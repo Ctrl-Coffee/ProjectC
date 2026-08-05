@@ -1,0 +1,46 @@
+### [ 필수 제외 대상 ] ###
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emory[Cc]aptures/
+
+# AssetStore 패키지는 프로젝트에 포함되지만, UPM 캐시는 제외됩니다.
+/[Pp]ackages/*
+!/[Pp]ackages/manifest.json
+!/[Pp]ackages/packages-lock.json
+
+### [ C# & Visual Studio 관련 ] ###
+# 유니티가 자동 생성하는 프로젝트 파일들 (전부 제외)
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprep
+*.unitypackage
+*.booproj
+
+# 빌드 결과물 및 캐시
+[Bb]in/
+.vs/
+
+### [ OS & 도구 관련 ] ###
+.DS_Store
+Thumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+
+
+Assets/00_ThirdParty/
