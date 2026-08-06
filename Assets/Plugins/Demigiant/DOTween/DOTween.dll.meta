@@ -1,20 +1,13 @@
 fileFormatVersion: 2
-guid: b7aae730b64601f459d58364c0d988f9
-labels:
-- NuGetForUnity
+guid: a811bde74b26b53498b4f6d872b09b6d
 PluginImporter:
-  externalObjects: {}
-  serializedVersion: 3
+  serializedVersion: 1
   iconMap: {}
   executionOrder: {}
-  defineConstraints: []
   isPreloaded: 0
-  isOverridable: 0
-  isExplicitlyReferenced: 0
-  validateReferences: 1
   platformData:
     Any:
-      enabled: 0
+      enabled: 1
       settings: {}
     Editor:
       enabled: 0
@@ -22,7 +15,15 @@ PluginImporter:
         DefaultValueInitialized: true
     WindowsStoreApps:
       enabled: 0
-      settings: {}
+      settings:
+        CPU: AnyCPU
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 27676
+  packageName: DOTween (HOTween v2)
+  packageVersion: 1.2.825
+  assetPath: Assets/Plugins/Demigiant/DOTween/DOTween.dll
+  uploadId: 939688
