@@ -59,4 +59,15 @@ public static class Utils
     {
         return Resources.Load<T>(path);
     }
+
+    public static bool IsNullOrWhiteSpace(string str)
+    {
+        if (string.IsNullOrWhiteSpace(str))
+        {
+            Logger.LogError("string이 null이거나 빈 문자열입니다.");
+            return true;
+        }
+
+        return false;
+    }
 }
