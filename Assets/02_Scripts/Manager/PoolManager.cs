@@ -37,8 +37,8 @@ public class PoolManager
         => GetFromPool(poolId, position, rotation);
     public GameObject SpawnFromPool(string poolId, Vector3 position, Quaternion rotation, Transform parent)
         => GetFromPool(poolId, position, rotation, parent);
-    public GameObject SpawnFromPool(string poolId, Transform parent, bool orginTF)
-        => GetFromPool(poolId, Vector3.zero, Quaternion.identity, parent, orginTF);
+    public GameObject SpawnFromPool(string poolId, Transform parent, bool usePrefabTransform)
+        => GetFromPool(poolId, Vector3.zero, Quaternion.identity, parent, usePrefabTransform);
 
     public T SpawnFromPool<T>(string poolId) where T : Component
     {
@@ -73,9 +73,9 @@ public class PoolManager
         else
             throw new Exception($"Pool Id({poolId})에 올바른 컴포넌트가 존재하지 않습니다. component: {typeof(T)}.");
     }
-    public T SpawnFromPool<T>(string poolId, Transform parent, bool orginTF) where T : Component
+    public T SpawnFromPool<T>(string poolId, Transform parent, bool usePrefabTransform) where T : Component
     {
-        GameObject obj = GetFromPool(poolId, Vector3.zero, Quaternion.identity, parent, orginTF);
+        GameObject obj = GetFromPool(poolId, Vector3.zero, Quaternion.identity, parent, usePrefabTransform);
         if (obj.TryGetComponent<T>(out T component))
             return component;
         else
@@ -87,20 +87,19 @@ public class PoolManager
         if (obj == null)
             return;
 
-        if (!_objectPools.TryGetValue(obj.name, out Queue<GameObject> pool))
+        if (!_objectPools.ContainsKey(obj.name))
         {
             Logger.LogError($"Pool Id({obj.name})에 해당하는 풀이 없습니다.");
             return;
         }
 
-        if (!_activeObjects.TryGetValue(obj.name, out List<GameObject> activeList))
+        if (!_activeObjects.TryGetValue(obj.name, out var activeList) || !activeList.Remove(obj))
         {
             Logger.LogWarning($"Pool Id({obj.name}) 오브젝트는 이미 반환되었거나 활성 목록에 없습니다.");
             return;
         }
 
         _objectPools[obj.name].Enqueue(obj);
-        _activeObjects[obj.name].Remove(obj);
 
         obj.SetActive(false);
         obj.transform.SetParent(_poolRoot, false);
@@ -117,7 +116,7 @@ public class PoolManager
         }
     }
 
-    private GameObject GetFromPool(string poolId, Vector3 position, Quaternion rotation, Transform parent = null, bool orginTF = false)
+    private GameObject GetFromPool(string poolId, Vector3 position, Quaternion rotation, Transform parent = null, bool usePrefabTransform = false)
     {
         if (!_objectPools.ContainsKey(poolId))
             throw new Exception($"Pool Id({poolId})에 해당하는 풀은 존재하지 않습니다.");
@@ -130,18 +129,16 @@ public class PoolManager
 
         GameObject obj = poolQueue.Dequeue();
 
-        if (!orginTF)
-        {
-            obj.transform.position = position;
-            obj.transform.rotation = rotation;
-        }
-
         if (null != parent)
         {
             obj.transform.SetParent(parent, false);
         }
 
-        obj.gameObject.SetActive(true);
+        if (!usePrefabTransform)
+        {
+            obj.transform.position = position;
+            obj.transform.rotation = rotation;
+        }
 
         if (!_activeObjects.ContainsKey(poolId))
         {
@@ -149,6 +146,8 @@ public class PoolManager
         }
 
         _activeObjects[poolId].Add(obj);
+
+        obj.gameObject.SetActive(true);
 
         return obj;
     }
