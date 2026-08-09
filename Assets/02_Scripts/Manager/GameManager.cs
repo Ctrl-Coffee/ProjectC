@@ -1,6 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using UnityEditor.EditorTools;
-using UnityEngine;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
@@ -10,6 +8,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static PoolManager Pool { get { return Instance._poolManager; } }
     public static TimeManager Time { get { return Instance._timeManager; } }
     public static UIManager UI { get { return Instance._uiManager; } }
+    public static ViewModelManager ViewModel { get { return Instance._viewModelManager; } }
 
     #region Manager Variables
 
@@ -19,6 +18,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private PoolManager _poolManager = new();
     private TimeManager _timeManager = new();
     private UIManager _uiManager = new();
+    private ViewModelManager _viewModelManager = new();
 
     #endregion
 
@@ -44,6 +44,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private async UniTask InitializeAsync()
     {
+        await _uiManager.Init();
+
         // TODO: 로딩 UI 연결
         await _resourceManager.PreloadAssetsAsync();
 

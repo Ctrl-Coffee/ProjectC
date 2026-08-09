@@ -49,6 +49,17 @@ public class ResourceManager
         onProgress?.Invoke(1f);
     }
 
+    public T GetLoadedAsset<T>(string address) where T: UnityEngine.Object
+    {
+        if (!_assetHandles.TryGetValue(address, out var handle))
+        {
+            Logger.LogError($"{address}는 로드되지 않은 에셋입니다.");
+            return null;
+        }
+
+        return GetAssetFromHandle<T>(address, handle);
+    }
+
     public async UniTask<T> LoadAssetAsync<T>(string address, CancellationToken cancelToken = default) where T : UnityEngine.Object
     {
         if (Utils.IsNullOrWhiteSpace(address))
