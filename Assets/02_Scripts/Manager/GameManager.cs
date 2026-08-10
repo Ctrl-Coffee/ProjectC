@@ -56,4 +56,26 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
 
     #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void OpenTestHud()
+    {
+        UI.OpenTestHUDUI();
+    }
+
+    public void OpenTestPopup()
+    {
+        UI.OpenTestPopupUI();
+    }
 }
