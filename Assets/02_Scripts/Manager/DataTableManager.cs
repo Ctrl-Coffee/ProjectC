@@ -8,6 +8,7 @@ public class DataTableManager
     #region Variables
     public Dictionary<string, PoolData> PoolDataTable { get; private set; } = new();
     public Dictionary<string, PreLoadAssetData> PreLoadAssetDataTable { get; private set; } = new();
+    public Dictionary<string, AutoWorkData> AutoWorkDataTable { get; private set; } = new();
 
 
     #endregion
@@ -17,6 +18,9 @@ public class DataTableManager
         // TODO: 데이터 테이블 만들기
         //PoolDataTable = LoadData<PoolData>(nameof(PoolData));
         //PreLoadAssetDataTable = LoadData<PreLoadAssetData>(nameof(PreLoadAssetData));
+
+        // TODO: JSON 테이블이 생기면 LoadData<AutoWorkData>로 교체
+        LoadDummyAutoWorkData();
     }
 
     #region Getters
@@ -27,8 +31,39 @@ public class DataTableManager
         return PreLoadAssetDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
+    public AutoWorkData GetAutoWorkData(string id)
+    {
+        if (null == AutoWorkDataTable || string.IsNullOrEmpty(id)) return null;
+        return AutoWorkDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
     #endregion
 
+    #region Dummy
+
+    private void LoadDummyAutoWorkData()
+    {
+        AutoWorkDataTable = new Dictionary<string, AutoWorkData>();
+
+        AddDummyAutoWork("AutoWork_01", "aaa", 1800f, 100, 5);
+        AddDummyAutoWork("AutoWork_02", "bbb", 3600f, 250, 12);
+        AddDummyAutoWork("AutoWork_03", "ccc", 5400f, 420, 20);
+        AddDummyAutoWork("AutoWork_04", "ddd", 7200f, 600, 30);
+    }
+
+    private void AddDummyAutoWork(string id, string name, float durationSeconds, int rewardMoney, int rewardDP)
+    {
+        AutoWorkDataTable.Add(id, new AutoWorkData
+        {
+            Id = id,
+            Name = name,
+            DurationSeconds = durationSeconds,
+            RewardMoney = rewardMoney,
+            RewardDP = rewardDP,
+        });
+    }
+
+    #endregion
 
     [Serializable]
     class SerializationWrapper<T>

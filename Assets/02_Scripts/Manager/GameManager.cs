@@ -1,4 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
@@ -26,6 +28,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     #endregion
 
     #region Variables
+
+    private const float AUTO_WORK_COLLECT_INTERVAL = 1f;
 
     private bool _initComplete = false;
 
@@ -64,8 +68,23 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         _initComplete = true;
 
-        // TODO: 로비가 생기면 시작 화면을 로비로 교체
+        CollectAutoWorkLoopAsync().Forget();
+
+        // TODO: 로딩/로비가 생기면 지우기
         await _uiManager.OpenWorkInfoUI();
+    }
+
+    // 업무 화면이 닫혀 있어도 정산되도록 하기
+    private async UniTaskVoid CollectAutoWorkLoopAsync()
+    {
+        CancellationToken token = destroyCancellationToken;
+
+        while (!token.IsCancellationRequested)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(AUTO_WORK_COLLECT_INTERVAL), ignoreTimeScale: true, cancellationToken: token);
+
+            AutoWorkQueue.CollectCompleted();
+        }
     }
 
     #endregion
