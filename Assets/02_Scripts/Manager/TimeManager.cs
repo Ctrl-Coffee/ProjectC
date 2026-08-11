@@ -11,6 +11,10 @@ public class TimeManager
     private float _timeRate = 1f;
     private int _pauseCount = 0;
 
+#if UNITY_EDITOR
+    private TimeSpan _debugTimeOffset = TimeSpan.Zero;
+#endif
+
     public float GameDeltaTime
     {
         get
@@ -26,6 +30,40 @@ public class TimeManager
             return _pauseCount > 0;
         }
     }
+
+    // 자동업무처럼 앱이 꺼져 있어도 흘러야 하는 시간은 이걸 쓴다.
+    // 서버 시각이 붙으면 여기에 보정치를 더한다.
+    public DateTime UtcNow
+    {
+        get
+        {
+#if UNITY_EDITOR
+            return DateTime.UtcNow + _debugTimeOffset;
+#else
+            return DateTime.UtcNow;
+#endif
+        }
+    }
+
+#if UNITY_EDITOR
+    public TimeSpan DebugTimeOffset
+    {
+        get
+        {
+            return _debugTimeOffset;
+        }
+    }
+
+    public void AddDebugTime(TimeSpan amount)
+    {
+        _debugTimeOffset += amount;
+    }
+
+    public void ResetDebugTime()
+    {
+        _debugTimeOffset = TimeSpan.Zero;
+    }
+#endif
 
     public void Init()
     {

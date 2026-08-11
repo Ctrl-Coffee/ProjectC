@@ -9,6 +9,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static TimeManager Time { get { return Instance._timeManager; } }
     public static UIManager UI { get { return Instance._uiManager; } }
     public static ViewModelManager ViewModel { get { return Instance._viewModelManager; } }
+    public static SaveManager Save { get { return Instance._saveManager; } }
+    public static UserData User { get { return Instance._saveManager.User; } }
 
     #region Manager Variables
 
@@ -19,6 +21,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private TimeManager _timeManager = new();
     private UIManager _uiManager = new();
     private ViewModelManager _viewModelManager = new();
+    private SaveManager _saveManager = new();
 
     #endregion
 
@@ -35,11 +38,18 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         base.Init();
 
+        _saveManager.Load();
         _dataTable.LoadAllData();
 
         // TODO: ui, network init
 
         InitializeAsync().Forget();
+    }
+
+    // TODO: 모바일은 OnApplicationPause(true)에서도 저장 필요
+    private void OnApplicationQuit()
+    {
+        _saveManager.Save();
     }
 
     private async UniTask InitializeAsync()

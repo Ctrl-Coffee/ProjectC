@@ -5,7 +5,7 @@ public class WorkInfoUI : UIBase
     [SerializeField] private UIButtonComponent _btnStart;
     [SerializeField] private UIButtonComponent _btnClose;
 
-    private WorkFlowHandler _workHandler = new();
+    private MiniGameFlowHandler _workHandler = new();
 
     private void OnEnable()
     {

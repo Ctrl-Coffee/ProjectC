@@ -2,7 +2,7 @@
 using System;
 using System.Threading;
 
-public class WorkFlowHandler
+public class MiniGameFlowHandler
 {
     private int _workLevel = 1;
     private CancellationTokenSource _cancelToken = new();
