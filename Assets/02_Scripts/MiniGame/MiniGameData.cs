@@ -16,7 +16,8 @@ public struct MiniGameContext
 public struct MiniGameResult
 {
     public bool IsCompleted;
-    public float Completion;
+    public float Accuracy;
+
     public MiniGameGrade Grade;
 
     public static MiniGameResult Canceled
@@ -26,7 +27,7 @@ public struct MiniGameResult
             return new MiniGameResult
             {
                 IsCompleted = false,
-                Completion = 0f,
+                Accuracy = 0f,
                 Grade = MiniGameGrade.Miss,
             };
         }
@@ -48,17 +49,5 @@ public static class MiniGameGradeTable
         if (accuracy >= BAD_THRESHOLD) return MiniGameGrade.Bad;
 
         return MiniGameGrade.Miss;
-    }
-
-    public static float GetCompletion(MiniGameGrade grade)
-    {
-        switch (grade)
-        {
-            case MiniGameGrade.Perfect: return 1f;
-            case MiniGameGrade.Good: return 0.75f;
-            case MiniGameGrade.Normal: return 0.5f;
-            case MiniGameGrade.Bad: return 0.25f;
-            default: return 0f;
-        }
     }
 }

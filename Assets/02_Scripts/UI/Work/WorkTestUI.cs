@@ -73,10 +73,11 @@ public class WorkTestUI : MonoBehaviour
 
         if (!result.IsCompleted)
         {
+            SetResultText("취소됨");
             return;
         }
 
-        string message = $"{result.Grade} / 완성도 {result.Completion:P0}";
+        string message = $"{result.Grade} / 정확도 {result.Accuracy:P0}";
 
         SetResultText(message);
         Logger.Log($"미니게임 종료 - {message}");

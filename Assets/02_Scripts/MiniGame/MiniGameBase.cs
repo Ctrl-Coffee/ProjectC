@@ -79,8 +79,6 @@ public abstract class MiniGameBase : UIBase
 
             await SlideAsync(hiddenPosition, _slideOutDuration, token);
 
-            this.gameObject.SetActive(false);
-
             return result;
         }
         catch (OperationCanceledException)
@@ -90,7 +88,23 @@ public abstract class MiniGameBase : UIBase
         finally
         {
             IsPlaying = false;
+            HideImmediate();
         }
+    }
+
+    private void HideImmediate()
+    {
+        if (null == this)
+        {
+            return;
+        }
+
+        if (null != _panel)
+        {
+            _panel.DOKill();
+        }
+
+        this.gameObject.SetActive(false);
     }
 
     public abstract UniTask<MiniGameResult> PlayAsync(MiniGameContext context, CancellationToken token);

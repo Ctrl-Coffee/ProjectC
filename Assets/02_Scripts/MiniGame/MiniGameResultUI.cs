@@ -61,8 +61,11 @@ public class MiniGameResultUI : UIBase
 
             _confirmSource = null;
 
-            transform.DOKill();
-            this.gameObject.SetActive(false);
+            if (null != this)
+            {
+                transform.DOKill();
+                this.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -75,7 +78,7 @@ public class MiniGameResultUI : UIBase
 
         if (null != _completionText)
         {
-            _completionText.text = $"{result.Completion:P0}";
+            _completionText.text = $"{result.Accuracy:P0}";
         }
     }
 

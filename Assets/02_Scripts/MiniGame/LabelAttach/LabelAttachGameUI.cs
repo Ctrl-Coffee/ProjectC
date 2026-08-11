@@ -11,8 +11,7 @@ public class LabelAttachGameUI : MiniGameBase
     [Header("배치")]
     [SerializeField] private RectTransform _playArea;
     [SerializeField] private RectTransform _targetSlot;
-    [SerializeField] private Button _attachButton;
-
+    [SerializeField] private UIButtonComponent _attachButton;
     [SerializeField] private FallingLabel _labelPrefab;
 
     // TODO: 김경훈 (26.08.10) 라벨 여러개가 되면 PoolManager로 옮기기
@@ -25,11 +24,15 @@ public class LabelAttachGameUI : MiniGameBase
     [Header("난이도 - 기본값")]
     [SerializeField] private float _baseFallSpeed = 400f;
     [SerializeField] private float _baseTolerance = 150f;
+    [SerializeField] private float _basePerfectRadius = 30f;
 
     [Header("난이도 - 업무 레벨당 증감")]
     [SerializeField] private float _fallSpeedPerLevel = 20f;
     [SerializeField] private float _tolerancePerLevel = 5f;
     [SerializeField] private float _minTolerance = 40f;
+
+    [SerializeField] private float _perfectRadiusPerLevel = 1f;
+    [SerializeField] private float _minPerfectRadius = 8f;
 
     [Header("스킵 연출")]
     [SerializeField] private float _skipSpeedMultiplier = 4f;
@@ -37,6 +40,7 @@ public class LabelAttachGameUI : MiniGameBase
     private bool _hasAttachResult = false;
     private float _attachAccuracy = 0f;
     private float _currentTolerance = 0f;
+    private float _currentPerfectRadius = 0f;
     private int _targetShapeId = 0;
 
     public override async UniTask<MiniGameResult> PlayAsync(MiniGameContext context, CancellationToken token)
@@ -48,6 +52,7 @@ public class LabelAttachGameUI : MiniGameBase
 
         float fallSpeed = GetFallSpeed(context.WorkLevel);
         _currentTolerance = GetTolerance(context.WorkLevel);
+        _currentPerfectRadius = GetPerfectRadius(context.WorkLevel);
 
         if (!SetupRound())
         {
@@ -60,13 +65,11 @@ public class LabelAttachGameUI : MiniGameBase
         {
             float accuracy = await RunLabelAsync(fallSpeed, _currentTolerance, token);
 
-            MiniGameGrade grade = MiniGameGradeTable.GetGrade(accuracy);
-
             return new MiniGameResult
             {
                 IsCompleted = true,
-                Completion = MiniGameGradeTable.GetCompletion(grade),
-                Grade = grade,
+                Accuracy = accuracy,
+                Grade = MiniGameGradeTable.GetGrade(accuracy),
             };
         }
         catch (OperationCanceledException)
@@ -188,7 +191,7 @@ public class LabelAttachGameUI : MiniGameBase
         }
     }
 
-    private float EvaluateAttach(float tolerance)
+    private float EvaluateAttach(float perfectRadius, float tolerance)
     {
         if (null == _labelInstance)
         {
@@ -202,17 +205,29 @@ public class LabelAttachGameUI : MiniGameBase
 
         float distance = Vector2.Distance(_labelInstance.RectTransform.anchoredPosition, _targetSlot.anchoredPosition);
 
-        return CalculateAccuracy(distance, tolerance);
+        return CalculateAccuracy(distance, perfectRadius, tolerance);
     }
 
-    private float CalculateAccuracy(float distance, float tolerance)
+    private float CalculateAccuracy(float distance, float perfectRadius, float tolerance)
     {
         if (tolerance <= 0f)
         {
             return 0f;
         }
 
-        float accuracy = 1f - (distance / tolerance);
+        if (distance <= perfectRadius)
+        {
+            return 1f;
+        }
+
+        float falloffRange = tolerance - perfectRadius;
+
+        if (falloffRange <= 0f)
+        {
+            return 0f;
+        }
+
+        float accuracy = 1f - ((distance - perfectRadius) / falloffRange);
 
         return Mathf.Clamp01(accuracy);
     }
@@ -233,6 +248,14 @@ public class LabelAttachGameUI : MiniGameBase
         return Mathf.Max(_minTolerance, tolerance);
     }
 
+    private float GetPerfectRadius(int workLevel)
+    {
+        int levelStep = Mathf.Max(0, workLevel - 1);
+        float perfectRadius = _basePerfectRadius - (_perfectRadiusPerLevel * levelStep);
+
+        return Mathf.Max(_minPerfectRadius, perfectRadius);
+    }
+
     private void BindInput()
     {
         if (null == _attachButton)
@@ -240,7 +263,7 @@ public class LabelAttachGameUI : MiniGameBase
             return;
         }
 
-        _attachButton.onClick.AddListener(OnClickAttach);
+        _attachButton.BindButtonEvent(OnClickAttach);
     }
 
     private void UnbindInput()
@@ -250,7 +273,7 @@ public class LabelAttachGameUI : MiniGameBase
             return;
         }
 
-        _attachButton.onClick.RemoveListener(OnClickAttach);
+        _attachButton.UnBindAllButtonEvent();
     }
 
     private void OnClickAttach()
@@ -260,7 +283,7 @@ public class LabelAttachGameUI : MiniGameBase
             return;
         }
 
-        _attachAccuracy = EvaluateAttach(_currentTolerance);
+        _attachAccuracy = EvaluateAttach(_currentPerfectRadius, _currentTolerance);
         _hasAttachResult = true;
     }
 
