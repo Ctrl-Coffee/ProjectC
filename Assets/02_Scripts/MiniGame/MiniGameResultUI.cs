@@ -8,68 +8,39 @@ public class MiniGameResultUI : UIBase
 {
     [SerializeField] private TextMeshProUGUI _gradeText;
     [SerializeField] private TextMeshProUGUI _completionText;
-    [SerializeField] private UIButtonComponent _confirmButton;
+    [SerializeField] private UIButtonComponent _closeButton;
 
     [Header("연출")]
     [SerializeField] private float _openDuration = 0.25f;
+    [SerializeField] private float _closeDuration = 0.2f;
 
-    private UniTaskCompletionSource _confirmSource;
+    private UniTaskCompletionSource _closeRequestedSource;
 
-    protected virtual void Awake()
-    {
-        this.gameObject.SetActive(false);
-    }
-
-    public override void PlayOpenAnimation()
+    public override Tween PlayOpenAnimation()
     {
         transform.localScale = Vector3.zero;
 
         transform.DOKill();
-        transform.DOScale(1f, _openDuration).SetEase(Ease.OutBack).SetUpdate(true);
+        return transform.DOScale(1f, _openDuration).SetEase(Ease.OutBack).SetUpdate(true);
     }
 
-    public async UniTask ShowAsync(MiniGameResult result, CancellationToken token)
+    public override Tween PlayCloseAnimation()
     {
-        Apply(result);
-
-        this.gameObject.SetActive(true);
-        this.transform.SetAsLastSibling();
-
-        PlayOpenAnimation();
-
-        _confirmSource = new UniTaskCompletionSource();
-
-        if (null != _confirmButton)
-        {
-            _confirmButton.BindButtonEvent(OnClickConfirm);
-        }
-        else
-        {
-            Logger.LogWarning("ConfirmButton이 없어 결과창을 닫을 수 없습니다.");
-        }
-
-        try
-        {
-            await _confirmSource.Task.AttachExternalCancellation(token);
-        }
-        finally
-        {
-            if (null != _confirmButton)
-            {
-                _confirmButton.UnBindAllButtonEvent();
-            }
-
-            _confirmSource = null;
-
-            if (null != this)
-            {
-                transform.DOKill();
-                this.gameObject.SetActive(false);
-            }
-        }
+        transform.DOKill();
+        return transform.DOScale(0f, _closeDuration).SetEase(Ease.InBack).SetUpdate(true);
     }
 
-    private void Apply(MiniGameResult result)
+    public override void OnClickCloseButton()
+    {
+        if (null == _closeRequestedSource)
+        {
+            return;
+        }
+
+        _closeRequestedSource.TrySetResult();
+    }
+
+    public void SetResult(MiniGameResult result)
     {
         if (null != _gradeText)
         {
@@ -82,13 +53,32 @@ public class MiniGameResultUI : UIBase
         }
     }
 
-    private void OnClickConfirm()
+    public async UniTask WaitForCloseAsync(CancellationToken token)
     {
-        if (null == _confirmSource)
+        _closeRequestedSource = new UniTaskCompletionSource();
+
+        if (null != _closeButton)
         {
-            return;
+            _closeButton.BindButtonEvent(OnClickCloseButton);
+        }
+        else
+        {
+            Logger.LogError("CloseButton이 연결되지 않아 결과창을 닫을 수 없습니다.");
         }
 
-        _confirmSource.TrySetResult();
+        try
+        {
+            await _closeRequestedSource.Task.AttachExternalCancellation(token);
+        }
+        finally
+        {
+            if (null != _closeButton)
+            {
+                _closeButton.UnBindAllButtonEvent();
+            }
+
+            _closeRequestedSource = null;
+            CloseUI();
+        }
     }
 }

@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 3138989175305264841}
   - component: {fileID: 3381834101739260896}
   m_Layer: 0
-  m_Name: ResultPopupUI
+  m_Name: MiniGameResultUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MiniGameResultUI
   _gradeText: {fileID: 7431791053510082231}
   _completionText: {fileID: 2792579285189023866}
-  _confirmButton: {fileID: 4690175243491182531}
+  _closeButton: {fileID: 4690175243491182531}
   _openDuration: 0.25
 --- !u!1 &5687667175884272776
 GameObject:

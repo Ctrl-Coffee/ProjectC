@@ -1,10 +1,8 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
+using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class LabelAttachGameUI : MiniGameBase
+public class SubtitleEditGameUI : MiniGameBase
 {
     private const float MIN_FALL_SPEED = 1f;
 
@@ -12,14 +10,11 @@ public class LabelAttachGameUI : MiniGameBase
     [SerializeField] private RectTransform _playArea;
     [SerializeField] private RectTransform _targetSlot;
     [SerializeField] private UIButtonComponent _attachButton;
-    [SerializeField] private FallingLabel _labelPrefab;
 
-    // TODO: 김경훈 (26.08.10) 라벨 여러개가 되면 PoolManager로 옮기기
-    private FallingLabel _labelInstance;
+    [SerializeField] private FallingSubtitle _subtitlePrefab;
 
-    [Header("모양")]
-    [SerializeField] private Sprite[] _shapeSprites;
-    [SerializeField] private Image _targetShapeImage;
+    // TODO: 김경훈 (26.08.10) 자막 여러개가 되면 PoolManager로 옮기기
+    private FallingSubtitle _subtitleInstance;
 
     [Header("난이도 - 기본값")]
     [SerializeField] private float _baseFallSpeed = 400f;
@@ -30,18 +25,13 @@ public class LabelAttachGameUI : MiniGameBase
     [SerializeField] private float _fallSpeedPerLevel = 20f;
     [SerializeField] private float _tolerancePerLevel = 5f;
     [SerializeField] private float _minTolerance = 40f;
-
     [SerializeField] private float _perfectRadiusPerLevel = 1f;
     [SerializeField] private float _minPerfectRadius = 8f;
-
-    [Header("스킵 연출")]
-    [SerializeField] private float _skipSpeedMultiplier = 4f;
 
     private bool _hasAttachResult = false;
     private float _attachAccuracy = 0f;
     private float _currentTolerance = 0f;
     private float _currentPerfectRadius = 0f;
-    private int _targetShapeId = 0;
 
     public override async UniTask<MiniGameResult> PlayAsync(MiniGameContext context, CancellationToken token)
     {
@@ -63,7 +53,7 @@ public class LabelAttachGameUI : MiniGameBase
 
         try
         {
-            float accuracy = await RunLabelAsync(fallSpeed, _currentTolerance, token);
+            float accuracy = await RunSubtitleAsync(fallSpeed, _currentTolerance, token);
 
             return new MiniGameResult
             {
@@ -72,56 +62,20 @@ public class LabelAttachGameUI : MiniGameBase
                 Grade = MiniGameGradeTable.GetGrade(accuracy),
             };
         }
-        catch (OperationCanceledException)
-        {
-            return MiniGameResult.Canceled;
-        }
         finally
         {
             UnbindInput();
         }
     }
 
-    public override async UniTask PlaySkipAsync(MiniGameContext context, CancellationToken token)
-    {
-        if (!ValidateReferences())
-        {
-            return;
-        }
-
-        float fallSpeed = GetFallSpeed(context.WorkLevel) * _skipSpeedMultiplier;
-
-        if (!SetupRound())
-        {
-            return;
-        }
-
-        try
-        {
-            await RunSkipFallAsync(fallSpeed, token);
-            _labelInstance.SnapTo(_targetSlot.anchoredPosition);
-        }
-        catch (OperationCanceledException)
-        {
-        }
-    }
-
     private bool SetupRound()
     {
-        if (null == EnsureLabel())
+        if (null == EnsureSubtitle())
         {
             return false;
         }
 
-        _targetShapeId = 0;
-
-        Sprite shapeSprite = GetShapeSprite(_targetShapeId);
-        if (null != _targetShapeImage && null != shapeSprite)
-        {
-            _targetShapeImage.sprite = shapeSprite;
-        }
-
-        _labelInstance.Setup(_targetShapeId, shapeSprite, GetLabelStartPosition());
+        _subtitleInstance.Setup(GetSubtitleStartPosition());
 
         _hasAttachResult = false;
         _attachAccuracy = 0f;
@@ -129,33 +83,33 @@ public class LabelAttachGameUI : MiniGameBase
         return true;
     }
 
-    private FallingLabel EnsureLabel()
+    private FallingSubtitle EnsureSubtitle()
     {
-        if (null != _labelInstance)
+        if (null != _subtitleInstance)
         {
-            return _labelInstance;
+            return _subtitleInstance;
         }
 
-        if (null == _labelPrefab)
+        if (null == _subtitlePrefab)
         {
-            Logger.LogError("LabelPrefab이 연결되지 않았습니다.");
+            Logger.LogError("SubtitlePrefab이 연결되지 않았습니다.");
             return null;
         }
 
-        _labelInstance = Instantiate(_labelPrefab, _playArea, false);
+        _subtitleInstance = Instantiate(_subtitlePrefab, _playArea, false);
 
-        return _labelInstance;
+        return _subtitleInstance;
     }
 
-    private Vector2 GetLabelStartPosition()
+    private Vector2 GetSubtitleStartPosition()
     {
         Vector2 startPosition = _targetSlot.anchoredPosition;
-        startPosition.y = (_playArea.rect.height * 0.5f) + _labelInstance.RectTransform.rect.height;
+        startPosition.y = (_playArea.rect.height * 0.5f) + _subtitleInstance.RectTransform.rect.height;
 
         return startPosition;
     }
 
-    private async UniTask<float> RunLabelAsync(float fallSpeed, float tolerance, CancellationToken token)
+    private async UniTask<float> RunSubtitleAsync(float fallSpeed, float tolerance, CancellationToken token)
     {
         float missLineY = _targetSlot.anchoredPosition.y - tolerance;
 
@@ -169,41 +123,23 @@ public class LabelAttachGameUI : MiniGameBase
             }
 
             float deltaTime = GetDeltaTime();
-            _labelInstance.Fall(fallSpeed * deltaTime);
+            _subtitleInstance.Fall(fallSpeed * deltaTime);
 
-            if (_labelInstance.RectTransform.anchoredPosition.y < missLineY)
+            if (_subtitleInstance.RectTransform.anchoredPosition.y < missLineY)
             {
                 return 0f;
             }
         }
     }
 
-    private async UniTask RunSkipFallAsync(float fallSpeed, CancellationToken token)
-    {
-        float targetY = _targetSlot.anchoredPosition.y;
-
-        while (_labelInstance.RectTransform.anchoredPosition.y > targetY)
-        {
-            await UniTask.Yield(PlayerLoopTiming.Update, token);
-
-            float deltaTime = GetDeltaTime();
-            _labelInstance.Fall(fallSpeed * deltaTime);
-        }
-    }
-
     private float EvaluateAttach(float perfectRadius, float tolerance)
     {
-        if (null == _labelInstance)
+        if (null == _subtitleInstance)
         {
             return 0f;
         }
 
-        if (_labelInstance.ShapeId != _targetShapeId)
-        {
-            return 0f;
-        }
-
-        float distance = Vector2.Distance(_labelInstance.RectTransform.anchoredPosition, _targetSlot.anchoredPosition);
+        float distance = Vector2.Distance(_subtitleInstance.RectTransform.anchoredPosition, _targetSlot.anchoredPosition);
 
         return CalculateAccuracy(distance, perfectRadius, tolerance);
     }
@@ -297,26 +233,11 @@ public class LabelAttachGameUI : MiniGameBase
         return GameManager.Time.GameDeltaTime;
     }
 
-    private Sprite GetShapeSprite(int shapeId)
-    {
-        if (null == _shapeSprites || _shapeSprites.Length == 0)
-        {
-            return null;
-        }
-
-        if (shapeId < 0 || shapeId >= _shapeSprites.Length)
-        {
-            return null;
-        }
-
-        return _shapeSprites[shapeId];
-    }
-
     private bool ValidateReferences()
     {
-        if (null == _playArea || null == _targetSlot || null == _labelPrefab)
+        if (null == _playArea || null == _targetSlot || null == _subtitlePrefab)
         {
-            Logger.LogError("참조 비어있음 (PlayArea / TargetSlot / Label)");
+            Logger.LogError("참조 비어있음 (PlayArea / TargetSlot / Subtitle)");
             return false;
         }
 

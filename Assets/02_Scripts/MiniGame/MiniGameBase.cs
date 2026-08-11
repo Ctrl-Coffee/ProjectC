@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
 using System.Threading;
 using UnityEngine;
 
@@ -12,16 +11,10 @@ public abstract class MiniGameBase : UIBase
     [SerializeField] private float _slideOutDuration = 0.35f;
     [SerializeField] private float _slideDistance = 0f;
 
-    // TODO: 김경훈 (26.08.11) - 결과창 생성/표시를 UIManager로 이관 후 삭제
-    [Header("결과창")]
-    [SerializeField] private MiniGameResultUI _resultUIPrefab;
-
-    private MiniGameResultUI _resultUIInstance;
-
     private Vector2 _shownPosition;
-    private bool _isPositionCaptured = false;
+    private Tween _openTween;
 
-    public bool IsPlaying { get; private set; }
+    private bool _isPositionCaptured = false;
 
     protected RectTransform Panel
     {
@@ -39,7 +32,6 @@ public abstract class MiniGameBase : UIBase
     protected virtual void Awake()
     {
         CapturePosition();
-        this.gameObject.SetActive(false);
     }
 
     public async UniTask<MiniGameResult> RunAsync(MiniGameContext context, CancellationToken token)
@@ -50,106 +42,29 @@ public abstract class MiniGameBase : UIBase
             return MiniGameResult.Canceled;
         }
 
-        if (IsPlaying)
-        {
-            Logger.LogWarning("이미 진행 중입니다.");
-            return MiniGameResult.Canceled;
-        }
+        await WaitForOpenAsync(token);
 
-        IsPlaying = true;
-
-        try
-        {
-            CapturePosition();
-
-            Panel.DOKill();
-            this.gameObject.SetActive(true);
-
-            Vector2 hiddenPosition = GetHiddenPosition();
-            Panel.anchoredPosition = hiddenPosition;
-
-            await SlideAsync(_shownPosition, _slideInDuration, token);
-
-            MiniGameResult result = await PlayAsync(context, token);
-
-            if (result.IsCompleted)
-            {
-                await ShowResultAsync(result, token);
-            }
-
-            await SlideAsync(hiddenPosition, _slideOutDuration, token);
-
-            return result;
-        }
-        catch (OperationCanceledException)
-        {
-            return MiniGameResult.Canceled;
-        }
-        finally
-        {
-            IsPlaying = false;
-            HideImmediate();
-        }
-    }
-
-    private void HideImmediate()
-    {
-        if (null == this)
-        {
-            return;
-        }
-
-        if (null != _panel)
-        {
-            _panel.DOKill();
-        }
-
-        this.gameObject.SetActive(false);
+        return await PlayAsync(context, token);
     }
 
     public abstract UniTask<MiniGameResult> PlayAsync(MiniGameContext context, CancellationToken token);
-    public abstract UniTask PlaySkipAsync(MiniGameContext context, CancellationToken token);
 
-    // TODO: 김경훈 (26.08.11) - 결과창 생성/표시를 UIManager로 이관 후 삭제
-    #region Moved to UIManager
-    private async UniTask ShowResultAsync(MiniGameResult result, CancellationToken token)
-    {
-        MiniGameResultUI resultUI = EnsureResultUI();
-
-        if (null == resultUI)
-        {
-            return;
-        }
-
-        await resultUI.ShowAsync(result, token);
-    }
-
-    private MiniGameResultUI EnsureResultUI()
-    {
-        if (null != _resultUIInstance)
-        {
-            return _resultUIInstance;
-        }
-
-        if (null == _resultUIPrefab)
-        {
-            Logger.LogWarning("ResultUIPrefab이 없어 결과창을 건너뜁니다.");
-            return null;
-        }
-
-        _resultUIInstance = Instantiate(_resultUIPrefab, Panel, false);
-
-        return _resultUIInstance;
-    }
-
-    #endregion
-
-    public override void PlayOpenAnimation()
+    public override Tween PlayOpenAnimation()
     {
         CapturePosition();
 
         Panel.DOKill();
         Panel.anchoredPosition = GetHiddenPosition();
+
+        if (_slideInDuration <= 0f)
+        {
+            Panel.anchoredPosition = _shownPosition;
+            _openTween = null;
+            return _openTween;
+        }
+
+        _openTween = Panel.DOAnchorPos(_shownPosition, _slideInDuration).SetEase(Ease.OutCubic).SetUpdate(true);
+        return _openTween;
     }
 
     public override Tween PlayCloseAnimation()
@@ -157,19 +72,22 @@ public abstract class MiniGameBase : UIBase
         CapturePosition();
 
         Panel.DOKill();
+        _openTween = null;
 
         return Panel.DOAnchorPos(GetHiddenPosition(), _slideOutDuration).SetEase(Ease.InCubic).SetUpdate(true);
     }
 
-    private async UniTask SlideAsync(Vector2 to, float duration, CancellationToken token)
+    private async UniTask WaitForOpenAsync(CancellationToken token)
     {
-        if (duration <= 0f)
+        Tween openTween = _openTween;
+        _openTween = null;
+
+        if (null == openTween || !openTween.IsActive())
         {
-            Panel.anchoredPosition = to;
             return;
         }
 
-        await Panel.DOAnchorPos(to, duration).SetEase(Ease.OutCubic).SetUpdate(true).ToUniTask(cancellationToken: token);
+        await openTween.ToUniTask(cancellationToken: token);
     }
 
     private void CapturePosition()

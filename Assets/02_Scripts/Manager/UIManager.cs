@@ -208,7 +208,6 @@ public class UIManager
             _popupStack.Pop();
         }
 
-        _uiRootTypes.Remove(uiType);
         ui.gameObject.SetActive(false);
     }
 }

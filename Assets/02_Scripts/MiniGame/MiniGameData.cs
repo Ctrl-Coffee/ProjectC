@@ -9,7 +9,6 @@
 
 public struct MiniGameContext
 {
-    public string WorkId;
     public int WorkLevel;
 }
 

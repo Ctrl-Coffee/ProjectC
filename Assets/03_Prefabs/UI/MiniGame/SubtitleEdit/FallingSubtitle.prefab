@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7882010916697531405}
   - component: {fileID: 2618395666597504199}
   m_Layer: 5
-  m_Name: FallingLabel
+  m_Name: FallingSubtitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,6 +87,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83e6674990977e249a44701af77a0d08, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FallingLabel
+  m_EditorClassIdentifier: Assembly-CSharp::FallingSubtitle
   _rectTransform: {fileID: 702456359938989423}
-  _shapeImage: {fileID: 7882010916697531405}

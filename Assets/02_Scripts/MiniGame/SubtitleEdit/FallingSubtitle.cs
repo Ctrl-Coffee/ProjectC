@@ -1,10 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine;
 
-public class FallingLabel : MonoBehaviour
+public class FallingSubtitle : MonoBehaviour
 {
     [SerializeField] private RectTransform _rectTransform;
-    [SerializeField] private Image _shapeImage;
 
     public RectTransform RectTransform
     {
@@ -19,24 +17,14 @@ public class FallingLabel : MonoBehaviour
         }
     }
 
-    public int ShapeId { get; private set; }
-
     private void Reset()
     {
         _rectTransform = this.transform as RectTransform;
     }
 
-    public void Setup(int shapeId, Sprite shapeSprite, Vector2 startPosition)
+    public void Setup(Vector2 startPosition)
     {
-        ShapeId = shapeId;
-
-        if (null != _shapeImage && null != shapeSprite)
-        {
-            _shapeImage.sprite = shapeSprite;
-        }
-
         RectTransform.anchoredPosition = startPosition;
-        SetVisible(true);
     }
 
     public void Fall(float distance)
@@ -44,15 +32,5 @@ public class FallingLabel : MonoBehaviour
         Vector2 position = RectTransform.anchoredPosition;
         position.y -= distance;
         RectTransform.anchoredPosition = position;
-    }
-
-    public void SnapTo(Vector2 position)
-    {
-        RectTransform.anchoredPosition = position;
-    }
-
-    public void SetVisible(bool isVisible)
-    {
-        this.gameObject.SetActive(isVisible);
     }
 }

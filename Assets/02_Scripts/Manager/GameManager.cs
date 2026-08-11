@@ -53,6 +53,9 @@ public class GameManager : SingletonBehaviour<GameManager>
         await _poolManager.InitAsync(poolRoot);
 
         _initComplete = true;
+
+        // TODO: 로비가 생기면 시작 화면을 로비로 교체
+        await _uiManager.OpenWorkInfoUI();
     }
 
     #endregion
