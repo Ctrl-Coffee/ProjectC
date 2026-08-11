@@ -2,6 +2,45 @@
 
 public static class Utils
 {
+    public static string FormatClock(float seconds)
+    {
+        if (seconds <= 0f)
+        {
+            return "00:00";
+        }
+
+        int totalSeconds = (int)seconds;
+        int hours = totalSeconds / 3600;
+        int minutes = (totalSeconds % 3600) / 60;
+        int remainSeconds = totalSeconds % 60;
+
+        if (hours > 0)
+        {
+            return $"{hours}:{minutes:00}:{remainSeconds:00}";
+        }
+
+        return $"{minutes:00}:{remainSeconds:00}";
+    }
+
+    public static string FormatDuration(float seconds)
+    {
+        int totalSeconds = (int)seconds;
+        int hours = totalSeconds / 3600;
+        int minutes = (totalSeconds % 3600) / 60;
+
+        if (hours <= 0)
+        {
+            return $"{minutes}분";
+        }
+
+        if (minutes <= 0)
+        {
+            return $"{hours}시간";
+        }
+
+        return $"{hours}시간 {minutes}분";
+    }
+
     public static T GetOrAddComponent<T>(GameObject obj) where T : Component
     {
         if (null == obj) return null;
