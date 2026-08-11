@@ -13,8 +13,6 @@ public class ResourceManager
     private Dictionary<string, UniTaskCompletionSource<UnityEngine.Object>> _currentLoading = new();
     private Dictionary<string, HashSet<string>> _contentAddresses = new();
 
-    private CancellationTokenSource _allReleaseToken = new();
-
     private const int _maxLoadCount = 4;
 
     public T GetLoadedAsset<T>(string address) where T: UnityEngine.Object
@@ -42,7 +40,7 @@ public class ResourceManager
                 return loadedAsset;
             }
 
-            Logger.LogWarning($"handle 이상: address {address}");
+            Logger.LogWarning($"{address}의 handle 이상");
             _assetHandles.Remove(address);
 
             if(handle.IsValid())
@@ -61,27 +59,18 @@ public class ResourceManager
         var newTask = new UniTaskCompletionSource<UnityEngine.Object>();
         _currentLoading[address] = newTask;
 
-        CancellationToken allReleaseToken = _allReleaseToken.Token;
-
-        TryLoadAddressablesAssetAsync<T>(address, newTask, allReleaseToken).Forget();
+        TryLoadAddressablesAssetAsync<T>(address, newTask).Forget();
 
         UnityEngine.Object asset = await newTask.Task.AttachExternalCancellation(cancelToken);
 
         return asset as T;
     }
 
-    public async UniTask LoadContentAsync(string label, Action<float> onProgress = null,
-        CancellationToken cancelToken = default)
+    public async UniTask LoadContentAsync(string label, Action<float> onProgress = null)
     {
         if (Utils.IsNullOrWhiteSpace(label))
         {
             throw new ArgumentException("콘텐츠 라벨이 비어 있습니다.", nameof(label));
-        }
-
-        if (_contentAddresses.ContainsKey(label))
-        {
-            onProgress?.Invoke(1f);
-            return;
         }
 
         AsyncOperationHandle<IList<IResourceLocation>> locationsHandle = default;
@@ -91,7 +80,7 @@ public class ResourceManager
             onProgress?.Invoke(0f);
 
             locationsHandle = Addressables.LoadResourceLocationsAsync(label, typeof(UnityEngine.Object));
-            IList<IResourceLocation> locations = await locationsHandle.ToUniTask(cancellationToken: cancelToken);
+            IList<IResourceLocation> locations = await locationsHandle.ToUniTask();
 
             if (locations.Count == 0)
             {
@@ -109,7 +98,7 @@ public class ResourceManager
                 string address = location.PrimaryKey;
                 addresses.Add(address);
 
-                loadTasks.Add(LoadContentAssetAsync(address, semaphore, cancelToken,
+                loadTasks.Add(LoadContentAssetAsync(label, address, semaphore,
                     () =>
                     {
                         loadedCount++;
@@ -164,11 +153,6 @@ public class ResourceManager
 
     public void ReleaseAllAssets()
     {
-        _allReleaseToken.Cancel();
-        _allReleaseToken.Dispose();
-
-        _allReleaseToken = new CancellationTokenSource();
-
         foreach (var handle in _assetHandles.Values)
         {
             if (handle.IsValid())
@@ -186,13 +170,13 @@ public class ResourceManager
     {
         if (!handle.IsValid())
         {
-            Logger.LogError($"핸들 유효하지 않습니다. - Address: {address}");
+            Logger.LogError($"{address} 핸들이 유효하지 않습니다.");
             return null;
         }
 
         if (!handle.IsDone || handle.Status != AsyncOperationStatus.Succeeded)
         {
-            Logger.LogError($"에셋 로드 못했습니다. - Address: {address}");
+            Logger.LogError($"{address} 에셋 로드 실패.");
             return null;
         }
 
@@ -200,15 +184,14 @@ public class ResourceManager
 
         if (asset == null)
         {
-            Logger.LogError($"로드된 에셋이 null입니다. - Address: {address}");
+            Logger.LogError($"{address}가 null입니다.");
             return null;
         }
 
         return asset;
     }
 
-    private async UniTask TryLoadAddressablesAssetAsync<T>(string address, UniTaskCompletionSource<UnityEngine.Object> task
-        , CancellationToken allReleaseToken) where T : UnityEngine.Object
+    private async UniTask TryLoadAddressablesAssetAsync<T>(string address, UniTaskCompletionSource<UnityEngine.Object> task) where T : UnityEngine.Object
     {
         AsyncOperationHandle<T> handle = default;
 
@@ -216,25 +199,16 @@ public class ResourceManager
         {
             handle = Addressables.LoadAssetAsync<T>(address);
 
-            T asset = await handle.ToUniTask(cancellationToken: allReleaseToken);
+            T asset = await handle.ToUniTask();
 
             if (asset == null)
             {
-                throw new Exception($"로드된 에셋이 null입니다. Address: {address}");
+                throw new Exception($"{address}가 null입니다.");
             }
 
             _assetHandles[address] = handle;
 
             task.TrySetResult(asset);
-        }
-        catch (OperationCanceledException)
-        {
-            if (handle.IsValid())
-            {
-                Addressables.Release(handle);
-            }
-
-            task.TrySetCanceled(allReleaseToken);
         }
         catch (Exception exception)
         {
@@ -254,14 +228,17 @@ public class ResourceManager
         }
     }
 
-    private async UniTask LoadContentAssetAsync(string address, SemaphoreSlim semaphore,
-        CancellationToken cancelToken, Action onCompleted)
+    private async UniTask LoadContentAssetAsync(string label, string address, SemaphoreSlim semaphore, Action onCompleted)
     {
-        await semaphore.WaitAsync(cancelToken);
+        await semaphore.WaitAsync();
 
         try
         {
-            await LoadAssetAsync<UnityEngine.Object>(address, cancelToken);
+            await LoadAssetAsync<UnityEngine.Object>(address);
+        }
+        catch (Exception exception)
+        {
+            Logger.LogWarning($"콘텐츠 에셋 로드 실패 - Label: {label}, Address: {address}, Exception: {exception.Message}");
         }
         finally
         {
