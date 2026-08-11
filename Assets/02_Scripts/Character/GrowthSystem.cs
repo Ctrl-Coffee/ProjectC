@@ -2,17 +2,17 @@
 
 public class GrowthSystem
 {
-    public CharacterStatData GetFinalStat(OwnedCompanionData ownedCompanion)
+    public CharacterStatData GetFinalStat(string companionId, int level )
     {
-        CompanionData companion = GameManager.DataTable.GetCompanionData(ownedCompanion.CompanionId);
+        CompanionData companion = GameManager.DataTable.GetCompanionData(companionId);
 
         if (companion == null)
         {
-            Debug.LogError($"동료 데이터를 찾을 수 없습니다. Id: {ownedCompanion.CompanionId}");
+            Debug.LogError($"동료 데이터를 찾을 수 없습니다. Id: {companionId}");
             return null;
         }
 
-        float growthMultiplier = (ownedCompanion.Level - 1);
+        float growthMultiplier = (level - 1);
         float finalAttack = companion.BaseAtk + (companion.GrowthAtk * growthMultiplier);
         float finalDef = companion.BaseDef + (companion.GrowthDef * growthMultiplier);
         float finalHp = companion.BaseHp + (companion.GrowthHp * growthMultiplier);

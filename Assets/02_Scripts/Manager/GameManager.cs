@@ -9,6 +9,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static TimeManager Time { get { return Instance._timeManager; } }
     public static UIManager UI { get { return Instance._uiManager; } }
     public static ViewModelManager ViewModel { get { return Instance._viewModelManager; } }
+    public static GrowthSystem Growth { get { return Instance._growthSystem; } }
+
 
     #region Manager Variables
 
@@ -19,6 +21,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private TimeManager _timeManager = new();
     private UIManager _uiManager = new();
     private ViewModelManager _viewModelManager = new();
+    private GrowthSystem _growthSystem = new();
 
     #endregion
 
