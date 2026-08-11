@@ -46,8 +46,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         await _uiManager.Init();
 
-        // TODO: 로딩 UI 연결
-        await _resourceManager.PreloadAssetsAsync();
+        // TODO 공통 리소스 로드
 
         var poolRoot = Utils.CreateEmptyGameObject("PoolRoot", this.gameObject.transform).transform;
         await _poolManager.InitAsync(poolRoot);

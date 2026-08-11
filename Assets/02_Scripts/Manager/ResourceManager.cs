@@ -5,49 +5,17 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 public class ResourceManager
 {
     private Dictionary<string, AsyncOperationHandle> _assetHandles = new();
     private Dictionary<string, UniTaskCompletionSource<UnityEngine.Object>> _currentLoading = new();
+    private Dictionary<string, HashSet<string>> _contentAddresses = new();
 
     private CancellationTokenSource _allReleaseToken = new();
 
-    private const int MAX_LOAD_COUNT = 4;
-
-
-    public async UniTask PreloadAssetsAsync(Action<float> onProgress = null)
-    {
-        int progressCount = 0;
-        onProgress?.Invoke(0f);
-
-        var dataTable = GameManager.DataTable.PreLoadAssetDataTable;
-
-        int totalCount = dataTable.Count;
-
-        if (dataTable.Count == 0)
-        {
-            onProgress?.Invoke(1f);
-            return;
-        }
-
-        List<UniTask> loadTasks = new(totalCount);
-        using SemaphoreSlim semaphore = new(MAX_LOAD_COUNT);
-
-        foreach (PreLoadAssetData preLoadData in dataTable.Values)
-        {
-            loadTasks.Add(LoadWithSemaphoreAsync(preLoadData, semaphore,
-                () =>
-                {
-                    progressCount++;
-                    onProgress?.Invoke(progressCount / (float)totalCount);
-                }));
-        }
-
-        await UniTask.WhenAll(loadTasks);
-
-        onProgress?.Invoke(1f);
-    }
+    private const int _maxLoadCount = 4;
 
     public T GetLoadedAsset<T>(string address) where T: UnityEngine.Object
     {
@@ -102,6 +70,85 @@ public class ResourceManager
         return asset as T;
     }
 
+    public async UniTask LoadContentAsync(string label, Action<float> onProgress = null,
+        CancellationToken cancelToken = default)
+    {
+        if (Utils.IsNullOrWhiteSpace(label))
+        {
+            throw new ArgumentException("콘텐츠 라벨이 비어 있습니다.", nameof(label));
+        }
+
+        if (_contentAddresses.ContainsKey(label))
+        {
+            onProgress?.Invoke(1f);
+            return;
+        }
+
+        AsyncOperationHandle<IList<IResourceLocation>> locationsHandle = default;
+
+        try
+        {
+            onProgress?.Invoke(0f);
+
+            locationsHandle = Addressables.LoadResourceLocationsAsync(label, typeof(UnityEngine.Object));
+            IList<IResourceLocation> locations = await locationsHandle.ToUniTask(cancellationToken: cancelToken);
+
+            if (locations.Count == 0)
+            {
+                throw new Exception($"{label} 라벨에 등록된 에셋이 없습니다.");
+            }
+
+            HashSet<string> addresses = new();
+            List<UniTask> loadTasks = new(locations.Count);
+            int loadedCount = 0;
+
+            using SemaphoreSlim semaphore = new(_maxLoadCount);
+
+            foreach (IResourceLocation location in locations)
+            {
+                string address = location.PrimaryKey;
+                addresses.Add(address);
+
+                loadTasks.Add(LoadContentAssetAsync(address, semaphore, cancelToken,
+                    () =>
+                    {
+                        loadedCount++;
+                        onProgress?.Invoke(loadedCount / (float)locations.Count);
+                    }));
+            }
+
+            await UniTask.WhenAll(loadTasks);
+
+            _contentAddresses[label] = addresses;
+            onProgress?.Invoke(1f);
+        }
+        finally
+        {
+            if (locationsHandle.IsValid())
+            {
+                Addressables.Release(locationsHandle);
+            }
+        }
+    }
+
+    public bool IsContentLoaded(string label)
+    {
+        return _contentAddresses.ContainsKey(label);
+    }
+
+    public void ReleaseContent(string label)
+    {
+        if (!_contentAddresses.Remove(label, out HashSet<string> addresses))
+        {
+            return;
+        }
+
+        foreach (string address in addresses)
+        {
+            ReleaseAsset(address);
+        }
+    }
+
     public void ReleaseAsset(string address)
     {
         if (!_assetHandles.Remove(address, out var handle))
@@ -132,43 +179,7 @@ public class ResourceManager
 
         _assetHandles.Clear();
         _currentLoading.Clear();
-    }
-
-    private async UniTask LoadWithSemaphoreAsync(PreLoadAssetData preLoadData, SemaphoreSlim semaphore, Action onCompleted)
-    {
-        await semaphore.WaitAsync();
-
-        try
-        {
-            switch (preLoadData.AssetType)
-            {
-                case "Mesh":
-                    await LoadAssetAsync<Mesh>(preLoadData.Address);
-                    break;
-
-                case "Material":
-                    await LoadAssetAsync<Material>(preLoadData.Address);
-                    break;
-
-                case "Prefab":
-                case "GameObject":
-                    await LoadAssetAsync<GameObject>(preLoadData.Address);
-                    break;
-
-                case "AudioClip":
-                    await LoadAssetAsync<AudioClip>(preLoadData.Address);
-                    break;
-
-                default:
-                    await LoadAssetAsync<UnityEngine.Object>(preLoadData.Address);
-                    break;
-            }
-        }
-        finally
-        {
-            onCompleted?.Invoke();
-            semaphore.Release();
-        }
+        _contentAddresses.Clear();
     }
 
     private T GetAssetFromHandle<T>(string address, AsyncOperationHandle handle) where T : UnityEngine.Object
@@ -240,6 +251,22 @@ public class ResourceManager
             {
                 _currentLoading.Remove(address);
             }
+        }
+    }
+
+    private async UniTask LoadContentAssetAsync(string address, SemaphoreSlim semaphore,
+        CancellationToken cancelToken, Action onCompleted)
+    {
+        await semaphore.WaitAsync(cancelToken);
+
+        try
+        {
+            await LoadAssetAsync<UnityEngine.Object>(address, cancelToken);
+        }
+        finally
+        {
+            onCompleted?.Invoke();
+            semaphore.Release();
         }
     }
 }
