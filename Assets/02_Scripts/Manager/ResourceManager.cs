@@ -84,7 +84,8 @@ public class ResourceManager
 
             if (locations.Count == 0)
             {
-                throw new Exception($"{label} 라벨에 등록된 에셋이 없습니다.");
+                Logger.LogWarning($"{label} 라벨에 등록된 에셋이 없습니다.");
+                return;
             }
 
             HashSet<string> addresses = new();

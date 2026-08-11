@@ -9,4 +9,11 @@
     {
         return $"UI/{uiType.Name}";
     }
+
+    public static class Label
+    {
+        public const string Common = "Common";
+        public const string Reality = "Reality";
+        public const string Dream = "Dream";
+    }
 }

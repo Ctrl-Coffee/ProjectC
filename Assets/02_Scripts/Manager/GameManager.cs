@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
@@ -46,7 +47,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         await _uiManager.Init();
 
-        // TODO 공통 리소스 로드
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.Common);
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.Reality);
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.Dream);
+
 
         var poolRoot = Utils.CreateEmptyGameObject("PoolRoot", this.gameObject.transform).transform;
         await _poolManager.InitAsync(poolRoot);
@@ -55,4 +59,17 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
 
     #endregion
+
+
+    [ContextMenu("OpenTestHUDUI")]
+    public void OpenTestHUDUI()
+    {
+        UI.OpenTestHUDUI();
+    }
+    [ContextMenu("ExampleVoidFunc")]
+    public void ExampleVoidFunc()
+    {
+        UI.ExampleVoidFunc();
+    }
+
 }
