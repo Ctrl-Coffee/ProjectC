@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5b45a00e9f9fa4b9ea35822433006b, type: 3}
+  m_Name: CompanionDataSO
+  m_EditorClassIdentifier: Assembly-CSharp::CompanionDataSO
+  CompanionDataList:
+  - Id: 001
+    Name: "\uAC80\uC0AC"
+    GradeStar: 1
+    BaseAtk: 10
+    BaseHp: 100
+    BaseDef: 20
+    GrowthAtk: 5
+    GrowthHp: 10
+    GrowthDef: 7
+    SkillId: skill_001
+  - Id: 002
+    Name: "\uAD81\uC218"
+    GradeStar: 2
+    BaseAtk: 15
+    BaseHp: 80
+    BaseDef: 15
+    GrowthAtk: 10
+    GrowthHp: 8
+    GrowthDef: 6
+    SkillId: skill_002

@@ -9,6 +9,7 @@ public class DataTableManager
     public Dictionary<string, PoolData> PoolDataTable { get; private set; } = new();
     public Dictionary<string, PreLoadAssetData> PreLoadAssetDataTable { get; private set; } = new();
 
+    public Dictionary<string, CompanionData> CompanionDataTable { get; private set; } = new();
 
     #endregion
 
@@ -17,6 +18,7 @@ public class DataTableManager
         // TODO: 데이터 테이블 만들기
         //PoolDataTable = LoadData<PoolData>(nameof(PoolData));
         //PreLoadAssetDataTable = LoadData<PreLoadAssetData>(nameof(PreLoadAssetData));
+        LoadCompanionDataFromSO();
     }
 
     #region Getters
@@ -25,6 +27,12 @@ public class DataTableManager
     {
         if (null == PreLoadAssetDataTable || string.IsNullOrEmpty(id)) return null;
         return PreLoadAssetDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public CompanionData GetCompanionData(string id)
+    {
+        if (null == CompanionDataTable || string.IsNullOrEmpty(id)) return null;
+        return CompanionDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
     #endregion
@@ -71,5 +79,24 @@ public class DataTableManager
         }
 
         return new Dictionary<string, T>();
+    }
+
+    //TODO 희준 : 임시코드. 데이터테이블 완성되면 제거
+    private void LoadCompanionDataFromSO()
+    {
+        string resourcePath = "SO/CompanionDataSO";
+        CompanionDataSO companionDataSO = Utils.ResourcesLoad<CompanionDataSO>(resourcePath);
+
+        if (companionDataSO == null)
+        {
+            Debug.LogError("companiondata가 null");
+            return;
+        }
+
+        foreach (CompanionData data in companionDataSO.CompanionDataList)
+        {
+            CompanionDataTable.Add(data.Id, data);
+            Debug.Log($"{data.Name} 데이터를 {CompanionDataTable.Count}개 로드했습니다.");
+        }
     }
 }
