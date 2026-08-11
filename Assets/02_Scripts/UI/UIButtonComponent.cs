@@ -32,7 +32,7 @@ public class UIButtonComponent : MonoBehaviour
         _button.onClick.AddListener(onClickCallback.Invoke);
     }
 
-    public void UnBindAllButtonEvent()
+    public void UnBindButtonAllEvent()
     {
         if (_button == null) return;
 

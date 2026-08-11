@@ -208,7 +208,22 @@ public class UIManager
             _popupStack.Pop();
         }
 
-        _uiRootTypes.Remove(uiType);
         ui.gameObject.SetActive(false);
+    }
+
+    private void ClearUIRootType()
+    {
+        _uiRootTypes.Clear();
+    }
+
+    private void ClearCreatedUI()
+    {
+        foreach (var ui in _createdUI.Values)
+        {
+            GameObject.Destroy(ui.gameObject);
+        }
+
+        _createdUI.Clear();
+        _uiStates.Clear();
     }
 }
