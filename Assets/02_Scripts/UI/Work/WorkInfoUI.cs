@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -170,6 +170,6 @@ public class WorkInfoUI : UIBase
             return;
         }
 
-        button.UnBindAllButtonEvent();
+        button.UnBindButtonAllEvent();
     }
 }
