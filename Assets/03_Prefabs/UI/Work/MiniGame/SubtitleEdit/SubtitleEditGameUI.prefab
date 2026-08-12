@@ -388,7 +388,7 @@ MonoBehaviour:
   _slideDistance: 0
   _playArea: {fileID: 2016611751811022578}
   _targetSlot: {fileID: 8102348523170662560}
-  _attachButton: {fileID: 1136975888596784662}
+  _btnAttach: {fileID: 1136975888596784662}
   _subtitlePrefab: {fileID: 2618395666597504199, guid: 2447e59c25942d34f8a4212cc5b6ffbb, type: 3}
   _baseFallSpeed: 400
   _baseTolerance: 150

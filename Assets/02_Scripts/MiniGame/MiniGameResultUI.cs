@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class MiniGameResultUI : UIBase
 {
-    [SerializeField] private TextMeshProUGUI _gradeText;
-    [SerializeField] private TextMeshProUGUI _completionText;
-    [SerializeField] private UIButtonComponent _closeButton;
+    [SerializeField] private TextMeshProUGUI _txtGrade;
+    [SerializeField] private TextMeshProUGUI _txtAccuracy;
+    [SerializeField] private UIButtonComponent _btnClose;
 
     [Header("연출")]
     [SerializeField] private float _openDuration = 0.25f;
@@ -42,14 +42,14 @@ public class MiniGameResultUI : UIBase
 
     public void SetResult(MiniGameResult result)
     {
-        if (null != _gradeText)
+        if (null != _txtGrade)
         {
-            _gradeText.text = result.Grade.ToString();
+            _txtGrade.text = result.Grade.ToString();
         }
 
-        if (null != _completionText)
+        if (null != _txtAccuracy)
         {
-            _completionText.text = $"{result.Accuracy:P0}";
+            _txtAccuracy.text = $"{result.Accuracy:P0}";
         }
     }
 
@@ -57,9 +57,9 @@ public class MiniGameResultUI : UIBase
     {
         _closeRequestedSource = new UniTaskCompletionSource();
 
-        if (null != _closeButton)
+        if (null != _btnClose)
         {
-            _closeButton.BindButtonEvent(OnClickCloseButton);
+            _btnClose.BindButtonEvent(OnClickCloseButton);
         }
         else
         {
@@ -72,9 +72,9 @@ public class MiniGameResultUI : UIBase
         }
         finally
         {
-            if (null != _closeButton)
+            if (null != _btnClose)
             {
-                _closeButton.UnBindAllButtonEvent();
+                _btnClose.UnBindAllButtonEvent();
             }
 
             _closeRequestedSource = null;

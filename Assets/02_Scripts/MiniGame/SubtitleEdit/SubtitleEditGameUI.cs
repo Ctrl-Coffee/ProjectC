@@ -9,7 +9,7 @@ public class SubtitleEditGameUI : MiniGameBase
     [Header("배치")]
     [SerializeField] private RectTransform _playArea;
     [SerializeField] private RectTransform _targetSlot;
-    [SerializeField] private UIButtonComponent _attachButton;
+    [SerializeField] private UIButtonComponent _btnAttach;
 
     [SerializeField] private FallingSubtitle _subtitlePrefab;
 
@@ -75,7 +75,7 @@ public class SubtitleEditGameUI : MiniGameBase
             return false;
         }
 
-        _subtitleInstance.Setup(GetSubtitleStartPosition());
+        _subtitleInstance.SetPosition(GetSubtitleStartPosition());
 
         _hasAttachResult = false;
         _attachAccuracy = 0f;
@@ -194,22 +194,22 @@ public class SubtitleEditGameUI : MiniGameBase
 
     private void BindInput()
     {
-        if (null == _attachButton)
+        if (null == _btnAttach)
         {
             return;
         }
 
-        _attachButton.BindButtonEvent(OnClickAttach);
+        _btnAttach.BindButtonEvent(OnClickAttach);
     }
 
     private void UnbindInput()
     {
-        if (null == _attachButton)
+        if (null == _btnAttach)
         {
             return;
         }
 
-        _attachButton.UnBindAllButtonEvent();
+        _btnAttach.UnBindAllButtonEvent();
     }
 
     private void OnClickAttach()
@@ -241,7 +241,7 @@ public class SubtitleEditGameUI : MiniGameBase
             return false;
         }
 
-        if (null == _attachButton)
+        if (null == _btnAttach)
         {
             Logger.LogWarning("참조 비어있음 (AttachButton)");
         }

@@ -1,4 +1,10 @@
-﻿public enum MiniGameGrade
+﻿public enum MiniGameType
+{
+    None,
+    SubtitleEdit,
+}
+
+public enum MiniGameGrade
 {
     Miss,
     Bad,

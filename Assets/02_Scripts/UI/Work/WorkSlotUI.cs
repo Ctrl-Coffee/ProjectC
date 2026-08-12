@@ -11,20 +11,10 @@ public class WorkSlotUI : MonoBehaviour
     private string _workId;
     private Action<string> _onClickPlay;
 
-    public void Setup(string workId, string workName, string info, Action<string> onClickPlay)
+    public void Bind(string workId, Action<string> onClickPlay)
     {
         _workId = workId;
         _onClickPlay = onClickPlay;
-
-        if (null != _txtName)
-        {
-            _txtName.text = workName;
-        }
-
-        if (null != _txtInfo)
-        {
-            _txtInfo.text = info;
-        }
 
         if (null == _btnPlay)
         {
@@ -34,6 +24,31 @@ public class WorkSlotUI : MonoBehaviour
 
         _btnPlay.UnBindAllButtonEvent();
         _btnPlay.BindButtonEvent(OnClickPlay);
+    }
+
+    public void Unbind()
+    {
+        _onClickPlay = null;
+
+        if (null == _btnPlay)
+        {
+            return;
+        }
+
+        _btnPlay.UnBindAllButtonEvent();
+    }
+
+    public void SetInfo(string workName, string info)
+    {
+        if (null != _txtName)
+        {
+            _txtName.text = workName;
+        }
+
+        if (null != _txtInfo)
+        {
+            _txtInfo.text = info;
+        }
     }
 
     private void OnClickPlay()

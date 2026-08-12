@@ -2,6 +2,18 @@
 
 public static class Utils
 {
+    public static T ParseEnum<T>(string value, T defaultValue = default) where T : struct, System.Enum
+    {
+        if (System.Enum.TryParse(value, true, out T result) && System.Enum.IsDefined(typeof(T), result))
+        {
+            return result;
+        }
+
+        Logger.LogError($"{typeof(T).Name} 값을 해석할 수 없습니다. value: {value}");
+
+        return defaultValue;
+    }
+
     public static string FormatClock(float seconds)
     {
         if (seconds <= 0f)

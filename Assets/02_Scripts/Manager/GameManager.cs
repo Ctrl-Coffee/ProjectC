@@ -1,6 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using System;
-using System.Threading;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
@@ -29,8 +27,6 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     #region Variables
 
-    private const float AUTO_WORK_COLLECT_INTERVAL = 1f;
-
     private bool _initComplete = false;
 
 
@@ -44,6 +40,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         _saveManager.Load();
         _dataTable.LoadAllData();
+
+        WorkTable.Build(_dataTable.WorkDataTable);
 
         // TODO: ui, network init
 
@@ -68,23 +66,10 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         _initComplete = true;
 
-        CollectAutoWorkLoopAsync().Forget();
+        AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
 
         // TODO: 로딩/로비가 생기면 지우기
         await _uiManager.OpenWorkInfoUI();
-    }
-
-    // 업무 화면이 닫혀 있어도 정산되도록 하기
-    private async UniTaskVoid CollectAutoWorkLoopAsync()
-    {
-        CancellationToken token = destroyCancellationToken;
-
-        while (!token.IsCancellationRequested)
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(AUTO_WORK_COLLECT_INTERVAL), ignoreTimeScale: true, cancellationToken: token);
-
-            AutoWorkQueue.CollectCompleted();
-        }
     }
 
     #endregion

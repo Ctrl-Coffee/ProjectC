@@ -101,6 +101,10 @@ public class WorkDebugWindow : EditorWindow
         CurrencyModel currency = GameManager.User.Currency;
 
         EditorGUILayout.LabelField("돈", currency.Money.ToString());
-        EditorGUILayout.LabelField("DP", currency.DP.ToString());
+        EditorGUILayout.LabelField("드림 포인트", currency.DreamPoint.ToString());
+        EditorGUILayout.LabelField("에너지", currency.Energy.ToString());
+        EditorGUILayout.LabelField("꿈의 조각", currency.DreamFragment.ToString());
+        EditorGUILayout.LabelField("몽상의 스크롤", currency.DreamScroll.ToString());
+        EditorGUILayout.LabelField("영감", currency.Inspiration.ToString());
     }
 }

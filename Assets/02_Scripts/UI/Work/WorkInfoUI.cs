@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class WorkInfoUI : UIBase
 {
-    private enum WorkCategory
-    {
-        Manual,
-        Auto,
-    }
-
-    // TODO: 데이터 테이블로 옮기기
-    private const string MANUAL_WORK_ID = "SubtitleEdit";
-    private const string MANUAL_WORK_NAME = "Manuel_work1";
-
     [SerializeField] private UIButtonComponent _btnClose;
 
     [Header("필터")]
@@ -30,13 +20,16 @@ public class WorkInfoUI : UIBase
     private MiniGameFlowHandler _workHandler = new();
     private List<WorkSlotUI> _spawnedSlots = new();
 
+    private WorkType _currentWorkType;
+    private bool _isWorkListBuilt = false;
+
     private void OnEnable()
     {
         BindButton(_btnClose, OnClickCloseButton, nameof(_btnClose));
         BindButton(_btnManual, OnClickManualTab, nameof(_btnManual));
         BindButton(_btnAuto, OnClickAutoTab, nameof(_btnAuto));
 
-        RefreshWorkList(WorkCategory.Manual);
+        RefreshWorkList(WorkType.Manual);
     }
 
     private void OnDisable()
@@ -53,20 +46,34 @@ public class WorkInfoUI : UIBase
 
     private void OnClickManualTab()
     {
-        RefreshWorkList(WorkCategory.Manual);
+        RefreshWorkList(WorkType.Manual);
     }
 
     private void OnClickAutoTab()
     {
-        RefreshWorkList(WorkCategory.Auto);
+        RefreshWorkList(WorkType.Auto);
     }
 
-    private void OnClickManualWork(string workId)
+    private void OnClickWork(string workId)
     {
-        _workHandler.StartMiniGameAsync().Forget();
+        WorkData data = GameManager.DataTable.GetWorkData(workId);
+
+        if (null == data)
+        {
+            Logger.LogError($"업무 데이터를 찾을 수 없습니다. id: {workId}");
+            return;
+        }
+
+        if (WorkType.Auto == data.Type)
+        {
+            EnqueueAutoWork(data.Id);
+            return;
+        }
+
+        _workHandler.StartMiniGameAsync(data).Forget();
     }
 
-    private void OnClickAutoWork(string workId)
+    private void EnqueueAutoWork(string workId)
     {
         if (!AutoWorkQueue.TryEnqueue(workId))
         {
@@ -81,20 +88,36 @@ public class WorkInfoUI : UIBase
         _workQueue.Refresh();
     }
 
-    private void RefreshWorkList(WorkCategory category)
+    private void RefreshWorkList(WorkType workType)
     {
-        ClearWorkList();
-
-        if (WorkCategory.Manual == category)
+        if (_isWorkListBuilt && _currentWorkType == workType)
         {
-            SpawnWorkSlot(MANUAL_WORK_ID, MANUAL_WORK_NAME, string.Empty, OnClickManualWork);
             return;
         }
 
-        foreach (AutoWorkData data in GameManager.DataTable.AutoWorkDataTable.Values)
+        _currentWorkType = workType;
+        _isWorkListBuilt = true;
+
+        ClearWorkList();
+
+        IReadOnlyList<WorkData> workList = WorkTable.GetList(workType);
+
+        for (int i = 0; i < workList.Count; i++)
         {
-            SpawnWorkSlot(data.Id, data.Name, Utils.FormatDuration(data.DurationSeconds), OnClickAutoWork);
+            WorkData data = workList[i];
+
+            SpawnWorkSlot(data.Id, data.Name, GetSlotInfo(data), OnClickWork);
         }
+    }
+
+    private string GetSlotInfo(WorkData data)
+    {
+        if (WorkType.Auto != data.Type)
+        {
+            return string.Empty;
+        }
+
+        return Utils.FormatDuration(data.DurationSeconds);
     }
 
     private void ClearWorkList()
@@ -106,6 +129,7 @@ public class WorkInfoUI : UIBase
                 continue;
             }
 
+            _spawnedSlots[i].Unbind();
             Destroy(_spawnedSlots[i].gameObject);
         }
 
@@ -122,7 +146,9 @@ public class WorkInfoUI : UIBase
 
         WorkSlotUI slot = Instantiate(_workSlotPrefab, _content, false);
 
-        slot.Setup(workId, workName, info, onClickPlay);
+        slot.Bind(workId, onClickPlay);
+        slot.SetInfo(workName, info);
+
         _spawnedSlots.Add(slot);
     }
 

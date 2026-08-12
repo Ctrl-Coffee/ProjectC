@@ -269,9 +269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24e3eb3dae14e64780854e201796bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiniGameResultUI
-  _gradeText: {fileID: 7431791053510082231}
-  _completionText: {fileID: 2792579285189023866}
-  _closeButton: {fileID: 4690175243491182531}
+  _txtGrade: {fileID: 7431791053510082231}
+  _txtAccuracy: {fileID: 2792579285189023866}
+  _btnClose: {fileID: 4690175243491182531}
   _openDuration: 0.25
 --- !u!1 &5687667175884272776
 GameObject:

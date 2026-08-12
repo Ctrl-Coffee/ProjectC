@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
+using System.Threading;
 
 public static class AutoWorkQueue
 {
     public const int MAX_SLOT_COUNT = 5;
+
+    private const float COLLECT_INTERVAL = 1f;
 
     private static List<AutoWorkSlot> Slots
     {
@@ -37,11 +41,17 @@ public static class AutoWorkQueue
             return false;
         }
 
-        AutoWorkData data = GameManager.DataTable.GetAutoWorkData(workId);
+        WorkData data = GameManager.DataTable.GetWorkData(workId);
 
         if (null == data)
         {
-            Logger.LogError($"자동업무 데이터를 찾을 수 없습니다. id: {workId}");
+            Logger.LogError($"업무 데이터를 찾을 수 없습니다. id: {workId}");
+            return false;
+        }
+
+        if (WorkType.Auto != data.Type)
+        {
+            Logger.LogError($"자동업무가 아니어서 큐에 넣을 수 없습니다. id: {workId}");
             return false;
         }
 
@@ -87,11 +97,11 @@ public static class AutoWorkQueue
 
         for (int i = startIndex; i < slots.Count; i++)
         {
-            AutoWorkData data = GameManager.DataTable.GetAutoWorkData(slots[i].WorkId);
+            WorkData data = GameManager.DataTable.GetWorkData(slots[i].WorkId);
 
             if (null == data)
             {
-                Logger.LogError($"자동업무 데이터를 찾을 수 없어 시각 재계산을 건너뜁니다. id: {slots[i].WorkId}");
+                Logger.LogError($"업무 데이터를 찾을 수 없어 시각 재계산을 건너뜁니다. id: {slots[i].WorkId}");
                 continue;
             }
 
@@ -111,6 +121,17 @@ public static class AutoWorkQueue
         }
     }
 
+    // 업무 화면이 닫혀 있어도 정산되도록 하기
+    public static async UniTaskVoid RunCollectLoopAsync(CancellationToken token)
+    {
+        while (!token.IsCancellationRequested)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(COLLECT_INTERVAL), ignoreTimeScale: true, cancellationToken: token);
+
+            CollectCompleted();
+        }
+    }
+
     public static int CollectCompleted()
     {
         List<AutoWorkSlot> slots = Slots;
@@ -119,19 +140,19 @@ public static class AutoWorkQueue
 
         while (slots.Count > 0 && nowTicks >= slots[0].EndTicks)
         {
-            AutoWorkData data = GameManager.DataTable.GetAutoWorkData(slots[0].WorkId);
+            WorkData data = GameManager.DataTable.GetWorkData(slots[0].WorkId);
 
             slots.RemoveAt(0);
             collectedCount++;
 
             if (null == data)
             {
-                Logger.LogError("정산할 자동업무 데이터를 찾을 수 없어 보상을 건너뜁니다.");
+                Logger.LogError("정산할 업무 데이터를 찾을 수 없어 보상을 건너뜁니다.");
                 continue;
             }
 
             GameManager.User.Currency.AddMoney(data.RewardMoney);
-            GameManager.User.Currency.AddDP(data.RewardDP);
+            GameManager.User.Currency.AddDreamPoint(data.RewardDP);
 
             Logger.Log($"자동업무 완료 - {data.Name} / 돈 {data.RewardMoney} / DP {data.RewardDP}");
         }

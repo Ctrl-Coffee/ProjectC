@@ -22,9 +22,9 @@ public class FallingSubtitle : MonoBehaviour
         _rectTransform = this.transform as RectTransform;
     }
 
-    public void Setup(Vector2 startPosition)
+    public void SetPosition(Vector2 position)
     {
-        RectTransform.anchoredPosition = startPosition;
+        RectTransform.anchoredPosition = position;
     }
 
     public void Fall(float distance)
