@@ -3,18 +3,16 @@ using UnityEngine;
 
 public class TestGrowthUI : MonoBehaviour
 {
-    [SerializeField] private string _companionId = "Companion001";
+    [SerializeField] private string _companionId = "Companion_001";
     [SerializeField] private int _level = 3;
 
-    private void Start()
+    [ContextMenu("동료 성장 UI 열기")]
+    private void OpenGrowthUI()
     {
         OpenGrowthUIAsync().Forget();
     }
-
     private async UniTask OpenGrowthUIAsync()
     {
-        await UniTask.Delay(1000);   // TODO 희준 : GameManager 초기화 완료 대기로 교체
-
         OwnedCompanionData ownedData = new OwnedCompanionData();
         ownedData.CompanionId = _companionId;
         ownedData.Level = _level;

@@ -12,6 +12,8 @@ public class DataTableManager
 
     public Dictionary<string, CompanionData> CompanionDataTable { get; private set; } = new();
     public Dictionary<string, CompanionLevelUpCostData> CompanionLevelUpCostDataTable { get; private set; } = new();
+    public Dictionary<string, SkillData> SkillDataTable { get; private set; } = new();
+
 
 
     #endregion
@@ -25,6 +27,7 @@ public class DataTableManager
         WorkDataTable = LoadData<WorkData>(nameof(WorkData));
         CompanionDataTable = LoadData<CompanionData>(nameof(CompanionData));
         CompanionLevelUpCostDataTable = LoadData<CompanionLevelUpCostData>(nameof(CompanionLevelUpCostData));
+        SkillDataTable = LoadData<SkillData>(nameof(SkillData));
     }
 
     #region Getters
@@ -50,6 +53,11 @@ public class DataTableManager
     {
         if (null == CompanionLevelUpCostDataTable || string.IsNullOrEmpty(id)) return null;
         return CompanionLevelUpCostDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+    public SkillData GetSkillData(string id)
+    {
+        if (null == SkillDataTable || string.IsNullOrEmpty(id)) return null;
+        return SkillDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
     #endregion
@@ -95,24 +103,5 @@ public class DataTableManager
         }
 
         return new Dictionary<string, T>();
-    }
-
-    //TODO 희준 : 임시코드. 데이터테이블 완성되면 제거
-    private void LoadCompanionDataFromSO()
-    {
-        string resourcePath = "SO/CompanionDataSO";
-        CompanionDataSO companionDataSO = Utils.ResourcesLoad<CompanionDataSO>(resourcePath);
-
-        if (companionDataSO == null)
-        {
-            Debug.LogError("companiondata가 null");
-            return;
-        }
-
-        foreach (CompanionData data in companionDataSO.CompanionDataList)
-        {
-            CompanionDataTable.Add(data.Id, data);
-            Debug.Log($"{data.Name} 데이터를 {CompanionDataTable.Count}개 로드했습니다.");
-        }
     }
 }
