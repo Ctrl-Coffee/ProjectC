@@ -26,16 +26,20 @@ public class MiniGameFlowHandler
             return;
         }
 
-        MiniGameResult result = await PlayAsync(workData.MiniGameType);
-
-        if (!result.IsCompleted)
+        if (GameManager.User.Currency.TrySpendEnergy(workData.ReqEnergy))
         {
-            return;
+            Logger.Log($"미니게임 시작 - {workData.Name} / 남은 에너지 {GameManager.User.Currency.Energy}");
+            MiniGameResult result = await PlayAsync(workData.MiniGameType);
+
+            if (!result.IsCompleted)
+            {
+                return;
+            }
+
+            GiveReward(workData, result.Accuracy);
+
+            Logger.Log($"미니게임 종료 - {result.Grade} / 정확도 {result.Accuracy:P0}");
         }
-
-        GiveReward(workData, result.Accuracy);
-
-        Logger.Log($"미니게임 종료 - {result.Grade} / 정확도 {result.Accuracy:P0}");
     }
 
     private void GiveReward(WorkData workData, float accuracy)

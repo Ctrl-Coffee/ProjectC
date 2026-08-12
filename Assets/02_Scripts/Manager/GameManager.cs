@@ -41,8 +41,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         _saveManager.Load();
         _dataTable.LoadAllData();
 
-        WorkTable.Build(_dataTable.WorkDataTable);
-
         // TODO: ui, network init
 
         InitializeAsync().Forget();
@@ -67,6 +65,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         _initComplete = true;
 
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
+        EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
         // TODO: 로딩/로비가 생기면 지우기
         await _uiManager.OpenWorkInfoUI();
