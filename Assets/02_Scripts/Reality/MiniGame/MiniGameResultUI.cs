@@ -74,7 +74,7 @@ public class MiniGameResultUI : UIBase
         {
             if (null != _btnClose)
             {
-                _btnClose.UnBindAllButtonEvent();
+                _btnClose.UnBindButtonAllEvent();
             }
 
             _closeRequestedSource = null;
