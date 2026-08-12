@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIButtonComponent : MonoBehaviour
 {
     [SerializeField] private Button _button;
-    [SerializeField] private Text _text;
+    [SerializeField] private TextMeshProUGUI _text;
 
     private void Awake()
     {

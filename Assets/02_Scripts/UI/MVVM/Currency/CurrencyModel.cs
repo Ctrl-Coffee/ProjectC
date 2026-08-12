@@ -1,0 +1,249 @@
+﻿using System;
+using UnityEngine;
+
+[Serializable]
+public class CurrencyModel : ModelBase
+{
+    // 테스트용 설정. 최대치 100, 시작치 30
+    private const long START_ENERGY = 30;
+    private const long MAX_ENERGY = 100;
+
+    [SerializeField] private long _money;
+    [SerializeField] private long _dreamPoint;
+    [SerializeField] private long _energy = START_ENERGY;
+    [SerializeField] private long _dreamFragment;
+    [SerializeField] private long _dreamScroll;
+    [SerializeField] private long _inspiration;
+
+    public long Money
+    {
+        get
+        {
+            return _money;
+        }
+        private set
+        {
+            if (_money == value)
+            {
+                return;
+            }
+
+            _money = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public long DreamPoint
+    {
+        get
+        {
+            return _dreamPoint;
+        }
+        private set
+        {
+            if (_dreamPoint == value)
+            {
+                return;
+            }
+
+            _dreamPoint = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public long Energy
+    {
+        get
+        {
+            return _energy;
+        }
+        private set
+        {
+            if (_energy == value)
+            {
+                return;
+            }
+
+            _energy = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public long MaxEnergy
+    {
+        get
+        {
+            return MAX_ENERGY;
+        }
+    }
+
+    public long DreamFragment
+    {
+        get
+        {
+            return _dreamFragment;
+        }
+        private set
+        {
+            if (_dreamFragment == value)
+            {
+                return;
+            }
+
+            _dreamFragment = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public long DreamScroll
+    {
+        get
+        {
+            return _dreamScroll;
+        }
+        private set
+        {
+            if (_dreamScroll == value)
+            {
+                return;
+            }
+
+            _dreamScroll = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public long Inspiration
+    {
+        get
+        {
+            return _inspiration;
+        }
+        private set
+        {
+            if (_inspiration == value)
+            {
+                return;
+            }
+
+            _inspiration = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public override void InitializeOnce()
+    {
+    }
+
+    public void AddMoney(long amount)
+    {
+        Money += amount;
+    }
+
+    public void AddDreamPoint(long amount)
+    {
+        DreamPoint += amount;
+    }
+
+    public void AddEnergy(long amount)
+    {
+        if (MAX_ENERGY <= Energy)
+        {
+            return;
+        }
+
+        Energy = Math.Min(MAX_ENERGY, Energy + amount);
+    }
+
+    public void AddDreamFragment(long amount)
+    {
+        DreamFragment += amount;
+    }
+    
+    public void AddDreamScroll(long amount)
+    {
+        DreamScroll += amount;
+    }
+
+    public void AddInspiration(long amount)
+    {
+        Inspiration += amount;
+    }
+
+    public bool TrySpendMoney(long amount)
+    {
+        if (!CanSpend(Money, amount))
+        {
+            return false;
+        }
+
+        Money -= amount;
+
+        return true;
+    }
+
+    public bool TrySpendDreamPoint(long amount)
+    {
+        if (!CanSpend(DreamPoint, amount))
+        {
+            return false;
+        }
+
+        DreamPoint -= amount;
+
+        return true;
+    }
+
+    public bool TrySpendEnergy(long amount)
+    {
+        if (!CanSpend(Energy, amount))
+        {
+            return false;
+        }
+
+        Energy -= amount;
+
+        return true;
+    }
+
+    public bool TrySpendDreamFragment(long amount)
+    {
+        if (!CanSpend(DreamFragment, amount))
+        {
+            return false;
+        }
+
+        DreamFragment -= amount;
+
+        return true;
+    }
+
+    public bool TrySpendDreamScroll(long amount)
+    {
+        if (!CanSpend(DreamScroll, amount))
+        {
+            return false;
+        }
+
+        DreamScroll -= amount;
+
+        return true;
+    }
+
+    public bool TrySpendInspiration(long amount)
+    {
+        if (!CanSpend(Inspiration, amount))
+        {
+            return false;
+        }
+
+        Inspiration -= amount;
+
+        return true;
+    }
+
+    private bool CanSpend(long current, long amount)
+    {
+        return 0 < amount && amount <= current;
+    }
+}

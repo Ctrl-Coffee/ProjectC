@@ -29,7 +29,6 @@ public class UIBase : MonoBehaviour
             .SetUpdate(true);
     }
 
-
     public virtual void OnClickCloseButton()
     {
         // TODO(김익환): audio
