@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class UIBase : MonoBehaviour
 {
+    [SerializeField] private bool _isPlayAnimation = true;
+
     public void OpenUI()
     {
         PlayOpenAnimation();
@@ -15,6 +17,9 @@ public class UIBase : MonoBehaviour
 
     public virtual Tween PlayOpenAnimation()
     {
+        if(_isPlayAnimation == false)
+            return null;
+
         transform.localScale = Vector3.zero;
 
         transform.DOKill();

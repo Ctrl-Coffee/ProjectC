@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIButtonComponent : MonoBehaviour
 {
     [SerializeField] private Button _button;
-    [SerializeField] private Text _text;
+    [SerializeField] private TextMeshProUGUI _text;
 
     private void Awake()
     {
@@ -13,15 +14,14 @@ public class UIButtonComponent : MonoBehaviour
 
     private void InitUIButton()
     {
-        if (_button != null)
+        if (_button == null)
         {
-            return;
+            _button = this.gameObject.GetComponentInChildren<Button>();
         }
 
-        var button = this.gameObject.GetComponentInChildren<Button>();
-        if (button != null)
+        if(_text == null)
         {
-            this._button = button;
+            _text = this.gameObject.GetComponentInChildren<TextMeshProUGUI>();
         }
     }
 

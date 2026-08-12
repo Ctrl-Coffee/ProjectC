@@ -56,16 +56,32 @@ public class GameManager : SingletonBehaviour<GameManager>
         await _poolManager.InitAsync(poolRoot);
 
         _initComplete = true;
+
+        EnterReal();
     }
 
     #endregion
 
-
-    [ContextMenu("OpenTestHUDUI")]
-    public void OpenTestHUDUI()
+    public void EnterReal()
     {
-        UI.OpenTestHUDUI();
+        UI.OpenLobbyHud();
     }
+
+    public void ExitReal()
+    {
+
+    }
+
+    public void EnterDream()
+    {
+
+    }
+
+    public void EixtDream()
+    {
+
+    }
+
     [ContextMenu("ExampleVoidFunc")]
     public void ExampleVoidFunc()
     {

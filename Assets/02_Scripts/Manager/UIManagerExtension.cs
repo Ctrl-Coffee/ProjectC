@@ -9,9 +9,9 @@ using UnityEngine;
 /// </summary>
 public static class UIManagerExtension
 {
-    public static UniTask<TestHUDUI> OpenTestHUDUI(this UIManager uiManager)
+    public static void OpenLobbyHud(this UIManager uiManager)
     {
-        return uiManager.OpenHUDUI<TestHUDUI>();
+        uiManager.OpenHUDUI<LobbyUI>().Forget();
     }
 
     public static void ExampleVoidFunc(this UIManager uiManager)

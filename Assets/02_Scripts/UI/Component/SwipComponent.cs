@@ -1,121 +1,200 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 public class SwipComponent : MonoBehaviour
 {
-    [SerializeField] private Scrollbar _scrollbar;
+    [SerializeField] private Camera _camera;
     [SerializeField] private float _swipeTime = 0.2f;
-    [SerializeField] private SwipeDirect swipeDirect = SwipeDirect.Horizontal;
+    [SerializeField] private float _swipeDistanceRate = 0.2f;
+    [FormerlySerializedAs("swipeDirect")]
+    [SerializeField] private SwipeDirect _swipeDirect = SwipeDirect.Horizontal;
 
-    private float _minSwipeDistance; // 스와이프 하기 위한 움직여야 하는 최소 거리
+    private Vector3[] _pagePositions;
 
-    private float[] _scrollPageStartValues;
-    private float _pageWidth;
+    private Vector2 _startTouchPosition;
+    private Vector3 _startTouchWorldPosition;
+    private Vector3 _dragStartPosition;
 
-    private float _startTouch;
-    private float _endTouch;
-
-    private int _currentPage = 0;
+    private int _currentPage;
     private int _maxPage;
 
-    private bool _isSwiping = false;
+    private bool _isSwiping;
+    private bool _isDragging;
+    private bool _isTouchInput;
 
     private Tween _swipeTween;
 
     private void Awake()
     {
-        _scrollPageStartValues = new float[transform.childCount];
-
-        _pageWidth = 1f / (transform.childCount - 1);
-
-        for (int i = 0; i < _scrollPageStartValues.Length; i++)
+        if (_camera == null)
         {
-            _scrollPageStartValues[i] = i * _pageWidth;
+            Logger.LogError("드래그 좌표를 변환할 Camera가 필요합니다.");
+            enabled = false;
+            return;
         }
 
-        _maxPage = transform.childCount - 1;
-
-        _minSwipeDistance = Screen.width * 0.2f;
-    }
-
-    private void Start()
-    {
-        SetScrollBarValue(0);
+        SetPagePositions();
     }
 
     private void Update()
     {
-        TestUpdateInput();
+        UpdateInput();
     }
 
-    private void SetScrollBarValue(int index)
+    private void OnDisable()
     {
-        _currentPage = index;
-        _scrollbar.value = _scrollPageStartValues[index];
+        _swipeTween?.Kill();
+        _isSwiping = false;
+        _isDragging = false;
     }
 
-    private void TestUpdateInput()
+    private void SetPagePositions()
+    {
+        int pageCount = transform.childCount;
+
+        if (pageCount == 0)
+        {
+            Logger.LogError("스와이프할 자식 스프라이트가 없습니다.");
+            enabled = false;
+            return;
+        }
+
+        _pagePositions = new Vector3[pageCount];
+        _pagePositions[0] = transform.position;
+
+        Transform firstPage = transform.GetChild(0);
+        SpriteRenderer firstRenderer = firstPage.GetComponent<SpriteRenderer>();
+
+        if (firstRenderer == null)
+        {
+            Logger.LogError($"{firstPage.name}에 SpriteRenderer가 없습니다.");
+            enabled = false;
+            return;
+        }
+
+        float firstCenter = GetAxisValue(firstRenderer.bounds.center);
+        float nextPagePosition = firstCenter + (GetAxisValue(firstRenderer.bounds.size) * 0.5f);
+
+        for (int i = 1; i < pageCount; i++)
+        {
+            Transform page = transform.GetChild(i);
+            SpriteRenderer renderer = page.GetComponent<SpriteRenderer>();
+
+            if (renderer == null)
+            {
+                Logger.LogError($"{page.name}에 SpriteRenderer가 없습니다.");
+                enabled = false;
+                return;
+            }
+
+            float halfSize = GetAxisValue(renderer.bounds.size) * 0.5f;
+            float targetCenter = nextPagePosition + halfSize;
+            float positionOffset = targetCenter - GetAxisValue(renderer.bounds.center);
+
+            page.position += GetAxisVector(positionOffset);
+            _pagePositions[i] = _pagePositions[0] + GetAxisVector(firstCenter - targetCenter);
+
+            nextPagePosition = targetCenter + halfSize;
+        }
+
+        _currentPage = 0;
+        _maxPage = pageCount - 1;
+    }
+
+    private void UpdateInput()
     {
         if (_isSwiping == true)
             return;
 
-#if UNITY_EDITOR
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Touchscreen.current != null)
         {
-            if (swipeDirect == SwipeDirect.Horizontal)
-                _startTouch = Mouse.current.position.ReadValue().x;
-            else
-                _startTouch = Mouse.current.position.ReadValue().y;
-        }
-        else if (Mouse.current.leftButton.wasReleasedThisFrame)
-        {
-            if (swipeDirect == SwipeDirect.Horizontal)
-                _endTouch = Mouse.current.position.ReadValue().x;
-            else
-                _endTouch = Mouse.current.position.ReadValue().y;
+            if (Touchscreen.current.primaryTouch.press.wasPressedThisFrame == true)
+            {
+                _isTouchInput = true;
+                BeginDrag(Touchscreen.current.primaryTouch.position.ReadValue());
+                return;
+            }
 
-            UpdateSwipe();
-        }
-#endif
+            if (_isDragging == true && _isTouchInput == true)
+            {
+                Vector2 touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
 
-#if UNITY_ANDROID
-        if (Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
-        {
-            _startTouchX = Touchscreen.current.primaryTouch.position.ReadValue().x;
+                if (Touchscreen.current.primaryTouch.press.wasReleasedThisFrame == true)
+                    EndDrag(touchPosition);
+                else
+                    Drag(touchPosition);
+
+                return;
+            }
         }
-        else if (Touchscreen.current.primaryTouch.press.wasReleasedThisFrame)
+
+        if (Mouse.current == null)
+            return;
+
+        if (Mouse.current.leftButton.wasPressedThisFrame == true)
         {
-            _endTouchX = Touchscreen.current.primaryTouch.position.ReadValue().x;
-            UpdateSwipe();
+            _isTouchInput = false;
+            BeginDrag(Mouse.current.position.ReadValue());
         }
-#endif
+        else if (_isDragging == true && _isTouchInput == false)
+        {
+            Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+            if (Mouse.current.leftButton.wasReleasedThisFrame == true)
+                EndDrag(mousePosition);
+            else if (Mouse.current.leftButton.isPressed == true)
+                Drag(mousePosition);
+        }
     }
 
-    private void UpdateSwipe()
+    private void BeginDrag(Vector2 touchPosition)
     {
-        if (Mathf.Abs(_endTouch - _startTouch) < _minSwipeDistance)
+        _startTouchPosition = touchPosition;
+        _startTouchWorldPosition = GetWorldPosition(touchPosition);
+        _dragStartPosition = transform.position;
+        _isDragging = true;
+    }
+
+    private void Drag(Vector2 touchPosition)
+    {
+        float dragDistance = GetAxisValue(GetWorldPosition(touchPosition) - _startTouchWorldPosition);
+        float targetPosition = GetAxisValue(_dragStartPosition) + dragDistance;
+        float firstPagePosition = GetAxisValue(_pagePositions[0]);
+        float lastPagePosition = GetAxisValue(_pagePositions[_maxPage]);
+
+        targetPosition = Mathf.Clamp(
+            targetPosition,
+            Mathf.Min(firstPagePosition, lastPagePosition),
+            Mathf.Max(firstPagePosition, lastPagePosition));
+
+        transform.position = _dragStartPosition + GetAxisVector(targetPosition - GetAxisValue(_dragStartPosition));
+    }
+
+    private void EndDrag(Vector2 touchPosition)
+    {
+        Drag(touchPosition);
+        _isDragging = false;
+
+        float swipeDistance = GetAxisValue(touchPosition - _startTouchPosition);
+        float screenSize = _swipeDirect == SwipeDirect.Horizontal ? Screen.width : Screen.height;
+
+        if (Mathf.Abs(swipeDistance) < screenSize * _swipeDistanceRate)
         {
             Swipe(_currentPage);
             return;
         }
 
-        bool isLeft = _startTouch < _endTouch;
+        float nextPageDirection = _maxPage == 0 ? 0f : Mathf.Sign(GetAxisValue(_pagePositions[_maxPage] - _pagePositions[0]));
 
-        if (isLeft)
+        if (Mathf.Sign(swipeDistance) == nextPageDirection)
         {
-            if (_currentPage == 0)
-                return;
-
-            _currentPage--;
+            _currentPage = Mathf.Min(_currentPage + 1, _maxPage);
         }
         else
         {
-            if (_currentPage == _maxPage)
-                return;
-
-            _currentPage++;
+            _currentPage = Mathf.Max(_currentPage - 1, 0);
         }
 
         Swipe(_currentPage);
@@ -126,12 +205,29 @@ public class SwipComponent : MonoBehaviour
         _swipeTween?.Kill();
 
         _isSwiping = true;
+        _swipeTween = transform.DOMove(_pagePositions[index], _swipeTime)
+            .OnComplete(() => _isSwiping = false);
+    }
 
-        _swipeTween = DOTween.To(
-            () => _scrollbar.value,
-            value => _scrollbar.value = value,
-            _scrollPageStartValues[index],
-            _swipeTime
-        ).OnComplete(() => _isSwiping = false);
+    private float GetAxisValue(Vector2 value)
+    {
+        return _swipeDirect == SwipeDirect.Horizontal ? value.x : value.y;
+    }
+
+    private float GetAxisValue(Vector3 value)
+    {
+        return _swipeDirect == SwipeDirect.Horizontal ? value.x : value.y;
+    }
+
+    private Vector3 GetWorldPosition(Vector2 screenPosition)
+    {
+        float cameraDistance = Vector3.Dot(transform.position - _camera.transform.position, _camera.transform.forward);
+
+        return _camera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, cameraDistance));
+    }
+
+    private Vector3 GetAxisVector(float value)
+    {
+        return _swipeDirect == SwipeDirect.Horizontal ? new Vector3(value, 0f, 0f) : new Vector3(0f, value, 0f);
     }
 }
