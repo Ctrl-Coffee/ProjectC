@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using UnityEngine;
 
 public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
 {
@@ -16,6 +17,7 @@ public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
     {
         base.InitializeModel();
         Refresh();
+        base.OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(Level)));
     }
 
     protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -27,7 +29,11 @@ public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
     private void Refresh()
     {
         CompanionData companionData = GameManager.DataTable.GetCompanionData(_model.CompanionId);
-        if (companionData == null) return;
+        if (companionData == null)
+        {
+            Debug.LogError($"동료 데이터를 찾을 수 없습니다. Id: {_model.CompanionId}");
+            return;
+        }
 
         CharacterStatData stat = GameManager.Growth.GetFinalStat(_model.CompanionId, _model.Level);
         if (stat == null) return;

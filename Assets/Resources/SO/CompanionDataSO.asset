@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CompanionDataSO
   m_EditorClassIdentifier: Assembly-CSharp::CompanionDataSO
   CompanionDataList:
-  - Id: 001
-    Name: "\uAC80\uC0AC"
+  - Id: Companion001
+    Name: SwordMan
     GradeStar: 1
     BaseAtk: 10
     BaseHp: 100
@@ -23,8 +23,8 @@ MonoBehaviour:
     GrowthHp: 10
     GrowthDef: 7
     SkillId: skill_001
-  - Id: 002
-    Name: "\uAD81\uC218"
+  - Id: Companion002
+    Name: Archer
     GradeStar: 2
     BaseAtk: 15
     BaseHp: 80
