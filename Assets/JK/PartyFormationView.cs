@@ -16,6 +16,7 @@ public class PartyFormationView : ViewBase<PartyFormationViewModel>
     private readonly List<CharacterSlotView> _characterSlots = new List<CharacterSlotView>();
 
     private int _selectedSupportSlot = -1;
+    private ColorData _selectedCharacterSlot = null;
 
     #region Test
 
@@ -144,15 +145,48 @@ public class PartyFormationView : ViewBase<PartyFormationViewModel>
 
     private void OnSupportSlotClicked(int slotIndex)
     {
-        if (_selectedSupportSlot == slotIndex)
+        if (_selectedCharacterSlot != null)
         {
-            ClearSupportSlotSelection();
+            bool isSet = _viewModel.RequestSetSupport(slotIndex, _selectedCharacterSlot.Id);
+
+            if (isSet)
+            {
+                _selectedCharacterSlot = null;
+            }
+
             return;
         }
 
-        _selectedSupportSlot = slotIndex;
+        if (_selectedSupportSlot < 0)
+        {
+            _selectedSupportSlot = slotIndex;
 
-        RefreshSupportSlotSelection();
+            RefreshSupportSlotSelection();
+
+            return;
+        }
+
+        if (_selectedSupportSlot != slotIndex)
+        {
+            bool isSwaped = _viewModel.RequestSwapSupport(slotIndex, _selectedSupportSlot);
+
+            if (isSwaped)
+            {
+                ClearSupportSlotSelection();
+            }
+
+            return;
+        }
+
+        if (_supportSlots[slotIndex].HasCharacter())
+        {
+            bool isRemoved = _viewModel.RequestRemoveSupport(slotIndex);
+
+            if (isRemoved)
+            {
+                ClearSupportSlotSelection();
+            }
+        }
     }
 
     private void OnCharacterClicked(ColorData colorData)
@@ -162,11 +196,22 @@ public class PartyFormationView : ViewBase<PartyFormationViewModel>
             return;
         }
 
+        if (_selectedCharacterSlot != null)
+        {
+            _selectedCharacterSlot = null;
+        }
+
         int existingSlotIndex = _viewModel.RequestFindSupportSlotIndex(colorData.Id);
 
         if (existingSlotIndex >= 0)
         {
-            HandleExistingCharacterSelection(existingSlotIndex);
+            bool isRemoved = _viewModel.RequestRemoveSupport(existingSlotIndex);
+            
+            if (isRemoved)
+            {
+                ClearSupportSlotSelection();
+            }
+
             return;
         }
 
@@ -182,23 +227,13 @@ public class PartyFormationView : ViewBase<PartyFormationViewModel>
             return;
         }
 
-        _viewModel.RequestAddSupport(colorData.Id);
-    }
+        bool isAdded = _viewModel.RequestAddSupport(colorData.Id);
 
-    private void HandleExistingCharacterSelection(int existingSlot)
-    {
-        if (_selectedSupportSlot < 0)
+        if (!isAdded)
         {
+            _selectedCharacterSlot = colorData;
             return;
         }
-
-        if (_selectedSupportSlot == existingSlot)
-        {
-            ClearSupportSlotSelection();
-            return;
-        }
-
-        _viewModel.RequestSwapSupport(_selectedSupportSlot, existingSlot);
 
         ClearSupportSlotSelection();
     }

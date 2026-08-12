@@ -26,14 +26,18 @@ public class PartySlotView : MonoBehaviour
     public void Initialize(int slotIndex, Action<int> onSupportSlotClicked)
     {
         _slotIndex = slotIndex;
-
         PartySlotClicked = onSupportSlotClicked;
     }
 
     public void SetSelected(bool selected)
     {
         _isSelected = selected;
-        Debug.Log($"{_slotIndex} : {_isSelected}");
+    }
+
+    public bool HasCharacter()
+    {
+        bool hasCharacter = _image.color != Color.white;
+        return hasCharacter;
     }
 
     private void OnSlotClicked()

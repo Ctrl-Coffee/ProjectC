@@ -51,6 +51,12 @@ public class PartyFormationViewModel : ViewModelBase<PartyFormationModel>
         return isSwapped;
     }
 
+    public bool RequestRemoveSupport(int slotIndex)
+    {
+        bool isRemoved = _model.RemoveSupport(slotIndex);
+        return isRemoved;
+    }
+
     private void OnSupportCharacterIdChanged(int index)
     {
         SupportCharacterIdChanged?.Invoke(index);
