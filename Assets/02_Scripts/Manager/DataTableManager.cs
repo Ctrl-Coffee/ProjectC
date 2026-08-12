@@ -54,8 +54,6 @@ public class DataTableManager
 
     #endregion
 
-    #endregion
-
     [Serializable]
     class SerializationWrapper<T>
     {
