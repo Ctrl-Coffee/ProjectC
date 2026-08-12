@@ -10,6 +10,8 @@ public class DataTableManager
     public Dictionary<string, PreLoadAssetData> PreLoadAssetDataTable { get; private set; } = new();
 
     public Dictionary<string, CompanionData> CompanionDataTable { get; private set; } = new();
+    public Dictionary<string, CompanionLevelUpCostData> CompanionLevelUpCostDataTable { get; private set; } = new();
+
 
     #endregion
 
@@ -19,6 +21,7 @@ public class DataTableManager
         //PoolDataTable = LoadData<PoolData>(nameof(PoolData));
         //PreLoadAssetDataTable = LoadData<PreLoadAssetData>(nameof(PreLoadAssetData));
         CompanionDataTable = LoadData<CompanionData>(nameof(CompanionData));
+        CompanionLevelUpCostDataTable = LoadData<CompanionLevelUpCostData>(nameof(CompanionLevelUpCostData));
     }
 
     #region Getters
@@ -33,6 +36,12 @@ public class DataTableManager
     {
         if (null == CompanionDataTable || string.IsNullOrEmpty(id)) return null;
         return CompanionDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public CompanionLevelUpCostData GetCompanionLevelUpCost(string id)
+    {
+        if (null == CompanionLevelUpCostDataTable || string.IsNullOrEmpty(id)) return null;
+        return CompanionLevelUpCostDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
     #endregion

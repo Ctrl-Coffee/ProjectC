@@ -45,4 +45,17 @@ public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
         Hp = stat.FinalHp;
     }
 
+    public void LevelUp()
+    {
+        bool canLevelUp = GameManager.Growth.CheckCanLevelUp(_model.CompanionId, _model.Level);
+
+        if (canLevelUp == false)
+        {
+            Debug.Log("이미 최대 레벨입니다");
+            return;
+        }
+
+        _model.Level += 1;
+        
+    }
 }
