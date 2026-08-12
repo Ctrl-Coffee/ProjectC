@@ -1,0 +1,62 @@
+[
+  {
+    "Id": "Work_Manual_01",
+    "Name": "Edit Subtitle",
+    "WorkType": "Manual",
+    "MiniGame": "SubtitleEdit",
+    "ReqEnergy": 1,
+    "DurationSeconds": 0,
+    "RewardMoney": 50,
+    "RewardDP": 3,
+    "IconKey": null,
+    "Description": null
+  },
+  {
+    "Id": "Work_Auto_01",
+    "Name": "Sync Subtitle",
+    "WorkType": "Auto",
+    "MiniGame": "None",
+    "ReqEnergy": 0,
+    "DurationSeconds": 1800,
+    "RewardMoney": 100,
+    "RewardDP": 5,
+    "IconKey": null,
+    "Description": null
+  },
+  {
+    "Id": "Work_Auto_02",
+    "Name": "Make Thumbnail",
+    "WorkType": "Auto",
+    "MiniGame": "None",
+    "ReqEnergy": 0,
+    "DurationSeconds": 3600,
+    "RewardMoney": 250,
+    "RewardDP": 12,
+    "IconKey": null,
+    "Description": null
+  },
+  {
+    "Id": "Work_Auto_03",
+    "Name": "Encoding",
+    "WorkType": "Auto",
+    "MiniGame": "None",
+    "ReqEnergy": 0,
+    "DurationSeconds": 5400,
+    "RewardMoney": 420,
+    "RewardDP": 20,
+    "IconKey": null,
+    "Description": null
+  },
+  {
+    "Id": "Work_Auto_04",
+    "Name": "Backup Video",
+    "WorkType": "Auto",
+    "MiniGame": "None",
+    "ReqEnergy": 0,
+    "DurationSeconds": 7200,
+    "RewardMoney": 600,
+    "RewardDP": 30,
+    "IconKey": null,
+    "Description": null
+  }
+]
