@@ -18,7 +18,7 @@ public class DataTableManager
         // TODO: 데이터 테이블 만들기
         //PoolDataTable = LoadData<PoolData>(nameof(PoolData));
         //PreLoadAssetDataTable = LoadData<PreLoadAssetData>(nameof(PreLoadAssetData));
-        LoadCompanionDataFromSO();
+        CompanionDataTable = LoadData<CompanionData>(nameof(CompanionData));
     }
 
     #region Getters
