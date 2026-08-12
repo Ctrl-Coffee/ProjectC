@@ -19,7 +19,7 @@ public class CharacterSlotView : MonoBehaviour
 
     private void OnDisable()
     {
-        buttonComponent.UnBindAllButtonEvent();
+        buttonComponent.UnBindButtonAllEvent();
     }
 
     public void Initialize(ColorData colorData, Action<ColorData> onCharacterClicked)

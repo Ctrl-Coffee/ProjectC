@@ -20,7 +20,7 @@ public class PartySlotView : MonoBehaviour
 
     private void OnDisable()
     {
-        _slotButton.UnBindAllButtonEvent();
+        _slotButton.UnBindButtonAllEvent();
     }
 
     public void Initialize(int slotIndex, Action<int> onSupportSlotClicked)

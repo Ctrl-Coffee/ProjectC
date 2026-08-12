@@ -12,10 +12,13 @@ public abstract class ViewBase<T> : UIBase where T : ViewModelBase
 
         _viewModel = viewModel;
         _viewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
+
+        OnBindViewModel();
+
         _viewModel.InitializeModel();
     }
 
-    protected virtual void OnDestroy()
+    protected virtual void OnDisable()
     {
         if (_viewModel != null)
         {
@@ -23,5 +26,6 @@ public abstract class ViewBase<T> : UIBase where T : ViewModelBase
         }
     }
 
+    protected virtual void OnBindViewModel() { }
     protected abstract void OnPropertyChanged(string propertyName);
 }
