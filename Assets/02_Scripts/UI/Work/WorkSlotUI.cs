@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ public class WorkSlotUI : MonoBehaviour
             return;
         }
 
-        _btnPlay.UnBindAllButtonEvent();
+        _btnPlay.UnBindButtonAllEvent();
         _btnPlay.BindButtonEvent(OnClickPlay);
     }
 
@@ -35,7 +35,7 @@ public class WorkSlotUI : MonoBehaviour
             return;
         }
 
-        _btnPlay.UnBindAllButtonEvent();
+        _btnPlay.UnBindButtonAllEvent();
     }
 
     public void SetInfo(string workName, string info)

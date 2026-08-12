@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
 
@@ -209,7 +209,7 @@ public class SubtitleEditGameUI : MiniGameBase
             return;
         }
 
-        _btnAttach.UnBindAllButtonEvent();
+        _btnAttach.UnBindButtonAllEvent();
     }
 
     private void OnClickAttach()

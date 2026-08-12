@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +21,7 @@ public class WorkQueueSlotUI : MonoBehaviour
             return;
         }
 
-        _btnSlot.UnBindAllButtonEvent();
+        _btnSlot.UnBindButtonAllEvent();
         _btnSlot.BindButtonEvent(OnClickSlot);
     }
 
@@ -34,7 +34,7 @@ public class WorkQueueSlotUI : MonoBehaviour
             return;
         }
 
-        _btnSlot.UnBindAllButtonEvent();
+        _btnSlot.UnBindButtonAllEvent();
     }
 
     public void SetEmpty()
