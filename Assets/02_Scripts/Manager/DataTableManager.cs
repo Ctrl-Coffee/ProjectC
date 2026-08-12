@@ -8,7 +8,7 @@ public class DataTableManager
     #region Variables
     public Dictionary<string, PoolData> PoolDataTable { get; private set; } = new();
     public Dictionary<string, PreLoadAssetData> PreLoadAssetDataTable { get; private set; } = new();
-
+    public Dictionary<string, WorkData> WorkDataTable { get; private set; } = new();
 
     #endregion
 
@@ -17,6 +17,8 @@ public class DataTableManager
         // TODO: 데이터 테이블 만들기
         //PoolDataTable = LoadData<PoolData>(nameof(PoolData));
         //PreLoadAssetDataTable = LoadData<PreLoadAssetData>(nameof(PreLoadAssetData));
+
+        WorkDataTable = LoadData<WorkData>(nameof(WorkData));
     }
 
     #region Getters
@@ -27,8 +29,13 @@ public class DataTableManager
         return PreLoadAssetDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
-    #endregion
+    public WorkData GetWorkData(string id)
+    {
+        if (null == WorkDataTable || string.IsNullOrEmpty(id)) return null;
+        return WorkDataTable.TryGetValue(id, out var data) ? data : null;
+    }
 
+    #endregion
 
     [Serializable]
     class SerializationWrapper<T>

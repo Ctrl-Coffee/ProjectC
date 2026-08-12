@@ -13,12 +13,12 @@ public class UIBase : MonoBehaviour
         GameManager.UI.CloseUI(this, isCloseAll);
     }
 
-    public virtual void PlayOpenAnimation()
+    public virtual Tween PlayOpenAnimation()
     {
         transform.localScale = Vector3.zero;
 
         transform.DOKill();
-        transform.DOScale(1f, 1f).SetEase(Ease.OutBack).SetUpdate(true);
+        return transform.DOScale(1f, 1f).SetEase(Ease.OutBack).SetUpdate(true);
     }
 
     public virtual Tween PlayCloseAnimation()
@@ -28,7 +28,6 @@ public class UIBase : MonoBehaviour
             .SetEase(Ease.InBack)
             .SetUpdate(true);
     }
-
 
     public virtual void OnClickCloseButton()
     {

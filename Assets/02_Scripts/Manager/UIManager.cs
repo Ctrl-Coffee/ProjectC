@@ -1,154 +1,229 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class UIManager
 {
-    private Dictionary<Type, UIBase> _openUIs = new();
-    private List<UIBase> _openUIOrder = new();
+    private Dictionary<Type, UIBase> _createdUI = new();
+    private Dictionary<Type, UIState> _uiStates = new();
+    private Dictionary<Type, UIRootType> _uiRootTypes = new();
+    private Stack<Type> _popupStack = new();
 
-    private Dictionary<Type, UIBase> _createdUIs = new();
-
-    private Transform _uiRoot;
+    private List<Transform> _canvasLayer;
 
     public async UniTask Init()
     {
-        if(_uiRoot == null)
+        if (_canvasLayer == null)
         {
             await CreateUIRoot();
         }
     }
 
-    public T OpenUI<T>() where T : UIBase
+    public async UniTask<T> OpenUI<T>(UIRootType uiRootType) where T : UIBase
     {
         Type uiType = typeof(T);
-        T ui = GetOrCreateUI<T>(out var isAlreadyOpen);
 
-        if (!ui)
+        if (_uiStates.TryGetValue(uiType, out UIState state) && state != UIState.Closed)
         {
-            Logger.Log($"{uiType}가 null 입니다.");
             return null;
         }
 
-        if (isAlreadyOpen)
+        if (_uiRootTypes.ContainsKey(uiType) && _uiRootTypes[uiType] != uiRootType)
         {
-            Logger.Log($"{uiType}가 이미 열려있습니다");
+            Logger.LogError($"{uiType}은 {uiRootType}이 아닙니다.");
             return null;
         }
 
-        _openUIOrder.Add(ui);
-        _openUIs.Add(typeof(T), ui);
+        _uiStates[uiType] = UIState.Opening;
 
-        ui.transform.SetAsLastSibling();
-        ui.gameObject.SetActive(true);
-        ui.OpenUI();
+        try
+        {
+            var ui = await GetOrCreateUI<T>(uiRootType);
 
-        return ui;
+            if (null == ui)
+            {
+                Logger.Log($"{uiType}가 null 입니다.");
+                _uiStates[uiType] = UIState.Closed;
+                return null;
+            }
+
+            ui.gameObject.SetActive(true);
+
+            if (uiRootType == UIRootType.Popup)
+            {
+                ui.transform.SetAsLastSibling();
+                _popupStack.Push(uiType);
+            }
+
+            _uiStates[uiType] = UIState.Opened;
+
+            ui.OpenUI();
+            return ui;
+        }
+        catch
+        {
+            _uiStates[uiType] = UIState.Closed;
+            throw;
+        }
     }
 
     public void CloseUI(UIBase ui, bool isCloseAll = false)
     {
         var uiType = ui.GetType();
 
-        if (!_openUIs.Remove(uiType))
+        if (!_uiStates.TryGetValue(uiType, out UIState state) || state != UIState.Opened)
         {
             return;
         }
 
-        _openUIOrder.Remove(ui);
+        if (_uiRootTypes[uiType] == UIRootType.Popup)
+        {
+            if (_popupStack.Count == 0 || _popupStack.Peek() != uiType)
+            {
+                return;
+            }
+        }
 
-        if(isCloseAll == true)
+        _uiStates[uiType] = UIState.Closing;
+
+        if (isCloseAll == true)
         {
             ui.transform.DOKill();
-            ui.gameObject.SetActive(false);
+            CompleteClose(ui);
             return;
         }
 
         ui.PlayCloseAnimation().OnComplete(() =>
         {
-            ui.gameObject.SetActive(false);
+            CompleteClose(ui);
         });
     }
 
-    public void CloseAllOpenUI() 
+    public void CloseAllPopups()
     {
-        while (_openUIOrder.Count > 0)
+        while (_popupStack.Count > 0)
         {
-            CloseUI(_openUIOrder[_openUIOrder.Count - 1], true);
+            var uiType = _popupStack.Peek();
+            if (_createdUI.TryGetValue(uiType, out UIBase ui))
+            {
+                CloseUI(ui, true);
+            }
+            else
+            {
+                _popupStack.Pop();
+            }
         }
     }
 
-    public bool ExistOpenUI() 
-    { 
-        return _openUIs.Count > 0;
-    }
-
-    public UIBase GetCurrentFrontUI() 
-    { 
-        if(_openUIOrder.Count == 0)
+    public UIBase GetCurrentFrontUI()
+    {
+        if (_popupStack.Count == 0)
         {
             return null;
         }
 
-        return _openUIOrder[_openUIOrder.Count - 1];
+        return _createdUI[_popupStack.Peek()];
     }
 
-    public void CloseCurrentFrontUI()
+    public UniTask<T> OpenHUDUI<T>() where T : UIBase
     {
-        if (_openUIOrder.Count == 0)
+        return OpenUI<T>(UIRootType.Hud);
+    }
+
+    public UniTask<T> OpenPopupUI<T>() where T : UIBase
+    {
+        return OpenUI<T>(UIRootType.Popup);
+    }
+
+    public UniTask<T> OpenOverlayUI<T>() where T : UIBase
+    {
+        return OpenUI<T>(UIRootType.Overlay);
+    }
+
+    public UniTask<T> OpenLoadingUI<T>() where T : UIBase
+    {
+        return OpenUI<T>(UIRootType.Loading);
+    }
+
+    private async UniTask<T> GetOrCreateUI<T>(UIRootType uiRootType) where T : UIBase
+    {
+        var uiType = typeof(T);
+
+        T ui = null;
+
+        if (_createdUI.ContainsKey(uiType))
         {
-            return;
+            ui = _createdUI[uiType] as T;
+            return ui;
         }
 
-        CloseUI(_openUIOrder[_openUIOrder.Count - 1]);
+        var uiPrefab = await GameManager.Resource.LoadAssetAsync<GameObject>(AddressablePath.GetUIPath(uiType));
+
+        if (uiPrefab == null)
+        {
+            Logger.LogError($"{uiType.Name}가 null입니다.");
+            return null;
+        }
+
+        if (!uiPrefab.TryGetComponent<T>(out T uiComponent))
+        {
+            Logger.LogError($"{uiType.Name} 프리팹에 {uiType.Name} 컴포넌트가 없습니다.");
+            return null;
+        }
+
+        ui = GameObject.Instantiate(uiComponent, _canvasLayer[(int)uiRootType]);
+
+        _createdUI.Add(uiType, ui);
+        _uiRootTypes[uiType] = uiRootType;
+
+        return ui;
     }
 
     private async UniTask CreateUIRoot()
     {
         GameObject uiRootPrefab = await GameManager.Resource.LoadAssetAsync<GameObject>(AddressablePath.Prefab.UIRoot);
 
-        if(uiRootPrefab == null)
+        if (uiRootPrefab == null)
         {
             Logger.LogError("UIRoot 프리팹이 null입니다.");
             return;
         }
 
         var uiRootInstance = GameObject.Instantiate(uiRootPrefab);
-        _uiRoot = uiRootInstance.transform;
+
+        _canvasLayer = new(uiRootInstance.GetComponent<UIManagerHelper>().Canvas);
     }
 
-    private T GetOrCreateUI<T>(out bool isAlreadyOpen) where T : UIBase
+    private void CompleteClose(UIBase ui)
     {
-        var uiType = typeof(T);
+        var uiType = ui.GetType();
 
-        T ui = null;
-        isAlreadyOpen = false;
+        _uiStates[uiType] = UIState.Closed;
 
-        if (_openUIs.ContainsKey(uiType))
+        if (_uiRootTypes.ContainsKey(uiType) && _uiRootTypes[uiType] == UIRootType.Popup)
         {
-            isAlreadyOpen = true;
-            ui = _openUIs[uiType] as T;
+            _popupStack.Pop();
         }
-        else if(_createdUIs.ContainsKey(uiType))
-        {
-            ui = _createdUIs[uiType] as T;
-        }
-        else
-        {
-            var uiPrefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.GetUIPath(uiType));
-            
-            if (uiPrefab == null)
-            {
-                Logger.LogError($"{uiType.Name}가 null입니다.");
-                return null;
-            }
 
-            ui = GameObject.Instantiate(uiPrefab, _uiRoot).GetComponent<UIBase>() as T;
-            _createdUIs.Add(uiType, ui);
+        ui.gameObject.SetActive(false);
+    }
+
+    private void ClearUIRootType()
+    {
+        _uiRootTypes.Clear();
+    }
+
+    private void ClearCreatedUI()
+    {
+        foreach (var ui in _createdUI.Values)
+        {
+            GameObject.Destroy(ui.gameObject);
         }
-            
-        return ui;
+
+        _createdUI.Clear();
+        _uiStates.Clear();
     }
 }
