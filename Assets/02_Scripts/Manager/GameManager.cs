@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
@@ -9,6 +10,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static TimeManager Time { get { return Instance._timeManager; } }
     public static UIManager UI { get { return Instance._uiManager; } }
     public static ViewModelManager ViewModel { get { return Instance._viewModelManager; } }
+    public static SaveManager Save { get { return Instance._saveManager; } }
+    public static UserData User { get { return Instance._saveManager.User; } }
     public static GrowthSystem Growth { get { return Instance._growthSystem; } }
 
 
@@ -21,6 +24,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private TimeManager _timeManager = new();
     private UIManager _uiManager = new();
     private ViewModelManager _viewModelManager = new();
+    private SaveManager _saveManager = new();
     private GrowthSystem _growthSystem = new();
 
     #endregion
@@ -38,6 +42,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         base.Init();
 
+        _saveManager.Load();
         _dataTable.LoadAllData();
 
         // TODO: ui, network init
@@ -45,18 +50,45 @@ public class GameManager : SingletonBehaviour<GameManager>
         InitializeAsync().Forget();
     }
 
+    // TODO: 모바일은 OnApplicationPause(true)에서도 저장 필요
+    private void OnApplicationQuit()
+    {
+        _saveManager.Save();
+    }
+
     private async UniTask InitializeAsync()
     {
         await _uiManager.Init();
 
-        // TODO: 로딩 UI 연결
-        await _resourceManager.PreloadAssetsAsync();
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.Common);
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.Reality);
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.Dream);
+
 
         var poolRoot = Utils.CreateEmptyGameObject("PoolRoot", this.gameObject.transform).transform;
         await _poolManager.InitAsync(poolRoot);
 
         _initComplete = true;
+
+        AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
+        EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
+
+        // TODO: 로딩/로비가 생기면 지우기
+        await _uiManager.OpenWorkInfoUI();
     }
 
     #endregion
+
+
+    [ContextMenu("OpenTestHUDUI")]
+    public void OpenTestHUDUI()
+    {
+        UI.OpenTestHUDUI();
+    }
+    [ContextMenu("ExampleVoidFunc")]
+    public void ExampleVoidFunc()
+    {
+        UI.ExampleVoidFunc();
+    }
+
 }

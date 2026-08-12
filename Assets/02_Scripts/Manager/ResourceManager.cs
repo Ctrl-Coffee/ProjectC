@@ -5,49 +5,15 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 public class ResourceManager
 {
     private Dictionary<string, AsyncOperationHandle> _assetHandles = new();
     private Dictionary<string, UniTaskCompletionSource<UnityEngine.Object>> _currentLoading = new();
+    private Dictionary<string, HashSet<string>> _contentAddresses = new();
 
-    private CancellationTokenSource _allReleaseToken = new();
-
-    private const int MAX_LOAD_COUNT = 4;
-
-
-    public async UniTask PreloadAssetsAsync(Action<float> onProgress = null)
-    {
-        int progressCount = 0;
-        onProgress?.Invoke(0f);
-
-        var dataTable = GameManager.DataTable.PreLoadAssetDataTable;
-
-        int totalCount = dataTable.Count;
-
-        if (dataTable.Count == 0)
-        {
-            onProgress?.Invoke(1f);
-            return;
-        }
-
-        List<UniTask> loadTasks = new(totalCount);
-        using SemaphoreSlim semaphore = new(MAX_LOAD_COUNT);
-
-        foreach (PreLoadAssetData preLoadData in dataTable.Values)
-        {
-            loadTasks.Add(LoadWithSemaphoreAsync(preLoadData, semaphore,
-                () =>
-                {
-                    progressCount++;
-                    onProgress?.Invoke(progressCount / (float)totalCount);
-                }));
-        }
-
-        await UniTask.WhenAll(loadTasks);
-
-        onProgress?.Invoke(1f);
-    }
+    private const int _maxLoadCount = 4;
 
     public T GetLoadedAsset<T>(string address) where T: UnityEngine.Object
     {
@@ -74,7 +40,7 @@ public class ResourceManager
                 return loadedAsset;
             }
 
-            Logger.LogWarning($"handle 이상: address {address}");
+            Logger.LogWarning($"{address}의 handle 이상");
             _assetHandles.Remove(address);
 
             if(handle.IsValid())
@@ -93,13 +59,84 @@ public class ResourceManager
         var newTask = new UniTaskCompletionSource<UnityEngine.Object>();
         _currentLoading[address] = newTask;
 
-        CancellationToken allReleaseToken = _allReleaseToken.Token;
-
-        TryLoadAddressablesAssetAsync<T>(address, newTask, allReleaseToken).Forget();
+        TryLoadAddressablesAssetAsync<T>(address, newTask).Forget();
 
         UnityEngine.Object asset = await newTask.Task.AttachExternalCancellation(cancelToken);
 
         return asset as T;
+    }
+
+    public async UniTask LoadContentAsync(string label, Action<float> onProgress = null)
+    {
+        if (Utils.IsNullOrWhiteSpace(label))
+        {
+            throw new ArgumentException("콘텐츠 라벨이 비어 있습니다.", nameof(label));
+        }
+
+        AsyncOperationHandle<IList<IResourceLocation>> locationsHandle = default;
+
+        try
+        {
+            onProgress?.Invoke(0f);
+
+            locationsHandle = Addressables.LoadResourceLocationsAsync(label, typeof(UnityEngine.Object));
+            IList<IResourceLocation> locations = await locationsHandle.ToUniTask();
+
+            if (locations.Count == 0)
+            {
+                Logger.LogWarning($"{label} 라벨에 등록된 에셋이 없습니다.");
+                return;
+            }
+
+            HashSet<string> addresses = new();
+            List<UniTask> loadTasks = new(locations.Count);
+            int loadedCount = 0;
+
+            using SemaphoreSlim semaphore = new(_maxLoadCount);
+
+            foreach (IResourceLocation location in locations)
+            {
+                string address = location.PrimaryKey;
+                addresses.Add(address);
+
+                loadTasks.Add(LoadContentAssetAsync(label, address, semaphore,
+                    () =>
+                    {
+                        loadedCount++;
+                        onProgress?.Invoke(loadedCount / (float)locations.Count);
+                    }));
+            }
+
+            await UniTask.WhenAll(loadTasks);
+
+            _contentAddresses[label] = addresses;
+            onProgress?.Invoke(1f);
+        }
+        finally
+        {
+            if (locationsHandle.IsValid())
+            {
+                Addressables.Release(locationsHandle);
+            }
+        }
+    }
+
+    public bool IsContentLoaded(string label)
+    {
+        return _contentAddresses.ContainsKey(label);
+    }
+
+    public void ReleaseContent(string label)
+    {
+        if (!_contentAddresses.Remove(label, out HashSet<string> addresses))
+        {
+            return;
+        }
+
+        foreach (string address in addresses)
+        {
+            ReleaseAsset(address);
+        }
     }
 
     public void ReleaseAsset(string address)
@@ -117,11 +154,6 @@ public class ResourceManager
 
     public void ReleaseAllAssets()
     {
-        _allReleaseToken.Cancel();
-        _allReleaseToken.Dispose();
-
-        _allReleaseToken = new CancellationTokenSource();
-
         foreach (var handle in _assetHandles.Values)
         {
             if (handle.IsValid())
@@ -132,56 +164,20 @@ public class ResourceManager
 
         _assetHandles.Clear();
         _currentLoading.Clear();
-    }
-
-    private async UniTask LoadWithSemaphoreAsync(PreLoadAssetData preLoadData, SemaphoreSlim semaphore, Action onCompleted)
-    {
-        await semaphore.WaitAsync();
-
-        try
-        {
-            switch (preLoadData.AssetType)
-            {
-                case "Mesh":
-                    await LoadAssetAsync<Mesh>(preLoadData.Address);
-                    break;
-
-                case "Material":
-                    await LoadAssetAsync<Material>(preLoadData.Address);
-                    break;
-
-                case "Prefab":
-                case "GameObject":
-                    await LoadAssetAsync<GameObject>(preLoadData.Address);
-                    break;
-
-                case "AudioClip":
-                    await LoadAssetAsync<AudioClip>(preLoadData.Address);
-                    break;
-
-                default:
-                    await LoadAssetAsync<UnityEngine.Object>(preLoadData.Address);
-                    break;
-            }
-        }
-        finally
-        {
-            onCompleted?.Invoke();
-            semaphore.Release();
-        }
+        _contentAddresses.Clear();
     }
 
     private T GetAssetFromHandle<T>(string address, AsyncOperationHandle handle) where T : UnityEngine.Object
     {
         if (!handle.IsValid())
         {
-            Logger.LogError($"핸들 유효하지 않습니다. - Address: {address}");
+            Logger.LogError($"{address} 핸들이 유효하지 않습니다.");
             return null;
         }
 
         if (!handle.IsDone || handle.Status != AsyncOperationStatus.Succeeded)
         {
-            Logger.LogError($"에셋 로드 못했습니다. - Address: {address}");
+            Logger.LogError($"{address} 에셋 로드 실패.");
             return null;
         }
 
@@ -189,15 +185,14 @@ public class ResourceManager
 
         if (asset == null)
         {
-            Logger.LogError($"로드된 에셋이 null입니다. - Address: {address}");
+            Logger.LogError($"{address}가 null입니다.");
             return null;
         }
 
         return asset;
     }
 
-    private async UniTask TryLoadAddressablesAssetAsync<T>(string address, UniTaskCompletionSource<UnityEngine.Object> task
-        , CancellationToken allReleaseToken) where T : UnityEngine.Object
+    private async UniTask TryLoadAddressablesAssetAsync<T>(string address, UniTaskCompletionSource<UnityEngine.Object> task) where T : UnityEngine.Object
     {
         AsyncOperationHandle<T> handle = default;
 
@@ -205,25 +200,16 @@ public class ResourceManager
         {
             handle = Addressables.LoadAssetAsync<T>(address);
 
-            T asset = await handle.ToUniTask(cancellationToken: allReleaseToken);
+            T asset = await handle.ToUniTask();
 
             if (asset == null)
             {
-                throw new Exception($"로드된 에셋이 null입니다. Address: {address}");
+                throw new Exception($"{address}가 null입니다.");
             }
 
             _assetHandles[address] = handle;
 
             task.TrySetResult(asset);
-        }
-        catch (OperationCanceledException)
-        {
-            if (handle.IsValid())
-            {
-                Addressables.Release(handle);
-            }
-
-            task.TrySetCanceled(allReleaseToken);
         }
         catch (Exception exception)
         {
@@ -240,6 +226,25 @@ public class ResourceManager
             {
                 _currentLoading.Remove(address);
             }
+        }
+    }
+
+    private async UniTask LoadContentAssetAsync(string label, string address, SemaphoreSlim semaphore, Action onCompleted)
+    {
+        await semaphore.WaitAsync();
+
+        try
+        {
+            await LoadAssetAsync<UnityEngine.Object>(address);
+        }
+        catch (Exception exception)
+        {
+            Logger.LogWarning($"콘텐츠 에셋 로드 실패 - Label: {label}, Address: {address}, Exception: {exception.Message}");
+        }
+        finally
+        {
+            onCompleted?.Invoke();
+            semaphore.Release();
         }
     }
 }

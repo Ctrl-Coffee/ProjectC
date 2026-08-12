@@ -24,4 +24,18 @@ public static class UIManagerExtension
         return uiManager.OpenPopupUI<TestPopupUI>();
     }
 
+    public static UniTask<WorkInfoUI> OpenWorkInfoUI(this UIManager uiManager)
+    {
+        return uiManager.OpenPopupUI<WorkInfoUI>();
+    }
+
+    public static UniTask<SubtitleEditGameUI> OpenSubtitleEditGameUI(this UIManager uiManager)
+    {
+        return uiManager.OpenPopupUI<SubtitleEditGameUI>();
+    }
+
+    public static UniTask<MiniGameResultUI> OpenMiniGameResultUI(this UIManager uiManager)
+    {
+        return uiManager.OpenOverlayUI<MiniGameResultUI>();
+    }
 }

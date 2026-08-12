@@ -255,10 +255,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManagerHelper
   Canvas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3561540336453095915}
+  - {fileID: 2660288405042877430}
+  - {fileID: 5510590664445122136}
+  - {fileID: 1004868956098538297}
 --- !u!1 &7300932813445205586
 GameObject:
   m_ObjectHideFlags: 0
