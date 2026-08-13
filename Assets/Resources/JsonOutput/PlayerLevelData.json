@@ -1,0 +1,72 @@
+[
+  {
+    "Level": 1,
+    "HP": 1000,
+    "ATK": 100,
+    "DEF": 50,
+    "UpgradeCost": 0
+  },
+  {
+    "Level": 2,
+    "HP": 1120,
+    "ATK": 110,
+    "DEF": 54,
+    "UpgradeCost": 10
+  },
+  {
+    "Level": 3,
+    "HP": 1254,
+    "ATK": 121,
+    "DEF": 58,
+    "UpgradeCost": 15
+  },
+  {
+    "Level": 4,
+    "HP": 1405,
+    "ATK": 133,
+    "DEF": 63,
+    "UpgradeCost": 20
+  },
+  {
+    "Level": 5,
+    "HP": 1574,
+    "ATK": 146,
+    "DEF": 68,
+    "UpgradeCost": 30
+  },
+  {
+    "Level": 6,
+    "HP": 1762,
+    "ATK": 161,
+    "DEF": 73,
+    "UpgradeCost": 40
+  },
+  {
+    "Level": 7,
+    "HP": 1974,
+    "ATK": 177,
+    "DEF": 79,
+    "UpgradeCost": 55
+  },
+  {
+    "Level": 8,
+    "HP": 2211,
+    "ATK": 195,
+    "DEF": 86,
+    "UpgradeCost": 75
+  },
+  {
+    "Level": 9,
+    "HP": 2476,
+    "ATK": 214,
+    "DEF": 93,
+    "UpgradeCost": 100
+  },
+  {
+    "Level": 10,
+    "HP": 2773,
+    "ATK": 236,
+    "DEF": 100,
+    "UpgradeCost": 140
+  }
+]

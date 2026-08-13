@@ -6,7 +6,6 @@
     "TargetCount": 1,
     "CoolTime": 5,
     "BaseEffect": 5,
-    "GrowthEffect": 0.3,
     "BuffDuration": 0
   },
   {
@@ -16,7 +15,6 @@
     "TargetCount": 3,
     "CoolTime": 8,
     "BaseEffect": 3,
-    "GrowthEffect": 0.2,
     "BuffDuration": 5
   },
   {
@@ -26,7 +24,6 @@
     "TargetCount": 3,
     "CoolTime": 9,
     "BaseEffect": 4,
-    "GrowthEffect": 0.4,
     "BuffDuration": 0
   },
   {
@@ -36,7 +33,6 @@
     "TargetCount": 3,
     "CoolTime": 8,
     "BaseEffect": 6,
-    "GrowthEffect": 0.3,
     "BuffDuration": 0
   },
   {
@@ -46,7 +42,6 @@
     "TargetCount": 1,
     "CoolTime": 4,
     "BaseEffect": 6,
-    "GrowthEffect": 0.4,
     "BuffDuration": 0
   }
 ]

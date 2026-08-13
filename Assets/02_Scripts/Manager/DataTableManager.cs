@@ -11,7 +11,7 @@ public class DataTableManager
     public Dictionary<string, WorkData> WorkDataTable { get; private set; } = new();
 
     public Dictionary<string, CompanionData> CompanionDataTable { get; private set; } = new();
-    public Dictionary<string, CompanionLevelUpCostData> CompanionLevelUpCostDataTable { get; private set; } = new();
+    public Dictionary<string, CompanionLevelData> CompanionLevelDataTable { get; private set; } = new();
     public Dictionary<string, SkillData> SkillDataTable { get; private set; } = new();
 
 
@@ -26,7 +26,7 @@ public class DataTableManager
 
         WorkDataTable = LoadData<WorkData>(nameof(WorkData));
         CompanionDataTable = LoadData<CompanionData>(nameof(CompanionData));
-        CompanionLevelUpCostDataTable = LoadData<CompanionLevelUpCostData>(nameof(CompanionLevelUpCostData));
+        CompanionLevelDataTable = LoadData<CompanionLevelData>(nameof(CompanionLevelData));
         SkillDataTable = LoadData<SkillData>(nameof(SkillData));
     }
 
@@ -49,10 +49,11 @@ public class DataTableManager
         return CompanionDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
-    public CompanionLevelUpCostData GetCompanionLevelUpCost(string id)
+    public CompanionLevelData GetCompanionLevelData(string companionId, int level)
     {
-        if (null == CompanionLevelUpCostDataTable || string.IsNullOrEmpty(id)) return null;
-        return CompanionLevelUpCostDataTable.TryGetValue(id, out var data) ? data : null;
+        if (null == CompanionLevelDataTable || string.IsNullOrEmpty(companionId)) return null;
+        string id = $"{companionId}_{level}";
+        return CompanionLevelDataTable.TryGetValue(id, out var data) ? data : null;
     }
     public SkillData GetSkillData(string id)
     {

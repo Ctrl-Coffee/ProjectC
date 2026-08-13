@@ -8,6 +8,5 @@ public class SkillData : BaseData
     public int TargetCount;
     public float CoolTime;
     public float BaseEffect;
-    public float GrowthEffect;
     public float BuffDuration;
 }
