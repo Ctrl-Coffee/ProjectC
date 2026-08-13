@@ -7,7 +7,19 @@
     "ReqEnergy": 1,
     "DurationSeconds": 0,
     "RewardMoney": 50,
-    "RewardDP": 3,
+    "RewardDP": 5,
+    "IconKey": null,
+    "Description": null
+  },
+  {
+    "Id": "Work_Manual_02",
+    "Name": "Motion Tracking",
+    "WorkType": "Manual",
+    "MiniGame": "MotionTracking",
+    "ReqEnergy": 3,
+    "DurationSeconds": 0,
+    "RewardMoney": 100,
+    "RewardDP": 8,
     "IconKey": null,
     "Description": null
   },
