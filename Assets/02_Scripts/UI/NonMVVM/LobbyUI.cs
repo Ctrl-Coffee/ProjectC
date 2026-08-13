@@ -11,4 +11,17 @@ public class LobbyUI : UIBase
     [SerializeField] private UIButtonComponent _settingBtn;
     [SerializeField] private UIButtonComponent _goDreamBtn;
     [SerializeField] private UIButtonComponent _goDowntownBtn;
+
+    [SerializeField] private UIButtonComponent _coffeeBtn;
+    [SerializeField] private UIButtonComponent _computerBtn;
+
+    private void OnEnable()
+    {
+        _computerBtn.BindButtonEvent(OnOpenWorkInfoUI);
+    }
+
+    private void OnOpenWorkInfoUI()
+    {
+        GameManager.UI.OpenWorkInfoUI();
+    }
 }

@@ -30,6 +30,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private bool _initComplete = false;
 
+    private LobbyController _lobbyController;
 
     #endregion
 
@@ -70,9 +71,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
-        // TODO: 로딩/로비가 생기면 지우기
-        await _uiManager.OpenWorkInfoUI();
-
         EnterReal();
     }
 
@@ -80,12 +78,19 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void EnterReal()
     {
+        if(_lobbyController == null)
+        {
+            _lobbyController = new();
+        }
+
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.LobbyBackground);
+        _lobbyController.Open(backgroundPrefab);
         UI.OpenLobbyHud();
     }
 
     public void ExitReal()
     {
-
+        _lobbyController.Close();
     }
 
     public void EnterDream()

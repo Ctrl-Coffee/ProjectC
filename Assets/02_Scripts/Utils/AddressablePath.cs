@@ -3,6 +3,7 @@
     public static class Prefab
     {
         public const string UIRoot = "UI/UIRoot";
+        public const string LobbyBackground = "LobbyBackground";
     }
 
     public static string GetUIPath(System.Type uiType)

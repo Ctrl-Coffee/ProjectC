@@ -10,6 +10,7 @@ public class SwipComponent : MonoBehaviour
     [SerializeField] private float _swipeDistanceRate = 0.2f;
     [FormerlySerializedAs("swipeDirect")]
     [SerializeField] private SwipeDirect _swipeDirect = SwipeDirect.Horizontal;
+    [SerializeField] private int _startPage = 0;
 
     private Vector3[] _pagePositions;
 
@@ -30,12 +31,11 @@ public class SwipComponent : MonoBehaviour
     {
         if (_camera == null)
         {
-            Logger.LogError("드래그 좌표를 변환할 Camera가 필요합니다.");
-            enabled = false;
-            return;
+            _camera = Camera.main;
         }
 
         SetPagePositions();
+        Swipe(Mathf.Clamp(_startPage, 0, _maxPage), true);
     }
 
     private void Update()
@@ -200,13 +200,21 @@ public class SwipComponent : MonoBehaviour
         Swipe(_currentPage);
     }
 
-    private void Swipe(int index)
+    private void Swipe(int index, bool immediately = false)
     {
         _swipeTween?.Kill();
+        _currentPage = index;
 
-        _isSwiping = true;
-        _swipeTween = transform.DOMove(_pagePositions[index], _swipeTime)
-            .OnComplete(() => _isSwiping = false);
+        if (immediately == true)
+        {
+            transform.position = _pagePositions[index];
+        }
+        else
+        {
+            _isSwiping = true;
+            _swipeTween = transform.DOMove(_pagePositions[index], _swipeTime)
+                .OnComplete(() => _isSwiping = false);
+        }
     }
 
     private float GetAxisValue(Vector2 value)

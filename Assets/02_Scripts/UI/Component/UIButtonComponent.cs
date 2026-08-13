@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public class UIButtonComponent : MonoBehaviour
 {
     [SerializeField] private Button _button;
@@ -16,7 +17,7 @@ public class UIButtonComponent : MonoBehaviour
     {
         if (_button == null)
         {
-            _button = this.gameObject.GetComponentInChildren<Button>();
+            _button = this.gameObject.GetComponent<Button>();
         }
 
         if(_text == null)
@@ -44,5 +45,10 @@ public class UIButtonComponent : MonoBehaviour
         if (_text == null) return;
 
         _text.text = buttonStr;
+    }
+
+    private void Reset()
+    {
+        InitUIButton();
     }
 }
