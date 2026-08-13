@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class LobbyUI : UIBase
+public class RealLobbyUI : UIBase
 {
     [SerializeField] private TextMeshProUGUI _money;
     [SerializeField] private TextMeshProUGUI _energy;

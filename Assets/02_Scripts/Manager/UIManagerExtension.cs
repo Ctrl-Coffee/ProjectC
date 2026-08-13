@@ -11,7 +11,7 @@ public static class UIManagerExtension
 {
     public static void OpenLobbyHud(this UIManager uiManager)
     {
-        uiManager.OpenHUDUI<LobbyUI>().Forget();
+        uiManager.OpenHUDUI<RealLobbyUI>().Forget();
     }
 
     public static void ExampleVoidFunc(this UIManager uiManager)

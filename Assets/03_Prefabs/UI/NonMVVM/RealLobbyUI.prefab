@@ -1625,7 +1625,7 @@ GameObject:
   - component: {fileID: 224435858158979666}
   - component: {fileID: 3473911000386275451}
   m_Layer: 5
-  m_Name: LobbyUI
+  m_Name: RealLobbyUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
