@@ -11,17 +11,17 @@ public class CompanionGrowthView : ViewBase<CompanionGrowthViewModel>
     [SerializeField] private TextMeshProUGUI _hpText;
     [SerializeField] private Button _levelUpButton;
 
-    private void Awake()
+    private void OnEnable()
     {
         _levelUpButton.onClick.AddListener(OnClickLevelUp);
+
     }
 
-    protected override void OnDestroy()
+    protected override void OnDisable()
     {
-        base.OnDestroy();
+        base.OnDisable();
         _levelUpButton.onClick.RemoveListener(OnClickLevelUp);
     }
-
     private void OnClickLevelUp()
     {
         if (_viewModel == null) return;
