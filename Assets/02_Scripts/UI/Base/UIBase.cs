@@ -4,6 +4,7 @@ using UnityEngine;
 public class UIBase : MonoBehaviour
 {
     [SerializeField] private bool _isPlayAnimation = true;
+    public bool IsPlayAnimation => _isPlayAnimation;
 
     public void OpenUI()
     {

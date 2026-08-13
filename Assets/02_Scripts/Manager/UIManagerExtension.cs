@@ -9,20 +9,27 @@ using UnityEngine;
 /// </summary>
 public static class UIManagerExtension
 {
-    public static void OpenLobbyHud(this UIManager uiManager)
+    public static void OpenRealHud(this UIManager uiManager)
     {
         uiManager.OpenHUDUI<RealLobbyUI>().Forget();
     }
 
-    public static void ExampleVoidFunc(this UIManager uiManager)
+    public static void OpenDreamHud(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<TestPopupUI>().Forget();
+        uiManager.OpenHUDUI<DreamLobbyUI>().Forget();
     }
 
-    public static UniTask<TestPopupUI> ExampleAsyncFunc(this UIManager uiManager)
+    public static void CloseRealHud(this UIManager uiManager)
     {
-        return uiManager.OpenPopupUI<TestPopupUI>();
+        uiManager.CloseHUDUI<RealLobbyUI>().Forget();
     }
+
+
+    public static void CloseDreamHud(this UIManager uiManager)
+    {
+        uiManager.CloseHUDUI<DreamLobbyUI>().Forget();
+    }
+
 
     public static UniTask<WorkInfoUI> OpenWorkInfoUI(this UIManager uiManager)
     {

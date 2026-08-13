@@ -30,7 +30,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private bool _initComplete = false;
 
-    private LobbyController _lobbyController;
+    private LobbyController _realLobbyController;
+    private LobbyController _dreamLobbyController;
 
     #endregion
 
@@ -78,35 +79,37 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void EnterReal()
     {
-        if(_lobbyController == null)
+        if(_realLobbyController == null)
         {
-            _lobbyController = new();
+            _realLobbyController = new();
         }
 
-        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.LobbyBackground);
-        _lobbyController.Open(backgroundPrefab);
-        UI.OpenLobbyHud();
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.RealLobbyBackground);
+        _realLobbyController.Enter(backgroundPrefab);
+        UI.OpenRealHud();
     }
 
     public void ExitReal()
     {
-        _lobbyController.Close();
+        _realLobbyController.Release();
+        UI.CloseRealHud();
     }
 
     public void EnterDream()
     {
+        if (_dreamLobbyController == null)
+        {
+            _dreamLobbyController = new();
+        }
 
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DreamLobbyBackground);
+        _dreamLobbyController.Enter(backgroundPrefab);
+        UI.OpenDreamHud();
     }
 
-    public void EixtDream()
+    public void ExitDream()
     {
-
+        _dreamLobbyController.Release();
+        UI.CloseDreamHud();
     }
-
-    [ContextMenu("ExampleVoidFunc")]
-    public void ExampleVoidFunc()
-    {
-        UI.ExampleVoidFunc();
-    }
-
 }

@@ -96,10 +96,17 @@ public class UIManager
             return;
         }
 
-        ui.PlayCloseAnimation().OnComplete(() =>
+        if(ui.IsPlayAnimation == true)
+        {
+            ui.PlayCloseAnimation().OnComplete(() =>
+            {
+                CompleteClose(ui);
+            });
+        }
+        else
         {
             CompleteClose(ui);
-        });
+        }   
     }
 
     public void CloseAllPopups()
@@ -146,6 +153,13 @@ public class UIManager
     public UniTask<T> OpenLoadingUI<T>() where T : UIBase
     {
         return OpenUI<T>(UIRootType.Loading);
+    }
+
+    public async UniTask<T> CloseHUDUI<T>() where T : UIBase
+    {
+        var ui = await GetOrCreateUI<T>(UIRootType.Hud);
+        ui.CloseUI();
+        return ui;
     }
 
     private async UniTask<T> GetOrCreateUI<T>(UIRootType uiRootType) where T : UIBase

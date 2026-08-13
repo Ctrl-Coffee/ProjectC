@@ -4,12 +4,12 @@ public class LobbyController
 {
     private GameObject _backgroundInstance;
 
-    public void Open(GameObject backgroundPrefab)
+    public void Enter(GameObject backgroundPrefab)
     {
         _backgroundInstance = Object.Instantiate(backgroundPrefab, Vector3.zero, Quaternion.identity);
     }
 
-    public void Close()
+    public void Release()
     {
         if (_backgroundInstance == null)
             return;

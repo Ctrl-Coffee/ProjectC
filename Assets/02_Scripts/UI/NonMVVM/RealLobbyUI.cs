@@ -17,7 +17,21 @@ public class RealLobbyUI : UIBase
 
     private void OnEnable()
     {
+        _goDreamBtn.BindButtonEvent(OnChangeSceenToDream);
+
         _computerBtn.BindButtonEvent(OnOpenWorkInfoUI);
+    }
+
+    private void OnDisable()
+    {
+        _goDreamBtn.UnBindButtonAllEvent();
+        _computerBtn.UnBindButtonAllEvent();
+    }
+
+    private void OnChangeSceenToDream()
+    {
+        GameManager.Instance.ExitReal();
+        GameManager.Instance.EnterDream();
     }
 
     private void OnOpenWorkInfoUI()
