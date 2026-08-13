@@ -1,5 +1,6 @@
 [
   {
+    "Id": "1",
     "Level": 1,
     "HP": 1000,
     "ATK": 100,
@@ -7,6 +8,7 @@
     "UpgradeCost": 0
   },
   {
+    "Id": "2",
     "Level": 2,
     "HP": 1120,
     "ATK": 110,
@@ -14,6 +16,7 @@
     "UpgradeCost": 10
   },
   {
+    "Id": "3",
     "Level": 3,
     "HP": 1254,
     "ATK": 121,
@@ -21,6 +24,7 @@
     "UpgradeCost": 15
   },
   {
+    "Id": "4",
     "Level": 4,
     "HP": 1405,
     "ATK": 133,
@@ -28,6 +32,7 @@
     "UpgradeCost": 20
   },
   {
+    "Id": "5",
     "Level": 5,
     "HP": 1574,
     "ATK": 146,
@@ -35,6 +40,7 @@
     "UpgradeCost": 30
   },
   {
+    "Id": "6",
     "Level": 6,
     "HP": 1762,
     "ATK": 161,
@@ -42,6 +48,7 @@
     "UpgradeCost": 40
   },
   {
+    "Id": "7",
     "Level": 7,
     "HP": 1974,
     "ATK": 177,
@@ -49,6 +56,7 @@
     "UpgradeCost": 55
   },
   {
+    "Id": "8",
     "Level": 8,
     "HP": 2211,
     "ATK": 195,
@@ -56,6 +64,7 @@
     "UpgradeCost": 75
   },
   {
+    "Id": "9",
     "Level": 9,
     "HP": 2476,
     "ATK": 214,
@@ -63,6 +72,7 @@
     "UpgradeCost": 100
   },
   {
+    "Id": "10",
     "Level": 10,
     "HP": 2773,
     "ATK": 236,

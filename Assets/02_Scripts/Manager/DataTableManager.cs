@@ -13,6 +13,7 @@ public class DataTableManager
     public Dictionary<string, CompanionData> CompanionDataTable { get; private set; } = new();
     public Dictionary<string, CompanionLevelData> CompanionLevelDataTable { get; private set; } = new();
     public Dictionary<string, SkillData> SkillDataTable { get; private set; } = new();
+    public Dictionary<string, PlayerLevelData> PlayerLevelDataTable { get; private set; } = new();
 
 
 
@@ -28,6 +29,7 @@ public class DataTableManager
         CompanionDataTable = LoadData<CompanionData>(nameof(CompanionData));
         CompanionLevelDataTable = LoadData<CompanionLevelData>(nameof(CompanionLevelData));
         SkillDataTable = LoadData<SkillData>(nameof(SkillData));
+        PlayerLevelDataTable = LoadData<PlayerLevelData>(nameof(PlayerLevelData));
     }
 
     #region Getters
@@ -59,6 +61,11 @@ public class DataTableManager
     {
         if (null == SkillDataTable || string.IsNullOrEmpty(id)) return null;
         return SkillDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+    public PlayerLevelData GetPlayerLevelData(int level)
+    {
+        if (null == PlayerLevelDataTable) return null;
+        return PlayerLevelDataTable.TryGetValue(level.ToString(), out var data) ? data : null;
     }
 
     #endregion

@@ -1,12 +1,11 @@
 ﻿using System;
 
 [Serializable]
-public class CompanionLevelData : BaseData
+public class PlayerLevelData : BaseData
 {
-    public string CompanionId;
     public int Level;
     public float HP;
     public float ATK;
     public float DEF;
-    public float UpgradeCost;
+    public int UpgradeCost;
 }

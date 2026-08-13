@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using UnityEngine;
 
-public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
+public class PlayerGrowthViewModel : ViewModelBase<PlayerGrowthModel>
 {
     public string Name { get; private set; }
     public int Level { get; private set; }
@@ -9,7 +9,7 @@ public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
     public float Def { get; private set; }
     public float Hp { get; private set; }
 
-    public CompanionGrowthViewModel(CompanionGrowthModel model) : base(model)
+    public PlayerGrowthViewModel(PlayerGrowthModel model) : base(model)
     {
     }
 
@@ -24,20 +24,12 @@ public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
         Refresh();
         base.OnPropertyChanged(sender, e);
     }
-    
     private void Refresh()
     {
-        CompanionData companionData = GameManager.DataTable.GetCompanionData(_model.CompanionId);
-        if (companionData == null)
-        {
-            Debug.LogError($"동료 데이터를 찾을 수 없습니다. Id: {_model.CompanionId}");
-            return;
-        }
-
-        CharacterStatData stat = GameManager.Growth.GetFinalStat(_model.CompanionId, _model.Level);
+        CharacterStatData stat = GameManager.Growth.GetPlayerFinalStat(_model.Level);
         if (stat == null) return;
-        
-        Name = companionData.Name;
+        // TODO 희준 : 이름 데이터 정해지면 교체
+        Name = "임시용사";
         Level = _model.Level;
         Atk = stat.FinalAtk;
         Def = stat.FinalDef;
@@ -46,7 +38,7 @@ public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
 
     public void LevelUp()
     {
-        bool canLevelUp = GameManager.Growth.CheckCanLevelUp(_model.CompanionId, _model.Level);
+        bool canLevelUp = GameManager.Growth.CheckPlayerCanLevelUp(_model.Level);
 
         if (canLevelUp == false)
         {
@@ -55,6 +47,6 @@ public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
         }
 
         _model.Level += 1;
-        
     }
+   
 }
