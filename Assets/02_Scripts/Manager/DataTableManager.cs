@@ -10,6 +10,12 @@ public class DataTableManager
     public Dictionary<string, PreLoadAssetData> PreLoadAssetDataTable { get; private set; } = new();
     public Dictionary<string, WorkData> WorkDataTable { get; private set; } = new();
 
+    public Dictionary<string, CompanionData> CompanionDataTable { get; private set; } = new();
+    public Dictionary<string, CompanionLevelUpCostData> CompanionLevelUpCostDataTable { get; private set; } = new();
+    public Dictionary<string, SkillData> SkillDataTable { get; private set; } = new();
+
+
+
     #endregion
 
     public void LoadAllData()
@@ -19,6 +25,9 @@ public class DataTableManager
         //PreLoadAssetDataTable = LoadData<PreLoadAssetData>(nameof(PreLoadAssetData));
 
         WorkDataTable = LoadData<WorkData>(nameof(WorkData));
+        CompanionDataTable = LoadData<CompanionData>(nameof(CompanionData));
+        CompanionLevelUpCostDataTable = LoadData<CompanionLevelUpCostData>(nameof(CompanionLevelUpCostData));
+        SkillDataTable = LoadData<SkillData>(nameof(SkillData));
     }
 
     #region Getters
@@ -33,6 +42,22 @@ public class DataTableManager
     {
         if (null == WorkDataTable || string.IsNullOrEmpty(id)) return null;
         return WorkDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+    public CompanionData GetCompanionData(string id)
+    {
+        if (null == CompanionDataTable || string.IsNullOrEmpty(id)) return null;
+        return CompanionDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public CompanionLevelUpCostData GetCompanionLevelUpCost(string id)
+    {
+        if (null == CompanionLevelUpCostDataTable || string.IsNullOrEmpty(id)) return null;
+        return CompanionLevelUpCostDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+    public SkillData GetSkillData(string id)
+    {
+        if (null == SkillDataTable || string.IsNullOrEmpty(id)) return null;
+        return SkillDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
     #endregion
