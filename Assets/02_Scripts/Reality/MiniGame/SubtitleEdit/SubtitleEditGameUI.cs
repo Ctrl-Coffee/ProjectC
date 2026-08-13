@@ -15,12 +15,36 @@ public class SubtitleEditGameUI : MiniGameBase
     private FallingSubtitle _subtitleInstance;
 
     [Header("난이도")]
-    [SerializeField] private float _fallSpeed = 400f;
-    [SerializeField] private float _tolerance = 150f;
-    [SerializeField] private float _perfectRadius = 30f;
+    [SerializeField] private float _fallSpeedRatio = 0.3f;
+    [SerializeField] private float _toleranceRatio = 0.1f;
+    [SerializeField] private float _perfectRadiusRatio = 0.02f;
 
     private bool _hasAttachResult = false;
     private float _attachAccuracy = 0f;
+
+    private float FallSpeed
+    {
+        get
+        {
+            return _fallSpeedRatio * _playArea.rect.height;
+        }
+    }
+
+    private float Tolerance
+    {
+        get
+        {
+            return _toleranceRatio * _playArea.rect.height;
+        }
+    }
+
+    private float PerfectRadius
+    {
+        get
+        {
+            return _perfectRadiusRatio * _playArea.rect.height;
+        }
+    }
 
     public override async UniTask<MiniGameResult> PlayAsync(MiniGameContext context, CancellationToken token)
     {
@@ -96,7 +120,8 @@ public class SubtitleEditGameUI : MiniGameBase
 
     private async UniTask<float> RunSubtitleAsync(CancellationToken token)
     {
-        float missLineY = _targetSlot.anchoredPosition.y - _tolerance;
+        float fallSpeed = FallSpeed;
+        float missLineY = _targetSlot.anchoredPosition.y - Tolerance;
 
         while (true)
         {
@@ -108,7 +133,7 @@ public class SubtitleEditGameUI : MiniGameBase
             }
 
             float deltaTime = GetDeltaTime();
-            _subtitleInstance.Fall(_fallSpeed * deltaTime);
+            _subtitleInstance.Fall(fallSpeed * deltaTime);
 
             if (_subtitleInstance.RectTransform.anchoredPosition.y < missLineY)
             {
@@ -126,7 +151,7 @@ public class SubtitleEditGameUI : MiniGameBase
 
         float distance = Vector2.Distance(_subtitleInstance.RectTransform.anchoredPosition, _targetSlot.anchoredPosition);
 
-        return CalculateAccuracy(distance, _perfectRadius, _tolerance);
+        return CalculateAccuracy(distance, PerfectRadius, Tolerance);
     }
 
     private float CalculateAccuracy(float distance, float perfectRadius, float tolerance)
@@ -189,6 +214,12 @@ public class SubtitleEditGameUI : MiniGameBase
         if (null == _playArea || null == _targetSlot || null == _subtitlePrefab)
         {
             Logger.LogError("참조 비어있음 (PlayArea / TargetSlot / Subtitle)");
+            return false;
+        }
+
+        if (_playArea.rect.height <= 0f)
+        {
+            Logger.LogError("PlayArea의 높이가 0.");
             return false;
         }
 
