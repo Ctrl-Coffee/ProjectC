@@ -4,7 +4,6 @@ using UnityEngine;
 public class TestGrowthUI : MonoBehaviour
 {
     [SerializeField] private string _companionId = "Companion_001";
-    [SerializeField] private int _level = 3;
 
     [ContextMenu("동료 성장 UI 열기")]
     private void OpenGrowthUI()
@@ -14,9 +13,7 @@ public class TestGrowthUI : MonoBehaviour
     private async UniTask OpenGrowthUIAsync()
     {
         Debug.Log($"용사 레벨: {GameManager.User.Player.Level}");
-        OwnedCompanionData ownedData = new OwnedCompanionData();
-        ownedData.CompanionId = _companionId;
-        ownedData.Level = _level;
+        OwnedCompanionData ownedData = GetOrCreateOwnedCompanion(_companionId);
 
         CompanionGrowthModel model = new CompanionGrowthModel(ownedData);
         CompanionGrowthViewModel viewModel = new CompanionGrowthViewModel(model);
@@ -55,5 +52,22 @@ public class TestGrowthUI : MonoBehaviour
         }
 
         view.BindViewModel(viewModel);
+    }
+
+    private OwnedCompanionData GetOrCreateOwnedCompanion(string companionId)
+    {
+        foreach(OwnedCompanionData owned in GameManager.User.Companions)
+        {
+            if (owned.CompanionId == companionId)
+            {
+                return owned;
+            }
+        }
+
+        OwnedCompanionData ownedData = new OwnedCompanionData();
+        ownedData.CompanionId = companionId;
+        ownedData.Level = 1;
+        GameManager.User.Companions.Add(ownedData);
+        return ownedData;
     }
 }
