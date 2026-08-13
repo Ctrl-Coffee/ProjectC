@@ -2,6 +2,7 @@
 {
     None,
     SubtitleEdit,
+    MotionTracking,
 }
 
 public enum MiniGameGrade
@@ -15,7 +16,6 @@ public enum MiniGameGrade
 
 public struct MiniGameContext
 {
-    public int WorkLevel;
 }
 
 public struct MiniGameResult

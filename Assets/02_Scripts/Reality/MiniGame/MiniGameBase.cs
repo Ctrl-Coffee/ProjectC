@@ -49,6 +49,16 @@ public abstract class MiniGameBase : UIBase
 
     public abstract UniTask<MiniGameResult> PlayAsync(MiniGameContext context, CancellationToken token);
 
+    protected float GetDeltaTime()
+    {
+        if (null == GameManager.Instance)
+        {
+            return Time.deltaTime;
+        }
+
+        return GameManager.Time.GameDeltaTime;
+    }
+
     public override Tween PlayOpenAnimation()
     {
         CapturePosition();

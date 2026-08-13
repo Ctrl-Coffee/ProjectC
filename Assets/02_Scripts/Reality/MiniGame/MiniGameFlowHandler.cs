@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class MiniGameFlowHandler
 {
-    private int _workLevel = 1;
     private CancellationTokenSource _cancelToken = new();
 
     public void Cancel()
@@ -68,27 +67,26 @@ public class MiniGameFlowHandler
         switch (miniGameType)
         {
             case MiniGameType.SubtitleEdit:
-                return PlaySubtitleEditAsync();
+                return PlayMiniGameAsync<SubtitleEditGameUI>();
 
+            case MiniGameType.MotionTracking:
+                return PlayMiniGameAsync<MotionTrackingGameUI>();
             default:
                 Logger.LogError($"지원하지 않는 미니게임입니다. type: {miniGameType}");
                 return UniTask.FromResult(MiniGameResult.Canceled);
         }
     }
 
-    private async UniTask<MiniGameResult> PlaySubtitleEditAsync()
+    private async UniTask<MiniGameResult> PlayMiniGameAsync<T>() where T : MiniGameBase
     {
-        SubtitleEditGameUI ui = await GameManager.UI.OpenSubtitleEditGameUI();
+        T ui = await GameManager.UI.OpenMiniGameUI<T>();
 
         if (null == ui)
         {
             return MiniGameResult.Canceled;
         }
 
-        MiniGameContext context = new MiniGameContext
-        {
-            WorkLevel = _workLevel,
-        };
+        MiniGameContext context = new MiniGameContext();
 
         CancellationToken token = _cancelToken.Token;
 
