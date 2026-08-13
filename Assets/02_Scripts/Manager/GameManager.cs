@@ -14,6 +14,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static UserData User { get { return Instance._saveManager.User; } }
     public static GrowthSystem Growth { get { return Instance._growthSystem; } }
     public static CompanionManager Companion { get { return Instance._companionManager; } }
+    public static EquipmentManager Equipment { get { return Instance._equipmentManager; } }
+
 
 
     #region Manager Variables
@@ -28,6 +30,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     private SaveManager _saveManager = new();
     private GrowthSystem _growthSystem = new();
     private CompanionManager _companionManager = new();
+    private EquipmentManager _equipmentManager = new();
+
 
     #endregion
 

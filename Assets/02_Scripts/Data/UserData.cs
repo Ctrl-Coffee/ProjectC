@@ -9,4 +9,5 @@ public class UserData
     public long LastEnergyRecoverTicks;
     public OwnedPlayerData Player = new();
     public List<OwnedCompanionData> Companions = new();
+    public List<OwnedEquipmentData> Equipments = new();
 }

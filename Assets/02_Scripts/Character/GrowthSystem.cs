@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 public class GrowthSystem
 {
@@ -53,6 +54,40 @@ public class GrowthSystem
 
         //TODO 희준 : 꿈의 조각 확인, 차감 (nextLevelData.UpgradeCost 사용)
 
+        return true;
+    }
+
+    public CharacterStatData GetEquipmentFinalStat(string equipmentId, int level)
+    {
+        EquipmentLevelData levelData = GameManager.DataTable.GetEquipmentLevelData(level);
+        EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
+        
+        if (levelData == null || equipmentData == null)
+        {
+            Debug.LogError($"장비 레벨데이터가 없습니다. 레벨 : {level}");
+            return null;
+        }
+
+        if (equipmentData == null)
+        {
+            Debug.LogError($"장비 데이터가 없습니다. 장비 : {equipmentId}");
+            return null;
+        }
+
+        float multiplier = levelData.StatMultiplier;
+        return new CharacterStatData(equipmentData.BaseAtk * multiplier, equipmentData.BaseDef * multiplier, equipmentData.BaseHp * multiplier);
+    }
+
+    public bool CheckEquipmentCanLevelUp(int level)
+    {
+        EquipmentLevelData nextLevelData = GameManager.DataTable.GetEquipmentLevelData(level + 1);
+
+        if (nextLevelData == null)
+        {
+            return false;
+        }
+
+        //TODO 희준 : 꿈의 조각 확인, 차감 (nextLevelData.UpgradeCost 사용)
         return true;
     }
 }
