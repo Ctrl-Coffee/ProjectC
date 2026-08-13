@@ -14,8 +14,8 @@ public class DataTableManager
     public Dictionary<string, CompanionLevelData> CompanionLevelDataTable { get; private set; } = new();
     public Dictionary<string, SkillData> SkillDataTable { get; private set; } = new();
     public Dictionary<string, PlayerLevelData> PlayerLevelDataTable { get; private set; } = new();
-
-
+    public Dictionary<string, EquipmentLevelData> EquipmentLevelDataTable { get; private set; } = new();
+    public Dictionary<string, EquipmentData> EquipmentDataTable { get; private set; } = new();
 
     #endregion
 
@@ -30,6 +30,8 @@ public class DataTableManager
         CompanionLevelDataTable = LoadData<CompanionLevelData>(nameof(CompanionLevelData));
         SkillDataTable = LoadData<SkillData>(nameof(SkillData));
         PlayerLevelDataTable = LoadData<PlayerLevelData>(nameof(PlayerLevelData));
+        EquipmentLevelDataTable = LoadData<EquipmentLevelData>(nameof(EquipmentLevelData));
+        EquipmentDataTable = LoadData<EquipmentData>(nameof(EquipmentData));
     }
 
     #region Getters
@@ -66,6 +68,16 @@ public class DataTableManager
     {
         if (null == PlayerLevelDataTable) return null;
         return PlayerLevelDataTable.TryGetValue(level.ToString(), out var data) ? data : null;
+    }
+    public EquipmentLevelData GetEquipmentLevelData(int level)
+    {
+        if (null == EquipmentLevelDataTable) return null;
+        return EquipmentLevelDataTable.TryGetValue(level.ToString(), out var data) ? data : null;
+    }
+    public EquipmentData GetEquipmentData(string id)
+    {
+        if (null == EquipmentDataTable || string.IsNullOrEmpty(id)) return null;
+        return EquipmentDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
     #endregion
