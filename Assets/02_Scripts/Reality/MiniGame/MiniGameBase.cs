@@ -49,6 +49,10 @@ public abstract class MiniGameBase : UIBase
 
     public abstract UniTask<MiniGameResult> PlayAsync(MiniGameContext context, CancellationToken token);
 
+    protected virtual void ClearGame()
+    {
+    }
+
     protected float GetDeltaTime()
     {
         if (null == GameManager.Instance)
@@ -62,6 +66,7 @@ public abstract class MiniGameBase : UIBase
     public override Tween PlayOpenAnimation()
     {
         CapturePosition();
+        ClearGame();
 
         Panel.DOKill();
         Panel.anchoredPosition = GetHiddenPosition();

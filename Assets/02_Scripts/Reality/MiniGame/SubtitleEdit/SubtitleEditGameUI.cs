@@ -15,7 +15,7 @@ public class SubtitleEditGameUI : MiniGameBase
     private FallingSubtitle _subtitleInstance;
 
     [Header("난이도")]
-    [SerializeField] private float _fallSpeedRatio = 0.3f;
+    [SerializeField] private float _fallSpeedRatio = 0.5f;
     [SerializeField] private float _toleranceRatio = 0.1f;
     [SerializeField] private float _perfectRadiusRatio = 0.02f;
 
@@ -64,16 +64,12 @@ public class SubtitleEditGameUI : MiniGameBase
         {
             float accuracy = await RunSubtitleAsync(token);
 
-            return new MiniGameResult
-            {
-                IsCompleted = true,
-                Accuracy = accuracy,
-                Grade = MiniGameGradeTable.GetGrade(accuracy),
-            };
+            return MiniGameResult.Completed(accuracy);
         }
         finally
         {
             UnbindInput();
+            HideSubtitle();
         }
     }
 
@@ -86,10 +82,27 @@ public class SubtitleEditGameUI : MiniGameBase
 
         _subtitleInstance.SetPosition(GetSubtitleStartPosition());
 
+        _subtitleInstance.gameObject.SetActive(true);
+
         _hasAttachResult = false;
         _attachAccuracy = 0f;
 
         return true;
+    }
+
+    protected override void ClearGame()
+    {
+        HideSubtitle();
+    }
+
+    private void HideSubtitle()
+    {
+        if (null == _subtitleInstance)
+        {
+            return;
+        }
+
+        _subtitleInstance.gameObject.SetActive(false);
     }
 
     private FallingSubtitle EnsureSubtitle()
@@ -151,31 +164,7 @@ public class SubtitleEditGameUI : MiniGameBase
 
         float distance = Vector2.Distance(_subtitleInstance.RectTransform.anchoredPosition, _targetSlot.anchoredPosition);
 
-        return CalculateAccuracy(distance, PerfectRadius, Tolerance);
-    }
-
-    private float CalculateAccuracy(float distance, float perfectRadius, float tolerance)
-    {
-        if (tolerance <= 0f)
-        {
-            return 0f;
-        }
-
-        if (distance <= perfectRadius)
-        {
-            return 1f;
-        }
-
-        float falloffRange = tolerance - perfectRadius;
-
-        if (falloffRange <= 0f)
-        {
-            return 0f;
-        }
-
-        float accuracy = 1f - ((distance - perfectRadius) / falloffRange);
-
-        return Mathf.Clamp01(accuracy);
+        return MiniGameScore.FromDistance(distance, PerfectRadius, Tolerance);
     }
 
     private void BindInput()

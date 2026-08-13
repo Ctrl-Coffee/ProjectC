@@ -1,4 +1,6 @@
-﻿public enum MiniGameType
+﻿using UnityEngine;
+
+public enum MiniGameType
 {
     None,
     SubtitleEdit,
@@ -25,6 +27,18 @@ public struct MiniGameResult
 
     public MiniGameGrade Grade;
 
+    public static MiniGameResult Completed(float accuracy)
+    {
+        float clamped = Mathf.Clamp01(accuracy);
+
+        return new MiniGameResult
+        {
+            IsCompleted = true,
+            Accuracy = clamped,
+            Grade = MiniGameGradeTable.GetGrade(clamped),
+        };
+    }
+
     public static MiniGameResult Canceled
     {
         get
@@ -36,6 +50,43 @@ public struct MiniGameResult
                 Grade = MiniGameGrade.Miss,
             };
         }
+    }
+}
+
+public static class MiniGameScore
+{
+    // 개수 기반 - 전체 N개 중 K개 성공
+    public static float FromCount(int successCount, int totalCount)
+    {
+        if (totalCount <= 0)
+        {
+            return 0f;
+        }
+
+        return Mathf.Clamp01((float)successCount / totalCount);
+    }
+
+    // 거리 기반 - perfectRadius 안이면 만점, tolerance 밖이면 0점, 그 사이는 선형 감소
+    public static float FromDistance(float distance, float perfectRadius, float tolerance)
+    {
+        if (tolerance <= 0f)
+        {
+            return 0f;
+        }
+
+        if (distance <= perfectRadius)
+        {
+            return 1f;
+        }
+
+        float falloffRange = tolerance - perfectRadius;
+
+        if (falloffRange <= 0f)
+        {
+            return 0f;
+        }
+
+        return Mathf.Clamp01(1f - ((distance - perfectRadius) / falloffRange));
     }
 }
 

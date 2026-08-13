@@ -54,17 +54,22 @@ public class MotionTrackingGameUI : MiniGameBase
         {
             float accuracy = await RunTrackingAsync(token);
 
-            return new MiniGameResult
-            {
-                IsCompleted = true,
-                Accuracy = accuracy,
-                Grade = MiniGameGradeTable.GetGrade(accuracy),
-            };
+            return MiniGameResult.Completed(accuracy);
         }
         finally
         {
             UnbindInput();
         }
+    }
+
+    protected override void ClearGame()
+    {
+        if (!HasViewReferences())
+        {
+            return;
+        }
+
+        SetupRound();
     }
 
     private void SetupRound()
@@ -194,6 +199,16 @@ public class MotionTrackingGameUI : MiniGameBase
         }
 
         return _holdArea.IsPressed;
+    }
+
+    private bool HasViewReferences()
+    {
+        if (null == _trackRect || null == _targetRect || null == _markerRect)
+        {
+            return false;
+        }
+
+        return _trackRect.rect.height > 0f;
     }
 
     private bool ValidateReferences()
