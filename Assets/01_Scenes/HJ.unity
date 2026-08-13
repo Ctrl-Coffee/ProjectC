@@ -148,8 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177e32ebd4192ef4fa9b5a8b35600512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestGrowthUI
-  _companionId: Companion_001
-  _level: 3
+  _companionId: Companion_002
 --- !u!4 &332796177
 Transform:
   m_ObjectHideFlags: 0

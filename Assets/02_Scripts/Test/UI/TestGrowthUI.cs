@@ -12,8 +12,13 @@ public class TestGrowthUI : MonoBehaviour
     }
     private async UniTask OpenGrowthUIAsync()
     {
-        Debug.Log($"용사 레벨: {GameManager.User.Player.Level}");
-        OwnedCompanionData ownedData = GetOrCreateOwnedCompanion(_companionId);
+        OwnedCompanionData ownedData = GameManager.Companion.GetOwnedCompanion(_companionId);
+
+        if (ownedData == null)
+        {
+            Debug.LogError($"보유하지 않은 동료입니다. Id: {_companionId}");
+            return;
+        }
 
         CompanionGrowthModel model = new CompanionGrowthModel(ownedData);
         CompanionGrowthViewModel viewModel = new CompanionGrowthViewModel(model);
@@ -54,20 +59,10 @@ public class TestGrowthUI : MonoBehaviour
         view.BindViewModel(viewModel);
     }
 
-    private OwnedCompanionData GetOrCreateOwnedCompanion(string companionId)
+    [ContextMenu("테스트 동료 지급")]
+    private void AddTestCompanion()
     {
-        foreach(OwnedCompanionData owned in GameManager.User.Companions)
-        {
-            if (owned.CompanionId == companionId)
-            {
-                return owned;
-            }
-        }
-
-        OwnedCompanionData ownedData = new OwnedCompanionData();
-        ownedData.CompanionId = companionId;
-        ownedData.Level = 1;
-        GameManager.User.Companions.Add(ownedData);
-        return ownedData;
+        bool isAdded = GameManager.Companion.AddCompanion(_companionId);
+        Debug.Log(isAdded ? "동료 획득" : "이미 보유 중");
     }
 }
