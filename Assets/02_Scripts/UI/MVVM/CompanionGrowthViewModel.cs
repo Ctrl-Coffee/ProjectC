@@ -15,9 +15,8 @@ public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
 
     public override void InitializeModel()
     {
-        base.InitializeModel();
         Refresh();
-        base.OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(Level)));
+        base.InitializeModel();
     }
 
     protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
