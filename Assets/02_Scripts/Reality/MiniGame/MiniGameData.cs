@@ -16,6 +16,8 @@ public enum MiniGameGrade
     Perfect,
 }
 
+// TODO: 난이도(업무 레벨) 개념이 들어오면 여기에 필드를 추가하고 MiniGameFlowHandler에서 채우기
+// MiniGameBase / PlayAsync 시그니처를 건드리지 않으려고 빈 구조체로 유지 중. 지우지 말 것.
 public struct MiniGameContext
 {
 }
@@ -56,6 +58,7 @@ public struct MiniGameResult
 public static class MiniGameScore
 {
     // 개수 기반 - 전체 N개 중 K개 성공
+    // TODO: 미니게임에서 사용 예정. 아직 호출부가 없어도 지우지 말 것
     public static float FromCount(int successCount, int totalCount)
     {
         if (totalCount <= 0)

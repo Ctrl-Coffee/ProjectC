@@ -48,18 +48,9 @@ public class MotionTrackingGameUI : MiniGameBase
 
         SetupRound();
 
-        BindInput();
+        float accuracy = await RunTrackingAsync(token);
 
-        try
-        {
-            float accuracy = await RunTrackingAsync(token);
-
-            return MiniGameResult.Completed(accuracy);
-        }
-        finally
-        {
-            UnbindInput();
-        }
+        return MiniGameResult.Completed(accuracy);
     }
 
     protected override void ClearGame()
@@ -69,22 +60,33 @@ public class MotionTrackingGameUI : MiniGameBase
             return;
         }
 
-        SetupRound();
+        ResetPlayState();
+        RefreshView();
     }
 
     private void SetupRound()
     {
         _marker.Init(GetMarkerSize(), _liftAcceleration, _gravity, _bounceFactor);
-        _marker.ResetPosition(START_POSITION);
-
         _target.Init(_targetSize, _targetSpeed, _targetSmoothTime, _targetJumpRange, _targetHoldTimeRange);
+
+        ResetPlayState();
+
+        SetTargetSize();
+        RefreshView();
+    }
+
+    private void ResetPlayState()
+    {
+        _marker.ResetPosition(START_POSITION);
         _target.ResetPosition(START_POSITION);
 
         _progress = 0f;
         _elapsedTime = 0f;
 
-        SetTargetSize();
-        RefreshView();
+        if (null != _holdArea)
+        {
+            _holdArea.ResetButtonPress();
+        }
     }
 
     private async UniTask<float> RunTrackingAsync(CancellationToken token)
@@ -169,26 +171,6 @@ public class MotionTrackingGameUI : MiniGameBase
     private float GetMarkerSize()
     {
         return _markerRect.rect.height / _trackRect.rect.height;
-    }
-
-    private void BindInput()
-    {
-        if (null == _holdArea)
-        {
-            return;
-        }
-
-        _holdArea.ResetButtonPress();
-    }
-
-    private void UnbindInput()
-    {
-        if (null == _holdArea)
-        {
-            return;
-        }
-
-        _holdArea.ResetButtonPress();
     }
 
     private bool IsPressed()

@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class MiniGameFlowHandler
 {
-    private CancellationTokenSource _cancelToken = new();
+    private CancellationTokenSource _cancelToken;
+
+    private bool _isPlaying = false;
 
     public void Cancel()
     {
-        if (_cancelToken.IsCancellationRequested)
+        if (null == _cancelToken || _cancelToken.IsCancellationRequested)
         {
             return;
         }
@@ -25,10 +27,22 @@ public class MiniGameFlowHandler
             return;
         }
 
-        if (GameManager.User.Currency.TrySpendEnergy(workData.ReqEnergy))
+        if (_isPlaying)
         {
-            Logger.Log($"미니게임 시작 - {workData.Name} / 남은 에너지 {GameManager.User.Currency.Energy}");
-            MiniGameResult result = await PlayAsync(workData.MiniGameType);
+            return;
+        }
+
+        if (!GameManager.User.Currency.CanSpendEnergy(workData.ReqEnergy))
+        {
+            Logger.LogWarning($"에너지가 부족해 시작할 수 없습니다. {workData.Name} / 필요 {workData.ReqEnergy} / 보유 {GameManager.User.Currency.Energy}");
+            return;
+        }
+
+        _isPlaying = true;
+
+        try
+        {
+            MiniGameResult result = await PlayAsync(workData);
 
             if (!result.IsCompleted)
             {
@@ -39,14 +53,18 @@ public class MiniGameFlowHandler
 
             Logger.Log($"미니게임 종료 - {result.Grade} / 정확도 {result.Accuracy:P0}");
         }
+        finally
+        {
+            _isPlaying = false;
+        }
     }
 
     private void GiveReward(WorkData workData, float accuracy)
     {
         float rate = Mathf.Clamp01(accuracy);
 
-        long money = Mathf.RoundToInt(workData.RewardMoney * rate);
-        long dp = Mathf.RoundToInt(workData.RewardDP * rate);
+        long money = (long)Math.Round(workData.RewardMoney * (double)rate);
+        long dp = (long)Math.Round(workData.RewardDP * (double)rate);
 
         if (money <= 0 && dp <= 0)
         {
@@ -62,32 +80,44 @@ public class MiniGameFlowHandler
         Logger.Log($"수동업무 완료 - {workData.Name} / 돈 {money} / DP {dp}");
     }
 
-    private UniTask<MiniGameResult> PlayAsync(MiniGameType miniGameType)
+    private UniTask<MiniGameResult> PlayAsync(WorkData workData)
     {
-        switch (miniGameType)
+        switch (workData.MiniGameType)
         {
             case MiniGameType.SubtitleEdit:
-                return PlayMiniGameAsync<SubtitleEditGameUI>();
+                return PlayMiniGameAsync<SubtitleEditGameUI>(workData);
 
             case MiniGameType.MotionTracking:
-                return PlayMiniGameAsync<MotionTrackingGameUI>();
+                return PlayMiniGameAsync<MotionTrackingGameUI>(workData);
+
             default:
-                Logger.LogError($"지원하지 않는 미니게임입니다. type: {miniGameType}");
+                Logger.LogError($"지원하지 않는 미니게임입니다. type: {workData.MiniGameType}");
                 return UniTask.FromResult(MiniGameResult.Canceled);
         }
     }
 
-    private async UniTask<MiniGameResult> PlayMiniGameAsync<T>() where T : MiniGameBase
+    private async UniTask<MiniGameResult> PlayMiniGameAsync<T>(WorkData workData) where T : MiniGameBase
     {
         T ui = await GameManager.UI.OpenMiniGameUI<T>();
 
         if (null == ui)
         {
+            Logger.LogWarning($"미니게임 UI를 열지 못했습니다. type: {workData.MiniGameType}");
             return MiniGameResult.Canceled;
         }
 
+        if (!GameManager.User.Currency.TrySpendEnergy(workData.ReqEnergy))
+        {
+            Logger.LogError($"에너지 차감에 실패했습니다. 차감 경로가 늘어났는지 확인이 필요합니다. {workData.Name} / 필요 {workData.ReqEnergy}");
+            ui.CloseUI();
+            return MiniGameResult.Canceled;
+        }
+
+        Logger.Log($"미니게임 시작 - {workData.Name} / 남은 에너지 {GameManager.User.Currency.Energy}");
+
         MiniGameContext context = new MiniGameContext();
 
+        _cancelToken = new CancellationTokenSource();
         CancellationToken token = _cancelToken.Token;
 
         try
@@ -108,6 +138,9 @@ public class MiniGameFlowHandler
         finally
         {
             ui.CloseUI();
+
+            _cancelToken.Dispose();
+            _cancelToken = null;
         }
     }
 

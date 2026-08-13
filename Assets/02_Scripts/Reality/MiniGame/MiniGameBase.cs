@@ -14,8 +14,6 @@ public abstract class MiniGameBase : UIBase
     private Vector2 _shownPosition;
     private Tween _openTween;
 
-    private bool _isPositionCaptured = false;
-
     protected RectTransform Panel
     {
         get
@@ -32,6 +30,17 @@ public abstract class MiniGameBase : UIBase
     protected virtual void Awake()
     {
         CapturePosition();
+    }
+
+    private void OnDisable()
+    {
+        if (null == Panel)
+        {
+            return;
+        }
+
+        Panel.DOKill();
+        _openTween = null;
     }
 
     public async UniTask<MiniGameResult> RunAsync(MiniGameContext context, CancellationToken token)
@@ -65,7 +74,6 @@ public abstract class MiniGameBase : UIBase
 
     public override Tween PlayOpenAnimation()
     {
-        CapturePosition();
         ClearGame();
 
         Panel.DOKill();
@@ -84,8 +92,6 @@ public abstract class MiniGameBase : UIBase
 
     public override Tween PlayCloseAnimation()
     {
-        CapturePosition();
-
         Panel.DOKill();
         _openTween = null;
 
@@ -107,18 +113,12 @@ public abstract class MiniGameBase : UIBase
 
     private void CapturePosition()
     {
-        if (_isPositionCaptured)
-        {
-            return;
-        }
-
         if (null == Panel)
         {
             return;
         }
 
         _shownPosition = Panel.anchoredPosition;
-        _isPositionCaptured = true;
     }
 
     private Vector2 GetHiddenPosition()
