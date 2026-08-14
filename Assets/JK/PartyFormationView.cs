@@ -42,20 +42,21 @@ public class PartyFormationView : ViewBase<PartyFormationViewModel>
         TestMethod();
     }
 
-    protected override void OnDisable()
-    {
-        base.OnDisable();
+    
+    //protected override void OnDisable()
+    //{
+    //    base.OnDisable();
 
-        _viewModel.SupportCharacterIdChanged -= OnSupportCharacterIdChanged;
-        _viewModel = null;
-    }
+    //    _viewModel.SupportCharacterIdChanged -= OnSupportCharacterIdChanged;
+    //    _viewModel = null;
+    //}
 
-    protected override void OnBindViewModel()
-    {
-        _viewModel.SupportCharacterIdChanged += OnSupportCharacterIdChanged;
-        RefreshLeaderSlot();
-        InitializeCharacterList();
-    }
+    //protected override void OnBindViewModel()
+    //{
+    //    _viewModel.SupportCharacterIdChanged += OnSupportCharacterIdChanged;
+    //    RefreshLeaderSlot();
+    //    InitializeCharacterList();
+    //}
 
     protected override void OnPropertyChanged(string propertyName)
     {

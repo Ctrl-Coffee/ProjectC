@@ -29,6 +29,6 @@ public class TestGrowthUI : MonoBehaviour
             return;
         }
 
-        view.BindViewModel(viewModel);
+        // view.BindViewModel(viewModel);
     }
 }

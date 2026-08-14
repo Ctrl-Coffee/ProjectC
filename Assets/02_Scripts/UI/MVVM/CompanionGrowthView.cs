@@ -17,11 +17,11 @@ public class CompanionGrowthView : ViewBase<CompanionGrowthViewModel>
 
     }
 
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-        _levelUpButton.onClick.RemoveListener(OnClickLevelUp);
-    }
+    //protected override void OnDisable()
+    //{
+    //    base.OnDisable();
+    //    _levelUpButton.onClick.RemoveListener(OnClickLevelUp);
+    //}
     private void OnClickLevelUp()
     {
         if (_viewModel == null) return;
