@@ -1595,10 +1595,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6844817169732586087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 457fcbd4f17936e47b711fe19fa05b40, type: 3}
+  m_Script: {fileID: 11500000, guid: 8aa45b3f6aedc3144b13510ee55b6596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DreamLobbyUI
   _isPlayAnimation: 0
+  _panel: {fileID: 0}
   _dreamPoint: {fileID: 8893234458725769064}
   _fragmentDream: {fileID: 4141043095731169148}
   _scrollDream: {fileID: 1256276468385762375}

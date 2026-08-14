@@ -11,23 +11,23 @@ public static class UIManagerExtension
 {
     public static void OpenRealHud(this UIManager uiManager)
     {
-        uiManager.OpenHUDUI<RealLobbyUI>().Forget();
+        uiManager.OpenHUDUI<RealHudUI>().Forget();
     }
 
     public static void OpenDreamHud(this UIManager uiManager)
     {
-        uiManager.OpenHUDUI<DreamLobbyUI>().Forget();
+        uiManager.OpenHUDUI<DreamHudUI>().Forget();
     }
 
     public static void CloseRealHud(this UIManager uiManager)
     {
-        uiManager.CloseHUDUI<RealLobbyUI>().Forget();
+        uiManager.CloseHUDUI<RealHudUI>().Forget();
     }
 
 
     public static void CloseDreamHud(this UIManager uiManager)
     {
-        uiManager.CloseHUDUI<DreamLobbyUI>().Forget();
+        uiManager.CloseHUDUI<DreamHudUI>().Forget();
     }
 
     public static async void OpenConfirmUI(this UIManager uiManager, ConfirmData confirmData, ConfirmButtonAction buttonAction)

@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class DreamLobbyUI : UIBase
+public class DreamHudUI : UIBase
 {
     [SerializeField] private TextMeshProUGUI _dreamPoint;
     [SerializeField] private TextMeshProUGUI _fragmentDream;
