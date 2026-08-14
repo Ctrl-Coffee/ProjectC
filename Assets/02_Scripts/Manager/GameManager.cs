@@ -12,6 +12,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static ViewModelManager ViewModel { get { return Instance._viewModelManager; } }
     public static SaveManager Save { get { return Instance._saveManager; } }
     public static UserData User { get { return Instance._saveManager.User; } }
+    public static GrowthSystem Growth { get { return Instance._growthSystem; } }
+
 
     #region Manager Variables
 
@@ -23,6 +25,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private UIManager _uiManager = new();
     private ViewModelManager _viewModelManager = new();
     private SaveManager _saveManager = new();
+    private GrowthSystem _growthSystem = new();
 
     #endregion
 
