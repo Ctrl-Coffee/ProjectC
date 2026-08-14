@@ -2,81 +2,81 @@
   {
     "Id": "Equipment_001",
     "Name": "줄무늬 잠옷",
-    "BaseAtk": 5,
+    "BaseAttack": 5,
     "BaseHp": 10,
-    "BaseDef": 2,
+    "BaseDefense": 2,
     "SkillId": "Skill_101"
   },
   {
     "Id": "Equipment_002",
     "Name": "구겨진 셔츠",
-    "BaseAtk": 8,
+    "BaseAttack": 8,
     "BaseHp": 5,
-    "BaseDef": 1,
+    "BaseDefense": 1,
     "SkillId": "Skill_102"
   },
   {
     "Id": "Equipment_003",
     "Name": "견습생 로브",
-    "BaseAtk": 10,
+    "BaseAttack": 10,
     "BaseHp": 15,
-    "BaseDef": 4,
+    "BaseDefense": 4,
     "SkillId": "Skill_103"
   },
   {
     "Id": "Equipment_004",
     "Name": "두꺼운 외투",
-    "BaseAtk": 4,
+    "BaseAttack": 4,
     "BaseHp": 40,
-    "BaseDef": 12,
+    "BaseDefense": 12,
     "SkillId": "Skill_104"
   },
   {
     "Id": "Equipment_005",
     "Name": "사냥꾼 재킷",
-    "BaseAtk": 14,
+    "BaseAttack": 14,
     "BaseHp": 10,
-    "BaseDef": 3,
+    "BaseDefense": 3,
     "SkillId": "Skill_105"
   },
   {
     "Id": "Equipment_006",
     "Name": "몽상가의 로브",
-    "BaseAtk": 16,
+    "BaseAttack": 16,
     "BaseHp": 20,
-    "BaseDef": 5,
+    "BaseDefense": 5,
     "SkillId": "Skill_106"
   },
   {
     "Id": "Equipment_007",
     "Name": "은빛 갑주",
-    "BaseAtk": 20,
+    "BaseAttack": 20,
     "BaseHp": 25,
-    "BaseDef": 8,
+    "BaseDefense": 8,
     "SkillId": "Skill_107"
   },
   {
     "Id": "Equipment_008",
     "Name": "수면술사의 망토",
-    "BaseAtk": 24,
+    "BaseAttack": 24,
     "BaseHp": 15,
-    "BaseDef": 6,
+    "BaseDefense": 6,
     "SkillId": "Skill_108"
   },
   {
     "Id": "Equipment_009",
     "Name": "별빛 드레스",
-    "BaseAtk": 28,
+    "BaseAttack": 28,
     "BaseHp": 30,
-    "BaseDef": 10,
+    "BaseDefense": 10,
     "SkillId": "Skill_109"
   },
   {
     "Id": "Equipment_010",
     "Name": "꿈의 파편 갑옷",
-    "BaseAtk": 34,
+    "BaseAttack": 34,
     "BaseHp": 40,
-    "BaseDef": 14,
+    "BaseDefense": 14,
     "SkillId": "Skill_110"
   }
 ]

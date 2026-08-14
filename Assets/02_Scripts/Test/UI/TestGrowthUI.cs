@@ -8,11 +8,11 @@ public class TestGrowthUI : MonoBehaviour
     [SerializeField] private string _equipmentId = "Equipment_001";
 
     [ContextMenu("동료 성장 UI 열기")]
-    private void OpenGrowthUI()
+    private void OpenCompanionGrowthUI()
     {
-        OpenGrowthUIAsync().Forget();
+        OpenCompanionGrowthUIAsync().Forget();
     }
-    private async UniTask OpenGrowthUIAsync()
+    private async UniTask OpenCompanionGrowthUIAsync()
     {
         OwnedCompanionData ownedData = GameManager.Companion.GetOwnedCompanion(_companionId);
 
@@ -36,7 +36,35 @@ public class TestGrowthUI : MonoBehaviour
 
         view.BindViewModel(viewModel);
     }
+    [ContextMenu("장비 성장 UI 열기")]
+    private void OpenEquipmentGrowthUI()
+    {
+        OpenEquipmentGrowthUIAsync().Forget();
+    }
+    private async UniTask OpenEquipmentGrowthUIAsync()
+    {
+        OwnedEquipmentData ownedData = GameManager.Equipment.GetOwnedEquipment(_equipmentId);
 
+        if (ownedData == null)
+        {
+            Debug.LogError($"보유하지 않은 장비입니다. Id: {_equipmentId}");
+            return;
+        }
+
+        EquipmentGrowthModel model = new EquipmentGrowthModel(ownedData);
+        EquipmentGrowthViewModel viewModel = new EquipmentGrowthViewModel(model);
+        GameManager.ViewModel.Register(viewModel);
+
+        EquipmentGrowthView view = await GameManager.UI.OpenPopupUI<EquipmentGrowthView>();
+
+        if (view == null)
+        {
+            Debug.LogError("EquipmentGrowthView를 열지 못했습니다.");
+            return;
+        }
+
+        view.BindViewModel(viewModel);
+    }
     [ContextMenu("용사 성장 UI 열기")]
     private void OpenPlayerGrowthUI()
     {
@@ -103,6 +131,19 @@ public class TestGrowthUI : MonoBehaviour
 
         Debug.Log($"장비: {equipped.EquipmentId} / 레벨: {equipped.Level} / Atk: {stat.FinalAtk} / Def: {stat.FinalDef} / Hp: {stat.FinalHp}");
     }
+
+    [ContextMenu("꿈의 조각 지급")]  
+    private void LogAddDreamFragment()
+    {
+        GameManager.User.Currency.AddDreamFragment(100);
+    }
+
+    [ContextMenu("꿈의 조각 확인")]  
+    private void LogCheckDreamFragment()
+    {
+        Debug.Log(GameManager.User.Currency.DreamFragment);
+    }
+
 }
 
 

@@ -14,7 +14,7 @@ public class GrowthSystem
             return null;
         }
 
-        return new CharacterStatData(levelData.ATK, levelData.DEF, levelData.HP);
+        return new CharacterStatData(levelData.BaseAttack, levelData.BaseDefense, levelData.HP);
     }
 
     public CharacterStatData GetPlayerFinalStat(int level)
@@ -27,7 +27,7 @@ public class GrowthSystem
             return null;
         }
 
-        return new CharacterStatData(levelData.ATK, levelData.DEF, levelData.HP);
+        return new CharacterStatData(levelData.BaseAttack, levelData.BaseDefense, levelData.HP);
     }
 
     public CharacterStatData GetEquipmentFinalStat(string equipmentId, int level)
@@ -48,52 +48,123 @@ public class GrowthSystem
         }
 
         float multiplier = levelData.StatMultiplier;
-        return new CharacterStatData(equipmentData.BaseAtk * multiplier, equipmentData.BaseDef * multiplier, equipmentData.BaseHp * multiplier);
+        return new CharacterStatData(equipmentData.BaseAttack * multiplier, equipmentData.BaseDefense * multiplier, equipmentData.BaseHp * multiplier);
+    }
+
+    public CharacterSkillEffectData GetEquipmentFinalSkill(string equipmentId, int level)
+    {
+        EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
+        if (equipmentData == null)
+        {
+            Debug.LogError($"장비 데이터가 없습니다 장비 : {equipmentId}");
+            return null;
+        }
+
+        SkillData skillData = GameManager.DataTable.GetSkillData(equipmentData.SkillId);
+        if (skillData == null)
+        {
+            Debug.LogError($"스킬 데이터가 없습니다. 스킬 : {equipmentData.SkillId}");
+            return null;
+        }
+
+        EquipmentLevelData levelData = GameManager.DataTable.GetEquipmentLevelData(level);
+        if (levelData == null)
+        {
+            Debug.LogError($"장비 레벨 데이터가 없습니다. 레벨 : {level}");
+            return null;
+        }
+
+        return new CharacterSkillEffectData(skillData, skillData.BaseEffect * levelData.SkillMultiplier);
     }
 
     #endregion
 
     #region 레벨업 판정
 
+    public bool IsCompanionMaxLevel(string companionId, int level)
+    {
+        return GameManager.DataTable.GetCompanionLevelData(companionId, level + 1) == null;
+    }
+
     public bool CheckCompanionCanLevelUp(string companionId, int level)
     {
-        CompanionLevelData nextLevelData = GameManager.DataTable.GetCompanionLevelData(companionId, level + 1);
-
-        if (nextLevelData == null)
+        if (IsCompanionMaxLevel(companionId, level))
         {
             return false;
         }
 
-        //TODO 희준 : 꿈의 조각 확인, 차감 (nextLevelData.UpgradeCost 사용)
+        CompanionLevelData nextLevelData = GameManager.DataTable.GetCompanionLevelData(companionId, level + 1);
 
-        return true;
+        return GameManager.User.Currency.DreamFragment >= (long)nextLevelData.UpgradeCost;
+    }
+
+    public bool TryPayCompanionLevelUpCost(string companionId, int level)
+    {
+        if (CheckCompanionCanLevelUp(companionId, level) == false)
+        {
+            return false;
+        }
+
+        CompanionLevelData nextLevelData = GameManager.DataTable.GetCompanionLevelData(companionId, level + 1);
+
+        return GameManager.User.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
+    }
+
+    public bool IsPlayerMaxLevel(int level)
+    {
+        return GameManager.DataTable.GetPlayerLevelData(level + 1) == null;
     }
 
     public bool CheckPlayerCanLevelUp(int level)
     {
-        PlayerLevelData nextLevelData = GameManager.DataTable.GetPlayerLevelData(level + 1);
-
-        if (nextLevelData == null)
+        if (IsPlayerMaxLevel(level))
         {
             return false;
         }
 
-        //TODO 희준 : 꿈의 조각 확인, 차감 (nextLevelData.UpgradeCost 사용)
+        PlayerLevelData nextLevelData = GameManager.DataTable.GetPlayerLevelData(level + 1);
 
-        return true;
+        return GameManager.User.Currency.DreamFragment >= (long)nextLevelData.UpgradeCost; 
+    }
+
+    public bool TryPayPlayerLevelUpCost(int level)
+    {
+        if(CheckPlayerCanLevelUp(level) == false)
+        {
+            return false;
+        }
+
+        PlayerLevelData nextLevelData = GameManager.DataTable.GetPlayerLevelData(level + 1);
+
+        return GameManager.User.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
+    }
+    public bool IsEquipmentMaxLevel(int level)
+    {
+        return GameManager.DataTable.GetEquipmentLevelData(level + 1) == null;
     }
 
     public bool CheckEquipmentCanLevelUp(int level)
     {
-        EquipmentLevelData nextLevelData = GameManager.DataTable.GetEquipmentLevelData(level + 1);
-
-        if (nextLevelData == null)
+        if (IsEquipmentMaxLevel(level))
         {
             return false;
         }
 
-        //TODO 희준 : 꿈의 조각 확인, 차감 (nextLevelData.UpgradeCost 사용)
-        return true;
+        EquipmentLevelData nextLevelData = GameManager.DataTable.GetEquipmentLevelData(level + 1);
+
+        return GameManager.User.Currency.DreamFragment >= (long)nextLevelData.UpgradeCost;
+    }
+
+    public bool TryPayEquipmentLevelUpCost(int level)
+    {
+        if(CheckEquipmentCanLevelUp(level) == false)
+        {
+            return false;
+        }
+
+        EquipmentLevelData nextLevelData = GameManager.DataTable.GetEquipmentLevelData(level + 1);
+
+        return GameManager.User.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
     }
 
     #endregion
@@ -167,29 +238,8 @@ public class GrowthSystem
         {
             return null;
         }
-
-        EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipped.EquipmentId);
-        if (equipmentData == null)
-        {
-            Debug.LogError($"장비 데이터가 없습니다 장비 : {equipped.EquipmentId}");
-            return null;
-        }
-
-        SkillData skillData = GameManager.DataTable.GetSkillData(equipmentData.SkillId);
-        if (skillData == null)
-        {
-            Debug.LogError($"스킬 데이터가 없습니다. 스킬 : {skillData.Id}");
-            return null;
-        }
-
-        EquipmentLevelData levelData = GameManager.DataTable.GetEquipmentLevelData(equipped.Level);
-        if (levelData == null)
-        {
-            Debug.LogError($"장비 레벨 데이터가 없습니다. 레벨 : {equipped.Level}");
-            return null;
-        }
-
-        return new CharacterSkillEffectData(skillData, skillData.BaseEffect * levelData.SkillMultiplier);
+               
+        return GetEquipmentFinalSkill(equipped.EquipmentId, equipped.Level);
     }
 
     public CharacterSkillEffectData GetCompanionBattleSkill(string companionId)

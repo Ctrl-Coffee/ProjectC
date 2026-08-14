@@ -4,8 +4,8 @@
     "CompanionId": "Companion_001",
     "Level": 1,
     "HP": 100,
-    "ATK": 10,
-    "DEF": 10,
+    "BaseAttack": 10,
+    "BaseDefense": 10,
     "UpgradeCost": 0
   },
   {
@@ -13,8 +13,8 @@
     "CompanionId": "Companion_001",
     "Level": 2,
     "HP": 112,
-    "ATK": 11,
-    "DEF": 11,
+    "BaseAttack": 11,
+    "BaseDefense": 11,
     "UpgradeCost": 10
   },
   {
@@ -22,8 +22,8 @@
     "CompanionId": "Companion_001",
     "Level": 3,
     "HP": 125,
-    "ATK": 12,
-    "DEF": 12,
+    "BaseAttack": 12,
+    "BaseDefense": 12,
     "UpgradeCost": 15
   },
   {
@@ -31,8 +31,8 @@
     "CompanionId": "Companion_001",
     "Level": 4,
     "HP": 140,
-    "ATK": 13,
-    "DEF": 13,
+    "BaseAttack": 13,
+    "BaseDefense": 13,
     "UpgradeCost": 20
   },
   {
@@ -40,8 +40,8 @@
     "CompanionId": "Companion_001",
     "Level": 5,
     "HP": 157,
-    "ATK": 15,
-    "DEF": 14,
+    "BaseAttack": 15,
+    "BaseDefense": 14,
     "UpgradeCost": 30
   },
   {
@@ -49,8 +49,8 @@
     "CompanionId": "Companion_001",
     "Level": 6,
     "HP": 176,
-    "ATK": 16,
-    "DEF": 15,
+    "BaseAttack": 16,
+    "BaseDefense": 15,
     "UpgradeCost": 40
   },
   {
@@ -58,8 +58,8 @@
     "CompanionId": "Companion_001",
     "Level": 7,
     "HP": 197,
-    "ATK": 18,
-    "DEF": 16,
+    "BaseAttack": 18,
+    "BaseDefense": 16,
     "UpgradeCost": 55
   },
   {
@@ -67,8 +67,8 @@
     "CompanionId": "Companion_001",
     "Level": 8,
     "HP": 221,
-    "ATK": 19,
-    "DEF": 17,
+    "BaseAttack": 19,
+    "BaseDefense": 17,
     "UpgradeCost": 75
   },
   {
@@ -76,8 +76,8 @@
     "CompanionId": "Companion_001",
     "Level": 9,
     "HP": 248,
-    "ATK": 21,
-    "DEF": 19,
+    "BaseAttack": 21,
+    "BaseDefense": 19,
     "UpgradeCost": 100
   },
   {
@@ -85,8 +85,8 @@
     "CompanionId": "Companion_001",
     "Level": 10,
     "HP": 277,
-    "ATK": 24,
-    "DEF": 20,
+    "BaseAttack": 24,
+    "BaseDefense": 20,
     "UpgradeCost": 140
   },
   {
@@ -94,8 +94,8 @@
     "CompanionId": "Companion_002",
     "Level": 1,
     "HP": 80,
-    "ATK": 13,
-    "DEF": 8,
+    "BaseAttack": 13,
+    "BaseDefense": 8,
     "UpgradeCost": 0
   },
   {
@@ -103,8 +103,8 @@
     "CompanionId": "Companion_002",
     "Level": 2,
     "HP": 90,
-    "ATK": 14,
-    "DEF": 9,
+    "BaseAttack": 14,
+    "BaseDefense": 9,
     "UpgradeCost": 10
   },
   {
@@ -112,8 +112,8 @@
     "CompanionId": "Companion_002",
     "Level": 3,
     "HP": 100,
-    "ATK": 16,
-    "DEF": 9,
+    "BaseAttack": 16,
+    "BaseDefense": 9,
     "UpgradeCost": 15
   },
   {
@@ -121,8 +121,8 @@
     "CompanionId": "Companion_002",
     "Level": 4,
     "HP": 112,
-    "ATK": 17,
-    "DEF": 10,
+    "BaseAttack": 17,
+    "BaseDefense": 10,
     "UpgradeCost": 20
   },
   {
@@ -130,8 +130,8 @@
     "CompanionId": "Companion_002",
     "Level": 5,
     "HP": 126,
-    "ATK": 19,
-    "DEF": 11,
+    "BaseAttack": 19,
+    "BaseDefense": 11,
     "UpgradeCost": 30
   },
   {
@@ -139,8 +139,8 @@
     "CompanionId": "Companion_002",
     "Level": 6,
     "HP": 141,
-    "ATK": 21,
-    "DEF": 12,
+    "BaseAttack": 21,
+    "BaseDefense": 12,
     "UpgradeCost": 40
   },
   {
@@ -148,8 +148,8 @@
     "CompanionId": "Companion_002",
     "Level": 7,
     "HP": 158,
-    "ATK": 23,
-    "DEF": 13,
+    "BaseAttack": 23,
+    "BaseDefense": 13,
     "UpgradeCost": 55
   },
   {
@@ -157,8 +157,8 @@
     "CompanionId": "Companion_002",
     "Level": 8,
     "HP": 177,
-    "ATK": 25,
-    "DEF": 14,
+    "BaseAttack": 25,
+    "BaseDefense": 14,
     "UpgradeCost": 75
   },
   {
@@ -166,8 +166,8 @@
     "CompanionId": "Companion_002",
     "Level": 9,
     "HP": 198,
-    "ATK": 28,
-    "DEF": 15,
+    "BaseAttack": 28,
+    "BaseDefense": 15,
     "UpgradeCost": 100
   },
   {
@@ -175,8 +175,8 @@
     "CompanionId": "Companion_002",
     "Level": 10,
     "HP": 222,
-    "ATK": 31,
-    "DEF": 16,
+    "BaseAttack": 31,
+    "BaseDefense": 16,
     "UpgradeCost": 140
   },
   {
@@ -184,8 +184,8 @@
     "CompanionId": "Companion_003",
     "Level": 1,
     "HP": 110,
-    "ATK": 14,
-    "DEF": 10,
+    "BaseAttack": 14,
+    "BaseDefense": 10,
     "UpgradeCost": 0
   },
   {
@@ -193,8 +193,8 @@
     "CompanionId": "Companion_003",
     "Level": 2,
     "HP": 123,
-    "ATK": 15,
-    "DEF": 11,
+    "BaseAttack": 15,
+    "BaseDefense": 11,
     "UpgradeCost": 10
   },
   {
@@ -202,8 +202,8 @@
     "CompanionId": "Companion_003",
     "Level": 3,
     "HP": 138,
-    "ATK": 17,
-    "DEF": 12,
+    "BaseAttack": 17,
+    "BaseDefense": 12,
     "UpgradeCost": 15
   },
   {
@@ -211,8 +211,8 @@
     "CompanionId": "Companion_003",
     "Level": 4,
     "HP": 155,
-    "ATK": 19,
-    "DEF": 13,
+    "BaseAttack": 19,
+    "BaseDefense": 13,
     "UpgradeCost": 20
   },
   {
@@ -220,8 +220,8 @@
     "CompanionId": "Companion_003",
     "Level": 5,
     "HP": 173,
-    "ATK": 20,
-    "DEF": 14,
+    "BaseAttack": 20,
+    "BaseDefense": 14,
     "UpgradeCost": 30
   },
   {
@@ -229,8 +229,8 @@
     "CompanionId": "Companion_003",
     "Level": 6,
     "HP": 194,
-    "ATK": 23,
-    "DEF": 15,
+    "BaseAttack": 23,
+    "BaseDefense": 15,
     "UpgradeCost": 40
   },
   {
@@ -238,8 +238,8 @@
     "CompanionId": "Companion_003",
     "Level": 7,
     "HP": 217,
-    "ATK": 25,
-    "DEF": 16,
+    "BaseAttack": 25,
+    "BaseDefense": 16,
     "UpgradeCost": 55
   },
   {
@@ -247,8 +247,8 @@
     "CompanionId": "Companion_003",
     "Level": 8,
     "HP": 243,
-    "ATK": 27,
-    "DEF": 17,
+    "BaseAttack": 27,
+    "BaseDefense": 17,
     "UpgradeCost": 75
   },
   {
@@ -256,8 +256,8 @@
     "CompanionId": "Companion_003",
     "Level": 9,
     "HP": 272,
-    "ATK": 30,
-    "DEF": 19,
+    "BaseAttack": 30,
+    "BaseDefense": 19,
     "UpgradeCost": 100
   },
   {
@@ -265,8 +265,8 @@
     "CompanionId": "Companion_003",
     "Level": 10,
     "HP": 305,
-    "ATK": 33,
-    "DEF": 20,
+    "BaseAttack": 33,
+    "BaseDefense": 20,
     "UpgradeCost": 140
   },
   {
@@ -274,8 +274,8 @@
     "CompanionId": "Companion_004",
     "Level": 1,
     "HP": 115,
-    "ATK": 15,
-    "DEF": 15,
+    "BaseAttack": 15,
+    "BaseDefense": 15,
     "UpgradeCost": 0
   },
   {
@@ -283,8 +283,8 @@
     "CompanionId": "Companion_004",
     "Level": 2,
     "HP": 129,
-    "ATK": 17,
-    "DEF": 16,
+    "BaseAttack": 17,
+    "BaseDefense": 16,
     "UpgradeCost": 10
   },
   {
@@ -292,8 +292,8 @@
     "CompanionId": "Companion_004",
     "Level": 3,
     "HP": 144,
-    "ATK": 18,
-    "DEF": 17,
+    "BaseAttack": 18,
+    "BaseDefense": 17,
     "UpgradeCost": 15
   },
   {
@@ -301,8 +301,8 @@
     "CompanionId": "Companion_004",
     "Level": 4,
     "HP": 162,
-    "ATK": 20,
-    "DEF": 19,
+    "BaseAttack": 20,
+    "BaseDefense": 19,
     "UpgradeCost": 20
   },
   {
@@ -310,8 +310,8 @@
     "CompanionId": "Companion_004",
     "Level": 5,
     "HP": 181,
-    "ATK": 22,
-    "DEF": 20,
+    "BaseAttack": 22,
+    "BaseDefense": 20,
     "UpgradeCost": 30
   },
   {
@@ -319,8 +319,8 @@
     "CompanionId": "Companion_004",
     "Level": 6,
     "HP": 203,
-    "ATK": 24,
-    "DEF": 22,
+    "BaseAttack": 24,
+    "BaseDefense": 22,
     "UpgradeCost": 40
   },
   {
@@ -328,8 +328,8 @@
     "CompanionId": "Companion_004",
     "Level": 7,
     "HP": 227,
-    "ATK": 27,
-    "DEF": 24,
+    "BaseAttack": 27,
+    "BaseDefense": 24,
     "UpgradeCost": 55
   },
   {
@@ -337,8 +337,8 @@
     "CompanionId": "Companion_004",
     "Level": 8,
     "HP": 254,
-    "ATK": 29,
-    "DEF": 26,
+    "BaseAttack": 29,
+    "BaseDefense": 26,
     "UpgradeCost": 75
   },
   {
@@ -346,8 +346,8 @@
     "CompanionId": "Companion_004",
     "Level": 9,
     "HP": 285,
-    "ATK": 32,
-    "DEF": 28,
+    "BaseAttack": 32,
+    "BaseDefense": 28,
     "UpgradeCost": 100
   },
   {
@@ -355,8 +355,8 @@
     "CompanionId": "Companion_004",
     "Level": 10,
     "HP": 319,
-    "ATK": 35,
-    "DEF": 30,
+    "BaseAttack": 35,
+    "BaseDefense": 30,
     "UpgradeCost": 140
   },
   {
@@ -364,8 +364,8 @@
     "CompanionId": "Companion_005",
     "Level": 1,
     "HP": 120,
-    "ATK": 15,
-    "DEF": 16,
+    "BaseAttack": 15,
+    "BaseDefense": 16,
     "UpgradeCost": 0
   },
   {
@@ -373,8 +373,8 @@
     "CompanionId": "Companion_005",
     "Level": 2,
     "HP": 134,
-    "ATK": 17,
-    "DEF": 17,
+    "BaseAttack": 17,
+    "BaseDefense": 17,
     "UpgradeCost": 10
   },
   {
@@ -382,8 +382,8 @@
     "CompanionId": "Companion_005",
     "Level": 3,
     "HP": 151,
-    "ATK": 18,
-    "DEF": 19,
+    "BaseAttack": 18,
+    "BaseDefense": 19,
     "UpgradeCost": 15
   },
   {
@@ -391,8 +391,8 @@
     "CompanionId": "Companion_005",
     "Level": 4,
     "HP": 169,
-    "ATK": 20,
-    "DEF": 20,
+    "BaseAttack": 20,
+    "BaseDefense": 20,
     "UpgradeCost": 20
   },
   {
@@ -400,8 +400,8 @@
     "CompanionId": "Companion_005",
     "Level": 5,
     "HP": 189,
-    "ATK": 22,
-    "DEF": 22,
+    "BaseAttack": 22,
+    "BaseDefense": 22,
     "UpgradeCost": 30
   },
   {
@@ -409,8 +409,8 @@
     "CompanionId": "Companion_005",
     "Level": 6,
     "HP": 211,
-    "ATK": 24,
-    "DEF": 24,
+    "BaseAttack": 24,
+    "BaseDefense": 24,
     "UpgradeCost": 40
   },
   {
@@ -418,8 +418,8 @@
     "CompanionId": "Companion_005",
     "Level": 7,
     "HP": 237,
-    "ATK": 27,
-    "DEF": 25,
+    "BaseAttack": 27,
+    "BaseDefense": 25,
     "UpgradeCost": 55
   },
   {
@@ -427,8 +427,8 @@
     "CompanionId": "Companion_005",
     "Level": 8,
     "HP": 265,
-    "ATK": 29,
-    "DEF": 27,
+    "BaseAttack": 29,
+    "BaseDefense": 27,
     "UpgradeCost": 75
   },
   {
@@ -436,8 +436,8 @@
     "CompanionId": "Companion_005",
     "Level": 9,
     "HP": 297,
-    "ATK": 32,
-    "DEF": 30,
+    "BaseAttack": 32,
+    "BaseDefense": 30,
     "UpgradeCost": 100
   },
   {
@@ -445,8 +445,8 @@
     "CompanionId": "Companion_005",
     "Level": 10,
     "HP": 333,
-    "ATK": 35,
-    "DEF": 32,
+    "BaseAttack": 35,
+    "BaseDefense": 32,
     "UpgradeCost": 140
   }
 ]

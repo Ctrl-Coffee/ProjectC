@@ -46,15 +46,19 @@ public class CompanionGrowthViewModel : ViewModelBase<CompanionGrowthModel>
 
     public void LevelUp()
     {
-        bool canLevelUp = GameManager.Growth.CheckCompanionCanLevelUp(_model.CompanionId, _model.Level);
-
-        if (canLevelUp == false)
+        // TODO 희준 : 로그 대신 팝업필요
+        if (GameManager.Growth.IsCompanionMaxLevel(_model.CompanionId, _model.Level) == true)
         {
             Debug.Log("이미 최대 레벨입니다");
             return;
         }
 
+        if (GameManager.Growth.TryPayCompanionLevelUpCost(_model.CompanionId, _model.Level) == false)
+        {
+            Debug.Log("꿈의 조각이 부족합니다");
+            return;
+        }
+
         _model.Level += 1;
-        
     }
 }

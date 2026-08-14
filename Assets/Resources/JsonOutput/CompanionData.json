@@ -2,31 +2,31 @@
   {
     "Id": "Companion_001",
     "Name": "김환",
-    "GradeStar": 1,
+    "Grade": 1,
     "SkillId": "Skill_001"
   },
   {
     "Id": "Companion_002",
     "Name": "이아진",
-    "GradeStar": 1,
+    "Grade": 1,
     "SkillId": "Skill_002"
   },
   {
     "Id": "Companion_003",
     "Name": "김경민",
-    "GradeStar": 2,
+    "Grade": 2,
     "SkillId": "Skill_003"
   },
   {
     "Id": "Companion_004",
     "Name": "장준성",
-    "GradeStar": 3,
+    "Grade": 3,
     "SkillId": "Skill_004"
   },
   {
     "Id": "Companion_005",
     "Name": "김희주",
-    "GradeStar": 3,
+    "Grade": 3,
     "SkillId": "Skill_005"
   }
 ]

@@ -4,8 +4,8 @@
 public class EquipmentData : BaseData
 {
     public string Name;
-    public float BaseAtk;
+    public float BaseAttack;
     public float BaseHp;
-    public float BaseDef;
+    public float BaseDefense;
     public string SkillId;
 }

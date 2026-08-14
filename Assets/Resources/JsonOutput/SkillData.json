@@ -4,7 +4,7 @@
     "Name": "베기",
     "SkillType": 0,
     "TargetCount": 1,
-    "CoolTime": 5,
+    "CoolDown": 5,
     "BaseEffect": 5,
     "BuffDuration": 0
   },
@@ -13,7 +13,7 @@
     "Name": "공증버프",
     "SkillType": 2,
     "TargetCount": 3,
-    "CoolTime": 8,
+    "CoolDown": 8,
     "BaseEffect": 3,
     "BuffDuration": 5
   },
@@ -22,7 +22,7 @@
     "Name": "전체 힐",
     "SkillType": 1,
     "TargetCount": 3,
-    "CoolTime": 9,
+    "CoolDown": 9,
     "BaseEffect": 4,
     "BuffDuration": 0
   },
@@ -31,7 +31,7 @@
     "Name": "파이어볼",
     "SkillType": 0,
     "TargetCount": 3,
-    "CoolTime": 8,
+    "CoolDown": 8,
     "BaseEffect": 6,
     "BuffDuration": 0
   },
@@ -40,7 +40,7 @@
     "Name": "찌르기",
     "SkillType": 0,
     "TargetCount": 1,
-    "CoolTime": 4,
+    "CoolDown": 4,
     "BaseEffect": 6,
     "BuffDuration": 0
   },
@@ -49,7 +49,7 @@
     "Name": "베개 휘두르기",
     "SkillType": 0,
     "TargetCount": 1,
-    "CoolTime": 5,
+    "CoolDown": 5,
     "BaseEffect": 5,
     "BuffDuration": 0
   },
@@ -58,7 +58,7 @@
     "Name": "소맷자락 일격",
     "SkillType": 0,
     "TargetCount": 1,
-    "CoolTime": 4,
+    "CoolDown": 4,
     "BaseEffect": 7,
     "BuffDuration": 0
   },
@@ -67,7 +67,7 @@
     "Name": "마력 탄",
     "SkillType": 0,
     "TargetCount": 1,
-    "CoolTime": 6,
+    "CoolDown": 6,
     "BaseEffect": 8,
     "BuffDuration": 0
   },
@@ -76,7 +76,7 @@
     "Name": "방어 태세",
     "SkillType": 2,
     "TargetCount": 1,
-    "CoolTime": 10,
+    "CoolDown": 10,
     "BaseEffect": 3,
     "BuffDuration": 6
   },
@@ -85,7 +85,7 @@
     "Name": "조준 사격",
     "SkillType": 0,
     "TargetCount": 1,
-    "CoolTime": 5,
+    "CoolDown": 5,
     "BaseEffect": 9,
     "BuffDuration": 0
   },
@@ -94,7 +94,7 @@
     "Name": "꿈결 치유",
     "SkillType": 1,
     "TargetCount": 3,
-    "CoolTime": 9,
+    "CoolDown": 9,
     "BaseEffect": 6,
     "BuffDuration": 0
   },
@@ -103,7 +103,7 @@
     "Name": "은빛 반격",
     "SkillType": 0,
     "TargetCount": 2,
-    "CoolTime": 7,
+    "CoolDown": 7,
     "BaseEffect": 10,
     "BuffDuration": 0
   },
@@ -112,7 +112,7 @@
     "Name": "수면 낙인",
     "SkillType": 0,
     "TargetCount": 1,
-    "CoolTime": 4,
+    "CoolDown": 4,
     "BaseEffect": 12,
     "BuffDuration": 0
   },
@@ -121,7 +121,7 @@
     "Name": "별빛 세례",
     "SkillType": 0,
     "TargetCount": 3,
-    "CoolTime": 8,
+    "CoolDown": 8,
     "BaseEffect": 11,
     "BuffDuration": 0
   },
@@ -130,7 +130,7 @@
     "Name": "몽환의 일격",
     "SkillType": 0,
     "TargetCount": 3,
-    "CoolTime": 10,
+    "CoolDown": 10,
     "BaseEffect": 14,
     "BuffDuration": 0
   }

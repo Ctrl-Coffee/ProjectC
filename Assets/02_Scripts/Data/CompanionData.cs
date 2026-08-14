@@ -4,6 +4,6 @@
 public class CompanionData : BaseData
 {
     public string Name;
-    public int GradeStar;
+    public int Grade;
     public string SkillId;
 }

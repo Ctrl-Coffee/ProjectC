@@ -38,11 +38,16 @@ public class PlayerGrowthViewModel : ViewModelBase<PlayerGrowthModel>
 
     public void LevelUp()
     {
-        bool canLevelUp = GameManager.Growth.CheckPlayerCanLevelUp(_model.Level);
-
-        if (canLevelUp == false)
+        // TODO 희준 : 로그 대신 팝업필요
+        if (GameManager.Growth.IsPlayerMaxLevel(_model.Level) == true)
         {
             Debug.Log("이미 최대 레벨입니다");
+            return;
+        }
+
+        if (GameManager.Growth.TryPayPlayerLevelUpCost(_model.Level) == false)
+        {
+            Debug.Log("꿈의 조각이 부족합니다");
             return;
         }
 
