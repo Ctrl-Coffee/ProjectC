@@ -62,7 +62,7 @@ public class GrowthSystem
         EquipmentLevelData levelData = GameManager.DataTable.GetEquipmentLevelData(level);
         EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
         
-        if (levelData == null || equipmentData == null)
+        if (levelData == null)
         {
             Debug.LogError($"장비 레벨데이터가 없습니다. 레벨 : {level}");
             return null;
@@ -89,5 +89,55 @@ public class GrowthSystem
 
         //TODO 희준 : 꿈의 조각 확인, 차감 (nextLevelData.UpgradeCost 사용)
         return true;
+    }
+
+    public CharacterStatData GetPlayerBattleStat()
+    {
+        return GetPlayerBattleStat(GameManager.User.Player.Level);
+    }
+
+    public CharacterStatData GetPlayerBattleStat(int level)
+    {
+        CharacterStatData finalStat = GetPlayerFinalStat(level);
+        if (finalStat == null)
+        {
+            return null;    
+        }
+
+        OwnedEquipmentData equipped = GameManager.Equipment.GetEquippedEquipment();
+        if (equipped == null)
+        {
+            return finalStat;
+        }
+
+        CharacterStatData equipmentStat = GetEquipmentFinalStat(equipped.EquipmentId, equipped.Level);
+        if(equipmentStat == null)
+        {
+            return finalStat;
+        }
+
+        return new CharacterStatData(finalStat.FinalAtk + equipmentStat.FinalAtk, finalStat.FinalDef + equipmentStat.FinalDef, finalStat.FinalHp + equipmentStat.FinalHp);
+    }
+
+    public CharacterStatData GetCompanionBattleStat(string companionId)
+    {
+        OwnedCompanionData owned = GameManager.Companion.GetOwnedCompanion(companionId);
+        if (owned == null)
+        {
+            Debug.LogError($"보유하지 않은 동료. id : {companionId}");
+            return null;
+        }
+
+        return GetCompanionFinalStat(companionId, owned.Level);
+    }
+
+    public CharacterStatData GetCharacterBattleStat(string characterId)
+    {
+        if (characterId == CharacterId.PLAYER)
+        {
+            return GetPlayerBattleStat();
+        }
+
+        return GetCompanionBattleStat(characterId);
     }
 }
