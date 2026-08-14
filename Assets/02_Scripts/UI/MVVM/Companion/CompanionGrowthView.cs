@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CompanionGrowthView : ViewBase<CompanionGrowthViewModel>
+public class CompanionGrowthView : ViewBase
 {
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _levelText;
@@ -11,23 +11,43 @@ public class CompanionGrowthView : ViewBase<CompanionGrowthViewModel>
     [SerializeField] private TextMeshProUGUI _hpText;
     [SerializeField] private Button _levelUpButton;
 
+    private CompanionGrowthViewModel _viewModel;
+
     private void OnEnable()
     {
+        Subscribe();
         _levelUpButton.onClick.AddListener(OnClickLevelUp);
-
     }
 
-    //protected override void OnDisable()
-    //{
-    //    base.OnDisable();
-    //    _levelUpButton.onClick.RemoveListener(OnClickLevelUp);
-    //}
+    protected void OnDisable()
+    {
+        _levelUpButton.onClick.RemoveListener(OnClickLevelUp);
+        UnSubscribe();
+    }
+
+    protected override void BindViewModel()
+    {
+        string testID = "Companion_001"; // 테스트용 동료 ID
+        _viewModel = GameManager.ViewModel.RequestCompanionGrowthViewModel(testID);
+    }
+
+    protected override void Subscribe()
+    {
+        _viewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
+    }
+
+    protected override void UnSubscribe()
+    {
+        _viewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
+    }
+
     private void OnClickLevelUp()
     {
         if (_viewModel == null) return;
 
         _viewModel.LevelUp();
     }
+
     protected override void OnPropertyChanged(string propertyName)
     {
         RefreshAll();

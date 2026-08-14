@@ -14,18 +14,6 @@ public class TestGrowthUI : MonoBehaviour
     }
     private async UniTask OpenCompanionGrowthUIAsync()
     {
-        OwnedCompanionData ownedData = GameManager.Companion.GetOwnedCompanion(_companionId);
-
-        if (ownedData == null)
-        {
-            Debug.LogError($"보유하지 않은 동료입니다. Id: {_companionId}");
-            return;
-        }
-
-        CompanionGrowthModel model = new CompanionGrowthModel(ownedData);
-        CompanionGrowthViewModel viewModel = new CompanionGrowthViewModel(model);
-        GameManager.ViewModel.Register(viewModel);
-
         CompanionGrowthView view = await GameManager.UI.OpenPopupUI<CompanionGrowthView>();
 
         if (view == null)
@@ -43,18 +31,6 @@ public class TestGrowthUI : MonoBehaviour
     }
     private async UniTask OpenEquipmentGrowthUIAsync()
     {
-        OwnedEquipmentData ownedData = GameManager.Equipment.GetOwnedEquipment(_equipmentId);
-
-        if (ownedData == null)
-        {
-            Debug.LogError($"보유하지 않은 장비입니다. Id: {_equipmentId}");
-            return;
-        }
-
-        EquipmentGrowthModel model = new EquipmentGrowthModel(ownedData);
-        EquipmentGrowthViewModel viewModel = new EquipmentGrowthViewModel(model);
-        GameManager.ViewModel.Register(viewModel);
-
         EquipmentGrowthView view = await GameManager.UI.OpenPopupUI<EquipmentGrowthView>();
 
         if (view == null)
@@ -62,8 +38,6 @@ public class TestGrowthUI : MonoBehaviour
             Debug.LogError("EquipmentGrowthView를 열지 못했습니다.");
             return;
         }
-
-        //view.BindViewModel(viewModel);
     }
     [ContextMenu("용사 성장 UI 열기")]
     private void OpenPlayerGrowthUI()
@@ -73,11 +47,6 @@ public class TestGrowthUI : MonoBehaviour
 
     private async UniTask OpenPlayerGrowthUIAsync()
     {
-        PlayerGrowthModel model = new PlayerGrowthModel(GameManager.User.Player);
-
-        PlayerGrowthViewModel viewModel = new PlayerGrowthViewModel(model);
-        GameManager.ViewModel.Register(viewModel);
-
         PlayerGrowthView view = await GameManager.UI.OpenPopupUI<PlayerGrowthView>();
 
         if (view == null)
@@ -85,8 +54,6 @@ public class TestGrowthUI : MonoBehaviour
             Debug.LogError("PlayerGrowthView를 열지 못했습니다.");
             return;
         }
-
-        //view.BindViewModel(viewModel);
     }
 
     [ContextMenu("테스트 동료 지급")]

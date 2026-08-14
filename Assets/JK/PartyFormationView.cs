@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PartyFormationView : ViewBase<PartyFormationViewModel>
+public class PartyFormationView : ViewBase
 {
     [Header("Leader")]
     [SerializeField] private PartySlotView _mainSlot;
@@ -18,6 +18,8 @@ public class PartyFormationView : ViewBase<PartyFormationViewModel>
     private int _selectedSupportSlot = -1;
     private ColorData _selectedCharacterSlot = null;
 
+    private PartyFormationViewModel _viewModel;
+
     #region Test
 
     private readonly Dictionary<string, ColorData> _colorDictionary = new Dictionary<string, ColorData>();
@@ -29,9 +31,7 @@ public class PartyFormationView : ViewBase<PartyFormationViewModel>
         _colorDictionary.Add("Blue", new ColorData("Blue", Color.blue));
         _colorDictionary.Add("Yellow", new ColorData("Yellow", Color.yellow));
 
-        PartyFormationModel partyFormationModel = new PartyFormationModel();
-        PartyFormationViewModel partyFormationViewModel = new PartyFormationViewModel(partyFormationModel);
-        BindViewModel(partyFormationViewModel);
+        BindViewModel();
     }
 
     #endregion
@@ -42,21 +42,35 @@ public class PartyFormationView : ViewBase<PartyFormationViewModel>
         TestMethod();
     }
 
-    
+
     //protected override void OnDisable()
     //{
     //    base.OnDisable();
-
-    //    _viewModel.SupportCharacterIdChanged -= OnSupportCharacterIdChanged;
+    //    
     //    _viewModel = null;
     //}
 
     //protected override void OnBindViewModel()
     //{
-    //    _viewModel.SupportCharacterIdChanged += OnSupportCharacterIdChanged;
     //    RefreshLeaderSlot();
     //    InitializeCharacterList();
     //}
+
+    protected override void BindViewModel()
+    {
+        PartyFormationModel partyFormationModel = new PartyFormationModel();
+        _viewModel = new PartyFormationViewModel(partyFormationModel);
+    }
+
+    protected override void Subscribe()
+    {
+        _viewModel.SupportCharacterIdChanged += OnSupportCharacterIdChanged;
+    }
+
+    protected override void UnSubscribe()
+    {
+        _viewModel.SupportCharacterIdChanged -= OnSupportCharacterIdChanged;
+    }
 
     protected override void OnPropertyChanged(string propertyName)
     {
