@@ -63,7 +63,7 @@ public class TestGrowthUI : MonoBehaviour
             return;
         }
 
-        view.BindViewModel(viewModel);
+        //view.BindViewModel(viewModel);
     }
     [ContextMenu("용사 성장 UI 열기")]
     private void OpenPlayerGrowthUI()
@@ -86,7 +86,7 @@ public class TestGrowthUI : MonoBehaviour
             return;
         }
 
-        view.BindViewModel(viewModel);
+        //view.BindViewModel(viewModel);
     }
 
     [ContextMenu("테스트 동료 지급")]
