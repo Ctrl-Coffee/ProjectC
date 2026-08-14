@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -148,11 +147,6 @@ public class UIManager
     public UniTask<T> OpenOverlayUI<T>() where T : UIBase
     {
         return OpenUI<T>(UIRootType.Overlay);
-    }
-
-    public UniTask<T> OpenLoadingUI<T>() where T : UIBase
-    {
-        return OpenUI<T>(UIRootType.Loading);
     }
 
     public async UniTask<T> CloseHUDUI<T>() where T : UIBase
