@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerGrowthView : ViewBase<PlayerGrowthViewModel>
+public class PlayerGrowthView : ViewBase
 {
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _levelText;
@@ -11,17 +11,35 @@ public class PlayerGrowthView : ViewBase<PlayerGrowthViewModel>
     [SerializeField] private TextMeshProUGUI _hpText;
     [SerializeField] private Button _levelUpButton;
 
+    private PlayerGrowthViewModel _viewModel;
+
     private void OnEnable()
     {
+        Subscribe();
         _levelUpButton.onClick.AddListener(OnClickLevelUp);
-
     }
 
-    protected override void OnDisable()
+    protected void OnDisable()
     {
-        base.OnDisable();
         _levelUpButton.onClick.RemoveListener(OnClickLevelUp);
+        UnSubscribe();
     }
+
+    protected override void BindViewModel()
+    {
+        _viewModel = GameManager.ViewModel.RequestGrowthViewModel();
+    }
+
+    protected override void Subscribe()
+    {
+        _viewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
+    }
+
+    protected override void UnSubscribe()
+    {
+        _viewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
+    }
+
     private void OnClickLevelUp()
     {
         if (_viewModel == null) return;

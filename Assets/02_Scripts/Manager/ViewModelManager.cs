@@ -3,50 +3,29 @@ using System.Collections.Generic;
 
 public class ViewModelManager
 {
-    private Dictionary<Type, ViewModelBase> _viewModels = new();
+    private PlayerService _playerService;
+    private CompanionService _companionService;
+    private EquipmentService _equipmentService;
 
-    public void Register(ViewModelBase viewModel)
+    public PlayerGrowthViewModel RequestGrowthViewModel()
     {
-        if (viewModel == null) return;
-
-        Type type = viewModel.GetType();
-
-        if (_viewModels.TryGetValue(type, out ViewModelBase oldViewModel))
-        {
-            oldViewModel.UnBind();
-        }
-
-        _viewModels[type] = viewModel;
-
-    }
-    public T Get<T>() where T : ViewModelBase
-    {
-        if (_viewModels.TryGetValue(typeof(T), out ViewModelBase viewModel))
-        {
-            return viewModel as T;
-        }
-
-        return null;
+        return _playerService.RequestGrowthViewModel();
     }
 
-    public void UnBind<T>() where T : ViewModelBase
+    public CompanionGrowthViewModel RequestCompanionGrowthViewModel(string companionId)
     {
-        Type type = typeof(T);
-
-        if (_viewModels.TryGetValue(type, out ViewModelBase viewModel))
-        {
-            viewModel.UnBind();
-            _viewModels.Remove(type);
-        }
+        return _companionService.RequestCompanionGrowthViewModel(companionId);
     }
 
-    public void UnBindAll()
+    public EquipmentGrowthViewModel RequestEquipmentGrowthViewModel(string equipmentId)
     {
-        foreach (ViewModelBase viewModel in _viewModels.Values)
-        {
-            viewModel.UnBind();
-        }
+        return _equipmentService.RequestEquipmentGrowthViewModel(equipmentId);
+    }
 
-        _viewModels.Clear();
+    public void AllRelease()
+    {
+        _playerService.ReleaseGrowthViewModel();
+        _companionService.ReleaseCompanionGrowthViewModel();
+        _equipmentService.ReleaseEquipmentGrowthViewModel();
     }
 }

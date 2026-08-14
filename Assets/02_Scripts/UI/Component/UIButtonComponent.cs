@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public class UIButtonComponent : MonoBehaviour
 {
     [SerializeField] private Button _button;
@@ -14,15 +15,14 @@ public class UIButtonComponent : MonoBehaviour
 
     private void InitUIButton()
     {
-        if (_button != null)
+        if (_button == null)
         {
-            return;
+            _button = this.gameObject.GetComponent<Button>();
         }
 
-        var button = this.gameObject.GetComponentInChildren<Button>();
-        if (button != null)
+        if(_text == null)
         {
-            this._button = button;
+            _text = this.gameObject.GetComponentInChildren<TextMeshProUGUI>();
         }
     }
 
@@ -45,5 +45,10 @@ public class UIButtonComponent : MonoBehaviour
         if (_text == null) return;
 
         _text.text = buttonStr;
+    }
+
+    private void Reset()
+    {
+        InitUIButton();
     }
 }

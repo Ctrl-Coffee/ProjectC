@@ -39,6 +39,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private bool _initComplete = false;
 
+    private LobbyController _realLobbyController;
+    private LobbyController _dreamLobbyController;
 
     #endregion
 
@@ -79,22 +81,44 @@ public class GameManager : SingletonBehaviour<GameManager>
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
-        // TODO: 로딩/로비가 생기면 지우기
-        await _uiManager.OpenWorkInfoUI();
+        EnterReal();
     }
 
     #endregion
 
-
-    [ContextMenu("OpenTestHUDUI")]
-    public void OpenTestHUDUI()
+    public void EnterReal()
     {
-        UI.OpenTestHUDUI();
-    }
-    [ContextMenu("ExampleVoidFunc")]
-    public void ExampleVoidFunc()
-    {
-        UI.ExampleVoidFunc();
+        if(_realLobbyController == null)
+        {
+            _realLobbyController = new();
+        }
+
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.RealLobbyBackground);
+        _realLobbyController.Enter(backgroundPrefab);
+        UI.OpenRealHud();
     }
 
+    public void ExitReal()
+    {
+        _realLobbyController.Release();
+        UI.CloseRealHud();
+    }
+
+    public void EnterDream()
+    {
+        if (_dreamLobbyController == null)
+        {
+            _dreamLobbyController = new();
+        }
+
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DreamLobbyBackground);
+        _dreamLobbyController.Enter(backgroundPrefab);
+        UI.OpenDreamHud();
+    }
+
+    public void ExitDream()
+    {
+        _dreamLobbyController.Release();
+        UI.CloseDreamHud();
+    }
 }

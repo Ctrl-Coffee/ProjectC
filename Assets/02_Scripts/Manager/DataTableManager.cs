@@ -9,6 +9,7 @@ public class DataTableManager
     public Dictionary<string, PoolData> PoolDataTable { get; private set; } = new();
     public Dictionary<string, PreLoadAssetData> PreLoadAssetDataTable { get; private set; } = new();
     public Dictionary<string, WorkData> WorkDataTable { get; private set; } = new();
+    public Dictionary<string, ConfirmData> ConfirmDataTable { get; private set; } = new();
 
     public Dictionary<string, CompanionData> CompanionDataTable { get; private set; } = new();
     public Dictionary<string, CompanionLevelData> CompanionLevelDataTable { get; private set; } = new();
@@ -24,6 +25,7 @@ public class DataTableManager
         // TODO: 데이터 테이블 만들기
         //PoolDataTable = LoadData<PoolData>(nameof(PoolData));
         //PreLoadAssetDataTable = LoadData<PreLoadAssetData>(nameof(PreLoadAssetData));
+        ConfirmDataTable = LoadData<ConfirmData>(nameof(ConfirmData));
 
         WorkDataTable = LoadData<WorkData>(nameof(WorkData));
         CompanionDataTable = LoadData<CompanionData>(nameof(CompanionData));
@@ -78,6 +80,12 @@ public class DataTableManager
     {
         if (null == EquipmentDataTable || string.IsNullOrEmpty(id)) return null;
         return EquipmentDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public ConfirmData GetConfirmData(string id)
+    {
+        if (null == ConfirmDataTable || string.IsNullOrEmpty(id)) return null;
+        return ConfirmDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
     #endregion

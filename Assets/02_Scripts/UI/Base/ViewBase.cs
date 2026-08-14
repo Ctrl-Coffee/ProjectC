@@ -1,31 +1,8 @@
 ﻿
-public abstract class ViewBase<T> : UIBase where T : ViewModelBase
+public abstract class ViewBase : UIBase
 {
-    protected T _viewModel;
-
-    public void BindViewModel(T viewModel)
-    {
-        if (_viewModel != null)
-        {
-            _viewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
-        }
-
-        _viewModel = viewModel;
-        _viewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
-
-        OnBindViewModel();
-
-        _viewModel.InitializeModel();
-    }
-
-    protected virtual void OnDisable()
-    {
-        if (_viewModel != null)
-        {
-            _viewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
-        }
-    }
-
-    protected virtual void OnBindViewModel() { }
+    protected abstract void BindViewModel();
+    protected abstract void Subscribe();
+    protected abstract void UnSubscribe();
     protected abstract void OnPropertyChanged(string propertyName);
 }
