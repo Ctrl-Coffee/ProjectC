@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using UnityEngine;
 
@@ -18,24 +18,27 @@ public class SaveManager
 
     public void Load()
     {
-        if (!File.Exists(SavePath))
+        if (File.Exists(SavePath))
+        {
+            try
+            {
+                string json = File.ReadAllText(SavePath);
+                UserData loaded = JsonUtility.FromJson<UserData>(json);
+
+                User = null != loaded ? loaded : new UserData();
+            }
+            catch (Exception exception)
+            {
+                Logger.LogError($"세이브 로드 실패, 새로 시작합니다. {exception.Message}");
+                User = new UserData();
+            }
+        }
+        else
         {
             User = new UserData();
-            return;
         }
 
-        try
-        {
-            string json = File.ReadAllText(SavePath);
-            UserData loaded = JsonUtility.FromJson<UserData>(json);
-
-            User = null != loaded ? loaded : new UserData();
-        }
-        catch (Exception exception)
-        {
-            Logger.LogError($"세이브 로드 실패, 새로 시작합니다. {exception.Message}");
-            User = new UserData();
-        }
+        User.EnsureDefaults();
     }
 
     public void Save()
