@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,9 +33,9 @@ public class CompanionSelectionSlotView : MonoBehaviour
         _companionDataId = companionDataId;
     }
 
-    public void SetSprite(Sprite sprite)
+    public void SetSprite(string spriteKey)
     {
-        _companionPortraitImage.sprite = sprite;
+        UIUtility.SetSpriteAsync(_companionPortraitImage, spriteKey).Forget();
     }
 
     public void OnSlotClicked()

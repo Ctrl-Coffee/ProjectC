@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class FormationSlotView : MonoBehaviour
@@ -10,8 +11,8 @@ public class FormationSlotView : MonoBehaviour
         UnityUtility.ValidateReference(_formationImage, nameof(_formationImage));
     }
 
-    public void SetSprite(Sprite sprite)
+    public void SetSprite(string spriteKey)
     {
-        _formationImage.sprite = sprite;
+        UIUtility.SetSpriteAsync(_formationImage, spriteKey).Forget();
     }
 }
