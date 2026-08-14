@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "TEST_CONFIRM",
+    "TitleTxet": "test title",
+    "DescTxet": "test desc",
+    "OKText": "test OK",
+    "CancelText": "test Cancel",
+    "ConfirmType": "OK_CANCEL"
+  }
+]

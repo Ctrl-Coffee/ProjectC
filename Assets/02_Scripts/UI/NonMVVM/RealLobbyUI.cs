@@ -19,12 +19,15 @@ public class RealLobbyUI : UIBase
     {
         _goDreamBtn.BindButtonEvent(OnChangeSceenToDream);
 
+        _coffeeBtn.BindButtonEvent(TEST);
         _computerBtn.BindButtonEvent(OnOpenWorkInfoUI);
     }
 
     private void OnDisable()
     {
         _goDreamBtn.UnBindButtonAllEvent();
+
+        _coffeeBtn.UnBindButtonAllEvent();
         _computerBtn.UnBindButtonAllEvent();
     }
 
@@ -37,5 +40,25 @@ public class RealLobbyUI : UIBase
     private void OnOpenWorkInfoUI()
     {
         GameManager.UI.OpenWorkInfoUI();
+    }
+
+    private void TEST()
+    {
+        var confirmData = GameManager.DataTable.GetConfirmData(ConfirmDataKey.TEST_CONFIRM);
+        var buttonAction = new ConfirmButtonAction();
+        buttonAction.OnClickOKButton = OKAction;
+        buttonAction.OnClickCancelButton = CancleAction;
+
+        GameManager.UI.OpenConfirmUI(confirmData, buttonAction);
+    }
+
+    private void OKAction()
+    {
+        Debug.Log("OKAction");
+    }
+
+    private void CancleAction()
+    {
+        Debug.Log("CancleAction");
     }
 }

@@ -30,6 +30,12 @@ public static class UIManagerExtension
         uiManager.CloseHUDUI<DreamLobbyUI>().Forget();
     }
 
+    public static async void OpenConfirmUI(this UIManager uiManager, ConfirmData confirmData, ConfirmButtonAction buttonAction)
+    {
+        var ui = await uiManager.OpenPopupUI<ConfirmUI>();
+        ui.SetConfirmUI(confirmData, buttonAction);
+    }
+
 
     public static UniTask<WorkInfoUI> OpenWorkInfoUI(this UIManager uiManager)
     {

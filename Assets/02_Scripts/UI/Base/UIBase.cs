@@ -4,6 +4,7 @@ using UnityEngine;
 public class UIBase : MonoBehaviour
 {
     [SerializeField] private bool _isPlayAnimation = true;
+    [SerializeField] RectTransform _panel;
     public bool IsPlayAnimation => _isPlayAnimation;
 
     public void OpenUI()
@@ -21,16 +22,16 @@ public class UIBase : MonoBehaviour
         if(_isPlayAnimation == false)
             return null;
 
-        transform.localScale = Vector3.zero;
+        _panel.localScale = Vector3.zero;
 
-        transform.DOKill();
-        return transform.DOScale(1f, 1f).SetEase(Ease.OutBack).SetUpdate(true);
+        _panel.DOKill();
+        return _panel.DOScale(1f, 1f).SetEase(Ease.OutBack).SetUpdate(true);
     }
 
     public virtual Tween PlayCloseAnimation()
     {
-        transform.DOKill();
-        return transform.DOScale(0f, 1f)
+        _panel.DOKill();
+        return _panel.DOScale(0f, 1f)
             .SetEase(Ease.InBack)
             .SetUpdate(true);
     }

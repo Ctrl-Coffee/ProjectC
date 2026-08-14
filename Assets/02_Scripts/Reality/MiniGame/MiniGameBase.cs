@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class MiniGameBase : UIBase
 {
     [Header("슬라이드 연출")]
-    [SerializeField] private RectTransform _panel;
+    [SerializeField] private RectTransform _panelaaaa;
     [SerializeField] private float _slideInDuration = 0.6f;
     [SerializeField] private float _slideOutDuration = 0.35f;
     [SerializeField] private float _slideDistance = 0f;
@@ -20,12 +20,12 @@ public abstract class MiniGameBase : UIBase
     {
         get
         {
-            if (null == _panel)
+            if (null == _panelaaaa)
             {
-                _panel = this.transform as RectTransform;
+                _panelaaaa = this.transform as RectTransform;
             }
 
-            return _panel;
+            return _panelaaaa;
         }
     }
 
