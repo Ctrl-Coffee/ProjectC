@@ -3,9 +3,11 @@ using UnityEngine;
 
 public sealed class CompanionFormationSlotView : FormationSlotView
 {
+    private const int INVALID_SLOT_INDEX = -1;
+
     [SerializeField] private UIButtonComponent _slotButton;
 
-    private int _slotIndex;
+    public int SlotIndex { get; private set; } = INVALID_SLOT_INDEX;
 
     public event Action<int> SlotClicked;
 
@@ -25,9 +27,14 @@ public sealed class CompanionFormationSlotView : FormationSlotView
         _slotButton.UnBindButtonAllEvent();
     }
 
-    public void Initialize(int slotIndex)
+    public void SetSlotIndex(int slotIndex)
     {
-        _slotIndex = slotIndex;
+        SlotIndex = slotIndex;
+    }
+
+    public void ClearSlotIndex()
+    {
+        SlotIndex = INVALID_SLOT_INDEX;
     }
 
     public void SetSelected(bool selected)
@@ -37,6 +44,6 @@ public sealed class CompanionFormationSlotView : FormationSlotView
 
     private void OnSlotClicked()
     {
-        SlotClicked?.Invoke(_slotIndex);
+        SlotClicked?.Invoke(SlotIndex);
     }
 }
