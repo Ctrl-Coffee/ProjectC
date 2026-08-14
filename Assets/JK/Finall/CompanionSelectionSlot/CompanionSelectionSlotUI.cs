@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CompanionSelectionSlotView : MonoBehaviour
+public class CompanionSelectionSlotUI : MonoBehaviour
 {
     [SerializeField] private UIButtonComponent _slotButton;
     [SerializeField] private Image _companionPortraitImage;

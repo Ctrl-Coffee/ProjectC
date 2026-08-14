@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FormationSlotView : MonoBehaviour
+public class FormationSlotUI : MonoBehaviour
 {
     [SerializeField] protected Image _formationImage;
 

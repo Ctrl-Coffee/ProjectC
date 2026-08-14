@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public sealed class CompanionFormationSlotView : FormationSlotView
+public sealed class CompanionFormationSlotUI : FormationSlotUI
 {
     private const int INVALID_SLOT_INDEX = -1;
 

@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 656053120956507116}
   - component: {fileID: 4796609322886058468}
   m_Layer: 5
-  m_Name: CompanionSelectionSlotView
+  m_Name: CompanionSelectionSlotUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
