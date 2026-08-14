@@ -10,4 +10,12 @@ public class UserData
     public OwnedPlayerData Player = new();
     public List<OwnedCompanionData> Companions = new();
     public List<OwnedEquipmentData> Equipments = new();
+
+    public void EnsureDefaults()
+    {
+        if (Player.Level <= 0)
+        {
+            Player.Level = 1;
+        }
+    }
 }
