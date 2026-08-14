@@ -15,13 +15,14 @@ public class EquipmentGrowthView : ViewBase<EquipmentGrowthViewModel>
 
     private void OnEnable()
     {
+        Subscribe();
         _levelUpButton.onClick.AddListener(OnClickLevelUp);
     }
 
-    protected override void OnDisable()
+    protected void OnDisable()
     {
-        base.OnDisable();
         _levelUpButton.onClick.RemoveListener(OnClickLevelUp);
+        UnSubscribe();
     }
 
     private void OnClickLevelUp()
