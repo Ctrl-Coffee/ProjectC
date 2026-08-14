@@ -1,21 +1,26 @@
 ﻿using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TestGrowthUI : MonoBehaviour
 {
     [SerializeField] private string _companionId = "Companion_001";
-    [SerializeField] private int _level = 3;
+    [SerializeField] private string _equipmentId = "Equipment_001";
 
     [ContextMenu("동료 성장 UI 열기")]
-    private void OpenGrowthUI()
+    private void OpenCompanionGrowthUI()
     {
-        OpenGrowthUIAsync().Forget();
+        OpenCompanionGrowthUIAsync().Forget();
     }
-    private async UniTask OpenGrowthUIAsync()
+    private async UniTask OpenCompanionGrowthUIAsync()
     {
-        OwnedCompanionData ownedData = new OwnedCompanionData();
-        ownedData.CompanionId = _companionId;
-        ownedData.Level = _level;
+        OwnedCompanionData ownedData = GameManager.Companion.GetOwnedCompanion(_companionId);
+
+        if (ownedData == null)
+        {
+            Debug.LogError($"보유하지 않은 동료입니다. Id: {_companionId}");
+            return;
+        }
 
         CompanionGrowthModel model = new CompanionGrowthModel(ownedData);
         CompanionGrowthViewModel viewModel = new CompanionGrowthViewModel(model);
@@ -31,4 +36,115 @@ public class TestGrowthUI : MonoBehaviour
 
         // view.BindViewModel(viewModel);
     }
+    [ContextMenu("장비 성장 UI 열기")]
+    private void OpenEquipmentGrowthUI()
+    {
+        OpenEquipmentGrowthUIAsync().Forget();
+    }
+    private async UniTask OpenEquipmentGrowthUIAsync()
+    {
+        OwnedEquipmentData ownedData = GameManager.Equipment.GetOwnedEquipment(_equipmentId);
+
+        if (ownedData == null)
+        {
+            Debug.LogError($"보유하지 않은 장비입니다. Id: {_equipmentId}");
+            return;
+        }
+
+        EquipmentGrowthModel model = new EquipmentGrowthModel(ownedData);
+        EquipmentGrowthViewModel viewModel = new EquipmentGrowthViewModel(model);
+        GameManager.ViewModel.Register(viewModel);
+
+        EquipmentGrowthView view = await GameManager.UI.OpenPopupUI<EquipmentGrowthView>();
+
+        if (view == null)
+        {
+            Debug.LogError("EquipmentGrowthView를 열지 못했습니다.");
+            return;
+        }
+
+        view.BindViewModel(viewModel);
+    }
+    [ContextMenu("용사 성장 UI 열기")]
+    private void OpenPlayerGrowthUI()
+    {
+        OpenPlayerGrowthUIAsync().Forget();
+    }
+
+    private async UniTask OpenPlayerGrowthUIAsync()
+    {
+        PlayerGrowthModel model = new PlayerGrowthModel(GameManager.User.Player);
+
+        PlayerGrowthViewModel viewModel = new PlayerGrowthViewModel(model);
+        GameManager.ViewModel.Register(viewModel);
+
+        PlayerGrowthView view = await GameManager.UI.OpenPopupUI<PlayerGrowthView>();
+
+        if (view == null)
+        {
+            Debug.LogError("PlayerGrowthView를 열지 못했습니다.");
+            return;
+        }
+
+        view.BindViewModel(viewModel);
+    }
+
+    [ContextMenu("테스트 동료 지급")]
+    private void AddTestCompanion()
+    {
+        bool isAdded = GameManager.Companion.AddCompanion(_companionId);
+        Debug.Log(isAdded ? "동료 획득" : "이미 보유 중");
+    }
+
+    [ContextMenu("테스트 장비 지급")]
+    private void AddTestEquipment()
+    {
+        bool isAdded = GameManager.Equipment.AddEquipment(_equipmentId);
+        Debug.Log(isAdded ? "장비 획득" : "이미 보유장비임");
+    }
+
+    [ContextMenu("테스트 장비 장착")]
+    private void EquipmentTest()
+    {
+        bool isEquip = GameManager.Equipment.Equip(_equipmentId);
+        Debug.Log(isEquip ? "장비 장착" : "장착할 장비 없음");
+        
+    }
+
+    [ContextMenu("장착 장비 스탯 로그")]
+    private void LogEquippedStat()
+    {
+        OwnedEquipmentData equipped = GameManager.Equipment.GetEquippedEquipment();
+
+        if (equipped == null)
+        {
+            Debug.Log("장착한 장비가 없습니다.");
+            return;
+        }
+
+        CharacterStatData stat = GameManager.Growth.GetEquipmentFinalStat(equipped.EquipmentId, equipped.Level);
+
+        if (stat == null)
+        {
+            return;
+        }
+
+        Debug.Log($"장비: {equipped.EquipmentId} / 레벨: {equipped.Level} / Atk: {stat.FinalAtk} / Def: {stat.FinalDef} / Hp: {stat.FinalHp}");
+    }
+
+    [ContextMenu("꿈의 조각 지급")]  
+    private void LogAddDreamFragment()
+    {
+        GameManager.User.Currency.AddDreamFragment(100);
+    }
+
+    [ContextMenu("꿈의 조각 확인")]  
+    private void LogCheckDreamFragment()
+    {
+        Debug.Log(GameManager.User.Currency.DreamFragment);
+    }
+
 }
+
+
+

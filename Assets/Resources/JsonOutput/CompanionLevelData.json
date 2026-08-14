@@ -1,0 +1,452 @@
+[
+  {
+    "Id": "Companion_001_1",
+    "CompanionId": "Companion_001",
+    "Level": 1,
+    "HP": 100,
+    "BaseAttack": 10,
+    "BaseDefense": 10,
+    "UpgradeCost": 0
+  },
+  {
+    "Id": "Companion_001_2",
+    "CompanionId": "Companion_001",
+    "Level": 2,
+    "HP": 112,
+    "BaseAttack": 11,
+    "BaseDefense": 11,
+    "UpgradeCost": 10
+  },
+  {
+    "Id": "Companion_001_3",
+    "CompanionId": "Companion_001",
+    "Level": 3,
+    "HP": 125,
+    "BaseAttack": 12,
+    "BaseDefense": 12,
+    "UpgradeCost": 15
+  },
+  {
+    "Id": "Companion_001_4",
+    "CompanionId": "Companion_001",
+    "Level": 4,
+    "HP": 140,
+    "BaseAttack": 13,
+    "BaseDefense": 13,
+    "UpgradeCost": 20
+  },
+  {
+    "Id": "Companion_001_5",
+    "CompanionId": "Companion_001",
+    "Level": 5,
+    "HP": 157,
+    "BaseAttack": 15,
+    "BaseDefense": 14,
+    "UpgradeCost": 30
+  },
+  {
+    "Id": "Companion_001_6",
+    "CompanionId": "Companion_001",
+    "Level": 6,
+    "HP": 176,
+    "BaseAttack": 16,
+    "BaseDefense": 15,
+    "UpgradeCost": 40
+  },
+  {
+    "Id": "Companion_001_7",
+    "CompanionId": "Companion_001",
+    "Level": 7,
+    "HP": 197,
+    "BaseAttack": 18,
+    "BaseDefense": 16,
+    "UpgradeCost": 55
+  },
+  {
+    "Id": "Companion_001_8",
+    "CompanionId": "Companion_001",
+    "Level": 8,
+    "HP": 221,
+    "BaseAttack": 19,
+    "BaseDefense": 17,
+    "UpgradeCost": 75
+  },
+  {
+    "Id": "Companion_001_9",
+    "CompanionId": "Companion_001",
+    "Level": 9,
+    "HP": 248,
+    "BaseAttack": 21,
+    "BaseDefense": 19,
+    "UpgradeCost": 100
+  },
+  {
+    "Id": "Companion_001_10",
+    "CompanionId": "Companion_001",
+    "Level": 10,
+    "HP": 277,
+    "BaseAttack": 24,
+    "BaseDefense": 20,
+    "UpgradeCost": 140
+  },
+  {
+    "Id": "Companion_002_1",
+    "CompanionId": "Companion_002",
+    "Level": 1,
+    "HP": 80,
+    "BaseAttack": 13,
+    "BaseDefense": 8,
+    "UpgradeCost": 0
+  },
+  {
+    "Id": "Companion_002_2",
+    "CompanionId": "Companion_002",
+    "Level": 2,
+    "HP": 90,
+    "BaseAttack": 14,
+    "BaseDefense": 9,
+    "UpgradeCost": 10
+  },
+  {
+    "Id": "Companion_002_3",
+    "CompanionId": "Companion_002",
+    "Level": 3,
+    "HP": 100,
+    "BaseAttack": 16,
+    "BaseDefense": 9,
+    "UpgradeCost": 15
+  },
+  {
+    "Id": "Companion_002_4",
+    "CompanionId": "Companion_002",
+    "Level": 4,
+    "HP": 112,
+    "BaseAttack": 17,
+    "BaseDefense": 10,
+    "UpgradeCost": 20
+  },
+  {
+    "Id": "Companion_002_5",
+    "CompanionId": "Companion_002",
+    "Level": 5,
+    "HP": 126,
+    "BaseAttack": 19,
+    "BaseDefense": 11,
+    "UpgradeCost": 30
+  },
+  {
+    "Id": "Companion_002_6",
+    "CompanionId": "Companion_002",
+    "Level": 6,
+    "HP": 141,
+    "BaseAttack": 21,
+    "BaseDefense": 12,
+    "UpgradeCost": 40
+  },
+  {
+    "Id": "Companion_002_7",
+    "CompanionId": "Companion_002",
+    "Level": 7,
+    "HP": 158,
+    "BaseAttack": 23,
+    "BaseDefense": 13,
+    "UpgradeCost": 55
+  },
+  {
+    "Id": "Companion_002_8",
+    "CompanionId": "Companion_002",
+    "Level": 8,
+    "HP": 177,
+    "BaseAttack": 25,
+    "BaseDefense": 14,
+    "UpgradeCost": 75
+  },
+  {
+    "Id": "Companion_002_9",
+    "CompanionId": "Companion_002",
+    "Level": 9,
+    "HP": 198,
+    "BaseAttack": 28,
+    "BaseDefense": 15,
+    "UpgradeCost": 100
+  },
+  {
+    "Id": "Companion_002_10",
+    "CompanionId": "Companion_002",
+    "Level": 10,
+    "HP": 222,
+    "BaseAttack": 31,
+    "BaseDefense": 16,
+    "UpgradeCost": 140
+  },
+  {
+    "Id": "Companion_003_1",
+    "CompanionId": "Companion_003",
+    "Level": 1,
+    "HP": 110,
+    "BaseAttack": 14,
+    "BaseDefense": 10,
+    "UpgradeCost": 0
+  },
+  {
+    "Id": "Companion_003_2",
+    "CompanionId": "Companion_003",
+    "Level": 2,
+    "HP": 123,
+    "BaseAttack": 15,
+    "BaseDefense": 11,
+    "UpgradeCost": 10
+  },
+  {
+    "Id": "Companion_003_3",
+    "CompanionId": "Companion_003",
+    "Level": 3,
+    "HP": 138,
+    "BaseAttack": 17,
+    "BaseDefense": 12,
+    "UpgradeCost": 15
+  },
+  {
+    "Id": "Companion_003_4",
+    "CompanionId": "Companion_003",
+    "Level": 4,
+    "HP": 155,
+    "BaseAttack": 19,
+    "BaseDefense": 13,
+    "UpgradeCost": 20
+  },
+  {
+    "Id": "Companion_003_5",
+    "CompanionId": "Companion_003",
+    "Level": 5,
+    "HP": 173,
+    "BaseAttack": 20,
+    "BaseDefense": 14,
+    "UpgradeCost": 30
+  },
+  {
+    "Id": "Companion_003_6",
+    "CompanionId": "Companion_003",
+    "Level": 6,
+    "HP": 194,
+    "BaseAttack": 23,
+    "BaseDefense": 15,
+    "UpgradeCost": 40
+  },
+  {
+    "Id": "Companion_003_7",
+    "CompanionId": "Companion_003",
+    "Level": 7,
+    "HP": 217,
+    "BaseAttack": 25,
+    "BaseDefense": 16,
+    "UpgradeCost": 55
+  },
+  {
+    "Id": "Companion_003_8",
+    "CompanionId": "Companion_003",
+    "Level": 8,
+    "HP": 243,
+    "BaseAttack": 27,
+    "BaseDefense": 17,
+    "UpgradeCost": 75
+  },
+  {
+    "Id": "Companion_003_9",
+    "CompanionId": "Companion_003",
+    "Level": 9,
+    "HP": 272,
+    "BaseAttack": 30,
+    "BaseDefense": 19,
+    "UpgradeCost": 100
+  },
+  {
+    "Id": "Companion_003_10",
+    "CompanionId": "Companion_003",
+    "Level": 10,
+    "HP": 305,
+    "BaseAttack": 33,
+    "BaseDefense": 20,
+    "UpgradeCost": 140
+  },
+  {
+    "Id": "Companion_004_1",
+    "CompanionId": "Companion_004",
+    "Level": 1,
+    "HP": 115,
+    "BaseAttack": 15,
+    "BaseDefense": 15,
+    "UpgradeCost": 0
+  },
+  {
+    "Id": "Companion_004_2",
+    "CompanionId": "Companion_004",
+    "Level": 2,
+    "HP": 129,
+    "BaseAttack": 17,
+    "BaseDefense": 16,
+    "UpgradeCost": 10
+  },
+  {
+    "Id": "Companion_004_3",
+    "CompanionId": "Companion_004",
+    "Level": 3,
+    "HP": 144,
+    "BaseAttack": 18,
+    "BaseDefense": 17,
+    "UpgradeCost": 15
+  },
+  {
+    "Id": "Companion_004_4",
+    "CompanionId": "Companion_004",
+    "Level": 4,
+    "HP": 162,
+    "BaseAttack": 20,
+    "BaseDefense": 19,
+    "UpgradeCost": 20
+  },
+  {
+    "Id": "Companion_004_5",
+    "CompanionId": "Companion_004",
+    "Level": 5,
+    "HP": 181,
+    "BaseAttack": 22,
+    "BaseDefense": 20,
+    "UpgradeCost": 30
+  },
+  {
+    "Id": "Companion_004_6",
+    "CompanionId": "Companion_004",
+    "Level": 6,
+    "HP": 203,
+    "BaseAttack": 24,
+    "BaseDefense": 22,
+    "UpgradeCost": 40
+  },
+  {
+    "Id": "Companion_004_7",
+    "CompanionId": "Companion_004",
+    "Level": 7,
+    "HP": 227,
+    "BaseAttack": 27,
+    "BaseDefense": 24,
+    "UpgradeCost": 55
+  },
+  {
+    "Id": "Companion_004_8",
+    "CompanionId": "Companion_004",
+    "Level": 8,
+    "HP": 254,
+    "BaseAttack": 29,
+    "BaseDefense": 26,
+    "UpgradeCost": 75
+  },
+  {
+    "Id": "Companion_004_9",
+    "CompanionId": "Companion_004",
+    "Level": 9,
+    "HP": 285,
+    "BaseAttack": 32,
+    "BaseDefense": 28,
+    "UpgradeCost": 100
+  },
+  {
+    "Id": "Companion_004_10",
+    "CompanionId": "Companion_004",
+    "Level": 10,
+    "HP": 319,
+    "BaseAttack": 35,
+    "BaseDefense": 30,
+    "UpgradeCost": 140
+  },
+  {
+    "Id": "Companion_005_1",
+    "CompanionId": "Companion_005",
+    "Level": 1,
+    "HP": 120,
+    "BaseAttack": 15,
+    "BaseDefense": 16,
+    "UpgradeCost": 0
+  },
+  {
+    "Id": "Companion_005_2",
+    "CompanionId": "Companion_005",
+    "Level": 2,
+    "HP": 134,
+    "BaseAttack": 17,
+    "BaseDefense": 17,
+    "UpgradeCost": 10
+  },
+  {
+    "Id": "Companion_005_3",
+    "CompanionId": "Companion_005",
+    "Level": 3,
+    "HP": 151,
+    "BaseAttack": 18,
+    "BaseDefense": 19,
+    "UpgradeCost": 15
+  },
+  {
+    "Id": "Companion_005_4",
+    "CompanionId": "Companion_005",
+    "Level": 4,
+    "HP": 169,
+    "BaseAttack": 20,
+    "BaseDefense": 20,
+    "UpgradeCost": 20
+  },
+  {
+    "Id": "Companion_005_5",
+    "CompanionId": "Companion_005",
+    "Level": 5,
+    "HP": 189,
+    "BaseAttack": 22,
+    "BaseDefense": 22,
+    "UpgradeCost": 30
+  },
+  {
+    "Id": "Companion_005_6",
+    "CompanionId": "Companion_005",
+    "Level": 6,
+    "HP": 211,
+    "BaseAttack": 24,
+    "BaseDefense": 24,
+    "UpgradeCost": 40
+  },
+  {
+    "Id": "Companion_005_7",
+    "CompanionId": "Companion_005",
+    "Level": 7,
+    "HP": 237,
+    "BaseAttack": 27,
+    "BaseDefense": 25,
+    "UpgradeCost": 55
+  },
+  {
+    "Id": "Companion_005_8",
+    "CompanionId": "Companion_005",
+    "Level": 8,
+    "HP": 265,
+    "BaseAttack": 29,
+    "BaseDefense": 27,
+    "UpgradeCost": 75
+  },
+  {
+    "Id": "Companion_005_9",
+    "CompanionId": "Companion_005",
+    "Level": 9,
+    "HP": 297,
+    "BaseAttack": 32,
+    "BaseDefense": 30,
+    "UpgradeCost": 100
+  },
+  {
+    "Id": "Companion_005_10",
+    "CompanionId": "Companion_005",
+    "Level": 10,
+    "HP": 333,
+    "BaseAttack": 35,
+    "BaseDefense": 32,
+    "UpgradeCost": 140
+  }
+]

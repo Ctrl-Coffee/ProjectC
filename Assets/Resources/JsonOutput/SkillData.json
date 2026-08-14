@@ -2,51 +2,136 @@
   {
     "Id": "Skill_001",
     "Name": "베기",
-    "SkillType": "0",
+    "SkillType": 0,
     "TargetCount": 1,
-    "CoolTime": 5,
+    "CoolDown": 5,
     "BaseEffect": 5,
-    "GrowthEffect": 0.3,
     "BuffDuration": 0
   },
   {
     "Id": "Skill_002",
     "Name": "공증버프",
-    "SkillType": "2",
+    "SkillType": 2,
     "TargetCount": 3,
-    "CoolTime": 8,
+    "CoolDown": 8,
     "BaseEffect": 3,
-    "GrowthEffect": 0.2,
     "BuffDuration": 5
   },
   {
     "Id": "Skill_003",
     "Name": "전체 힐",
-    "SkillType": "1",
+    "SkillType": 1,
     "TargetCount": 3,
-    "CoolTime": 9,
+    "CoolDown": 9,
     "BaseEffect": 4,
-    "GrowthEffect": 0.4,
     "BuffDuration": 0
   },
   {
     "Id": "Skill_004",
     "Name": "파이어볼",
-    "SkillType": "0",
+    "SkillType": 0,
     "TargetCount": 3,
-    "CoolTime": 8,
+    "CoolDown": 8,
     "BaseEffect": 6,
-    "GrowthEffect": 0.3,
     "BuffDuration": 0
   },
   {
     "Id": "Skill_005",
     "Name": "찌르기",
-    "SkillType": "0",
+    "SkillType": 0,
     "TargetCount": 1,
-    "CoolTime": 4,
+    "CoolDown": 4,
     "BaseEffect": 6,
-    "GrowthEffect": 0.4,
+    "BuffDuration": 0
+  },
+  {
+    "Id": "Skill_101",
+    "Name": "베개 휘두르기",
+    "SkillType": 0,
+    "TargetCount": 1,
+    "CoolDown": 5,
+    "BaseEffect": 5,
+    "BuffDuration": 0
+  },
+  {
+    "Id": "Skill_102",
+    "Name": "소맷자락 일격",
+    "SkillType": 0,
+    "TargetCount": 1,
+    "CoolDown": 4,
+    "BaseEffect": 7,
+    "BuffDuration": 0
+  },
+  {
+    "Id": "Skill_103",
+    "Name": "마력 탄",
+    "SkillType": 0,
+    "TargetCount": 1,
+    "CoolDown": 6,
+    "BaseEffect": 8,
+    "BuffDuration": 0
+  },
+  {
+    "Id": "Skill_104",
+    "Name": "방어 태세",
+    "SkillType": 2,
+    "TargetCount": 1,
+    "CoolDown": 10,
+    "BaseEffect": 3,
+    "BuffDuration": 6
+  },
+  {
+    "Id": "Skill_105",
+    "Name": "조준 사격",
+    "SkillType": 0,
+    "TargetCount": 1,
+    "CoolDown": 5,
+    "BaseEffect": 9,
+    "BuffDuration": 0
+  },
+  {
+    "Id": "Skill_106",
+    "Name": "꿈결 치유",
+    "SkillType": 1,
+    "TargetCount": 3,
+    "CoolDown": 9,
+    "BaseEffect": 6,
+    "BuffDuration": 0
+  },
+  {
+    "Id": "Skill_107",
+    "Name": "은빛 반격",
+    "SkillType": 0,
+    "TargetCount": 2,
+    "CoolDown": 7,
+    "BaseEffect": 10,
+    "BuffDuration": 0
+  },
+  {
+    "Id": "Skill_108",
+    "Name": "수면 낙인",
+    "SkillType": 0,
+    "TargetCount": 1,
+    "CoolDown": 4,
+    "BaseEffect": 12,
+    "BuffDuration": 0
+  },
+  {
+    "Id": "Skill_109",
+    "Name": "별빛 세례",
+    "SkillType": 0,
+    "TargetCount": 3,
+    "CoolDown": 8,
+    "BaseEffect": 11,
+    "BuffDuration": 0
+  },
+  {
+    "Id": "Skill_110",
+    "Name": "몽환의 일격",
+    "SkillType": 0,
+    "TargetCount": 3,
+    "CoolDown": 10,
+    "BaseEffect": 14,
     "BuffDuration": 0
   }
 ]

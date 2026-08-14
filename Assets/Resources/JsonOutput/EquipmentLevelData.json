@@ -1,0 +1,72 @@
+[
+  {
+    "Id": "1",
+    "Level": 1,
+    "StatMultiplier": 1,
+    "SkillMultiplier": 1,
+    "UpgradeCost": 0
+  },
+  {
+    "Id": "2",
+    "Level": 2,
+    "StatMultiplier": 1.1,
+    "SkillMultiplier": 1.08,
+    "UpgradeCost": 8
+  },
+  {
+    "Id": "3",
+    "Level": 3,
+    "StatMultiplier": 1.21,
+    "SkillMultiplier": 1.1664,
+    "UpgradeCost": 12
+  },
+  {
+    "Id": "4",
+    "Level": 4,
+    "StatMultiplier": 1.331,
+    "SkillMultiplier": 1.2597,
+    "UpgradeCost": 16
+  },
+  {
+    "Id": "5",
+    "Level": 5,
+    "StatMultiplier": 1.4641,
+    "SkillMultiplier": 1.3605,
+    "UpgradeCost": 24
+  },
+  {
+    "Id": "6",
+    "Level": 6,
+    "StatMultiplier": 1.6105,
+    "SkillMultiplier": 1.4693,
+    "UpgradeCost": 32
+  },
+  {
+    "Id": "7",
+    "Level": 7,
+    "StatMultiplier": 1.7716,
+    "SkillMultiplier": 1.5869,
+    "UpgradeCost": 44
+  },
+  {
+    "Id": "8",
+    "Level": 8,
+    "StatMultiplier": 1.9487,
+    "SkillMultiplier": 1.7138,
+    "UpgradeCost": 60
+  },
+  {
+    "Id": "9",
+    "Level": 9,
+    "StatMultiplier": 2.1436,
+    "SkillMultiplier": 1.8509,
+    "UpgradeCost": 80
+  },
+  {
+    "Id": "10",
+    "Level": 10,
+    "StatMultiplier": 2.3579,
+    "SkillMultiplier": 1.999,
+    "UpgradeCost": 110
+  }
+]
