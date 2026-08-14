@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 70ebdc8eb5b94d848bd3faaa7d0a4f34
+guid: b2cfd3ffda3996449b039b29f004a76f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5949084981187393495
-    second: "\uB85C\uBE4422_0"
+      213: -8944091814101306621
+    second: room_warm_ivory_left_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uB85C\uBE4422_0"
+      name: room_warm_ivory_left_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7d7394255456f8250800000000000000
-      internalID: 5949084981187393495
+      spriteID: 303330602e330e380800000000000000
+      internalID: -8944091814101306621
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\uB85C\uBE4422_0": 5949084981187393495
+      room_warm_ivory_left_0: -8944091814101306621
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
