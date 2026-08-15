@@ -5,6 +5,7 @@ public enum MiniGameType
     None,
     SubtitleEdit,
     MotionTracking,
+    ScratchLottery
 }
 
 public enum MiniGameGrade

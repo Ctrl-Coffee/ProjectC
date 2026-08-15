@@ -4,6 +4,8 @@ public enum WorkType
 {
     Manual,
     Auto,
+    Creative,
+    Gamble
 }
 
 [Serializable]
