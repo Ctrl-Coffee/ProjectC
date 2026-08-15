@@ -6,26 +6,12 @@ using UnityEngine;
 public abstract class MiniGameBase : UIBase
 {
     [Header("슬라이드 연출")]
-    [SerializeField] private RectTransform _panelaaaa;
     [SerializeField] private float _slideInDuration = 0.6f;
     [SerializeField] private float _slideOutDuration = 0.35f;
     [SerializeField] private float _slideDistance = 0f;
 
     private Vector2 _shownPosition;
     private Tween _openTween;
-
-    protected RectTransform Panel
-    {
-        get
-        {
-            if (null == _panelaaaa)
-            {
-                _panelaaaa = this.transform as RectTransform;
-            }
-
-            return _panelaaaa;
-        }
-    }
 
     protected virtual void Awake()
     {
@@ -47,7 +33,7 @@ public abstract class MiniGameBase : UIBase
     {
         if (null == Panel)
         {
-            Logger.LogError("RectTransform을 찾을 수 없습니다.");
+            Logger.LogError("슬라이드할 Panel이 지정되지 않았습니다.");
             return MiniGameResult.Canceled;
         }
 
@@ -76,6 +62,13 @@ public abstract class MiniGameBase : UIBase
     {
         ClearGame();
 
+        if (null == Panel)
+        {
+            Logger.LogError("슬라이드할 Panel이 지정되지 않았습니다.");
+            _openTween = null;
+            return _openTween;
+        }
+
         Panel.DOKill();
         Panel.anchoredPosition = GetHiddenPosition();
 
@@ -92,6 +85,12 @@ public abstract class MiniGameBase : UIBase
 
     public override Tween PlayCloseAnimation()
     {
+        if (null == Panel)
+        {
+            _openTween = null;
+            return null;
+        }
+
         Panel.DOKill();
         _openTween = null;
 

@@ -516,6 +516,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1dfd15c382edad419b50fe47d8442dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkTestUI
+  _isPlayAnimation: 1
+  _panel: {fileID: 1358093577544475393}
   _btnClose: {fileID: 8493380407530179384}
   _btnManual: {fileID: 3099647610927523199}
   _btnAuto: {fileID: 6865265569404128373}
