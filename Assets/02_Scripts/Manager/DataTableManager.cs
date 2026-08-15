@@ -9,6 +9,14 @@ public class DataTableManager
     public Dictionary<string, PoolData> PoolDataTable { get; private set; } = new();
     public Dictionary<string, PreLoadAssetData> PreLoadAssetDataTable { get; private set; } = new();
     public Dictionary<string, WorkData> WorkDataTable { get; private set; } = new();
+    public Dictionary<string, ConfirmData> ConfirmDataTable { get; private set; } = new();
+
+    public Dictionary<string, CompanionData> CompanionDataTable { get; private set; } = new();
+    public Dictionary<string, CompanionLevelData> CompanionLevelDataTable { get; private set; } = new();
+    public Dictionary<string, SkillData> SkillDataTable { get; private set; } = new();
+    public Dictionary<string, PlayerLevelData> PlayerLevelDataTable { get; private set; } = new();
+    public Dictionary<string, EquipmentLevelData> EquipmentLevelDataTable { get; private set; } = new();
+    public Dictionary<string, EquipmentData> EquipmentDataTable { get; private set; } = new();
 
     #endregion
 
@@ -17,8 +25,15 @@ public class DataTableManager
         // TODO: 데이터 테이블 만들기
         //PoolDataTable = LoadData<PoolData>(nameof(PoolData));
         //PreLoadAssetDataTable = LoadData<PreLoadAssetData>(nameof(PreLoadAssetData));
+        ConfirmDataTable = LoadData<ConfirmData>(nameof(ConfirmData));
 
         WorkDataTable = LoadData<WorkData>(nameof(WorkData));
+        CompanionDataTable = LoadData<CompanionData>(nameof(CompanionData));
+        CompanionLevelDataTable = LoadData<CompanionLevelData>(nameof(CompanionLevelData));
+        SkillDataTable = LoadData<SkillData>(nameof(SkillData));
+        PlayerLevelDataTable = LoadData<PlayerLevelData>(nameof(PlayerLevelData));
+        EquipmentLevelDataTable = LoadData<EquipmentLevelData>(nameof(EquipmentLevelData));
+        EquipmentDataTable = LoadData<EquipmentData>(nameof(EquipmentData));
     }
 
     #region Getters
@@ -33,6 +48,44 @@ public class DataTableManager
     {
         if (null == WorkDataTable || string.IsNullOrEmpty(id)) return null;
         return WorkDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+    public CompanionData GetCompanionData(string id)
+    {
+        if (null == CompanionDataTable || string.IsNullOrEmpty(id)) return null;
+        return CompanionDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public CompanionLevelData GetCompanionLevelData(string companionId, int level)
+    {
+        if (null == CompanionLevelDataTable || string.IsNullOrEmpty(companionId)) return null;
+        string id = $"{companionId}_{level}";
+        return CompanionLevelDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+    public SkillData GetSkillData(string id)
+    {
+        if (null == SkillDataTable || string.IsNullOrEmpty(id)) return null;
+        return SkillDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+    public PlayerLevelData GetPlayerLevelData(int level)
+    {
+        if (null == PlayerLevelDataTable) return null;
+        return PlayerLevelDataTable.TryGetValue(level.ToString(), out var data) ? data : null;
+    }
+    public EquipmentLevelData GetEquipmentLevelData(int level)
+    {
+        if (null == EquipmentLevelDataTable) return null;
+        return EquipmentLevelDataTable.TryGetValue(level.ToString(), out var data) ? data : null;
+    }
+    public EquipmentData GetEquipmentData(string id)
+    {
+        if (null == EquipmentDataTable || string.IsNullOrEmpty(id)) return null;
+        return EquipmentDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public ConfirmData GetConfirmData(string id)
+    {
+        if (null == ConfirmDataTable || string.IsNullOrEmpty(id)) return null;
+        return ConfirmDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
     #endregion

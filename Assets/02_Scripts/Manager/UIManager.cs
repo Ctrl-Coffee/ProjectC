@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -96,10 +95,17 @@ public class UIManager
             return;
         }
 
-        ui.PlayCloseAnimation().OnComplete(() =>
+        if(ui.IsPlayAnimation == true)
+        {
+            ui.PlayCloseAnimation().OnComplete(() =>
+            {
+                CompleteClose(ui);
+            });
+        }
+        else
         {
             CompleteClose(ui);
-        });
+        }   
     }
 
     public void CloseAllPopups()
@@ -143,9 +149,11 @@ public class UIManager
         return OpenUI<T>(UIRootType.Overlay);
     }
 
-    public UniTask<T> OpenLoadingUI<T>() where T : UIBase
+    public async UniTask<T> CloseHUDUI<T>() where T : UIBase
     {
-        return OpenUI<T>(UIRootType.Loading);
+        var ui = await GetOrCreateUI<T>(UIRootType.Hud);
+        ui.CloseUI();
+        return ui;
     }
 
     private async UniTask<T> GetOrCreateUI<T>(UIRootType uiRootType) where T : UIBase

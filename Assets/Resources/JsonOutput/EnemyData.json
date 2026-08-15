@@ -1,0 +1,74 @@
+[
+  {
+    "Id": "enemy_ch1_001",
+    "Name": "1스테이지 근접몹",
+    "BaseHP": 500,
+    "BaseAttack": 50,
+    "BaseDefense": 20,
+    "CoolDown": 1.5,
+    "SkillId": null
+  },
+  {
+    "Id": "enemy_ch1_002",
+    "Name": "1스테이지 원거리몹",
+    "BaseHP": 350,
+    "BaseAttack": 65,
+    "BaseDefense": 15,
+    "CoolDown": 1.8,
+    "SkillId": null
+  },
+  {
+    "Id": "enemy_ch1_003",
+    "Name": "1스테이지 탱커몹",
+    "BaseHP": 800,
+    "BaseAttack": 35,
+    "BaseDefense": 40,
+    "CoolDown": 2,
+    "SkillId": null
+  },
+  {
+    "Id": "boss_ch1_001",
+    "Name": "1스테이지 보스",
+    "BaseHP": 1800,
+    "BaseAttack": 80,
+    "BaseDefense": 45,
+    "CoolDown": 1.6,
+    "SkillId": null
+  },
+  {
+    "Id": "enemy_ch2_001",
+    "Name": "2스테이지 근접몹",
+    "BaseHP": 900,
+    "BaseAttack": 80,
+    "BaseDefense": 30,
+    "CoolDown": 1.5,
+    "SkillId": null
+  },
+  {
+    "Id": "enemy_ch2_002",
+    "Name": "2스테이지 원거리몹",
+    "BaseHP": 650,
+    "BaseAttack": 105,
+    "BaseDefense": 22,
+    "CoolDown": 1.8,
+    "SkillId": null
+  },
+  {
+    "Id": "enemy_ch2_003",
+    "Name": "2스테이지 탱커몹",
+    "BaseHP": 1200,
+    "BaseAttack": 65,
+    "BaseDefense": 55,
+    "CoolDown": 2,
+    "SkillId": null
+  },
+  {
+    "Id": "boss_ch2_001",
+    "Name": "2스테이지 보스",
+    "BaseHP": 3200,
+    "BaseAttack": 120,
+    "BaseDefense": 60,
+    "CoolDown": 1.5,
+    "SkillId": null
+  }
+]

@@ -9,20 +9,33 @@ using UnityEngine;
 /// </summary>
 public static class UIManagerExtension
 {
-    public static UniTask<TestHUDUI> OpenTestHUDUI(this UIManager uiManager)
+    public static void OpenRealHud(this UIManager uiManager)
     {
-        return uiManager.OpenHUDUI<TestHUDUI>();
+        uiManager.OpenHUDUI<RealHudUI>().Forget();
     }
 
-    public static void ExampleVoidFunc(this UIManager uiManager)
+    public static void OpenDreamHud(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<TestPopupUI>().Forget();
+        uiManager.OpenHUDUI<DreamHudUI>().Forget();
     }
 
-    public static UniTask<TestPopupUI> ExampleAsyncFunc(this UIManager uiManager)
+    public static void CloseRealHud(this UIManager uiManager)
     {
-        return uiManager.OpenPopupUI<TestPopupUI>();
+        uiManager.CloseHUDUI<RealHudUI>().Forget();
     }
+
+
+    public static void CloseDreamHud(this UIManager uiManager)
+    {
+        uiManager.CloseHUDUI<DreamHudUI>().Forget();
+    }
+
+    public static async void OpenConfirmUI(this UIManager uiManager, ConfirmData confirmData, ConfirmButtonAction buttonAction)
+    {
+        var ui = await uiManager.OpenPopupUI<ConfirmUI>();
+        ui.SetConfirmUI(confirmData, buttonAction);
+    }
+
 
     public static UniTask<WorkInfoUI> OpenWorkInfoUI(this UIManager uiManager)
     {

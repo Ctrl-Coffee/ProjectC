@@ -59,7 +59,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 200
   m_TargetDisplay: 0
 --- !u!114 &6829598360450418172
 MonoBehaviour:
@@ -160,7 +160,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 200
+  m_SortingOrder: 300
   m_TargetDisplay: 0
 --- !u!114 &9148312024558148890
 MonoBehaviour:
@@ -231,10 +231,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1004868956098538297}
   - {fileID: 3561540336453095915}
   - {fileID: 2660288405042877430}
   - {fileID: 5510590664445122136}
-  - {fileID: 1004868956098538297}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -255,10 +255,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManagerHelper
   Canvas:
+  - {fileID: 1004868956098538297}
   - {fileID: 3561540336453095915}
   - {fileID: 2660288405042877430}
   - {fileID: 5510590664445122136}
-  - {fileID: 1004868956098538297}
 --- !u!1 &7300932813445205586
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 3185651846676547621}
   - component: {fileID: 692696181665417585}
   m_Layer: 5
-  m_Name: Canvas_Loading
+  m_Name: Canvas_Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 400
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &3185651846676547621
 MonoBehaviour:
@@ -419,7 +419,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 300
+  m_SortingOrder: 400
   m_TargetDisplay: 0
 --- !u!114 &7693774592843496236
 MonoBehaviour:
