@@ -20,18 +20,18 @@ public abstract class MiniGameBase : UIBase
 
     private void OnDisable()
     {
-        if (null == Panel)
+        if (null == _panel)
         {
             return;
         }
 
-        Panel.DOKill();
+        _panel.DOKill();
         _openTween = null;
     }
 
     public async UniTask<MiniGameResult> RunAsync(MiniGameContext context, CancellationToken token)
     {
-        if (null == Panel)
+        if (null == _panel)
         {
             Logger.LogError("슬라이드할 Panel이 지정되지 않았습니다.");
             return MiniGameResult.Canceled;
@@ -62,39 +62,39 @@ public abstract class MiniGameBase : UIBase
     {
         ClearGame();
 
-        if (null == Panel)
+        if (null == _panel)
         {
             Logger.LogError("슬라이드할 Panel이 지정되지 않았습니다.");
             _openTween = null;
             return _openTween;
         }
 
-        Panel.DOKill();
-        Panel.anchoredPosition = GetHiddenPosition();
+        _panel.DOKill();
+        _panel.anchoredPosition = GetHiddenPosition();
 
         if (_slideInDuration <= 0f)
         {
-            Panel.anchoredPosition = _shownPosition;
+            _panel.anchoredPosition = _shownPosition;
             _openTween = null;
             return _openTween;
         }
 
-        _openTween = Panel.DOAnchorPos(_shownPosition, _slideInDuration).SetEase(Ease.OutCubic).SetUpdate(true);
+        _openTween = _panel.DOAnchorPos(_shownPosition, _slideInDuration).SetEase(Ease.OutCubic).SetUpdate(true);
         return _openTween;
     }
 
     public override Tween PlayCloseAnimation()
     {
-        if (null == Panel)
+        if (null == _panel)
         {
             _openTween = null;
             return null;
         }
 
-        Panel.DOKill();
+        _panel.DOKill();
         _openTween = null;
 
-        return Panel.DOAnchorPos(GetHiddenPosition(), _slideOutDuration).SetEase(Ease.InCubic).SetUpdate(true);
+        return _panel.DOAnchorPos(GetHiddenPosition(), _slideOutDuration).SetEase(Ease.InCubic).SetUpdate(true);
     }
 
     private async UniTask WaitForOpenAsync(CancellationToken token)
@@ -112,12 +112,12 @@ public abstract class MiniGameBase : UIBase
 
     private void CapturePosition()
     {
-        if (null == Panel)
+        if (null == _panel)
         {
             return;
         }
 
-        _shownPosition = Panel.anchoredPosition;
+        _shownPosition = _panel.anchoredPosition;
     }
 
     private Vector2 GetHiddenPosition()
@@ -126,7 +126,7 @@ public abstract class MiniGameBase : UIBase
 
         if (distance <= 0f)
         {
-            distance = Panel.rect.height;
+            distance = _panel.rect.height;
         }
 
         if (distance <= 0f)
