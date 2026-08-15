@@ -51,4 +51,23 @@ public static class UIManagerExtension
     {
         return uiManager.OpenOverlayUI<MiniGameResultUI>();
     }
+
+    //public static async UniTask<CompanionInventoryView> OpenCompanionInventory(
+    //    this UIManager uiManager)
+    //{
+    //    CompanionInventoryView view =
+    //        await uiManager.OpenPopupUI<CompanionInventoryView>();
+
+    //    if (view == null)
+    //    {
+    //        return null;
+    //    }
+
+    //    CompanionInventoryViewModel viewModel =
+    //        GameManager.ViewModelFactory.CreateCompanionInventory();
+
+    //    view.Bind(viewModel);
+
+    //    return view;
+    //}
 }

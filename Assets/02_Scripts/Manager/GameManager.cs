@@ -9,13 +9,14 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static PoolManager Pool { get { return Instance._poolManager; } }
     public static TimeManager Time { get { return Instance._timeManager; } }
     public static UIManager UI { get { return Instance._uiManager; } }
-    public static ViewModelManager ViewModel { get { return Instance._viewModelManager; } }
     public static SaveManager Save { get { return Instance._saveManager; } }
-    public static UserData User { get { return Instance._saveManager.User; } }
+    public static UserData User { get { return Instance._saveManager.User; } } // 삭제대상
     public static GrowthSystem Growth { get { return Instance._growthSystem; } }
-    public static CompanionManager Companion { get { return Instance._companionManager; } }
-    public static EquipmentManager Equipment { get { return Instance._equipmentManager; } }
+    public static CompanionManager Companion { get { return Instance._companionManager; } } // 삭제대상
+    public static EquipmentManager Equipment { get { return Instance._equipmentManager; } } // 삭제대상
 
+    public static GameSession Session { get { return Instance._gameSession; } }
+    public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
 
 
     #region Manager Variables
@@ -26,11 +27,13 @@ public class GameManager : SingletonBehaviour<GameManager>
     private PoolManager _poolManager = new();
     private TimeManager _timeManager = new();
     private UIManager _uiManager = new();
-    private ViewModelManager _viewModelManager = new();
     private SaveManager _saveManager = new();
     private GrowthSystem _growthSystem = new();
     private CompanionManager _companionManager = new();
     private EquipmentManager _equipmentManager = new();
+
+    private GameSession _gameSession;
+    private ViewModelFactory _viewModelFactory;
 
 
     #endregion
@@ -66,6 +69,14 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private async UniTask InitializeAsync()
     {
+        // TODO: 네트워크로 부터 데이터를 받은 뒤 생성
+        _gameSession = new();
+        // TODO: Session과 DataTable 생성 이후 생성하기
+        _viewModelFactory = new(Session, DataTable);
+
+
+
+
         await _uiManager.Init();
 
         await _resourceManager.LoadContentAsync(AddressablePath.Label.Common);

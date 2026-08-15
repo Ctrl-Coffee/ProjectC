@@ -8,4 +8,9 @@
         CompanionId = companionId;
         Level = level;
     }
+
+    public void LevelUp()
+    {
+        Level++;
+    }
 }

@@ -27,8 +27,8 @@ public class CompanionGrowthView : ViewBase
 
     protected override void BindViewModel()
     {
-        string testID = "Companion_001"; // 테스트용 동료 ID
-        _viewModel = GameManager.ViewModel.RequestCompanionGrowthViewModel(testID);
+        //string testID = "Companion_001"; // 테스트용 동료 ID
+        //_viewModel = GameManager.ViewModel.RequestCompanionGrowthViewModel(testID);
     }
 
     protected override void Subscribe()
