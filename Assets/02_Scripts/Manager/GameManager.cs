@@ -82,6 +82,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
         EnterReal();
+        await UI.OpenPerkInfoUI();
     }
 
     #endregion
