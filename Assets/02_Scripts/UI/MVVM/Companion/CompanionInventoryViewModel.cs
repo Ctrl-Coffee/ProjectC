@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-//public sealed class CompanionInventoryItem
+﻿
+//public class CompanionInventoryItem
 //{
 //    public string CompanionId { get; }
 //    public string Name { get; }
@@ -19,7 +16,7 @@ using System.ComponentModel;
 //    }
 //}
 
-public sealed class CompanionInventoryViewModel
+public class CompanionInventoryViewModel
 {
     public string Name { get; private set; }
     public int Level { get; private set; }

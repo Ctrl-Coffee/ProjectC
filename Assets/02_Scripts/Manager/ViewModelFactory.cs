@@ -1,4 +1,4 @@
-﻿public sealed class ViewModelFactory
+﻿public class ViewModelFactory
 {
     private GameSession _session;
     private DataTableManager _dataTable;

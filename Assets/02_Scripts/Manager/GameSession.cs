@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-
-public sealed class GameSession
+﻿
+public class GameSession
 {
     public CurrencyModel Currency { get; }
     public CompanionModel Companions { get; }
