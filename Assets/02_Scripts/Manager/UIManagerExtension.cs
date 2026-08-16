@@ -42,9 +42,9 @@ public static class UIManagerExtension
         return uiManager.OpenPopupUI<WorkInfoUI>();
     }
 
-    public static UniTask<SubtitleEditGameUI> OpenSubtitleEditGameUI(this UIManager uiManager)
+    public static UniTask<T> OpenMiniGameUI<T>(this UIManager uiManager) where T : MiniGameBase
     {
-        return uiManager.OpenPopupUI<SubtitleEditGameUI>();
+        return uiManager.OpenPopupUI<T>();
     }
 
     public static UniTask<MiniGameResultUI> OpenMiniGameResultUI(this UIManager uiManager)

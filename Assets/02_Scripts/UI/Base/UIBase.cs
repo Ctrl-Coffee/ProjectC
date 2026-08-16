@@ -4,7 +4,7 @@ using UnityEngine;
 public class UIBase : MonoBehaviour
 {
     [SerializeField] private bool _isPlayAnimation = true;
-    [SerializeField] RectTransform _panel;
+    [SerializeField] protected RectTransform _panel;
     public bool IsPlayAnimation => _isPlayAnimation;
 
     public void OpenUI()

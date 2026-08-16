@@ -194,6 +194,11 @@ public class CurrencyModel : ModelBase
         return true;
     }
 
+    public bool CanSpendEnergy(long amount)
+    {
+        return CanSpend(Energy, amount);
+    }
+
     public bool TrySpendEnergy(long amount)
     {
         if (!CanSpend(Energy, amount))
