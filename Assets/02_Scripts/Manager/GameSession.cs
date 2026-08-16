@@ -7,6 +7,7 @@ public sealed class GameSession
     public PlayerGrowthModel PlayerGrowth { get; }
     public EquipmentGrowthModel EquipmentGrowth { get; }
 
+    private NetworkManager _networkManager;
 
     public GameSession()
     {

@@ -2,25 +2,40 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-public sealed class CompanionInventoryItem
-{
-    public string CompanionId { get; }
-    public string Name { get; }
-    public int Level { get; }
+//public sealed class CompanionInventoryItem
+//{
+//    public string CompanionId { get; }
+//    public string Name { get; }
+//    public int Level { get; }
 
-    public CompanionInventoryItem(
-        string companionId,
-        string name,
-        int level)
-    {
-        CompanionId = companionId;
-        Name = name;
-        Level = level;
-    }
-}
+//    public CompanionInventoryItem(
+//        string companionId,
+//        string name,
+//        int level)
+//    {
+//        CompanionId = companionId;
+//        Name = name;
+//        Level = level;
+//    }
+//}
 
 public sealed class CompanionInventoryViewModel
 {
+    public string Name { get; private set; }
+    public int Level { get; private set; }
+    public float Attack { get; private set; }
+    public float Defense { get; private set; }
+    public float Hp { get; private set; }
+
+
+
+
+
+
+
+
+
+
     //private readonly CompanionModel _companionModel;
     //private readonly CurrencyModel _currencyModel;
     //private readonly DataTableManager _dataTable;

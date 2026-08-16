@@ -12,7 +12,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static SaveManager Save { get { return Instance._saveManager; } }
     public static UserData User { get { return Instance._saveManager.User; } } // 삭제대상
     public static GrowthSystem Growth { get { return Instance._growthSystem; } }
-    public static CompanionManager Companion { get { return Instance._companionManager; } } // 삭제대상
     public static EquipmentManager Equipment { get { return Instance._equipmentManager; } } // 삭제대상
 
     public static GameSession Session { get { return Instance._gameSession; } }
@@ -29,7 +28,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     private UIManager _uiManager = new();
     private SaveManager _saveManager = new();
     private GrowthSystem _growthSystem = new();
-    private CompanionManager _companionManager = new();
     private EquipmentManager _equipmentManager = new();
 
     private GameSession _gameSession;
@@ -69,13 +67,14 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private async UniTask InitializeAsync()
     {
-        // TODO: 네트워크로 부터 데이터를 받은 뒤 생성
+        // TODO: 네트워크로 부터 데이터를 받은 뒤 생성 - 비동기 await
+
         _gameSession = new();
-        // TODO: Session과 DataTable 생성 이후 생성하기
+        // TODO: 네트워크 매니저로 부터 데이터 요청 awit, 이 때 네트워크 매니저 주입
+
+        // TODO 네트워크 매니저의 서비스 로직들 초기화
+
         _viewModelFactory = new(Session, DataTable);
-
-
-
 
         await _uiManager.Init();
 

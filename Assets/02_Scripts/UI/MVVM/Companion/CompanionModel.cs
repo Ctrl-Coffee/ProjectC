@@ -1,23 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class CompanionModel
+public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState>
 {
-    private List<CompanionState> _companions = new();
-    private Dictionary<string, CompanionState> _companionById = new();
+    private Dictionary<string, CompanionState> _companions = new();
 
-    public IReadOnlyList<CompanionState> Companions => _companions;
+    public event Action<string, ContainerPropertyChangedEvent, CompanionState> ContainerPropertyChanged;
 
-    public event Action<string> CompanionChanged;
+    public Dictionary<string, CompanionState> Companions { get => _companions; }
 
-    public CompanionModel(IEnumerable<CompanionState> saveData)
+    public CompanionModel(IEnumerable<CompanionState> dbData)
     {
-        foreach (CompanionState companionSaveData in saveData)
+        foreach (CompanionState companionDBData in dbData)
         {
-            CompanionState companion = new CompanionState(companionSaveData.CompanionId, companionSaveData.Level);
+            CompanionState companion = new CompanionState(companionDBData);
 
-            _companions.Add(companion);
-            _companionById.Add(companion.CompanionId, companion);
+            _companions.Add(companion.CompanionId, companion);
+        }
+    }
+
+    public override void InitializeOnce()
+    {
+        OnPropertyChanged(nameof(Companions));
+    }
+
+    public void AddCompanion(string companionId)
+    {
+        if (!_companions.ContainsKey(companionId))
+        {
+            CompanionState companion = new CompanionState(companionId, 1);
+            _companions.Add(companionId, companion);
+            ContainerPropertyChanged?.Invoke(nameof(Companions), ContainerPropertyChangedEvent.Add, companion);
         }
     }
 
@@ -28,31 +41,40 @@ public class CompanionModel
             return null;
         }
 
-        return _companionById.TryGetValue(companionId, out CompanionState companion) ? companion : null;
+        return _companions.TryGetValue(companionId, out CompanionState companion) ? companion : null;
     }
 
-    public bool AddCompanion(string companionId)
+    public LevelUpResult TryLevelUp(string companionId)
     {
-        if (_companionById.ContainsKey(companionId))
+        if (!_companions.TryGetValue(companionId, out CompanionState companion))
         {
-            return false;
+            return LevelUpResult.Error;
         }
 
-        CompanionState companion = new CompanionState(companionId, 1);
+        var nextLevelData = GameManager.DataTable.GetCompanionLevelData(companionId, companion.Level + 1);
 
-        _companions.Add(companion);
-        _companionById.Add(companionId, companion);
-        CompanionChanged?.Invoke(companionId);
+        if (nextLevelData == null)
+        {
+            return LevelUpResult.MaxLevel;
+        }
 
-        return true;
+        if (!GameManager.Session.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost))
+        {
+            return LevelUpResult.NotEnoughCurrency;
+        }
+
+        companion.LevelUp();
+        ContainerPropertyChanged?.Invoke(nameof(Companions), ContainerPropertyChangedEvent.Update, companion);
+
+        return LevelUpResult.Success;
     }
 
-    public void LevelUp(string companionId)
+    public void RemoveCompanion(string companionId)
     {
-        if (_companionById.TryGetValue(companionId, out CompanionState companion))
+        if (_companions.TryGetValue(companionId, out CompanionState companion))
         {
-            companion.LevelUp();
-            CompanionChanged?.Invoke(companionId);
+            _companions.Remove(companionId);
+            ContainerPropertyChanged?.Invoke(nameof(Companions), ContainerPropertyChangedEvent.Remove, companion);
         }
     }
 }
