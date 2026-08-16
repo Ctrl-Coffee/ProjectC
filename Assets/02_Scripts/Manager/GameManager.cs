@@ -15,6 +15,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static GrowthSystem Growth { get { return Instance._growthSystem; } }
     public static CompanionManager Companion { get { return Instance._companionManager; } }
     public static EquipmentManager Equipment { get { return Instance._equipmentManager; } }
+    public static PerkManager Perk { get { return Instance._perkManager; } }
 
 
 
@@ -31,6 +32,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private GrowthSystem _growthSystem = new();
     private CompanionManager _companionManager = new();
     private EquipmentManager _equipmentManager = new();
+    private PerkManager _perkManager = new();
 
 
     #endregion

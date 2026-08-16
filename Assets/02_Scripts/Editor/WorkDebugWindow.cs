@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WorkDebugWindow : EditorWindow
 {
+    private const long ADD_INSPIRATION_AMOUNT = 10;
+
     [MenuItem("Tools/Work Debug")]
     private static void Open()
     {
@@ -106,5 +108,10 @@ public class WorkDebugWindow : EditorWindow
         EditorGUILayout.LabelField("꿈의 조각", currency.DreamFragment.ToString());
         EditorGUILayout.LabelField("몽상의 스크롤", currency.DreamScroll.ToString());
         EditorGUILayout.LabelField("영감", currency.Inspiration.ToString());
+
+        if (GUILayout.Button("영감 +10"))
+        {
+            currency.AddInspiration(ADD_INSPIRATION_AMOUNT);
+        }
     }
 }
