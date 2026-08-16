@@ -42,6 +42,11 @@ public static class UIManagerExtension
         return uiManager.OpenPopupUI<WorkInfoUI>();
     }
 
+    public static UniTask<PerkInfoUI> OpenPerkInfoUI(this UIManager uiManager)
+    {
+        return uiManager.OpenPopupUI<PerkInfoUI>();
+    }
+
     public static UniTask<T> OpenMiniGameUI<T>(this UIManager uiManager) where T : MiniGameBase
     {
         return uiManager.OpenPopupUI<T>();

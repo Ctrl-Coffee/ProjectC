@@ -4,7 +4,7 @@
     "Name": "시작",
     "AxisType": "None",
     "NodeType": "None",
-    "InspirationCost": "0",
+    "InspirationCost": 0,
     "ParentMode": "None",
     "ParentId": null,
     "EffectId": null,
@@ -18,7 +18,7 @@
     "Name": "손에 익은 일",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_None_Root"
@@ -38,7 +38,7 @@
     "Name": "자세 교정",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_01"
@@ -58,7 +58,7 @@
     "Name": "눈썰미",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_02"
@@ -78,7 +78,7 @@
     "Name": "반복 연습",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_03"
@@ -98,7 +98,7 @@
     "Name": "요령 터득",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_03"
@@ -118,7 +118,7 @@
     "Name": "일머리",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_04a",
@@ -141,7 +141,7 @@
     "Name": "야근 습관",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_05"
@@ -161,7 +161,7 @@
     "Name": "집중력",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_06"
@@ -181,7 +181,7 @@
     "Name": "손목 보호대",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_06"
@@ -201,7 +201,7 @@
     "Name": "금손",
     "AxisType": "Tech",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_07a",
@@ -222,7 +222,7 @@
     "Name": "마감 감각",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_08"
@@ -242,7 +242,7 @@
     "Name": "장인의 눈",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_09"
@@ -262,7 +262,7 @@
     "Name": "수수료 청구",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_None_Root"
@@ -282,7 +282,7 @@
     "Name": "캐시 정리",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_01"
@@ -302,7 +302,7 @@
     "Name": "와이파이 설치",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_02"
@@ -322,7 +322,7 @@
     "Name": "클라우드 백업",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_03"
@@ -342,7 +342,7 @@
     "Name": "자동화 스크립트",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_03"
@@ -362,7 +362,7 @@
     "Name": "예약 업로드",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_04a",
@@ -385,7 +385,7 @@
     "Name": "겹업무",
     "AxisType": "Tech",
     "NodeType": "Notable",
-    "InspirationCost": "4",
+    "InspirationCost": 4,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_05"
@@ -405,7 +405,7 @@
     "Name": "배치 처리",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_06"
@@ -425,7 +425,7 @@
     "Name": "무인 운영",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_06"
@@ -445,7 +445,7 @@
     "Name": "유휴 활용",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_07a",
@@ -466,7 +466,7 @@
     "Name": "파이프라인",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_08"
@@ -486,7 +486,7 @@
     "Name": "무중단 가동",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_09"
@@ -506,7 +506,7 @@
     "Name": "멀티태스킹",
     "AxisType": "Tech",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_03",
@@ -529,7 +529,7 @@
     "Name": "작업 흐름",
     "AxisType": "Tech",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_06",
@@ -552,7 +552,7 @@
     "Name": "총괄",
     "AxisType": "Tech",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_09",
@@ -575,7 +575,7 @@
     "Name": "잔돈 모으기",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_03"
@@ -595,7 +595,7 @@
     "Name": "딴생각",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_MUnlock_01"
@@ -615,7 +615,7 @@
     "Name": "취미 생활",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_MUnlock_02"
@@ -635,7 +635,7 @@
     "Name": "새로운 시도",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_MUnlock_03"
@@ -655,7 +655,7 @@
     "Name": "인터넷 도박",
     "AxisType": "Tech",
     "NodeType": "Unlock",
-    "InspirationCost": "7",
+    "InspirationCost": 7,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_MUnlock_04"
@@ -673,7 +673,7 @@
     "Name": "브레인 스토밍",
     "AxisType": "Tech",
     "NodeType": "Unlock",
-    "InspirationCost": "7",
+    "InspirationCost": 7,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_MUnlock_04"
@@ -691,7 +691,7 @@
     "Name": "퇴근 후 공부",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_03"
@@ -711,7 +711,7 @@
     "Name": "온라인 강의",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_AUnlock_01"
@@ -731,7 +731,7 @@
     "Name": "스터디 모임",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_AUnlock_02"
@@ -751,7 +751,7 @@
     "Name": "자기계발",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_AUnlock_03"
@@ -771,7 +771,7 @@
     "Name": "외국어 공부",
     "AxisType": "Tech",
     "NodeType": "Unlock",
-    "InspirationCost": "5",
+    "InspirationCost": 5,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_AUnlock_04"
@@ -789,7 +789,7 @@
     "Name": "게임 아카데미 수료",
     "AxisType": "Tech",
     "NodeType": "Unlock",
-    "InspirationCost": "5",
+    "InspirationCost": 5,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_AUnlock_04"
@@ -807,7 +807,7 @@
     "Name": "여유 시간",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Auto_09"
@@ -827,7 +827,7 @@
     "Name": "시간 부자",
     "AxisType": "Tech",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Time_01"
@@ -849,7 +849,7 @@
     "Name": "마이스터의 손",
     "AxisType": "Tech",
     "NodeType": "Keystone",
-    "InspirationCost": "10",
+    "InspirationCost": 10,
     "ParentMode": "All",
     "ParentId": [
       "Perk_Tech_Manual_10",
@@ -878,7 +878,7 @@
     "Name": "공장장",
     "AxisType": "Tech",
     "NodeType": "Keystone",
-    "InspirationCost": "10",
+    "InspirationCost": 10,
     "ParentMode": "All",
     "ParentId": [
       "Perk_Tech_Manual_10",
@@ -907,7 +907,7 @@
     "Name": "기지개",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_None_Root"
@@ -927,7 +927,7 @@
     "Name": "물 마시기",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_01"
@@ -947,7 +947,7 @@
     "Name": "커피 한 잔",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_02"
@@ -967,7 +967,7 @@
     "Name": "점심 산책",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_03"
@@ -987,7 +987,7 @@
     "Name": "창문 열기",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_03"
@@ -1007,7 +1007,7 @@
     "Name": "안락한 의자",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_04a",
@@ -1030,7 +1030,7 @@
     "Name": "암막 커튼",
     "AxisType": "Rest",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_05"
@@ -1050,7 +1050,7 @@
     "Name": "수면 안대",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_06"
@@ -1070,7 +1070,7 @@
     "Name": "백색 소음",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_06"
@@ -1090,7 +1090,7 @@
     "Name": "라텍스 베개",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_07a",
@@ -1111,7 +1111,7 @@
     "Name": "늦잠",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_08"
@@ -1131,7 +1131,7 @@
     "Name": "겨울잠",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_09"
@@ -1151,7 +1151,7 @@
     "Name": "요령",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_None_Root"
@@ -1171,7 +1171,7 @@
     "Name": "딴짓의 기술",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_01"
@@ -1191,7 +1191,7 @@
     "Name": "적당주의",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_02"
@@ -1211,7 +1211,7 @@
     "Name": "짬 내기",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_03"
@@ -1231,7 +1231,7 @@
     "Name": "눈치 보기",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_03"
@@ -1251,7 +1251,7 @@
     "Name": "미루기",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_04a",
@@ -1274,7 +1274,7 @@
     "Name": "워라밸",
     "AxisType": "Rest",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_05"
@@ -1294,7 +1294,7 @@
     "Name": "정시 퇴근",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_06"
@@ -1314,7 +1314,7 @@
     "Name": "반차",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_06"
@@ -1334,7 +1334,7 @@
     "Name": "재택근무",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_07a",
@@ -1355,7 +1355,7 @@
     "Name": "안식월",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_08"
@@ -1375,7 +1375,7 @@
     "Name": "프리랜서 선언",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_09"
@@ -1395,7 +1395,7 @@
     "Name": "낮잠 습관",
     "AxisType": "Rest",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_03",
@@ -1418,7 +1418,7 @@
     "Name": "컨디션 관리",
     "AxisType": "Rest",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_06",
@@ -1441,7 +1441,7 @@
     "Name": "자기 관리",
     "AxisType": "Rest",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_09",
@@ -1464,7 +1464,7 @@
     "Name": "매트리스",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Recover_05"
@@ -1484,7 +1484,7 @@
     "Name": "두꺼운 이불",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Bed_01"
@@ -1504,7 +1504,7 @@
     "Name": "온도 조절",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Bed_02"
@@ -1524,7 +1524,7 @@
     "Name": "침실 조명",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Bed_03"
@@ -1544,7 +1544,7 @@
     "Name": "아로마",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Bed_04"
@@ -1564,7 +1564,7 @@
     "Name": "완벽한 침실",
     "AxisType": "Rest",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Bed_05"
@@ -1586,7 +1586,7 @@
     "Name": "모니터 받침",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Save_05"
@@ -1606,7 +1606,7 @@
     "Name": "무소음 키보드",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Desk_01"
@@ -1626,7 +1626,7 @@
     "Name": "인체공학 마우스",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Desk_02"
@@ -1646,7 +1646,7 @@
     "Name": "공기청정기",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Desk_03"
@@ -1666,7 +1666,7 @@
     "Name": "스탠딩 데스크",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Desk_04"
@@ -1686,7 +1686,7 @@
     "Name": "완벽한 책상",
     "AxisType": "Rest",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Desk_05"
@@ -1708,7 +1708,7 @@
     "Name": "완전한 휴식",
     "AxisType": "Rest",
     "NodeType": "Keystone",
-    "InspirationCost": "10",
+    "InspirationCost": 10,
     "ParentMode": "All",
     "ParentId": [
       "Perk_Rest_Recover_10",
@@ -1731,7 +1731,7 @@
     "Name": "잠의 대가",
     "AxisType": "Rest",
     "NodeType": "Keystone",
-    "InspirationCost": "10",
+    "InspirationCost": 10,
     "ParentMode": "All",
     "ParentId": [
       "Perk_Rest_Recover_10",
@@ -1754,7 +1754,7 @@
     "Name": "초과 근무",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Tech_Manual_10"
@@ -1774,7 +1774,7 @@
     "Name": "주말 출근",
     "AxisType": "Tech",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Cross_T01"
@@ -1794,7 +1794,7 @@
     "Name": "선잠",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Rest_Bed_06"
@@ -1814,7 +1814,7 @@
     "Name": "뒤척임",
     "AxisType": "Rest",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Cross_R01"
@@ -1834,7 +1834,7 @@
     "Name": "야근 수당",
     "AxisType": "None",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Cross_T02"
@@ -1856,7 +1856,7 @@
     "Name": "카페인 수혈",
     "AxisType": "None",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Cross_R02"
@@ -1878,7 +1878,7 @@
     "Name": "체력 안배",
     "AxisType": "None",
     "NodeType": "Notable",
-    "InspirationCost": "3",
+    "InspirationCost": 3,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Cross_01",
@@ -1901,7 +1901,7 @@
     "Name": "각성제",
     "AxisType": "None",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Cross_01"
@@ -1921,7 +1921,7 @@
     "Name": "불면증",
     "AxisType": "None",
     "NodeType": "Minor",
-    "InspirationCost": "1",
+    "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
       "Perk_Cross_02"
@@ -1941,7 +1941,7 @@
     "Name": "번아웃",
     "AxisType": "None",
     "NodeType": "Keystone",
-    "InspirationCost": "10",
+    "InspirationCost": 10,
     "ParentMode": "All",
     "ParentId": [
       "Perk_Cross_04",
@@ -1959,6 +1959,132 @@
     ],
     "IconKey": null,
     "Description": "수동·자동 업무 획득 돈 +50%, 에너지 최대치 -40%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_ET1",
+    "Name": "초년생",
+    "AxisType": "Tech",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Tech_Manual_02"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add"
+    ],
+    "EffectValue": [
+      "0.05"
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_ER1",
+    "Name": "눈 붙이기",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_Recover_02"
+    ],
+    "EffectId": [
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      "0.05"
+    ],
+    "IconKey": null,
+    "Description": "에너지 회복량 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_E01",
+    "Name": "밤샘",
+    "AxisType": "None",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_ET1",
+      "Perk_Cross_ER1"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add",
+      "Effect_EnergyCost_Add"
+    ],
+    "EffectValue": [
+      "0.08",
+      "-0.04"
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +8%, 업무 에너지 소모 -4%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MT1",
+    "Name": "몰입",
+    "AxisType": "Tech",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Tech_Manual_06"
+    ],
+    "EffectId": [
+      "Effect_ManualDP_Add"
+    ],
+    "EffectValue": [
+      "0.06"
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 DP +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MR1",
+    "Name": "재충전",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_Recover_06"
+    ],
+    "EffectId": [
+      "Effect_EnergyMax_Add"
+    ],
+    "EffectValue": [
+      "0.06"
+    ],
+    "IconKey": null,
+    "Description": "에너지 최대치 +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_M01",
+    "Name": "교대 근무",
+    "AxisType": "None",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_MT1",
+      "Perk_Cross_MR1"
+    ],
+    "EffectId": [
+      "Effect_Duration_Add",
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      "-0.06",
+      "0.08"
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 소요 시간 -6%, 에너지 회복량 +8%",
     "ExclusiveGroup": null
   }
 ]

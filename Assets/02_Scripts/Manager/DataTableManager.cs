@@ -17,6 +17,7 @@ public class DataTableManager
     public Dictionary<string, PlayerLevelData> PlayerLevelDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentLevelData> EquipmentLevelDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentData> EquipmentDataTable { get; private set; } = new();
+    public Dictionary<string, PerkNodeData> PerkNodeDataTable { get; private set; } = new();
 
     #endregion
 
@@ -34,6 +35,7 @@ public class DataTableManager
         PlayerLevelDataTable = LoadData<PlayerLevelData>(nameof(PlayerLevelData));
         EquipmentLevelDataTable = LoadData<EquipmentLevelData>(nameof(EquipmentLevelData));
         EquipmentDataTable = LoadData<EquipmentData>(nameof(EquipmentData));
+        PerkNodeDataTable = LoadData<PerkNodeData>(nameof(PerkNodeData));
     }
 
     #region Getters
@@ -86,6 +88,12 @@ public class DataTableManager
     {
         if (null == ConfirmDataTable || string.IsNullOrEmpty(id)) return null;
         return ConfirmDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public PerkNodeData GetPerkNodeData(string id)
+    {
+        if (null == PerkNodeDataTable || string.IsNullOrEmpty(id)) return null;
+        return PerkNodeDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
     #endregion
