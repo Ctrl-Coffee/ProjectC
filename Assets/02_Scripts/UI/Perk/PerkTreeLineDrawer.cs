@@ -11,24 +11,47 @@ public class PerkTreeLineDrawer : MonoBehaviour
     [Header("선 모양")]
     [SerializeField] private float _lineWidth = 6f;
     [SerializeField] private Color _lineColor = new Color(0.42f, 0.44f, 0.5f, 1f);
+    [SerializeField] private Color _activeLineColor = new Color(1f, 0.85f, 0.4f, 1f);
+
+    private struct PerkLine
+    {
+        public Image Image;
+        public string ParentId;
+        public string ChildId;
+    }
 
     private Dictionary<string, PerkNodeUI> _nodeMap = new();
     private List<PerkNodeUI> _nodeBuffer = new();
 
-    private void Start()
+    private List<PerkLine> _lines = new();
+    private bool _isBuilt = false;
+
+    public RectTransform NodeRoot
     {
-        DrawLines();
+        get { return _nodeRoot; }
     }
 
-    public void DrawLines()
+    public void Refresh()
     {
-        if (!ValidateReferences())
+        if (!_isBuilt) 
+            BuildLines();
+
+        RefreshLineColors();
+    }
+
+    public void Rebuild()
+    {
+        ClearLines();
+        Refresh();
+    }
+
+    private void BuildLines()
+    {
+        if (!ValidateReferences()) 
             return;
 
-        if (!BuildNodeMap())
+        if (!BuildNodeMap()) 
             return;
-
-        int lineCount = 0;
 
         foreach (KeyValuePair<string, PerkNodeUI> pair in _nodeMap)
         {
@@ -43,9 +66,7 @@ public class PerkTreeLineDrawer : MonoBehaviour
             string[] parentIds = data.ParentId;
 
             if (null == parentIds)
-            {
                 continue;
-            }
 
             for (int i = 0; i < parentIds.Length; i++)
             {
@@ -56,8 +77,40 @@ public class PerkTreeLineDrawer : MonoBehaviour
                 }
 
                 CreateLine(parentIds[i], pair.Key, parentNode.RectTransform, pair.Value.RectTransform);
-                lineCount++;
             }
+        }
+
+        _isBuilt = true;
+
+        Logger.Log($"퍽 트리 연결선 {_lines.Count}개를 생성했습니다. (노드 {_nodeMap.Count}개)");
+    }
+
+    private void RefreshLineColors()
+    {
+        for (int i = 0; i < _lines.Count; i++)
+        {
+            PerkLine line = _lines[i];
+
+            if (null == line.Image)
+                continue;
+
+            bool isActive = GameManager.Perk.IsUnlocked(line.ParentId) && GameManager.Perk.IsUnlocked(line.ChildId);
+
+            line.Image.color = isActive ? _activeLineColor : _lineColor;
+        }
+    }
+
+    private void ClearLines()
+    {
+        _lines.Clear();
+        _isBuilt = false;
+
+        if (null == _lineRoot)
+            return;
+
+        for (int i = _lineRoot.childCount - 1; i >= 0; i--)
+        {
+            Destroy(_lineRoot.GetChild(i).gameObject);
         }
     }
 
@@ -131,5 +184,12 @@ public class PerkTreeLineDrawer : MonoBehaviour
         Image lineImage = lineObject.GetComponent<Image>();
         lineImage.color = _lineColor;
         lineImage.raycastTarget = false;
+
+        PerkLine line = new PerkLine();
+        line.Image = lineImage;
+        line.ParentId = fromId;
+        line.ChildId = toId;
+
+        _lines.Add(line);
     }
 }
