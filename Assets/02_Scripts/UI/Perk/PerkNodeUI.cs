@@ -74,8 +74,6 @@ public class PerkNodeUI : MonoBehaviour
         Color color = _lockOverlay.color;
         color.a = alpha;
         _lockOverlay.color = color;
-
-        _lockOverlay.gameObject.SetActive(alpha > 0f);
     }
 
     private float GetOverlayAlpha(PerkNodeState state)

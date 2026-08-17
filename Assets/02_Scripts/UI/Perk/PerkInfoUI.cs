@@ -22,6 +22,8 @@ public class PerkInfoUI : UIBase
         BindNodes();
         RefreshAll();
 
+        GameManager.Perk.OnPerkChanged += RefreshAll;
+
         if (null == _btnClose)
         {
             Logger.LogError("_btnClose 가 연결되지 않았습니다.");
@@ -33,6 +35,8 @@ public class PerkInfoUI : UIBase
 
     private void OnDisable()
     {
+        GameManager.Perk.OnPerkChanged -= RefreshAll;
+
         if (null == _btnClose)
         {
             return;
@@ -56,7 +60,7 @@ public class PerkInfoUI : UIBase
 
     public void OnClickNode(string perkId)
     {
-        GameManager.UI.OpenPerkDetailUI(perkId, this);
+        GameManager.UI.OpenPerkDetailUI(perkId);
     }
 
     private void BindNodes()

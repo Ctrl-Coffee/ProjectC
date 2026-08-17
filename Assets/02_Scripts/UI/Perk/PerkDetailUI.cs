@@ -15,7 +15,6 @@ public class PerkDetailUI : UIBase
     private Button _upgradeButtonControl;
 
     private string _perkId;
-    private PerkInfoUI _owner;
 
     private void OnEnable()
     {
@@ -83,7 +82,7 @@ public class PerkDetailUI : UIBase
         return false;
     }
 
-    public void SetPerk(string perkId, PerkInfoUI owner)
+    public void SetPerk(string perkId)
     {
         if (!ValidateReferences())
         {
@@ -91,7 +90,6 @@ public class PerkDetailUI : UIBase
         }
 
         _perkId = perkId;
-        _owner = owner;
 
         _upgradeButton.gameObject.SetActive(true);
         _cancelButton.gameObject.SetActive(true);
@@ -146,7 +144,6 @@ public class PerkDetailUI : UIBase
             return;
         }
 
-        NotifyOwner();
         CloseUI();
     }
 
@@ -158,17 +155,6 @@ public class PerkDetailUI : UIBase
             return;
         }
 
-        NotifyOwner();
         CloseUI();
-    }
-
-    private void NotifyOwner()
-    {
-        if (null == _owner)
-        {
-            return;
-        }
-
-        _owner.RefreshAll();
     }
 }

@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 
 public class PerkManager
 {
     private const string PARENT_MODE_ALL = "All";
     private const string PARENT_MODE_NONE = "None";
 
+    public event Action OnPerkChanged;
+
     private Dictionary<string, List<string>> _neighborIds;
-    private List<string> _rootIds;
+
     private HashSet<string> _unlockedSet;
 
     private HashSet<string> UnlockedSet
@@ -15,14 +18,7 @@ public class PerkManager
         {
             if (null == _unlockedSet)
             {
-                EnsureIndex();
-
                 _unlockedSet = new HashSet<string>(GameManager.User.UnlockedPerkIds);
-
-                for (int i = 0; i < _rootIds.Count; i++)
-                {
-                    _unlockedSet.Add(_rootIds[i]);
-                }
             }
 
             return _unlockedSet;
@@ -34,12 +30,14 @@ public class PerkManager
         return GameManager.User.UnlockedPerkIds;
     }
 
+    public void InvalidateCache()
+    {
+        _unlockedSet = null;
+    }
+
     public bool IsUnlocked(string perkId)
     {
-        if (string.IsNullOrEmpty(perkId))
-            return false;
-
-        return UnlockedSet.Contains(perkId);
+        return IsUnlockedIn(perkId, UnlockedSet);
     }
 
     public PerkNodeState GetState(string perkId)
@@ -117,8 +115,10 @@ public class PerkManager
         }
 
         GameManager.User.UnlockedPerkIds.Add(perkId);
-        _unlockedSet = null;
+        InvalidateCache();
         GameManager.Save.Save();
+
+        OnPerkChanged?.Invoke();
 
         return true;
     }
@@ -150,9 +150,11 @@ public class PerkManager
         HashSet<string> remain = new HashSet<string>(UnlockedSet);
         remain.Remove(perkId);
 
-        if (!TryDeriveAll(remain, out string orphanId))
+        string disconnectedId = FindDisconnectedPerk(remain);
+
+        if (!string.IsNullOrEmpty(disconnectedId))
         {
-            reason = $"이 퍽이 없으면 연결이 끊기는 퍽이 있습니다. ({orphanId})";
+            reason = $"이 퍽이 없으면 연결이 끊기는 퍽이 있습니다. ({disconnectedId})";
             return false;
         }
 
@@ -170,9 +172,11 @@ public class PerkManager
         PerkNodeData data = GameManager.DataTable.GetPerkNodeData(perkId);
 
         GameManager.User.UnlockedPerkIds.Remove(perkId);
-        _unlockedSet = null;
+        InvalidateCache();
         GameManager.User.Currency.AddInspiration(data.InspirationCost);
         GameManager.Save.Save();
+
+        OnPerkChanged?.Invoke();
 
         return true;
     }
@@ -182,13 +186,26 @@ public class PerkManager
         return data.ParentMode == PARENT_MODE_NONE;
     }
 
-    private bool IsRequirementMet(PerkNodeData data, HashSet<string> unlockedSet)
+    private bool IsUnlockedIn(string perkId, HashSet<string> unlockedIds)
+    {
+        if (string.IsNullOrEmpty(perkId))
+            return false;
+
+        PerkNodeData data = GameManager.DataTable.GetPerkNodeData(perkId);
+
+        if (null != data && IsRoot(data))
+            return true;
+
+        return unlockedIds.Contains(perkId);
+    }
+
+    private bool IsRequirementMet(PerkNodeData data, HashSet<string> unlockedIds)
     {
         if (IsRoot(data))
             return true;
 
         if (data.ParentMode == PARENT_MODE_ALL)
-            return IsAllParentUnlocked(data, unlockedSet);
+            return IsAllParentUnlocked(data, unlockedIds);
 
         EnsureIndex();
 
@@ -197,14 +214,14 @@ public class PerkManager
 
         for (int i = 0; i < neighbors.Count; i++)
         {
-            if (unlockedSet.Contains(neighbors[i]))
+            if (IsUnlockedIn(neighbors[i], unlockedIds))
                 return true;
         }
 
         return false;
     }
 
-    private bool IsAllParentUnlocked(PerkNodeData data, HashSet<string> unlockedSet)
+    private bool IsAllParentUnlocked(PerkNodeData data, HashSet<string> unlockedIds)
     {
         if (null == data.ParentId)
             return true;
@@ -216,7 +233,7 @@ public class PerkManager
             if (string.IsNullOrEmpty(parentId))
                 continue;
 
-            if (!unlockedSet.Contains(parentId))
+            if (!IsUnlockedIn(parentId, unlockedIds))
                 return false;
         }
 
@@ -230,19 +247,21 @@ public class PerkManager
         if (string.IsNullOrEmpty(data.ExclusiveGroup))
             return false;
 
-        foreach (string unlockedId in UnlockedSet)
+        List<string> unlockedList = GameManager.User.UnlockedPerkIds;
+
+        for (int i = 0; i < unlockedList.Count; i++)
         {
-            if (unlockedId == data.Id)
+            if (unlockedList[i] == data.Id)
                 continue;
 
-            PerkNodeData other = GameManager.DataTable.GetPerkNodeData(unlockedId);
+            PerkNodeData other = GameManager.DataTable.GetPerkNodeData(unlockedList[i]);
 
             if (null == other)
                 continue;
 
             if (other.ExclusiveGroup == data.ExclusiveGroup)
             {
-                blockerId = unlockedId;
+                blockerId = unlockedList[i];
                 return true;
             }
         }
@@ -250,21 +269,9 @@ public class PerkManager
         return false;
     }
 
-    private bool TryDeriveAll(HashSet<string> targetSet, out string orphanId)
+    private string FindDisconnectedPerk(HashSet<string> unlockedIds)
     {
-        orphanId = string.Empty;
-
-        HashSet<string> derived = new HashSet<string>();
-
-        foreach (string id in targetSet)
-        {
-            PerkNodeData data = GameManager.DataTable.GetPerkNodeData(id);
-
-            if (null != data && IsRoot(data))
-            {
-                derived.Add(id);
-            }
-        }
+        HashSet<string> connected = new HashSet<string>();
 
         bool isAdded = true;
 
@@ -272,9 +279,9 @@ public class PerkManager
         {
             isAdded = false;
 
-            foreach (string id in targetSet)
+            foreach (string id in unlockedIds)
             {
-                if (derived.Contains(id))
+                if (connected.Contains(id))
                     continue;
 
                 PerkNodeData data = GameManager.DataTable.GetPerkNodeData(id);
@@ -282,24 +289,21 @@ public class PerkManager
                 if (null == data)
                     continue;
 
-                if (!IsRequirementMet(data, derived))
+                if (!IsRequirementMet(data, connected))
                     continue;
 
-                derived.Add(id);
+                connected.Add(id);
                 isAdded = true;
             }
         }
 
-        foreach (string id in targetSet)
+        foreach (string id in unlockedIds)
         {
-            if (!derived.Contains(id))
-            {
-                orphanId = id;
-                return false;
-            }
+            if (!connected.Contains(id))
+                return id;
         }
 
-        return true;
+        return string.Empty;
     }
 
     private void EnsureIndex()
@@ -308,16 +312,10 @@ public class PerkManager
             return;
 
         _neighborIds = new Dictionary<string, List<string>>();
-        _rootIds = new List<string>();
 
         foreach (KeyValuePair<string, PerkNodeData> pair in GameManager.DataTable.PerkNodeDataTable)
         {
             PerkNodeData data = pair.Value;
-
-            if (IsRoot(data))
-            {
-                _rootIds.Add(data.Id);
-            }
 
             if (null == data.ParentId)
                 continue;
@@ -335,12 +333,12 @@ public class PerkManager
         }
     }
 
-    private void AddNeighbor(string id, string neighborId)
+    private void AddNeighbor(string perkId, string neighborId)
     {
-        if (!_neighborIds.TryGetValue(id, out List<string> neighbors))
+        if (!_neighborIds.TryGetValue(perkId, out List<string> neighbors))
         {
             neighbors = new List<string>();
-            _neighborIds.Add(id, neighbors);
+            _neighborIds.Add(perkId, neighbors);
         }
 
         if (!neighbors.Contains(neighborId))
