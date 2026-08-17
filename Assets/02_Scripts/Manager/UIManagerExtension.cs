@@ -41,7 +41,7 @@ public static class UIManagerExtension
         return uiManager.OpenContentUI<CompanionInventoryView>();
     }
 
-    public static async void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Action onClickLevelUp)
+    public static async void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Func<LevelUpResult> onClickLevelUp)
     {
         var ui = await uiManager.OpenPopupUI<CompanionDetailUI>();
         ui.Init(companionState, onClickLevelUp);
