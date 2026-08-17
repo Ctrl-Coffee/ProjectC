@@ -102,8 +102,7 @@
     "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
-      "Perk_Tech_Manual_03",
-      "Perk_Tech_Bridge_01"
+      "Perk_Tech_Manual_03"
     ],
     "EffectId": [
       "Effect_EnergyCost_Add"
@@ -187,8 +186,7 @@
     "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
-      "Perk_Tech_Manual_06",
-      "Perk_Tech_Bridge_02"
+      "Perk_Tech_Manual_06"
     ],
     "EffectId": [
       "Effect_ManualDP_Add"
@@ -351,8 +349,7 @@
     "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
-      "Perk_Tech_Auto_03",
-      "Perk_Tech_Bridge_01"
+      "Perk_Tech_Auto_03"
     ],
     "EffectId": [
       "Effect_Duration_Add"
@@ -436,8 +433,7 @@
     "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
-      "Perk_Tech_Auto_06",
-      "Perk_Tech_Bridge_02"
+      "Perk_Tech_Auto_06"
     ],
     "EffectId": [
       "Effect_Duration_Add"
@@ -978,8 +974,7 @@
     "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
-      "Perk_Rest_Recover_03",
-      "Perk_Rest_Bridge_01"
+      "Perk_Rest_Recover_03"
     ],
     "EffectId": [
       "Effect_EnergyMax_Add"
@@ -1063,8 +1058,7 @@
     "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
-      "Perk_Rest_Recover_06",
-      "Perk_Rest_Bridge_02"
+      "Perk_Rest_Recover_06"
     ],
     "EffectId": [
       "Effect_EnergyMax_Add"
@@ -1227,8 +1221,7 @@
     "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
-      "Perk_Rest_Save_03",
-      "Perk_Rest_Bridge_01"
+      "Perk_Rest_Save_03"
     ],
     "EffectId": [
       "Effect_EnergyCost_Add"
@@ -1312,8 +1305,7 @@
     "InspirationCost": 1,
     "ParentMode": "Any",
     "ParentId": [
-      "Perk_Rest_Save_06",
-      "Perk_Rest_Bridge_02"
+      "Perk_Rest_Save_06"
     ],
     "EffectId": [
       "Effect_EnergyCost_Add"
