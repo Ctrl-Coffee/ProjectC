@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using Cysharp.Threading.Tasks;
+using System;
+using TMPro;
 using UnityEngine;
 
 public class DreamHudUI : UIBase
@@ -10,20 +12,25 @@ public class DreamHudUI : UIBase
 
     [SerializeField] private UIButtonComponent _settingBtn;
 
-    [SerializeField] private UIButtonComponent _forgeBtn;
-    [SerializeField] private UIButtonComponent _guildBtn;
+    [SerializeField] private UIButtonComponent _gachaBtn;
+    [SerializeField] private UIButtonComponent _companionBtn;
     [SerializeField] private UIButtonComponent _stageBtn;
     [SerializeField] private UIButtonComponent _heroBtn;
     [SerializeField] private UIButtonComponent _lobbyBtn;
 
+    private UIBase _currentContent;
 
     private void OnEnable()
     {
+        _companionBtn.BindButtonEvent(OnOpenCompanion);
+        _stageBtn.BindButtonEvent(OnStage);
         _lobbyBtn.BindButtonEvent(OnChangeSceenToReal);
     }
 
     private void OnDisable()
     {
+        _companionBtn.UnBindButtonAllEvent();
+        _stageBtn.UnBindButtonAllEvent();
         _lobbyBtn.UnBindButtonAllEvent();
     }
 
@@ -31,5 +38,35 @@ public class DreamHudUI : UIBase
     {
         GameManager.Instance.ExitDream();
         GameManager.Instance.EnterReal();
+    }
+
+    private void OnStage()
+    {
+        if (_currentContent == null)
+            return;
+
+        _currentContent.CloseUI();
+        _currentContent = null;
+    }
+
+    private async void OnOpenCompanion()
+    {
+        var content = await GameManager.UI.OpenCompanionInventory();
+
+        CloseCurrentContent(content);
+    }
+
+
+    private void CloseCurrentContent(UIBase content)
+    {
+        if (content == null)
+            return;
+
+        if (_currentContent != null && _currentContent != content)
+        {
+            _currentContent.CloseUI();
+        }
+
+        _currentContent = content;
     }
 }

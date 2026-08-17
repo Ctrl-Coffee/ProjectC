@@ -36,6 +36,16 @@ public static class UIManagerExtension
         ui.SetConfirmUI(confirmData, buttonAction);
     }
 
+    public static UniTask<CompanionInventoryView> OpenCompanionInventory(this UIManager uiManager)
+    {
+        return uiManager.OpenContentUI<CompanionInventoryView>();
+    }
+
+    public static async void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Action onClickLevelUp)
+    {
+        var ui = await uiManager.OpenPopupUI<CompanionDetailUI>();
+        ui.Init(companionState, onClickLevelUp);
+    }
 
     public static UniTask<WorkInfoUI> OpenWorkInfoUI(this UIManager uiManager)
     {

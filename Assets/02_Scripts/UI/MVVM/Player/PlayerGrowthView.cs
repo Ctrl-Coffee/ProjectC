@@ -15,6 +15,11 @@ public class PlayerGrowthView : ViewBase
 
     private void OnEnable()
     {
+        if(_viewModel == null)
+        {
+            BindViewModel();
+        }
+
         Subscribe();
         _levelUpButton.onClick.AddListener(OnClickLevelUp);
     }
@@ -27,7 +32,7 @@ public class PlayerGrowthView : ViewBase
 
     protected override void BindViewModel()
     {
-        _viewModel = GameManager.ViewModel.RequestGrowthViewModel();
+        _viewModel = GameManager.ViewModel.CreatePlayerGrowthViewModel();
     }
 
     protected override void Subscribe()

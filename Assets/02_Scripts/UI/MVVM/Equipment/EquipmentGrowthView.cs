@@ -29,8 +29,8 @@ public class EquipmentGrowthView : ViewBase
 
     protected override void BindViewModel()
     {
-        string testID = "Equipment_001";
-        _viewModel = GameManager.ViewModel.RequestEquipmentGrowthViewModel(testID);
+        //string testID = "Equipment_001";
+        //_viewModel = GameManager.ViewModel.RequestEquipmentGrowthViewModel(testID);
     }
 
     protected override void Subscribe()
