@@ -16,7 +16,17 @@
         return viewModel;
     }
 
-    // TODO; 여기서 GameSession으로 부터 Model을 가져올거임.
-    // 필요하다면 DataTableManager도 가져올거임.
-    // => 그렇게 ViewModel을 생성하여 반환.
+    public CompanionInventoryViewModel CreateCompanionInventoryViewModel()
+    {
+        CompanionModel model = _session.Companion;
+        CompanionInventoryViewModel viewModel = new CompanionInventoryViewModel(model);
+        return viewModel;
+    }
+
+    public CompanionInventorySlotViewModel CreateCompanionInventorySlotViewModel(string companionId)
+    {
+        CompanionModel model = _session.Companion;
+        CompanionInventorySlotViewModel viewModel = new CompanionInventorySlotViewModel(model, companionId);
+        return viewModel;
+    }
 }

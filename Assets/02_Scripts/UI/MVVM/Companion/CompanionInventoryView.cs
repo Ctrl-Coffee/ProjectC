@@ -1,74 +1,179 @@
-﻿public class CompanionInventoryView// : ViewBase
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+public class CompanionInventoryView : ViewBase
 {
-    //private CompanionInventoryViewModel _viewModel;
-    //private bool _isSubscribed;
+    [SerializeField] private Transform _slotRoot;
+    [SerializeField] private TMPro.TMP_Dropdown _sortDropdown;
 
-    //public CompanionInventoryViewModel ViewModel => _viewModel;
+    private Dictionary<string, CompanionInventorySlotView> _slotDict = new();
 
-    //public void Bind(CompanionInventoryViewModel viewModel)
-    //{
-    //    UnSubscribe();
-    //    _viewModel?.Dispose();
+    private CompanionInventoryViewModel _inventoryViewModel;
 
-    //    _viewModel = viewModel;
 
-    //    if (isActiveAndEnabled)
-    //    {
-    //        Subscribe();
-    //    }
+    private void OnEnable()
+    {
+        if (_inventoryViewModel == null)
+        {
+            BindViewModel();
+        }
 
-    //    RefreshAll();
-    //}
+        Subscribe();
+        _sortDropdown.onValueChanged.AddListener(OnClickSort);
+    }
 
-    //private void OnEnable()
-    //{
-    //    Subscribe();
-    //}
+    private void OnDisable()
+    {
+        UnSubscribe();
+        _sortDropdown.onValueChanged.RemoveListener(OnClickSort);
+    }
 
-    //private void OnDisable()
-    //{
-    //    UnSubscribe();
-    //    _viewModel?.Dispose();
-    //    _viewModel = null;
-    //}
+    private void OnDestroy()
+    {
+        UnSubscribe();
 
-    //protected override void BindViewModel()
-    //{
-    //}
+        if (_inventoryViewModel != null)
+        {
+            _inventoryViewModel.UnBind();
+            _inventoryViewModel = null;
+        }
+    }
 
-    //protected override void Subscribe()
-    //{
-    //    if (_viewModel == null || _isSubscribed)
-    //    {
-    //        return;
-    //    }
+    protected override void BindViewModel()
+    {
+        _inventoryViewModel = GameManager.ViewModel.CreateCompanionInventoryViewModel();
+    }
 
-    //    _viewModel.Changed += OnViewModelChanged;
-    //    _isSubscribed = true;
-    //}
+    protected override void Subscribe()
+    {
+        _inventoryViewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
+        _inventoryViewModel.OnContainerChanged_ViewModel += OnContainerChanged;
+        _inventoryViewModel.InitializeModel();
+    }
 
-    //protected override void UnSubscribe()
-    //{
-    //    if (_viewModel == null || !_isSubscribed)
-    //    {
-    //        return;
-    //    }
+    protected override void UnSubscribe()
+    {
+        if (_inventoryViewModel != null)
+        {
+            _inventoryViewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
+            _inventoryViewModel.OnContainerChanged_ViewModel -= OnContainerChanged;
+        }
+    }
 
-    //    _viewModel.Changed -= OnViewModelChanged;
-    //    _isSubscribed = false;
-    //}
+    protected override void OnPropertyChanged(string propertyName)
+    {
+        switch (propertyName)
+        {
+            case nameof(CompanionModel.Companions):
+                ResetSlotAndCreateAll();
+                break;
+        }
+    }
+    private void OnClickSort(int index)
+    {
+        _inventoryViewModel.SetSort(index);
 
-    //protected override void OnPropertyChanged(string propertyName)
-    //{
-    //    RefreshAll();
-    //}
+        SortAllSlot();
+    }
 
-    //protected virtual void RefreshAll()
-    //{
-    //}
+    private void OnContainerChanged(string propertyName, ContainerPropertyChangedEvent changedEvent, CompanionState companionState)
+    {
+        if (propertyName == nameof(CompanionModel.Companions) == false)
+        {
+            return;
+        }
 
-    //private void OnViewModelChanged()
-    //{
-    //    RefreshAll();
-    //}
+        switch (changedEvent)
+        {
+            case ContainerPropertyChangedEvent.Add:
+                {
+                    CreateSlot(companionState);
+                    SortOneSlot(companionState);
+                }
+                break;
+
+            case ContainerPropertyChangedEvent.Remove:
+                {
+                    if (_slotDict.ContainsKey(companionState.CompanionId))
+                    {
+                        var slotView = _slotDict[companionState.CompanionId];
+                        Destroy(slotView.gameObject);
+                        _slotDict.Remove(companionState.CompanionId);
+                    }
+                }
+                break;
+
+            case ContainerPropertyChangedEvent.Update:
+                {
+                    SortOneSlot(companionState);
+                }
+                break;
+        }
+    }
+
+    private void SortOneSlot(CompanionState companionState)
+    {
+        CompanionInventorySlotView slot = _slotDict[companionState.CompanionId];
+
+        slot.transform.SetSiblingIndex(_inventoryViewModel.GetItemIndex(companionState));
+    }
+
+    private void SortAllSlot()
+    {
+        for (int i = 0; i < _inventoryViewModel.Items.Count; i++)
+        {
+            CompanionState companionState = _inventoryViewModel.Items[i];
+            _slotDict[companionState.CompanionId].transform.SetSiblingIndex(i);
+        }
+    }
+
+    private void ResetSlotAndCreateAll()
+    {
+        RemoveAllSlot();
+
+        foreach (var companionState in _inventoryViewModel.Items)
+        {
+            CreateSlot(companionState);
+        }
+    }
+
+
+    private void RemoveAllSlot()
+    {
+        if (_slotDict.Count > 0)
+        {
+            foreach (var slot in _slotDict)
+            {
+                Destroy(slot.Value.gameObject);
+            }
+            _slotDict.Clear();
+        }
+    }
+
+    private void CreateSlot(CompanionState companionState)
+    {
+        var slotPrefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.GetUIPath(typeof(CompanionInventorySlotView)));
+        var slotInstance = Instantiate(slotPrefab, _slotRoot);
+        if (slotInstance == null)
+            return;
+
+        var slotComponent = slotInstance.GetComponent<CompanionInventorySlotView>();
+        if (slotComponent == null)
+            return;
+
+        slotComponent.Init(companionState.CompanionId, OnClickSlot);
+        slotComponent.PlayOpenAnimation();
+
+        _slotDict.Add(companionState.CompanionId, slotComponent);
+    }
+
+    private void OnClickSlot(string companionId)
+    {
+        GameManager.UI.OpenCompanionDetailPopup(_inventoryViewModel.GetCompanionState(companionId), () => OnLevelUp(companionId));
+    }
+
+    private void OnLevelUp(string companionId)
+    {
+        var result = _inventoryViewModel.TempLevelUp(companionId);
+    }
 }

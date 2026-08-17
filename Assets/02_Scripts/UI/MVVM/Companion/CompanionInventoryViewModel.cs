@@ -1,185 +1,129 @@
-﻿
-//public class CompanionInventoryItem
-//{
-//    public string CompanionId { get; }
-//    public string Name { get; }
-//    public int Level { get; }
+﻿using System.Collections.Generic;
 
-//    public CompanionInventoryItem(
-//        string companionId,
-//        string name,
-//        int level)
-//    {
-//        CompanionId = companionId;
-//        Name = name;
-//        Level = level;
-//    }
-//}
-
-public class CompanionInventoryViewModel
+public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
 {
-    public string Name { get; private set; }
-    public int Level { get; private set; }
-    public float Attack { get; private set; }
-    public float Defense { get; private set; }
-    public float Hp { get; private set; }
+    public event System.Action<string, ContainerPropertyChangedEvent, CompanionState> OnContainerChanged_ViewModel;
+
+    public IReadOnlyList<CompanionState> Items => _items;
+    public CompanionInventorySort CurrentSort => _currentSort;
+
+    private CompanionInventorySort _currentSort = CompanionInventorySort.Level;
+    private readonly List<CompanionState> _items = new();
+
+    public CompanionInventoryViewModel(CompanionModel model) : base(model)
+    {
+        model.ContainerPropertyChanged += OnContainerChanged;
+        RefreshItems();
+    }
+
+    public override void UnBind()
+    {
+        _model.ContainerPropertyChanged -= OnContainerChanged;
+        base.UnBind();
+    }
+
+    public void OnContainerChanged(string propertyName, ContainerPropertyChangedEvent changedEvent, CompanionState companionState)
+    {
+        switch (changedEvent)
+        {
+            case ContainerPropertyChangedEvent.Add:
+                AddItem(companionState);
+                break;
+
+            case ContainerPropertyChangedEvent.Remove:
+                RemoveItem(companionState);
+                break;
+
+            case ContainerPropertyChangedEvent.Update:
+                UpdateItem(companionState);
+                break;
+        }
+
+        OnContainerChanged_ViewModel?.Invoke(propertyName, changedEvent, companionState);
+    }
+
+    public void SetSort(int index)
+    {
+        _currentSort = (CompanionInventorySort)index;
+        SortItems();
+    }
+
+    public int GetItemIndex(CompanionState value)
+    {
+        return _items.IndexOf(value);
+    }
+
+    public CompanionState GetCompanionState(string companionId)
+    {
+        return _model.GetCompanion(companionId);
+    }
+
+    private void SortItems()
+    {
+        if (_currentSort == CompanionInventorySort.Level)
+            _items.Sort((x, y) =>
+            {
+                int levelCompare = y.Level.CompareTo(x.Level);
+
+                if (levelCompare != 0)
+                {
+                    return levelCompare;
+                }
+
+                return string.CompareOrdinal(
+                    x.CompanionId,
+                    y.CompanionId);
+            });
+        else if(_currentSort == CompanionInventorySort.LevelReverse)
+            _items.Sort((x, y) =>
+            {
+                int levelCompare = x.Level.CompareTo(y.Level);
+
+                if (levelCompare != 0)
+                {
+                    return levelCompare;
+                }
+
+                return string.CompareOrdinal(
+                    x.CompanionId,
+                    y.CompanionId);
+            });
 
 
+    }
 
+    private void RefreshItems()
+    {
+        _items.Clear();
 
+        foreach (CompanionState companionState in _model.Companions.Values)
+        {
+            _items.Add(companionState);
+        }
 
+        SortItems();
+    }
 
+    private void AddItem(CompanionState companionState)
+    {
+        _items.Add(companionState);
 
+        SortItems();
+    }
 
+    private void RemoveItem(CompanionState companionState)
+    {
+        _items.Remove(companionState);
+    }
 
+    private void UpdateItem(CompanionState companionState)
+    {
+        SortItems();
+    }
 
-    //private readonly CompanionModel _companionModel;
-    //private readonly CurrencyModel _currencyModel;
-    //private readonly DataTableManager _dataTable;
-    //private readonly CompanionService _companionService;
-    //private readonly List<CompanionInventoryItem> _items = new();
-
-    //public IReadOnlyList<CompanionInventoryItem> Items => _items;
-    //public string SelectedCompanionId { get; private set; }
-    //public string Name { get; private set; }
-    //public int Level { get; private set; }
-    //public float Atk { get; private set; }
-    //public float Def { get; private set; }
-    //public float Hp { get; private set; }
-    //public long LevelUpCost { get; private set; }
-    //public bool IsMaxLevel { get; private set; }
-    //public bool CanLevelUp { get; private set; }
-
-    //public event Action Changed;
-
-    //public CompanionInventoryViewModel(
-    //    CompanionModel companionModel,
-    //    CurrencyModel currencyModel,
-    //    DataTableManager dataTable,
-    //    CompanionService companionService)
-    //{
-    //    _companionModel = companionModel;
-    //    _currencyModel = currencyModel;
-    //    _dataTable = dataTable;
-    //    _companionService = companionService;
-
-    //    _companionModel.CompanionChanged += OnCompanionChanged;
-    //    _currencyModel.PropertyChanged += OnCurrencyChanged;
-
-    //    RefreshItems();
-
-    //    if (_items.Count > 0)
-    //    {
-    //        SelectCompanion(_items[0].CompanionId);
-    //    }
-    //}
-
-    //public bool SelectCompanion(string companionId)
-    //{
-    //    if (_companionModel.GetCompanion(companionId) == null)
-    //    {
-    //        return false;
-    //    }
-
-    //    SelectedCompanionId = companionId;
-    //    RefreshSelectedCompanion();
-    //    Changed?.Invoke();
-
-    //    return true;
-    //}
-
-    //public CompanionLevelUpResult LevelUpSelectedCompanion()
-    //{
-    //    CompanionLevelUpResult result = _companionService.TryLevelUp(
-    //        SelectedCompanionId);
-
-    //    if (result != CompanionLevelUpResult.Success)
-    //    {
-    //        RefreshSelectedCompanion();
-    //        Changed?.Invoke();
-    //    }
-
-    //    return result;
-    //}
-
-    //public void Dispose()
-    //{
-    //    _companionModel.CompanionChanged -= OnCompanionChanged;
-    //    _currencyModel.PropertyChanged -= OnCurrencyChanged;
-    //}
-
-    //private void OnCompanionChanged(string companionId)
-    //{
-    //    RefreshItems();
-
-    //    if (SelectedCompanionId == companionId)
-    //    {
-    //        RefreshSelectedCompanion();
-    //    }
-
-    //    Changed?.Invoke();
-    //}
-
-    //private void OnCurrencyChanged(
-    //    object sender,
-    //    PropertyChangedEventArgs eventArgs)
-    //{
-    //    RefreshSelectedCompanion();
-    //    Changed?.Invoke();
-    //}
-
-    //private void RefreshItems()
-    //{
-    //    _items.Clear();
-
-    //    foreach (CompanionState companion in _companionModel.Companions)
-    //    {
-    //        CompanionData companionData = _dataTable.GetCompanionData(
-    //            companion.CompanionId);
-
-    //        if (companionData == null)
-    //        {
-    //            continue;
-    //        }
-
-    //        _items.Add(new CompanionInventoryItem(
-    //            companion.CompanionId,
-    //            companionData.Name,
-    //            companion.Level));
-    //    }
-    //}
-
-    //private void RefreshSelectedCompanion()
-    //{
-    //    CompanionState companion = _companionModel.GetCompanion(
-    //        SelectedCompanionId);
-
-    //    if (companion == null)
-    //    {
-    //        return;
-    //    }
-
-    //    CompanionData companionData = _dataTable.GetCompanionData(
-    //        companion.CompanionId);
-    //    CompanionLevelData levelData = _dataTable.GetCompanionLevelData(
-    //        companion.CompanionId,
-    //        companion.Level);
-    //    CompanionLevelData nextLevelData = _dataTable.GetCompanionLevelData(
-    //        companion.CompanionId,
-    //        companion.Level + 1);
-
-    //    if (companionData == null || levelData == null)
-    //    {
-    //        return;
-    //    }
-
-    //    Name = companionData.Name;
-    //    Level = companion.Level;
-    //    Atk = levelData.BaseAttack;
-    //    Def = levelData.BaseDefense;
-    //    Hp = levelData.HP;
-    //    IsMaxLevel = nextLevelData == null;
-    //    LevelUpCost = IsMaxLevel ? 0 : (long)nextLevelData.UpgradeCost;
-    //    CanLevelUp = !IsMaxLevel && _currencyModel.DreamFragment >= LevelUpCost;
-    //}
+    // TODO: 테스트
+    public LevelUpResult TempLevelUp(string companionId)
+    {
+        return _model.TryLevelUp(companionId);
+    }
 }
