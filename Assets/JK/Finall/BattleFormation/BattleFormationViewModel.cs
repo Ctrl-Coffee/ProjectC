@@ -68,6 +68,11 @@ public class BattleFormationViewModel : ViewModelBase<BattleFormationModel>
         return isCompanionRemoved;
     }
 
+    public void RequestBattleStart()
+    {
+        BattleManager.Instance.StartBattle(MainId, CompanionIds, EnemyIds);
+    }
+
     private void OnCompanionSlotChanged(int index)
     {
         CompanionSlotChanged?.Invoke(index);

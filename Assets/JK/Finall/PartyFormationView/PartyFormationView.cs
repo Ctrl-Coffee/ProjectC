@@ -105,7 +105,7 @@ public class PartyFormationView : ViewBase<BattleFormationViewModel>
 
     private void HandleStartButtonClicked()
     {
-     //   BattleManager.Instance.StartBattle("Stage_01");
+        _viewModel.RequestBattleStart();
     }
 
     #region 주인공 슬롯 관련 로직
