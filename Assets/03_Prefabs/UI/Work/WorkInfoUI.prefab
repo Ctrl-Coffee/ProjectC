@@ -520,6 +520,8 @@ MonoBehaviour:
   _btnClose: {fileID: 8493380407530179384}
   _btnManual: {fileID: 3099647610927523199}
   _btnAuto: {fileID: 6865265569404128373}
+  _btnGambling: {fileID: 1581979151522797895}
+  _btnCreative: {fileID: 7767378713939449618}
   _content: {fileID: 3744324737490088480}
   _workSlotPrefab: {fileID: 2871388872749892935, guid: 445b44b2f085a7547a9c86e7d7921045, type: 3}
   _workQueue: {fileID: 672752381597669204}
@@ -1559,8 +1561,8 @@ RectTransform:
   m_Children:
   - {fileID: 2580702895444457676}
   - {fileID: 369704021244302658}
-  - {fileID: 7317437798261472708}
   - {fileID: 8450935722781553421}
+  - {fileID: 7317437798261472708}
   m_Father: {fileID: 1358093577544475393}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -62,6 +62,12 @@ public static class AutoWorkQueue
             return false;
         }
 
+        if (!GameManager.Perk.Unlock.IsUnlocked(workId))
+        {
+            Logger.LogWarning($"아직 해금되지 않은 업무입니다. id: {workId}");
+            return false;
+        }
+
         List<AutoWorkSlot> slots = Slots;
         long startTicks = GameManager.Time.UtcNow.Ticks;
 

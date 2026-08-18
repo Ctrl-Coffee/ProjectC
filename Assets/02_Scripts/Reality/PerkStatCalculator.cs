@@ -95,19 +95,13 @@ public class PerkStatCalculator
             return;
         }
 
-        if (null == data.EffectValue || data.EffectId.Length != data.EffectValue.Length)
-        {
-            Logger.LogError($"EffectId 와 EffectValue 개수가 맞지 않습니다. id: {perkId}");
-            return;
-        }
-
         for (int i = 0; i < data.EffectId.Length; i++)
         {
-            AccumulateEffect(perkId, data.EffectId[i], data.EffectValue[i]);
+            AccumulateEffect(perkId, data.EffectId[i], data.EffectValue, i);
         }
     }
 
-    private void AccumulateEffect(string perkId, string effectId, float effectValue)
+    private void AccumulateEffect(string perkId, string effectId, float[] effectValues, int valueIndex)
     {
         if (string.IsNullOrEmpty(effectId))
         {
@@ -133,7 +127,13 @@ public class PerkStatCalculator
             return;
         }
 
-        Accumulate(effect.Stat, effect.Mod, effectValue);
+        if (null == effectValues || valueIndex >= effectValues.Length)
+        {
+            Logger.LogError($"Stat 효과에 수치가 없습니다. perk: {perkId}, effect: {effectId}");
+            return;
+        }
+
+        Accumulate(effect.Stat, effect.Mod, effectValues[valueIndex]);
     }
 
     private void Accumulate(WorkStatType statType, PerkModType modType, float value)

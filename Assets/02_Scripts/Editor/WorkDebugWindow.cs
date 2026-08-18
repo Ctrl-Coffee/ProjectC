@@ -242,7 +242,10 @@ public class WorkDebugWindow : EditorWindow
                 continue;
             }
 
-            EditorGUILayout.LabelField(data.Name, data.Id, EditorStyles.boldLabel);
+            bool isUnlocked = GameManager.Perk.Unlock.IsUnlocked(data.Id);
+            string lockMark = isUnlocked ? string.Empty : "  [잠김]";
+
+            EditorGUILayout.LabelField($"{data.Name}{lockMark}", data.Id, EditorStyles.boldLabel);
 
             EditorGUI.indentLevel++;
 

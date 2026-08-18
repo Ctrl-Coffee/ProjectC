@@ -9,6 +9,8 @@ public class WorkInfoUI : UIBase
     [Header("필터")]
     [SerializeField] private UIButtonComponent _btnManual;
     [SerializeField] private UIButtonComponent _btnAuto;
+    [SerializeField] private UIButtonComponent _btnGambling;
+    [SerializeField] private UIButtonComponent _btnCreative;
 
     [Header("업무 목록")]
     [SerializeField] private RectTransform _content;
@@ -28,6 +30,12 @@ public class WorkInfoUI : UIBase
         BindButton(_btnClose, OnClickCloseButton, nameof(_btnClose));
         BindButton(_btnManual, OnClickManualTab, nameof(_btnManual));
         BindButton(_btnAuto, OnClickAutoTab, nameof(_btnAuto));
+        BindButton(_btnGambling, OnClickGamblingTab, nameof(_btnGambling));
+        BindButton(_btnCreative, OnClickCreativeTab, nameof(_btnCreative));
+
+        RefreshTabs();
+
+        _isWorkListBuilt = false;
 
         RefreshWorkList(WorkType.Manual);
     }
@@ -37,6 +45,8 @@ public class WorkInfoUI : UIBase
         UnbindButton(_btnClose);
         UnbindButton(_btnManual);
         UnbindButton(_btnAuto);
+        UnbindButton(_btnGambling);
+        UnbindButton(_btnCreative);
     }
 
     private void OnDestroy()
@@ -52,6 +62,34 @@ public class WorkInfoUI : UIBase
     private void OnClickAutoTab()
     {
         RefreshWorkList(WorkType.Auto);
+    }
+
+    private void OnClickGamblingTab()
+    {
+        RefreshWorkList(WorkType.Gamble);
+    }
+
+    private void OnClickCreativeTab()
+    {
+        RefreshWorkList(WorkType.Creative);
+    }
+
+    private void RefreshTabs()
+    {
+        SetTabInteractable(_btnManual, WorkType.Manual);
+        SetTabInteractable(_btnAuto, WorkType.Auto);
+        SetTabInteractable(_btnGambling, WorkType.Gamble);
+        SetTabInteractable(_btnCreative, WorkType.Creative);
+    }
+
+    private void SetTabInteractable(UIButtonComponent button, WorkType workType)
+    {
+        if (null == button)
+        {
+            return;
+        }
+
+        button.SetInteractable(WorkTable.HasAny(workType));
     }
 
     private void OnClickWork(string workId)

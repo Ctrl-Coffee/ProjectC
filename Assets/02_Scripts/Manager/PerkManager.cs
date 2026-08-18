@@ -13,12 +13,21 @@ public class PerkManager
     private HashSet<string> _unlockedSet;
 
     private PerkStatCalculator _statCalculator = new();
+    private PerkUnlockChecker _unlockChecker = new();
 
     public PerkStatCalculator Stat
     {
         get
         {
             return _statCalculator;
+        }
+    }
+
+    public PerkUnlockChecker Unlock
+    {
+        get
+        {
+            return _unlockChecker;
         }
     }
 
@@ -44,6 +53,7 @@ public class PerkManager
     {
         _unlockedSet = null;
         _statCalculator.Invalidate();
+        _unlockChecker.Invalidate();
     }
 
     public bool IsUnlocked(string perkId)
