@@ -91,20 +91,10 @@ public class PartyFormationView : ViewBase<BattleFormationViewModel>
     private void ValidateReference()
     {
         UnityUtility.ValidateReference(_mainFormationSlot, nameof(_mainFormationSlot));
-
-        for (int index = 0; index < _companionFormationSlots.Length; index++)
-        {
-            UnityUtility.ValidateReference(_companionFormationSlots[index], $"{nameof(_companionFormationSlots)}[{index}]");
-        }
-
-        for (int index = 0; index < _enemyFormationSlots.Length; index++)
-        {
-            UnityUtility.ValidateReference(_enemyFormationSlots[index], $"{nameof(_enemyFormationSlots)}[{index}]");
-        }
-
+        UnityUtility.ValidateArrayReference(_companionFormationSlots, nameof(_companionFormationSlots));
+        UnityUtility.ValidateArrayReference(_enemyFormationSlots, nameof(_enemyFormationSlots));
         UnityUtility.ValidateReference(_companionSelectionContent, nameof(_companionSelectionContent));
         UnityUtility.ValidateReference(_companionSelectionSlotPrefab, nameof(_companionSelectionSlotPrefab));
-
         UnityUtility.ValidateReference(StartBattle, nameof(StartBattle));
     }
 
@@ -115,7 +105,7 @@ public class PartyFormationView : ViewBase<BattleFormationViewModel>
 
     private void HandleStartButtonClicked()
     {
-        BattleManager.Instance.Battle("Stage_01");
+     //   BattleManager.Instance.StartBattle("Stage_01");
     }
 
     #region 주인공 슬롯 관련 로직
