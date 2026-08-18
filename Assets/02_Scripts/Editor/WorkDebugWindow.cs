@@ -1,10 +1,21 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class WorkDebugWindow : EditorWindow
 {
     private const long ADD_INSPIRATION_AMOUNT = 10;
+    private const double REPAINT_INTERVAL = 0.25;
+
+    private static readonly string[] TAB_NAMES = { "기본", "수동 업무", "자동 업무", "에너지" };
+
+    private int _tabIndex = 0;
+    private Vector2 _scrollPosition;
+    private double _nextRepaintTime;
+
+    private Dictionary<WorkStatType, GUIContent> _statLabels = new();
+    private GUIContent _valueContent = new GUIContent();
 
     [MenuItem("Tools/Work Debug")]
     private static void Open()
@@ -16,8 +27,16 @@ public class WorkDebugWindow : EditorWindow
     {
         if (!Application.isPlaying)
         {
+            _statLabels.Clear();
             return;
         }
+
+        if (EditorApplication.timeSinceStartup < _nextRepaintTime)
+        {
+            return;
+        }
+
+        _nextRepaintTime = EditorApplication.timeSinceStartup + REPAINT_INTERVAL;
 
         Repaint();
     }
@@ -36,6 +55,37 @@ public class WorkDebugWindow : EditorWindow
             return;
         }
 
+        _tabIndex = GUILayout.Toolbar(_tabIndex, TAB_NAMES);
+        EditorGUILayout.Space();
+
+        _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
+
+        switch (_tabIndex)
+        {
+            case 1:
+                DrawManualWorkTab();
+                break;
+
+            case 2:
+                DrawAutoWorkTab();
+                break;
+
+            case 3:
+                DrawEnergyTab();
+                break;
+
+            default:
+                DrawBasicTab();
+                break;
+        }
+
+        EditorGUILayout.EndScrollView();
+    }
+
+    #region 기본 탭
+
+    private void DrawBasicTab()
+    {
         DrawTime();
         EditorGUILayout.Space();
 
@@ -43,6 +93,9 @@ public class WorkDebugWindow : EditorWindow
         EditorGUILayout.Space();
 
         DrawCurrency();
+        EditorGUILayout.Space();
+
+        DrawUnlockedPerks();
     }
 
     private void DrawTime()
@@ -78,7 +131,7 @@ public class WorkDebugWindow : EditorWindow
     {
         EditorGUILayout.LabelField("자동업무 큐", EditorStyles.boldLabel);
 
-        EditorGUILayout.LabelField("등록", $"{AutoWorkQueue.Count} / {AutoWorkQueue.MAX_SLOT_COUNT}");
+        EditorGUILayout.LabelField("등록", $"{AutoWorkQueue.Count} / {AutoWorkQueue.MaxSlotCount}");
         EditorGUILayout.LabelField("총 남은시간", Utils.FormatClock(AutoWorkQueue.GetTotalRemainSeconds()));
 
         for (int i = 0; i < AutoWorkQueue.Count; i++)
@@ -104,7 +157,7 @@ public class WorkDebugWindow : EditorWindow
 
         EditorGUILayout.LabelField("돈", currency.Money.ToString());
         EditorGUILayout.LabelField("드림 포인트", currency.DreamPoint.ToString());
-        EditorGUILayout.LabelField("에너지", currency.Energy.ToString());
+        EditorGUILayout.LabelField("에너지", $"{currency.Energy} / {currency.MaxEnergy}");
         EditorGUILayout.LabelField("꿈의 조각", currency.DreamFragment.ToString());
         EditorGUILayout.LabelField("몽상의 스크롤", currency.DreamScroll.ToString());
         EditorGUILayout.LabelField("영감", currency.Inspiration.ToString());
@@ -114,4 +167,207 @@ public class WorkDebugWindow : EditorWindow
             currency.AddInspiration(ADD_INSPIRATION_AMOUNT);
         }
     }
+
+    private void DrawUnlockedPerks()
+    {
+        IReadOnlyList<string> perkIds = GameManager.Perk.GetUnlockedPerkIds();
+
+        EditorGUILayout.LabelField($"활성 퍽 ({perkIds.Count}개)", EditorStyles.boldLabel);
+
+        if (perkIds.Count == 0)
+        {
+            EditorGUILayout.LabelField("    없음");
+            return;
+        }
+
+        for (int i = 0; i < perkIds.Count; i++)
+        {
+            PerkNodeData data = GameManager.DataTable.GetPerkNodeData(perkIds[i]);
+            string name = null != data ? data.Name : "(테이블 없음)";
+
+            EditorGUILayout.LabelField($"    {perkIds[i]}", name);
+        }
+    }
+
+    #endregion
+
+    #region 업무 버프 탭
+
+    private void DrawManualWorkTab()
+    {
+        EditorGUILayout.LabelField("수동 업무 보정", EditorStyles.boldLabel);
+
+        DrawModifier(WorkStatType.ManualWorkRewardMoney);
+        DrawModifier(WorkStatType.ManualWorkRewardDP);
+        DrawModifier(WorkStatType.WorkEnergyCost);
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("업무별 적용 결과", EditorStyles.boldLabel);
+
+        DrawWorkList(WorkType.Manual);
+    }
+
+    private void DrawAutoWorkTab()
+    {
+        EditorGUILayout.LabelField("자동 업무 보정", EditorStyles.boldLabel);
+
+        DrawModifier(WorkStatType.AutoWorkRewardMoney);
+        DrawModifier(WorkStatType.AutoWorkRewardDP);
+        DrawModifier(WorkStatType.WorkDuration);
+        DrawModifier(WorkStatType.AutoWorkSlotCount);
+
+        EditorGUILayout.Space();
+
+        DrawCompare("적용 슬롯 수", AutoWorkQueue.DebugBaseSlotCount, AutoWorkQueue.MaxSlotCount, "0");
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("업무별 적용 결과", EditorStyles.boldLabel);
+
+        DrawWorkList(WorkType.Auto);
+    }
+
+    private void DrawWorkList(WorkType workType)
+    {
+        PerkStatCalculator stat = GameManager.Perk.Stat;
+
+        bool isAuto = WorkType.Auto == workType;
+
+        WorkStatType moneyStat = isAuto ? WorkStatType.AutoWorkRewardMoney : WorkStatType.ManualWorkRewardMoney;
+        WorkStatType dpStat = isAuto ? WorkStatType.AutoWorkRewardDP : WorkStatType.ManualWorkRewardDP;
+
+        foreach (WorkData data in GameManager.DataTable.WorkDataTable.Values)
+        {
+            if (workType != data.Type)
+            {
+                continue;
+            }
+
+            EditorGUILayout.LabelField(data.Name, data.Id, EditorStyles.boldLabel);
+
+            EditorGUI.indentLevel++;
+
+            DrawCompare("보상 돈", data.RewardMoney, stat.GetLong(moneyStat, data.RewardMoney), "0");
+            DrawCompare("보상 DP", data.RewardDP, stat.GetLong(dpStat, data.RewardDP), "0");
+
+            if (isAuto)
+            {
+                DrawCompare("소요 시간(초)", data.DurationSeconds, stat.GetFloat(WorkStatType.WorkDuration, data.DurationSeconds), "0");
+            }
+            else
+            {
+                DrawCompare("에너지 소모", data.ReqEnergy, stat.GetLong(WorkStatType.WorkEnergyCost, data.ReqEnergy), "0");
+            }
+
+            EditorGUI.indentLevel--;
+        }
+    }
+
+    #endregion
+
+    #region 에너지 탭
+
+    private void DrawEnergyTab()
+    {
+        CurrencyModel currency = GameManager.User.Currency;
+
+        EditorGUILayout.LabelField("최대 에너지", EditorStyles.boldLabel);
+
+        DrawModifier(WorkStatType.EnergyMax);
+        DrawCompare("최대치", currency.DebugBaseMaxEnergy, currency.MaxEnergy, "0");
+        EditorGUILayout.LabelField("현재", $"{currency.Energy} / {currency.MaxEnergy}");
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("회복 속도", EditorStyles.boldLabel);
+
+        DrawModifier(WorkStatType.EnergyRecoverRate);
+
+        float baseInterval = EnergyRecovery.DebugBaseIntervalSeconds;
+        float appliedInterval = EnergyRecovery.DebugRecoverIntervalSeconds;
+
+        float speed = EnergyRecovery.DebugRecoverSpeed;
+
+        EditorGUILayout.LabelField("속도", $"x{speed:0.##}   ({FormatPercent(speed - 1f)})");
+        DrawCompare("회복 주기(초)", baseInterval, appliedInterval, "0.##");
+
+        if (0f < appliedInterval && 0f < baseInterval)
+        {
+            DrawCompare("분당 회복량", 60f / baseInterval, 60f / appliedInterval, "0.##");
+        }
+    }
+
+    #endregion
+
+    #region 공통
+
+    private void DrawModifier(WorkStatType statType)
+    {
+        GUIContent label = GetStatLabel(statType);
+
+        if (!GameManager.Perk.Stat.TryGetModifier(statType, out float flat, out float additiveRate, out float compoundRate))
+        {
+            _valueContent.text = "보정 없음";
+            EditorGUILayout.LabelField(label, _valueContent);
+            return;
+        }
+
+        float totalRate = (1f + additiveRate) * compoundRate;
+
+        string detail = $"합 {FormatPercent(additiveRate)} / 곱 {FormatPercent(compoundRate - 1f)}";
+
+        if (0f != flat)
+        {
+            detail += $" / 고정 {flat:+0.##;-0.##;0}";
+        }
+
+        _valueContent.text = $"{FormatPercent(totalRate - 1f)}   ({detail})";
+
+        EditorGUILayout.LabelField(label, _valueContent);
+    }
+
+    private void DrawCompare(string label, double baseValue, double appliedValue, string format)
+    {
+        string diff = string.Empty;
+
+        if (0d != baseValue)
+        {
+            diff = $"   ({FormatPercent(appliedValue / baseValue - 1d)})";
+        }
+
+        EditorGUILayout.LabelField(label, $"{baseValue.ToString(format)} -> {appliedValue.ToString(format)}{diff}");
+    }
+
+    private GUIContent GetStatLabel(WorkStatType statType)
+    {
+        if (_statLabels.TryGetValue(statType, out GUIContent cached))
+        {
+            return cached;
+        }
+
+        GUIContent label = CreateStatLabel(statType);
+
+        _statLabels.Add(statType, label);
+
+        return label;
+    }
+
+    private GUIContent CreateStatLabel(WorkStatType statType)
+    {
+        WorkStatData data = GameManager.DataTable.GetWorkStatData(statType);
+
+        if (null == data)
+        {
+            return new GUIContent(statType.ToString(), "WorkStat 테이블에 정의가 없습니다.");
+        }
+
+        string name = string.IsNullOrEmpty(data.Name) ? statType.ToString() : data.Name;
+
+        return new GUIContent(name, data.Description);
+    }
+
+    private static string FormatPercent(double rate)
+    {
+        return $"{rate * 100d:+0.#;-0.#;0}%";
+    }
+
+    #endregion
 }

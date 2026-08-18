@@ -5,9 +5,16 @@ using System.Threading;
 
 public static class AutoWorkQueue
 {
-    public const int MAX_SLOT_COUNT = 5;
-
+    private const int BASE_SLOT_COUNT = 5;
     private const float COLLECT_INTERVAL = 1f;
+
+    public static int MaxSlotCount
+    {
+        get
+        {
+            return GameManager.Perk.Stat.GetInt(WorkStatType.AutoWorkSlotCount, BASE_SLOT_COUNT);
+        }
+    }
 
     private static List<AutoWorkSlot> Slots
     {
@@ -29,7 +36,7 @@ public static class AutoWorkQueue
     {
         get
         {
-            return Slots.Count < MAX_SLOT_COUNT;
+            return Slots.Count < MaxSlotCount;
         }
     }
 
@@ -37,7 +44,7 @@ public static class AutoWorkQueue
     {
         if (!CanEnqueue)
         {
-            Logger.LogWarning($"업무 큐가 가득 찼습니다. (최대 {MAX_SLOT_COUNT}개)");
+            Logger.LogWarning($"업무 큐가 가득 찼습니다. (최대 {MaxSlotCount}개)");
             return false;
         }
 
@@ -67,7 +74,7 @@ public static class AutoWorkQueue
         {
             WorkId = workId,
             StartTicks = startTicks,
-            EndTicks = startTicks + (long)(data.DurationSeconds * TimeSpan.TicksPerSecond),
+            EndTicks = startTicks + GetDurationTicks(data),
         });
 
         GameManager.Save.Save();
@@ -115,13 +122,18 @@ public static class AutoWorkQueue
             AutoWorkSlot slot = slots[i];
 
             slot.StartTicks = startTicks;
-            slot.EndTicks = startTicks + (long)(data.DurationSeconds * TimeSpan.TicksPerSecond);
+            slot.EndTicks = startTicks + GetDurationTicks(data);
 
             slots[i] = slot;
         }
     }
 
-    // 업무 화면이 닫혀 있어도 정산되도록 하기
+    private static long GetDurationTicks(WorkData data)
+    {
+        float durationSeconds = GameManager.Perk.Stat.GetFloat(WorkStatType.WorkDuration, data.DurationSeconds);
+        return (long)(durationSeconds * TimeSpan.TicksPerSecond);
+    }
+
     public static async UniTaskVoid RunCollectLoopAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
@@ -151,10 +163,13 @@ public static class AutoWorkQueue
                 continue;
             }
 
-            GameManager.User.Currency.AddMoney(data.RewardMoney);
-            GameManager.User.Currency.AddDreamPoint(data.RewardDP);
+            long money = GameManager.Perk.Stat.GetLong(WorkStatType.AutoWorkRewardMoney, data.RewardMoney);
+            long dp = GameManager.Perk.Stat.GetLong(WorkStatType.AutoWorkRewardDP, data.RewardDP);
 
-            Logger.Log($"자동업무 완료 - {data.Name} / 돈 {data.RewardMoney} / DP {data.RewardDP}");
+            GameManager.User.Currency.AddMoney(money);
+            GameManager.User.Currency.AddDreamPoint(dp);
+
+            Logger.Log($"자동업무 완료 - {data.Name} / 돈 {money} / DP {dp}");
         }
 
         if (collectedCount > 0)
@@ -220,7 +235,14 @@ public static class AutoWorkQueue
     }
 
 #if UNITY_EDITOR
-    // 즉시 완료
+    public static int DebugBaseSlotCount
+    {
+        get
+        {
+            return BASE_SLOT_COUNT;
+        }
+    }
+
     public static void DebugCompleteFirst()
     {
         List<AutoWorkSlot> slots = Slots;

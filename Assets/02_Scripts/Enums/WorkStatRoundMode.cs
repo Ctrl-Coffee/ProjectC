@@ -1,5 +1,6 @@
-﻿public enum WorkStatRoundMode
+public enum WorkStatRoundMode
 {
+    None,
     Round,
     Floor,
     Ceil

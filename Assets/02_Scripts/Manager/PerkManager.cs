@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 public class PerkManager
@@ -11,6 +11,16 @@ public class PerkManager
     private Dictionary<string, List<string>> _neighborIds;
 
     private HashSet<string> _unlockedSet;
+
+    private PerkStatCalculator _statCalculator = new();
+
+    public PerkStatCalculator Stat
+    {
+        get
+        {
+            return _statCalculator;
+        }
+    }
 
     private HashSet<string> UnlockedSet
     {
@@ -33,6 +43,7 @@ public class PerkManager
     public void InvalidateCache()
     {
         _unlockedSet = null;
+        _statCalculator.Invalidate();
     }
 
     public bool IsUnlocked(string perkId)
@@ -118,6 +129,7 @@ public class PerkManager
         InvalidateCache();
         GameManager.Save.Save();
 
+        GameManager.User.Currency.NotifyMaxEnergyChanged();
         OnPerkChanged?.Invoke();
 
         return true;
@@ -176,6 +188,7 @@ public class PerkManager
         GameManager.User.Currency.AddInspiration(data.InspirationCost);
         GameManager.Save.Save();
 
+        GameManager.User.Currency.NotifyMaxEnergyChanged();
         OnPerkChanged?.Invoke();
 
         return true;
