@@ -27,7 +27,7 @@
       "Effect_ManualMoney_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +5%",
@@ -47,7 +47,7 @@
       "Effect_ManualDP_Add"
     ],
     "EffectValue": [
-      "0.04"
+      0.04
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 DP +4%",
@@ -67,7 +67,7 @@
       "Effect_ManualDP_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 DP +5%",
@@ -88,7 +88,7 @@
       "Effect_ManualMoney_Add"
     ],
     "EffectValue": [
-      "0.06"
+      0.06
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +6%",
@@ -108,7 +108,7 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "-0.04"
+      -0.04
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -4%",
@@ -130,8 +130,8 @@
       "Effect_ManualDP_Add"
     ],
     "EffectValue": [
-      "0.08",
-      "0.08"
+      0.08,
+      0.08
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +8%, DP +8%",
@@ -151,7 +151,7 @@
       "Effect_ManualDP_Add"
     ],
     "EffectValue": [
-      "0.07"
+      0.07
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 DP +7%",
@@ -172,7 +172,7 @@
       "Effect_ManualMoney_Add"
     ],
     "EffectValue": [
-      "0.07"
+      0.07
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +7%",
@@ -192,7 +192,7 @@
       "Effect_ManualDP_Add"
     ],
     "EffectValue": [
-      "0.07"
+      0.07
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 DP +7%",
@@ -213,7 +213,7 @@
       "Effect_ManualMoney_Add"
     ],
     "EffectValue": [
-      "0.3"
+      0.3
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +30%",
@@ -233,7 +233,7 @@
       "Effect_ManualMoney_Add"
     ],
     "EffectValue": [
-      "0.08"
+      0.08
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +8%",
@@ -254,7 +254,7 @@
       "Effect_ManualDP_Add"
     ],
     "EffectValue": [
-      "0.1"
+      0.1
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 DP +10%",
@@ -274,7 +274,7 @@
       "Effect_AutoMoney_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "자동 업무로 얻는 돈 +5%",
@@ -294,7 +294,7 @@
       "Effect_Duration_Add"
     ],
     "EffectValue": [
-      "-0.03"
+      -0.03
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 -3%",
@@ -314,7 +314,7 @@
       "Effect_Duration_Add"
     ],
     "EffectValue": [
-      "-0.05"
+      -0.05
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 -5%",
@@ -335,7 +335,7 @@
       "Effect_AutoDP_Add"
     ],
     "EffectValue": [
-      "0.06"
+      0.06
     ],
     "IconKey": null,
     "Description": "자동 업무로 얻는 DP +6%",
@@ -355,7 +355,7 @@
       "Effect_Duration_Add"
     ],
     "EffectValue": [
-      "-0.05"
+      -0.05
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 -5%",
@@ -377,8 +377,8 @@
       "Effect_AutoDP_Add"
     ],
     "EffectValue": [
-      "0.08",
-      "0.08"
+      0.08,
+      0.08
     ],
     "IconKey": null,
     "Description": "자동 업무로 얻는 돈 +8%, DP +8%",
@@ -398,7 +398,7 @@
       "Effect_SlotCount_Flat"
     ],
     "EffectValue": [
-      "1"
+      1
     ],
     "IconKey": null,
     "Description": "자동 업무 슬롯 +1",
@@ -419,7 +419,7 @@
       "Effect_AutoMoney_Add"
     ],
     "EffectValue": [
-      "0.07"
+      0.07
     ],
     "IconKey": null,
     "Description": "자동 업무로 얻는 돈 +7%",
@@ -439,7 +439,7 @@
       "Effect_Duration_Add"
     ],
     "EffectValue": [
-      "-0.06"
+      -0.06
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 -6%",
@@ -460,7 +460,7 @@
       "Effect_AutoDP_Add"
     ],
     "EffectValue": [
-      "0.1"
+      0.1
     ],
     "IconKey": null,
     "Description": "자동 업무로 얻는 DP +10%",
@@ -480,7 +480,7 @@
       "Effect_AutoMoney_Add"
     ],
     "EffectValue": [
-      "0.08"
+      0.08
     ],
     "IconKey": null,
     "Description": "자동 업무로 얻는 돈 +8%",
@@ -501,7 +501,7 @@
       "Effect_Duration_Add"
     ],
     "EffectValue": [
-      "-0.08"
+      -0.08
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 -8%",
@@ -523,8 +523,8 @@
       "Effect_AutoMoney_Add"
     ],
     "EffectValue": [
-      "0.1",
-      "0.1"
+      0.1,
+      0.1
     ],
     "IconKey": null,
     "Description": "수동·자동 업무로 얻는 돈 +10%",
@@ -546,8 +546,8 @@
       "Effect_AutoDP_Add"
     ],
     "EffectValue": [
-      "0.12",
-      "0.12"
+      0.12,
+      0.12
     ],
     "IconKey": null,
     "Description": "수동·자동 업무로 얻는 DP +12%",
@@ -569,8 +569,8 @@
       "Effect_Duration_Add"
     ],
     "EffectValue": [
-      "0.12",
-      "-0.08"
+      0.12,
+      -0.08
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +12%, 자동 업무 소요 시간 -8%",
@@ -590,7 +590,7 @@
       "Effect_ManualMoney_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +5%",
@@ -610,7 +610,7 @@
       "Effect_ManualDP_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 DP +5%",
@@ -630,7 +630,7 @@
       "Effect_ManualMoney_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +5%",
@@ -650,7 +650,7 @@
       "Effect_ManualDP_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 DP +5%",
@@ -706,7 +706,7 @@
       "Effect_AutoMoney_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "자동 업무로 얻는 돈 +5%",
@@ -726,7 +726,7 @@
       "Effect_Duration_Add"
     ],
     "EffectValue": [
-      "-0.05"
+      -0.05
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 -5%",
@@ -746,7 +746,7 @@
       "Effect_AutoDP_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "자동 업무로 얻는 DP +5%",
@@ -766,7 +766,7 @@
       "Effect_AutoMoney_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "자동 업무로 얻는 돈 +5%",
@@ -822,7 +822,7 @@
       "Effect_AutoMoney_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "자동 업무로 얻는 돈 +5%",
@@ -843,8 +843,8 @@
       "Effect_AutoMoney_Add"
     ],
     "EffectValue": [
-      "0.15",
-      "0.2"
+      0.15,
+      0.2
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 +15%, 돈 +20%",
@@ -868,11 +868,11 @@
       "Effect_ManualDP_Comp"
     ],
     "EffectValue": [
-      "-0.5",
-      "-0.5",
-      "-999",
-      "0.5",
-      "0.5"
+      -0.5,
+      -0.5,
+      -999,
+      0.5,
+      0.5
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 -50%, 돈 -50%, 수동 업무 에너지 소모 최소화, 수동 업무 획득 재화 +50%",
@@ -896,11 +896,11 @@
       "Effect_ManualDP_Comp"
     ],
     "EffectValue": [
-      "-0.3",
-      "0.5",
-      "0.5",
-      "-0.5",
-      "-0.5"
+      -0.3,
+      0.5,
+      0.5,
+      -0.5,
+      -0.5
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 -30%, 자동 업무 획득 재화 +50%, 수동 업무 획득 재화 -50%",
@@ -920,7 +920,7 @@
       "Effect_EnergyRecover_Flat"
     ],
     "EffectValue": [
-      "1"
+      1
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +1",
@@ -940,7 +940,7 @@
       "Effect_EnergyMax_Flat"
     ],
     "EffectValue": [
-      "5"
+      5
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +5",
@@ -960,7 +960,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +5%",
@@ -980,7 +980,7 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +5%",
@@ -1001,7 +1001,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +5%",
@@ -1023,8 +1023,8 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.07",
-      "0.07"
+      0.07,
+      0.07
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +7%, 회복량 +7%",
@@ -1044,7 +1044,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.2"
+      0.2
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +20%",
@@ -1064,7 +1064,7 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "0.07"
+      0.07
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +7%",
@@ -1085,7 +1085,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.07"
+      0.07
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +7%",
@@ -1106,7 +1106,7 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "0.1"
+      0.1
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +10%",
@@ -1126,7 +1126,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.1"
+      0.1
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +10%",
@@ -1147,7 +1147,7 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "0.12"
+      0.12
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +12%",
@@ -1167,7 +1167,7 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "-0.04"
+      -0.04
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -4%",
@@ -1187,7 +1187,7 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "-0.04"
+      -0.04
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -4%",
@@ -1207,7 +1207,7 @@
       "Effect_EnergyMax_Flat"
     ],
     "EffectValue": [
-      "8"
+      8
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +8",
@@ -1227,7 +1227,7 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "-0.05"
+      -0.05
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -5%",
@@ -1248,7 +1248,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +5%",
@@ -1270,8 +1270,8 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "-0.06",
-      "0.06"
+      -0.06,
+      0.06
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -6%, 에너지 최대치 +6%",
@@ -1291,7 +1291,7 @@
       "Effect_EnergyCost_Flat"
     ],
     "EffectValue": [
-      "-1"
+      -1
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -1",
@@ -1311,7 +1311,7 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "-0.06"
+      -0.06
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -6%",
@@ -1332,7 +1332,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.07"
+      0.07
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +7%",
@@ -1353,7 +1353,7 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "-0.07"
+      -0.07
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -7%",
@@ -1373,7 +1373,7 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "0.1"
+      0.1
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +10%",
@@ -1394,7 +1394,7 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "-0.08"
+      -0.08
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -8%",
@@ -1416,8 +1416,8 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "0.1",
-      "-0.05"
+      0.1,
+      -0.05
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +10%, 업무 에너지 소모 -5%",
@@ -1439,8 +1439,8 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "0.12",
-      "-0.06"
+      0.12,
+      -0.06
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +12%, 업무 에너지 소모 -6%",
@@ -1462,8 +1462,8 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "0.12",
-      "0.12"
+      0.12,
+      0.12
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +12%, 최대치 +12%",
@@ -1483,7 +1483,7 @@
       "Effect_EnergyMax_Flat"
     ],
     "EffectValue": [
-      "5"
+      5
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +5",
@@ -1503,7 +1503,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +5%",
@@ -1523,7 +1523,7 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +5%",
@@ -1543,7 +1543,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.06"
+      0.06
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +6%",
@@ -1563,7 +1563,7 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "0.06"
+      0.06
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +6%",
@@ -1584,8 +1584,8 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.15",
-      "0.15"
+      0.15,
+      0.15
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +15%, 회복량 +15%",
@@ -1605,7 +1605,7 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "-0.04"
+      -0.04
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -4%",
@@ -1625,7 +1625,7 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "-0.04"
+      -0.04
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -4%",
@@ -1645,7 +1645,7 @@
       "Effect_EnergyMax_Flat"
     ],
     "EffectValue": [
-      "5"
+      5
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +5",
@@ -1665,7 +1665,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +5%",
@@ -1685,7 +1685,7 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "-0.05"
+      -0.05
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -5%",
@@ -1706,8 +1706,8 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "-0.12",
-      "0.12"
+      -0.12,
+      0.12
     ],
     "IconKey": null,
     "Description": "업무 에너지 소모 -12%, 에너지 최대치 +12%",
@@ -1728,8 +1728,8 @@
       "Effect_EnergyRecover_Comp"
     ],
     "EffectValue": [
-      "0.5",
-      "0.5"
+      0.5,
+      0.5
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +50%, 회복량 +50%",
@@ -1750,8 +1750,8 @@
       "Effect_EnergyCost_Comp"
     ],
     "EffectValue": [
-      "0.8",
-      "-0.4"
+      0.8,
+      -0.4
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +80%, 업무 에너지 소모 -40%",
@@ -1771,7 +1771,7 @@
       "Effect_ManualMoney_Add"
     ],
     "EffectValue": [
-      "0.06"
+      0.06
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +6%",
@@ -1791,7 +1791,7 @@
       "Effect_ManualDP_Add"
     ],
     "EffectValue": [
-      "0.06"
+      0.06
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 DP +6%",
@@ -1811,7 +1811,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.06"
+      0.06
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +6%",
@@ -1831,7 +1831,7 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "0.06"
+      0.06
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +6%",
@@ -1852,8 +1852,8 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "0.12",
-      "-0.05"
+      0.12,
+      -0.05
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +12%, 업무 에너지 소모 -5%",
@@ -1874,8 +1874,8 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.12",
-      "0.08"
+      0.12,
+      0.08
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 DP +12%, 에너지 회복량 +8%",
@@ -1897,8 +1897,8 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "-0.08",
-      "0.1"
+      -0.08,
+      0.1
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 -8%, 에너지 최대치 +10%",
@@ -1918,7 +1918,7 @@
       "Effect_ManualMoney_Add"
     ],
     "EffectValue": [
-      "0.08"
+      0.08
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +8%",
@@ -1938,7 +1938,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.08"
+      0.08
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +8%",
@@ -1961,9 +1961,9 @@
       "Effect_EnergyMax_Comp"
     ],
     "EffectValue": [
-      "0.5",
-      "0.5",
-      "-0.4"
+      0.5,
+      0.5,
+      -0.4
     ],
     "IconKey": null,
     "Description": "수동·자동 업무 획득 돈 +50%, 에너지 최대치 -40%",
@@ -1983,7 +1983,7 @@
       "Effect_ManualMoney_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +5%",
@@ -2003,7 +2003,7 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "0.05"
+      0.05
     ],
     "IconKey": null,
     "Description": "에너지 회복량 +5%",
@@ -2025,8 +2025,8 @@
       "Effect_EnergyCost_Add"
     ],
     "EffectValue": [
-      "0.08",
-      "-0.04"
+      0.08,
+      -0.04
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 돈 +8%, 업무 에너지 소모 -4%",
@@ -2046,7 +2046,7 @@
       "Effect_ManualDP_Add"
     ],
     "EffectValue": [
-      "0.06"
+      0.06
     ],
     "IconKey": null,
     "Description": "수동 업무로 얻는 DP +6%",
@@ -2066,7 +2066,7 @@
       "Effect_EnergyMax_Add"
     ],
     "EffectValue": [
-      "0.06"
+      0.06
     ],
     "IconKey": null,
     "Description": "에너지 최대치 +6%",
@@ -2088,8 +2088,8 @@
       "Effect_EnergyRecover_Add"
     ],
     "EffectValue": [
-      "-0.06",
-      "0.08"
+      -0.06,
+      0.08
     ],
     "IconKey": null,
     "Description": "자동 업무 소요 시간 -6%, 에너지 회복량 +8%",

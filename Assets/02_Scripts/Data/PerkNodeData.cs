@@ -10,7 +10,7 @@ public class PerkNodeData : BaseData
     public string ParentMode;
     public string[] ParentId;
     public string[] EffectId;
-    public string[] EffectValue;
+    public float[] EffectValue;
     public string IconKey;
     public string Description;
     public string ExclusiveGroup;
