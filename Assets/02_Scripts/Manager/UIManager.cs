@@ -134,6 +134,11 @@ public class UIManager
         return _createdUI[_popupStack.Peek()];
     }
 
+    public UniTask<T> OpenContentUI<T>() where T : UIBase
+    {
+        return OpenUI<T>(UIRootType.Content);
+    }
+
     public UniTask<T> OpenHUDUI<T>() where T : UIBase
     {
         return OpenUI<T>(UIRootType.Hud);
@@ -147,6 +152,13 @@ public class UIManager
     public UniTask<T> OpenOverlayUI<T>() where T : UIBase
     {
         return OpenUI<T>(UIRootType.Overlay);
+    }
+
+    public async UniTask<T> CloseContentUI<T>() where T : UIBase
+    {
+        var ui = await GetOrCreateUI<T>(UIRootType.Content);
+        ui.CloseUI();
+        return ui;
     }
 
     public async UniTask<T> CloseHUDUI<T>() where T : UIBase

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 518684735169997018}
   - component: {fileID: 6779224141819055801}
   m_Layer: 5
-  m_Name: Guild
+  m_Name: Companion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 5982007002576643886}
   - component: {fileID: 1598579588871226777}
   m_Layer: 5
-  m_Name: Forge
+  m_Name: Gacha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1605,8 +1605,8 @@ MonoBehaviour:
   _scrollDream: {fileID: 1256276468385762375}
   _inspiration: {fileID: 6656990533849563400}
   _settingBtn: {fileID: 5386212322020137834}
-  _forgeBtn: {fileID: 1598579588871226777}
-  _guildBtn: {fileID: 6779224141819055801}
+  _gachaBtn: {fileID: 1598579588871226777}
+  _companionBtn: {fileID: 6779224141819055801}
   _stageBtn: {fileID: 3884458221969278670}
   _heroBtn: {fileID: 1378017208228638819}
   _lobbyBtn: {fileID: 6966460782411002248}
@@ -1675,7 +1675,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Forge
+  m_text: Gacha
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2357,7 +2357,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Guild
+  m_text: Companion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

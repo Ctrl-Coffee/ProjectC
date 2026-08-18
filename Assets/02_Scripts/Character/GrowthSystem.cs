@@ -4,19 +4,6 @@ public class GrowthSystem
 {
     #region 데이터 조회 (순수 계산)
 
-    public CharacterStatData GetCompanionFinalStat(string companionId, int level)
-    {
-        CompanionLevelData levelData = GameManager.DataTable.GetCompanionLevelData(companionId, level);
-
-        if (levelData == null)
-        {
-            Debug.LogError($"동료 레벨 데이터를 찾을 수 없습니다. Id: {companionId}, Level: {level}");
-            return null;
-        }
-
-        return new CharacterStatData(levelData.BaseAttack, levelData.BaseDefense, levelData.HP);
-    }
-
     public CharacterStatData GetPlayerFinalStat(int level)
     {
         PlayerLevelData levelData = GameManager.DataTable.GetPlayerLevelData(level);
@@ -81,35 +68,6 @@ public class GrowthSystem
 
     #region 레벨업 판정
 
-    public bool IsCompanionMaxLevel(string companionId, int level)
-    {
-        return GameManager.DataTable.GetCompanionLevelData(companionId, level + 1) == null;
-    }
-
-    public bool CheckCompanionCanLevelUp(string companionId, int level)
-    {
-        if (IsCompanionMaxLevel(companionId, level))
-        {
-            return false;
-        }
-
-        CompanionLevelData nextLevelData = GameManager.DataTable.GetCompanionLevelData(companionId, level + 1);
-
-        return GameManager.User.Currency.DreamFragment >= (long)nextLevelData.UpgradeCost;
-    }
-
-    public bool TryPayCompanionLevelUpCost(string companionId, int level)
-    {
-        if (CheckCompanionCanLevelUp(companionId, level) == false)
-        {
-            return false;
-        }
-
-        CompanionLevelData nextLevelData = GameManager.DataTable.GetCompanionLevelData(companionId, level + 1);
-
-        return GameManager.User.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
-    }
-
     public bool IsPlayerMaxLevel(int level)
     {
         return GameManager.DataTable.GetPlayerLevelData(level + 1) == null;
@@ -173,12 +131,7 @@ public class GrowthSystem
 
     public CharacterStatData GetCharacterBattleStat(string characterId)
     {
-        if (characterId == CharacterId.PLAYER)
-        {
-            return GetPlayerBattleStat();
-        }
-
-        return GetCompanionBattleStat(characterId);
+        return GetPlayerBattleStat();
     }
 
     public CharacterSkillEffectData GetCharacterBattleSkill(string characterId)
@@ -217,18 +170,6 @@ public class GrowthSystem
         }
 
         return new CharacterStatData(finalStat.FinalAtk + equipmentStat.FinalAtk, finalStat.FinalDef + equipmentStat.FinalDef, finalStat.FinalHp + equipmentStat.FinalHp);
-    }
-
-    public CharacterStatData GetCompanionBattleStat(string companionId)
-    {
-        OwnedCompanionData owned = GameManager.Companion.GetOwnedCompanion(companionId);
-        if (owned == null)
-        {
-            Debug.LogError($"보유하지 않은 동료. id : {companionId}");
-            return null;
-        }
-
-        return GetCompanionFinalStat(companionId, owned.Level);
     }
 
     public CharacterSkillEffectData GetPlayerBattleSkill()
