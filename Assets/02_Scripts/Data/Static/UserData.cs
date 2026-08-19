@@ -8,7 +8,6 @@ public class UserData
     public List<AutoWorkSlot> AutoWorkSlots = new();
     public long LastEnergyRecoverTicks;
     public OwnedPlayerData Player = new();
-    public List<OwnedEquipmentData> Equipments = new();
 
     public void EnsureDefaults()
     {

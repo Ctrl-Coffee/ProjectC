@@ -24,7 +24,6 @@ public static class UIManagerExtension
         uiManager.CloseHUDUI<RealHudUI>().Forget();
     }
 
-
     public static void CloseDreamHud(this UIManager uiManager)
     {
         uiManager.CloseHUDUI<DreamHudUI>().Forget();
@@ -41,10 +40,29 @@ public static class UIManagerExtension
         return uiManager.OpenContentUI<CompanionInventoryView>();
     }
 
-    public static async void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Action onClickLevelUp)
+    public static UniTask<HeroInventoryView> OpenHeroInventory(this UIManager uiManager)
+    {
+        return uiManager.OpenContentUI<HeroInventoryView>();
+    }
+
+    public static async void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Func<LevelUpResult> onClickLevelUp)
     {
         var ui = await uiManager.OpenPopupUI<CompanionDetailUI>();
         ui.Init(companionState, onClickLevelUp);
+    }
+
+    public static async void OpenEquipmentDetailPopup(this UIManager uiManager
+        , System.Func<LevelUpResult> onClickLevelUp, EquipmentData data, string equipmentId)
+    {
+        var ui = await uiManager.OpenPopupUI<EquipmentDetailUI>();
+
+
+        //무기 = 공격력, 공격속도, 스킬 쿨다운 감소,
+        //의복 = 체력, 방어력,
+        //장신구 = 공격력, 치명타율,
+
+
+        ui.Init(onClickLevelUp, data, equipmentId);
     }
 
     public static UniTask<WorkInfoUI> OpenWorkInfoUI(this UIManager uiManager)
