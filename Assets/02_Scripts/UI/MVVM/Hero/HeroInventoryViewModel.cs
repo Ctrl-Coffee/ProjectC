@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 
-public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
+public class HeroInventoryViewModel : ViewModelBase<HeroEquipmentModel>
 {
-    public event System.Action<string, ContainerPropertyChangedEvent, CompanionState> OnContainerChanged_ViewModel;
+    public event System.Action<string, ContainerPropertyChangedEvent, HeroEquipmentState> OnContainerChanged_ViewModel;
 
-    public IReadOnlyList<CompanionState> Items => _items;
+    public IReadOnlyList<HeroEquipmentState> Items => _items;
     public InventorySort CurrentSort => _currentSort;
 
     private InventorySort _currentSort = InventorySort.Level;
-    private readonly List<CompanionState> _items = new();
+    private readonly List<HeroEquipmentState> _items = new();
 
-    public CompanionInventoryViewModel(CompanionModel model) : base(model)
+
+    public HeroInventoryViewModel(HeroEquipmentModel model) : base(model)
     {
         model.ContainerPropertyChanged += OnContainerChanged;
-        RefreshItems();
+        RefreshItems(); 
     }
 
     public override void UnBind()
@@ -22,24 +23,24 @@ public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
         base.UnBind();
     }
 
-    public void OnContainerChanged(string propertyName, ContainerPropertyChangedEvent changedEvent, CompanionState companionState)
+    public void OnContainerChanged(string propertyName, ContainerPropertyChangedEvent changedEvent, HeroEquipmentState state)
     {
         switch (changedEvent)
         {
             case ContainerPropertyChangedEvent.Add:
-                AddItem(companionState);
+                AddItem(state);
                 break;
 
             case ContainerPropertyChangedEvent.Remove:
-                RemoveItem(companionState);
+                RemoveItem(state);
                 break;
 
             case ContainerPropertyChangedEvent.Update:
-                UpdateItem(companionState);
+                SortItems();
                 break;
         }
 
-        OnContainerChanged_ViewModel?.Invoke(propertyName, changedEvent, companionState);
+        OnContainerChanged_ViewModel?.Invoke(propertyName, changedEvent, state);
     }
 
     public void SetSort(int index)
@@ -48,14 +49,24 @@ public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
         SortItems();
     }
 
-    public int GetItemIndex(CompanionState value)
+    public int GetItemIndex(HeroEquipmentState value)
     {
         return _items.IndexOf(value);
     }
 
-    public CompanionState GetCompanionState(string companionId)
+    public HeroEquipmentState GetHeroEquipmentState(string id)
     {
-        return _model.GetCompanion(companionId);
+        return _model.GetHeroEquipment(id);
+    }
+
+    public LevelUpResult TryLevelUp(string heroEquipmentId)
+    {
+        return _model.TryLevelUp(heroEquipmentId);
+    }
+
+    public int GetLevel(string heroEquipmentId)
+    {
+        return _model.GetLevel(heroEquipmentId);
     }
 
     private void SortItems()
@@ -71,10 +82,10 @@ public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
                 }
 
                 return string.CompareOrdinal(
-                    x.CompanionId,
-                    y.CompanionId);
+                    x.HeroEquipmentId,
+                    y.HeroEquipmentId);
             });
-        else if(_currentSort == InventorySort.LevelReverse)
+        else if (_currentSort == InventorySort.LevelReverse)
             _items.Sort((x, y) =>
             {
                 int levelCompare = x.Level.CompareTo(y.Level);
@@ -85,44 +96,32 @@ public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
                 }
 
                 return string.CompareOrdinal(
-                    x.CompanionId,
-                    y.CompanionId);
+                    x.HeroEquipmentId,
+                    y.HeroEquipmentId);
             });
-
-
     }
 
     private void RefreshItems()
     {
         _items.Clear();
 
-        foreach (CompanionState companionState in _model.Companions.Values)
+        foreach (HeroEquipmentState state in _model.Equipments.Values)
         {
-            _items.Add(companionState);
+            _items.Add(state);
         }
 
         SortItems();
     }
 
-    private void AddItem(CompanionState companionState)
+    private void AddItem(HeroEquipmentState state)
     {
-        _items.Add(companionState);
+        _items.Add(state);
 
         SortItems();
     }
 
-    private void RemoveItem(CompanionState companionState)
+    private void RemoveItem(HeroEquipmentState state)
     {
-        _items.Remove(companionState);
-    }
-
-    private void UpdateItem(CompanionState companionState)
-    {
-        SortItems();
-    }
-
-    public LevelUpResult TryLevelUp(string companionId)
-    {
-        return _model.TryLevelUp(companionId);
+        _items.Remove(state);
     }
 }

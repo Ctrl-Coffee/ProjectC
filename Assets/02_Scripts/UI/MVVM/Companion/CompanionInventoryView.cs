@@ -174,6 +174,6 @@ public class CompanionInventoryView : ViewBase
 
     private LevelUpResult OnLevelUp(string companionId)
     {
-        return _inventoryViewModel.TempLevelUp(companionId);
+        return _inventoryViewModel.TryLevelUp(companionId);
     }
 }
