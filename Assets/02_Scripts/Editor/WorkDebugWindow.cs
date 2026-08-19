@@ -111,10 +111,28 @@ public class WorkDebugWindow : EditorWindow
 
         if (GUILayout.Button("초기화"))
         {
-            GameManager.Time.ResetDebugTime();
+            ResetDebugTime();
         }
 
         EditorGUILayout.EndHorizontal();
+    }
+
+    private void ResetDebugTime()
+    {
+        long shiftTicks = -GameManager.Time.DebugTimeOffset.Ticks;
+
+        GameManager.Time.ResetDebugTime();
+
+        if (0 == shiftTicks)
+        {
+            return;
+        }
+
+        AutoWorkQueue.DebugShiftSchedule(shiftTicks);
+
+        GameManager.User.LastEnergyRecoverTicks += shiftTicks;
+
+        GameManager.Save.Save();
     }
 
     private void DrawAddTimeButton(string label, TimeSpan amount)

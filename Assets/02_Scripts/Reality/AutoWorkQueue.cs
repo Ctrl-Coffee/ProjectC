@@ -88,6 +88,38 @@ public static class AutoWorkQueue
         return true;
     }
 
+    public static void NormalizeSchedule()
+    {
+        List<AutoWorkSlot> slots = Slots;
+
+        if (slots.Count == 0)
+        {
+            return;
+        }
+
+        long nowTicks = GameManager.Time.UtcNow.Ticks;
+        long shiftTicks = slots[0].StartTicks - nowTicks;
+
+        if (shiftTicks <= 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < slots.Count; i++)
+        {
+            AutoWorkSlot slot = slots[i];
+
+            slot.StartTicks -= shiftTicks;
+            slot.EndTicks -= shiftTicks;
+
+            slots[i] = slot;
+        }
+
+        GameManager.Save.Save();
+
+        Logger.LogWarning($"미래 시각의 자동업무 큐를 {shiftTicks / TimeSpan.TicksPerSecond}초 앞당겼습니다.");
+    }
+
     public static bool TryCancel(int index)
     {
         if (!IsValidIndex(index))
@@ -142,6 +174,8 @@ public static class AutoWorkQueue
 
     public static async UniTaskVoid RunCollectLoopAsync(CancellationToken token)
     {
+        NormalizeSchedule();
+
         while (!token.IsCancellationRequested)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(COLLECT_INTERVAL), ignoreTimeScale: true, cancellationToken: token);
@@ -246,6 +280,21 @@ public static class AutoWorkQueue
         get
         {
             return BASE_SLOT_COUNT;
+        }
+    }
+
+    public static void DebugShiftSchedule(long shiftTicks)
+    {
+        List<AutoWorkSlot> slots = Slots;
+
+        for (int i = 0; i < slots.Count; i++)
+        {
+            AutoWorkSlot slot = slots[i];
+
+            slot.StartTicks += shiftTicks;
+            slot.EndTicks += shiftTicks;
+
+            slots[i] = slot;
         }
     }
 

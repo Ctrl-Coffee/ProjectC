@@ -13,7 +13,7 @@ public class WorkInfoUI : UIBase
     [SerializeField] private UIButtonComponent _btnCreative;
 
     [Header("업무 목록")]
-    [SerializeField] private RectTransform _content;
+    [SerializeField] private RectTransform _workMenuContent;
     [SerializeField] private WorkSlotUI _workSlotPrefab;
 
     [Header("자동업무 큐")]
@@ -176,13 +176,13 @@ public class WorkInfoUI : UIBase
 
     private void SpawnWorkSlot(string workId, string workName, string info, Action<string> onClickPlay)
     {
-        if (null == _workSlotPrefab || null == _content)
+        if (null == _workSlotPrefab || null == _workMenuContent)
         {
             Logger.LogError("WorkSlot 프리팹 또는 Content가 연결되지 않았습니다.");
             return;
         }
 
-        WorkSlotUI slot = Instantiate(_workSlotPrefab, _content, false);
+        WorkSlotUI slot = Instantiate(_workSlotPrefab, _workMenuContent, false);
 
         slot.Bind(workId, onClickPlay);
         slot.SetInfo(workName, info);
