@@ -12,8 +12,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static SaveManager Save { get { return Instance._saveManager; } }
     public static UserData User { get { return Instance._saveManager.User; } } // 삭제대상
     public static GrowthSystem Growth { get { return Instance._growthSystem; } }
-
-    public static EquipmentManager Equipment { get { return Instance._equipmentManager; } }
     public static PerkManager Perk { get { return Instance._perkManager; } }
 
     public static GameSession Session { get { return Instance._gameSession; } }
@@ -30,8 +28,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     private UIManager _uiManager = new();
     private SaveManager _saveManager = new();
     private GrowthSystem _growthSystem = new();
-
-    private EquipmentManager _equipmentManager = new();
     private PerkManager _perkManager = new();
 
     private GameSession _gameSession;
@@ -96,7 +92,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
         EnterReal();
-        await UI.OpenPerkInfoUI();
     }
 
     #endregion
