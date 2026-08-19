@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 201589797fc1b524c8dc677d5956f5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerkDetailUI
-  _isPlayAnimation: 0
+  _isPlayAnimation: 1
   _panel: {fileID: 1500000002}
   _nameText: {fileID: 6640306996089216973}
   _descriptionText: {fileID: 1684622501404597300}
@@ -58,6 +58,10 @@ MonoBehaviour:
   _btnClose: {fileID: 1794566506642038216}
   _upgradeButton: {fileID: 970161024943993062}
   _cancelButton: {fileID: 3255248088804983102}
+  _slidePanel: {fileID: 7575510803389675621}
+  _slideInDuration: 0.3
+  _slideOutDuration: 0.2
+  _slideDistance: 300
 --- !u!1 &1787443441373134493
 GameObject:
   m_ObjectHideFlags: 0

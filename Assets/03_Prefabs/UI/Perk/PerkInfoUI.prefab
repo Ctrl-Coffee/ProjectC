@@ -54,7 +54,11 @@ MonoBehaviour:
   _isPlayAnimation: 0
   _panel: {fileID: 1600000022}
   _btnClose: {fileID: 4086872437862668602}
-  _lineDrawer: {fileID: 1600000043}
+  _lineDrawer: {fileID: 1558737885823861298}
+  _minorIcon: {fileID: 6802260575018433171, guid: 9366fbf78f06818429d9ccbaaf337a69, type: 3}
+  _notableIcon: {fileID: -984509186932416109, guid: 316517b8e3bba76499bc6d2b7aee9f2c, type: 3}
+  _unlockIcon: {fileID: -4677958207564997388, guid: 5eb5956f4f8b9f847868d026cb807bd5, type: 3}
+  _keystoneIcon: {fileID: -6090385032611815802, guid: 299d0fab1b561674fa7df8fc80e4a9bd, type: 3}
 --- !u!1 &1600000011
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08, g: 0.09, b: 0.11, a: 0.94}
+  m_Color: {r: 0.08, g: 0.09, b: 0.11, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -143,6 +147,7 @@ GameObject:
   - component: {fileID: 1600000024}
   - component: {fileID: 1600000025}
   - component: {fileID: 5643560191185324394}
+  - component: {fileID: 1558737885823861298}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -252,12 +257,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PerkTreeZoom
   _scrollRect: {fileID: 1600000025}
   _content: {fileID: 1600000042}
-  _canvas: {fileID: 0}
   _minScale: 0.5
   _maxScale: 2
   _defaultScale: 1
   _wheelSensitivity: 0.1
   _pinchSensitivity: 0.005
+--- !u!114 &1558737885823861298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600000021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7c1d5e9f617a230c3d8e1f509214c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerkTreeLineDrawer
+  _lineRoot: {fileID: 1600000052}
+  _nodeRoot: {fileID: 1600000062}
+  _lineWidth: 10
+  _lineColor: {r: 1, g: 1, b: 1, a: 1}
+  _activeLineColor: {r: 1, g: 0.8178215, b: 0.27735847, a: 1}
+  _fillDuration: 0.35
+  _retractDuration: 0.25
 --- !u!1 &1600000031
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +380,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1600000042}
-  - component: {fileID: 1600000043}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -386,23 +408,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 5400, y: 6000}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1600000043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600000041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7c1d5e9f617a230c3d8e1f509214c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PerkTreeLineDrawer
-  _lineRoot: {fileID: 1600000052}
-  _nodeRoot: {fileID: 1600000062}
-  _lineWidth: 10
-  _lineColor: {r: 0.4867924, g: 0.4867924, b: 0.4867924, a: 1}
-  _activeLineColor: {r: 1, g: 0.884252, b: 0.53396225, a: 1}
 --- !u!1 &1600000051
 GameObject:
   m_ObjectHideFlags: 0

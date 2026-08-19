@@ -1,9 +1,12 @@
-﻿using TMPro;
+﻿using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PerkDetailUI : UIBase
 {
+    private const float MIN_SLIDE_DURATION = 0.01f;
+
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _descriptionText;
     [SerializeField] private TextMeshProUGUI _costText;
@@ -12,9 +15,36 @@ public class PerkDetailUI : UIBase
     [SerializeField] private UIButtonComponent _upgradeButton;
     [SerializeField] private UIButtonComponent _cancelButton;
 
+    [Header("슬라이드 연출")]
+    [SerializeField] private RectTransform _slidePanel;
+    [SerializeField] private float _slideInDuration = 0.3f;
+    [SerializeField] private float _slideOutDuration = 0.2f;
+    [SerializeField] private float _slideDistance = 0f;
+
     private Button _upgradeButtonControl;
 
     private string _perkId;
+
+    private Vector2 _shownPosition;
+    private bool _isPositionCaptured = false;
+
+    private RectTransform SlideTarget
+    {
+        get
+        {
+            if (null != _slidePanel)
+            {
+                return _slidePanel;
+            }
+
+            return _panel;
+        }
+    }
+
+    private void Awake()
+    {
+        CapturePosition();
+    }
 
     private void OnEnable()
     {
@@ -28,12 +58,117 @@ public class PerkDetailUI : UIBase
 
     private void OnDisable()
     {
+        RectTransform target = SlideTarget;
+
+        if (null != target)
+        {
+            target.DOKill();
+        }
+
         if (null == _btnClose)
         {
             return;
         }
 
         _btnClose.UnBindButtonAllEvent();
+    }
+
+    public override Tween PlayOpenAnimation()
+    {
+        if (!IsPlayAnimation)
+        {
+            return null;
+        }
+
+        RectTransform target = SlideTarget;
+
+        if (null == target)
+        {
+            return base.PlayOpenAnimation();
+        }
+
+        target.DOKill();
+        target.anchoredPosition = GetHiddenPosition();
+
+        return target.DOAnchorPos(_shownPosition, GetDuration(_slideInDuration))
+            .SetEase(Ease.OutCubic)
+            .SetUpdate(true);
+    }
+
+    public override Tween PlayCloseAnimation()
+    {
+        RectTransform target = SlideTarget;
+
+        if (null == target)
+        {
+            return base.PlayCloseAnimation();
+        }
+
+        target.DOKill();
+
+        return target.DOAnchorPos(GetHiddenPosition(), GetDuration(_slideOutDuration))
+            .SetEase(Ease.InCubic)
+            .SetUpdate(true);
+    }
+
+    private void CapturePosition()
+    {
+        if (_isPositionCaptured)
+        {
+            return;
+        }
+
+        RectTransform target = SlideTarget;
+
+        if (null == target)
+        {
+            Logger.LogError("슬라이드할 Panel 이 연결되지 않았습니다.");
+            return;
+        }
+
+        _shownPosition = target.anchoredPosition;
+        _isPositionCaptured = true;
+    }
+
+    private Vector2 GetHiddenPosition()
+    {
+        return new Vector2(_shownPosition.x + GetSlideDistance(), _shownPosition.y);
+    }
+
+    private float GetSlideDistance()
+    {
+        if (0f < _slideDistance)
+        {
+            return _slideDistance;
+        }
+
+        RectTransform target = SlideTarget;
+
+        float panelWidth = target.rect.width;
+        RectTransform parent = target.parent as RectTransform;
+        float parentWidth = null != parent ? parent.rect.width : 0f;
+
+        if (0f < parentWidth)
+        {
+            return (parentWidth + panelWidth) * 0.5f;
+        }
+
+        if (0f < panelWidth)
+        {
+            return panelWidth;
+        }
+
+        return Screen.width;
+    }
+
+    private float GetDuration(float duration)
+    {
+        if (duration <= 0f)
+        {
+            return MIN_SLIDE_DURATION;
+        }
+
+        return duration;
     }
 
     private bool ValidateReferences()

@@ -6,6 +6,12 @@ public class PerkInfoUI : UIBase
     [SerializeField] private UIButtonComponent _btnClose;
     [SerializeField] private PerkTreeLineDrawer _lineDrawer;
 
+    [Header("노드 아이콘")]
+    [SerializeField] private Sprite _minorIcon;
+    [SerializeField] private Sprite _notableIcon;
+    [SerializeField] private Sprite _unlockIcon;
+    [SerializeField] private Sprite _keystoneIcon;
+
     private List<PerkNodeUI> _nodes = new();
     private bool _isBound = false;
 
@@ -61,6 +67,26 @@ public class PerkInfoUI : UIBase
     public void OnClickNode(string perkId)
     {
         GameManager.UI.OpenPerkDetailUI(perkId);
+    }
+
+    public Sprite GetNodeIcon(PerkNodeType nodeType)
+    {
+        switch (nodeType)
+        {
+            case PerkNodeType.Minor:
+                return _minorIcon;
+
+            case PerkNodeType.Notable:
+                return _notableIcon;
+
+            case PerkNodeType.Unlock:
+                return _unlockIcon;
+
+            case PerkNodeType.Keystone:
+                return _keystoneIcon;
+        }
+
+        return null;
     }
 
     private void BindNodes()

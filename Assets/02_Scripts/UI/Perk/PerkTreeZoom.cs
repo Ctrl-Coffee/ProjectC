@@ -11,8 +11,6 @@ public class PerkTreeZoom : MonoBehaviour, IScrollHandler
     [SerializeField] private ScrollRect _scrollRect;
     [SerializeField] private RectTransform _content;
 
-    [SerializeField] private Canvas _canvas;
-
     [Header("배율")]
     [SerializeField] private float _minScale = 0.5f;
     [SerializeField] private float _maxScale = 2f;
@@ -229,30 +227,18 @@ public class PerkTreeZoom : MonoBehaviour, IScrollHandler
             return;
         }
 
-        Camera eventCamera = GetEventCamera();
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(_content, screenPoint, null, out Vector2 localPoint);
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_content, screenPoint, eventCamera, out Vector2 beforeLocal);
+        float prevScale = _currentScale;
 
         SetScale(targetScale);
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_content, screenPoint, eventCamera, out Vector2 afterLocal);
-
-        _content.anchoredPosition += (afterLocal - beforeLocal) * targetScale;
+        _content.anchoredPosition += localPoint * (prevScale - targetScale);
     }
 
     private void SetScale(float scale)
     {
         _currentScale = scale;
         _content.localScale = new Vector3(scale, scale, 1f);
-    }
-
-    private Camera GetEventCamera()
-    {
-        if (null == _canvas || RenderMode.ScreenSpaceOverlay == _canvas.renderMode)
-        {
-            return null;
-        }
-
-        return _canvas.worldCamera;
     }
 }
