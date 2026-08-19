@@ -33,8 +33,8 @@ public class PerkTreeLineDrawer : MonoBehaviour
 
     public void Refresh()
     {
-        if (!_isBuilt) 
-            BuildLines();
+        if (!_isBuilt)
+            BuildLines(null);
 
         RefreshLineColors();
     }
@@ -45,7 +45,24 @@ public class PerkTreeLineDrawer : MonoBehaviour
         Refresh();
     }
 
-    private void BuildLines()
+    public void RebuildWithTable(IReadOnlyDictionary<string, PerkNodeData> table)
+    {
+        ClearLines();
+        BuildLines(table);
+        RefreshLineColors();
+    }
+
+    private PerkNodeData GetNodeData(IReadOnlyDictionary<string, PerkNodeData> table, string nodeId)
+    {
+        if (null != table)
+        {
+            return table.TryGetValue(nodeId, out PerkNodeData data) ? data : null;
+        }
+
+        return GameManager.DataTable.GetPerkNodeData(nodeId);
+    }
+
+    private void BuildLines(IReadOnlyDictionary<string, PerkNodeData> table)
     {
         if (!ValidateReferences()) 
             return;
@@ -55,7 +72,7 @@ public class PerkTreeLineDrawer : MonoBehaviour
 
         foreach (KeyValuePair<string, PerkNodeUI> pair in _nodeMap)
         {
-            PerkNodeData data = GameManager.DataTable.GetPerkNodeData(pair.Key);
+            PerkNodeData data = GetNodeData(table, pair.Key);
 
             if (null == data)
             {
@@ -87,6 +104,8 @@ public class PerkTreeLineDrawer : MonoBehaviour
 
     private void RefreshLineColors()
     {
+        bool hasPerkState = Application.isPlaying && null != GameManager.Instance;
+
         for (int i = 0; i < _lines.Count; i++)
         {
             PerkLine line = _lines[i];
@@ -94,7 +113,9 @@ public class PerkTreeLineDrawer : MonoBehaviour
             if (null == line.Image)
                 continue;
 
-            bool isActive = GameManager.Perk.IsUnlocked(line.ParentId) && GameManager.Perk.IsUnlocked(line.ChildId);
+            bool isActive = hasPerkState
+                && GameManager.Perk.IsUnlocked(line.ParentId)
+                && GameManager.Perk.IsUnlocked(line.ChildId);
 
             line.Image.color = isActive ? _activeLineColor : _lineColor;
         }
@@ -110,7 +131,16 @@ public class PerkTreeLineDrawer : MonoBehaviour
 
         for (int i = _lineRoot.childCount - 1; i >= 0; i--)
         {
-            Destroy(_lineRoot.GetChild(i).gameObject);
+            GameObject lineObject = _lineRoot.GetChild(i).gameObject;
+
+            if (Application.isPlaying)
+            {
+                Destroy(lineObject);
+            }
+            else
+            {
+                DestroyImmediate(lineObject);
+            }
         }
     }
 
