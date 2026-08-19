@@ -17,6 +17,11 @@ public class DataTableManager
     public Dictionary<string, PlayerLevelData> PlayerLevelDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentLevelData> EquipmentLevelDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentData> EquipmentDataTable { get; private set; } = new();
+    public Dictionary<string, GachaProbabilityData> GachaProbabilityDataTable { get; private set; } = new();
+
+    private Dictionary<int, List<CompanionData>> _companionsByGrade = new();
+
+    private Dictionary<GachaType, List<GachaProbabilityData>> _probabilitiesByGachaType = new();
 
     #endregion
 
@@ -34,6 +39,9 @@ public class DataTableManager
         PlayerLevelDataTable = LoadData<PlayerLevelData>(nameof(PlayerLevelData));
         EquipmentLevelDataTable = LoadData<EquipmentLevelData>(nameof(EquipmentLevelData));
         EquipmentDataTable = LoadData<EquipmentData>(nameof(EquipmentData));
+        GachaProbabilityDataTable = LoadData<GachaProbabilityData>(nameof(GachaProbabilityData));
+        BuildCompanionGradeIndex();
+        BuildGachaProbabilityIndex();
     }
 
     #region Getters
@@ -88,6 +96,28 @@ public class DataTableManager
         return ConfirmDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
+    public IReadOnlyList<CompanionData> GetCompanionsByGrade(int grade)
+    {
+        if (!_companionsByGrade.TryGetValue(grade, out List<CompanionData> companions))
+        {
+            Debug.LogError($"해당 등급의 동료 데이터가 없습니다. 등급 : {grade}");
+            return null;
+        }
+
+        return companions;
+    }
+
+    public IReadOnlyList<GachaProbabilityData> GetGachaProbabilityData(GachaType gachaType)
+    {
+        if (!_probabilitiesByGachaType.TryGetValue(gachaType, out List<GachaProbabilityData> probability))
+        {
+            Debug.LogError($"해당 가챠 종류가 존재하지 않습니다. 종류 : {gachaType}");
+            return null;
+        }
+
+        return probability;
+    }
+
     #endregion
 
     [Serializable]
@@ -131,5 +161,37 @@ public class DataTableManager
         }
 
         return new Dictionary<string, T>();
+    }
+
+    private void BuildCompanionGradeIndex()
+    {
+        _companionsByGrade.Clear();
+
+        foreach (CompanionData data in CompanionDataTable.Values)
+        {
+            if (!_companionsByGrade.TryGetValue(data.Grade, out List<CompanionData> list))
+            {
+                list = new List<CompanionData>();
+                _companionsByGrade.Add(data.Grade, list);
+            }
+
+            list.Add(data);
+        }
+    }
+
+    private void BuildGachaProbabilityIndex()
+    {
+        _probabilitiesByGachaType.Clear();
+
+        foreach (GachaProbabilityData data in  GachaProbabilityDataTable.Values)
+        {
+            if(!_probabilitiesByGachaType.TryGetValue(data.GachaType, out List<GachaProbabilityData> list))
+            {
+                list = new List<GachaProbabilityData>();
+                _probabilitiesByGachaType.Add(data.GachaType, list);
+            }
+
+            list.Add(data);
+        }
     }
 }

@@ -7,6 +7,7 @@ public class GameSession
     public EquipmentGrowthModel EquipmentGrowth { get; }
 
     public CompanionModel Companion { get; }
+    public GachaModel Gacha { get; }
 
 
     private NetworkManager _networkManager;
@@ -31,6 +32,7 @@ public class GameSession
             , new("311", 3)
         };
         Companion = new(companionStates);
+        Gacha = new();
 
     }
 }

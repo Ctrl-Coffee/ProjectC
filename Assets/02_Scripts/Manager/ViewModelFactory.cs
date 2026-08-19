@@ -29,4 +29,11 @@
         CompanionInventorySlotViewModel viewModel = new CompanionInventorySlotViewModel(model, companionId);
         return viewModel;
     }
+
+    public GachaViewModel CreateGachaViewModel()
+    {
+        GachaModel model = _session.Gacha;
+        GachaViewModel viewModel = new GachaViewModel(model);
+        return viewModel;
+    }
 }

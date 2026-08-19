@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -60,5 +61,16 @@ public static class UIManagerExtension
     public static UniTask<MiniGameResultUI> OpenMiniGameResultUI(this UIManager uiManager)
     {
         return uiManager.OpenOverlayUI<MiniGameResultUI>();
+    }
+
+    public static UniTask<GachaView> OpenGachaView(this UIManager uiManager)
+    {
+        return uiManager.OpenPopupUI<GachaView>();
+    }
+
+    public static async void OpenGachaResultUI(this UIManager uiManager, IReadOnlyList<GachaResultData> results)
+    {
+        GachaResultUI ui = await uiManager.OpenPopupUI<GachaResultUI>();
+        ui.Init(results);
     }
 }

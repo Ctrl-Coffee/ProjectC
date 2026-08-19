@@ -1,0 +1,44 @@
+[
+  {
+    "Id": "Companion_1",
+    "GachaType": 0,
+    "Grade": 1,
+    "Probability": 70,
+    "DuplicateReward": 10
+  },
+  {
+    "Id": "Companion_2",
+    "GachaType": 0,
+    "Grade": 2,
+    "Probability": 25,
+    "DuplicateReward": 30
+  },
+  {
+    "Id": "Companion_3",
+    "GachaType": 0,
+    "Grade": 3,
+    "Probability": 5,
+    "DuplicateReward": 100
+  },
+  {
+    "Id": "Equipment_1",
+    "GachaType": 1,
+    "Grade": 1,
+    "Probability": 70,
+    "DuplicateReward": 10
+  },
+  {
+    "Id": "Equipment_2",
+    "GachaType": 1,
+    "Grade": 2,
+    "Probability": 25,
+    "DuplicateReward": 30
+  },
+  {
+    "Id": "Equipment_3",
+    "GachaType": 1,
+    "Grade": 3,
+    "Probability": 5,
+    "DuplicateReward": 100
+  }
+]

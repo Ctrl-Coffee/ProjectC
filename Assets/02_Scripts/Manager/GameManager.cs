@@ -16,6 +16,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public static GameSession Session { get { return Instance._gameSession; } }
     public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
+    public static GachaSystem Gacha { get { return Instance._gachaSystem; } }
 
 
     #region Manager Variables
@@ -29,6 +30,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private SaveManager _saveManager = new();
     private GrowthSystem _growthSystem = new();
     private EquipmentManager _equipmentManager = new();
+    private GachaSystem _gachaSystem = new();
 
     private GameSession _gameSession;
     private ViewModelFactory _viewModelFactory;
