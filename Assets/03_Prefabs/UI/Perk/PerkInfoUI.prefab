@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 1600000023}
   - component: {fileID: 1600000024}
   - component: {fileID: 1600000025}
+  - component: {fileID: 5643560191185324394}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -237,6 +238,26 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5643560191185324394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600000021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c24295af269ecb4ba473554655d1641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerkTreeZoom
+  _scrollRect: {fileID: 1600000025}
+  _content: {fileID: 1600000042}
+  _canvas: {fileID: 0}
+  _minScale: 0.5
+  _maxScale: 2
+  _defaultScale: 1
+  _wheelSensitivity: 0.1
+  _pinchSensitivity: 0.005
 --- !u!1 &1600000031
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,8 +401,8 @@ MonoBehaviour:
   _lineRoot: {fileID: 1600000052}
   _nodeRoot: {fileID: 1600000062}
   _lineWidth: 10
-  _lineColor: {r: 1, g: 1, b: 1, a: 1}
-  _activeLineColor: {r: 1, g: 0.85, b: 0.4, a: 1}
+  _lineColor: {r: 0.4867924, g: 0.4867924, b: 0.4867924, a: 1}
+  _activeLineColor: {r: 1, g: 0.884252, b: 0.53396225, a: 1}
 --- !u!1 &1600000051
 GameObject:
   m_ObjectHideFlags: 0
