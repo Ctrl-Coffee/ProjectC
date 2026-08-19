@@ -129,59 +129,59 @@ public class GrowthSystem
 
     #region 전투용 조회 (현재 상태)
 
-    public CharacterStatData GetCharacterBattleStat(string characterId)
-    {
-        return GetPlayerBattleStat();
-    }
+    //public CharacterStatData GetCharacterBattleStat(string characterId)
+    //{
+    //    return GetPlayerBattleStat();
+    //}
 
-    public CharacterSkillEffectData GetCharacterBattleSkill(string characterId)
-    {
-        if (characterId == CharacterId.PLAYER)
-        {
-            return GetPlayerBattleSkill();
-        }
+    //public CharacterSkillEffectData GetCharacterBattleSkill(string characterId)
+    //{
+    //    if (characterId == CharacterId.PLAYER)
+    //    {
+    //        return GetPlayerBattleSkill();
+    //    }
 
-        return GetCompanionBattleSkill(characterId);
-    }
+    //    return GetCompanionBattleSkill(characterId);
+    //}
 
-    public CharacterStatData GetPlayerBattleStat()
-    {
-        return GetPlayerBattleStat(GameManager.User.Player.Level);
-    }
+    //public CharacterStatData GetPlayerBattleStat()
+    //{
+    //    return GetPlayerBattleStat(GameManager.User.Player.Level);
+    //}
 
-    public CharacterStatData GetPlayerBattleStat(int level)
-    {
-        CharacterStatData finalStat = GetPlayerFinalStat(level);
-        if (finalStat == null)
-        {
-            return null;
-        }
+    //public CharacterStatData GetPlayerBattleStat(int level)
+    //{
+    //    CharacterStatData finalStat = GetPlayerFinalStat(level);
+    //    if (finalStat == null)
+    //    {
+    //        return null;
+    //    }
 
-        OwnedEquipmentData equipped = GameManager.Equipment.GetEquippedEquipment();
-        if (equipped == null)
-        {
-            return finalStat;
-        }
+    //    OwnedEquipmentData equipped = GameManager.Equipment.GetEquippedEquipment();
+    //    if (equipped == null)
+    //    {
+    //        return finalStat;
+    //    }
 
-        CharacterStatData equipmentStat = GetEquipmentFinalStat(equipped.EquipmentId, equipped.Level);
-        if(equipmentStat == null)
-        {
-            return finalStat;
-        }
+    //    CharacterStatData equipmentStat = GetEquipmentFinalStat(equipped.EquipmentId, equipped.Level);
+    //    if(equipmentStat == null)
+    //    {
+    //        return finalStat;
+    //    }
 
-        return new CharacterStatData(finalStat.FinalAtk + equipmentStat.FinalAtk, finalStat.FinalDef + equipmentStat.FinalDef, finalStat.FinalHp + equipmentStat.FinalHp);
-    }
+    //    return new CharacterStatData(finalStat.FinalAtk + equipmentStat.FinalAtk, finalStat.FinalDef + equipmentStat.FinalDef, finalStat.FinalHp + equipmentStat.FinalHp);
+    //}
 
-    public CharacterSkillEffectData GetPlayerBattleSkill()
-    {
-        OwnedEquipmentData equipped = GameManager.Equipment.GetEquippedEquipment();
-        if(equipped == null)
-        {
-            return null;
-        }
-               
-        return GetEquipmentFinalSkill(equipped.EquipmentId, equipped.Level);
-    }
+    //public CharacterSkillEffectData GetPlayerBattleSkill()
+    //{
+    //    OwnedEquipmentData equipped = GameManager.Equipment.GetEquippedEquipment();
+    //    if(equipped == null)
+    //    {
+    //        return null;
+    //    }
+
+    //    return GetEquipmentFinalSkill(equipped.EquipmentId, equipped.Level);
+    //}
 
     public CharacterSkillEffectData GetCompanionBattleSkill(string companionId)
     {

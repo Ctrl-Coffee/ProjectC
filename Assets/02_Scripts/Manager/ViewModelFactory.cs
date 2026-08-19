@@ -29,4 +29,18 @@
         CompanionInventorySlotViewModel viewModel = new CompanionInventorySlotViewModel(model, companionId);
         return viewModel;
     }
+
+    public HeroInventoryViewModel CreateHeroInventoryViewModel()
+    {
+        HeroEquipmentModel model = _session.HeroEquipment;
+        HeroInventoryViewModel viewModel = new HeroInventoryViewModel(model);
+        return viewModel;
+    }
+
+    public HeroEquipmentSlotViewModel CreateHeroEquipmentSlotViewModel(string heroEquipmentId)
+    {
+        HeroEquipmentModel model = _session.HeroEquipment;
+        HeroEquipmentSlotViewModel viewModel = new HeroEquipmentSlotViewModel(model, heroEquipmentId);
+        return viewModel;
+    }
 }
