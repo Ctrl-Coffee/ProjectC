@@ -15,6 +15,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public static GameSession Session { get { return Instance._gameSession; } }
     public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
+    public static SoundManager Sound { get { return Instance._soundManager; } }
 
 
     #region Manager Variables
@@ -27,6 +28,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private UIManager _uiManager = new();
     private SaveManager _saveManager = new();
     private GrowthSystem _growthSystem = new();
+    private SoundManager _soundManager = new();
 
     private GameSession _gameSession;
     private ViewModelFactory _viewModelFactory;
@@ -80,6 +82,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         await _resourceManager.LoadContentAsync(AddressablePath.Label.Reality);
         await _resourceManager.LoadContentAsync(AddressablePath.Label.Dream);
 
+        _soundManager.Init(this.gameObject);
 
         var poolRoot = Utils.CreateEmptyGameObject("PoolRoot", this.gameObject.transform).transform;
         await _poolManager.InitAsync(poolRoot);

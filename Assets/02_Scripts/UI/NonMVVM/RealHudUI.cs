@@ -17,6 +17,8 @@ public class RealHudUI : UIBase
 
     private void OnEnable()
     {
+        _settingBtn.BindButtonEvent(OnOpenSettingUI);
+
         _goDreamBtn.BindButtonEvent(OnChangeSceenToDream);
 
         _coffeeBtn.BindButtonEvent(TEST);
@@ -25,10 +27,16 @@ public class RealHudUI : UIBase
 
     private void OnDisable()
     {
+        _settingBtn.UnBindButtonAllEvent();
         _goDreamBtn.UnBindButtonAllEvent();
 
         _coffeeBtn.UnBindButtonAllEvent();
         _computerBtn.UnBindButtonAllEvent();
+    }
+
+    private void OnOpenSettingUI()
+    {
+        GameManager.UI.OpenSettingUI();
     }
 
     private void OnChangeSceenToDream()

@@ -35,6 +35,11 @@ public static class UIManagerExtension
         ui.SetConfirmUI(confirmData, buttonAction);
     }
 
+    public static void OpenSettingUI(this UIManager uiManager)
+    {
+        uiManager.OpenPopupUI<SettingUI>().Forget();
+    }
+
     public static UniTask<CompanionInventoryView> OpenCompanionInventory(this UIManager uiManager)
     {
         return uiManager.OpenContentUI<CompanionInventoryView>();
