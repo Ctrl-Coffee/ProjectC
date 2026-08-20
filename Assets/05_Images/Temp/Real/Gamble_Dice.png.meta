@@ -1,0 +1,884 @@
+fileFormatVersion: 2
+guid: 3db411b86dbd97f4781a3c9bed1159f3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7376682199063288146
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_0"
+  - first:
+      213: -5653292479946183243
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_1"
+  - first:
+      213: 8516639259536891069
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_2"
+  - first:
+      213: 3707713475270461916
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_3"
+  - first:
+      213: 932633792882382457
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_4"
+  - first:
+      213: 6173874244271826278
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_5"
+  - first:
+      213: -986834306429189626
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_6"
+  - first:
+      213: -3857284364529854037
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_7"
+  - first:
+      213: -6449584963068019171
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_8"
+  - first:
+      213: 6739223850699997112
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_9"
+  - first:
+      213: -4621746968286040584
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_10"
+  - first:
+      213: 7375674359479015803
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_11"
+  - first:
+      213: -499034631804503476
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_12"
+  - first:
+      213: -7812174306346384807
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_13"
+  - first:
+      213: 9012238254302872718
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_14"
+  - first:
+      213: -1393652993437249339
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_15"
+  - first:
+      213: 9048445545956157960
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_16"
+  - first:
+      213: -8491207550451018327
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_17"
+  - first:
+      213: -5413231364896668117
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_18"
+  - first:
+      213: -8582785872667618387
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_19"
+  - first:
+      213: -7579553582183034301
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_20"
+  - first:
+      213: -3860901287670777998
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_21"
+  - first:
+      213: 7655231683728880040
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_22"
+  - first:
+      213: -7662309910538809553
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_23"
+  - first:
+      213: 6488810899360593243
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_24"
+  - first:
+      213: 3330354366202157788
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_25"
+  - first:
+      213: 7261560179971200843
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_26"
+  - first:
+      213: -2957455880054933288
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_27"
+  - first:
+      213: -7190285540113778066
+    second: "ChatGPT_Image_2026\uB144_8\uC6D4_19\uC77C_\uC624\uD6C4_04_06_59-removebg-preview_28"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Gamble_Dice_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 348
+        width: 58
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea6a2ef8f92c0a990800000000000000
+      internalID: -7376682199063288146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_2
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 348
+        width: 59
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bdab6121787b81b0800000000000000
+      internalID: -5653292479946183243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_3
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 348
+        width: 58
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbc97d0984e213670800000000000000
+      internalID: 8516639259536891069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_4
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 348
+        width: 58
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd9cc6ee2c1747330800000000000000
+      internalID: 3707713475270461916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_5
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 348
+        width: 59
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 976974a4e7161fc00800000000000000
+      internalID: 932633792882382457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 276
+        width: 58
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66561c12ae10ea550800000000000000
+      internalID: 6173874244271826278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_7
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 276
+        width: 58
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6028e114d6f0e42f0800000000000000
+      internalID: -986834306429189626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_8
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 275
+        width: 59
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba99786ae4c287ac0800000000000000
+      internalID: -3857284364529854037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_9
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 276
+        width: 59
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1e31afb5a87e76a0800000000000000
+      internalID: -6449584963068019171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_10
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 276
+        width: 59
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bf30d2e268868d50800000000000000
+      internalID: 6739223850699997112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 203
+        width: 58
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fd62919e914cdfb0800000000000000
+      internalID: -4621746968286040584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_12
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 202
+        width: 58
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7914bf70c8ab5660800000000000000
+      internalID: 7375674359479015803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_13
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 203
+        width: 59
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4abca875a21319f0800000000000000
+      internalID: -499034631804503476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_14
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 202
+        width: 59
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9524acaebd4959390800000000000000
+      internalID: -7812174306346384807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_15
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 203
+        width: 59
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e84c8e281f6e11d70800000000000000
+      internalID: 9012238254302872718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_16
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 129
+        width: 58
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c053028cffb8ace0800000000000000
+      internalID: -1393652993437249339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_17
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 130
+        width: 59
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80aae288849829d70800000000000000
+      internalID: 9048445545956157960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_18
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 130
+        width: 59
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a59041a8bb292a80800000000000000
+      internalID: -8491207550451018327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_19
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 129
+        width: 58
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b26c45011c650e4b0800000000000000
+      internalID: -5413231364896668117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_20
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 129
+        width: 59
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da3d76ce8b1d3e880800000000000000
+      internalID: -8582785872667618387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_21
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 31
+        width: 41
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 342d0f9dc2400d690800000000000000
+      internalID: -7579553582183034301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_22
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 34
+        width: 43
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 277f88b1cb25b6ac0800000000000000
+      internalID: -3860901287670777998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_23
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 36
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a1b9fd38a8dc3a60800000000000000
+      internalID: 7655231683728880040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_24
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 42
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2f0167abb10aa590800000000000000
+      internalID: -7662309910538809553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_25
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 44
+        width: 36
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b55321f3223ec0a50800000000000000
+      internalID: 6488810899360593243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_26
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 36
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cda96ada6abc73e20800000000000000
+      internalID: 3330354366202157788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_27
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 33
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b471e42a28e36c460800000000000000
+      internalID: 7261560179971200843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_28
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 33
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d87f6edb8105f6d0800000000000000
+      internalID: -2957455880054933288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gamble_Dice_29
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 30
+        width: 41
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6af3e3a569f63c90800000000000000
+      internalID: -7190285540113778066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b797dda4e329bae4d925bcf423139ba7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Gamble_Dice_1: -7376682199063288146
+      Gamble_Dice_10: 6739223850699997112
+      Gamble_Dice_11: -4621746968286040584
+      Gamble_Dice_12: 7375674359479015803
+      Gamble_Dice_13: -499034631804503476
+      Gamble_Dice_14: -7812174306346384807
+      Gamble_Dice_15: 9012238254302872718
+      Gamble_Dice_16: -1393652993437249339
+      Gamble_Dice_17: 9048445545956157960
+      Gamble_Dice_18: -8491207550451018327
+      Gamble_Dice_19: -5413231364896668117
+      Gamble_Dice_2: -5653292479946183243
+      Gamble_Dice_20: -8582785872667618387
+      Gamble_Dice_21: -7579553582183034301
+      Gamble_Dice_22: -3860901287670777998
+      Gamble_Dice_23: 7655231683728880040
+      Gamble_Dice_24: -7662309910538809553
+      Gamble_Dice_25: 6488810899360593243
+      Gamble_Dice_26: 3330354366202157788
+      Gamble_Dice_27: 7261560179971200843
+      Gamble_Dice_28: -2957455880054933288
+      Gamble_Dice_29: -7190285540113778066
+      Gamble_Dice_3: 8516639259536891069
+      Gamble_Dice_4: 3707713475270461916
+      Gamble_Dice_5: 932633792882382457
+      Gamble_Dice_6: 6173874244271826278
+      Gamble_Dice_7: -986834306429189626
+      Gamble_Dice_8: -3857284364529854037
+      Gamble_Dice_9: -6449584963068019171
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
