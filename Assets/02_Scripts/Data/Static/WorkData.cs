@@ -1,11 +1,5 @@
 ﻿using System;
 
-public enum WorkType
-{
-    Manual,
-    Auto
-}
-
 [Serializable]
 public class WorkData : BaseData
 {

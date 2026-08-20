@@ -1,23 +1,5 @@
 ﻿using UnityEngine;
 
-public enum MiniGameType
-{
-    None,
-    SubtitleEdit,
-    MotionTracking,
-    ScratchLottery,
-    DiceGamble
-}
-
-public enum MiniGameGrade
-{
-    Miss,
-    Bad,
-    Normal,
-    Good,
-    Perfect,
-}
-
 // TODO: 난이도(업무 레벨) 개념이 들어오면 여기에 필드를 추가하고 MiniGameFlowHandler에서 채우기
 // MiniGameBase / PlayAsync 시그니처를 건드리지 않으려고 빈 구조체로 유지 중. 지우지 말 것.
 public struct MiniGameContext
