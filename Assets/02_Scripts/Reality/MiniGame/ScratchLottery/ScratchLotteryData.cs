@@ -1,11 +1,3 @@
-﻿public enum ScratchSymbol
-{
-    None,
-    Computer,
-    Coffee,
-    Bed,
-    Money,
-} 
 public struct ScratchLotteryResult
 {
     public ScratchSymbol[] Symbols;
@@ -14,8 +6,8 @@ public struct ScratchLotteryResult
     public int MatchedCount;
     public bool IsSuccess;
 }
+
 public struct ScratchModifier
 {
     public float[] SymbolWeights;
 }
-
