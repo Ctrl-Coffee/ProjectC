@@ -24,6 +24,7 @@ public class DreamHudUI : UIBase
     {
         _companionBtn.BindButtonEvent(OnOpenCompanion);
         _stageBtn.BindButtonEvent(OnStage);
+        _heroBtn.BindButtonEvent(OnOpenHero);
         _lobbyBtn.BindButtonEvent(OnChangeSceenToReal);
     }
 
@@ -31,6 +32,7 @@ public class DreamHudUI : UIBase
     {
         _companionBtn.UnBindButtonAllEvent();
         _stageBtn.UnBindButtonAllEvent();
+        _heroBtn.UnBindButtonAllEvent();
         _lobbyBtn.UnBindButtonAllEvent();
     }
 
@@ -56,6 +58,13 @@ public class DreamHudUI : UIBase
         CloseCurrentContent(content);
     }
 
+
+    private async void OnOpenHero()
+    {
+        var content = await GameManager.UI.OpenHeroInventory();
+
+        CloseCurrentContent(content);
+    }
 
     private void CloseCurrentContent(UIBase content)
     {

@@ -12,11 +12,12 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static SaveManager Save { get { return Instance._saveManager; } }
     public static UserData User { get { return Instance._saveManager.User; } } // 삭제대상
     public static GrowthSystem Growth { get { return Instance._growthSystem; } }
-    public static EquipmentManager Equipment { get { return Instance._equipmentManager; } } // 삭제대상
+    public static PerkManager Perk { get { return Instance._perkManager; } }
 
     public static GameSession Session { get { return Instance._gameSession; } }
     public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
     public static GachaSystem Gacha { get { return Instance._gachaSystem; } }
+    public static SoundManager Sound { get { return Instance._soundManager; } }
 
 
     #region Manager Variables
@@ -29,8 +30,9 @@ public class GameManager : SingletonBehaviour<GameManager>
     private UIManager _uiManager = new();
     private SaveManager _saveManager = new();
     private GrowthSystem _growthSystem = new();
-    private EquipmentManager _equipmentManager = new();
     private GachaSystem _gachaSystem = new();
+    private SoundManager _soundManager = new();
+    private PerkManager _perkManager = new();
 
     private GameSession _gameSession;
     private ViewModelFactory _viewModelFactory;
@@ -80,10 +82,11 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         await _uiManager.Init();
 
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.Common);
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.Reality);
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.Dream);
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.COMMON);
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.REALITY);
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.DREAM);
 
+        _soundManager.Init(this.gameObject);
 
         var poolRoot = Utils.CreateEmptyGameObject("PoolRoot", this.gameObject.transform).transform;
         await _poolManager.InitAsync(poolRoot);
@@ -94,6 +97,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
         EnterReal();
+        Sound.PlayBGM(AddressablePath.Audio.BGM_LOBBY);
     }
 
     #endregion
@@ -105,7 +109,7 @@ public class GameManager : SingletonBehaviour<GameManager>
             _realLobbyController = new();
         }
 
-        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.RealLobbyBackground);
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.REAL_LOBBY_BACKGROUND);
         _realLobbyController.Enter(backgroundPrefab);
         UI.OpenRealHud();
     }
@@ -123,7 +127,7 @@ public class GameManager : SingletonBehaviour<GameManager>
             _dreamLobbyController = new();
         }
 
-        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DreamLobbyBackground);
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DREAM_LOBBY_BACKGROUND);
         _dreamLobbyController.Enter(backgroundPrefab);
         UI.OpenDreamHud();
     }

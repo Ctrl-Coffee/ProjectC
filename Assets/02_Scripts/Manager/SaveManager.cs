@@ -8,7 +8,7 @@ public class SaveManager
 
     public UserData User { get; private set; } = new();
 
-    private string SavePath
+    public static string SavePath
     {
         get
         {
@@ -61,5 +61,6 @@ public class SaveManager
         }
 
         User = new UserData();
+        User.EnsureDefaults();
     }
 }

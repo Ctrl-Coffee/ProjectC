@@ -1,0 +1,1611 @@
+[
+  {
+    "Id": "Perk_None_Root",
+    "Name": "시작",
+    "AxisType": "None",
+    "NodeType": "None",
+    "InspirationCost": 0,
+    "ParentMode": "None",
+    "ParentId": null,
+    "EffectId": null,
+    "EffectValue": null,
+    "IconKey": null,
+    "Description": "노드 시작점",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_01",
+    "Name": "손에 익은 일",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_None_Root"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add"
+    ],
+    "EffectValue": [
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_02",
+    "Name": "작업 감각",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_01"
+    ],
+    "EffectId": [
+      "Effect_ManualDP_Add"
+    ],
+    "EffectValue": [
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 DP +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_03",
+    "Name": "일머리",
+    "AxisType": "Manual",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_02"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add",
+      "Effect_ManualDP_Add"
+    ],
+    "EffectValue": [
+      0.08,
+      0.08
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +8%, DP +8%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_04a",
+    "Name": "반복 연습",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_03"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add"
+    ],
+    "EffectValue": [
+      0.06
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_04b",
+    "Name": "집중력",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_03"
+    ],
+    "EffectId": [
+      "Effect_ManualDP_Add"
+    ],
+    "EffectValue": [
+      0.07
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 DP +7%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_05",
+    "Name": "금손",
+    "AxisType": "Manual",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_04a",
+      "Perk_Manual_04b"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add"
+    ],
+    "EffectValue": [
+      0.3
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +30%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_06",
+    "Name": "마감 감각",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_05"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add"
+    ],
+    "EffectValue": [
+      0.08
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +8%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_07",
+    "Name": "장인의 눈",
+    "AxisType": "Manual",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_06"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add",
+      "Effect_ManualDP_Add"
+    ],
+    "EffectValue": [
+      0.07,
+      0.1
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +7%, DP +10%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_End",
+    "Name": "마이스터의 손",
+    "AxisType": "Manual",
+    "NodeType": "Keystone",
+    "InspirationCost": 10,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_07"
+    ],
+    "EffectId": [
+      "Effect_Duration_Comp",
+      "Effect_AutoMoney_Comp",
+      "Effect_EnergyCost_Flat",
+      "Effect_ManualMoney_Comp",
+      "Effect_ManualDP_Comp"
+    ],
+    "EffectValue": [
+      -0.5,
+      -0.5,
+      -999,
+      0.5,
+      0.5
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 시간 -50%, 자동 돈 -50%, 업무 에너지 소모 최소화, 수동 획득 재화 +50%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_Unlock_01",
+    "Name": "잔돈 모으기",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_03"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add"
+    ],
+    "EffectValue": [
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_Unlock_02",
+    "Name": "취미 생활",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_Unlock_01"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add",
+      "Effect_ManualDP_Add"
+    ],
+    "EffectValue": [
+      0.05,
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +5%, DP +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_Unlock_03",
+    "Name": "새로운 시도",
+    "AxisType": "Manual",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_Unlock_02"
+    ],
+    "EffectId": [
+      "Effect_ManualDP_Add"
+    ],
+    "EffectValue": [
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 DP +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_Unlock_A",
+    "Name": "인터넷 도박",
+    "AxisType": "Manual",
+    "NodeType": "Unlock",
+    "InspirationCost": 7,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_Unlock_03"
+    ],
+    "EffectId": [
+      "Effect_Unlock_Gambling01"
+    ],
+    "EffectValue": null,
+    "IconKey": null,
+    "Description": "도박 업무 '즉석 복권' 해금",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Manual_Unlock_B",
+    "Name": "브레인 스토밍",
+    "AxisType": "Manual",
+    "NodeType": "Unlock",
+    "InspirationCost": 7,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_Unlock_03"
+    ],
+    "EffectId": [
+      "Effect_Unlock_Creative01"
+    ],
+    "EffectValue": null,
+    "IconKey": null,
+    "Description": "창작 업무 '소설 쓰기' 해금",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_01",
+    "Name": "수수료 청구",
+    "AxisType": "Auto",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_None_Root"
+    ],
+    "EffectId": [
+      "Effect_AutoMoney_Add"
+    ],
+    "EffectValue": [
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 돈 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_02",
+    "Name": "캐시 정리",
+    "AxisType": "Auto",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_01"
+    ],
+    "EffectId": [
+      "Effect_Duration_Add"
+    ],
+    "EffectValue": [
+      -0.03
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 소요 시간 -3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_03",
+    "Name": "초고속 인터넷",
+    "AxisType": "Auto",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_02"
+    ],
+    "EffectId": [
+      "Effect_Duration_Add"
+    ],
+    "EffectValue": [
+      -0.05
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 소요 시간 -5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_04a",
+    "Name": "클라우드 백업",
+    "AxisType": "Auto",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_03"
+    ],
+    "EffectId": [
+      "Effect_AutoDP_Add"
+    ],
+    "EffectValue": [
+      0.06
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 DP +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_04b",
+    "Name": "자동화 스크립트",
+    "AxisType": "Auto",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_03"
+    ],
+    "EffectId": [
+      "Effect_Duration_Add"
+    ],
+    "EffectValue": [
+      -0.05
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 소요 시간 -5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_05",
+    "Name": "예약 업로드",
+    "AxisType": "Auto",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_04a",
+      "Perk_Auto_04b"
+    ],
+    "EffectId": [
+      "Effect_AutoMoney_Add",
+      "Effect_AutoDP_Add"
+    ],
+    "EffectValue": [
+      0.08,
+      0.08
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 돈 +8%, DP +8%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_06",
+    "Name": "겹업무",
+    "AxisType": "Auto",
+    "NodeType": "Notable",
+    "InspirationCost": 4,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_05"
+    ],
+    "EffectId": [
+      "Effect_SlotCount_Flat"
+    ],
+    "EffectValue": [
+      1
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 슬롯 +1",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_07",
+    "Name": "파이프라인",
+    "AxisType": "Auto",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_06"
+    ],
+    "EffectId": [
+      "Effect_AutoMoney_Add",
+      "Effect_AutoDP_Add",
+      "Effect_Duration_Add"
+    ],
+    "EffectValue": [
+      0.08,
+      0.1,
+      -0.08
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 돈 +8%, DP +10%, 소요 시간 -8%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_End",
+    "Name": "1인 스타트업",
+    "AxisType": "Auto",
+    "NodeType": "Keystone",
+    "InspirationCost": 10,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_07"
+    ],
+    "EffectId": [
+      "Effect_Duration_Comp",
+      "Effect_AutoMoney_Comp",
+      "Effect_AutoDP_Comp",
+      "Effect_ManualMoney_Comp",
+      "Effect_ManualDP_Comp"
+    ],
+    "EffectValue": [
+      -0.3,
+      0.5,
+      0.5,
+      -0.5,
+      -0.5
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 시간 -30%, 자동 획득 재화 +50%, 수동 획득 재화 -50%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_Unlock_01",
+    "Name": "퇴근 후 공부",
+    "AxisType": "Auto",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_03"
+    ],
+    "EffectId": [
+      "Effect_AutoMoney_Add"
+    ],
+    "EffectValue": [
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 돈 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_Unlock_02",
+    "Name": "자기계발",
+    "AxisType": "Auto",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_Unlock_01"
+    ],
+    "EffectId": [
+      "Effect_Duration_Add",
+      "Effect_AutoDP_Add",
+      "Effect_AutoMoney_Add"
+    ],
+    "EffectValue": [
+      -0.05,
+      0.05,
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 시간 -5%, 돈 +5%, DP +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Auto_Unlock_A",
+    "Name": "외국어 공부",
+    "AxisType": "Auto",
+    "NodeType": "Unlock",
+    "InspirationCost": 5,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_Unlock_02"
+    ],
+    "EffectId": [
+      "Effect_Unlock_Auto05"
+    ],
+    "EffectValue": null,
+    "IconKey": null,
+    "Description": "자동 업무 '해외 영화 번역' 해금 (택일)",
+    "ExclusiveGroup": "Exclusive_Auto_Unlock"
+  },
+  {
+    "Id": "Perk_Auto_Unlock_B",
+    "Name": "게임 아카데미 수료",
+    "AxisType": "Auto",
+    "NodeType": "Unlock",
+    "InspirationCost": 5,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_Unlock_02"
+    ],
+    "EffectId": [
+      "Effect_Unlock_Auto06"
+    ],
+    "EffectValue": null,
+    "IconKey": null,
+    "Description": "자동 업무 '게임 기획하기' 해금 (택일)",
+    "ExclusiveGroup": "Exclusive_Auto_Unlock"
+  },
+  {
+    "Id": "Perk_Auto_Time",
+    "Name": "시간 부자",
+    "AxisType": "Auto",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_07"
+    ],
+    "EffectId": [
+      "Effect_Duration_Add",
+      "Effect_AutoMoney_Add"
+    ],
+    "EffectValue": [
+      0.15,
+      0.2
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 소요 시간 +15%, 돈 +20%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_01",
+    "Name": "기지개",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_None_Root"
+    ],
+    "EffectId": [
+      "Effect_EnergyRecover_Flat"
+    ],
+    "EffectValue": [
+      1
+    ],
+    "IconKey": null,
+    "Description": "에너지 회복량 +1",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_02",
+    "Name": "물 마시기",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_01"
+    ],
+    "EffectId": [
+      "Effect_EnergyMax_Flat"
+    ],
+    "EffectValue": [
+      5
+    ],
+    "IconKey": null,
+    "Description": "에너지 최대치 +5",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_03",
+    "Name": "커피 한 잔",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_02"
+    ],
+    "EffectId": [
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "에너지 회복량 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_Bridge_01",
+    "Name": "낮잠 습관",
+    "AxisType": "Rest",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_03"
+    ],
+    "EffectId": [
+      "Effect_EnergyRecover_Add",
+      "Effect_EnergyCost_Add"
+    ],
+    "EffectValue": [
+      0.1,
+      -0.05
+    ],
+    "IconKey": null,
+    "Description": "에너지 회복량 +10%, 업무 에너지 소모 -5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_04a",
+    "Name": "점심 산책",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_Bridge_01"
+    ],
+    "EffectId": [
+      "Effect_EnergyMax_Add"
+    ],
+    "EffectValue": [
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "에너지 최대치 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_05a",
+    "Name": "암막 커튼",
+    "AxisType": "Rest",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_04a"
+    ],
+    "EffectId": [
+      "Effect_EnergyMax_Add",
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      0.07,
+      0.2
+    ],
+    "IconKey": null,
+    "Description": "에너지 최대치 +7%, 회복량 +20%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_06a",
+    "Name": "완벽한 침실",
+    "AxisType": "Rest",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_05a"
+    ],
+    "EffectId": [
+      "Effect_EnergyMax_Add",
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      0.15,
+      0.15
+    ],
+    "IconKey": null,
+    "Description": "에너지 최대치 +15%, 회복량 +15%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_04b",
+    "Name": "요령",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_Bridge_01"
+    ],
+    "EffectId": [
+      "Effect_EnergyCost_Add"
+    ],
+    "EffectValue": [
+      -0.04
+    ],
+    "IconKey": null,
+    "Description": "업무 에너지 소모 -4%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_05b",
+    "Name": "워라밸",
+    "AxisType": "Rest",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_04b"
+    ],
+    "EffectId": [
+      "Effect_EnergyCost_Add",
+      "Effect_EnergyMax_Add",
+      "Effect_EnergyCost_Flat"
+    ],
+    "EffectValue": [
+      -0.06,
+      0.06,
+      -1
+    ],
+    "IconKey": null,
+    "Description": "업무 에너지 소모 -6·-1, 에너지 최대치 +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_06b",
+    "Name": "완벽한 책상",
+    "AxisType": "Rest",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_05b"
+    ],
+    "EffectId": [
+      "Effect_EnergyCost_Add",
+      "Effect_EnergyMax_Add"
+    ],
+    "EffectValue": [
+      -0.12,
+      0.12
+    ],
+    "IconKey": null,
+    "Description": "업무 에너지 소모 -12%, 에너지 최대치 +12%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_Bridge_02",
+    "Name": "컨디션 관리",
+    "AxisType": "Rest",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_05a",
+      "Perk_Rest_05b"
+    ],
+    "EffectId": [
+      "Effect_EnergyMax_Add",
+      "Effect_EnergyCost_Add"
+    ],
+    "EffectValue": [
+      0.12,
+      -0.06
+    ],
+    "IconKey": null,
+    "Description": "에너지 최대치 +12%, 업무 에너지 소모 -6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_Bridge_03",
+    "Name": "생활의 균형",
+    "AxisType": "Rest",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "All",
+    "ParentId": [
+      "Perk_Rest_06a",
+      "Perk_Rest_06b"
+    ],
+    "EffectId": [
+      "Effect_EnergyRecover_Add",
+      "Effect_EnergyMax_Add"
+    ],
+    "EffectValue": [
+      0.12,
+      0.12
+    ],
+    "IconKey": null,
+    "Description": "에너지 회복량 +12%, 최대치 +12%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_Side",
+    "Name": "재택근무",
+    "AxisType": "Rest",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_05b"
+    ],
+    "EffectId": [
+      "Effect_EnergyCost_Add"
+    ],
+    "EffectValue": [
+      -0.07
+    ],
+    "IconKey": null,
+    "Description": "업무 에너지 소모 -7%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Rest_End",
+    "Name": "회복 탄력성",
+    "AxisType": "Rest",
+    "NodeType": "Keystone",
+    "InspirationCost": 10,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_Bridge_03"
+    ],
+    "EffectId": [
+      "Effect_EnergyMax_Comp",
+      "Effect_EnergyRecover_Comp",
+      "Effect_EnergyCost_Comp"
+    ],
+    "EffectValue": [
+      0.5,
+      0.8,
+      -0.4
+    ],
+    "IconKey": null,
+    "Description": "에너지 최대치 +50%, 회복량 +80%, 업무 에너지 소모 -40%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MA_Manual_01",
+    "Name": "수동자동 수동 연결 노드 1",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_03"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add"
+    ],
+    "EffectValue": [
+      0.03
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MA_Manual_02",
+    "Name": "수동자동 수동 연결 노드 2",
+    "AxisType": "Manual",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_MA_Manual_01"
+    ],
+    "EffectId": [
+      "Effect_ManualDP_Add"
+    ],
+    "EffectValue": [
+      0.06
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 DP +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MA_Manual_03",
+    "Name": "수동자동 수동 연결 노드 3",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_MA_Manual_02"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add"
+    ],
+    "EffectValue": [
+      0.03
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MA_Auto_01",
+    "Name": "수동자동 자동 연결 노드 1",
+    "AxisType": "Auto",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_03"
+    ],
+    "EffectId": [
+      "Effect_AutoMoney_Add"
+    ],
+    "EffectValue": [
+      0.03
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 돈 +3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MA_Auto_02",
+    "Name": "수동자동 자동 연결 노드 2",
+    "AxisType": "Auto",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_MA_Auto_01"
+    ],
+    "EffectId": [
+      "Effect_AutoDP_Add"
+    ],
+    "EffectValue": [
+      0.06
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 DP +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MA_Auto_03",
+    "Name": "수동자동 자동 연결 노드 3",
+    "AxisType": "Auto",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_MA_Auto_02"
+    ],
+    "EffectId": [
+      "Effect_Duration_Add"
+    ],
+    "EffectValue": [
+      -0.03
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 소요 시간 -3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MA_01",
+    "Name": "작업 전환",
+    "AxisType": "None",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_MA_Manual_03",
+      "Perk_Link_MA_Auto_03"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add",
+      "Effect_AutoMoney_Add"
+    ],
+    "EffectValue": [
+      0.05,
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "수동·자동 업무로 얻는 돈 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MA_02",
+    "Name": "병렬 처리",
+    "AxisType": "None",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_MA_01"
+    ],
+    "EffectId": [
+      "Effect_ManualDP_Add",
+      "Effect_AutoDP_Add"
+    ],
+    "EffectValue": [
+      0.05,
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "수동·자동 업무로 얻는 DP +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MA_03",
+    "Name": "멀티태스킹",
+    "AxisType": "None",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_MA_02"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add",
+      "Effect_AutoMoney_Add"
+    ],
+    "EffectValue": [
+      0.1,
+      0.1
+    ],
+    "IconKey": null,
+    "Description": "수동·자동 업무로 얻는 돈 +10%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MA_04",
+    "Name": "총괄",
+    "AxisType": "None",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_MA_03"
+    ],
+    "EffectId": [
+      "Effect_ManualDP_Add",
+      "Effect_AutoDP_Add",
+      "Effect_Duration_Add"
+    ],
+    "EffectValue": [
+      0.08,
+      0.08,
+      -0.05
+    ],
+    "IconKey": null,
+    "Description": "수동·자동 업무 DP +8%, 자동 업무 소요 시간 -5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MA_End",
+    "Name": "올라운더",
+    "AxisType": "None",
+    "NodeType": "Keystone",
+    "InspirationCost": 10,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_MA_04"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Comp",
+      "Effect_ManualDP_Comp",
+      "Effect_AutoMoney_Comp",
+      "Effect_AutoDP_Comp",
+      "Effect_Duration_Comp"
+    ],
+    "EffectValue": [
+      0.35,
+      0.35,
+      0.35,
+      0.35,
+      0.15
+    ],
+    "IconKey": null,
+    "Description": "수동·자동 업무 돈·DP +35%, 자동 업무 소요 시간 +15%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MR_Manual_01",
+    "Name": "수동휴식 수동 연결 노드 1",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Manual_03"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add"
+    ],
+    "EffectValue": [
+      0.03
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MR_Manual_02",
+    "Name": "수동휴식 수동 연결 노드 2",
+    "AxisType": "Manual",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_MR_Manual_01"
+    ],
+    "EffectId": [
+      "Effect_ManualDP_Add"
+    ],
+    "EffectValue": [
+      0.06
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 DP +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MR_Manual_03",
+    "Name": "수동휴식 수동 연결 노드 3",
+    "AxisType": "Manual",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_MR_Manual_02"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add"
+    ],
+    "EffectValue": [
+      0.03
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MR_Rest_01",
+    "Name": "수동휴식 휴식 연결 노드 1",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_03"
+    ],
+    "EffectId": [
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      0.03
+    ],
+    "IconKey": null,
+    "Description": "에너지 회복량 +3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MR_Rest_02",
+    "Name": "수동휴식 휴식 연결 노드 2",
+    "AxisType": "Rest",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_MR_Rest_01"
+    ],
+    "EffectId": [
+      "Effect_EnergyMax_Add"
+    ],
+    "EffectValue": [
+      0.06
+    ],
+    "IconKey": null,
+    "Description": "에너지 최대치 +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_MR_Rest_03",
+    "Name": "수동휴식 휴식 연결 노드 3",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_MR_Rest_02"
+    ],
+    "EffectId": [
+      "Effect_EnergyCost_Add"
+    ],
+    "EffectValue": [
+      -0.03
+    ],
+    "IconKey": null,
+    "Description": "업무 에너지 소모 -3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MR_01",
+    "Name": "초년생",
+    "AxisType": "None",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_MR_Manual_03",
+      "Perk_Link_MR_Rest_03"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add",
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      0.05,
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +5%, 에너지 회복량 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MR_02",
+    "Name": "밤샘",
+    "AxisType": "None",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_MR_01"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add",
+      "Effect_EnergyCost_Add"
+    ],
+    "EffectValue": [
+      0.08,
+      -0.04
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +8%, 업무 에너지 소모 -4%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MR_03",
+    "Name": "카페인 수혈",
+    "AxisType": "None",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_MR_02"
+    ],
+    "EffectId": [
+      "Effect_ManualDP_Add",
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      0.06,
+      0.06
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 DP +6%, 에너지 회복량 +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MR_04",
+    "Name": "야근 수당",
+    "AxisType": "None",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_MR_03"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Add",
+      "Effect_EnergyCost_Add"
+    ],
+    "EffectValue": [
+      0.12,
+      -0.05
+    ],
+    "IconKey": null,
+    "Description": "수동 업무로 얻는 돈 +12%, 업무 에너지 소모 -5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_MR_End",
+    "Name": "번아웃",
+    "AxisType": "None",
+    "NodeType": "Keystone",
+    "InspirationCost": 10,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_MR_04"
+    ],
+    "EffectId": [
+      "Effect_ManualMoney_Comp",
+      "Effect_ManualDP_Comp",
+      "Effect_EnergyMax_Comp"
+    ],
+    "EffectValue": [
+      0.5,
+      0.5,
+      -0.4
+    ],
+    "IconKey": null,
+    "Description": "수동 업무 돈·DP +50%, 에너지 최대치 -40%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_AR_Auto_01",
+    "Name": "자동휴식 자동 연결 노드 1",
+    "AxisType": "Auto",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Auto_03"
+    ],
+    "EffectId": [
+      "Effect_AutoMoney_Add"
+    ],
+    "EffectValue": [
+      0.03
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 돈 +3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_AR_Auto_02",
+    "Name": "자동휴식 자동 연결 노드 2",
+    "AxisType": "Auto",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_AR_Auto_01"
+    ],
+    "EffectId": [
+      "Effect_AutoDP_Add"
+    ],
+    "EffectValue": [
+      0.06
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 DP +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_AR_Auto_03",
+    "Name": "자동휴식 자동 연결 노드 3",
+    "AxisType": "Auto",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_AR_Auto_02"
+    ],
+    "EffectId": [
+      "Effect_Duration_Add"
+    ],
+    "EffectValue": [
+      -0.03
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 소요 시간 -3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_AR_Rest_01",
+    "Name": "자동휴식 휴식 연결 노드 1",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Rest_03"
+    ],
+    "EffectId": [
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      0.03
+    ],
+    "IconKey": null,
+    "Description": "에너지 회복량 +3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_AR_Rest_02",
+    "Name": "자동휴식 휴식 연결 노드 2",
+    "AxisType": "Rest",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_AR_Rest_01"
+    ],
+    "EffectId": [
+      "Effect_EnergyMax_Add"
+    ],
+    "EffectValue": [
+      0.06
+    ],
+    "IconKey": null,
+    "Description": "에너지 최대치 +6%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Link_AR_Rest_03",
+    "Name": "자동휴식 휴식 연결 노드 3",
+    "AxisType": "Rest",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_AR_Rest_02"
+    ],
+    "EffectId": [
+      "Effect_EnergyCost_Add"
+    ],
+    "EffectValue": [
+      -0.03
+    ],
+    "IconKey": null,
+    "Description": "업무 에너지 소모 -3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_AR_01",
+    "Name": "교대 준비",
+    "AxisType": "None",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Link_AR_Auto_03",
+      "Perk_Link_AR_Rest_03"
+    ],
+    "EffectId": [
+      "Effect_Duration_Add",
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      -0.03,
+      0.03
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 소요 시간 -3%, 에너지 회복량 +3%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_AR_02",
+    "Name": "예약 근무",
+    "AxisType": "None",
+    "NodeType": "Minor",
+    "InspirationCost": 1,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_AR_01"
+    ],
+    "EffectId": [
+      "Effect_AutoMoney_Add",
+      "Effect_EnergyMax_Add"
+    ],
+    "EffectValue": [
+      0.05,
+      0.05
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 돈 +5%, 에너지 최대치 +5%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_AR_03",
+    "Name": "교대 근무",
+    "AxisType": "None",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_AR_02"
+    ],
+    "EffectId": [
+      "Effect_Duration_Add",
+      "Effect_EnergyRecover_Add"
+    ],
+    "EffectValue": [
+      -0.06,
+      0.08
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 소요 시간 -6%, 에너지 회복량 +8%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_AR_04",
+    "Name": "무인 작업 시스템",
+    "AxisType": "None",
+    "NodeType": "Notable",
+    "InspirationCost": 3,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_AR_03"
+    ],
+    "EffectId": [
+      "Effect_AutoDP_Add",
+      "Effect_EnergyCost_Add"
+    ],
+    "EffectValue": [
+      0.08,
+      -0.04
+    ],
+    "IconKey": null,
+    "Description": "자동 업무로 얻는 DP +8%, 업무 에너지 소모 -4%",
+    "ExclusiveGroup": null
+  },
+  {
+    "Id": "Perk_Cross_AR_End",
+    "Name": "24시간 체제",
+    "AxisType": "None",
+    "NodeType": "Keystone",
+    "InspirationCost": 10,
+    "ParentMode": "Any",
+    "ParentId": [
+      "Perk_Cross_AR_04"
+    ],
+    "EffectId": [
+      "Effect_AutoMoney_Comp",
+      "Effect_AutoDP_Comp",
+      "Effect_EnergyRecover_Comp"
+    ],
+    "EffectValue": [
+      0.5,
+      0.5,
+      -0.4
+    ],
+    "IconKey": null,
+    "Description": "자동 업무 돈·DP +50%, 에너지 회복량 -40%",
+    "ExclusiveGroup": null
+  }
+]

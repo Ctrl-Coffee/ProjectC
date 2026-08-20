@@ -172,8 +172,8 @@ public class CompanionInventoryView : ViewBase
         GameManager.UI.OpenCompanionDetailPopup(_inventoryViewModel.GetCompanionState(companionId), () => OnLevelUp(companionId));
     }
 
-    private void OnLevelUp(string companionId)
+    private LevelUpResult OnLevelUp(string companionId)
     {
-        var result = _inventoryViewModel.TempLevelUp(companionId);
+        return _inventoryViewModel.TryLevelUp(companionId);
     }
 }

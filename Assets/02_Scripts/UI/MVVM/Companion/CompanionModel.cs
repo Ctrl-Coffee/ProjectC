@@ -51,17 +51,17 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
             return LevelUpResult.Error;
         }
 
-        //var nextLevelData = GameManager.DataTable.GetCompanionLevelData(companionId, companion.Level + 1);
+        var nextLevelData = GameManager.DataTable.GetCompanionLevelData(companionId, companion.Level + 1);
 
-        //if (nextLevelData == null)
-        //{
-        //    return LevelUpResult.MaxLevel;
-        //}
+        if (nextLevelData == null)
+        {
+            return LevelUpResult.MaxLevel;
+        }
 
-        //if (!GameManager.Session.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost))
-        //{
-        //    return LevelUpResult.NotEnoughCurrency;
-        //}
+        if (!GameManager.Session.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost))
+        {
+            return LevelUpResult.NotEnoughCurrency;
+        }
 
         companion.LevelUp();
         ContainerPropertyChanged?.Invoke(nameof(Companions), ContainerPropertyChangedEvent.Update, companion);

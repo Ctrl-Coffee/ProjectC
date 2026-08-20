@@ -32,9 +32,11 @@ public class MiniGameFlowHandler
             return;
         }
 
-        if (!GameManager.User.Currency.CanSpendEnergy(workData.ReqEnergy))
+        long energyCost = GetEnergyCost(workData);
+
+        if (!GameManager.User.Currency.CanSpendEnergy(energyCost))
         {
-            Logger.LogWarning($"에너지가 부족해 시작할 수 없습니다. {workData.Name} / 필요 {workData.ReqEnergy} / 보유 {GameManager.User.Currency.Energy}");
+            Logger.LogWarning($"에너지가 부족해 시작할 수 없습니다. {workData.Name} / 필요 {energyCost} / 보유 {GameManager.User.Currency.Energy}");
             return;
         }
 
@@ -49,7 +51,7 @@ public class MiniGameFlowHandler
                 return;
             }
 
-            GiveReward(workData, result.Accuracy);
+            GiveReward(workData, result);
 
             Logger.Log($"미니게임 종료 - {result.Grade} / 정확도 {result.Accuracy:P0}");
         }
@@ -59,12 +61,17 @@ public class MiniGameFlowHandler
         }
     }
 
-    private void GiveReward(WorkData workData, float accuracy)
+    private long GetEnergyCost(WorkData workData)
     {
-        float rate = Mathf.Clamp01(accuracy);
+        return GameManager.Perk.Stat.GetLong(WorkStatType.WorkEnergyCost, workData.ReqEnergy);
+    }
 
-        long money = (long)Math.Round(workData.RewardMoney * (double)rate);
-        long dp = (long)Math.Round(workData.RewardDP * (double)rate);
+    private void GiveReward(WorkData workData, MiniGameResult result)
+    {
+        float rate = Mathf.Clamp01(result.Accuracy) * result.RewardMultiplier;
+
+        long money = (long)Math.Round(GameManager.Perk.Stat.GetFloat(WorkStatType.ManualWorkRewardMoney, workData.RewardMoney) * (double)rate);
+        long dp = (long)Math.Round(GameManager.Perk.Stat.GetFloat(WorkStatType.ManualWorkRewardDP, workData.RewardDP) * (double)rate);
 
         if (money <= 0 && dp <= 0)
         {
@@ -90,6 +97,12 @@ public class MiniGameFlowHandler
             case MiniGameType.MotionTracking:
                 return PlayMiniGameAsync<MotionTrackingGameUI>(workData);
 
+            case MiniGameType.DiceGamble:
+                return PlayMiniGameAsync<DiceGambleGameUI>(workData);
+
+            case MiniGameType.ScratchLottery:
+                return PlayMiniGameAsync<ScratchLotteryGameUI>(workData);
+
             default:
                 Logger.LogError($"지원하지 않는 미니게임입니다. type: {workData.MiniGameType}");
                 return UniTask.FromResult(MiniGameResult.Canceled);
@@ -106,9 +119,11 @@ public class MiniGameFlowHandler
             return MiniGameResult.Canceled;
         }
 
-        if (!GameManager.User.Currency.TrySpendEnergy(workData.ReqEnergy))
+        long energyCost = GetEnergyCost(workData);
+
+        if (!GameManager.User.Currency.TrySpendEnergy(energyCost))
         {
-            Logger.LogError($"에너지 차감에 실패했습니다. 차감 경로가 늘어났는지 확인이 필요합니다. {workData.Name} / 필요 {workData.ReqEnergy}");
+            Logger.LogError($"에너지 차감에 실패했습니다. {workData.Name} / 필요 {energyCost}");
             ui.CloseUI();
             return MiniGameResult.Canceled;
         }
@@ -124,7 +139,7 @@ public class MiniGameFlowHandler
         {
             MiniGameResult result = await ui.RunAsync(context, token);
 
-            if (result.IsCompleted)
+            if (result.IsCompleted && result.SkipResultPopup == false)
             {
                 await ShowResultAsync(result, token);
             }

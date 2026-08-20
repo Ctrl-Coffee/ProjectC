@@ -14,21 +14,32 @@ public class RealHudUI : UIBase
 
     [SerializeField] private UIButtonComponent _coffeeBtn;
     [SerializeField] private UIButtonComponent _computerBtn;
+    [SerializeField] private UIButtonComponent _perkBtn;
 
     private void OnEnable()
     {
+        _settingBtn.BindButtonEvent(OnOpenSettingUI);
+
         _goDreamBtn.BindButtonEvent(OnChangeSceenToDream);
 
         _coffeeBtn.BindButtonEvent(TEST);
         _computerBtn.BindButtonEvent(OnOpenWorkInfoUI);
+        _perkBtn.BindButtonEvent(OnOpenPerkInfoUI);
     }
 
     private void OnDisable()
     {
+        _settingBtn.UnBindButtonAllEvent();
         _goDreamBtn.UnBindButtonAllEvent();
 
         _coffeeBtn.UnBindButtonAllEvent();
         _computerBtn.UnBindButtonAllEvent();
+        _perkBtn.UnBindButtonAllEvent();
+    }
+
+    private void OnOpenSettingUI()
+    {
+        GameManager.UI.OpenSettingUI();
     }
 
     private void OnChangeSceenToDream()
@@ -40,6 +51,11 @@ public class RealHudUI : UIBase
     private void OnOpenWorkInfoUI()
     {
         GameManager.UI.OpenWorkInfoUI();
+    }
+
+    private void OnOpenPerkInfoUI()
+    {
+        GameManager.UI.OpenPerkInfoUI();
     }
 
     private void TEST()

@@ -5,7 +5,9 @@
     "BaseAttack": 5,
     "BaseHp": 10,
     "BaseDefense": 2,
-    "SkillId": "Skill_101"
+    "EquipmentTypeString": "Armor",
+    "SkillId": "Skill_101",
+    "IconPath": "UI/Equipments[Equipment_0]"
   },
   {
     "Id": "Equipment_002",
@@ -13,7 +15,9 @@
     "BaseAttack": 8,
     "BaseHp": 5,
     "BaseDefense": 1,
-    "SkillId": "Skill_102"
+    "EquipmentTypeString": "Armor",
+    "SkillId": "Skill_102",
+    "IconPath": "UI/Equipments[Equipment_1]"
   },
   {
     "Id": "Equipment_003",
@@ -21,7 +25,9 @@
     "BaseAttack": 10,
     "BaseHp": 15,
     "BaseDefense": 4,
-    "SkillId": "Skill_103"
+    "EquipmentTypeString": "Armor",
+    "SkillId": "Skill_103",
+    "IconPath": "UI/Equipments[Equipment_3]"
   },
   {
     "Id": "Equipment_004",
@@ -29,7 +35,9 @@
     "BaseAttack": 4,
     "BaseHp": 40,
     "BaseDefense": 12,
-    "SkillId": "Skill_104"
+    "EquipmentTypeString": "Armor",
+    "SkillId": "Skill_104",
+    "IconPath": "UI/Equipments[Equipment_4]"
   },
   {
     "Id": "Equipment_005",
@@ -37,7 +45,9 @@
     "BaseAttack": 14,
     "BaseHp": 10,
     "BaseDefense": 3,
-    "SkillId": "Skill_105"
+    "EquipmentTypeString": "Armor",
+    "SkillId": "Skill_105",
+    "IconPath": "UI/Equipments[Equipment_5]"
   },
   {
     "Id": "Equipment_006",
@@ -45,7 +55,9 @@
     "BaseAttack": 16,
     "BaseHp": 20,
     "BaseDefense": 5,
-    "SkillId": "Skill_106"
+    "EquipmentTypeString": "Armor",
+    "SkillId": "Skill_106",
+    "IconPath": "UI/Equipments[Equipment_6]"
   },
   {
     "Id": "Equipment_007",
@@ -53,7 +65,9 @@
     "BaseAttack": 20,
     "BaseHp": 25,
     "BaseDefense": 8,
-    "SkillId": "Skill_107"
+    "EquipmentTypeString": "Armor",
+    "SkillId": "Skill_107",
+    "IconPath": "UI/Equipments[Equipment_7]"
   },
   {
     "Id": "Equipment_008",
@@ -61,7 +75,9 @@
     "BaseAttack": 24,
     "BaseHp": 15,
     "BaseDefense": 6,
-    "SkillId": "Skill_108"
+    "EquipmentTypeString": "Armor",
+    "SkillId": "Skill_108",
+    "IconPath": "UI/Equipments[Equipment_8]"
   },
   {
     "Id": "Equipment_009",
@@ -69,7 +85,9 @@
     "BaseAttack": 28,
     "BaseHp": 30,
     "BaseDefense": 10,
-    "SkillId": "Skill_109"
+    "EquipmentTypeString": "Armor",
+    "SkillId": "Skill_109",
+    "IconPath": "UI/Equipments[Equipment_9]"
   },
   {
     "Id": "Equipment_010",
@@ -77,6 +95,8 @@
     "BaseAttack": 34,
     "BaseHp": 40,
     "BaseDefense": 14,
-    "SkillId": "Skill_110"
+    "EquipmentTypeString": "Armor",
+    "SkillId": "Skill_110",
+    "IconPath": "UI/Equipments[Equipment_10]"
   }
 ]

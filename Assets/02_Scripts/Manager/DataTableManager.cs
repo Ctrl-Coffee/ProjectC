@@ -18,6 +18,9 @@ public class DataTableManager
     public Dictionary<string, EquipmentLevelData> EquipmentLevelDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentData> EquipmentDataTable { get; private set; } = new();
     public Dictionary<string, GachaProbabilityData> GachaProbabilityDataTable { get; private set; } = new();
+    public Dictionary<string, PerkNodeData> PerkNodeDataTable { get; private set; } = new();
+    public Dictionary<string, PerkEffectData> PerkEffectDataTable { get; private set; } = new();
+    public Dictionary<string, WorkStatData> WorkStatDataTable { get; private set; } = new();
 
     private Dictionary<int, List<CompanionData>> _companionsByGrade = new();
 
@@ -40,6 +43,10 @@ public class DataTableManager
         EquipmentLevelDataTable = LoadData<EquipmentLevelData>(nameof(EquipmentLevelData));
         EquipmentDataTable = LoadData<EquipmentData>(nameof(EquipmentData));
         GachaProbabilityDataTable = LoadData<GachaProbabilityData>(nameof(GachaProbabilityData));
+        PerkNodeDataTable = LoadData<PerkNodeData>(nameof(PerkNodeData));
+        PerkEffectDataTable = LoadData<PerkEffectData>(nameof(PerkEffectData));
+        WorkStatDataTable = LoadData<WorkStatData>(nameof(WorkStatData));
+
         BuildCompanionGradeIndex();
         BuildGachaProbabilityIndex();
     }
@@ -116,6 +123,24 @@ public class DataTableManager
         }
 
         return probability;
+    }
+
+    public PerkNodeData GetPerkNodeData(string id)
+    {
+        if (null == PerkNodeDataTable || string.IsNullOrEmpty(id)) return null;
+        return PerkNodeDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public PerkEffectData GetPerkEffectData(string id)
+    {
+        if (null == PerkEffectDataTable || string.IsNullOrEmpty(id)) return null;
+        return PerkEffectDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public WorkStatData GetWorkStatData(WorkStatType statType)
+    {
+        if (null == WorkStatDataTable || WorkStatType.None == statType) return null;
+        return WorkStatDataTable.TryGetValue(statType.ToString(), out var data) ? data : null;
     }
 
     #endregion

@@ -4,10 +4,11 @@ public class GameSession
 {
     public CurrencyModel Currency { get; }
     public PlayerGrowthModel PlayerGrowth { get; }
-    public EquipmentGrowthModel EquipmentGrowth { get; }
 
     public CompanionModel Companion { get; }
     public GachaModel Gacha { get; }
+    public HeroEquipmentModel HeroEquipment { get; }
+    public HeroEquipedModel HeroEquiped { get; }
 
 
     private NetworkManager _networkManager;
@@ -23,7 +24,6 @@ public class GameSession
         Currency = new();
 
         PlayerGrowth = new(new());
-        EquipmentGrowth = new(new());
 
         List<CompanionState> companionStates = new()
         {
@@ -34,5 +34,16 @@ public class GameSession
         Companion = new(companionStates);
         Gacha = new();
 
+
+        List<HeroEquipmentState> heroEquipmentStates = new()
+        {
+            new("Equipment_001", 1), new("Equipment_002", 2), new("Equipment_003", 3)
+            , new("Equipment_004", 4), new("Equipment_005", 5), new("Equipment_006", 6)
+            , new("Equipment_007", 7), new("Equipment_008", 8), new("Equipment_009", 9)
+            , new("Equipment_010", 10)
+        };
+        HeroEquipment = new(heroEquipmentStates);
+
+        HeroEquiped = new();
     }
 }
