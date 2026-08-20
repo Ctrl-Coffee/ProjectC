@@ -51,7 +51,7 @@ public class MiniGameFlowHandler
                 return;
             }
 
-            GiveReward(workData, result.Accuracy);
+            GiveReward(workData, result);
 
             Logger.Log($"미니게임 종료 - {result.Grade} / 정확도 {result.Accuracy:P0}");
         }
@@ -66,9 +66,9 @@ public class MiniGameFlowHandler
         return GameManager.Perk.Stat.GetLong(WorkStatType.WorkEnergyCost, workData.ReqEnergy);
     }
 
-    private void GiveReward(WorkData workData, float accuracy)
+    private void GiveReward(WorkData workData, MiniGameResult result)
     {
-        float rate = Mathf.Clamp01(accuracy);
+        float rate = Mathf.Clamp01(result.Accuracy) * result.RewardMultiplier;
 
         long money = (long)Math.Round(GameManager.Perk.Stat.GetFloat(WorkStatType.ManualWorkRewardMoney, workData.RewardMoney) * (double)rate);
         long dp = (long)Math.Round(GameManager.Perk.Stat.GetFloat(WorkStatType.ManualWorkRewardDP, workData.RewardDP) * (double)rate);
@@ -96,6 +96,12 @@ public class MiniGameFlowHandler
 
             case MiniGameType.MotionTracking:
                 return PlayMiniGameAsync<MotionTrackingGameUI>(workData);
+
+            case MiniGameType.DiceGamble:
+                return PlayMiniGameAsync<DiceGambleGameUI>(workData);
+
+            case MiniGameType.ScratchLottery:
+                return PlayMiniGameAsync<ScratchLotteryGameUI>(workData);
 
             default:
                 Logger.LogError($"지원하지 않는 미니게임입니다. type: {workData.MiniGameType}");
@@ -133,7 +139,7 @@ public class MiniGameFlowHandler
         {
             MiniGameResult result = await ui.RunAsync(context, token);
 
-            if (result.IsCompleted)
+            if (result.IsCompleted && result.SkipResultPopup == false)
             {
                 await ShowResultAsync(result, token);
             }

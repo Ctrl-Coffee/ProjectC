@@ -3,7 +3,7 @@
 public enum WorkType
 {
     Manual,
-    Auto,
+    Auto
 }
 
 [Serializable]
