@@ -180,7 +180,7 @@
     "EffectType": "Unlock",
     "StatType": null,
     "ModType": null,
-    "TargetId": "Work_Gambling_01",
+    "TargetId": "Work_Manual_03",
     "Description": "도박 업무 '즉석 복권' 해금"
   },
   {
@@ -188,7 +188,7 @@
     "EffectType": "Unlock",
     "StatType": null,
     "ModType": null,
-    "TargetId": "Work_Creative_01",
+    "TargetId": "Work_Manual_04",
     "Description": "창작 업무 '소설 쓰기' 해금"
   }
 ]
