@@ -25,13 +25,13 @@ public class UIBase : MonoBehaviour
         _panel.localScale = Vector3.zero;
 
         _panel.DOKill();
-        return _panel.DOScale(1f, 1f).SetEase(Ease.OutBack).SetUpdate(true);
+        return _panel.DOScale(1f, 0.5f).SetEase(Ease.OutBack).SetUpdate(true);
     }
 
     public virtual Tween PlayCloseAnimation()
     {
         _panel.DOKill();
-        return _panel.DOScale(0f, 1f)
+        return _panel.DOScale(0f, 0.5f)
             .SetEase(Ease.InBack)
             .SetUpdate(true);
     }
