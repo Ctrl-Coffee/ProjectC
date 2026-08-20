@@ -70,6 +70,20 @@ public static class UIManagerExtension
         return uiManager.OpenPopupUI<WorkInfoUI>();
     }
 
+    public static UniTask<PerkInfoUI> OpenPerkInfoUI(this UIManager uiManager)
+    {
+        return uiManager.OpenPopupUI<PerkInfoUI>();
+    }
+
+    public static async void OpenPerkDetailUI(this UIManager uiManager, string perkId)
+    {
+        var ui = await uiManager.OpenPopupUI<PerkDetailUI>();
+
+        if (null == ui) return;
+
+        ui.SetPerk(perkId);
+    }
+
     public static UniTask<T> OpenMiniGameUI<T>(this UIManager uiManager) where T : MiniGameBase
     {
         return uiManager.OpenPopupUI<T>();
