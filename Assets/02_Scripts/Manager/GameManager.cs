@@ -78,9 +78,9 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         await _uiManager.Init();
 
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.Common);
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.Reality);
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.Dream);
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.COMMON);
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.REALITY);
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.DREAM);
 
         _soundManager.Init(this.gameObject);
 
@@ -93,6 +93,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
         EnterReal();
+        Sound.PlayBGM(AddressablePath.Audio.BGM_LOBBY);
     }
 
     #endregion
@@ -104,7 +105,7 @@ public class GameManager : SingletonBehaviour<GameManager>
             _realLobbyController = new();
         }
 
-        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.RealLobbyBackground);
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.REAL_LOBBY_BACKGROUND);
         _realLobbyController.Enter(backgroundPrefab);
         UI.OpenRealHud();
     }
@@ -122,7 +123,7 @@ public class GameManager : SingletonBehaviour<GameManager>
             _dreamLobbyController = new();
         }
 
-        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DreamLobbyBackground);
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DREAM_LOBBY_BACKGROUND);
         _dreamLobbyController.Enter(backgroundPrefab);
         UI.OpenDreamHud();
     }

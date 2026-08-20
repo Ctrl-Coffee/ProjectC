@@ -15,8 +15,8 @@ public class SoundManager
     private const float _mutedDecibel = -80f;
 
     // TODO: 추후 정장된 값 로드
-    private float _bgmVolume = 1f;
-    private float _sfxVolume = 1f;
+    private float _bgmVolume = 0.2f;
+    private float _sfxVolume = 0.2f;
 
     // TODO: 추후 정장된 값 로드
     private bool _isBGMMuted = false;
@@ -31,6 +31,9 @@ public class SoundManager
 
         _bgmPlayer.outputAudioMixerGroup = _mixer.FindMatchingGroups("BGM")[0];
         _sfxPlayer.outputAudioMixerGroup = _mixer.FindMatchingGroups("SFX")[0];
+
+        ApplyVolume("BGMVolume", _bgmVolume, false);
+        ApplyVolume("SFXVolume", _sfxVolume, false);
     }
 
     public void PlayBGM(string soundPath)
@@ -58,7 +61,7 @@ public class SoundManager
         _bgmVolume = volume;
         _isBGMMuted = false;
 
-        _mixer.SetFloat("BGMVolume", Mathf.Log10(volume) * 20f);
+        ApplyVolume("BGMVolume", _bgmVolume, false);
     }
 
     public void SetSFXVolume(float volume)
@@ -66,7 +69,7 @@ public class SoundManager
         _sfxVolume = volume;
         _isSFXMuted = false;
 
-        _mixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20f);
+        ApplyVolume("SFXVolume", _sfxVolume, false);
     }
 
     public void PauseBGM()
@@ -95,14 +98,14 @@ public class SoundManager
 
     private void ApplyVolume(string parameterName, float volume, bool isMuted)
     {
-        float decibel = isMuted ? _mutedDecibel : Mathf.Log10(volume) * 20f;
+        float decibel = isMuted || volume <= 0f ? _mutedDecibel : Mathf.Max(_mutedDecibel, 10f * Mathf.Log(volume, 2f));
 
         _mixer.SetFloat(parameterName, decibel);
     }
 
     private async UniTaskVoid LoadAndPlayAudioClip(AudioSource audioSource, string audioPath, bool isLoop = false)
     {
-        AudioClip clip = await GameManager.Resource.LoadAssetAsync<AudioClip>($"Sound/{audioPath}");
+        AudioClip clip = await GameManager.Resource.LoadAssetAsync<AudioClip>(audioPath);
         if (clip == null)
         {
             Debug.LogError($"{audioPath}를 찾을 수 없습니다! 어드레서블 설정이 되어 있는지 확인해주세요.");

@@ -11,6 +11,7 @@ public class UIButtonComponent : MonoBehaviour
     private void Awake()
     {
         InitUIButton();
+        _button.onClick.AddListener(AudioPlay);
     }
 
     private void InitUIButton()
@@ -50,5 +51,10 @@ public class UIButtonComponent : MonoBehaviour
     private void Reset()
     {
         InitUIButton();
+    }
+
+    private void AudioPlay()
+    {
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.BUTTON_CLICK);
     }
 }

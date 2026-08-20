@@ -204,7 +204,7 @@ public class UIManager
 
     private async UniTask CreateUIRoot()
     {
-        GameObject uiRootPrefab = await GameManager.Resource.LoadAssetAsync<GameObject>(AddressablePath.Prefab.UIRoot);
+        GameObject uiRootPrefab = await GameManager.Resource.LoadAssetAsync<GameObject>(AddressablePath.Prefab.UIROOT);
 
         if (uiRootPrefab == null)
         {
