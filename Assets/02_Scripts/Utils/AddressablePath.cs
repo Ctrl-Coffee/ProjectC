@@ -17,6 +17,7 @@
         public const string COMMON = "Common";
         public const string REALITY = "Reality";
         public const string DREAM = "Dream";
+        public const string LOADDING = "Loading";
     }
 
     public static class Audio

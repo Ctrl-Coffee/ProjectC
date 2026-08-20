@@ -38,7 +38,6 @@ public class UIBase : MonoBehaviour
 
     public virtual void OnClickCloseButton()
     {
-        // TODO(김익환): audio
         CloseUI();
     }
 }
