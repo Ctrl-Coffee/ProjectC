@@ -48,6 +48,13 @@ public class UIButtonComponent : MonoBehaviour
         _text.text = buttonStr;
     }
 
+    public void SetInteractable(bool isInteractable)
+    {
+        if (_button == null) return;
+
+        _button.interactable = isInteractable;
+    }
+
     private void Reset()
     {
         InitUIButton();

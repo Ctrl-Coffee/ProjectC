@@ -4,9 +4,9 @@ using UnityEngine;
 [Serializable]
 public class CurrencyModel : ModelBase
 {
-    // 테스트용 설정. 최대치 100, 시작치 30
-    private const long START_ENERGY = 30;
-    private const long MAX_ENERGY = 100;
+    // 테스트용 설정. 최대치 200, 시작치 50
+    private const long START_ENERGY = 50;
+    private const long MAX_ENERGY = 200;
 
     [SerializeField] private long _money;
     [SerializeField] private long _dreamPoint;
@@ -73,9 +73,24 @@ public class CurrencyModel : ModelBase
     {
         get
         {
+            return GameManager.Perk.Stat.GetLong(WorkStatType.EnergyMax, MAX_ENERGY);
+        }
+    }
+
+    public void NotifyMaxEnergyChanged()
+    {
+        OnPropertyChanged(nameof(MaxEnergy));
+    }
+
+#if UNITY_EDITOR
+    public long DebugBaseMaxEnergy
+    {
+        get
+        {
             return MAX_ENERGY;
         }
     }
+#endif
 
     public long DreamFragment
     {
@@ -147,12 +162,14 @@ public class CurrencyModel : ModelBase
 
     public void AddEnergy(long amount)
     {
-        if (MAX_ENERGY <= Energy)
+        long maxEnergy = MaxEnergy;
+
+        if (maxEnergy <= Energy)
         {
             return;
         }
 
-        Energy = Math.Min(MAX_ENERGY, Energy + amount);
+        Energy = Math.Min(maxEnergy, Energy + amount);
     }
 
     public void AddDreamFragment(long amount)

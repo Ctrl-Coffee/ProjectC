@@ -17,6 +17,9 @@ public class DataTableManager
     public Dictionary<string, PlayerLevelData> PlayerLevelDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentLevelData> EquipmentLevelDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentData> EquipmentDataTable { get; private set; } = new();
+    public Dictionary<string, PerkNodeData> PerkNodeDataTable { get; private set; } = new();
+    public Dictionary<string, PerkEffectData> PerkEffectDataTable { get; private set; } = new();
+    public Dictionary<string, WorkStatData> WorkStatDataTable { get; private set; } = new();
 
     #endregion
 
@@ -34,6 +37,9 @@ public class DataTableManager
         PlayerLevelDataTable = LoadData<PlayerLevelData>(nameof(PlayerLevelData));
         EquipmentLevelDataTable = LoadData<EquipmentLevelData>(nameof(EquipmentLevelData));
         EquipmentDataTable = LoadData<EquipmentData>(nameof(EquipmentData));
+        PerkNodeDataTable = LoadData<PerkNodeData>(nameof(PerkNodeData));
+        PerkEffectDataTable = LoadData<PerkEffectData>(nameof(PerkEffectData));
+        WorkStatDataTable = LoadData<WorkStatData>(nameof(WorkStatData));
     }
 
     #region Getters
@@ -86,6 +92,24 @@ public class DataTableManager
     {
         if (null == ConfirmDataTable || string.IsNullOrEmpty(id)) return null;
         return ConfirmDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public PerkNodeData GetPerkNodeData(string id)
+    {
+        if (null == PerkNodeDataTable || string.IsNullOrEmpty(id)) return null;
+        return PerkNodeDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public PerkEffectData GetPerkEffectData(string id)
+    {
+        if (null == PerkEffectDataTable || string.IsNullOrEmpty(id)) return null;
+        return PerkEffectDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public WorkStatData GetWorkStatData(WorkStatType statType)
+    {
+        if (null == WorkStatDataTable || WorkStatType.None == statType) return null;
+        return WorkStatDataTable.TryGetValue(statType.ToString(), out var data) ? data : null;
     }
 
     #endregion
