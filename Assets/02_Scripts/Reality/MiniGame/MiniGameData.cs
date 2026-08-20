@@ -5,7 +5,8 @@ public enum MiniGameType
     None,
     SubtitleEdit,
     MotionTracking,
-    ScratchLottery
+    ScratchLottery,
+    DiceGamble
 }
 
 public enum MiniGameGrade
@@ -30,6 +31,12 @@ public struct MiniGameResult
 
     public MiniGameGrade Grade;
 
+    // 보상 배율. Accuracy와 달리 1을 넘을 수 있다 (예: 주사위 대성공 2배)
+    public float RewardMultiplier;
+
+    // 미니게임이 자체 결과 연출을 가진 경우 공용 결과창을 건너뛴다
+    public bool SkipResultPopup;
+
     public static MiniGameResult Completed(float accuracy)
     {
         float clamped = Mathf.Clamp01(accuracy);
@@ -39,6 +46,7 @@ public struct MiniGameResult
             IsCompleted = true,
             Accuracy = clamped,
             Grade = MiniGameGradeTable.GetGrade(clamped),
+            RewardMultiplier = 1f,
         };
     }
 

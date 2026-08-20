@@ -118,5 +118,17 @@
     "RewardDP": 10,
     "IconKey": null,
     "Description": "소설 쓰기"
+  },
+  {
+    "Id": "Work_Gamble_01",
+    "Name": "DiceGamble",
+    "WorkType": "Gamble",
+    "MiniGame": "DiceGamble",
+    "ReqEnergy": 5,
+    "DurationSeconds": 0,
+    "RewardMoney": 300,
+    "RewardDP": 20,
+    "IconKey": null,
+    "Description": "오늘의 운세를 점칩니다"
   }
 ]
