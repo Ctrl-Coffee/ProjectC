@@ -66,7 +66,7 @@ public class DiceGambleGameUI : MiniGameBase
         _contentRoot.SetActive(true);
         _txtStamp.enabled = false;
 
-        DiceModifier modifier = new DiceModifier(); // TODO희준 : 퍽 시스템에서 읽어오기
+        DiceModifier modifier = CreateModifier();
 
         int targetValue = _roller.CreateTarget();
 
@@ -144,6 +144,19 @@ public class DiceGambleGameUI : MiniGameBase
 
         return true;
     }
+    // TODO 희준 : WorkStatType에 주사위 항목(DiceRollCount / DiceMinimumValue / DiceResultBonus)이
+    // 추가되면 GameManager.Perk.Stat.GetInt로 읽어오기. 상하한은 WorkStatData 표가 처리한다.
+    private DiceModifier CreateModifier()
+    {
+        return new DiceModifier
+        {
+            RollCount = 1,
+            MinimumValue = 0,
+            ResultBonus = 0,
+            // RollCount = GameManager.Perk.Stat.GetInt(WorkStatType.DiceRollCount, 1),
+        };
+    }
+
     private MiniGameResult ToMiniGameResult(DiceGambleResult diceResult)
     {
         float rate = diceResult.IsSuccess ? _successRate
