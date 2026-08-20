@@ -2621,12 +2621,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SettingUI
   _isPlayAnimation: 1
   _panel: {fileID: 6490295914637491254}
+  _gameVersionText: {fileID: 370082019048217811}
   _bgmNormal: {fileID: 2861427793085338552}
   _bgmMute: {fileID: 5709761744877960882}
   _sfxNormal: {fileID: 6768589624472755184}
   _sfxMute: {fileID: 1951934268364691011}
   _bgmButton: {fileID: 5648365881842899830}
   _sfxButton: {fileID: 2637594505924818802}
+  _privacyPolicyButton: {fileID: 6011037892055344307}
   _closeButton: {fileID: 2022002262432489201}
   _bgmSlider: {fileID: 1538675504569747451}
   _sfxSlider: {fileID: 3541038938770626967}
@@ -2928,6 +2930,8 @@ GameObject:
   - component: {fileID: 9047300244621879941}
   - component: {fileID: 4161005416011311022}
   - component: {fileID: 5722372362585211378}
+  - component: {fileID: 322597610608454142}
+  - component: {fileID: 6011037892055344307}
   m_Layer: 5
   m_Name: Text_Privacy
   m_TagString: Untagged
@@ -3054,6 +3058,64 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &322597610608454142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060344120074489350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 5722372362585211378}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6011037892055344307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060344120074489350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6111adf02703a4d8b688b8592cc05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonComponent
+  _button: {fileID: 322597610608454142}
+  _text: {fileID: 5722372362585211378}
 --- !u!1 &4067818627361123033
 GameObject:
   m_ObjectHideFlags: 0
@@ -4080,7 +4142,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 7903542098445853830}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -4744,7 +4806,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 5628627839895855384}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []

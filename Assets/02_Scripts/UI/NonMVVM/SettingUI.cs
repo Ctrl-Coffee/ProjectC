@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingUI : UIBase
 {
+    [SerializeField] private TextMeshProUGUI _gameVersionText;
+
     [SerializeField] private GameObject _bgmNormal;
     [SerializeField] private GameObject _bgmMute;
     [SerializeField] private GameObject _sfxNormal;
@@ -10,12 +13,19 @@ public class SettingUI : UIBase
 
     [SerializeField] private UIButtonComponent _bgmButton;
     [SerializeField] private UIButtonComponent _sfxButton;
+    [SerializeField] private UIButtonComponent _privacyPolicyButton;
     [SerializeField] private UIButtonComponent _closeButton;
 
     [SerializeField] private Slider _bgmSlider;
     [SerializeField] private Slider _sfxSlider;
 
+    private const string PRIVACY_POLICY_URL = "https://github.com/Ctrl-Coffee/ProjectC";
     private const float MIN_VALUE = 0.0001f;
+
+    private void Awake()
+    {
+        SetGameVersion();
+    }
 
     private void OnEnable()
     {
@@ -30,6 +40,7 @@ public class SettingUI : UIBase
 
         _sfxButton.BindButtonEvent(OnToggleSFX);
         _bgmButton.BindButtonEvent(OnToggleBGM);
+        _privacyPolicyButton.BindButtonEvent(OnPrivacyPolicyURL);
         _closeButton.BindButtonEvent(OnClose);
     }
 
@@ -37,6 +48,7 @@ public class SettingUI : UIBase
     {
         _sfxButton.UnBindButtonAllEvent();
         _bgmButton.UnBindButtonAllEvent();
+        _privacyPolicyButton.UnBindButtonAllEvent();
         _closeButton.UnBindButtonAllEvent();
     }
 
@@ -83,5 +95,15 @@ public class SettingUI : UIBase
     {
         normal.SetActive(volume > MIN_VALUE);
         mute.SetActive(volume <= MIN_VALUE);
+    }
+
+    private void SetGameVersion()
+    {
+        _gameVersionText.text = $"Version:{Application.version}";
+    }
+
+    private void OnPrivacyPolicyURL()
+    {
+        Application.OpenURL(PRIVACY_POLICY_URL);
     }
 }
