@@ -24,6 +24,30 @@
     "Description": "모션 캡쳐 알바를 신청합니다"
   },
   {
+    "Id": "Work_Manual_03",
+    "Name": "Roll Dice",
+    "WorkType": "Manual",
+    "MiniGame": "DiceGamble",
+    "ReqEnergy": 20,
+    "DurationSeconds": 0,
+    "RewardMoney": 2000,
+    "RewardDP": 0,
+    "IconKey": null,
+    "Description": "주사위 굴리기!!"
+  },
+  {
+    "Id": "Work_Manual_04",
+    "Name": "Write a novel",
+    "WorkType": "Manual",
+    "MiniGame": "None",
+    "ReqEnergy": 1,
+    "DurationSeconds": 0,
+    "RewardMoney": 0,
+    "RewardDP": 10,
+    "IconKey": null,
+    "Description": "소설 쓰기"
+  },
+  {
     "Id": "Work_Auto_01",
     "Name": "Sync Subtitle",
     "WorkType": "Auto",
@@ -94,29 +118,5 @@
     "RewardDP": 50,
     "IconKey": null,
     "Description": "게임 컨텐츠 기획을 실행합니다"
-  },
-  {
-    "Id": "Work_Gambling_01",
-    "Name": "Scratch Lottery",
-    "WorkType": "Gamble",
-    "MiniGame": "ScratchLottery",
-    "ReqEnergy": 20,
-    "DurationSeconds": 0,
-    "RewardMoney": 2000,
-    "RewardDP": 0,
-    "IconKey": null,
-    "Description": "즉석 복권 긁기!!"
-  },
-  {
-    "Id": "Work_Creative_01",
-    "Name": "Write a novel",
-    "WorkType": "Creative",
-    "MiniGame": "None",
-    "ReqEnergy": 1,
-    "DurationSeconds": 0,
-    "RewardMoney": 0,
-    "RewardDP": 10,
-    "IconKey": null,
-    "Description": "소설 쓰기"
   }
 ]
