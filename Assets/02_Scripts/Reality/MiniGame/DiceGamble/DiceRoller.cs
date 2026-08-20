@@ -9,7 +9,7 @@ public class DiceRoller
     private const int TARGET_MAX = 19;
     
 
-    public DiceGambleResult Roll(int targetValue, DiceModifier modifier)
+    public MiniGameResult Roll(int targetValue, DiceModifier modifier)
     {
         int rollCount = Mathf.Max(1, modifier.RollCount);
         int[] rolledValues = new int[rollCount];
@@ -39,7 +39,7 @@ public class DiceRoller
             isSuccess = finalValue >= targetValue;
         }
 
-        return new DiceGambleResult
+        return new MiniGameResult
         {
             TargetValue = targetValue,
             RolledValues = rolledValues,

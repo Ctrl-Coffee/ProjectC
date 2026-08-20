@@ -35,12 +35,6 @@ public class DiceGambleGameUI : MiniGameBase
     [Header("결과 대기")]
     [SerializeField] private int _resultDelayMs = 800;
 
-    [Header("보상 배율")]
-    [SerializeField] private float _successRate = 1f;
-    [SerializeField] private float _failRate = 0.5f;
-    [SerializeField] private float _criticalFailRate = 0f;
-    [SerializeField] private float _criticalSuccessMultiplier = 2f;
-
     private Vector2 _diceRestPosition;
 
     private DiceRoller _roller = new();
@@ -74,13 +68,13 @@ public class DiceGambleGameUI : MiniGameBase
 
         await WaitForRollAsync(token);
 
-        DiceGambleResult diceResult = _roller.Roll(targetValue, modifier);
+        MiniGameResult result = _roller.Roll(targetValue, modifier);
 
-        await PlayRollAnimationAsync(diceResult.FinalValue, token);
-        await PlayStampAsync(diceResult.IsSuccess, token);
+        await PlayRollAnimationAsync(result.FinalValue, token);
+        await PlayStampAsync(result.IsSuccess, token);
         await UniTask.Delay(_resultDelayMs, ignoreTimeScale: true, cancellationToken: token);
 
-        return ToMiniGameResult(diceResult);
+        return MiniGameScore.FromDice(result);
     }
 
     private async UniTask WaitForRollAsync(CancellationToken token)
@@ -155,20 +149,6 @@ public class DiceGambleGameUI : MiniGameBase
             ResultBonus = 0,
             // RollCount = GameManager.Perk.Stat.GetInt(WorkStatType.DiceRollCount, 1),
         };
-    }
-
-    private MiniGameResult ToMiniGameResult(DiceGambleResult diceResult)
-    {
-        float rate = diceResult.IsSuccess ? _successRate
-            : diceResult.IsCriticalFail ? _criticalFailRate
-            : _failRate;
-
-        MiniGameResult result = MiniGameResult.Completed(rate);
-
-        result.RewardMultiplier = diceResult.IsCriticalSuccess ? _criticalSuccessMultiplier : 1f;
-        result.SkipResultPopup = true;
-
-        return result;
     }
 
     private async UniTask PlayStampAsync(bool isSuccess, CancellationToken token)

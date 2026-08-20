@@ -4,6 +4,7 @@ public class SymbolDrawer
 {
     public const int CELL_COUNT = 5;
     public const int MATCH_COUNT = 3;
+    public const int SYMBOL_COUNT = 4;
 
     private static readonly float[] DEFAULT_WEIGHT = { 20f, 50f, 20f, 10f};
 
@@ -20,7 +21,7 @@ public class SymbolDrawer
         return symbols;
     }
 
-    public ScratchLotteryResult Judge(ScratchSymbol[] symbols, bool[] revealed)
+    public MiniGameResult Judge(ScratchSymbol[] symbols, bool[] revealed)
     {
         int[] counts = new int[DEFAULT_WEIGHT.Length + 1];
 
@@ -50,7 +51,7 @@ public class SymbolDrawer
             break;
         }
 
-        return new ScratchLotteryResult
+        return new MiniGameResult
         {
             Symbols = symbols,
             Revealed = revealed,

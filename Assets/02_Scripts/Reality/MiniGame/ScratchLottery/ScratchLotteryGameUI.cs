@@ -19,11 +19,6 @@ public class ScratchLotteryGameUI : MiniGameBase
     [Header("진행")]
     [SerializeField] private float _playDurationSeconds = 30f;
 
-    [Header("보상 배율")]
-    [SerializeField] private float[] _symbolRates = { 0.1f, 0.2f, 0.5f, 1f };
-    [SerializeField] private float _match4Multiplier = 1.5f;
-    [SerializeField] private float _match5Multiplier = 2f;
-
     private SymbolDrawer _drawer = new();
 
     public override async UniTask<MiniGameResult> PlayAsync(MiniGameContext context, CancellationToken token)
@@ -52,9 +47,9 @@ public class ScratchLotteryGameUI : MiniGameBase
             _inputArea.OnScratch -= OnScratch;
         }
 
-        ScratchLotteryResult result = _drawer.Judge(symbols, CollectRevealed());
+        MiniGameResult result = _drawer.Judge(symbols, CollectRevealed());
 
-        return ToMiniGameResult(result);
+        return MiniGameScore.FromScratch(result);
     }
 
     private void SetupCells(ScratchSymbol[] symbols)
@@ -123,60 +118,6 @@ public class ScratchLotteryGameUI : MiniGameBase
 
         return revealed;
     }
-    private MiniGameResult ToMiniGameResult(ScratchLotteryResult lotteryResult)
-    {
-        if (lotteryResult.IsSuccess == false)
-        {
-            return MiniGameResult.Completed(0f);
-        }
-
-        MiniGameResult result = MiniGameResult.Completed(GetSymbolRate(lotteryResult.MatchedSymbol));
-
-        result.RewardMultiplier = GetCountMultiplier(lotteryResult.MatchedCount);
-        result.Grade = GetGrade(lotteryResult.MatchedSymbol);
-
-        return result;
-    }
-
-    private float GetSymbolRate(ScratchSymbol symbol)
-    {
-        int rateIndex = (int)symbol - 1;
-
-        if (rateIndex < 0 || _symbolRates.Length <= rateIndex)
-        {
-            Debug.LogError($"심볼 배율을 찾을 수 없습니다. symbol: {symbol}");
-            return 0f;
-        }
-
-        return _symbolRates[rateIndex];
-    }
-
-    private float GetCountMultiplier(int matchedCount)
-    {
-        if (5 <= matchedCount)
-        {
-            return _match5Multiplier;
-        }
-
-        if (4 == matchedCount)
-        {
-            return _match4Multiplier;
-        }
-
-        return 1f;
-    }
-
-    private MiniGameGrade GetGrade(ScratchSymbol symbol)
-    {
-        switch (symbol)
-        {
-            case ScratchSymbol.Money: return MiniGameGrade.Perfect;
-            case ScratchSymbol.Bed: return MiniGameGrade.Good;
-            case ScratchSymbol.Coffee: return MiniGameGrade.Normal;
-            case ScratchSymbol.Computer: return MiniGameGrade.Bad;
-            default: return MiniGameGrade.Miss;
-        }
-    }
     private void OnScratch(Vector2 screenPosition)
     {
         foreach (ScratchCell cell in _cells)
@@ -238,9 +179,9 @@ public class ScratchLotteryGameUI : MiniGameBase
             return false;
         }
 
-        if (null == _symbolSprites || _symbolSprites.Length != _symbolRates.Length)
+        if (null == _symbolSprites || _symbolSprites.Length != SymbolDrawer.SYMBOL_COUNT)
         {
-            Debug.LogError("심볼 스프라이트 개수가 배율 개수와 다릅니다.");
+            Debug.LogError($"심볼 스프라이트가 {SymbolDrawer.SYMBOL_COUNT}개여야 합니다.");
             return false;
         }
 
