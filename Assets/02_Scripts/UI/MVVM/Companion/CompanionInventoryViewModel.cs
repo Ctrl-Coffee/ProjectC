@@ -5,9 +5,9 @@ public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
     public event System.Action<string, ContainerPropertyChangedEvent, CompanionState> OnContainerChanged_ViewModel;
 
     public IReadOnlyList<CompanionState> Items => _items;
-    public CompanionInventorySort CurrentSort => _currentSort;
+    public InventorySort CurrentSort => _currentSort;
 
-    private CompanionInventorySort _currentSort = CompanionInventorySort.Level;
+    private InventorySort _currentSort = InventorySort.Level;
     private readonly List<CompanionState> _items = new();
 
     public CompanionInventoryViewModel(CompanionModel model) : base(model)
@@ -44,7 +44,7 @@ public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
 
     public void SetSort(int index)
     {
-        _currentSort = (CompanionInventorySort)index;
+        _currentSort = (InventorySort)index;
         SortItems();
     }
 
@@ -60,7 +60,7 @@ public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
 
     private void SortItems()
     {
-        if (_currentSort == CompanionInventorySort.Level)
+        if (_currentSort == InventorySort.Level)
             _items.Sort((x, y) =>
             {
                 int levelCompare = y.Level.CompareTo(x.Level);
@@ -74,7 +74,7 @@ public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
                     x.CompanionId,
                     y.CompanionId);
             });
-        else if(_currentSort == CompanionInventorySort.LevelReverse)
+        else if(_currentSort == InventorySort.LevelReverse)
             _items.Sort((x, y) =>
             {
                 int levelCompare = x.Level.CompareTo(y.Level);
@@ -121,8 +121,7 @@ public class CompanionInventoryViewModel : ViewModelBase<CompanionModel>
         SortItems();
     }
 
-    // TODO: 테스트
-    public LevelUpResult TempLevelUp(string companionId)
+    public LevelUpResult TryLevelUp(string companionId)
     {
         return _model.TryLevelUp(companionId);
     }

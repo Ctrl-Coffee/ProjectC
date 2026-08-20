@@ -32,9 +32,11 @@ public class MiniGameFlowHandler
             return;
         }
 
-        if (!GameManager.User.Currency.CanSpendEnergy(workData.ReqEnergy))
+        long energyCost = GetEnergyCost(workData);
+
+        if (!GameManager.User.Currency.CanSpendEnergy(energyCost))
         {
-            Logger.LogWarning($"에너지가 부족해 시작할 수 없습니다. {workData.Name} / 필요 {workData.ReqEnergy} / 보유 {GameManager.User.Currency.Energy}");
+            Logger.LogWarning($"에너지가 부족해 시작할 수 없습니다. {workData.Name} / 필요 {energyCost} / 보유 {GameManager.User.Currency.Energy}");
             return;
         }
 
@@ -59,12 +61,17 @@ public class MiniGameFlowHandler
         }
     }
 
+    private long GetEnergyCost(WorkData workData)
+    {
+        return GameManager.Perk.Stat.GetLong(WorkStatType.WorkEnergyCost, workData.ReqEnergy);
+    }
+
     private void GiveReward(WorkData workData, MiniGameResult result)
     {
         float rate = Mathf.Clamp01(result.Accuracy) * result.RewardMultiplier;
 
-        long money = (long)Math.Round(workData.RewardMoney * (double)rate);
-        long dp = (long)Math.Round(workData.RewardDP * (double)rate);
+        long money = (long)Math.Round(GameManager.Perk.Stat.GetFloat(WorkStatType.ManualWorkRewardMoney, workData.RewardMoney) * (double)rate);
+        long dp = (long)Math.Round(GameManager.Perk.Stat.GetFloat(WorkStatType.ManualWorkRewardDP, workData.RewardDP) * (double)rate);
 
         if (money <= 0 && dp <= 0)
         {
@@ -109,9 +116,11 @@ public class MiniGameFlowHandler
             return MiniGameResult.Canceled;
         }
 
-        if (!GameManager.User.Currency.TrySpendEnergy(workData.ReqEnergy))
+        long energyCost = GetEnergyCost(workData);
+
+        if (!GameManager.User.Currency.TrySpendEnergy(energyCost))
         {
-            Logger.LogError($"에너지 차감에 실패했습니다. 차감 경로가 늘어났는지 확인이 필요합니다. {workData.Name} / 필요 {workData.ReqEnergy}");
+            Logger.LogError($"에너지 차감에 실패했습니다. {workData.Name} / 필요 {energyCost}");
             ui.CloseUI();
             return MiniGameResult.Canceled;
         }
