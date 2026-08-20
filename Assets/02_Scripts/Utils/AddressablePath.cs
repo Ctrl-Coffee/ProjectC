@@ -2,9 +2,9 @@
 {
     public static class Prefab
     {
-        public const string UIRoot = "UI/UIRoot";
-        public const string RealLobbyBackground = "RealLobbyBackground";
-        public const string DreamLobbyBackground = "DreamLobbyBackground";
+        public const string UIROOT = "UI/UIRoot";
+        public const string REAL_LOBBY_BACKGROUND = "RealLobbyBackground";
+        public const string DREAM_LOBBY_BACKGROUND = "DreamLobbyBackground";
     }
 
     public static string GetUIPath(System.Type uiType)
@@ -14,8 +14,14 @@
 
     public static class Label
     {
-        public const string Common = "Common";
-        public const string Reality = "Reality";
-        public const string Dream = "Dream";
+        public const string COMMON = "Common";
+        public const string REALITY = "Reality";
+        public const string DREAM = "Dream";
+    }
+
+    public static class Audio
+    {
+        public const string BGM_LOBBY = "Audio/BGM/Lobby";
+        public const string BUTTON_CLICK = "Audio/SFX/ButtonClick";
     }
 }
