@@ -45,7 +45,7 @@
     "RewardMoney": 0,
     "RewardDP": 10,
     "IconKey": null,
-    "Description": "소설 쓰기"
+    "Description": "소설 쓰기(미구현)"
   },
   {
     "Id": "Work_Auto_01",
