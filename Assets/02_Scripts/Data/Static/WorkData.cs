@@ -13,6 +13,7 @@ public class WorkData : BaseData
     public string WorkType;
     public string MiniGame;
     public int ReqEnergy;
+    public int ReqGold;
 
     public float DurationSeconds;
 

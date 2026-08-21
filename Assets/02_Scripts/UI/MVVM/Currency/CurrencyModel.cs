@@ -186,6 +186,10 @@ public class CurrencyModel : ModelBase
     {
         Inspiration += amount;
     }
+    public bool CanSpendMoney(long amount)
+    {
+        return CanSpend(Money, amount);
+    }
 
     public bool TrySpendMoney(long amount)
     {

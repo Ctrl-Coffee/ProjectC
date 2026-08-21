@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +19,19 @@ public class GachaView : ViewBase
     [SerializeField] private TextMeshProUGUI _multiDrawLabelText;
     [SerializeField] private Button _closeButton;
 
+    [Header("배너")]
+    [SerializeField] private Image _bannerImage;
+    [SerializeField] private Sprite _companionBannerSprite;
+    [SerializeField] private Sprite _equipmentBannerSprite;
+
+    [Header("뽑기 연출")]
+    [SerializeField] private RectTransform _scrollRect;
+    [SerializeField] private Image _flashImage;
+    [SerializeField] private int _spinCount = 3;
+    [SerializeField] private float _spinDuration = 1f;
+    [SerializeField] private float _flashDuration = 0.3f;
+
+    private bool _isDrawing = false;
     private GachaViewModel _viewModel;
 
     private void OnEnable()
@@ -85,11 +101,27 @@ public class GachaView : ViewBase
                 break;
         }
     }
+    private Sprite GetBannerSprite(GachaType gachaType)
+    {
+        switch (gachaType)
+        {
+            case GachaType.Companion:
+                return _companionBannerSprite;
+
+            case GachaType.Equipment:
+                return _equipmentBannerSprite;
+
+            default:
+                Debug.LogError($"배너 이미지가 없는 가챠 종류입니다. type : {gachaType}");
+                return null;
+        }
+    }
 
     private void RefreshAll()
     {
         if (_viewModel == null) return;
 
+        _bannerImage.sprite = GetBannerSprite(_viewModel.CurrentType);
         _bannerNameText.text = _viewModel.BannerName;
         _singleCostText.text = $"필요 재화 : {_viewModel.SingleCost}";
         _multiCostText.text = $"필요 재화 : {_viewModel.MultiCost}";
@@ -111,21 +143,57 @@ public class GachaView : ViewBase
 
     private void OnClickSingleDraw()
     {
-        IReadOnlyList<GachaResultData> results = _viewModel.Draw(_viewModel.SingleDrawCount);
-
-        if (results == null) return;
-
-        GameManager.UI.OpenGachaResultUI(results);
+        DrawAsync(_viewModel.SingleDrawCount).Forget();
     }
 
     private void OnClickMultiDraw()
     {
-        IReadOnlyList<GachaResultData> results = _viewModel.Draw(_viewModel.MultiDrawCount);
+        DrawAsync(_viewModel.MultiDrawCount).Forget();
+    }
+
+    private async UniTaskVoid DrawAsync(int count)
+    {
+        if (_isDrawing) return;
+
+        IReadOnlyList<GachaResultData> results = _viewModel.Draw(count);
 
         if (results == null) return;
 
-        GameManager.UI.OpenGachaResultUI(results);
+        _isDrawing = true;
+
+        try
+        {
+            await PlayDrawEffectAsync(this.GetCancellationTokenOnDestroy());
+
+            GameManager.UI.OpenGachaResultUI(results);
+        }
+        finally
+        {
+            _isDrawing = false;
+        }
     }
 
-   
+    private async UniTask PlayDrawEffectAsync(CancellationToken token)
+    {
+        _scrollRect.DOKill();
+        _scrollRect.localEulerAngles = Vector3.zero;
+
+        await _scrollRect.DORotate(new Vector3(0f, 0f, -360f * _spinCount), _spinDuration, RotateMode.FastBeyond360).SetEase(Ease.InCubic).SetUpdate(true).ToUniTask(cancellationToken: token);
+
+        await PlayFlashAsync(token);
+
+        _scrollRect.localEulerAngles = Vector3.zero;
+    }
+
+    private async UniTask PlayFlashAsync(CancellationToken token)
+    {
+        _flashImage.gameObject.SetActive(true);
+        _flashImage.color = new Color(1f, 1f, 1f, 0f);
+
+        await _flashImage.DOFade(1f, _flashDuration * 0.3f).SetUpdate(true).ToUniTask(cancellationToken: token);
+
+        await _flashImage.DOFade(0f, _flashDuration * 0.7f).SetUpdate(true).ToUniTask(cancellationToken: token);
+
+        _flashImage.gameObject.SetActive(false);
+    }
 }
