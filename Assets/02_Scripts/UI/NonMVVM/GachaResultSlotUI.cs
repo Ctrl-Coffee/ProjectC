@@ -14,16 +14,24 @@ public class GachaResultSlotUI : UIBase
 
     public void Init(GachaResultData result)
     {
-        CompanionData companionData = GameManager.DataTable.GetCompanionData(result.Id);
+        bool isValid = false;
 
-        if (companionData == null)
+        switch (result.GachaType)
         {
-            Debug.LogError($"동료 데이터를 찾을 수 없습니다. Id : {result.Id}");
-            return;
+            case GachaType.Companion:
+                isValid = SetCompanionInfo(result.Id);
+                break;
+
+            case GachaType.Equipment:
+                isValid = SetEquipmentInfo(result.Id);
+                break;
+
+            default:
+                Debug.LogError($"지원하지 않는 가챠 종류입니다. type : {result.GachaType}");
+                break;
         }
 
-        _nameText.text = companionData.Name;
-        _gradeText.text = $"★ {companionData.Grade}";
+        if (isValid == false) return;
 
         _newBadge.SetActive(result.IsDuplicate == false);
         _rewardText.gameObject.SetActive(result.IsDuplicate);
@@ -33,6 +41,38 @@ public class GachaResultSlotUI : UIBase
             _rewardText.text = $"+{result.DuplicateReward}";
         }
     }
+    private bool SetCompanionInfo(string companionId)
+    {
+        CompanionData companionData = GameManager.DataTable.GetCompanionData(companionId);
+
+        if (companionData == null)
+        {
+            Debug.LogError($"동료 데이터를 찾을 수 없습니다. Id : {companionId}");
+            return false;
+        }
+
+        _nameText.text = companionData.Name;
+        _gradeText.text = $"★ {companionData.Grade}";
+
+        return true;
+    }
+
+    private bool SetEquipmentInfo(string equipmentId)
+    {
+        EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
+
+        if (equipmentData == null)
+        {
+            Debug.LogError($"장비 데이터를 찾을 수 없습니다. Id : {equipmentId}");
+            return false;
+        }
+
+        _nameText.text = equipmentData.Name;
+        _gradeText.text = equipmentData.EquipmentGrade.ToString();
+
+        return true;
+    }
+
     public override Tween PlayOpenAnimation()
     {
         if (IsPlayAnimation == false) return null;

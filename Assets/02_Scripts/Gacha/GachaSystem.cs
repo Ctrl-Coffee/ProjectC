@@ -91,25 +91,36 @@ public class GachaSystem
         switch (gachaType)
         {
             case GachaType.Companion:
-            {
-                IReadOnlyList<CompanionData> companions = GameManager.DataTable.GetCompanionsByGrade(grade);
-
-                if (companions == null) return null;
-
-                List<string> ids = new List<string>();
-
-                foreach (CompanionData data in companions)
                 {
-                    ids.Add(data.Id);
+                    IReadOnlyList<CompanionData> companions = GameManager.DataTable.GetCompanionsByGrade(grade);
+
+                    if (companions == null) return null;
+
+                    List<string> ids = new List<string>();
+
+                    foreach (CompanionData data in companions)
+                    {
+                        ids.Add(data.Id);
+                    }
+
+                    return ids;
                 }
 
-                return ids;
-            }
-
             case GachaType.Equipment:
-                //TODO 희준 : 장비등급, 모델 생기면 구현
-                Debug.LogError("장비 가챠는 아직 미구현");
-                return null;
+                { 
+                    IReadOnlyList<EquipmentData> equipment = GameManager.DataTable.GetEquipmentsByGrade(grade);
+
+                    if (equipment == null) return null;
+
+                    List<string> ids = new List<string>();
+
+                    foreach (EquipmentData data in equipment)
+                    {
+                        ids.Add(data.Id);
+                    }
+
+                        return ids;
+                    }
 
             default:
                 Debug.LogError($"구현되지 않은 가차 종류입니다 {gachaType}");

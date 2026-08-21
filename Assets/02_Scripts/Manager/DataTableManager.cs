@@ -25,6 +25,8 @@ public class DataTableManager
     private Dictionary<int, List<CompanionData>> _companionsByGrade = new();
 
     private Dictionary<GachaType, List<GachaProbabilityData>> _probabilitiesByGachaType = new();
+    
+    private Dictionary<int, List<EquipmentData>> _equipmentsByGrade = new();
 
     #endregion
 
@@ -49,6 +51,7 @@ public class DataTableManager
 
         BuildCompanionGradeIndex();
         BuildGachaProbabilityIndex();
+        BuildEquipmentGradeIndex();
     }
 
     #region Getters
@@ -112,6 +115,17 @@ public class DataTableManager
         }
 
         return companions;
+    }
+
+    public IReadOnlyList<EquipmentData> GetEquipmentsByGrade(int grade)
+    {
+        if (!_equipmentsByGrade.TryGetValue(grade, out List<EquipmentData> equipments))
+        {
+            Debug.LogError($"해당 등급의 장비 데이터가 없습니다 등급 : {grade}");
+            return null;
+        }
+
+        return equipments;
     }
 
     public IReadOnlyList<GachaProbabilityData> GetGachaProbabilityData(GachaType gachaType)
@@ -214,6 +228,24 @@ public class DataTableManager
             {
                 list = new List<GachaProbabilityData>();
                 _probabilitiesByGachaType.Add(data.GachaType, list);
+            }
+
+            list.Add(data);
+        }
+    }
+
+    private void BuildEquipmentGradeIndex()
+    {
+        _equipmentsByGrade.Clear();
+
+        foreach (EquipmentData data in EquipmentDataTable.Values)
+        {
+            int grade = (int)data.EquipmentGrade;
+
+            if (!_equipmentsByGrade.TryGetValue(grade, out List<EquipmentData> list))
+            {
+                list = new List<EquipmentData>();
+                _equipmentsByGrade.Add(grade, list);
             }
 
             list.Add(data);

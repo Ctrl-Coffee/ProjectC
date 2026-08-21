@@ -10,6 +10,8 @@ public class GachaResultUI : UIBase
 
     private const float _slotInterval = 0.05f;
 
+    private const float _openInterval = 0.1f;
+    private const float _closeInterval = 0.05f;
     private Tween _openTween;
 
     private List<GachaResultSlotUI> _slot = new();
@@ -25,6 +27,8 @@ public class GachaResultUI : UIBase
     }
     public void Init(IReadOnlyList<GachaResultData> results)
     {
+        _closeButton.gameObject.SetActive(false);
+
         RemoveAllSlot();
 
         if (results == null) return;
@@ -45,10 +49,27 @@ public class GachaResultUI : UIBase
 
     private void PlaySlotAnimations()
     {
+        Tween lastTween = null;
+
         for (int index = 0; index < _slot.Count; index++)
         {
-            _slot[index].PlayOpenAnimation()?.SetDelay(index * 0.1f);
+            Tween slotTween = _slot[index].PlayOpenAnimation();
+            slotTween?.SetDelay(index * _openInterval);
+            lastTween = slotTween;
         }
+
+        if (lastTween == null)
+        {
+            ShowCloseButton();
+            return;
+        }
+
+        lastTween.OnComplete(ShowCloseButton);
+    }
+
+    private void ShowCloseButton()
+    {
+        _closeButton.gameObject.SetActive(true);
     }
     private void CreateSlot(GachaResultData result)
     {
@@ -88,14 +109,14 @@ public class GachaResultUI : UIBase
     }
     public override Tween PlayCloseAnimation()
     {
+        _closeButton.gameObject.SetActive(false);
+
         for (int index = 0; index < _slot.Count; index++)
         {
-            _slot[index].PlayCloseAnimation().SetDelay(index * _slotInterval);
+            _slot[index].PlayCloseAnimation().SetDelay(index * _closeInterval);
         }
 
-        float slotTotalTime = _slot.Count > 0
-            ? GachaResultSlotUI.CloseDuration + _slotInterval * (_slot.Count - 1)
-            : 0f;
+        float slotTotalTime = _slot.Count > 0 ? GachaResultSlotUI.CloseDuration + _closeInterval * (_slot.Count - 1) : 0f;
 
         return base.PlayCloseAnimation().SetDelay(slotTotalTime);
     }

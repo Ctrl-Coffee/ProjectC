@@ -7,7 +7,8 @@
     "BaseDefense": 2,
     "EquipmentTypeString": "Armor",
     "SkillId": "Skill_101",
-    "IconPath": "UI/Equipments[Equipment_0]"
+    "IconPath": "UI/Equipments[Equipment_0]",
+    "Grade": "Rare"
   },
   {
     "Id": "Equipment_002",
@@ -17,7 +18,8 @@
     "BaseDefense": 1,
     "EquipmentTypeString": "Armor",
     "SkillId": "Skill_102",
-    "IconPath": "UI/Equipments[Equipment_1]"
+    "IconPath": "UI/Equipments[Equipment_1]",
+    "Grade": "Rare"
   },
   {
     "Id": "Equipment_003",
@@ -27,7 +29,8 @@
     "BaseDefense": 4,
     "EquipmentTypeString": "Armor",
     "SkillId": "Skill_103",
-    "IconPath": "UI/Equipments[Equipment_3]"
+    "IconPath": "UI/Equipments[Equipment_3]",
+    "Grade": "Rare"
   },
   {
     "Id": "Equipment_004",
@@ -37,7 +40,8 @@
     "BaseDefense": 12,
     "EquipmentTypeString": "Armor",
     "SkillId": "Skill_104",
-    "IconPath": "UI/Equipments[Equipment_4]"
+    "IconPath": "UI/Equipments[Equipment_4]",
+    "Grade": "Epic"
   },
   {
     "Id": "Equipment_005",
@@ -47,7 +51,8 @@
     "BaseDefense": 3,
     "EquipmentTypeString": "Armor",
     "SkillId": "Skill_105",
-    "IconPath": "UI/Equipments[Equipment_5]"
+    "IconPath": "UI/Equipments[Equipment_5]",
+    "Grade": "Epic"
   },
   {
     "Id": "Equipment_006",
@@ -57,7 +62,8 @@
     "BaseDefense": 5,
     "EquipmentTypeString": "Armor",
     "SkillId": "Skill_106",
-    "IconPath": "UI/Equipments[Equipment_6]"
+    "IconPath": "UI/Equipments[Equipment_6]",
+    "Grade": "Epic"
   },
   {
     "Id": "Equipment_007",
@@ -67,7 +73,8 @@
     "BaseDefense": 8,
     "EquipmentTypeString": "Armor",
     "SkillId": "Skill_107",
-    "IconPath": "UI/Equipments[Equipment_7]"
+    "IconPath": "UI/Equipments[Equipment_7]",
+    "Grade": "Unique"
   },
   {
     "Id": "Equipment_008",
@@ -77,7 +84,8 @@
     "BaseDefense": 6,
     "EquipmentTypeString": "Armor",
     "SkillId": "Skill_108",
-    "IconPath": "UI/Equipments[Equipment_8]"
+    "IconPath": "UI/Equipments[Equipment_8]",
+    "Grade": "Unique"
   },
   {
     "Id": "Equipment_009",
@@ -87,7 +95,8 @@
     "BaseDefense": 10,
     "EquipmentTypeString": "Armor",
     "SkillId": "Skill_109",
-    "IconPath": "UI/Equipments[Equipment_9]"
+    "IconPath": "UI/Equipments[Equipment_9]",
+    "Grade": "Unique"
   },
   {
     "Id": "Equipment_010",
@@ -97,6 +106,7 @@
     "BaseDefense": 14,
     "EquipmentTypeString": "Armor",
     "SkillId": "Skill_110",
-    "IconPath": "UI/Equipments[Equipment_10]"
+    "IconPath": "UI/Equipments[Equipment_10]",
+    "Grade": "Legendry"
   }
 ]

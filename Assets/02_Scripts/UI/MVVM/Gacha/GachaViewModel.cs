@@ -81,9 +81,9 @@ public class GachaViewModel : ViewModelBase<GachaModel>
 
         List<GachaResultData> results = new List<GachaResultData>();
 
-        foreach (string companionId in drawnIds)
+        foreach (string drawnId in drawnIds)
         {
-            GachaResultData result = GiveCompanion(companionId);
+            GachaResultData result = GiveReward(drawnId);
 
             if (result != null)
             {
@@ -101,7 +101,7 @@ public class GachaViewModel : ViewModelBase<GachaModel>
         if (companionModel.GetCompanion(companionId) == null)
         {
             companionModel.AddCompanion(companionId);
-            return new GachaResultData(companionId, false, 0);
+            return new GachaResultData(companionId, GachaType.Companion, false, 0);
         }
 
         CompanionData companionData = GameManager.DataTable.GetCompanionData(companionId);
@@ -115,6 +115,46 @@ public class GachaViewModel : ViewModelBase<GachaModel>
         int reward = GameManager.Gacha.GetDuplicateReward(GachaType.Companion, companionData.Grade);
         GameManager.Session.Currency.AddDreamFragment(reward);
 
-        return new GachaResultData(companionId, true, reward);
+        return new GachaResultData(companionId, GachaType.Companion, true, reward);
+    }
+
+    private GachaResultData GiveEquipment(string equipmentId)
+    {
+        HeroEquipmentModel equipmentModel = GameManager.Session.HeroEquipment;
+
+        if (equipmentModel.GetHeroEquipment(equipmentId) == null)
+        {
+            equipmentModel.AddHeroEquipment(equipmentId);
+            return new GachaResultData(equipmentId, GachaType.Equipment, false, 0);
+        }
+
+        EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
+
+        if (equipmentData == null)
+        {
+            Debug.LogError($"장비 데이터를 찾을 수 없습니다. id : {equipmentId}");
+            return null;
+        }
+
+        int reward = GameManager.Gacha.GetDuplicateReward(GachaType.Equipment, (int)equipmentData.EquipmentGrade);
+        GameManager.Session.Currency.AddDreamFragment(reward);
+
+        return new GachaResultData(equipmentId, GachaType.Equipment, true, reward);
+    }
+
+    private GachaResultData GiveReward(string drawnId)
+    {
+        switch (_model.CurrentType)
+        {
+            case GachaType.Companion:
+                return GiveCompanion(drawnId);
+
+            case GachaType.Equipment:
+                return GiveEquipment(drawnId);
+
+            default:
+                Debug.LogError($"지원하지 않는 가챠 종류입니다 type : {_model.CurrentType}");
+                return null;
+        }
     }
 }
