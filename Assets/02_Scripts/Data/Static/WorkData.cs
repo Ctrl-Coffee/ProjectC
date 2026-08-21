@@ -12,6 +12,8 @@ public class WorkData : BaseData
 
     public int RewardMoney;
     public int RewardDP;
+    public string IconKey;
+    public string Description;
 
     private WorkType _workType;
     private MiniGameType _miniGameType;

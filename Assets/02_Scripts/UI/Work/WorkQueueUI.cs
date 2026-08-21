@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -139,7 +139,20 @@ public class WorkQueueUI : MonoBehaviour
                 continue;
             }
 
+            _slots[i].SetIcon(GetIconKey(AutoWorkQueue.GetWorkId(i)));
             _slots[i].SetProgress(AutoWorkQueue.GetProgress(i));
         }
+    }
+
+    private string GetIconKey(string workId)
+    {
+        WorkData data = GameManager.DataTable.GetWorkData(workId);
+
+        if (null == data)
+        {
+            return string.Empty;
+        }
+
+        return data.IconKey;
     }
 }

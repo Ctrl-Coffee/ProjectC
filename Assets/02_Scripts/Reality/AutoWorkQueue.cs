@@ -239,6 +239,16 @@ public static class AutoWorkQueue
         return (float)remainTicks / TimeSpan.TicksPerSecond;
     }
 
+    public static string GetWorkId(int index)
+    {
+        if (!IsValidIndex(index))
+        {
+            return string.Empty;
+        }
+
+        return Slots[index].WorkId;
+    }
+
     public static float GetProgress(int index)
     {
         if (!IsValidIndex(index))

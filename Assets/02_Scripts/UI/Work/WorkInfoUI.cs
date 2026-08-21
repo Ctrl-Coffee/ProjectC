@@ -126,18 +126,32 @@ public class WorkInfoUI : UIBase
         {
             WorkData data = workList[i];
 
-            SpawnWorkSlot(data.Id, data.Name, GetSlotInfo(data), OnClickWork);
+            SpawnWorkSlot(data.Id, data.Name, GetSlotInfo(data), data.IconKey, OnClickWork);
         }
     }
 
     private string GetSlotInfo(WorkData data)
     {
+        bool hasDescription = !Utils.IsNullOrWhiteSpace(data.Description);
+
         if (WorkType.Auto != data.Type)
         {
-            return string.Empty;
+            if (!hasDescription)
+            {
+                return string.Empty;
+            }
+
+            return data.Description;
         }
 
-        return Utils.FormatDuration(data.DurationSeconds);
+        string duration = Utils.FormatDuration(data.DurationSeconds);
+
+        if (!hasDescription)
+        {
+            return duration;
+        }
+
+        return $"{data.Description} ({duration})";
     }
 
     private void ClearWorkList()
@@ -156,7 +170,7 @@ public class WorkInfoUI : UIBase
         _spawnedSlots.Clear();
     }
 
-    private void SpawnWorkSlot(string workId, string workName, string info, Action<string> onClickPlay)
+    private void SpawnWorkSlot(string workId, string workName, string info, string iconKey, Action<string> onClickPlay)
     {
         if (null == _workSlotPrefab || null == _workMenuContent)
         {
@@ -168,6 +182,7 @@ public class WorkInfoUI : UIBase
 
         slot.Bind(workId, onClickPlay);
         slot.SetInfo(workName, info);
+        slot.SetIcon(iconKey);
 
         _spawnedSlots.Add(slot);
     }
