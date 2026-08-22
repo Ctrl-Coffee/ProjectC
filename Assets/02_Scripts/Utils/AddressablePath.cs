@@ -23,5 +23,10 @@
     {
         public const string BGM_LOBBY = "Audio/BGM/Lobby";
         public const string BUTTON_CLICK = "Audio/SFX/ButtonClick";
+
+        public const string TYPING_1 = "Audio/SFX/Typing1";
+        public const string TYPING_2 = "Audio/SFX/Typing2";
+        public const string TYPING_3 = "Audio/SFX/Typing3";
+        public const string TYPING_4 = "Audio/SFX/Typing4";
     }
 }

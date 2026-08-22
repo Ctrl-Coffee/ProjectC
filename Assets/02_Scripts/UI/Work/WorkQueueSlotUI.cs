@@ -70,9 +70,8 @@ public class WorkQueueSlotUI : MonoBehaviour
         {
             return;
         }
-        catch (Exception exception)
+        catch (Exception)
         {
-            Logger.LogWarning($"큐 슬롯 아이콘 로드에 실패했습니다. key: {iconKey}, {exception.Message}");
             return;
         }
 

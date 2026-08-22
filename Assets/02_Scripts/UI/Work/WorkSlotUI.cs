@@ -58,7 +58,6 @@ public class WorkSlotUI : MonoBehaviour
     {
         if (null == _imgThumbnail)
         {
-            Logger.LogError("WorkSlot의 썸네일 Image가 연결되지 않았습니다.");
             return;
         }
 
@@ -82,9 +81,8 @@ public class WorkSlotUI : MonoBehaviour
         {
             return;
         }
-        catch (Exception exception)
+        catch (Exception)
         {
-            Logger.LogWarning($"업무 아이콘 로드에 실패했습니다. key: {iconKey}, {exception.Message}");
             return;
         }
 
@@ -95,7 +93,6 @@ public class WorkSlotUI : MonoBehaviour
 
         if (null == sprite)
         {
-            Logger.LogWarning($"업무 아이콘을 불러오지 못했습니다. key: {iconKey}");
             return;
         }
 

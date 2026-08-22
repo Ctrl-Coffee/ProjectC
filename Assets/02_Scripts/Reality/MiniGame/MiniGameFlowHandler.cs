@@ -19,7 +19,7 @@ public class MiniGameFlowHandler
         _cancelToken.Cancel();
     }
 
-    public async UniTaskVoid StartMiniGameAsync(WorkData workData)
+    public async UniTask StartMiniGameAsync(WorkData workData)
     {
         if (null == workData)
         {
