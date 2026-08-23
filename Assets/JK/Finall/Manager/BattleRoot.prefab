@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 2002391199104791905}
   - component: {fileID: 5071718125347830074}
   - component: {fileID: 5106754535789017643}
-  - component: {fileID: 8115761004185230129}
+  - component: {fileID: 1436812971792672737}
+  - component: {fileID: 6348205214166011955}
   m_Layer: 0
   m_Name: EnemyUnit_3
   m_TagString: Untagged
@@ -115,7 +116,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8115761004185230129
+--- !u!70 &1436812971792672737
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026421069465089014}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
+--- !u!114 &6348205214166011955
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,9 +162,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1026421069465089014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 751f62cfe45f256478a073b1450fe0a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b2a309a5effa55469c8d8adb2a8dd19, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyBattleUnitView
+  m_EditorClassIdentifier: Assembly-CSharp::BattleUnitView
+  _behaviorGraphAgent: {fileID: 0}
+  FormationSlotIndex: 2
+  TestHp: 0
 --- !u!1 &2978656370913483907
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +211,8 @@ GameObject:
   - component: {fileID: 8400797191505521684}
   - component: {fileID: 5947014958819159498}
   - component: {fileID: 8079711916322036806}
-  - component: {fileID: 7100669207087554407}
+  - component: {fileID: 2883956135584616624}
+  - component: {fileID: 6486275752386550627}
   m_Layer: 0
   m_Name: CompanionUnit_2
   m_TagString: Untagged
@@ -274,7 +316,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7100669207087554407
+--- !u!70 &2883956135584616624
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455275286843988099}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
+--- !u!114 &6486275752386550627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,9 +362,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4455275286843988099}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 176d5a3bb52befc469cf8a089bb0cdff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b2a309a5effa55469c8d8adb2a8dd19, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CompanionBattleUnitView
+  m_EditorClassIdentifier: Assembly-CSharp::BattleUnitView
+  _behaviorGraphAgent: {fileID: 0}
+  FormationSlotIndex: 2
+  TestHp: 0
 --- !u!1 &5415995287497116206
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +379,8 @@ GameObject:
   - component: {fileID: 2861445430779763764}
   - component: {fileID: 7871020916059842977}
   - component: {fileID: 5197215682893226702}
-  - component: {fileID: 8086457648734346788}
+  - component: {fileID: 4567196798539786182}
+  - component: {fileID: 4555432152519872559}
   m_Layer: 0
   m_Name: EnemyUnit_2
   m_TagString: Untagged
@@ -401,7 +484,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8086457648734346788
+--- !u!70 &4567196798539786182
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415995287497116206}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
+--- !u!114 &4555432152519872559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -410,9 +530,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5415995287497116206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 751f62cfe45f256478a073b1450fe0a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b2a309a5effa55469c8d8adb2a8dd19, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyBattleUnitView
+  m_EditorClassIdentifier: Assembly-CSharp::BattleUnitView
+  _behaviorGraphAgent: {fileID: 0}
+  FormationSlotIndex: 1
+  TestHp: 0
 --- !u!1 &5440297698249652870
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +547,10 @@ GameObject:
   - component: {fileID: 7341399546513223370}
   - component: {fileID: 713583051059620913}
   - component: {fileID: 8407836891807109895}
-  - component: {fileID: 563682519503260845}
+  - component: {fileID: 1362051520634854443}
+  - component: {fileID: 8587598554149521341}
+  - component: {fileID: 3086104052999457134}
+  - component: {fileID: 791902745390818007}
   m_Layer: 0
   m_Name: MainUnit
   m_TagString: Untagged
@@ -528,7 +654,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &563682519503260845
+--- !u!114 &1362051520634854443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -537,9 +663,124 @@ MonoBehaviour:
   m_GameObject: {fileID: 5440297698249652870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b89556bb46f4c9408ee89fad0a7875a, type: 3}
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SupportCharacterBattleView
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -2503053168644071603, guid: 5ac0d97c5d1d62045b0aeb9ca760263a, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 2353026806635037577
+  - rid: 2353026806635037578
+  m_OriginalGraph: {fileID: -2503053168644071603, guid: 5ac0d97c5d1d62045b0aeb9ca760263a, type: 2}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 2353026806635037577
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 5440297698249652870}
+    - rid: 2353026806635037578
+      type: {class: 'BlackboardVariable`1[[BaseBattleUnitView, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14728815615644225528
+          m_Value1: 2609043711947155724
+        Name: BattleUnitView
+        m_Value: {fileID: 0}
+--- !u!70 &8587598554149521341
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440297698249652870}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
+--- !u!70 &3086104052999457134
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440297698249652870}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
+--- !u!114 &791902745390818007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440297698249652870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2a309a5effa55469c8d8adb2a8dd19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleUnitView
+  _behaviorGraphAgent: {fileID: 0}
+  FormationSlotIndex: 1
+  TestHp: 0
 --- !u!1 &6006179756395191690
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,8 +810,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7341399546513223370}
   - {fileID: 7016013836136402711}
+  - {fileID: 7341399546513223370}
   - {fileID: 8400797191505521684}
   m_Father: {fileID: 1083567511253421247}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -585,7 +826,8 @@ GameObject:
   - component: {fileID: 6047208266540061431}
   - component: {fileID: 7723694794137979262}
   - component: {fileID: 8589173380984250720}
-  - component: {fileID: 389896745778018574}
+  - component: {fileID: 6615954498295972861}
+  - component: {fileID: 7903961302517003209}
   m_Layer: 0
   m_Name: EnemyUnit_1
   m_TagString: Untagged
@@ -689,7 +931,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &389896745778018574
+--- !u!70 &6615954498295972861
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6307192331399447172}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
+--- !u!114 &7903961302517003209
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -698,9 +977,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6307192331399447172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 751f62cfe45f256478a073b1450fe0a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b2a309a5effa55469c8d8adb2a8dd19, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyBattleUnitView
+  m_EditorClassIdentifier: Assembly-CSharp::BattleUnitView
+  _behaviorGraphAgent: {fileID: 0}
+  FormationSlotIndex: 0
+  TestHp: 0
 --- !u!1 &7311577766825784402
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +1028,7 @@ GameObject:
   - component: {fileID: 1083567511253421247}
   - component: {fileID: 8674399021840147081}
   m_Layer: 0
-  m_Name: BattleField
+  m_Name: BattleRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -783,13 +1065,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleUnitSpawner
   _playerBattleUnitViews:
-  - {fileID: 1443886808268379755}
-  - {fileID: 563682519503260845}
-  - {fileID: 7100669207087554407}
+  - {fileID: 1428992812156030716}
+  - {fileID: 791902745390818007}
+  - {fileID: 6486275752386550627}
   _enemyBattleUnitViews:
-  - {fileID: 389896745778018574}
-  - {fileID: 8086457648734346788}
-  - {fileID: 8115761004185230129}
+  - {fileID: 7903961302517003209}
+  - {fileID: 4555432152519872559}
+  - {fileID: 6348205214166011955}
 --- !u!1 &9129107897744784993
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +1083,8 @@ GameObject:
   - component: {fileID: 7016013836136402711}
   - component: {fileID: 3224485056605353619}
   - component: {fileID: 4078431999068939372}
-  - component: {fileID: 1443886808268379755}
+  - component: {fileID: 7613753518879585104}
+  - component: {fileID: 1428992812156030716}
   m_Layer: 0
   m_Name: CompanionUnit_1
   m_TagString: Untagged
@@ -905,7 +1188,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1443886808268379755
+--- !u!70 &7613753518879585104
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129107897744784993}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
+--- !u!114 &1428992812156030716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -914,9 +1234,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 9129107897744784993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 176d5a3bb52befc469cf8a089bb0cdff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b2a309a5effa55469c8d8adb2a8dd19, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CompanionBattleUnitView
+  m_EditorClassIdentifier: Assembly-CSharp::BattleUnitView
+  _behaviorGraphAgent: {fileID: 0}
+  FormationSlotIndex: 0
+  TestHp: 0
 --- !u!1 &9178942897646606341
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,7 +1321,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2109374072882261304, guid: 21cf595715ae8c84eb287dff44020749, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1006,5 +1329,5 @@ SpriteRenderer:
   m_Size: {x: 1080, y: 1920}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
