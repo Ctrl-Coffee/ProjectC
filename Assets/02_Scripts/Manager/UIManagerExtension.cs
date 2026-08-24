@@ -71,6 +71,11 @@ public static class UIManagerExtension
         ui.Init(onClickLevelUp, data, equipmentId);
     }
 
+    public static UniTask<LoadingUI> OpenLoading(this UIManager uiManager)
+    {
+        return uiManager.OpenContentUI<LoadingUI>();
+    }
+
     public static UniTask<WorkInfoUI> OpenWorkInfoUI(this UIManager uiManager)
     {
         return uiManager.OpenPopupUI<WorkInfoUI>();

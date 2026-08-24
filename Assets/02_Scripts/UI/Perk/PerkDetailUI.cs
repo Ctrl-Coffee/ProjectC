@@ -44,16 +44,15 @@ public class PerkDetailUI : UIBase
     private void Awake()
     {
         CapturePosition();
-    }
 
-    private void OnEnable()
-    {
         if (!ValidateReferences())
         {
             return;
         }
 
         _btnClose.BindButtonEvent(OnClickCloseButton);
+        _upgradeButton.BindButtonEvent(OnClickUpgrade);
+        _cancelButton.BindButtonEvent(OnClickCancel);
     }
 
     private void OnDisable()
@@ -64,13 +63,6 @@ public class PerkDetailUI : UIBase
         {
             target.DOKill();
         }
-
-        if (null == _btnClose)
-        {
-            return;
-        }
-
-        _btnClose.UnBindButtonAllEvent();
     }
 
     public override Tween PlayOpenAnimation()
@@ -233,12 +225,6 @@ public class PerkDetailUI : UIBase
         {
             _upgradeButtonControl = _upgradeButton.gameObject.GetComponent<Button>();
         }
-
-        _upgradeButton.UnBindButtonAllEvent();
-        _cancelButton.UnBindButtonAllEvent();
-
-        _upgradeButton.BindButtonEvent(OnClickUpgrade);
-        _cancelButton.BindButtonEvent(OnClickCancel);
 
         Refresh();
     }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,33 +16,157 @@ public class WorkInfoUI : UIBase
     [SerializeField] private RectTransform _workMenuContent;
     [SerializeField] private WorkSlotUI _workSlotPrefab;
 
-    [Header("자동업무 큐")]
-    [SerializeField] private WorkQueueUI _workQueue;
+    [Header("연출")]
+    [SerializeField] private RectTransform _screen;
 
     private MiniGameFlowHandler _workHandler = new();
+    private TypingSoundLoop _typingSound = new();
     private List<WorkSlotUI> _spawnedSlots = new();
 
     private WorkType _currentWorkType;
     private bool _isWorkListBuilt = false;
 
-    private void OnEnable()
+    private const float RISE_DURATION = 0.25f;
+    private const float FALL_DURATION = 0.2f;
+    private const float SCREEN_DELAY = 0.05f;
+    private const float SCREEN_LINE_SCALE = 0.02f;
+    private const float SCREEN_ON_LINE = 0.1f;
+    private const float SCREEN_ON_EXPAND = 0.14f;
+    private const float SCREEN_OFF_COLLAPSE = 0.14f;
+    private const float SCREEN_OFF_SHRINK = 0.1f;
+
+    private Vector2 _panelShownPosition;
+    private bool _isPositionCaptured = false;
+
+    private void Awake()
     {
+        CapturePanelPosition();
+
         BindButton(_btnClose, OnClickCloseButton, nameof(_btnClose));
         BindButton(_btnManual, OnClickManualTab, nameof(_btnManual));
         BindButton(_btnAuto, OnClickAutoTab, nameof(_btnAuto));
+    }
 
+    public override Tween PlayOpenAnimation()
+    {
+        CapturePanelPosition();
+
+        if (!IsPlayAnimation)
+        {
+            ResetToShown();
+            return null;
+        }
+
+        _panel.DOKill();
+        _panel.localScale = Vector3.one;
+        _panel.anchoredPosition = GetHiddenPosition();
+
+        Sequence sequence = DOTween.Sequence().SetUpdate(true);
+
+        sequence.Append(_panel.DOAnchorPos(_panelShownPosition, RISE_DURATION).SetEase(Ease.OutCubic));
+
+        if (null == _screen)
+        {
+            return sequence;
+        }
+
+        _screen.DOKill();
+        _screen.localScale = new Vector3(0f, SCREEN_LINE_SCALE, 1f);
+
+        sequence.AppendInterval(SCREEN_DELAY);
+        sequence.Append(_screen.DOScaleX(1f, SCREEN_ON_LINE).SetEase(Ease.OutQuad));
+        sequence.Append(_screen.DOScaleY(1f, SCREEN_ON_EXPAND).SetEase(Ease.OutQuad));
+
+        return sequence;
+    }
+
+    public override Tween PlayCloseAnimation()
+    {
+        CapturePanelPosition();
+
+        _panel.DOKill();
+
+        Sequence sequence = DOTween.Sequence().SetUpdate(true);
+
+        if (null != _screen)
+        {
+            _screen.DOKill();
+
+            sequence.Append(_screen.DOScaleY(SCREEN_LINE_SCALE, SCREEN_OFF_COLLAPSE).SetEase(Ease.InQuad));
+            sequence.Append(_screen.DOScaleX(0f, SCREEN_OFF_SHRINK).SetEase(Ease.InQuad));
+        }
+
+        sequence.Append(_panel.DOAnchorPos(GetHiddenPosition(), FALL_DURATION).SetEase(Ease.InCubic));
+
+        return sequence;
+    }
+
+    private void CapturePanelPosition()
+    {
+        if (_isPositionCaptured || null == _panel)
+        {
+            return;
+        }
+
+        _panelShownPosition = _panel.anchoredPosition;
+        _isPositionCaptured = true;
+    }
+
+    private Vector2 GetHiddenPosition()
+    {
+        if (null == _panel)
+        {
+            return _panelShownPosition;
+        }
+
+        float distance = _panelShownPosition.y + _panel.rect.height;
+
+        return new Vector2(_panelShownPosition.x, _panelShownPosition.y - distance);
+    }
+
+    private void ResetToShown()
+    {
+        if (null != _panel)
+        {
+            _panel.DOKill();
+            _panel.anchoredPosition = _panelShownPosition;
+            _panel.localScale = Vector3.one;
+        }
+
+        if (null != _screen)
+        {
+            _screen.DOKill();
+            _screen.localScale = Vector3.one;
+        }
+    }
+
+    private void OnEnable()
+    {
         RefreshTabs();
 
         _isWorkListBuilt = false;
 
         RefreshWorkList(WorkType.Manual);
+
+        GameManager.Perk.OnPerkChanged += OnPerkChanged;
+
+        _typingSound.Play();
     }
 
     private void OnDisable()
     {
-        UnbindButton(_btnClose);
-        UnbindButton(_btnManual);
-        UnbindButton(_btnAuto);
+        GameManager.Perk.OnPerkChanged -= OnPerkChanged;
+
+        _typingSound.Stop();
+    }
+
+    private void OnPerkChanged()
+    {
+        RefreshTabs();
+
+        _isWorkListBuilt = false;
+
+        RefreshWorkList(_currentWorkType);
     }
 
     private void OnDestroy()
@@ -86,26 +212,28 @@ public class WorkInfoUI : UIBase
 
         if (WorkType.Auto == data.Type)
         {
-            EnqueueAutoWork(data.Id);
+            AutoWorkQueue.TryEnqueue(data.Id);
             return;
         }
 
-        _workHandler.StartMiniGameAsync(data).Forget();
+        RunMiniGameAsync(data).Forget();
     }
 
-    private void EnqueueAutoWork(string workId)
+    private async UniTaskVoid RunMiniGameAsync(WorkData data)
     {
-        if (!AutoWorkQueue.TryEnqueue(workId))
-        {
-            return;
-        }
+        _typingSound.Stop();
 
-        if (null == _workQueue)
+        try
         {
-            return;
+            await _workHandler.StartMiniGameAsync(data);
         }
-
-        _workQueue.Refresh();
+        finally
+        {
+            if (isActiveAndEnabled)
+            {
+                _typingSound.Play();
+            }
+        }
     }
 
     private void RefreshWorkList(WorkType workType)
@@ -126,18 +254,32 @@ public class WorkInfoUI : UIBase
         {
             WorkData data = workList[i];
 
-            SpawnWorkSlot(data.Id, data.Name, GetSlotInfo(data), OnClickWork);
+            SpawnWorkSlot(data.Id, data.Name, GetSlotInfo(data), data.IconKey, OnClickWork);
         }
     }
 
     private string GetSlotInfo(WorkData data)
     {
+        bool hasDescription = !Utils.IsNullOrWhiteSpace(data.Description);
+
         if (WorkType.Auto != data.Type)
         {
-            return string.Empty;
+            if (!hasDescription)
+            {
+                return string.Empty;
+            }
+
+            return data.Description;
         }
 
-        return Utils.FormatDuration(data.DurationSeconds);
+        string duration = Utils.FormatDuration(data.DurationSeconds);
+
+        if (!hasDescription)
+        {
+            return duration;
+        }
+
+        return $"{data.Description} ({duration})";
     }
 
     private void ClearWorkList()
@@ -156,7 +298,7 @@ public class WorkInfoUI : UIBase
         _spawnedSlots.Clear();
     }
 
-    private void SpawnWorkSlot(string workId, string workName, string info, Action<string> onClickPlay)
+    private void SpawnWorkSlot(string workId, string workName, string info, string iconKey, Action<string> onClickPlay)
     {
         if (null == _workSlotPrefab || null == _workMenuContent)
         {
@@ -168,6 +310,7 @@ public class WorkInfoUI : UIBase
 
         slot.Bind(workId, onClickPlay);
         slot.SetInfo(workName, info);
+        slot.SetIcon(iconKey);
 
         _spawnedSlots.Add(slot);
     }
@@ -181,15 +324,5 @@ public class WorkInfoUI : UIBase
         }
 
         button.BindButtonEvent(onClick);
-    }
-
-    private void UnbindButton(UIButtonComponent button)
-    {
-        if (null == button)
-        {
-            return;
-        }
-
-        button.UnBindButtonAllEvent();
     }
 }

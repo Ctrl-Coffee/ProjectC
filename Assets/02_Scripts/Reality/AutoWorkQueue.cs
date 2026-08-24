@@ -8,6 +8,10 @@ public static class AutoWorkQueue
     private const int BASE_SLOT_COUNT = 5;
     private const float COLLECT_INTERVAL = 1f;
 
+    public static event Action OnQueueChanged;
+
+    private static List<AutoWorkSlot> _slots = new();
+
     public static int MaxSlotCount
     {
         get
@@ -20,7 +24,7 @@ public static class AutoWorkQueue
     {
         get
         {
-            return GameManager.User.AutoWorkSlots;
+            return _slots;
         }
     }
 
@@ -83,9 +87,14 @@ public static class AutoWorkQueue
             EndTicks = startTicks + GetDurationTicks(data),
         });
 
-        GameManager.Save.Save();
+        NotifyQueueChanged();
 
         return true;
+    }
+
+    private static void NotifyQueueChanged()
+    {
+        OnQueueChanged?.Invoke();
     }
 
     public static void NormalizeSchedule()
@@ -115,7 +124,7 @@ public static class AutoWorkQueue
             slots[i] = slot;
         }
 
-        GameManager.Save.Save();
+        NotifyQueueChanged();
 
         Logger.LogWarning($"미래 시각의 자동업무 큐를 {shiftTicks / TimeSpan.TicksPerSecond}초 앞당겼습니다.");
     }
@@ -130,7 +139,7 @@ public static class AutoWorkQueue
         Slots.RemoveAt(index);
         RecalculateFrom(index);
 
-        GameManager.Save.Save();
+        NotifyQueueChanged();
 
         return true;
     }
@@ -206,15 +215,16 @@ public static class AutoWorkQueue
             long money = GameManager.Perk.Stat.GetLong(WorkStatType.AutoWorkRewardMoney, data.RewardMoney);
             long dp = GameManager.Perk.Stat.GetLong(WorkStatType.AutoWorkRewardDP, data.RewardDP);
 
-            GameManager.User.Currency.AddMoney(money);
-            GameManager.User.Currency.AddDreamPoint(dp);
+            GameManager.Session.Currency.AddMoney(money);
+            GameManager.Session.Currency.AddDreamPoint(dp);
 
             Logger.Log($"자동업무 완료 - {data.Name} / 돈 {money} / DP {dp}");
         }
 
         if (collectedCount > 0)
         {
-            GameManager.Save.Save();
+
+            NotifyQueueChanged();
         }
 
         return collectedCount;
@@ -237,6 +247,16 @@ public static class AutoWorkQueue
         }
 
         return (float)remainTicks / TimeSpan.TicksPerSecond;
+    }
+
+    public static string GetWorkId(int index)
+    {
+        if (!IsValidIndex(index))
+        {
+            return string.Empty;
+        }
+
+        return Slots[index].WorkId;
     }
 
     public static float GetProgress(int index)
@@ -296,6 +316,8 @@ public static class AutoWorkQueue
 
             slots[i] = slot;
         }
+
+        NotifyQueueChanged();
     }
 
     public static void DebugCompleteFirst()
@@ -310,6 +332,8 @@ public static class AutoWorkQueue
         AutoWorkSlot slot = slots[0];
         slot.EndTicks = GameManager.Time.UtcNow.Ticks;
         slots[0] = slot;
+
+        NotifyQueueChanged();
     }
 #endif
 }

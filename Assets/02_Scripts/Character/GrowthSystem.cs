@@ -82,7 +82,7 @@ public class GrowthSystem
 
         PlayerLevelData nextLevelData = GameManager.DataTable.GetPlayerLevelData(level + 1);
 
-        return GameManager.User.Currency.DreamFragment >= (long)nextLevelData.UpgradeCost; 
+        return GameManager.Session.Currency.DreamFragment >= (long)nextLevelData.UpgradeCost; 
     }
 
     public bool TryPayPlayerLevelUpCost(int level)
@@ -94,7 +94,7 @@ public class GrowthSystem
 
         PlayerLevelData nextLevelData = GameManager.DataTable.GetPlayerLevelData(level + 1);
 
-        return GameManager.User.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
+        return GameManager.Session.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
     }
     public bool IsEquipmentMaxLevel(int level)
     {
@@ -110,7 +110,7 @@ public class GrowthSystem
 
         EquipmentLevelData nextLevelData = GameManager.DataTable.GetEquipmentLevelData(level + 1);
 
-        return GameManager.User.Currency.DreamFragment >= (long)nextLevelData.UpgradeCost;
+        return GameManager.Session.Currency.DreamFragment >= (long)nextLevelData.UpgradeCost;
     }
 
     public bool TryPayEquipmentLevelUpCost(int level)
@@ -122,7 +122,7 @@ public class GrowthSystem
 
         EquipmentLevelData nextLevelData = GameManager.DataTable.GetEquipmentLevelData(level + 1);
 
-        return GameManager.User.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
+        return GameManager.Session.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
     }
 
     #endregion

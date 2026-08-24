@@ -12,6 +12,8 @@ public class PerkManager
 
     private HashSet<string> _unlockedSet;
 
+    private List<string> _unlockedPerkIds = new();
+
     private PerkStatCalculator _statCalculator = new();
     private PerkUnlockChecker _unlockChecker = new();
 
@@ -37,7 +39,7 @@ public class PerkManager
         {
             if (null == _unlockedSet)
             {
-                _unlockedSet = new HashSet<string>(GameManager.User.UnlockedPerkIds);
+                _unlockedSet = new HashSet<string>(_unlockedPerkIds);
             }
 
             return _unlockedSet;
@@ -46,7 +48,7 @@ public class PerkManager
 
     public IReadOnlyList<string> GetUnlockedPerkIds()
     {
-        return GameManager.User.UnlockedPerkIds;
+        return _unlockedPerkIds;
     }
 
     public void InvalidateCache()
@@ -110,7 +112,7 @@ public class PerkManager
             return false;
         }
 
-        if (GameManager.User.Currency.Inspiration < data.InspirationCost)
+        if (GameManager.Session.Currency.Inspiration < data.InspirationCost)
         {
             reason = "영감이 부족합니다.";
             return false;
@@ -129,17 +131,16 @@ public class PerkManager
 
         PerkNodeData data = GameManager.DataTable.GetPerkNodeData(perkId);
 
-        if (0 < data.InspirationCost && !GameManager.User.Currency.TrySpendInspiration(data.InspirationCost))
+        if (0 < data.InspirationCost && !GameManager.Session.Currency.TrySpendInspiration(data.InspirationCost))
         {
             Logger.LogWarning($"영감 차감에 실패했습니다. id: {perkId}");
             return false;
         }
 
-        GameManager.User.UnlockedPerkIds.Add(perkId);
+        _unlockedPerkIds.Add(perkId);
         InvalidateCache();
-        GameManager.Save.Save();
 
-        GameManager.User.Currency.NotifyMaxEnergyChanged();
+        GameManager.Session.Currency.NotifyMaxEnergyChanged();
         OnPerkChanged?.Invoke();
 
         return true;
@@ -193,12 +194,11 @@ public class PerkManager
 
         PerkNodeData data = GameManager.DataTable.GetPerkNodeData(perkId);
 
-        GameManager.User.UnlockedPerkIds.Remove(perkId);
+        _unlockedPerkIds.Remove(perkId);
         InvalidateCache();
-        GameManager.User.Currency.AddInspiration(data.InspirationCost);
-        GameManager.Save.Save();
+        GameManager.Session.Currency.AddInspiration(data.InspirationCost);
 
-        GameManager.User.Currency.NotifyMaxEnergyChanged();
+        GameManager.Session.Currency.NotifyMaxEnergyChanged();
         OnPerkChanged?.Invoke();
 
         return true;
@@ -270,7 +270,7 @@ public class PerkManager
         if (string.IsNullOrEmpty(data.ExclusiveGroup))
             return false;
 
-        List<string> unlockedList = GameManager.User.UnlockedPerkIds;
+        List<string> unlockedList = _unlockedPerkIds;
 
         for (int i = 0; i < unlockedList.Count; i++)
         {

@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorkSlotUI : MonoBehaviour
 {
+    [SerializeField] private Image _imgThumbnail;
     [SerializeField] private TextMeshProUGUI _txtName;
-    [SerializeField] private TextMeshProUGUI _txtInfo;
+    [SerializeField] private TextMeshProUGUI _txtDesc;
     [SerializeField] private UIButtonComponent _btnPlay;
 
     private string _workId;
@@ -22,7 +25,6 @@ public class WorkSlotUI : MonoBehaviour
             return;
         }
 
-        _btnPlay.UnBindButtonAllEvent();
         _btnPlay.BindButtonEvent(OnClickPlay);
     }
 
@@ -38,17 +40,67 @@ public class WorkSlotUI : MonoBehaviour
         _btnPlay.UnBindButtonAllEvent();
     }
 
-    public void SetInfo(string workName, string info)
+    public void SetInfo(string workName, string desc)
     {
         if (null != _txtName)
         {
             _txtName.text = workName;
         }
 
-        if (null != _txtInfo)
+        if (null != _txtDesc)
         {
-            _txtInfo.text = info;
+            _txtDesc.text = desc;
         }
+    }
+
+    public void SetIcon(string iconKey)
+    {
+        if (null == _imgThumbnail)
+        {
+            return;
+        }
+
+        if (Utils.IsNullOrWhiteSpace(iconKey))
+        {
+            return;
+        }
+
+        LoadIconAsync(iconKey, _workId).Forget();
+    }
+
+    private async UniTaskVoid LoadIconAsync(string iconKey, string requestedWorkId)
+    {
+        Sprite sprite;
+
+        try
+        {
+            sprite = await GameManager.Resource.LoadAssetAsync<Sprite>(iconKey, destroyCancellationToken);
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
+        catch (Exception)
+        {
+            return;
+        }
+
+        if (requestedWorkId != _workId)
+        {
+            return;
+        }
+
+        if (null == sprite)
+        {
+            return;
+        }
+
+        if (null == _imgThumbnail)
+        {
+            return;
+        }
+
+        _imgThumbnail.sprite = sprite;
     }
 
     private void OnClickPlay()

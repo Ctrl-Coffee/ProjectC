@@ -19,7 +19,7 @@ public class MiniGameFlowHandler
         _cancelToken.Cancel();
     }
 
-    public async UniTaskVoid StartMiniGameAsync(WorkData workData)
+    public async UniTask StartMiniGameAsync(WorkData workData)
     {
         if (null == workData)
         {
@@ -35,15 +35,15 @@ public class MiniGameFlowHandler
         long energyCost = GetEnergyCost(workData);
         long goldCost = GetGoldCost(workData);
 
-        if (!GameManager.User.Currency.CanSpendEnergy(energyCost))
+        if (!GameManager.Session.Currency.CanSpendEnergy(energyCost))
         {
-            Logger.LogWarning($"에너지가 부족해 시작할 수 없습니다. {workData.Name} / 필요 {energyCost} / 보유 {GameManager.User.Currency.Energy}");
+            Logger.LogWarning($"에너지가 부족해 시작할 수 없습니다. {workData.Name} / 필요 {energyCost} / 보유 {GameManager.Session.Currency.Energy}");
             return;
         }
 
-        if (0 < goldCost && !GameManager.User.Currency.CanSpendMoney(goldCost))
+        if (0 < goldCost && !GameManager.Session.Currency.CanSpendMoney(goldCost))
         {
-            Logger.LogWarning($"골드가 부족해 시작할 수 없습니다. {workData.Name} / 필요 {goldCost} / 보유 {GameManager.User.Currency.Money}");
+            Logger.LogWarning($"골드가 부족해 시작할 수 없습니다. {workData.Name} / 필요 {goldCost} / 보유 {GameManager.Session.Currency.Money}");
             return;
         }
 
@@ -83,12 +83,12 @@ public class MiniGameFlowHandler
     {
         if (0 < energyCost)
         {
-            GameManager.User.Currency.AddEnergy(energyCost);
+            GameManager.Session.Currency.AddEnergy(energyCost);
         }
 
         if (0 < goldCost)
         {
-            GameManager.User.Currency.AddMoney(goldCost);
+            GameManager.Session.Currency.AddMoney(goldCost);
         }
 
         Logger.Log($"미니게임 비용 반환 - 에너지 {energyCost} / 골드 {goldCost}");
@@ -106,10 +106,8 @@ public class MiniGameFlowHandler
             return;
         }
 
-        GameManager.User.Currency.AddMoney(money);
-        GameManager.User.Currency.AddDreamPoint(dp);
-
-        GameManager.Save.Save();
+        GameManager.Session.Currency.AddMoney(money);
+        GameManager.Session.Currency.AddDreamPoint(dp);
 
         Logger.Log($"수동업무 완료 - {workData.Name} / 돈 {money} / DP {dp}");
     }
@@ -149,14 +147,14 @@ public class MiniGameFlowHandler
         long energyCost = GetEnergyCost(workData);
         long goldCost = GetGoldCost(workData);
 
-        if (!GameManager.User.Currency.TrySpendEnergy(energyCost))
+        if (!GameManager.Session.Currency.TrySpendEnergy(energyCost))
         {
             Logger.LogError($"에너지 차감에 실패했습니다. {workData.Name} / 필요 {energyCost}");
             ui.CloseUI();
             return MiniGameResult.Canceled;
         }
 
-        if (0 < goldCost && !GameManager.User.Currency.TrySpendMoney(goldCost))
+        if (0 < goldCost && !GameManager.Session.Currency.TrySpendMoney(goldCost))
         {
             Logger.LogError($"골드 차감에 실패했습니다. {workData.Name} / 필요 {goldCost}");
 

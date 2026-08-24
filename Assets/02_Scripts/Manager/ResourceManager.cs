@@ -15,7 +15,7 @@ public class ResourceManager
 
     private const int _maxLoadCount = 4;
 
-    public T GetLoadedAsset<T>(string address) where T: UnityEngine.Object
+    public T GetLoadedAsset<T>(string address) where T : UnityEngine.Object
     {
         if (!_assetHandles.TryGetValue(address, out var handle))
         {
@@ -43,7 +43,7 @@ public class ResourceManager
             Logger.LogWarning($"{address}의 handle 이상");
             _assetHandles.Remove(address);
 
-            if(handle.IsValid())
+            if (handle.IsValid())
             {
                 Addressables.Release(handle);
             }
@@ -165,6 +165,29 @@ public class ResourceManager
         _assetHandles.Clear();
         _currentLoading.Clear();
         _contentAddresses.Clear();
+    }
+
+    public async UniTask LoadAllLabelAssetAsync(Action<float> onProgress)
+    {
+        string[] labels =
+        {
+            AddressablePath.Label.COMMON,
+            AddressablePath.Label.REALITY,
+            AddressablePath.Label.DREAM
+        };
+
+        for (int i = 0; i < labels.Length; i++)
+        {
+            int labelIndex = i;
+
+            await LoadContentAsync(labels[labelIndex],
+                progress =>
+                {
+                    float totalProgress = (labelIndex + progress) / labels.Length;
+
+                    onProgress?.Invoke(totalProgress);
+                });
+        }
     }
 
     private T GetAssetFromHandle<T>(string address, AsyncOperationHandle handle) where T : UnityEngine.Object

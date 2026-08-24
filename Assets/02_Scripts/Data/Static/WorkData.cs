@@ -1,11 +1,5 @@
 ﻿using System;
 
-public enum WorkType
-{
-    Manual,
-    Auto
-}
-
 [Serializable]
 public class WorkData : BaseData
 {
@@ -19,6 +13,8 @@ public class WorkData : BaseData
 
     public int RewardMoney;
     public int RewardDP;
+    public string IconKey;
+    public string Description;
 
     private WorkType _workType;
     private MiniGameType _miniGameType;
