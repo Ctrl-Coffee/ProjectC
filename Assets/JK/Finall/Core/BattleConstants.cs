@@ -1,5 +1,11 @@
 ﻿public static class BattleConstants
 {
-    public const int MAX_COMPANION_COUNT = 2;
+    public const int INVALID_BATTLE_POSITION = -1;
+
+    public const int MAX_PLAYER_COUNT = 3;
     public const int MAX_ENEMY_COUNT = 3;
+
+    public const int MAX_COMPANION_COUNT = 2;
+
+    public static readonly int[] COMPANION_BATTLE_POSITIONS = { 0, 2 };
 }

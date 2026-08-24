@@ -33,6 +33,7 @@ public class CompanionSelectionSlotUI : MonoBehaviour
         _companionDataId = companionDataId;
     }
 
+    //TODO
     public void SetSprite(string spriteKey)
     {
         UIUtility.SetSpriteAsync(_companionPortraitImage, spriteKey).Forget();

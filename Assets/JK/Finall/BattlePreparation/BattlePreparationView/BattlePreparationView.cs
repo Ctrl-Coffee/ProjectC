@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class BattlePreparationView : MonoBehaviour
 {
-    private const int INVALID_COMPANION_POSITION = -1;
-
     [Header("Companion Selection")]
     [SerializeField] private Transform _companionSelectionContent;
     [SerializeField] private CompanionSelectionSlotUI _companionSelectionSlotPrefab;
@@ -15,7 +13,7 @@ public class BattlePreparationView : MonoBehaviour
 
     private Camera _mainCamera;
 
-    private int _selectedCompanionPosition = INVALID_COMPANION_POSITION;
+    private int _selectedCompanionBattlePosition = BattleConstants.INVALID_BATTLE_POSITION;
     private string _selectedCompanionSelectionId;
 
     private readonly List<CompanionSelectionSlotUI> _companionSelectionSlotPool = new List<CompanionSelectionSlotUI>();
@@ -43,12 +41,12 @@ public class BattlePreparationView : MonoBehaviour
             return;
         }
 
-        if (!TryGetClickedCompanionPosition(out int position))
+        if (!TryGetClickedCompanionPosition(out int battlePosition))
         {
             return;
         }
 
-        HandleCompanionPositionClicked(position);
+        HandleCompanionPositionClicked(battlePosition);
     }
 
     private void OnDisable()
@@ -61,14 +59,14 @@ public class BattlePreparationView : MonoBehaviour
 
     private void OnDestroy()
     {
-        foreach (CompanionSelectionSlotUI slot in _companionSelectionSlotPool)
+        foreach (CompanionSelectionSlotUI companionSelectionSlot in _companionSelectionSlotPool)
         {
-            if (slot == null)
+            if (companionSelectionSlot == null)
             {
                 continue;
             }
 
-            slot.SlotClicked -= HandleCompanionSelectionSlotClicked;
+            companionSelectionSlot.SlotClicked -= HandleCompanionSelectionSlotClicked;
         }
     }
 
@@ -79,9 +77,9 @@ public class BattlePreparationView : MonoBehaviour
         UnityUtility.ValidateReference(_startBattleButton, nameof(_startBattleButton));
     }
 
-    private bool TryGetClickedCompanionPosition(out int position)
+    private bool TryGetClickedCompanionPosition(out int battlePosition)
     {
-        position = INVALID_COMPANION_POSITION;
+        battlePosition = BattleConstants.INVALID_BATTLE_POSITION;
 
         Vector2 screenPosition = Pointer.current.position.ReadValue();
         Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(screenPosition);
@@ -93,35 +91,35 @@ public class BattlePreparationView : MonoBehaviour
             return false;
         }
 
-        if (!hitCollider.TryGetComponent(out BattleUnitView companionView))
+        if (!hitCollider.TryGetComponent(out CompanionBattleUnitView companionBattleUnitView))
         {
             return false;
         }
 
-        position = companionView.FormationSlotIndex;
+        battlePosition = companionBattleUnitView.BattlePosition;
         return true;
     }
 
-    private void HandleCompanionPositionClicked(int position)
+    private void HandleCompanionPositionClicked(int battlePosition)
     {
-        if (TrySetCompanionToSelectedPosition(position))
+        if (TrySetCompanionToSelectedPosition(battlePosition))
         {
             return;
         }
 
-        if (TrySelectCompanionPosition(position))
+        if (TrySelectCompanionPosition(battlePosition))
         {
             return;
         }
 
         try
         {
-            if (TrySwapCompanion(position))
+            if (TrySwapCompanion(battlePosition))
             {
                 return;
             }
 
-            TryRemoveCompanion(position);
+            TryRemoveCompanion(battlePosition);
         }
         finally
         {
@@ -129,14 +127,14 @@ public class BattlePreparationView : MonoBehaviour
         }
     }
 
-    private bool TrySetCompanionToSelectedPosition(int position)
+    private bool TrySetCompanionToSelectedPosition(int battlePosition)
     {
         if (string.IsNullOrWhiteSpace(_selectedCompanionSelectionId))
         {
             return false;
         }
 
-        bool isCompanionSet = BattleManager.Instance.RequestSetCompanionToPosition(position, _selectedCompanionSelectionId);
+        bool isCompanionSet = BattleManager.Instance.RequestSetCompanionToPosition(battlePosition, _selectedCompanionSelectionId);
 
         if (isCompanionSet)
         {
@@ -146,38 +144,38 @@ public class BattlePreparationView : MonoBehaviour
         return isCompanionSet;
     }
 
-    private bool TrySelectCompanionPosition(int position)
+    private bool TrySelectCompanionPosition(int battlePosition)
     {
-        if (_selectedCompanionPosition != INVALID_COMPANION_POSITION)
+        if (_selectedCompanionBattlePosition != BattleConstants.INVALID_BATTLE_POSITION)
         {
             return false;
         }
 
-        _selectedCompanionPosition = position;
+        _selectedCompanionBattlePosition = battlePosition;
 
         return true;
     }
 
-    private bool TrySwapCompanion(int position)
+    private bool TrySwapCompanion(int battlePosition)
     {
-        if (_selectedCompanionPosition == position)
+        if (_selectedCompanionBattlePosition == battlePosition)
         {
             return false;
         }
 
-        bool isCompanionSwapped = BattleManager.Instance.RequestSwapCompanion(_selectedCompanionPosition, position);
+        bool isCompanionSwapped = BattleManager.Instance.RequestSwapCompanion(_selectedCompanionBattlePosition, battlePosition);
         return isCompanionSwapped;
     }
 
-    private bool TryRemoveCompanion(int position)
+    private bool TryRemoveCompanion(int battlePosition)
     {
-        bool isCompanionRemoved = BattleManager.Instance.RequestRemoveCompanion(position);
+        bool isCompanionRemoved = BattleManager.Instance.RequestRemoveCompanion(battlePosition);
         return isCompanionRemoved;
     }
 
     private void ClearSelectedCompanionPosition()
     {
-        _selectedCompanionPosition = INVALID_COMPANION_POSITION;
+        _selectedCompanionBattlePosition = BattleConstants.INVALID_BATTLE_POSITION;
     }
 
     private void ClearSelectedCompanionId()
@@ -267,12 +265,12 @@ public class BattlePreparationView : MonoBehaviour
 
     private bool TrySetCompanionToSelectedPosition(string companionId)
     {
-        if (_selectedCompanionPosition == INVALID_COMPANION_POSITION)
+        if (_selectedCompanionBattlePosition == BattleConstants.INVALID_BATTLE_POSITION)
         {
             return false;
         }
 
-        bool isCompanionSet = BattleManager.Instance.RequestSetCompanionToPosition(_selectedCompanionPosition, companionId);
+        bool isCompanionSet = BattleManager.Instance.RequestSetCompanionToPosition(_selectedCompanionBattlePosition, companionId);
         return isCompanionSet;
     }
 
@@ -294,6 +292,7 @@ public class BattlePreparationView : MonoBehaviour
         return isCompanionRemoved;
     }
 
+    //TODO
     private void HandleStartBattleButtonClicked()
     {
         gameObject.SetActive(false);

@@ -85,6 +85,22 @@ public class BattleManager : MonoBehaviour
         return true;
     }
 
+    public void RequestPlayerUseSkill(int battlePosition, string skillId, SkillExecutionData skillExecutionData)
+    {
+        Debug.Log($"{battlePosition} {skillId} 스킬사용");
+        //BaseBattleUnitView target = _battleField.FindEnemyTarget(attackerSlotIndex);
+
+        //ExecuteAttack(target, attackStats);
+    }
+
+    public void RequestEnemyUseSkill(int battlePosition, string skillId, SkillExecutionData skillExecutionData)
+    {
+        Debug.Log($"{battlePosition} {skillId} 스킬사용");
+        //BaseBattleUnitView target = _battleField.FindEnemyTarget(attackerSlotIndex);
+
+        //ExecuteAttack(target, attackStats);
+    }
+
     private async UniTask CreateBattleRootAsync()
     {
         GameObject prefab = await Addressables.LoadAssetAsync<GameObject>("Prefabs/BattleRoot");
@@ -106,19 +122,8 @@ public class BattleManager : MonoBehaviour
     //    //_battleField.InitializeField(mainId, companionIds, enemyIds);
     //    //_battleField.StartBattle();
     //}
-    //public void RequestPlayerUseSkill(int slotId, string skillId, SkillExecutionData skillExecutionData)
-    //{
-    //    //BaseBattleUnitView target = _battleField.FindEnemyTarget(attackerSlotIndex);
 
-    //    //ExecuteAttack(target, attackStats);
-    //}
 
-    //public void RequestEnemyUseSkill(int slotId, string skillId, SkillExecutionData skillExecutionData)
-    //{
-    //    //BaseBattleUnitView target = _battleField.FindEnemyTarget(attackerSlotIndex);
-
-    //    //ExecuteAttack(target, attackStats);
-    //}
 
 
     //public void RequestAttackEnemy(int attackerSlotIndex, AttackData attackStats)
