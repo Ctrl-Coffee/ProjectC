@@ -9,8 +9,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static PoolManager Pool { get { return Instance._poolManager; } }
     public static TimeManager Time { get { return Instance._timeManager; } }
     public static UIManager UI { get { return Instance._uiManager; } }
-    public static SaveManager Save { get { return Instance._saveManager; } }
-    public static UserData User { get { return Instance._saveManager.User; } } // 삭제대상
     public static GrowthSystem Growth { get { return Instance._growthSystem; } }
     public static PerkManager Perk { get { return Instance._perkManager; } }
 
@@ -27,7 +25,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     private PoolManager _poolManager = new();
     private TimeManager _timeManager = new();
     private UIManager _uiManager = new();
-    private SaveManager _saveManager = new();
     private GrowthSystem _growthSystem = new();
     private SoundManager _soundManager = new();
     private PerkManager _perkManager = new();
@@ -53,16 +50,9 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         base.Init();
 
-        _saveManager.Load();
         _dataTable.LoadAllData();
 
         InitializeAsync().Forget();
-    }
-
-    // TODO: 모바일은 OnApplicationPause(true)에서도 저장 필요
-    private void OnApplicationQuit()
-    {
-        _saveManager.Save();
     }
 
     private async UniTask InitializeAsync()

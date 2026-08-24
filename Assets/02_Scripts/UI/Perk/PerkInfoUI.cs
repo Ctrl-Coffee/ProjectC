@@ -23,13 +23,8 @@ public class PerkInfoUI : UIBase
         }
     }
 
-    private void OnEnable()
+    private void Awake()
     {
-        BindNodes();
-        RefreshAll();
-
-        GameManager.Perk.OnPerkChanged += RefreshAll;
-
         if (null == _btnClose)
         {
             Logger.LogError("_btnClose 가 연결되지 않았습니다.");
@@ -39,16 +34,17 @@ public class PerkInfoUI : UIBase
         _btnClose.BindButtonEvent(OnClickCloseButton);
     }
 
+    private void OnEnable()
+    {
+        BindNodes();
+        RefreshAll();
+
+        GameManager.Perk.OnPerkChanged += RefreshAll;
+    }
+
     private void OnDisable()
     {
         GameManager.Perk.OnPerkChanged -= RefreshAll;
-
-        if (null == _btnClose)
-        {
-            return;
-        }
-
-        _btnClose.UnBindButtonAllEvent();
     }
 
     public void RefreshAll()
