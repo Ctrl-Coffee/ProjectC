@@ -10,6 +10,8 @@ public static class AutoWorkQueue
 
     public static event Action OnQueueChanged;
 
+    private static List<AutoWorkSlot> _slots = new();
+
     public static int MaxSlotCount
     {
         get
@@ -22,7 +24,7 @@ public static class AutoWorkQueue
     {
         get
         {
-            return GameManager.Session.Work.AutoWorkSlots;
+            return _slots;
         }
     }
 

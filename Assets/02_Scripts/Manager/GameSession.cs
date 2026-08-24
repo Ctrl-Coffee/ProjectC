@@ -9,9 +9,6 @@ public class GameSession
     public HeroEquipmentModel HeroEquipment { get; }
     public HeroEquipedModel HeroEquiped { get; }
 
-    public WorkState Work { get; }
-    public PerkState Perk { get; }
-
 
     private NetworkManager _networkManager;
 
@@ -24,9 +21,6 @@ public class GameSession
 
         // 임시
         Currency = new();
-
-        Work = new();
-        Perk = new();
 
         PlayerGrowth = new(new());
 

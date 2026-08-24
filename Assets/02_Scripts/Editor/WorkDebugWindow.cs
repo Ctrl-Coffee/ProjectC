@@ -130,8 +130,7 @@ public class WorkDebugWindow : EditorWindow
 
         AutoWorkQueue.DebugShiftSchedule(shiftTicks);
 
-        GameManager.Session.Work.LastEnergyRecoverTicks += shiftTicks;
-
+        EnergyRecovery.DebugShiftLastRecoverTicks(shiftTicks);
     }
 
     private void DrawAddTimeButton(string label, TimeSpan amount)

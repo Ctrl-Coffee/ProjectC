@@ -12,6 +12,8 @@ public class PerkManager
 
     private HashSet<string> _unlockedSet;
 
+    private List<string> _unlockedPerkIds = new();
+
     private PerkStatCalculator _statCalculator = new();
     private PerkUnlockChecker _unlockChecker = new();
 
@@ -37,7 +39,7 @@ public class PerkManager
         {
             if (null == _unlockedSet)
             {
-                _unlockedSet = new HashSet<string>(GameManager.Session.Perk.UnlockedPerkIds);
+                _unlockedSet = new HashSet<string>(_unlockedPerkIds);
             }
 
             return _unlockedSet;
@@ -46,7 +48,7 @@ public class PerkManager
 
     public IReadOnlyList<string> GetUnlockedPerkIds()
     {
-        return GameManager.Session.Perk.UnlockedPerkIds;
+        return _unlockedPerkIds;
     }
 
     public void InvalidateCache()
@@ -135,7 +137,7 @@ public class PerkManager
             return false;
         }
 
-        GameManager.Session.Perk.UnlockedPerkIds.Add(perkId);
+        _unlockedPerkIds.Add(perkId);
         InvalidateCache();
 
         GameManager.Session.Currency.NotifyMaxEnergyChanged();
@@ -192,7 +194,7 @@ public class PerkManager
 
         PerkNodeData data = GameManager.DataTable.GetPerkNodeData(perkId);
 
-        GameManager.Session.Perk.UnlockedPerkIds.Remove(perkId);
+        _unlockedPerkIds.Remove(perkId);
         InvalidateCache();
         GameManager.Session.Currency.AddInspiration(data.InspirationCost);
 
@@ -268,7 +270,7 @@ public class PerkManager
         if (string.IsNullOrEmpty(data.ExclusiveGroup))
             return false;
 
-        List<string> unlockedList = GameManager.Session.Perk.UnlockedPerkIds;
+        List<string> unlockedList = _unlockedPerkIds;
 
         for (int i = 0; i < unlockedList.Count; i++)
         {

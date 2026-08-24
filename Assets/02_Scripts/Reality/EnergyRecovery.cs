@@ -9,6 +9,8 @@ public static class EnergyRecovery
     private const long RECOVER_AMOUNT = 1;
     private const float CHECK_INTERVAL = 1f;
 
+    private static long _lastEnergyRecoverTicks;
+
     public static async UniTaskVoid RunRecoverLoopAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
@@ -21,32 +23,31 @@ public static class EnergyRecovery
 
     private static void Recover()
     {
-        WorkState work = GameManager.Session.Work;
         CurrencyModel currency = GameManager.Session.Currency;
 
         long nowTicks = GameManager.Time.UtcNow.Ticks;
 
-        if (work.LastEnergyRecoverTicks <= 0 || nowTicks < work.LastEnergyRecoverTicks)
+        if (_lastEnergyRecoverTicks <= 0 || nowTicks < _lastEnergyRecoverTicks)
         {
-            work.LastEnergyRecoverTicks = nowTicks;
+            _lastEnergyRecoverTicks = nowTicks;
             return;
         }
 
         if (currency.MaxEnergy <= currency.Energy)
         {
-            work.LastEnergyRecoverTicks = nowTicks;
+            _lastEnergyRecoverTicks = nowTicks;
             return;
         }
 
         long intervalTicks = GetRecoverIntervalTicks();
-        long recoverCount = (nowTicks - work.LastEnergyRecoverTicks) / intervalTicks;
+        long recoverCount = (nowTicks - _lastEnergyRecoverTicks) / intervalTicks;
 
         if (recoverCount <= 0)
         {
             return;
         }
 
-        work.LastEnergyRecoverTicks += recoverCount * intervalTicks;
+        _lastEnergyRecoverTicks += recoverCount * intervalTicks;
 
         currency.AddEnergy(recoverCount * RECOVER_AMOUNT);
 
@@ -91,6 +92,11 @@ public static class EnergyRecovery
         {
             return GameManager.Perk.Stat.GetFloat(WorkStatType.EnergyRecoverRate, BASE_RECOVER_SPEED);
         }
+    }
+
+    public static void DebugShiftLastRecoverTicks(long shiftTicks)
+    {
+        _lastEnergyRecoverTicks += shiftTicks;
     }
 #endif
 }
