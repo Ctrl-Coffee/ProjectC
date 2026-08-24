@@ -165,7 +165,7 @@ public class MiniGameFlowHandler
 
         }
 
-        Logger.Log($"미니게임 시작 - {workData.Name} / 남은 에너지 {GameManager.User.Currency.Energy} / 남은 골드 {GameManager.User.Currency.Money}");
+        Logger.Log($"미니게임 시작 - {workData.Name} / 남은 에너지 {GameManager.Session.Currency.Energy} / 남은 골드 {GameManager.Session.Currency.Money}");
 
         MiniGameContext context = new MiniGameContext();
 
