@@ -25,5 +25,9 @@
         public const string BUTTON_CLICK = "Audio/SFX/ButtonClick";
         public const string GACHA_SUMMON = "Audio/SFX/SummonGacha";
         public const string GACHA_SLOT = "Audio/SFX/GachaSlot";
+        public const string SUBTITLE = "Audio/SFX/Subtitle";
+        public const string DICE_ROLLING = "Audio/SFX/DiceRolling";
+        public const string STAMP_SUCCESS = "Audio/SFX/StampSuccess";
+        public const string STAMP_FAIL = "Audio/SFX/StampFail";
     }
 }
