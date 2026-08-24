@@ -5,11 +5,12 @@ using UnityEngine.Serialization;
 
 public class SwipComponent : MonoBehaviour
 {
-    [SerializeField] private Camera _camera;
-    [SerializeField] private float _swipeTime = 0.2f;
-    [SerializeField] private float _swipeDistanceRate = 0.2f;
-    [FormerlySerializedAs("swipeDirect")]
+    [Header("Swipe Settings")]
     [SerializeField] private SwipeDirect _swipeDirect = SwipeDirect.Horizontal;
+    [SerializeField] private float _swipeDistanceRate = 0.2f;
+    [SerializeField] private float _swipeTime = 0.2f;
+
+    [Header("Page")]
     [SerializeField] private int _startPage = 0;
 
     private Vector3[] _pagePositions;
@@ -26,6 +27,8 @@ public class SwipComponent : MonoBehaviour
     private bool _isTouchInput;
 
     private Tween _swipeTween;
+
+    private Camera _camera;
 
     private void Awake()
     {
