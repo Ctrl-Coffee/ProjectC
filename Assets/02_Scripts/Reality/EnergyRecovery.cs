@@ -9,6 +9,8 @@ public static class EnergyRecovery
     private const long RECOVER_AMOUNT = 1;
     private const float CHECK_INTERVAL = 1f;
 
+    private static long _lastEnergyRecoverTicks;
+
     public static async UniTaskVoid RunRecoverLoopAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
@@ -21,35 +23,33 @@ public static class EnergyRecovery
 
     private static void Recover()
     {
-        UserData user = GameManager.User;
-        CurrencyModel currency = user.Currency;
+        CurrencyModel currency = GameManager.Session.Currency;
 
         long nowTicks = GameManager.Time.UtcNow.Ticks;
 
-        if (user.LastEnergyRecoverTicks <= 0 || nowTicks < user.LastEnergyRecoverTicks)
+        if (_lastEnergyRecoverTicks <= 0 || nowTicks < _lastEnergyRecoverTicks)
         {
-            user.LastEnergyRecoverTicks = nowTicks;
+            _lastEnergyRecoverTicks = nowTicks;
             return;
         }
 
         if (currency.MaxEnergy <= currency.Energy)
         {
-            user.LastEnergyRecoverTicks = nowTicks;
+            _lastEnergyRecoverTicks = nowTicks;
             return;
         }
 
         long intervalTicks = GetRecoverIntervalTicks();
-        long recoverCount = (nowTicks - user.LastEnergyRecoverTicks) / intervalTicks;
+        long recoverCount = (nowTicks - _lastEnergyRecoverTicks) / intervalTicks;
 
         if (recoverCount <= 0)
         {
             return;
         }
 
-        user.LastEnergyRecoverTicks += recoverCount * intervalTicks;
+        _lastEnergyRecoverTicks += recoverCount * intervalTicks;
 
         currency.AddEnergy(recoverCount * RECOVER_AMOUNT);
-        GameManager.Save.Save();
 
         Logger.Log($"에너지 회복 {recoverCount * RECOVER_AMOUNT} - 현재 {currency.Energy} / {currency.MaxEnergy}");
     }
@@ -92,6 +92,11 @@ public static class EnergyRecovery
         {
             return GameManager.Perk.Stat.GetFloat(WorkStatType.EnergyRecoverRate, BASE_RECOVER_SPEED);
         }
+    }
+
+    public static void DebugShiftLastRecoverTicks(long shiftTicks)
+    {
+        _lastEnergyRecoverTicks += shiftTicks;
     }
 #endif
 }

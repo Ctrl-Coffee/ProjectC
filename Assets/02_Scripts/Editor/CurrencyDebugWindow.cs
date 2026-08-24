@@ -1,5 +1,4 @@
-﻿using System.IO;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 public class CurrencyDebugWindow : EditorWindow
@@ -63,10 +62,6 @@ public class CurrencyDebugWindow : EditorWindow
 
         DrawCurrency();
 
-        EditorGUILayout.Space();
-
-        DrawSaveFile();
-
         EditorGUILayout.EndScrollView();
     }
 
@@ -84,7 +79,7 @@ public class CurrencyDebugWindow : EditorWindow
             return;
         }
 
-        CurrencyModel currency = GameManager.User.Currency;
+        CurrencyModel currency = GameManager.Session.Currency;
 
         if (null == currency)
         {
@@ -324,69 +319,5 @@ public class CurrencyDebugWindow : EditorWindow
         }
 
         return currencyType.ToString();
-    }
-
-    private void DrawSaveFile()
-    {
-        EditorGUILayout.LabelField("세이브 파일", EditorStyles.boldLabel);
-
-        string savePath = SaveManager.SavePath;
-        bool isExists = File.Exists(savePath);
-
-        EditorGUILayout.LabelField("경로", savePath);
-        EditorGUILayout.LabelField("상태", isExists ? "있음" : "없음");
-
-        EditorGUI.BeginDisabledGroup(!Application.isPlaying || null == GameManager.Instance);
-
-        if (GUILayout.Button("세이브 파일에 저장"))
-        {
-            GameManager.Save.Save();
-
-            Logger.Log("[CurrencyDebug] 세이브 저장 완료");
-        }
-
-        EditorGUI.EndDisabledGroup();
-
-        EditorGUI.BeginDisabledGroup(!isExists);
-
-        if (GUILayout.Button("세이브 파일 삭제"))
-        {
-            DeleteSaveFile(savePath);
-        }
-
-        EditorGUI.EndDisabledGroup();
-
-        if (Application.isPlaying)
-        {
-            EditorGUILayout.HelpBox("삭제 후에는 플레이를 다시 시작하세요.", MessageType.Warning);
-        }
-    }
-
-    private void DeleteSaveFile(string savePath)
-    {
-        bool isConfirmed = EditorUtility.DisplayDialog(
-            "세이브 파일 삭제"
-            , $"세이브 파일을 삭제합니다. 되돌릴 수 없습니다.\n\n{savePath}"
-            , "삭제"
-            , "취소");
-
-        if (!isConfirmed)
-        {
-            return;
-        }
-
-        if (Application.isPlaying && null != GameManager.Instance)
-        {
-            GameManager.Save.DeleteAll();
-            GameManager.Perk.InvalidateCache();
-        }
-        else
-        {
-            File.Delete(savePath);
-        }
-
-        Logger.Log("[CurrencyDebug] 세이브 파일 삭제 완료");
-
-        Repaint();
     }
 }
