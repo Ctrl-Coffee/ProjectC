@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 5059624294023517127}
   - component: {fileID: 7596219155893977948}
   - component: {fileID: 1942632873046724028}
+  - component: {fileID: 6588881151248428581}
   m_Layer: 5
   m_Name: Btn_CompanionTab
   m_TagString: Untagged
@@ -301,6 +302,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6588881151248428581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170721177629522944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6111adf02703a4d8b688b8592cc05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonComponent
+  _button: {fileID: 1942632873046724028}
+  _text: {fileID: 7262020744415645753}
 --- !u!1 &1180935008285491358
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +540,7 @@ GameObject:
   - component: {fileID: 39848788017959186}
   - component: {fileID: 468354079604406800}
   - component: {fileID: 2530880249621232029}
+  - component: {fileID: 2598792322267469594}
   m_Layer: 5
   m_Name: Btn_MultiDraw
   m_TagString: Untagged
@@ -635,6 +651,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2598792322267469594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430437467498396387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6111adf02703a4d8b688b8592cc05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonComponent
+  _button: {fileID: 2530880249621232029}
+  _text: {fileID: 5534915480914595790}
 --- !u!1 &1803079252135789511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,6 +1178,7 @@ GameObject:
   - component: {fileID: 7638998077291481763}
   - component: {fileID: 5912371576987535460}
   - component: {fileID: 4136314885997948196}
+  - component: {fileID: 2220899721248436670}
   m_Layer: 5
   m_Name: btn_Back
   m_TagString: Untagged
@@ -1257,6 +1288,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2220899721248436670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5862079828239988683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6111adf02703a4d8b688b8592cc05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonComponent
+  _button: {fileID: 4136314885997948196}
+  _text: {fileID: 7718950218782773938}
 --- !u!1 &6297686601417276386
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,6 +1607,7 @@ GameObject:
   - component: {fileID: 3072930729209300120}
   - component: {fileID: 5315300952201084670}
   - component: {fileID: 7632036801003420521}
+  - component: {fileID: 4990523962136564655}
   m_Layer: 5
   m_Name: Btn_EqupmentTab
   m_TagString: Untagged
@@ -1672,6 +1718,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4990523962136564655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7043814090626046633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6111adf02703a4d8b688b8592cc05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonComponent
+  _button: {fileID: 7632036801003420521}
+  _text: {fileID: 4485038013605087926}
 --- !u!1 &7070860711466449090
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,15 +2225,15 @@ MonoBehaviour:
   _isPlayAnimation: 1
   _panel: {fileID: 4474974361440673155}
   _bannerNameText: {fileID: 7602658302500217424}
-  _singleDrawButton: {fileID: 2868076710013874825}
+  _singleDrawButton: {fileID: 700848039287680152}
   _singleCostText: {fileID: 4995685624932339124}
-  _multiDrawButton: {fileID: 2530880249621232029}
+  _multiDrawButton: {fileID: 2598792322267469594}
   _multiCostText: {fileID: 5584662256668328114}
-  _companionTabButton: {fileID: 1942632873046724028}
-  _equipmentTabButton: {fileID: 7632036801003420521}
+  _companionTabButton: {fileID: 6588881151248428581}
+  _equipmentTabButton: {fileID: 4990523962136564655}
   _singleDrawLabelText: {fileID: 7909139891368789192}
   _multiDrawLabelText: {fileID: 5534915480914595790}
-  _closeButton: {fileID: 4136314885997948196}
+  _closeButton: {fileID: 2220899721248436670}
   _bannerImage: {fileID: 288732887563060176}
   _companionBannerSprite: {fileID: 21300000, guid: 92efb2224aa9f5d439d010e61fd4afe7, type: 3}
   _equipmentBannerSprite: {fileID: 21300000, guid: 9b9ad8b8b4b12194a8a79f766a52fb92, type: 3}
@@ -2194,6 +2254,7 @@ GameObject:
   - component: {fileID: 327359740667427544}
   - component: {fileID: 1217084680244130954}
   - component: {fileID: 2868076710013874825}
+  - component: {fileID: 700848039287680152}
   m_Layer: 5
   m_Name: Btn_SingleDraw
   m_TagString: Untagged
@@ -2304,6 +2365,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &700848039287680152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8990234950960932930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6111adf02703a4d8b688b8592cc05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonComponent
+  _button: {fileID: 2868076710013874825}
+  _text: {fileID: 7909139891368789192}
 --- !u!1 &9102688965588645570
 GameObject:
   m_ObjectHideFlags: 0

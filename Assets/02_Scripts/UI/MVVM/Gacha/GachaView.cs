@@ -9,15 +9,15 @@ using UnityEngine.UI;
 public class GachaView : ViewBase
 {
     [SerializeField] private TextMeshProUGUI _bannerNameText;
-    [SerializeField] private Button _singleDrawButton;
+    [SerializeField] private UIButtonComponent _singleDrawButton;
     [SerializeField] private TextMeshProUGUI _singleCostText;
-    [SerializeField] private Button _multiDrawButton;
+    [SerializeField] private UIButtonComponent _multiDrawButton;
     [SerializeField] private TextMeshProUGUI _multiCostText;
-    [SerializeField] private Button _companionTabButton;
-    [SerializeField] private Button _equipmentTabButton;
+    [SerializeField] private UIButtonComponent _companionTabButton;
+    [SerializeField] private UIButtonComponent _equipmentTabButton;
     [SerializeField] private TextMeshProUGUI _singleDrawLabelText;
     [SerializeField] private TextMeshProUGUI _multiDrawLabelText;
-    [SerializeField] private Button _closeButton;
+    [SerializeField] private UIButtonComponent _closeButton;
 
     [Header("배너")]
     [SerializeField] private Image _bannerImage;
@@ -43,22 +43,22 @@ public class GachaView : ViewBase
 
         Subscribe();
 
-        _companionTabButton.onClick.AddListener(OnClickComponionTab);
-        _equipmentTabButton.onClick.AddListener(OnClickEquipmentTab);
-        _singleDrawButton.onClick.AddListener(OnClickSingleDraw);
-        _multiDrawButton.onClick.AddListener(OnClickMultiDraw);
-        _closeButton.onClick.AddListener(OnClickCloseButton);
+        _companionTabButton.BindButtonEvent(OnClickComponionTab);
+        _equipmentTabButton.BindButtonEvent(OnClickEquipmentTab);
+        _singleDrawButton.BindButtonEvent(OnClickSingleDraw);
+        _multiDrawButton.BindButtonEvent(OnClickMultiDraw);
+        _closeButton.BindButtonEvent(OnClickCloseButton);
     }
 
     private void OnDisable()
     {
         UnSubscribe();
 
-        _companionTabButton.onClick.RemoveListener(OnClickComponionTab);
-        _equipmentTabButton.onClick.RemoveListener(OnClickEquipmentTab);
-        _singleDrawButton.onClick.RemoveListener(OnClickSingleDraw);
-        _multiDrawButton.onClick.RemoveListener(OnClickMultiDraw);
-        _closeButton.onClick.RemoveListener(OnClickCloseButton);
+        _companionTabButton.UnBindButtonAllEvent();
+        _equipmentTabButton.UnBindButtonAllEvent();
+        _singleDrawButton.UnBindButtonAllEvent();
+        _multiDrawButton.UnBindButtonAllEvent();
+        _closeButton.UnBindButtonAllEvent();
     }
 
     private void OnDestroy()
@@ -125,8 +125,8 @@ public class GachaView : ViewBase
         _bannerNameText.text = _viewModel.BannerName;
         _singleCostText.text = $"필요 재화 : {_viewModel.SingleCost}";
         _multiCostText.text = $"필요 재화 : {_viewModel.MultiCost}";
-        _singleDrawButton.interactable = _viewModel.CanDrawSingle;
-        _multiDrawButton.interactable = _viewModel.CanDrawMulti;
+        _singleDrawButton.SetInteractable(_viewModel.CanDrawSingle);
+        _multiDrawButton.SetInteractable(_viewModel.CanDrawMulti);
         _singleDrawLabelText.text = $"{_viewModel.SingleDrawCount}회 뽑기";
         _multiDrawLabelText.text = $"{_viewModel.MultiDrawCount}회 뽑기";
     }
@@ -178,6 +178,7 @@ public class GachaView : ViewBase
         _scrollRect.DOKill();
         _scrollRect.localEulerAngles = Vector3.zero;
 
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.GACHA_SUMMON);
         await _scrollRect.DORotate(new Vector3(0f, 0f, -360f * _spinCount), _spinDuration, RotateMode.FastBeyond360).SetEase(Ease.InCubic).SetUpdate(true).ToUniTask(cancellationToken: token);
 
         await PlayFlashAsync(token);

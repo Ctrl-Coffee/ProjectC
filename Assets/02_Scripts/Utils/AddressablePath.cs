@@ -23,5 +23,7 @@
     {
         public const string BGM_LOBBY = "Audio/BGM/Lobby";
         public const string BUTTON_CLICK = "Audio/SFX/ButtonClick";
+        public const string GACHA_SUMMON = "Audio/SFX/SummonGacha";
+        public const string GACHA_SLOT = "Audio/SFX/GachaSlot";
     }
 }
