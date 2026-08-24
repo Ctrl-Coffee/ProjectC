@@ -18,16 +18,24 @@ public class WorkQueueUI : MonoBehaviour
 
     private void OnEnable()
     {
+        AutoWorkQueue.OnQueueChanged += Refresh;
+        GameManager.Perk.OnPerkChanged += Refresh;
+
         Refresh();
     }
 
     private void OnDisable()
     {
+        AutoWorkQueue.OnQueueChanged -= Refresh;
+        GameManager.Perk.OnPerkChanged -= Refresh;
+
         ClearSlots();
     }
 
     private void Update()
     {
+        RefreshProgress();
+
         _refreshTimer += Time.unscaledDeltaTime;
 
         if (_refreshTimer < REFRESH_INTERVAL)
@@ -36,14 +44,15 @@ public class WorkQueueUI : MonoBehaviour
         }
 
         _refreshTimer = 0f;
-        Refresh();
+        RefreshTotalTime();
     }
 
     public void Refresh()
     {
         RebuildSlots();
         RefreshTotalTime();
-        RefreshSlots();
+        RefreshSlotContents();
+        RefreshProgress();    
     }
 
     private void RebuildSlots()
@@ -106,12 +115,7 @@ public class WorkQueueUI : MonoBehaviour
 
     private void OnClickSlot(int index)
     {
-        if (!AutoWorkQueue.TryCancel(index))
-        {
-            return;
-        }
-
-        Refresh();
+        AutoWorkQueue.TryCancel(index);
     }
 
     private void RefreshTotalTime()
@@ -124,7 +128,7 @@ public class WorkQueueUI : MonoBehaviour
         _txtTotalTime.text = Utils.FormatClock(AutoWorkQueue.GetTotalRemainSeconds());
     }
 
-    private void RefreshSlots()
+    private void RefreshSlotContents()
     {
         for (int i = 0; i < _slots.Count; i++)
         {
@@ -140,6 +144,25 @@ public class WorkQueueUI : MonoBehaviour
             }
 
             _slots[i].SetIcon(GetIconKey(AutoWorkQueue.GetWorkId(i)));
+        }
+    }
+
+    private void RefreshProgress()
+    {
+        int count = AutoWorkQueue.Count;
+
+        for (int i = 0; i < _slots.Count; i++)
+        {
+            if (null == _slots[i])
+            {
+                continue;
+            }
+
+            if (i >= count)
+            {
+                continue;
+            }
+
             _slots[i].SetProgress(AutoWorkQueue.GetProgress(i));
         }
     }

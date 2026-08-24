@@ -25,7 +25,6 @@ public class WorkSlotUI : MonoBehaviour
             return;
         }
 
-        _btnPlay.UnBindButtonAllEvent();
         _btnPlay.BindButtonEvent(OnClickPlay);
     }
 

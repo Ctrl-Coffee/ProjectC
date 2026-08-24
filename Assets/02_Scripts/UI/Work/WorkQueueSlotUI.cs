@@ -24,7 +24,6 @@ public class WorkQueueSlotUI : MonoBehaviour
             return;
         }
 
-        _btnSlot.UnBindButtonAllEvent();
         _btnSlot.BindButtonEvent(OnClickSlot);
     }
 

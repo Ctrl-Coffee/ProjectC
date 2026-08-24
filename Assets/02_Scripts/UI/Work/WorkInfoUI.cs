@@ -19,9 +19,6 @@ public class WorkInfoUI : UIBase
     [Header("연출")]
     [SerializeField] private RectTransform _screen;
 
-    [Header("자동업무 큐")]
-    [SerializeField] private WorkQueueUI _workQueue;
-
     private MiniGameFlowHandler _workHandler = new();
     private TypingSoundLoop _typingSound = new();
     private List<WorkSlotUI> _spawnedSlots = new();
@@ -44,6 +41,10 @@ public class WorkInfoUI : UIBase
     private void Awake()
     {
         CapturePanelPosition();
+
+        BindButton(_btnClose, OnClickCloseButton, nameof(_btnClose));
+        BindButton(_btnManual, OnClickManualTab, nameof(_btnManual));
+        BindButton(_btnAuto, OnClickAutoTab, nameof(_btnAuto));
     }
 
     public override Tween PlayOpenAnimation()
@@ -141,26 +142,31 @@ public class WorkInfoUI : UIBase
 
     private void OnEnable()
     {
-        BindButton(_btnClose, OnClickCloseButton, nameof(_btnClose));
-        BindButton(_btnManual, OnClickManualTab, nameof(_btnManual));
-        BindButton(_btnAuto, OnClickAutoTab, nameof(_btnAuto));
-
         RefreshTabs();
 
         _isWorkListBuilt = false;
 
         RefreshWorkList(WorkType.Manual);
 
+        GameManager.Perk.OnPerkChanged += OnPerkChanged;
+
         _typingSound.Play();
     }
 
     private void OnDisable()
     {
-        UnbindButton(_btnClose);
-        UnbindButton(_btnManual);
-        UnbindButton(_btnAuto);
+        GameManager.Perk.OnPerkChanged -= OnPerkChanged;
 
         _typingSound.Stop();
+    }
+
+    private void OnPerkChanged()
+    {
+        RefreshTabs();
+
+        _isWorkListBuilt = false;
+
+        RefreshWorkList(_currentWorkType);
     }
 
     private void OnDestroy()
@@ -206,7 +212,7 @@ public class WorkInfoUI : UIBase
 
         if (WorkType.Auto == data.Type)
         {
-            EnqueueAutoWork(data.Id);
+            AutoWorkQueue.TryEnqueue(data.Id);
             return;
         }
 
@@ -228,21 +234,6 @@ public class WorkInfoUI : UIBase
                 _typingSound.Play();
             }
         }
-    }
-
-    private void EnqueueAutoWork(string workId)
-    {
-        if (!AutoWorkQueue.TryEnqueue(workId))
-        {
-            return;
-        }
-
-        if (null == _workQueue)
-        {
-            return;
-        }
-
-        _workQueue.Refresh();
     }
 
     private void RefreshWorkList(WorkType workType)
@@ -333,15 +324,5 @@ public class WorkInfoUI : UIBase
         }
 
         button.BindButtonEvent(onClick);
-    }
-
-    private void UnbindButton(UIButtonComponent button)
-    {
-        if (null == button)
-        {
-            return;
-        }
-
-        button.UnBindButtonAllEvent();
     }
 }

@@ -8,6 +8,8 @@ public static class AutoWorkQueue
     private const int BASE_SLOT_COUNT = 5;
     private const float COLLECT_INTERVAL = 1f;
 
+    public static event Action OnQueueChanged;
+
     public static int MaxSlotCount
     {
         get
@@ -85,7 +87,14 @@ public static class AutoWorkQueue
 
         GameManager.Save.Save();
 
+        NotifyQueueChanged();
+
         return true;
+    }
+
+    private static void NotifyQueueChanged()
+    {
+        OnQueueChanged?.Invoke();
     }
 
     public static void NormalizeSchedule()
@@ -117,6 +126,8 @@ public static class AutoWorkQueue
 
         GameManager.Save.Save();
 
+        NotifyQueueChanged();
+
         Logger.LogWarning($"미래 시각의 자동업무 큐를 {shiftTicks / TimeSpan.TicksPerSecond}초 앞당겼습니다.");
     }
 
@@ -131,6 +142,8 @@ public static class AutoWorkQueue
         RecalculateFrom(index);
 
         GameManager.Save.Save();
+
+        NotifyQueueChanged();
 
         return true;
     }
@@ -214,7 +227,10 @@ public static class AutoWorkQueue
 
         if (collectedCount > 0)
         {
+
             GameManager.Save.Save();
+
+            NotifyQueueChanged();
         }
 
         return collectedCount;
@@ -306,6 +322,8 @@ public static class AutoWorkQueue
 
             slots[i] = slot;
         }
+
+        NotifyQueueChanged();
     }
 
     public static void DebugCompleteFirst()
@@ -320,6 +338,8 @@ public static class AutoWorkQueue
         AutoWorkSlot slot = slots[0];
         slot.EndTicks = GameManager.Time.UtcNow.Ticks;
         slots[0] = slot;
+
+        NotifyQueueChanged();
     }
 #endif
 }
