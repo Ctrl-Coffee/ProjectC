@@ -130,9 +130,8 @@ public class WorkDebugWindow : EditorWindow
 
         AutoWorkQueue.DebugShiftSchedule(shiftTicks);
 
-        GameManager.User.LastEnergyRecoverTicks += shiftTicks;
+        GameManager.Session.Work.LastEnergyRecoverTicks += shiftTicks;
 
-        GameManager.Save.Save();
     }
 
     private void DrawAddTimeButton(string label, TimeSpan amount)
@@ -171,7 +170,7 @@ public class WorkDebugWindow : EditorWindow
     {
         EditorGUILayout.LabelField("재화", EditorStyles.boldLabel);
 
-        CurrencyModel currency = GameManager.User.Currency;
+        CurrencyModel currency = GameManager.Session.Currency;
 
         EditorGUILayout.LabelField("돈", currency.Money.ToString());
         EditorGUILayout.LabelField("드림 포인트", currency.DreamPoint.ToString());
@@ -289,7 +288,7 @@ public class WorkDebugWindow : EditorWindow
 
     private void DrawEnergyTab()
     {
-        CurrencyModel currency = GameManager.User.Currency;
+        CurrencyModel currency = GameManager.Session.Currency;
 
         EditorGUILayout.LabelField("최대 에너지", EditorStyles.boldLabel);
 

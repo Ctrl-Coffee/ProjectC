@@ -21,35 +21,34 @@ public static class EnergyRecovery
 
     private static void Recover()
     {
-        UserData user = GameManager.User;
-        CurrencyModel currency = user.Currency;
+        WorkState work = GameManager.Session.Work;
+        CurrencyModel currency = GameManager.Session.Currency;
 
         long nowTicks = GameManager.Time.UtcNow.Ticks;
 
-        if (user.LastEnergyRecoverTicks <= 0 || nowTicks < user.LastEnergyRecoverTicks)
+        if (work.LastEnergyRecoverTicks <= 0 || nowTicks < work.LastEnergyRecoverTicks)
         {
-            user.LastEnergyRecoverTicks = nowTicks;
+            work.LastEnergyRecoverTicks = nowTicks;
             return;
         }
 
         if (currency.MaxEnergy <= currency.Energy)
         {
-            user.LastEnergyRecoverTicks = nowTicks;
+            work.LastEnergyRecoverTicks = nowTicks;
             return;
         }
 
         long intervalTicks = GetRecoverIntervalTicks();
-        long recoverCount = (nowTicks - user.LastEnergyRecoverTicks) / intervalTicks;
+        long recoverCount = (nowTicks - work.LastEnergyRecoverTicks) / intervalTicks;
 
         if (recoverCount <= 0)
         {
             return;
         }
 
-        user.LastEnergyRecoverTicks += recoverCount * intervalTicks;
+        work.LastEnergyRecoverTicks += recoverCount * intervalTicks;
 
         currency.AddEnergy(recoverCount * RECOVER_AMOUNT);
-        GameManager.Save.Save();
 
         Logger.Log($"에너지 회복 {recoverCount * RECOVER_AMOUNT} - 현재 {currency.Energy} / {currency.MaxEnergy}");
     }

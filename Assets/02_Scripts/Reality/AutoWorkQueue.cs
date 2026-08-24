@@ -22,7 +22,7 @@ public static class AutoWorkQueue
     {
         get
         {
-            return GameManager.User.AutoWorkSlots;
+            return GameManager.Session.Work.AutoWorkSlots;
         }
     }
 
@@ -85,8 +85,6 @@ public static class AutoWorkQueue
             EndTicks = startTicks + GetDurationTicks(data),
         });
 
-        GameManager.Save.Save();
-
         NotifyQueueChanged();
 
         return true;
@@ -124,8 +122,6 @@ public static class AutoWorkQueue
             slots[i] = slot;
         }
 
-        GameManager.Save.Save();
-
         NotifyQueueChanged();
 
         Logger.LogWarning($"미래 시각의 자동업무 큐를 {shiftTicks / TimeSpan.TicksPerSecond}초 앞당겼습니다.");
@@ -140,8 +136,6 @@ public static class AutoWorkQueue
 
         Slots.RemoveAt(index);
         RecalculateFrom(index);
-
-        GameManager.Save.Save();
 
         NotifyQueueChanged();
 
@@ -219,16 +213,14 @@ public static class AutoWorkQueue
             long money = GameManager.Perk.Stat.GetLong(WorkStatType.AutoWorkRewardMoney, data.RewardMoney);
             long dp = GameManager.Perk.Stat.GetLong(WorkStatType.AutoWorkRewardDP, data.RewardDP);
 
-            GameManager.User.Currency.AddMoney(money);
-            GameManager.User.Currency.AddDreamPoint(dp);
+            GameManager.Session.Currency.AddMoney(money);
+            GameManager.Session.Currency.AddDreamPoint(dp);
 
             Logger.Log($"자동업무 완료 - {data.Name} / 돈 {money} / DP {dp}");
         }
 
         if (collectedCount > 0)
         {
-
-            GameManager.Save.Save();
 
             NotifyQueueChanged();
         }
