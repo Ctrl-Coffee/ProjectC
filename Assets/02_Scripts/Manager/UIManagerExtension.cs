@@ -50,6 +50,11 @@ public static class UIManagerExtension
         return uiManager.OpenContentUI<HeroInventoryView>();
     }
 
+    public static UniTask<PlayerStatView> OpenPlayerStat(this UIManager uiManager)
+    {
+        return uiManager.OpenPopupUI<PlayerStatView>();
+    }
+
     public static async void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Func<LevelUpResult> onClickLevelUp)
     {
         var ui = await uiManager.OpenPopupUI<CompanionDetailUI>();

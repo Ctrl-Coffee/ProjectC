@@ -4,6 +4,7 @@ public class GameSession
 {
     public CurrencyModel Currency { get; }
     public PlayerGrowthModel PlayerGrowth { get; }
+    public PlayerStatModel PlayerStat { get; }
 
     public CompanionModel Companion { get; }
     public HeroEquipmentModel HeroEquipment { get; }
@@ -43,5 +44,7 @@ public class GameSession
         HeroEquipment = new(heroEquipmentStates);
 
         HeroEquiped = new();
+
+        PlayerStat = new(PlayerGrowth, HeroEquiped, HeroEquipment);
     }
 }

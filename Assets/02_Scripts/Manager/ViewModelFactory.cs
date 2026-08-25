@@ -16,6 +16,13 @@
         return viewModel;
     }
 
+    public PlayerStatViewModel CreatePlayerStatViewModel()
+    {
+        PlayerStatModel model = _session.PlayerStat;
+        PlayerStatViewModel viewModel = new PlayerStatViewModel(model);
+        return viewModel;
+    }
+
     public CompanionInventoryViewModel CreateCompanionInventoryViewModel()
     {
         CompanionModel model = _session.Companion;
