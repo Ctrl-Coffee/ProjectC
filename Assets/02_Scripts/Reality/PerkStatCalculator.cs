@@ -47,7 +47,6 @@ public class PerkStatCalculator
         return WorkStatTable.Apply(statType, baseValue + flat, rate);
     }
 
-#if UNITY_EDITOR
     public bool TryGetModifier(WorkStatType statType, out float flat, out float additiveRate, out float compoundRate)
     {
         EnsureBuilt();
@@ -67,7 +66,6 @@ public class PerkStatCalculator
 
         return true;
     }
-#endif
 
     private void EnsureBuilt()
     {

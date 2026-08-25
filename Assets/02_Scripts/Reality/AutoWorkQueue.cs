@@ -294,8 +294,7 @@ public static class AutoWorkQueue
         return 0 <= index && index < Slots.Count;
     }
 
-#if UNITY_EDITOR
-    public static int DebugBaseSlotCount
+    public static int BaseSlotCount
     {
         get
         {
@@ -303,6 +302,7 @@ public static class AutoWorkQueue
         }
     }
 
+#if UNITY_EDITOR
     public static void DebugShiftSchedule(long shiftTicks)
     {
         List<AutoWorkSlot> slots = Slots;

@@ -69,8 +69,15 @@ public static class EnergyRecovery
         return intervalTicks > 0 ? intervalTicks : 1;
     }
 
-#if UNITY_EDITOR
-    public static float DebugBaseIntervalSeconds
+    public static float BaseRecoverSpeed
+    {
+        get
+        {
+            return BASE_RECOVER_SPEED;
+        }
+    }
+
+    public static float BaseIntervalSeconds
     {
         get
         {
@@ -78,7 +85,7 @@ public static class EnergyRecovery
         }
     }
 
-    public static float DebugRecoverIntervalSeconds
+    public static float RecoverIntervalSeconds
     {
         get
         {
@@ -86,7 +93,7 @@ public static class EnergyRecovery
         }
     }
 
-    public static float DebugRecoverSpeed
+    public static float RecoverSpeed
     {
         get
         {
@@ -94,6 +101,7 @@ public static class EnergyRecovery
         }
     }
 
+#if UNITY_EDITOR
     public static void DebugShiftLastRecoverTicks(long shiftTicks)
     {
         _lastEnergyRecoverTicks += shiftTicks;

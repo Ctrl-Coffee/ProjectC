@@ -82,15 +82,13 @@ public class CurrencyModel : ModelBase
         OnPropertyChanged(nameof(MaxEnergy));
     }
 
-#if UNITY_EDITOR
-    public long DebugBaseMaxEnergy
+    public long BaseMaxEnergy
     {
         get
         {
             return MAX_ENERGY;
         }
     }
-#endif
 
     public long DreamFragment
     {

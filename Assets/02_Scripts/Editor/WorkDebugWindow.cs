@@ -234,7 +234,7 @@ public class WorkDebugWindow : EditorWindow
 
         EditorGUILayout.Space();
 
-        DrawCompare("적용 슬롯 수", AutoWorkQueue.DebugBaseSlotCount, AutoWorkQueue.MaxSlotCount, "0");
+        DrawCompare("적용 슬롯 수", AutoWorkQueue.BaseSlotCount, AutoWorkQueue.MaxSlotCount, "0");
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("업무별 적용 결과", EditorStyles.boldLabel);
@@ -292,7 +292,7 @@ public class WorkDebugWindow : EditorWindow
         EditorGUILayout.LabelField("최대 에너지", EditorStyles.boldLabel);
 
         DrawModifier(WorkStatType.EnergyMax);
-        DrawCompare("최대치", currency.DebugBaseMaxEnergy, currency.MaxEnergy, "0");
+        DrawCompare("최대치", currency.BaseMaxEnergy, currency.MaxEnergy, "0");
         EditorGUILayout.LabelField("현재", $"{currency.Energy} / {currency.MaxEnergy}");
 
         EditorGUILayout.Space();
@@ -300,10 +300,10 @@ public class WorkDebugWindow : EditorWindow
 
         DrawModifier(WorkStatType.EnergyRecoverRate);
 
-        float baseInterval = EnergyRecovery.DebugBaseIntervalSeconds;
-        float appliedInterval = EnergyRecovery.DebugRecoverIntervalSeconds;
+        float baseInterval = EnergyRecovery.BaseIntervalSeconds;
+        float appliedInterval = EnergyRecovery.RecoverIntervalSeconds;
 
-        float speed = EnergyRecovery.DebugRecoverSpeed;
+        float speed = EnergyRecovery.RecoverSpeed;
 
         EditorGUILayout.LabelField("속도", $"x{speed:0.##}   ({FormatPercent(speed - 1f)})");
         DrawCompare("회복 주기(초)", baseInterval, appliedInterval, "0.##");
