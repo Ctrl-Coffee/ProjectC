@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -10,6 +11,10 @@ public class NetworkManager
     private string _token;
 
     public CompanionApi CompanionService { get; private set; }
+
+    private List<CompanionDto> _companions = new();
+
+    private AuthenticatedRequest _authenticatedRequest = new();
 
     public NetworkManager()
     {
@@ -48,18 +53,31 @@ public class NetworkManager
         {
             _userId = response.userId;
             _token = response.token;
+
+            _authenticatedRequest.userId = _userId;
+            _authenticatedRequest.token = _token;
         }
 
         return response;
     }
 
-    public UniTask<SaveCurrencyResponse> SaveCurrencyAsync(CurrencyDto currencyData)
+    public UniTask<SaveCurrencyResponse> SaveCurrencyAsync(CurrencyModel currencyModel)
     {
+        CurrencyDto currencyDto = new CurrencyDto()
+        {
+            money = currencyModel.Money,
+            dreamPoint = currencyModel.DreamPoint,
+            energy = currencyModel.Energy,
+            dreamFragment = currencyModel.DreamFragment,
+            dreamScroll = currencyModel.DreamScroll,
+            inspiration = currencyModel.Inspiration
+        };
+
         SaveCurrencyRequest request = new()
         {
             userId = _userId,
             token = _token,
-            currencyData = currencyData
+            currencyData = currencyDto
         };
 
         return PostAsync<SaveCurrencyResponse>("/api/currency/save", request);
@@ -67,13 +85,39 @@ public class NetworkManager
 
     public UniTask<LoadCurrencyResponse> LoadCurrencyAsync()
     {
-        AuthenticatedRequest request = new()
+        return PostAsync<LoadCurrencyResponse>("/api/currency/load", _authenticatedRequest);
+    }
+
+    public UniTask<SaveCompanionResponse> SaveCompanionAsync(CompanionModel companionModel)
+    {
+        _companions.Clear();
+
+        foreach (var companion in companionModel.Companions)
         {
-            userId = _userId,
-            token = _token
+            _companions.Add(new CompanionDto()
+            {
+                companionId = companion.Key,
+                level = companion.Value.Level
+            });
+        }
+
+        CompanionWrapperDto companionWrapperDto = new CompanionWrapperDto()
+        {
+            companions = _companions
         };
 
-        return PostAsync<LoadCurrencyResponse>("/api/currency/load", request);
+        SaveCompanionRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            CompanionData = companionWrapperDto
+        };
+        return PostAsync<SaveCompanionResponse>("/api/companion/save", request);
+    }
+
+    public UniTask<LoadCompanionResponse> LoadCompanionAsync()
+    {
+        return PostAsync<LoadCompanionResponse>("/api/companion/load", _authenticatedRequest);
     }
 
     private async UniTask<TResponse> PostAsync<TResponse>(string path, object requestData)

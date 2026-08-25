@@ -77,7 +77,9 @@ public class GameManager : SingletonBehaviour<GameManager>
                 onProgress?.Invoke(0.15f + progress * 0.65f); 
             });
 
-        _gameSession = new();
+        _gameSession = new(_networkManager);
+        await _gameSession.LoadAllData();
+
         _viewModelFactory = new(_gameSession, _dataTable);
 
         onProgress?.Invoke(0.85f);
@@ -91,9 +93,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         onProgress?.Invoke(1f);
 
         EnterReal();
-    }
-
-    #endregion
+    }                                                                     
+    #endregion                                                            
 
     public void EnterReal()
     {

@@ -1,16 +1,12 @@
 ﻿using System;
 
 [Serializable]
-public class SaveCurrencyResponse
+public class SaveCurrencyResponse : CommonResponse
 {
-    public int result;
-    public string message;
 }
 
 [Serializable]
-public class LoadCurrencyResponse
+public class LoadCurrencyResponse : CommonResponse
 {
-    public int result;
-    public string message;
     public CurrencyDto data;
 }

@@ -9,13 +9,13 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
 
     public Dictionary<string, CompanionState> Companions { get => _companions; }
 
-    public CompanionModel(IEnumerable<CompanionState> dbData)
+    public CompanionModel(List<CompanionDto> companions)
     {
-        foreach (CompanionState companionDBData in dbData)
+        foreach (CompanionDto companionDto in companions)
         {
-            CompanionState companion = new CompanionState(companionDBData);
+            CompanionState companState = new CompanionState(companionDto);
 
-            _companions.Add(companion.CompanionId, companion);
+            _companions.Add(companionDto.companionId, companState);
         }
     }
 

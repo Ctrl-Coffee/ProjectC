@@ -1,35 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 
 public class GameSession
 {
-    public CurrencyModel Currency { get; }
+    public CurrencyModel Currency { get; private set; }
     public PlayerGrowthModel PlayerGrowth { get; }
 
-    public CompanionModel Companion { get; }
-    public HeroEquipmentModel HeroEquipment { get; }
-    public HeroEquipedModel HeroEquiped { get; }
+    public CompanionModel Companion { get; private set; }
+    public HeroEquipmentModel HeroEquipment { get; private set; }
+    public HeroEquipedModel HeroEquiped { get; private set; }
 
 
     private NetworkManager _networkManager;
 
 
-    public GameSession()
+    public GameSession(NetworkManager networkManager)
     {
-        // 네트워크 매니저가 수신한 데이터를 받아 모델들을 생성.
-
-        // 임시
-        //Currency = new();
+        _networkManager = networkManager;
 
         PlayerGrowth = new(new());
-
-        List<CompanionState> companionStates = new()
-        {
-            new("111", 1), new("112", 2), new("113", 3)
-            , new("211", 2), new("212", 3), new("213", 4)
-            , new("311", 3)
-        };
-        Companion = new(companionStates);
-
 
         List<HeroEquipmentState> heroEquipmentStates = new()
         {
@@ -41,5 +30,17 @@ public class GameSession
         HeroEquipment = new(heroEquipmentStates);
 
         HeroEquiped = new();
+    }
+
+    public async UniTask LoadAllData()
+    {
+        var currencyData = await _networkManager.LoadCurrencyAsync();
+        Currency = new(currencyData.data);
+
+        var companionData = await _networkManager.LoadCompanionAsync();
+        CompanionWrapperDto wrapperDto =  companionData.data;
+        Companion = new(wrapperDto.companions);
+
+
     }
 }

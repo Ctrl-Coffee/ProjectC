@@ -56,14 +56,4 @@ public class RealHudUI : UIBase
     {
         GameManager.UI.OpenPerkInfoUI();
     }
-
-    private void OKAction()
-    {
-        Debug.Log("OKAction");
-    }
-
-    private void CancleAction()
-    {
-        Debug.Log("CancleAction");
-    }
 }

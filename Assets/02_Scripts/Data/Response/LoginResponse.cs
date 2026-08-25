@@ -1,10 +1,8 @@
 ﻿using System;
 
 [Serializable]
-public class LoginResponse
+public class LoginResponse : CommonResponse
 {
-    public int result;
     public long userId;
     public string token;
-    public string message;
 }
