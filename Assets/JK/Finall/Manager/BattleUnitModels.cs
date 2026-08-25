@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleUnitModels
 {
     private readonly PlayerBattleUnitModel[] _playerBattleUnitModels = new PlayerBattleUnitModel[BattleConstants.MAX_PLAYER_COUNT];
     private readonly EnemyBattleUnitModel[] _enemyBattleUnitModels = new EnemyBattleUnitModel[BattleConstants.MAX_ENEMY_COUNT];
+
+    private readonly List<string> _saveDataPartyCompanionIds;
 
     public IReadOnlyList<PlayerBattleUnitModel> PlayerBattleUnitModels
     {
@@ -36,131 +39,157 @@ public class BattleUnitModels
             _enemyBattleUnitModels[a] = new EnemyBattleUnitModel();
         }
 
-        BattleUnitData companionDataA = new BattleUnitData(1000f, 100f, 50f, 0.1f, 1.5f, 0.1f, 0.2f, "Skill_001", "Skill_001");
-        BattleUnitData companionDataB = new BattleUnitData(800f, 120f, 40f, 0.2f, 1.8f, 0.15f, 0.1f, "Skill_001", "Skill_001");
-        BattleUnitData companionDataC = new BattleUnitData(1200f, 80f, 70f, 0.05f, 1.3f, 0.05f, 0.3f, "Skill_001", "Skill_001");
+        BattleUnitData companionDataA = new BattleUnitData("Companion_001", 800f, 120f, 40f, 0.2f, 1.8f, 0.15f, 0.1f, "Skill_001", "Skill_002");
+        BattleUnitData companionDataB = new BattleUnitData("Companion_001", 1000f, 100f, 50f, 0.1f, 1.5f, 0.1f, 0.2f, "Skill_001", "Skill_002");
+        BattleUnitData companionDataC = new BattleUnitData("Companion_001", 1200f, 80f, 70f, 0.05f, 1.3f, 0.05f, 0.3f, "Skill_001", "Skill_002");
 
         _tempCompanionModel.Add("Companion_001", companionDataA);
         _tempCompanionModel.Add("Companion_002", companionDataB);
         _tempCompanionModel.Add("Companion_003", companionDataC);
+
+        //TODO 세이브 데이터에서 가져오기
+        _saveDataPartyCompanionIds = new List<string> { "Companion_001", "Companion_002" };
     }
 
-    public void SetCompanion(int position, string companionId)
+    public void InitalizeStage(string stageId)
     {
-        PlayerBattleUnitModel companionModel = _playerBattleUnitModels[position];
+        Debug.Log($"스테이지 초기화: {stageId}");
+        InitializeHeroModel();
+        InitializeCompanionModels();
+        InitializeEnemyModels(stageId);
+    }
 
+    private void InitializeHeroModel()
+    {
+        PlayerBattleUnitModel heroBattleUnitModel = _playerBattleUnitModels[BattleConstants.HERO_BATTLE_POSITIONS];
+
+        //TODO 캐릭터 모델 가져와서 만듣기
+        BattleUnitData battleUnitData = new("Hero_001", 10000000, 10000000, 10000000, 0.05f, 1.4f, 0.05f, 0.3f, "Skill_001", "Skill_002");
+
+        heroBattleUnitModel.Initialize(battleUnitData);
+    }
+
+    private void InitializeCompanionModels()
+    {
+        if (_saveDataPartyCompanionIds.Count != BattleConstants.MAX_COMPANION_COUNT)
+        {
+            Debug.LogError("동료 ID 목록 개수가 포메이션 슬롯 개수와 일치하지 않습니다.");
+            return;
+        }
+
+        for (int index = 0; index < _saveDataPartyCompanionIds.Count; index++)
+        {
+            int companionBattlePosition = BattleConstants.COMPANION_BATTLE_POSITIONS[index];
+
+            string companionId = _saveDataPartyCompanionIds[index];
+
+            if (string.IsNullOrWhiteSpace(companionId))
+            {
+                _playerBattleUnitModels[companionBattlePosition].Clear();
+                continue;
+            }
+
+            //TODO 동료 보유 모델에서 가져오기
+            BattleUnitData tempCompanionData = _tempCompanionModel[companionId];
+
+            //if (tempCompanionData == null)
+            //{
+            //    Debug.LogError($"'{companionId}' 보유 동료 모델을 찾을 수 없습니다.");
+
+            //    _playerBattleUnitModels[companionBattlePosition].Clear();
+            //    continue;
+            //}
+
+            //BattleUnitData battleUnitData = tempCompanionData;
+
+            _playerBattleUnitModels[companionBattlePosition].Initialize(tempCompanionData);
+        }
+    }
+
+    private void InitializeEnemyModels(string stageId)
+    {
+        // TODO: stageId를 기준으로 적 ID 목록 조회
+        List<string> enemyIds = new List<string>() { "enemy_ch1_001", "enemy_ch1_001", "enemy_ch1_001" };
+
+        if (enemyIds.Count != _enemyBattleUnitModels.Length)
+        {
+            Debug.LogError($"스테이지 적 수({enemyIds.Count})가 시스템 최대 적 수({_enemyBattleUnitModels.Length})와 일치하지 않습니다.");
+            return;
+        }
+
+        //TODO 데이터 다듬기
+        for (int index = 0; index < _enemyBattleUnitModels.Length; index++)
+        {
+            string enemyId = enemyIds[index];
+      
+            if (string.IsNullOrWhiteSpace(enemyId))
+            {
+                _enemyBattleUnitModels[index].Clear();
+                continue;
+            }
+
+            EnemyData enemyData = GameManager.DataTable.GetEnemyData(enemyId);
+           
+            if (enemyData == null)
+            {
+                Debug.LogError($"'{enemyId}' 적 데이터를 찾을 수 없습니다.");
+
+                _enemyBattleUnitModels[index].Clear();
+                continue;
+            }
+
+            BattleUnitData battleUnitData = new(enemyId, enemyData.BaseHP, enemyData.BaseATK, enemyData.BaseDEF, 0.05f, enemyData.AttackInterval, 0.05f, 0.3f, "Skill_001", "Skill_002");
+            _enemyBattleUnitModels[index].Initialize(battleUnitData);
+        }
+    }
+
+    public void SetCompanion(int battlePosition, string companionId)
+    {
         if (string.IsNullOrWhiteSpace(companionId))
         {
-            companionModel.Clear();
+            ClearCompanion(battlePosition);
             return;
         }
 
-        //TODO동료 모델 가져와서 만들기
-        if(!_tempCompanionModel.TryGetValue(companionId, out BattleUnitData battleUnitData))
+        //TODO 동료 모델 가져와서 만들기
+        if (!_tempCompanionModel.TryGetValue(companionId, out BattleUnitData battleUnitData))
         {
             Debug.LogError("배틀 데이터 없음");
-            companionModel.Clear();
+
+            ClearCompanion(battlePosition);
             return;
         }
 
-        companionModel.Initialize(battleUnitData);
+        _playerBattleUnitModels[battlePosition].Initialize(battleUnitData);
+        UpdateSaveDataPartyCompanionId(battlePosition, companionId);
     }
 
-    public void RemoveCompanion(int slotIndex)
+    public void RemoveCompanion(int battlePosition)
     {
-        PlayerBattleUnitModel companionModel = _playerBattleUnitModels[slotIndex];
+        ClearCompanion(battlePosition);
+    }
 
-        companionModel.Clear();
+    private void ClearCompanion(int battlePosition)
+    {
+        _playerBattleUnitModels[battlePosition].Clear();
+        UpdateSaveDataPartyCompanionId(battlePosition);
+    }
+
+    private void UpdateSaveDataPartyCompanionId(int battlePosition, string companionId = null)
+    {
+        int index = Array.IndexOf(BattleConstants.COMPANION_BATTLE_POSITIONS, battlePosition);
+
+        if (index < 0)
+        {
+            return;
+        }
+
+        _saveDataPartyCompanionIds[index] = companionId;
     }
 }
 
 
 
-
-    //public void InitializeField(IReadOnlyList<string> companionIds, IReadOnlyList<string> enemyIds)
-    //{
-    //    InitializeHeroModel();
-    //    InitializeCompanions(companionIds);
-    //    InitializeEnemies(enemyIds);
-    //}
-
-    //private void InitializeHeroModel()
-    //{
-    //    PlayerBattleUnitModel heroBattleUnitModel = _playerBattleUnitModels[MAIN_FORMATION_INDEX];
-
-    //    //캐릭터 모델 가져와서 만듣기
-    //    BattleUnitData battleUnitData = new BattleUnitData();
-
-    //    heroBattleUnitModel.Initialize(battleUnitData);
-    //}
-
-    //private void InitializeCompanions(IReadOnlyList<string> companionIds)
-    //{
-    //    if (companionIds == null)
-    //    {
-    //        Debug.LogError("동료 ID 목록이 null입니다.");
-    //        return;
-    //    }
-
-    //    if (companionIds.Count != COMPANION_FORMATION_INDICES.Length)
-    //    {
-    //        Debug.LogError("동료 ID 목록 개수가 포메이션 슬롯 개수와 일치하지 않습니다.");
-    //        return;
-    //    }
-
-    //    for (int index = 0; index < companionIds.Count; index++)
-    //    {
-    //        int formationSlotIndex = COMPANION_FORMATION_INDICES[index];
-
-    //        PlayerBattleUnitModel companionBattleUnitModel = _playerBattleUnitModels[formationSlotIndex];
-
-    //        string companionId = companionIds[index];
-
-    //        if (string.IsNullOrWhiteSpace(companionId))
-    //        {
-    //           // companionBattleUnitModel.Clear();
-    //            continue;
-    //        }
-
-    //        //동료 모델 가져와서 만듣기
-    //        BattleUnitData battleUnitData = new BattleUnitData();
-
-    //        companionBattleUnitModel.Initialize(battleUnitData);
-    //    }
-    //}
-
-    //private void InitializeEnemies(IReadOnlyList<string> enemyIds)
-    //{
-    //    if (enemyIds == null)
-    //    {
-    //        Debug.LogError("적 ID 목록이 null입니다.");
-    //        return;
-    //    }
-
-    //    if (enemyIds.Count != _enemyBattleUnitModels.Length)
-    //    {
-    //        Debug.LogError($"적 ID 목록 개수가 적 유닛 개수와 일치하지 않습니다. ");
-    //        return;
-    //    }
-
-    //    for (int index = 0; index < enemyIds.Count; index++)
-    //    {
-    //        EnemyBattleUnitModel enemyBattleUnitModel = _enemyBattleUnitModels[index];
-
-    //        string enemyId = enemyIds[index];
-
-    //        if (string.IsNullOrWhiteSpace(enemyId))
-    //        {
-    //            continue;
-    //        }
-
-
-    //        //적 데이터 가져와서 만듣기
-    //        BattleUnitData battleUnitData = new BattleUnitData();
-
-    //        enemyBattleUnitModel.Initialize(battleUnitData);
-    //    }
-    //}
 
     //public BaseBattleUnitView FindEnemyTarget(int slotIndex)
     //{

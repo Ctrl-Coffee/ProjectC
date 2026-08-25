@@ -21,6 +21,24 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+
+    public void StartBattle()
+    {
+        //_battleField.InitializeField(mainId, companionIds, enemyIds);
+        _battleRoot.StartBattle();
+    }
+
+    public void EndBattle()
+    {
+        //_battleField.InitializeField(mainId, companionIds, enemyIds);
+        //_battleField.StartBattle();
+    }
+
+    public void RequestInitalizeStage(string stageId)
+    {
+        _battleUnitModels.InitalizeStage(stageId);
+    }
+
     public bool RequestSetCompanionToPosition(int position, string companionId)
     {
         if (!_companionFormation.SetCompanionToPosition(position, companionId))
@@ -87,7 +105,6 @@ public class BattleManager : MonoBehaviour
 
     public void RequestPlayerUseSkill(int battlePosition, string skillId, SkillExecutionData skillExecutionData)
     {
-        Debug.Log($"{battlePosition} {skillId} 스킬사용");
         //BaseBattleUnitView target = _battleField.FindEnemyTarget(attackerSlotIndex);
 
         //ExecuteAttack(target, attackStats);
@@ -95,7 +112,6 @@ public class BattleManager : MonoBehaviour
 
     public void RequestEnemyUseSkill(int battlePosition, string skillId, SkillExecutionData skillExecutionData)
     {
-        Debug.Log($"{battlePosition} {skillId} 스킬사용");
         //BaseBattleUnitView target = _battleField.FindEnemyTarget(attackerSlotIndex);
 
         //ExecuteAttack(target, attackStats);
@@ -117,11 +133,6 @@ public class BattleManager : MonoBehaviour
         _battleRoot.InitializeBattleUnits(_battleUnitModels.PlayerBattleUnitModels, _battleUnitModels.EnemyBattleUnitModels);
     }
 }
-    //public void StartBattle(string mainId, IReadOnlyList<string> companionIds, IReadOnlyList<string> enemyIds)
-    //{
-    //    //_battleField.InitializeField(mainId, companionIds, enemyIds);
-    //    //_battleField.StartBattle();
-    //}
 
 
 
