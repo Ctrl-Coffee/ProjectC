@@ -38,12 +38,12 @@ public class GachaViewModel : ViewModelBase<GachaModel>
     private void Refresh()
     {
         CurrentType = _model.CurrentType;
-        SingleCost = GameManager.Gacha.GetDrawCost(1);
-        MultiCost = GameManager.Gacha.GetDrawCost(GachaSystem.MULTI_DRAW_COUNT);
+        SingleCost = GachaUtil.GetDrawCost(1);
+        MultiCost = GachaUtil.GetDrawCost(GachaUtil.MULTI_DRAW_COUNT);
         SingleDrawCount = 1;
-        MultiDrawCount = GachaSystem.MULTI_DRAW_COUNT;
-        CanDrawSingle = GameManager.Gacha.CheckCanDraw(1);
-        CanDrawMulti = GameManager.Gacha.CheckCanDraw(GachaSystem.MULTI_DRAW_COUNT);
+        MultiDrawCount = GachaUtil.MULTI_DRAW_COUNT;
+        CanDrawSingle = GachaUtil.CheckCanDraw(1);
+        CanDrawMulti = GachaUtil.CheckCanDraw(GachaUtil.MULTI_DRAW_COUNT);
 
         switch (_model.CurrentType)
         {
@@ -68,13 +68,13 @@ public class GachaViewModel : ViewModelBase<GachaModel>
 
     public IReadOnlyList<GachaResultData> Draw(int count)
     {
-        if (GameManager.Gacha.TryPayDrawCost(count) == false)
+        if (GachaUtil.TryPayDrawCost(count) == false)
         {
             Logger.Log("몽상의 스크롤이 부족합니다");
             return null;
         }
 
-        IReadOnlyList<string> drawnIds = GameManager.Gacha.Draw(_model.CurrentType, count);
+        IReadOnlyList<string> drawnIds = GachaUtil.Draw(_model.CurrentType, count);
 
         if (drawnIds == null) return null;
 
@@ -111,7 +111,7 @@ public class GachaViewModel : ViewModelBase<GachaModel>
             return null;
         }
 
-        int reward = GameManager.Gacha.GetDuplicateReward(GachaType.Companion, companionData.Grade);
+        int reward = GachaUtil.GetDuplicateReward(GachaType.Companion, companionData.Grade);
         GameManager.Session.Currency.AddDreamFragment(reward);
 
         return new GachaResultData(companionId, GachaType.Companion, true, reward);
@@ -135,7 +135,7 @@ public class GachaViewModel : ViewModelBase<GachaModel>
             return null;
         }
 
-        int reward = GameManager.Gacha.GetDuplicateReward(GachaType.Equipment, (int)equipmentData.EquipmentGrade);
+        int reward = GachaUtil.GetDuplicateReward(GachaType.Equipment, (int)equipmentData.EquipmentGrade);
         GameManager.Session.Currency.AddDreamFragment(reward);
 
         return new GachaResultData(equipmentId, GachaType.Equipment, true, reward);

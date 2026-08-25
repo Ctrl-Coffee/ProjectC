@@ -14,7 +14,6 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public static GameSession Session { get { return Instance._gameSession; } }
     public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
-    public static GachaSystem Gacha { get { return Instance._gachaSystem; } }
     public static SoundManager Sound { get { return Instance._soundManager; } }
 
 
@@ -27,7 +26,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     private TimeManager _timeManager = new();
     private UIManager _uiManager = new();
     private GrowthSystem _growthSystem = new();
-    private GachaSystem _gachaSystem = new();
     private SoundManager _soundManager = new();
     private PerkManager _perkManager = new();
 

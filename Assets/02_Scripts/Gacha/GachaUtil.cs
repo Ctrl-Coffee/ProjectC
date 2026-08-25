@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class GachaSystem
+public static class GachaUtil
 {
     //TODO 희준 : 기획 확정후 데이터 표로 이동
     private const long SINGLE_COST = 30;
     public const int MULTI_DRAW_COUNT = 5;
 
-    public long GetDrawCost(int count)
+    public static long GetDrawCost(int count)
     {
         return SINGLE_COST * count;
     }
-    public bool CheckCanDraw(int count)
+    public static bool CheckCanDraw(int count)
     {
         if (count <= 0)
         {
@@ -21,7 +21,7 @@ public class GachaSystem
         return GameManager.Session.Currency.DreamScroll >= GetDrawCost(count);
     }
 
-    public bool TryPayDrawCost(int count)
+    public static bool TryPayDrawCost(int count)
     {
         if (CheckCanDraw(count) == false)
         {
@@ -31,7 +31,7 @@ public class GachaSystem
         return GameManager.Session.Currency.TrySpendDreamScroll(GetDrawCost(count));
     }
 
-    public IReadOnlyList<string> Draw(GachaType gachaType, int count)
+    public static IReadOnlyList<string> Draw(GachaType gachaType, int count)
     {
         IReadOnlyList<GachaProbabilityData> probabilities = GameManager.DataTable.GetGachaProbabilityData(gachaType);
 
@@ -55,7 +55,7 @@ public class GachaSystem
         return results;
     }
 
-    private GachaProbabilityData DrawGrade(IReadOnlyList<GachaProbabilityData> probabilities)
+    private static GachaProbabilityData DrawGrade(IReadOnlyList<GachaProbabilityData> probabilities)
     {
         int totalWeight = 0;
 
@@ -86,7 +86,7 @@ public class GachaSystem
         return probabilities[probabilities.Count - 1];
     }
 
-    private IReadOnlyList<string> GetCandidateIds(GachaType gachaType, int grade)
+    private static IReadOnlyList<string> GetCandidateIds(GachaType gachaType, int grade)
     {
         switch (gachaType)
         {
@@ -128,7 +128,7 @@ public class GachaSystem
         }
     }
 
-    public int GetDuplicateReward(GachaType gachaType, int grade)
+    public static int GetDuplicateReward(GachaType gachaType, int grade)
     {
         IReadOnlyList<GachaProbabilityData> probabilities = GameManager.DataTable.GetGachaProbabilityData(gachaType);
 
