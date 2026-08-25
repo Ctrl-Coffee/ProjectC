@@ -1752,7 +1752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57cfbb32f93203468c58567d42ec8a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoginUI
-  _isPlayAnimation: 1
+  _isPlayAnimation: 0
   _panel: {fileID: 6153690971531187803}
   _titleText: {fileID: 3073779053458621709}
   _mailInputField: {fileID: 8149276350020375529}

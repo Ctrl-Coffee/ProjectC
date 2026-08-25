@@ -67,14 +67,11 @@ public class LoginUI : UIBase
                 return;
             }
 
+            await GameManager.Resource.LoadContentAsync(AddressablePath.Label.LOADDING);
             LoadingUI loadingUI = await GameManager.UI.OpenLoading();
-
-            await GameManager.Instance.InitializeAfterLoginAsync(loadingUI.SetProgress);
-
             CloseUI();
 
-            await loadingUI.WaitUntilFilledAsync();
-            loadingUI.CloseUI();
+            await GameManager.Instance.InitializeAfterLoginAsync(loadingUI.SetProgress);
         }
         catch (Exception)
         {
@@ -94,7 +91,7 @@ public class LoginUI : UIBase
             if (response.result != 0)
             {
                 Logger.LogWarning($"SignUp Failed: {response.message}");
-                ConfirmData data = GameManager.DataTable.GetConfirmData("SignUpFail");
+                ConfirmData data = GameManager.DataTable.GetConfirmData(ConfirmDataKey.SIGNUP_FAIL);
                 GameManager.UI.OpenConfirmUI(data);
                 _loginAndSignupButton.SetInteractable(true);
                 return;
@@ -104,7 +101,7 @@ public class LoginUI : UIBase
         }
         catch (Exception)
         {
-            ConfirmData data = GameManager.DataTable.GetConfirmData("SignUpFail");
+            ConfirmData data = GameManager.DataTable.GetConfirmData(ConfirmDataKey.SIGNUP_FAIL);
             GameManager.UI.OpenConfirmUI(data);
             _loginAndSignupButton.SetInteractable(true);
         }
@@ -142,7 +139,12 @@ public class LoginUI : UIBase
 
     private void ShowLoginFail()
     {
-        ConfirmData data = GameManager.DataTable.GetConfirmData("LoginFail");
+        ConfirmData data = GameManager.DataTable.GetConfirmData(ConfirmDataKey.LOGIN_FAIL);
         GameManager.UI.OpenConfirmUI(data);
+    }
+
+    private void GameLoading()
+    {
+
     }
 }

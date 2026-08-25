@@ -30,6 +30,11 @@ public class LoadingUI : UIBase
     public void SetProgress(float progress)
     {
         _progress = Mathf.Clamp01(progress);
+
+        if(_progress >= 1f)
+        {
+            CloseUI();
+        }
     }
 
     public async UniTask WaitUntilFilledAsync()

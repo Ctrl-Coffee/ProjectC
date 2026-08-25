@@ -38,8 +38,6 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     #endregion
 
-    private bool _initComplete = false;
-
     private LobbyController _realLobbyController;
     private LobbyController _dreamLobbyController;
 
@@ -74,10 +72,9 @@ public class GameManager : SingletonBehaviour<GameManager>
         onProgress?.Invoke(0.15f);
 
         await _resourceManager.LoadAllLabelAssetAsync(
-            progress =>
-            {
-                onProgress?.Invoke(
-                    0.15f + progress * 0.65f);
+            progress => 
+            { 
+                onProgress?.Invoke(0.15f + progress * 0.65f); 
             });
 
         _gameSession = new();
@@ -86,52 +83,14 @@ public class GameManager : SingletonBehaviour<GameManager>
         onProgress?.Invoke(0.85f);
 
         Transform poolRoot = Utils.CreateEmptyGameObject("PoolRoot",transform).transform;
-
         await _poolManager.InitAsync(poolRoot);
-
-        _initComplete = true;
 
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
-
-        EnterReal();
 
         onProgress?.Invoke(1f);
-    }
-
-    private async UniTask InitializeAsync()
-    {
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.LOADDING);
-
-        await _uiManager.Init();
-        LoadingUI loadingUI = await UI.OpenLoading();
-
-
-        // TODO: 네트워크로 부터 데이터를 받은 뒤 생성 - 비동기 await
-
-
-        // TODO: 네트워크 매니저로 부터 데이터 요청 awit, 이 때 네트워크 매니저 주입
-        _gameSession = new();
-
-        // TODO 네트워크 매니저의 서비스 로직들 초기화
-
-        _viewModelFactory = new(Session, DataTable);
-
-        await _resourceManager.LoadAllLabelAssetAsync(loadingUI.SetProgress);
-        await loadingUI.WaitUntilFilledAsync();
-
-        _soundManager.Init(this.gameObject);
-
-        var poolRoot = Utils.CreateEmptyGameObject("PoolRoot", this.gameObject.transform).transform;
-        await _poolManager.InitAsync(poolRoot);
-
-        _initComplete = true;
-
-        AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
-        EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
         EnterReal();
-        loadingUI.CloseUI();
     }
 
     #endregion

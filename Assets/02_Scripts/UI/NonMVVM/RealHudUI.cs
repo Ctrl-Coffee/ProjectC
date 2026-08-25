@@ -22,7 +22,6 @@ public class RealHudUI : UIBase
 
         _goDreamBtn.BindButtonEvent(OnChangeSceenToDream);
 
-        _coffeeBtn.BindButtonEvent(TEST);
         _computerBtn.BindButtonEvent(OnOpenWorkInfoUI);
         _perkBtn.BindButtonEvent(OnOpenPerkInfoUI);
     }
@@ -56,16 +55,6 @@ public class RealHudUI : UIBase
     private void OnOpenPerkInfoUI()
     {
         GameManager.UI.OpenPerkInfoUI();
-    }
-
-    private void TEST()
-    {
-        var confirmData = GameManager.DataTable.GetConfirmData(ConfirmDataKey.TEST_CONFIRM);
-        var buttonAction = new ConfirmButtonAction();
-        buttonAction.OnClickOKButton = OKAction;
-        buttonAction.OnClickCancelButton = CancleAction;
-
-        GameManager.UI.OpenConfirmUI(confirmData, buttonAction);
     }
 
     private void OKAction()
