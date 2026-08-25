@@ -87,7 +87,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -105,7 +105,7 @@ Animator:
   m_GameObject: {fileID: 1026421069465089014}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca0da643bdcdeb247b5b00a3b5151c9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -161,19 +161,37 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026421069465089014}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 0}
-  m_BlackboardVariableOverridesList: []
-  m_OriginalGraph: {fileID: 0}
+  m_Graph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 2353026919307935835
+  - rid: 2353026922625630289
+  m_OriginalGraph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2353026919307935835
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 1026421069465089014}
+    - rid: 2353026922625630289
+      type: {class: 'BlackboardVariable`1[[BattleUnitViewBase, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10742994660689346249
+          m_Value1: 12409263643547604750
+        Name: BattleUnitView
+        m_Value: {fileID: 8642476220201455171}
 --- !u!114 &8642476220201455171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBattleUnitView
   _behaviorGraphAgent: {fileID: 9207762492915772845}
+  HP: 0
 --- !u!1 &2978656370913483907
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +343,7 @@ Animator:
   m_GameObject: {fileID: 4455275286843988099}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca0da643bdcdeb247b5b00a3b5151c9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -380,19 +399,37 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4455275286843988099}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 0}
-  m_BlackboardVariableOverridesList: []
+  m_Graph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 2353026919307935832
+  - rid: 2353026922625630286
   m_OriginalGraph: {fileID: 0}
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2353026919307935832
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 4455275286843988099}
+    - rid: 2353026922625630286
+      type: {class: 'BlackboardVariable`1[[BattleUnitViewBase, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10742994660689346249
+          m_Value1: 12409263643547604750
+        Name: BattleUnitView
+        m_Value: {fileID: 5483188565245649147}
 --- !u!114 &5483188565245649147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompanionBattleUnitView
   _behaviorGraphAgent: {fileID: 3114989240083599018}
+  HP: 0
 --- !u!1 &5415995287497116206
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +531,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -511,7 +549,7 @@ Animator:
   m_GameObject: {fileID: 5415995287497116206}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca0da643bdcdeb247b5b00a3b5151c9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -567,19 +605,37 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5415995287497116206}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 0}
-  m_BlackboardVariableOverridesList: []
-  m_OriginalGraph: {fileID: 0}
+  m_Graph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 2353026919307935836
+  - rid: 2353026922625630288
+  m_OriginalGraph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2353026919307935836
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 5415995287497116206}
+    - rid: 2353026922625630288
+      type: {class: 'BlackboardVariable`1[[BattleUnitViewBase, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10742994660689346249
+          m_Value1: 12409263643547604750
+        Name: BattleUnitView
+        m_Value: {fileID: 1971904667341931504}
 --- !u!114 &1971904667341931504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBattleUnitView
   _behaviorGraphAgent: {fileID: 6056849095606025116}
+  HP: 0
 --- !u!1 &5440297698249652870
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +755,7 @@ Animator:
   m_GameObject: {fileID: 5440297698249652870}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca0da643bdcdeb247b5b00a3b5151c9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -754,19 +811,37 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5440297698249652870}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 0}
-  m_BlackboardVariableOverridesList: []
+  m_Graph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 2353026919307935833
+  - rid: 2353026922625630285
   m_OriginalGraph: {fileID: 0}
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2353026919307935833
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 5440297698249652870}
+    - rid: 2353026922625630285
+      type: {class: 'BlackboardVariable`1[[BattleUnitViewBase, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10742994660689346249
+          m_Value1: 12409263643547604750
+        Name: BattleUnitView
+        m_Value: {fileID: 4853505784912346247}
 --- !u!114 &4853505784912346247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,6 +855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeroBattleUnitView
   _behaviorGraphAgent: {fileID: 1362051520634854443}
+  HP: 0
 --- !u!1 &6006179756395191690
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +977,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -919,7 +995,7 @@ Animator:
   m_GameObject: {fileID: 6307192331399447172}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca0da643bdcdeb247b5b00a3b5151c9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -975,19 +1051,37 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6307192331399447172}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 0}
-  m_BlackboardVariableOverridesList: []
+  m_Graph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 2353026919307935837
+  - rid: 2353026922625630287
   m_OriginalGraph: {fileID: 0}
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2353026919307935837
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 6307192331399447172}
+    - rid: 2353026922625630287
+      type: {class: 'BlackboardVariable`1[[BattleUnitViewBase, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10742994660689346249
+          m_Value1: 12409263643547604750
+        Name: BattleUnitView
+        m_Value: {fileID: 8096782783841547075}
 --- !u!114 &8096782783841547075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,6 +1095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBattleUnitView
   _behaviorGraphAgent: {fileID: 6902389160075155463}
+  HP: 0
 --- !u!1 &7311577766825784402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,7 +1290,7 @@ Animator:
   m_GameObject: {fileID: 9129107897744784993}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca0da643bdcdeb247b5b00a3b5151c9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1251,19 +1346,37 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9129107897744784993}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 0}
-  m_BlackboardVariableOverridesList: []
+  m_Graph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 2353026919307935834
+  - rid: 2353026922625630284
   m_OriginalGraph: {fileID: 0}
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2353026919307935834
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 9129107897744784993}
+    - rid: 2353026922625630284
+      type: {class: 'BlackboardVariable`1[[BattleUnitViewBase, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10742994660689346249
+          m_Value1: 12409263643547604750
+        Name: BattleUnitView
+        m_Value: {fileID: 5335911453196091293}
 --- !u!114 &5335911453196091293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,6 +1390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompanionBattleUnitView
   _behaviorGraphAgent: {fileID: 8641224135295079621}
+  HP: 0
 --- !u!1 &9178942897646606341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,7 +1418,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6347449209006734491}
@@ -1358,13 +1472,13 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 5262389078627350799, guid: c1980ef4d71d5a844b952b1bd4b7ba6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1080, y: 1920}
+  m_Size: {x: 9.41, y: 16.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0

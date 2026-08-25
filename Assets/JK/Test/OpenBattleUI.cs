@@ -23,6 +23,7 @@ public class OpenBattleUI : MonoBehaviour
 
     private void OpenBattle()
     {
+        BattleManager.Instance.RequestInitalizeStage("stage1");
         _battleUI.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }

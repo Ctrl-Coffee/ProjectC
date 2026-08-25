@@ -15,6 +15,32 @@ public class BattleRoot : MonoBehaviour
         UnityUtility.ValidateArrayReference(_enemyBattleUnitViews, nameof(_enemyBattleUnitViews));
     }
 
+    public void StartBattle()
+    {
+        foreach (var a in _playerBattleUnitViews)
+        {
+            a.StartBattle();
+        }
+
+        foreach (var a in _enemyBattleUnitViews)
+        {
+            a.StartBattle();
+        }
+    }
+
+    public void EndBattle()
+    {
+        foreach (var a in _playerBattleUnitViews)
+        {
+            a.EndBattle();
+        }
+
+        foreach (var a in _enemyBattleUnitViews)
+        {
+            a.EndBattle();
+        }
+    }
+
     public void InitializeBattleUnits(IReadOnlyList<PlayerBattleUnitModel> playerBattleUnitModels, IReadOnlyList<EnemyBattleUnitModel> enemyBattleUnitModels)
     {
         InitializeBattleUnitViews(playerBattleUnitModels, _playerBattleUnitViews);
@@ -53,18 +79,6 @@ public class BattleRoot : MonoBehaviour
         }
     }
 
-    //public void StartBattle()
-    //{
-    //    foreach (var a in _playerBattleUnitViews)
-    //    {
-    //        a.StartBattle();
-    //    }
-
-    //    foreach (var a in _enemyBattleUnitViews)
-    //    {
-    //        a.StartBattle();
-    //    }
-    //}
 
     //public void InitializeField(string mainId, IReadOnlyList<string> companionIds, IReadOnlyList<string> enemyIds)
     //{

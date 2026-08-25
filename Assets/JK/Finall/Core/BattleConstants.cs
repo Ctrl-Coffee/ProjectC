@@ -7,5 +7,6 @@
 
     public const int MAX_COMPANION_COUNT = 2;
 
+    public const int HERO_BATTLE_POSITIONS = 1;
     public static readonly int[] COMPANION_BATTLE_POSITIONS = { 0, 2 };
 }
