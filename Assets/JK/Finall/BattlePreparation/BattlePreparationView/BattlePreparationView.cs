@@ -295,6 +295,7 @@ public class BattlePreparationView : MonoBehaviour
     //TODO
     private void HandleStartBattleButtonClicked()
     {
+        BattleManager.Instance.StartBattle();
         gameObject.SetActive(false);
     }
 }

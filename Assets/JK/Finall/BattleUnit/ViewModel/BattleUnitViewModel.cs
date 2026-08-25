@@ -8,6 +8,11 @@ public class BattleUnitViewModel
 
     public event Action<string> PropertyChanged;
 
+    public string AnimKey
+    {
+        get { return _battleUnitModelBase.AnimKey; }
+    }
+
     public float Hp
     {
         get { return _battleUnitModelBase.Hp; }
@@ -18,9 +23,9 @@ public class BattleUnitViewModel
         get { return _battleUnitModelBase.IsBasicAttackSkillReady; }
     }
 
-    public bool IsActiveSkillReady
+    public bool IsSignatureSkillReady
     {
-        get { return _battleUnitModelBase.IsActiveSkillReady; }
+        get { return _battleUnitModelBase.IsSignatureSkillReady; }
     }
 
     public bool IsDead
@@ -51,14 +56,19 @@ public class BattleUnitViewModel
         _battleUnitModelBase = null;
     }
 
+    public void StartBattle()
+    {
+        _battleUnitModelBase.StartBattle();
+    }
+
     public void RequestUseBasicAttackSkill(int battlePosition)
     {
         _battleUnitModelBase.UseBasicAttackSkill(battlePosition);
     }
 
-    public void RequestUseActiveSkill(int battlePosition)
+    public void RequestUseSignatureSkill(int battlePosition)
     {
-        _battleUnitModelBase.UseActiveSkill(battlePosition);
+        _battleUnitModelBase.UseSignatureSkill(battlePosition);
     }
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)

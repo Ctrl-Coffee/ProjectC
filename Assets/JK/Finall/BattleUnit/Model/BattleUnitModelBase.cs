@@ -2,6 +2,9 @@
 
 public abstract class BattleUnitModelBase : ModelBase
 {
+    private string _unitId;
+    private string _animKey;
+
     protected float _maxHp;
     protected float _hp;
     protected float _attack;
@@ -13,18 +16,23 @@ public abstract class BattleUnitModelBase : ModelBase
     private float _cooldownReduction;
 
     private string _basicAttackSkillId;
-    private string _activeSkillId;
+    private string _signatureSkillId;
 
     private float _baseBasicAttackSkillCooldown;
-    private float _baseActiveSkillCooldown;
+    private float _baseSignatureSkillCooldown;
 
     private float _calculatedBasicAttackSkillCooldown;
-    private float _calculatedActiveSkillCooldown;
+    private float _calculatedsignatureSkillCooldown;
 
     private bool _isBasicAttackSkillReady;
-    private bool _isActiveSkillReady;
+    private bool _isSignatureSkillReady;
 
     private bool _isDead;
+
+    public string AnimKey
+    {
+        get { return _animKey; }
+    }
 
     public float Hp
     {
@@ -58,14 +66,14 @@ public abstract class BattleUnitModelBase : ModelBase
         }
     }
 
-    public bool IsActiveSkillReady
+    public bool IsSignatureSkillReady
     {
-        get { return _isActiveSkillReady; }
+        get { return _isSignatureSkillReady; }
         private set
         {
-            if (_isActiveSkillReady == value) { return; }
+            if (_isSignatureSkillReady == value) { return; }
 
-            _isActiveSkillReady = value;
+            _isSignatureSkillReady = value;
             OnPropertyChanged();
         }
     }
@@ -102,29 +110,31 @@ public abstract class BattleUnitModelBase : ModelBase
             if (_cooldownReduction == value) { return; }
 
             _cooldownReduction = value;
-            UpdateActiveSkillCooldown();
+            UpdateSignatureSkillCooldown();
         }
     }
 
     public void Initialize(BattleUnitData battleUnitData)
     {
-        InitializeStats(battleUnitData);
-        InitializeSkills(battleUnitData);
+        InitializeIdentity(battleUnitData);
+        InitializeUnitStats(battleUnitData);
+        InitializeUnitSkills(battleUnitData);
         InitializeSkillCooldown();
         InitializeOnce();
     }
 
     public override void InitializeOnce()
     {
+        OnPropertyChanged(nameof(AnimKey));
         OnPropertyChanged(nameof(Hp));
         OnPropertyChanged(nameof(IsBasicAttackSkillReady));
-        OnPropertyChanged(nameof(IsActiveSkillReady));
+        OnPropertyChanged(nameof(IsSignatureSkillReady));
     }
 
-    public void OnBattleStarted()
+    public void StartBattle()
     {
         BasicAttackSkillCooldown();
-        ActiveSkillCooldown();
+        SignatureSkillCooldown();
     }
 
     public void UseBasicAttackSkill(int battlePosition)
@@ -141,18 +151,18 @@ public abstract class BattleUnitModelBase : ModelBase
         BasicAttackSkillCooldown();
     }
 
-    public void UseActiveSkill(int battlePosition)
+    public void UseSignatureSkill(int battlePosition)
     {
-        if (!IsActiveSkillReady)
+        if (!IsSignatureSkillReady)
         {
             return;
         }
 
-        IsActiveSkillReady = false;
+        IsSignatureSkillReady = false;
 
-        UseSkill(battlePosition, _activeSkillId);
+        UseSkill(battlePosition, _signatureSkillId);
 
-        ActiveSkillCooldown();
+        SignatureSkillCooldown();
     }
 
     public void TakeDamage(float damage)
@@ -165,7 +175,13 @@ public abstract class BattleUnitModelBase : ModelBase
         Hp += amount;
     }
 
-    private void InitializeStats(BattleUnitData battleUnitData)
+    private void InitializeIdentity(BattleUnitData battleUnitData)
+    {
+        _unitId = battleUnitData.UnitId;
+        _animKey = battleUnitData.Key;
+    }
+
+    private void InitializeUnitStats(BattleUnitData battleUnitData)
     {
         _maxHp = battleUnitData.MaxHp;
         _hp = _maxHp;
@@ -177,16 +193,16 @@ public abstract class BattleUnitModelBase : ModelBase
         _cooldownReduction = battleUnitData.CooldownReduction;
     }
 
-    private void InitializeSkills(BattleUnitData battleUnitData)
+    private void InitializeUnitSkills(BattleUnitData battleUnitData)
     {
         _basicAttackSkillId = battleUnitData.BasicAttackSkillId;
-        _activeSkillId = battleUnitData.ActiveSkillId;
+        _signatureSkillId = battleUnitData.SignatureSkillId;
     }
 
     private void InitializeSkillCooldown()
     {
         SkillData basicAttackSkillData = GameManager.DataTable.GetSkillData(_basicAttackSkillId);
-        SkillData activeSkillData = GameManager.DataTable.GetSkillData(_activeSkillId);
+        SkillData signatureSkillData = GameManager.DataTable.GetSkillData(_signatureSkillId);
 
         if (basicAttackSkillData == null)
         {
@@ -194,20 +210,20 @@ public abstract class BattleUnitModelBase : ModelBase
             return;
         }
 
-        if (activeSkillData == null)
+        if (signatureSkillData == null)
         {
-            Debug.LogError($"'{_activeSkillId}' 스킬 데이터를 찾을 수 없습니다.");
+            Debug.LogError($"'{_signatureSkillId}' 스킬 데이터를 찾을 수 없습니다.");
             return;
         }
 
         _baseBasicAttackSkillCooldown = basicAttackSkillData.CoolTime;
-        _baseActiveSkillCooldown = activeSkillData.CoolTime;
+        _baseSignatureSkillCooldown = signatureSkillData.CoolTime;
 
         UpdateBasicAttackSkillCooldown();
-        UpdateActiveSkillCooldown();
+        UpdateSignatureSkillCooldown();
 
         _isBasicAttackSkillReady = _calculatedBasicAttackSkillCooldown <= 0f;
-        _isActiveSkillReady = _calculatedActiveSkillCooldown <= 0f;
+        _isSignatureSkillReady = _calculatedsignatureSkillCooldown <= 0f;
     }
 
     public void Clear()
@@ -218,12 +234,12 @@ public abstract class BattleUnitModelBase : ModelBase
 
     private void BasicAttackSkillCooldown()
     {
-        TimeManagerTemp.Instance.RequestStartCooldown(_basicAttackSkillId, _calculatedBasicAttackSkillCooldown, OnBasicAttackSkillCooldownCompleted);
+        TimeManagerTemp.Instance.RequestStartCooldown($"{_unitId}_{_basicAttackSkillId}", _calculatedBasicAttackSkillCooldown, OnBasicAttackSkillCooldownCompleted);
     }
 
-    private void ActiveSkillCooldown()
+    private void SignatureSkillCooldown()
     {
-        TimeManagerTemp.Instance.RequestStartCooldown(_activeSkillId, _calculatedActiveSkillCooldown, OnActiveSkillCooldownCompleted);
+        TimeManagerTemp.Instance.RequestStartCooldown($"{_unitId}_{_signatureSkillId}", _calculatedsignatureSkillCooldown, OnSignatureSkillCooldownCompleted);
     }
 
     private void OnBasicAttackSkillCooldownCompleted()
@@ -231,9 +247,9 @@ public abstract class BattleUnitModelBase : ModelBase
         IsBasicAttackSkillReady = true;
     }
 
-    private void OnActiveSkillCooldownCompleted()
+    private void OnSignatureSkillCooldownCompleted()
     {
-        IsActiveSkillReady = true;
+        IsSignatureSkillReady = true;
     }
 
     private void UpdateBasicAttackSkillCooldown()
@@ -241,9 +257,9 @@ public abstract class BattleUnitModelBase : ModelBase
         _calculatedBasicAttackSkillCooldown = BattleUtility.CalculateBasicAttackSkillCooldown(_baseBasicAttackSkillCooldown, _attackSpeed);
     }
 
-    private void UpdateActiveSkillCooldown()
+    private void UpdateSignatureSkillCooldown()
     {
-        _calculatedActiveSkillCooldown = BattleUtility.CalculateActiveSkillCooldown(_baseActiveSkillCooldown, _cooldownReduction);
+        _calculatedsignatureSkillCooldown = BattleUtility.CalculateSignatureSkillCooldown(_baseSignatureSkillCooldown, _cooldownReduction);
     }
     
     protected abstract void UseSkill(int battlePosition, string skillId);
