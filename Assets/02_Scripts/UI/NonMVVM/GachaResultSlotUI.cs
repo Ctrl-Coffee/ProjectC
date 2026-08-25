@@ -30,7 +30,7 @@ public class GachaResultSlotUI : UIBase
                 break;
 
             default:
-                Debug.LogError($"지원하지 않는 가챠 종류입니다. type : {result.GachaType}");
+                Logger.LogError($"지원하지 않는 가챠 종류입니다. type : {result.GachaType}");
                 break;
         }
 
@@ -51,7 +51,7 @@ public class GachaResultSlotUI : UIBase
 
         if (companionData == null)
         {
-            Debug.LogError($"동료 데이터를 찾을 수 없습니다. Id : {companionId}");
+            Logger.LogError($"동료 데이터를 찾을 수 없습니다. Id : {companionId}");
             return false;
         }
 
@@ -70,7 +70,7 @@ public class GachaResultSlotUI : UIBase
 
         if (equipmentData == null)
         {
-            Debug.LogError($"장비 데이터를 찾을 수 없습니다. Id : {equipmentId}");
+            Logger.LogError($"장비 데이터를 찾을 수 없습니다. Id : {equipmentId}");
             return false;
         }
 
@@ -86,7 +86,7 @@ public class GachaResultSlotUI : UIBase
     {
         if (string.IsNullOrEmpty(iconPath))
         {
-            Debug.LogWarning($"아이콘 경로가 비어 있습니다. Id : {id}");
+            Logger.LogWarning($"아이콘 경로가 비어 있습니다. Id : {id}");
 
             _iconImage.enabled = false;
             return;
@@ -96,7 +96,7 @@ public class GachaResultSlotUI : UIBase
 
         if (icon == null)
         {
-            Debug.LogWarning($"아이콘을 찾을 수 없습니다. Id : {id}, 경로 : {iconPath}");
+            Logger.LogWarning($"아이콘을 찾을 수 없습니다. Id : {id}, 경로 : {iconPath}");
 
             _iconImage.enabled = false;
             return;

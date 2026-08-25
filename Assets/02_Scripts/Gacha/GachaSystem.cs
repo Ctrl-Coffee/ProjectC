@@ -66,7 +66,7 @@ public class GachaSystem
 
         if (totalWeight <= 0)
         {
-            Debug.LogError("확률 가중치의 합이 0 이하입니다");
+            Logger.LogError("확률 가중치의 합이 0 이하입니다");
             return null;
         }
 
@@ -123,7 +123,7 @@ public class GachaSystem
                     }
 
             default:
-                Debug.LogError($"구현되지 않은 가차 종류입니다 {gachaType}");
+                Logger.LogError($"구현되지 않은 가차 종류입니다 {gachaType}");
                 return null;
         }
     }
@@ -142,7 +142,7 @@ public class GachaSystem
             }
         }
 
-        Debug.LogError($"중복 복상 데이터를 찾을수 없습니다. 종류 {gachaType}, 등급 {grade}");
+        Logger.LogError($"중복 복상 데이터를 찾을수 없습니다. 종류 {gachaType}, 등급 {grade}");
         return 0;
     }
 }

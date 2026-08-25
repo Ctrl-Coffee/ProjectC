@@ -112,7 +112,7 @@ public class GachaView : ViewBase
                 return _equipmentBannerSprite;
 
             default:
-                Debug.LogError($"배너 이미지가 없는 가챠 종류입니다. type : {gachaType}");
+                Logger.LogError($"배너 이미지가 없는 가챠 종류입니다. type : {gachaType}");
                 return null;
         }
     }

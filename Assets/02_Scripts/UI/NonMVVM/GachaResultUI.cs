@@ -76,7 +76,7 @@ public class GachaResultUI : UIBase
         GameObject slotPrefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.GetUIPath(typeof(GachaResultSlotUI)));
         if (slotPrefab == null)
         {
-            Debug.LogError("결과 슬롯 프리팹을 찾을수 없습니다");
+            Logger.LogError("결과 슬롯 프리팹을 찾을수 없습니다");
             return;
         }
 

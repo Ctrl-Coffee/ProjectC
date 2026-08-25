@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using UnityEngine;
 
 public class GachaViewModel : ViewModelBase<GachaModel>
 {
@@ -57,7 +56,7 @@ public class GachaViewModel : ViewModelBase<GachaModel>
                 break;
 
             default:
-                Debug.LogError($"존재하지 않는 가챠타입입니다 {_model.CurrentType}");
+                Logger.LogError($"존재하지 않는 가챠타입입니다 {_model.CurrentType}");
                 break;
         }
     }
@@ -71,7 +70,7 @@ public class GachaViewModel : ViewModelBase<GachaModel>
     {
         if (GameManager.Gacha.TryPayDrawCost(count) == false)
         {
-            Debug.Log("몽상의 스크롤이 부족합니다");
+            Logger.Log("몽상의 스크롤이 부족합니다");
             return null;
         }
 
@@ -108,7 +107,7 @@ public class GachaViewModel : ViewModelBase<GachaModel>
 
         if (companionData == null)
         {
-            Debug.LogError($"동료 데이터를 찾을 수 없습니다. Id : {companionId}");
+            Logger.LogError($"동료 데이터를 찾을 수 없습니다. Id : {companionId}");
             return null;
         }
 
@@ -132,7 +131,7 @@ public class GachaViewModel : ViewModelBase<GachaModel>
 
         if (equipmentData == null)
         {
-            Debug.LogError($"장비 데이터를 찾을 수 없습니다. id : {equipmentId}");
+            Logger.LogError($"장비 데이터를 찾을 수 없습니다. id : {equipmentId}");
             return null;
         }
 
@@ -153,7 +152,7 @@ public class GachaViewModel : ViewModelBase<GachaModel>
                 return GiveEquipment(drawnId);
 
             default:
-                Debug.LogError($"지원하지 않는 가챠 종류입니다 type : {_model.CurrentType}");
+                Logger.LogError($"지원하지 않는 가챠 종류입니다 type : {_model.CurrentType}");
                 return null;
         }
     }
