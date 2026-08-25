@@ -3,11 +3,10 @@
 [Serializable]
 public class CurrencyDto
 {
-    public long Money;
-    public long DreamPoint;
-    public long Energy;
-    public long DreamFragment;
-    public long DreamScroll;
-    public long Inspiration;
-    public string EnergyRecoveredAt;
+    public long money;
+    public long dreamPoint;
+    public long energy;
+    public long dreamFragment;
+    public long dreamScroll;
+    public long inspiration;
 }

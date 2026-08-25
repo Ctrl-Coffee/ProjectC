@@ -4,10 +4,10 @@
 [Serializable]
 public class RegisterResponse
 {
-    public int Result;
-    public long UserId;
-    public string Email;
-    public string Nickname;
-    public string CreatedAt;
-    public string Message;
+    public int result;
+    public long userId;
+    public string email;
+    public string nickname;
+    public string createdAt;
+    public string message;
 }

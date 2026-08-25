@@ -15,6 +15,16 @@ public class CurrencyModel : ModelBase
     [SerializeField] private long _dreamScroll;
     [SerializeField] private long _inspiration;
 
+    public CurrencyModel(CurrencyDto currencyDto)
+    {
+        _money = currencyDto.money;
+        _dreamPoint = currencyDto.dreamPoint;
+        _energy = currencyDto.energy;
+        _dreamFragment = currencyDto.dreamFragment;
+        _dreamScroll = currencyDto.dreamScroll;
+        _inspiration = currencyDto.inspiration;
+    }
+
     public long Money
     {
         get

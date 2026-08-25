@@ -18,6 +18,7 @@
         public const string REALITY = "Reality";
         public const string DREAM = "Dream";
         public const string LOADDING = "Loading";
+        public const string LOGIN = "Login";
     }
 
     public static class Audio
@@ -29,5 +30,11 @@
         public const string TYPING_2 = "Audio/SFX/Typing2";
         public const string TYPING_3 = "Audio/SFX/Typing3";
         public const string TYPING_4 = "Audio/SFX/Typing4";
+    }
+
+    public static class Sprite
+    {
+        public const string LOGIN_PASSWORD_VIEW_ON = "Sprite/ViewOn";
+        public const string LOGIN_PASSWORD_VIEW_OFF = "Sprite/ViewOff";
     }
 }

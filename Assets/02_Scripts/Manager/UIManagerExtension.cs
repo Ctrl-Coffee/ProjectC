@@ -29,7 +29,7 @@ public static class UIManagerExtension
         uiManager.CloseHUDUI<DreamHudUI>().Forget();
     }
 
-    public static async void OpenConfirmUI(this UIManager uiManager, ConfirmData confirmData, ConfirmButtonAction buttonAction)
+    public static async void OpenConfirmUI(this UIManager uiManager, ConfirmData confirmData, ConfirmButtonAction buttonAction = null)
     {
         var ui = await uiManager.OpenPopupUI<ConfirmUI>();
         ui.SetConfirmUI(confirmData, buttonAction);
@@ -38,6 +38,11 @@ public static class UIManagerExtension
     public static void OpenSettingUI(this UIManager uiManager)
     {
         uiManager.OpenPopupUI<SettingUI>().Forget();
+    }
+
+    public static void OpenLoginUI(this UIManager uiManager)
+    {
+        uiManager.OpenPopupUI<LoginUI>().Forget();
     }
 
     public static UniTask<CompanionInventoryView> OpenCompanionInventory(this UIManager uiManager)

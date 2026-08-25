@@ -3,14 +3,14 @@
 [Serializable]
 public class SaveCurrencyResponse
 {
-    public int Result;
-    public string Message;
+    public int result;
+    public string message;
 }
 
 [Serializable]
 public class LoadCurrencyResponse
 {
-    public int Result;
-    public string Message;
-    public CurrencyDto Data;
+    public int result;
+    public string message;
+    public CurrencyDto data;
 }

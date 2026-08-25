@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 public class GameManager : SingletonBehaviour<GameManager>
@@ -15,6 +16,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static GameSession Session { get { return Instance._gameSession; } }
     public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
     public static SoundManager Sound { get { return Instance._soundManager; } }
+
+
 
 
     #region Manager Variables
@@ -35,14 +38,12 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     #endregion
 
-    #region Variables
-
     private bool _initComplete = false;
 
     private LobbyController _realLobbyController;
     private LobbyController _dreamLobbyController;
 
-    #endregion
+
 
     #region Init
 
@@ -52,7 +53,50 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         _dataTable.LoadAllData();
 
-        InitializeAsync().Forget();
+        InitializeLoginAsync().Forget();
+    }
+
+    private async UniTask InitializeLoginAsync()
+    {
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.LOGIN);
+        await _uiManager.Init();
+
+        _soundManager.Init(gameObject);
+        _uiManager.OpenLoginUI();
+    }
+
+    public async UniTask InitializeAfterLoginAsync(Action<float> onProgress)
+    {
+        onProgress?.Invoke(0f);
+
+        await _networkManager.LoadDataAsync();
+
+        onProgress?.Invoke(0.15f);
+
+        await _resourceManager.LoadAllLabelAssetAsync(
+            progress =>
+            {
+                onProgress?.Invoke(
+                    0.15f + progress * 0.65f);
+            });
+
+        _gameSession = new();
+        _viewModelFactory = new(_gameSession, _dataTable);
+
+        onProgress?.Invoke(0.85f);
+
+        Transform poolRoot = Utils.CreateEmptyGameObject("PoolRoot",transform).transform;
+
+        await _poolManager.InitAsync(poolRoot);
+
+        _initComplete = true;
+
+        AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
+        EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
+
+        EnterReal();
+
+        onProgress?.Invoke(1f);
     }
 
     private async UniTask InitializeAsync()

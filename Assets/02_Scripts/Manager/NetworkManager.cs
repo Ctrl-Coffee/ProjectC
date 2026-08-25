@@ -16,13 +16,19 @@ public class NetworkManager
         CompanionService = new CompanionApi();
     }
 
+    public async UniTask LoadDataAsync()
+    {
+        // 여기서 기본적인 저장 데이터 모두 불러오기
+        
+    }
+
     public UniTask<RegisterResponse> RegisterAsync(string email,  string password, string nickname)
     {
         RegisterRequest request = new()
         {
-            Email = email,
-            Password = password,
-            Nickname = nickname
+            email = email,
+            password = password,
+            nickname = nickname
         };
 
         return PostAsync<RegisterResponse>("/api/account/register", request);
@@ -32,8 +38,8 @@ public class NetworkManager
     {
         LoginRequest request = new()
         {
-            Email = email,
-            Password = password
+            email = email,
+            password = password
         };
 
         LoginResponse response = await PostAsync<LoginResponse>("/api/auth/login", request);
@@ -51,9 +57,9 @@ public class NetworkManager
     {
         SaveCurrencyRequest request = new()
         {
-            UserId = _userId,
-            Token = _token,
-            CurrencyData = currencyData
+            userId = _userId,
+            token = _token,
+            currencyData = currencyData
         };
 
         return PostAsync<SaveCurrencyResponse>("/api/currency/save", request);
@@ -63,8 +69,8 @@ public class NetworkManager
     {
         AuthenticatedRequest request = new()
         {
-            UserId = _userId,
-            Token = _token
+            userId = _userId,
+            token = _token
         };
 
         return PostAsync<LoadCurrencyResponse>("/api/currency/load", request);

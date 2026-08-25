@@ -3,7 +3,7 @@
 [Serializable]
 public class RegisterRequest
 {
-    public string Email;
-    public string Password;
-    public string Nickname;
+    public string email;
+    public string password;
+    public string nickname;
 }

@@ -3,5 +3,5 @@
 [Serializable]
 public class SaveCurrencyRequest : AuthenticatedRequest
 {
-    public CurrencyDto CurrencyData;
+    public CurrencyDto currencyData;
 }

@@ -3,6 +3,6 @@
 [Serializable]
 public class LoginRequest
 {
-    public string Email;
-    public string Password;
+    public string email;
+    public string password;
 }

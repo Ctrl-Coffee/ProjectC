@@ -48,6 +48,11 @@ public class UIButtonComponent : MonoBehaviour
         _text.text = buttonStr;
     }
 
+    public void ChangeButtonImage(Sprite sprite)
+    {
+        _button.image.sprite = sprite;
+    }
+
     public void SetInteractable(bool isInteractable)
     {
         if (_button == null) return;
