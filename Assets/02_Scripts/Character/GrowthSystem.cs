@@ -4,19 +4,6 @@ public class GrowthSystem
 {
     #region 데이터 조회 (순수 계산)
 
-    public CharacterStatData GetPlayerFinalStat(int level)
-    {
-        PlayerLevelData levelData = GameManager.DataTable.GetPlayerLevelData(level);
-
-        if (levelData == null)
-        {
-            Debug.LogError($"플레이어 레벨 데이터를 찾을수 없습니다 레벨 : {level}");
-            return null;
-        }
-
-        return new CharacterStatData(levelData.BaseAttack, levelData.BaseDefense, levelData.HP);
-    }
-
     public CharacterStatData GetEquipmentFinalStat(string equipmentId, int level)
     {
         EquipmentLevelData levelData = GameManager.DataTable.GetEquipmentLevelData(level);
