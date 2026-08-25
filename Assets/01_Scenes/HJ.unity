@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 332796177}
-  - component: {fileID: 332796176}
+  - component: {fileID: 332796178}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -136,19 +136,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &332796176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 332796175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba709ce1c782f44b9b349e99b27c323, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestGrowthUI
-  _testCount: 1000
 --- !u!4 &332796177
 Transform:
   m_ObjectHideFlags: 0
@@ -164,6 +151,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &332796178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332796175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d55b32d6c4442409efcd02141d2a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestGachaUI
+  _testScrollAmount: 1000
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,6 +30,13 @@
         return viewModel;
     }
 
+    public GachaViewModel CreateGachaViewModel()
+    {
+        GachaModel model = _session.Gacha;
+        GachaViewModel viewModel = new GachaViewModel(model);
+        return viewModel;
+    }
+
     public HeroInventoryViewModel CreateHeroInventoryViewModel()
     {
         HeroEquipmentModel model = _session.HeroEquipment;
