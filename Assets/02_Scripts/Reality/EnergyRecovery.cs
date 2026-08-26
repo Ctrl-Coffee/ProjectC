@@ -9,8 +9,6 @@ public static class EnergyRecovery
     private const long RECOVER_AMOUNT = 1;
     private const float CHECK_INTERVAL = 1f;
 
-    private static long _lastEnergyRecoverTicks;
-
     public static async UniTaskVoid RunRecoverLoopAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
@@ -21,35 +19,41 @@ public static class EnergyRecovery
         }
     }
 
-    private static void Recover()
+    public static void Recover()
     {
         CurrencyModel currency = GameManager.Session.Currency;
 
         long nowTicks = GameManager.Time.UtcNow.Ticks;
+        long lastRecoverTicks = currency.EnergyRecoveredAt;
 
-        if (_lastEnergyRecoverTicks <= 0 || nowTicks < _lastEnergyRecoverTicks)
+        if (lastRecoverTicks <= 0 || nowTicks < lastRecoverTicks)
         {
-            _lastEnergyRecoverTicks = nowTicks;
+            currency.EnergyRecoveredAt = nowTicks;
             return;
         }
 
         if (currency.MaxEnergy <= currency.Energy)
         {
-            _lastEnergyRecoverTicks = nowTicks;
+            currency.EnergyRecoveredAt = nowTicks;
             return;
         }
 
         long intervalTicks = GetRecoverIntervalTicks();
-        long recoverCount = (nowTicks - _lastEnergyRecoverTicks) / intervalTicks;
+        long recoverCount = (nowTicks - lastRecoverTicks) / intervalTicks;
 
         if (recoverCount <= 0)
         {
             return;
         }
 
-        _lastEnergyRecoverTicks += recoverCount * intervalTicks;
+        currency.EnergyRecoveredAt = lastRecoverTicks + recoverCount * intervalTicks;
+
+        // 실제로 오른 양만 기록하기
+        long beforeEnergy = currency.Energy;
 
         currency.AddEnergy(recoverCount * RECOVER_AMOUNT);
+
+        AwayReportCollector.RecordEnergy(currency.Energy - beforeEnergy);
 
         Logger.Log($"에너지 회복 {recoverCount * RECOVER_AMOUNT} - 현재 {currency.Energy} / {currency.MaxEnergy}");
     }
@@ -104,7 +108,7 @@ public static class EnergyRecovery
 #if UNITY_EDITOR
     public static void DebugShiftLastRecoverTicks(long shiftTicks)
     {
-        _lastEnergyRecoverTicks += shiftTicks;
+        GameManager.Session.Currency.EnergyRecoveredAt += shiftTicks;
     }
 #endif
 }

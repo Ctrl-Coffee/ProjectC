@@ -115,6 +115,38 @@ public class WorkDebugWindow : EditorWindow
         }
 
         EditorGUILayout.EndHorizontal();
+
+        DrawAwayReport();
+    }
+
+    // 에디터에서는 백그라운드 전환이 실제로 안 들어와서 복귀 리포트를 수동으로 띄운다.
+    private void DrawAwayReport()
+    {
+        EditorGUILayout.LabelField("자리비움 리포트", EditorStyles.boldLabel);
+
+        EditorGUILayout.BeginHorizontal();
+
+        DrawSimulateAwayButton("10분 비움", TimeSpan.FromMinutes(10));
+        DrawSimulateAwayButton("1시간 비움", TimeSpan.FromHours(1));
+        DrawSimulateAwayButton("8시간 비움", TimeSpan.FromHours(8));
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void DrawSimulateAwayButton(string label, TimeSpan duration)
+    {
+        if (!GUILayout.Button(label))
+        {
+            return;
+        }
+
+        if (null == GameManager.Instance)
+        {
+            Debug.LogWarning("플레이 중에만 자리비움을 시뮬레이션할 수 있습니다.");
+            return;
+        }
+
+        AwayReportFlow.DebugSimulateAway(duration);
     }
 
     private void ResetDebugTime()

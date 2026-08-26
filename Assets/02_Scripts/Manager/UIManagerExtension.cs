@@ -113,4 +113,13 @@ public static class UIManagerExtension
     {
         return uiManager.OpenOverlayUI<MiniGameResultUI>();
     }
+
+    public static async void OpenAwayReportUI(this UIManager uiManager, AwayReport report)
+    {
+        var ui = await uiManager.OpenPopupUI<AwayReportUI>();
+
+        if (null == ui) return;
+
+        ui.SetReport(report);
+    }
 }

@@ -128,4 +128,14 @@ public class GameManager : SingletonBehaviour<GameManager>
         _dreamLobbyController.Release();
         UI.CloseDreamHud();
     }
+
+    private void OnApplicationPause(bool isPaused)
+    {
+        AwayReportFlow.SetAppActive(!isPaused);
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        AwayReportFlow.SetAppActive(hasFocus);
+    }
 }

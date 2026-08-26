@@ -14,6 +14,7 @@ public class CurrencyModel : ModelBase
     [SerializeField] private long _dreamFragment;
     [SerializeField] private long _dreamScroll;
     [SerializeField] private long _inspiration;
+    [SerializeField] private long _energyRecoveredAt;
 
     public long Money
     {
@@ -80,6 +81,18 @@ public class CurrencyModel : ModelBase
     public void NotifyMaxEnergyChanged()
     {
         OnPropertyChanged(nameof(MaxEnergy));
+    }
+
+    public long EnergyRecoveredAt
+    {
+        get
+        {
+            return _energyRecoveredAt;
+        }
+        set
+        {
+            _energyRecoveredAt = value;
+        }
     }
 
     public long BaseMaxEnergy

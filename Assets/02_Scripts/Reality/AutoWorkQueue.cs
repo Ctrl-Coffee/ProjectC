@@ -218,6 +218,8 @@ public static class AutoWorkQueue
             GameManager.Session.Currency.AddMoney(money);
             GameManager.Session.Currency.AddDreamPoint(dp);
 
+            AwayReportCollector.RecordWork(data.Id, money, dp);
+
             Logger.Log($"자동업무 완료 - {data.Name} / 돈 {money} / DP {dp}");
         }
 
