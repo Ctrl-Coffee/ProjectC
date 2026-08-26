@@ -7,6 +7,7 @@ public class PlayerStatViewModel : ViewModelBase<PlayerStatModel>
 {
     // 퍽 보정 조회용으로 매번 Enum.GetValues를 돌리지 않도록 캐싱
     private static readonly WorkStatType[] WORK_STAT_TYPES = (WorkStatType[])Enum.GetValues(typeof(WorkStatType));
+    private static readonly PropertyChangedEventArgs PERK_BUFFS_CHANGED = new(nameof(PerkBuffs));
 
     public string Name { get; private set; }
     public int Level { get; private set; }
@@ -17,6 +18,8 @@ public class PlayerStatViewModel : ViewModelBase<PlayerStatModel>
     public float CriticalRate { get; private set; }
     public float NormalSkillHaste { get; private set; }
     public float SpecialSkillHaste { get; private set; }
+    public float NormalSkillCooldownReduceRate { get; private set; }
+    public float SpecialSkillCooldownReduceRate { get; private set; }
     public float CombatPower { get; private set; }
 
     public IReadOnlyList<PerkBuffInfo> PerkBuffs { get { return _perkBuffs; } }
@@ -26,38 +29,52 @@ public class PlayerStatViewModel : ViewModelBase<PlayerStatModel>
 
     public PlayerStatViewModel(PlayerStatModel model) : base(model)
     {
+    }
+
+    public void SubscribePerkChanged()
+    {
         GameManager.Perk.OnPerkChanged += OnPerkChanged;
+    }
+
+    public void UnSubscribePerkChanged()
+    {
+        GameManager.Perk.OnPerkChanged -= OnPerkChanged;
     }
 
     public override void InitializeModel()
     {
-        Refresh();
+        RefreshStats();
+        RefreshPerkBuffs();
+
         base.InitializeModel();
     }
 
     public override void UnBind()
     {
-        GameManager.Perk.OnPerkChanged -= OnPerkChanged;
+        UnSubscribePerkChanged();
         base.UnBind();
     }
 
     protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        Refresh();
+        RefreshStats();
+
         base.OnPropertyChanged(sender, e);
     }
 
     private void OnPerkChanged()
     {
-        OnPropertyChanged(this, new PropertyChangedEventArgs(nameof(PerkBuffs)));
+        RefreshPerkBuffs();
+
+        OnPropertyChanged(this, PERK_BUFFS_CHANGED);
     }
 
-    private void Refresh()
+    private void RefreshStats()
     {
         PlayerData playerData = GameManager.DataTable.GetPlayerData(CharacterId.PLAYER_DATA);
 
         Name = null == playerData ? string.Empty : playerData.Name;
-        Level = GameManager.Session.PlayerGrowth.Level;
+        Level = _model.Level;
 
         Attack = _model.Attack;
         Hp = _model.Hp;
@@ -65,9 +82,10 @@ public class PlayerStatViewModel : ViewModelBase<PlayerStatModel>
         CriticalRate = _model.CriticalRate;
         NormalSkillHaste = _model.NormalSkillHaste;
         SpecialSkillHaste = _model.SpecialSkillHaste;
-        CombatPower = _model.CombatPower;
 
-        RefreshPerkBuffs();
+        NormalSkillCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(NormalSkillHaste);
+        SpecialSkillCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(SpecialSkillHaste);
+        CombatPower = _model.CombatPower;
     }
 
     /// <summary>
@@ -98,15 +116,12 @@ public class PlayerStatViewModel : ViewModelBase<PlayerStatModel>
                 continue;
             }
 
-            _perkBuffs.Add(new PerkBuffInfo(GetStatName(statType), value));
+            WorkStatData statData = GameManager.DataTable.GetWorkStatData(statType);
+            string statName = null == statData ? statType.ToString() : statData.Name;
+            string iconKey = null == statData ? string.Empty : statData.IconKey;
+
+            _perkBuffs.Add(new PerkBuffInfo(statName, value, iconKey));
         }
-    }
-
-    private string GetStatName(WorkStatType statType)
-    {
-        WorkStatData statData = GameManager.DataTable.GetWorkStatData(statType);
-
-        return null == statData ? statType.ToString() : statData.Name;
     }
 
     private string BuildValueText(float flat, float additiveRate, float compoundRate)

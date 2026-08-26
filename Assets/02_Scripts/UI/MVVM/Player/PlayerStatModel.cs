@@ -33,6 +33,18 @@ public class PlayerStatModel : ModelBase, IStatData
     private float _normalSkillHaste;
     private float _specialSkillHaste;
     private float _combatPower;
+    private int _level;
+
+    public int Level
+    {
+        get { return _level; }
+        private set
+        {
+            if (_level == value) return;
+            _level = value;
+            OnPropertyChanged();
+        }
+    }
 
     public float Attack
     {
@@ -121,19 +133,13 @@ public class PlayerStatModel : ModelBase, IStatData
         _growth.PropertyChanged += OnGrowthChanged;
         _equiped.PropertyChanged += OnEquipedChanged;
         _equipment.ContainerPropertyChanged += OnEquipmentChanged;
+
+        Recalculate();
     }
 
     public override void InitializeOnce()
     {
         Recalculate();
-
-        OnPropertyChanged(nameof(Attack));
-        OnPropertyChanged(nameof(Hp));
-        OnPropertyChanged(nameof(Defense));
-        OnPropertyChanged(nameof(CriticalRate));
-        OnPropertyChanged(nameof(NormalSkillHaste));
-        OnPropertyChanged(nameof(SpecialSkillHaste));
-        OnPropertyChanged(nameof(CombatPower));
     }
 
     public void Dispose()
@@ -173,6 +179,8 @@ public class PlayerStatModel : ModelBase, IStatData
         sum.Add(GetEquipmentStat(EquipmentType.Weapon));
         sum.Add(GetEquipmentStat(EquipmentType.Armor));
         sum.Add(GetEquipmentStat(EquipmentType.Accessories));
+
+        Level = null == _growth ? 0 : _growth.Level;
 
         Attack = sum.Attack;
         Hp = sum.Hp;
