@@ -17,6 +17,8 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
 
             _companions.Add(companionDto.companionId, companState);
         }
+
+        InitializeOnce();
     }
 
     public override void InitializeOnce()

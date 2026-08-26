@@ -23,6 +23,8 @@ public class CurrencyModel : ModelBase
         _dreamFragment = currencyDto.dreamFragment;
         _dreamScroll = currencyDto.dreamScroll;
         _inspiration = currencyDto.inspiration;
+
+        InitializeOnce();
     }
 
     public long Money
@@ -158,6 +160,12 @@ public class CurrencyModel : ModelBase
 
     public override void InitializeOnce()
     {
+        OnPropertyChanged(nameof(Money));
+        OnPropertyChanged(nameof(DreamPoint));
+        OnPropertyChanged(nameof(Energy));
+        OnPropertyChanged(nameof(DreamFragment));
+        OnPropertyChanged(nameof(DreamScroll));
+        OnPropertyChanged(nameof(Inspiration));
     }
 
     public void AddMoney(long amount)

@@ -1,6 +1,15 @@
 ﻿
 public class HeroEquipedModel : ModelBase
 {
+    public HeroEquipedModel(EquipmentLoadoutDto equipmentLoadoutDto)
+    {
+        EquipedWeaponId = equipmentLoadoutDto.weaponEquipmentId;
+        EquipedArmorId = equipmentLoadoutDto.armorEquipmentId;
+        EquipedAccessoryId = equipmentLoadoutDto.accessoryEquipmentId;
+
+        InitializeOnce();
+    }
+
     public override void InitializeOnce()
     {
         OnPropertyChanged(nameof(EquipedWeaponId));
