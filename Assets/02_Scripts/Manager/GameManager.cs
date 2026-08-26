@@ -67,8 +67,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         onProgress?.Invoke(0f);
 
-        await _networkManager.LoadDataAsync();
-
         onProgress?.Invoke(0.15f);
 
         await _resourceManager.LoadAllLabelAssetAsync(
@@ -131,5 +129,26 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         _dreamLobbyController.Release();
         UI.CloseDreamHud();
+    }
+
+    public void RequestQuit()
+    {
+        QuitAfterSaveAsync().Forget();
+    }
+
+    private async UniTask QuitAfterSaveAsync()
+    {
+        await SaveUtil.SaveAllDataAsync();
+        Application.Quit();
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus == false)
+        {
+            return;
+        }
+
+        SaveUtil.SaveAllDataAsync().Forget();
     }
 }

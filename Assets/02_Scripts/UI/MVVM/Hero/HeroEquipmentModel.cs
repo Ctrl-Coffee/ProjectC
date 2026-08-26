@@ -35,6 +35,7 @@ public class HeroEquipmentModel : ModelBase, ContainerPropertyChanged<HeroEquipm
             HeroEquipmentState state = new HeroEquipmentState(heroEquipmentId, 1);
             _equipments.Add(heroEquipmentId, state);
             ContainerPropertyChanged?.Invoke(nameof(Equipments), ContainerPropertyChangedEvent.Add, state);
+            SaveUtil.RequestSaveEquipment();
         }
     }
 
@@ -69,6 +70,8 @@ public class HeroEquipmentModel : ModelBase, ContainerPropertyChanged<HeroEquipm
 
         state.LevelUp();
         ContainerPropertyChanged?.Invoke(nameof(Equipments), ContainerPropertyChangedEvent.Update, state);
+
+        SaveUtil.RequestSaveEquipment();
 
         return LevelUpResult.Success;
     }

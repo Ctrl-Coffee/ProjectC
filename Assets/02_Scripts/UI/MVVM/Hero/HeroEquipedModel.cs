@@ -31,6 +31,8 @@ public class HeroEquipedModel : ModelBase
                 EquipedAccessoryId = equipmentId;
                 break;
         }
+
+        SaveUtil.RequestSaveEquipmentLoadout();
     }
 
     public void UnEquip(EquipmentType type)
@@ -47,6 +49,8 @@ public class HeroEquipedModel : ModelBase
                 EquipedAccessoryId = null;
                 break;
         }
+
+        SaveUtil.RequestSaveEquipmentLoadout();
     }
 
     public string GetEquipedId(EquipmentType type)

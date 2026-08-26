@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 
 public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState>
@@ -33,6 +34,7 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
             CompanionState companion = new CompanionState(companionId, 1);
             _companions.Add(companionId, companion);
             ContainerPropertyChanged?.Invoke(nameof(Companions), ContainerPropertyChangedEvent.Add, companion);
+            SaveUtil.RequestSaveCompanion();
         }
     }
 
@@ -67,6 +69,8 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
 
         companion.LevelUp();
         ContainerPropertyChanged?.Invoke(nameof(Companions), ContainerPropertyChangedEvent.Update, companion);
+
+        SaveUtil.RequestSaveCompanion();
 
         return LevelUpResult.Success;
     }

@@ -1,25 +1,59 @@
 ﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 public static class SaveUtil
 {
-    public static async UniTask<SaveCurrencyResponse> SaveCurrencyAsync()
+    private static readonly SaveRequest _currencySaveRequest = new(SaveCurrencyAsync);
+    private static readonly SaveRequest _companionSaveRequest = new(SaveCompanionAsync);
+    private static readonly SaveRequest _equipmentSaveRequest = new(SaveEquipmentAsync);
+    private static readonly SaveRequest _equipmentLoadoutSaveRequest = new(SaveEquipmentLoadoutAsync);
+
+    public static void RequestSaveCurrency()
     {
-        return await GameManager.Network.SaveCurrencyAsync(GameManager.Session.Currency);
+        _currencySaveRequest.Request();
     }
 
-    public static async UniTask<SaveCompanionResponse> SaveCompanionAsync()
+    public static void RequestSaveCompanion()
     {
-        return await GameManager.Network.SaveCompanionAsync(GameManager.Session.Companion);
+        _companionSaveRequest.Request();
     }
 
-    public static async UniTask<SaveEquipmentResponse> SaveEquipmentAsync()
+    public static void RequestSaveEquipment()
     {
-        return await GameManager.Network.SaveEquipmentAsync(GameManager.Session.HeroEquipment);
+        _equipmentSaveRequest.Request();
     }
 
-    public static async UniTask<SaveEquipmentLoadoutResponse> SaveEquipmentLoadoutAsync()
+    public static void RequestSaveEquipmentLoadout()
     {
-        return await GameManager.Network.SaveEquipmentLoadoutAsync(GameManager.Session.HeroEquiped);
+        _equipmentLoadoutSaveRequest.Request();
+    }
+
+    public static async UniTask SaveAllDataAsync()
+    {
+        await UniTask.WhenAll(SaveCurrencyAsync(), SaveEquipmentLoadoutAsync());
+    }
+
+
+
+
+
+
+    private static async UniTask SaveCurrencyAsync()
+    {
+        await GameManager.Network.SaveCurrencyAsync(GameManager.Session.Currency);
+    }
+
+    private static async UniTask SaveEquipmentAsync()
+    {
+        await GameManager.Network.SaveEquipmentAsync(GameManager.Session.HeroEquipment);
+    }
+
+    private static async UniTask SaveEquipmentLoadoutAsync()
+    {
+        await GameManager.Network.SaveEquipmentLoadoutAsync(GameManager.Session.HeroEquiped);
+    }
+
+    private static async UniTask SaveCompanionAsync()
+    {
+        await GameManager.Network.SaveCompanionAsync(GameManager.Session.Companion);
     }
 }

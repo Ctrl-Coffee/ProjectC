@@ -10,24 +10,11 @@ public class NetworkManager
     private long _userId;
     private string _token;
 
-    public CompanionApi CompanionService { get; private set; }
-
     private List<CompanionDto> _companions = new();
     private List<EquipmentDto> _equipments = new();
     private EquipmentLoadoutDto _equipmentLoadoutDto = new();
 
     private AuthenticatedRequest _authenticatedRequest = new();
-
-    public NetworkManager()
-    {
-        CompanionService = new CompanionApi();
-    }
-
-    public async UniTask LoadDataAsync()
-    {
-        // 여기서 기본적인 저장 데이터 모두 불러오기
-
-    }
 
     public UniTask<RegisterResponse> RegisterAsync(string email, string password, string nickname)
     {
