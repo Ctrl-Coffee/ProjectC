@@ -23,6 +23,12 @@
         return viewModel;
     }
 
+    public PerkStatViewModel CreatePerkStatViewModel()
+    {
+        PerkStatViewModel viewModel = new PerkStatViewModel();
+        return viewModel;
+    }
+
     public CompanionInventoryViewModel CreateCompanionInventoryViewModel()
     {
         CompanionModel model = _session.Companion;

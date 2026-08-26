@@ -124,7 +124,7 @@ public class PerkDetailUI : UIBase
 
     private Vector2 GetHiddenPosition()
     {
-        return new Vector2(_shownPosition.x + GetSlideDistance(), _shownPosition.y);
+        return new Vector2(_shownPosition.x - GetSlideDistance(), _shownPosition.y);
     }
 
     private float GetSlideDistance()
@@ -137,17 +137,10 @@ public class PerkDetailUI : UIBase
         RectTransform target = SlideTarget;
 
         float panelWidth = target.rect.width;
-        RectTransform parent = target.parent as RectTransform;
-        float parentWidth = null != parent ? parent.rect.width : 0f;
-
-        if (0f < parentWidth)
-        {
-            return (parentWidth + panelWidth) * 0.5f;
-        }
 
         if (0f < panelWidth)
         {
-            return panelWidth;
+            return panelWidth + Mathf.Max(0f, _shownPosition.x);
         }
 
         return Screen.width;

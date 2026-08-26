@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class PlayerStatView : ViewBase
@@ -14,9 +13,6 @@ public class PlayerStatView : ViewBase
     [SerializeField] private TextMeshProUGUI _criticalRateText;
     [SerializeField] private TextMeshProUGUI _normalSkillHasteText;
     [SerializeField] private TextMeshProUGUI _specialSkillHasteText;
-
-    [SerializeField] private PerkBuffSlotUI[] _perkSlots;
-    [SerializeField] private TextMeshProUGUI _perkEmptyText;
 
     [SerializeField] private UIButtonComponent _blocker;
     [SerializeField] private UIButtonComponent _btnClose;
@@ -77,7 +73,6 @@ public class PlayerStatView : ViewBase
     protected override void Subscribe()
     {
         _viewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
-        _viewModel.SubscribePerkChanged();
 
         _viewModel.InitializeModel();
 
@@ -89,7 +84,6 @@ public class PlayerStatView : ViewBase
         if (_viewModel != null)
         {
             _viewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
-            _viewModel.UnSubscribePerkChanged();
         }
     }
 
@@ -129,10 +123,6 @@ public class PlayerStatView : ViewBase
                 RefreshCombatPower();
                 break;
 
-            case nameof(PlayerStatViewModel.PerkBuffs):
-                RefreshPerkBuff();
-                break;
-
             default:
                 RefreshAll();
                 break;
@@ -160,7 +150,6 @@ public class PlayerStatView : ViewBase
         RefreshNormalSkillHaste();
         RefreshSpecialSkillHaste();
 
-        RefreshPerkBuff();
     }
 
     private void RefreshLevel()
@@ -219,47 +208,5 @@ public class PlayerStatView : ViewBase
         }
 
         return $"{hasteValue} <color={Const.COLOR_BAD}>(+{-reducePercent}%)</color>";
-    }
-
-    private void RefreshPerkBuff()
-    {
-        IReadOnlyList<PerkBuffInfo> perkBuffs = _viewModel.PerkBuffs;
-
-        int buffCount = null == perkBuffs ? 0 : perkBuffs.Count;
-
-        if (null != _perkEmptyText)
-        {
-            _perkEmptyText.text = Const.NO_PERK_BUFF;
-            _perkEmptyText.gameObject.SetActive(0 == buffCount);
-        }
-
-        if (null == _perkSlots)
-        {
-            return;
-        }
-
-        for (int i = 0; i < _perkSlots.Length; i++)
-        {
-            PerkBuffSlotUI slot = _perkSlots[i];
-
-            if (null == slot)
-            {
-                continue;
-            }
-
-            if (i < buffCount)
-            {
-                slot.Bind(perkBuffs[i]);
-            }
-            else
-            {
-                slot.Hide();
-            }
-        }
-
-        if (_perkSlots.Length < buffCount)
-        {
-            Logger.LogWarning($"퍽 슬롯이 모자랍니다. 슬롯 : {_perkSlots.Length}, 퍽 : {buffCount}");
-        }
     }
 }

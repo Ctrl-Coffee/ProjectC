@@ -55,6 +55,11 @@ public static class UIManagerExtension
         return uiManager.OpenPopupUI<PlayerStatView>();
     }
 
+    public static UniTask<PerkStatView> OpenPerkStat(this UIManager uiManager)
+    {
+        return uiManager.OpenOverlayUI<PerkStatView>();
+    }
+
     public static async void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Func<LevelUpResult> onClickLevelUp)
     {
         var ui = await uiManager.OpenPopupUI<CompanionDetailUI>();
