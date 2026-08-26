@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74830dde37789f341bca17a1a62ea265, type: 3}
   m_Name: UnitAnimationSet
   m_EditorClassIdentifier: Assembly-CSharp::UnitAnimationSet
-  _idleClip: {fileID: 0}
-  _deathClip: {fileID: 0}
-  _basicAttackClip: {fileID: 0}
-  _signatureClip: {fileID: 0}
+  _idleClip: {fileID: 7400000, guid: 9a9694f4cc37e614f904851ed4a5dbbe, type: 2}
+  _deathClip: {fileID: 7400000, guid: 9a9694f4cc37e614f904851ed4a5dbbe, type: 2}
+  _basicAttackClip: {fileID: 7400000, guid: a445118671dccfb468f0a5679d1a92f7, type: 2}
+  _signatureClip: {fileID: 7400000, guid: a445118671dccfb468f0a5679d1a92f7, type: 2}
