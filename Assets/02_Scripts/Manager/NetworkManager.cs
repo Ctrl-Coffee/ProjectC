@@ -13,6 +13,8 @@ public class NetworkManager
     public CompanionApi CompanionService { get; private set; }
 
     private List<CompanionDto> _companions = new();
+    private List<EquipmentDto> _equipments = new();
+    private EquipmentLoadoutDto _equipmentLoadoutDto = new();
 
     private AuthenticatedRequest _authenticatedRequest = new();
 
@@ -24,10 +26,10 @@ public class NetworkManager
     public async UniTask LoadDataAsync()
     {
         // 여기서 기본적인 저장 데이터 모두 불러오기
-        
+
     }
 
-    public UniTask<RegisterResponse> RegisterAsync(string email,  string password, string nickname)
+    public UniTask<RegisterResponse> RegisterAsync(string email, string password, string nickname)
     {
         RegisterRequest request = new()
         {
@@ -118,6 +120,60 @@ public class NetworkManager
     public UniTask<LoadCompanionResponse> LoadCompanionAsync()
     {
         return PostAsync<LoadCompanionResponse>("/api/companion/load", _authenticatedRequest);
+    }
+
+    public UniTask<SaveEquipmentResponse> SaveEquipmentAsync(HeroEquipmentModel equipmentModel)
+    {
+        _equipments.Clear();
+
+        foreach (var equipment in equipmentModel.Equipments)
+        {
+            _equipments.Add(new EquipmentDto()
+            {
+                equipmentId = equipment.Key,
+                level = equipment.Value.Level
+            });
+        }
+
+        EquipmentWrapperDto equipmentWrapperDto = new EquipmentWrapperDto()
+        {
+            equipments = _equipments
+        };
+
+        SaveEquipmentRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            EquipmentData = equipmentWrapperDto
+        };
+
+        return PostAsync<SaveEquipmentResponse>("/api/equipment/save", request);
+    }
+
+    public UniTask<LoadEquipmentResponse> LoadEquipmentAsync()
+    {
+        return PostAsync<LoadEquipmentResponse>("/api/equipment/load", _authenticatedRequest);
+    }
+
+    public UniTask<SaveEquipmentLoadoutResponse> SaveEquipmentLoadoutAsync(HeroEquipedModel heroEquipedModel)
+    {
+        _equipmentLoadoutDto.weaponEquipmentId = heroEquipedModel.EquipedWeaponId;
+        _equipmentLoadoutDto.armorEquipmentId = heroEquipedModel.EquipedArmorId;
+        _equipmentLoadoutDto.accessoryEquipmentId = heroEquipedModel.EquipedAccessoryId;
+
+        SaveEquipmentLoadoutRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            EquipmentLoadoutData = _equipmentLoadoutDto
+        };
+
+        return PostAsync<SaveEquipmentLoadoutResponse>("/api/equipmentloadout/save", request);
+    }
+
+    public UniTask<LoadEquipmentLoadoutResponse> LoadEquipmentLoadoutAsync()
+    {
+        return PostAsync<LoadEquipmentLoadoutResponse>("/api/equipmentloadout/load", _authenticatedRequest);
     }
 
     private async UniTask<TResponse> PostAsync<TResponse>(string path, object requestData)
