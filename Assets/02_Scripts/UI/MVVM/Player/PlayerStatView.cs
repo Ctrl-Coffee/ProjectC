@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerStatView : ViewBase
 {
@@ -19,7 +18,8 @@ public class PlayerStatView : ViewBase
     [SerializeField] private PerkBuffSlotUI[] _perkSlots;
     [SerializeField] private TextMeshProUGUI _perkEmptyText;
 
-    [SerializeField] private Button _closeButton;
+    [SerializeField] private UIButtonComponent _blocker;
+    [SerializeField] private UIButtonComponent _btnClose;
 
     private PlayerStatViewModel _viewModel;
 
@@ -31,14 +31,31 @@ public class PlayerStatView : ViewBase
         }
 
         Subscribe();
-        _closeButton.onClick.AddListener(OnClickClose);
+
+        if (_blocker != null)
+        {
+            _blocker.BindButtonEvent(OnClickClose);
+        }
+
+        if (_btnClose != null)
+        {
+            _btnClose.BindButtonEvent(OnClickClose);
+        }
     }
 
     private void OnDisable()
     {
-        _closeButton.onClick.RemoveListener(OnClickClose);
-
         UnSubscribe();
+        
+        if (_blocker != null)
+        {
+            _blocker.UnBindButtonAllEvent();
+        }
+
+        if (_btnClose != null)
+        {
+            _btnClose.UnBindButtonAllEvent();
+        }
     }
 
     private void OnDestroy()
