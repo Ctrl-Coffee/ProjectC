@@ -1,4 +1,5 @@
-﻿using Unity.Behavior;
+﻿using Cysharp.Threading.Tasks;
+using Unity.Behavior;
 using UnityEngine;
 public static class BehaviorGraphVariableNames
 {
@@ -19,14 +20,17 @@ public abstract class BattleUnitViewBase : MonoBehaviour
 
     private int _battlePosition;
 
-    private BattleUnitAnimationController _battleUnitAnimationController;
+    private BattleUnitAnimator _battleUnitAnimator;
     private BattleUnitViewModel _battleUnitViewModel;
-
-    public float HP;
 
     public int BattlePosition
     {
         get { return _battlePosition; }
+    }
+
+    public bool IsIdle
+    {
+        get { return _battleUnitAnimator.IsIdle; }
     }
 
     private void Awake()
@@ -35,7 +39,9 @@ public abstract class BattleUnitViewBase : MonoBehaviour
 
         CacheBehaviorVariables();
 
-        _battleUnitAnimationController = new BattleUnitAnimationController(GetComponent<Animator>());
+        Animator animator = GetComponent<Animator>();
+
+        _battleUnitAnimator = new BattleUnitAnimator(animator);
         _battleUnitViewModel = new BattleUnitViewModel();
     }
 
@@ -74,14 +80,24 @@ public abstract class BattleUnitViewBase : MonoBehaviour
 
     public void UseBasicAttackSkill()
     {
+        if (_battleUnitViewModel.IsDead)
+        {
+            return;
+        }
+
         _battleUnitViewModel.RequestUseBasicAttackSkill(_battlePosition);
-        //_battleUnitAnimationController.SetState(UnitState.Idle);
+        _battleUnitAnimator.Play(BattleUnitAnimationType.BasicAttack);
     }
 
     public void UseSignatureSkill()
     {
+        if (_battleUnitViewModel.IsDead)
+        {
+            return;
+        }
+
         _battleUnitViewModel.RequestUseSignatureSkill(_battlePosition);
-        //_battleUnitAnimationController.SetState(UnitState.Idle);
+        _battleUnitAnimator.Play(BattleUnitAnimationType.Signature);
     }
 
     private void CacheBehaviorVariables()
@@ -107,15 +123,14 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         _battleUnitViewModel.Initialize(baseBattleUnitModel);
     }
 
-    private void UpdateAnim(string animKey)
+    private void UpdateAnimation(string addressableKey)
     {
-        _battleUnitAnimationController.InitializeAnimation(animKey);
+        _battleUnitAnimator.ApplyAnimationSet(addressableKey);
     }
 
     private void UpdateHpBar(float hp)
     {
         Debug.Log($"체력 변경 {hp}");
-        HP = hp;
     }
 
     private void UpdateBasicAttackSkillReady(bool isReady)
@@ -143,9 +158,18 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         if (isDead)
         {
             Debug.Log($"{gameObject.name} 사망");
-        }
 
-        //gameObject.SetActive(!isDead);
+            gameObject.SetActive(false);
+        }
+    }
+
+    private async UniTask Death()
+    {
+        _battleUnitAnimator.Play(BattleUnitAnimationType.Death);
+
+        await UniTask.WaitUntil(_battleUnitAnimator.IsDeathAnimationCompleted);
+
+        gameObject.SetActive(false);
     }
 
     private void NotifySkillReadyStateChanged(UnitSkillType unitSkillType)
@@ -158,7 +182,7 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         switch (propertyName)
         {
             case nameof(_battleUnitViewModel.AnimKey):
-                UpdateAnim(_battleUnitViewModel.AnimKey);
+                UpdateAnimation(_battleUnitViewModel.AnimKey);
                 break;
             case nameof(_battleUnitViewModel.Hp):
                 UpdateHpBar(_battleUnitViewModel.Hp);
