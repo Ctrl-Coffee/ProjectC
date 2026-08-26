@@ -50,5 +50,4 @@ public class SaveRequest
             _isSaving = false;
         }
     }
-
 }
