@@ -1,0 +1,159 @@
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+
+public class GachaViewModel : ViewModelBase<GachaModel>
+{
+    public GachaType CurrentType { get; private set; }
+    public string BannerName { get; private set; }
+    public long SingleCost { get; private set; }
+    public long MultiCost { get; private set; }
+    public int SingleDrawCount { get; private set; }
+    public int MultiDrawCount { get; private set; }
+    public bool CanDrawSingle { get; private set; }
+    public bool CanDrawMulti { get; private set; }
+
+    public GachaViewModel(GachaModel model) : base(model) 
+    {
+        GameManager.Session.Currency.PropertyChanged += OnPropertyChanged;
+    }
+
+    public override void InitializeModel()
+    {
+        Refresh();
+        base.InitializeModel();
+    }
+
+    protected override void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        Refresh();
+        base.OnPropertyChanged(sender, e);
+    }
+
+    public override void UnBind()
+    {
+        GameManager.Session.Currency.PropertyChanged -= OnPropertyChanged;
+        base.UnBind();
+    }
+
+    private void Refresh()
+    {
+        CurrentType = _model.CurrentType;
+        SingleCost = GachaUtil.GetDrawCost(1);
+        MultiCost = GachaUtil.GetDrawCost(GachaUtil.MULTI_DRAW_COUNT);
+        SingleDrawCount = 1;
+        MultiDrawCount = GachaUtil.MULTI_DRAW_COUNT;
+        CanDrawSingle = GachaUtil.CheckCanDraw(1);
+        CanDrawMulti = GachaUtil.CheckCanDraw(GachaUtil.MULTI_DRAW_COUNT);
+
+        switch (_model.CurrentType)
+        {
+            case GachaType.Companion:
+                BannerName = "동료 소환";
+                break;
+
+            case GachaType.Equipment:
+                BannerName = "장비 소환";
+                break;
+
+            default:
+                Logger.LogError($"존재하지 않는 가챠타입입니다 {_model.CurrentType}");
+                break;
+        }
+    }
+
+    public void SelectType(GachaType type )
+    {
+        _model.CurrentType = type;
+    }
+
+    public IReadOnlyList<GachaResultData> Draw(int count)
+    {
+        if (GachaUtil.TryPayDrawCost(count) == false)
+        {
+            Logger.Log("몽상의 스크롤이 부족합니다");
+            return null;
+        }
+
+        IReadOnlyList<string> drawnIds = GachaUtil.Draw(_model.CurrentType, count);
+
+        if (drawnIds == null) return null;
+
+        List<GachaResultData> results = new List<GachaResultData>();
+
+        foreach (string drawnId in drawnIds)
+        {
+            GachaResultData result = GiveReward(drawnId);
+
+            if (result != null)
+            {
+                results.Add(result);
+            }
+        }
+
+        return results;
+    }
+
+    private GachaResultData GiveCompanion(string companionId)
+    {
+        CompanionModel companionModel = GameManager.Session.Companion;
+
+        if (companionModel.GetCompanion(companionId) == null)
+        {
+            companionModel.AddCompanion(companionId);
+            return new GachaResultData(companionId, GachaType.Companion, false, 0);
+        }
+
+        CompanionData companionData = GameManager.DataTable.GetCompanionData(companionId);
+
+        if (companionData == null)
+        {
+            Logger.LogError($"동료 데이터를 찾을 수 없습니다. Id : {companionId}");
+            return null;
+        }
+
+        int reward = GachaUtil.GetDuplicateReward(GachaType.Companion, companionData.Grade);
+        GameManager.Session.Currency.AddDreamFragment(reward);
+
+        return new GachaResultData(companionId, GachaType.Companion, true, reward);
+    }
+
+    private GachaResultData GiveEquipment(string equipmentId)
+    {
+        HeroEquipmentModel equipmentModel = GameManager.Session.HeroEquipment;
+
+        if (equipmentModel.GetHeroEquipment(equipmentId) == null)
+        {
+            equipmentModel.AddHeroEquipment(equipmentId);
+            return new GachaResultData(equipmentId, GachaType.Equipment, false, 0);
+        }
+
+        EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
+
+        if (equipmentData == null)
+        {
+            Logger.LogError($"장비 데이터를 찾을 수 없습니다. id : {equipmentId}");
+            return null;
+        }
+
+        int reward = GachaUtil.GetDuplicateReward(GachaType.Equipment, (int)equipmentData.EquipmentGrade);
+        GameManager.Session.Currency.AddDreamFragment(reward);
+
+        return new GachaResultData(equipmentId, GachaType.Equipment, true, reward);
+    }
+
+    private GachaResultData GiveReward(string drawnId)
+    {
+        switch (_model.CurrentType)
+        {
+            case GachaType.Companion:
+                return GiveCompanion(drawnId);
+
+            case GachaType.Equipment:
+                return GiveEquipment(drawnId);
+
+            default:
+                Logger.LogError($"지원하지 않는 가챠 종류입니다 type : {_model.CurrentType}");
+                return null;
+        }
+    }
+}

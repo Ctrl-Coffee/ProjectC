@@ -6,6 +6,7 @@ public class GameSession
     public PlayerGrowthModel PlayerGrowth { get; }
 
     public CompanionModel Companion { get; }
+    public GachaModel Gacha { get; }
     public HeroEquipmentModel HeroEquipment { get; }
     public HeroEquipedModel HeroEquiped { get; }
 
@@ -31,6 +32,7 @@ public class GameSession
             , new("311", 3)
         };
         Companion = new(companionStates);
+        Gacha = new();
 
 
         List<HeroEquipmentState> heroEquipmentStates = new()
