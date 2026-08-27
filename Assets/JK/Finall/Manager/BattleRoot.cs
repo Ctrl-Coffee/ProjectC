@@ -47,6 +47,32 @@ public class BattleRoot : MonoBehaviour
         InitializeBattleUnitViews(enemyBattleUnitModels, _enemyBattleUnitViews);
     }
 
+    public void ResetUnitActiveState()
+    {
+        foreach (var a in _playerBattleUnitViews)
+        {
+            a.gameObject.SetActive(true);
+        }
+
+        foreach (var a in _enemyBattleUnitViews)
+        {
+            a.gameObject.SetActive(true);
+        }
+    }
+
+    public void UpdateUnitActiveState(int battlePosition, bool isActive, bool isPlayer)
+    {
+        BattleUnitViewBase[] battleUnitViewBases = isPlayer ? _playerBattleUnitViews : _enemyBattleUnitViews;
+
+        if (battlePosition < 0 || battlePosition >= battleUnitViewBases.Length)
+        {
+            Debug.LogError($"'{battlePosition}'이 뷰 배열의 유효 범위를 벗어났습니다.");
+            return;
+        }
+
+        battleUnitViewBases[battlePosition].gameObject.SetActive(isActive);
+    }
+
     private void InitializeBattleUnitViews(IReadOnlyList<BattleUnitModelBase> battleUnitModels, IReadOnlyList<BattleUnitViewBase> battleUnitViews)
     {
         if (battleUnitModels == null || battleUnitViews == null)
@@ -75,120 +101,7 @@ public class BattleRoot : MonoBehaviour
                 continue;
             }
 
-            battleUnitViews[index].Initialize(index, battleUnitModels[index]);
+            battleUnitViews[index].Initialize(battleUnitModels[index]);
         }
     }
-
-
-    //public void InitializeField(string mainId, IReadOnlyList<string> companionIds, IReadOnlyList<string> enemyIds)
-    //{
-    //    InitializeMain(mainId);
-    //    InitializeCompanions(companionIds);
-    //    InitializeEnemies(enemyIds);
-    //}
-
-
-
-    //private void InitializeMain(string mainId)
-    //{
-    //    BaseBattleUnitView mainBattleUnitView = _playerBattleUnitViews[MAIN_FORMATION_INDEX];
-
-    //    mainBattleUnitView.Initialize(mainId, MAIN_FORMATION_INDEX);
-    //    mainBattleUnitView.gameObject.SetActive(true);
-    //}
-
-    //private void InitializeCompanions(IReadOnlyList<string> companionIds)
-    //{
-    //    if (companionIds == null)
-    //    {
-    //        Debug.LogError("동료 ID 목록이 null입니다.");
-    //        return;
-    //    }
-
-    //    if (companionIds.Count != COMPANION_FORMATION_INDICES.Length)
-    //    {
-    //        Debug.LogError("동료 ID 목록 개수가 포메이션 슬롯 개수와 일치하지 않습니다.");
-    //        return;
-    //    }
-
-    //    for (int index = 0; index < companionIds.Count; index++)
-    //    {
-    //        int formationSlotIndex = COMPANION_FORMATION_INDICES[index];
-
-    //        BaseBattleUnitView companionBattleUnitView = _playerBattleUnitViews[formationSlotIndex];
-
-    //        string companionId = companionIds[index];
-
-    //        if (string.IsNullOrWhiteSpace(companionId))
-    //        {
-    //            companionBattleUnitView.gameObject.SetActive(false);
-    //            continue;
-    //        }
-
-    //        companionBattleUnitView.Initialize(companionId, formationSlotIndex);
-    //        companionBattleUnitView.gameObject.SetActive(true);
-    //    }
-    //}
-
-    //private void InitializeEnemies(IReadOnlyList<string> enemyIds)
-    //{
-    //    if (enemyIds == null)
-    //    {
-    //        Debug.LogError("적 ID 목록이 null입니다.");
-    //        return;
-    //    }
-
-    //    if (enemyIds.Count != _enemyBattleUnitViews.Length)
-    //    {
-    //        Debug.LogError($"적 ID 목록 개수가 적 유닛 개수와 일치하지 않습니다. ");
-    //        return;
-    //    }
-
-    //    for (int index = 0; index < enemyIds.Count; index++)
-    //    {
-    //        BaseBattleUnitView enemyBattleUnitView = _enemyBattleUnitViews[index];
-
-    //        string enemyId = enemyIds[index];
-
-    //        if (string.IsNullOrWhiteSpace(enemyId))
-    //        {
-    //            enemyBattleUnitView.gameObject.SetActive(false);
-    //            continue;
-    //        }
-
-    //        enemyBattleUnitView.Initialize(enemyId, index);
-    //        enemyBattleUnitView.gameObject.SetActive(true);
-    //    }
-    //}
-
-    //public BaseBattleUnitView FindEnemyTarget(int slotIndex)
-    //{
-    //    BaseBattleUnitView target = FindTarget(_enemyBattleUnitViews, slotIndex); 
-    //    return target;
-    //}
-
-    //public BaseBattleUnitView FindPlayerTarget(int slotIndex)
-    //{
-    //    BaseBattleUnitView target = FindTarget(_playerBattleUnitViews, slotIndex);
-    //    return target;
-    //}
-
-    //private BaseBattleUnitView FindTarget(BaseBattleUnitView[] battleUnitViews, int slotIndex)
-    //{
-    //    for (int index = 0; index < battleUnitViews.Length; index++)
-    //    {
-    //        int targetIndex = (slotIndex + index) % battleUnitViews.Length;
-
-    //        BaseBattleUnitView battleUnitView = battleUnitViews[targetIndex];
-
-    //        if (battleUnitView == null || battleUnitView.IsDead)
-    //        {
-    //            continue;
-    //        }
-
-    //        return battleUnitView;
-    //    }
-
-    //    return null;
-    //}
 }
