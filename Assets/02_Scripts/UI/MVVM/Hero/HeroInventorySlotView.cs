@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HeroInventorySlotView : ViewBase
 {
-    [SerializeField] private Image _icon;
+    [SerializeField] private Image _itemIcon;
     [SerializeField] private Image _selectedImage;
     [SerializeField] private TMPro.TextMeshProUGUI _level;
 
@@ -85,7 +85,7 @@ public class HeroInventorySlotView : ViewBase
 
     private async void LoadIconAsync(string iconPath)
     {
-        _icon.sprite = await GameManager.Resource.LoadAssetAsync<Sprite>(iconPath);
+        _itemIcon.sprite = await GameManager.Resource.LoadAssetAsync<Sprite>(iconPath);
     }
 
     private void SetSelected(bool isSelected)
