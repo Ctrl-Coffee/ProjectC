@@ -13,6 +13,8 @@ public class UIManager
 
     private List<Transform> _canvasLayer;
 
+    private int _opendUICount = 0;
+
     public async UniTask Init()
     {
         if (_canvasLayer == null)
@@ -57,6 +59,11 @@ public class UIManager
                 _popupStack.Push(uiType);
             }
 
+            if(uiRootType != UIRootType.Hud)
+            {
+                _opendUICount++;
+            }
+
             _uiStates[uiType] = UIState.Opened;
 
             ui.OpenUI();
@@ -87,6 +94,11 @@ public class UIManager
         }
 
         _uiStates[uiType] = UIState.Closing;
+
+        if (_uiRootTypes[uiType] != UIRootType.Hud)
+        {
+            _opendUICount--;
+        }
 
         if (isCloseAll == true)
         {
@@ -124,7 +136,7 @@ public class UIManager
         }
     }
 
-    public UIBase GetCurrentFrontUI()
+    public UIBase GetCurrentFrontPopupUI()
     {
         if (_popupStack.Count == 0)
         {
@@ -132,6 +144,11 @@ public class UIManager
         }
 
         return _createdUI[_popupStack.Peek()];
+    }
+
+    public bool ExistOpendUI()
+    {
+        return _opendUICount > 0;
     }
 
     public UniTask<T> OpenContentUI<T>() where T : UIBase

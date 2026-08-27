@@ -43,6 +43,9 @@ public class SwipComponent : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.UI.ExistOpendUI())
+            return;
+
         UpdateInput();
     }
 
