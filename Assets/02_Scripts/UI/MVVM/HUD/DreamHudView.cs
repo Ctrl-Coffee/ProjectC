@@ -14,6 +14,7 @@ public class DreamHudView : ViewBase
     [SerializeField] private UIButtonComponent _companionBtn;
     [SerializeField] private UIButtonComponent _stageBtn;
     [SerializeField] private UIButtonComponent _heroBtn;
+
     [SerializeField] private UIButtonComponent _lobbyBtn;
 
     private UIBase _currentContent;
@@ -29,20 +30,26 @@ public class DreamHudView : ViewBase
 
         Subscribe();
 
+        _gachaBtn.BindButtonEvent(OnOpenGacha);
         _companionBtn.BindButtonEvent(OnOpenCompanion);
         _stageBtn.BindButtonEvent(OnStage);
         _heroBtn.BindButtonEvent(OnOpenHero);
+
         _lobbyBtn.BindButtonEvent(OnChangeSceenToReal);
+
+        _settingBtn.BindButtonEvent(OnOpenSettingUI);
     }
 
     private void OnDisable()
     {
         UnSubscribe();
 
+        _gachaBtn.UnBindButtonAllEvent();
         _companionBtn.UnBindButtonAllEvent();
         _stageBtn.UnBindButtonAllEvent();
         _heroBtn.UnBindButtonAllEvent();
         _lobbyBtn.UnBindButtonAllEvent();
+        _settingBtn.UnBindButtonAllEvent();
     }
 
     private void OnDestroy()
@@ -63,7 +70,7 @@ public class DreamHudView : ViewBase
 
     protected override void OnPropertyChanged(string propertyName)
     {
-        switch(propertyName)
+        switch (propertyName)
         {
             case nameof(CurrencyViewModel.DreamPoint):
                 _dreamPoint.text = _currencyViewModel.DreamPoint.ToString();
@@ -102,6 +109,7 @@ public class DreamHudView : ViewBase
         if (_currentContent == null)
             return;
 
+        ShowLobbyButton();
         _currentContent.CloseUI();
         _currentContent = null;
     }
@@ -109,7 +117,7 @@ public class DreamHudView : ViewBase
     private async void OnOpenCompanion()
     {
         var content = await GameManager.UI.OpenCompanionInventory();
-
+        HideLobbyButton();
         CloseCurrentContent(content);
     }
 
@@ -117,8 +125,21 @@ public class DreamHudView : ViewBase
     private async void OnOpenHero()
     {
         var content = await GameManager.UI.OpenHeroInventory();
-
+        HideLobbyButton();
         CloseCurrentContent(content);
+    }
+
+    private async void OnOpenGacha()
+    {
+        var content = await GameManager.UI.OpenGachaView();
+
+        ShowLobbyButton();
+        CloseCurrentContent(content);
+    }
+
+    private void OnOpenSettingUI()
+    {
+        GameManager.UI.OpenSettingUI();
     }
 
     private void CloseCurrentContent(UIBase content)
@@ -133,12 +154,22 @@ public class DreamHudView : ViewBase
 
         _currentContent = content;
     }
-    
+
     private void RefreshAll()
     {
         _dreamPoint.text = _currencyViewModel.DreamPoint.ToString();
         _fragmentDream.text = _currencyViewModel.DreamFragment.ToString();
         _scrollDream.text = _currencyViewModel.DreamScroll.ToString();
         _inspiration.text = _currencyViewModel.Inspiration.ToString();
+    }
+
+    private void HideLobbyButton()
+    {
+        _lobbyBtn.gameObject.SetActive(false);
+    }
+
+    private void ShowLobbyButton()
+    {
+        _lobbyBtn.gameObject.SetActive(true);
     }
 }
