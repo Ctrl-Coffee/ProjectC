@@ -1374,6 +1374,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 650, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7700000000000006013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7700000000000006011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5c81b7a3d94f60b81c7e5a4d306f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AwayReportRowUI
+  _currencyType: 2
+  _icon: {fileID: 7700000000000007012}
+  _txtLabel: {fileID: 7700000000000000054}
+  _txtValue: {fileID: 7700000000000000064}
 --- !u!1 &7700000000000006021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1429,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 650, y: 64}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &7700000000000006023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7700000000000006021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5c81b7a3d94f60b81c7e5a4d306f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AwayReportRowUI
+  _currencyType: 0
+  _icon: {fileID: 7700000000000007022}
+  _txtLabel: {fileID: 7700000000000000074}
+  _txtValue: {fileID: 7700000000000000084}
 --- !u!1 &7700000000000006031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,6 +1484,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 650, y: 64}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &7700000000000006033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7700000000000006031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5c81b7a3d94f60b81c7e5a4d306f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AwayReportRowUI
+  _currencyType: 1
+  _icon: {fileID: 7700000000000007032}
+  _txtLabel: {fileID: 7700000000000000094}
+  _txtValue: {fileID: 7700000000000000104}
 --- !u!1 &7700000000000007011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,7 +1565,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 899fa0aad4654488abd2e26b078c542d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 81b8c16e3f8f0db4fb93fe5b78dae48e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1592,7 +1640,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d651cbc58b9d6430f8b5f6404488f9ed, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4f0d45e479358240a04dec348a92e66, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1667,7 +1715,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e0bd30aa80af44c3f8dcf51bb4aa5216, type: 3}
+  m_Sprite: {fileID: 2828309583515013855, guid: 8cb51a27683add14ab47cea3ad295ae3, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1729,9 +1777,10 @@ MonoBehaviour:
   _isPlayAnimation: 1
   _panel: {fileID: 7700000000000009012}
   _txtAwayDuration: {fileID: 7700000000000000044}
-  _rowEnergy: {fileID: 7700000000000006013}
-  _rowMoney: {fileID: 7700000000000006023}
-  _rowDreamPoint: {fileID: 7700000000000006033}
+  _rows:
+  - {fileID: 7700000000000006013}
+  - {fileID: 7700000000000006023}
+  - {fileID: 7700000000000006033}
   _btnConfirm: {fileID: 7700000000000009036}
 --- !u!1 &7700000000000009011
 GameObject:
@@ -2059,48 +2108,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7700000000000006013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7700000000000006011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e5c81b7a3d94f60b81c7e5a4d306f19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AwayReportRowUI
-  _icon: {fileID: 7700000000000007012}
-  _txtLabel: {fileID: 7700000000000000054}
-  _txtValue: {fileID: 7700000000000000064}
---- !u!114 &7700000000000006023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7700000000000006021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e5c81b7a3d94f60b81c7e5a4d306f19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AwayReportRowUI
-  _icon: {fileID: 7700000000000007022}
-  _txtLabel: {fileID: 7700000000000000074}
-  _txtValue: {fileID: 7700000000000000084}
---- !u!114 &7700000000000006033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7700000000000006031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e5c81b7a3d94f60b81c7e5a4d306f19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AwayReportRowUI
-  _icon: {fileID: 7700000000000007032}
-  _txtLabel: {fileID: 7700000000000000094}
-  _txtValue: {fileID: 7700000000000000104}

@@ -1,21 +1,72 @@
 ﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class AwayReportRowUI : MonoBehaviour
+public class AwayReportRowUI : MonoBehaviour, ICurrencyEffectSource
 {
     private const float COUNT_UP_DURATION = 0.7f;
-
     private const float ICON_PUNCH_SCALE = 0.25f;
     private const float ICON_PUNCH_DURATION = 0.35f;
     private const int ICON_PUNCH_VIBRATO = 6;
     private const float ICON_PUNCH_ELASTICITY = 0.6f;
+
+    [SerializeField] private CurrencyType _currencyType;
 
     [SerializeField] private RectTransform _icon;
     [SerializeField] private TextMeshProUGUI _txtLabel;
     [SerializeField] private TextMeshProUGUI _txtValue;
 
     private long _targetAmount;
+
+    private Image _iconImage;
+
+    public CurrencyType CurrencyType
+    {
+        get
+        {
+            return _currencyType;
+        }
+    }
+
+    public bool IsVisible
+    {
+        get
+        {
+            return gameObject.activeSelf;
+        }
+    }
+
+    public RectTransform Icon
+    {
+        get
+        {
+            return _icon;
+        }
+    }
+
+    public Sprite IconSprite
+    {
+        get
+        {
+            if (null == _icon)
+            {
+                return null;
+            }
+
+            if (null == _iconImage)
+            {
+                _iconImage = _icon.GetComponent<Image>();
+            }
+
+            if (null == _iconImage)
+            {
+                return null;
+            }
+
+            return _iconImage.sprite;
+        }
+    }
 
     public void SetAmount(long amount)
     {

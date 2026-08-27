@@ -11,15 +11,16 @@ public class AwayReportUI : UIBase
     private const float COUNT_UP_OPEN_GAP = 0.08f;
 
     [SerializeField] private TextMeshProUGUI _txtAwayDuration;
-
-    [SerializeField] private AwayReportRowUI _rowEnergy;
-    [SerializeField] private AwayReportRowUI _rowMoney;
-    [SerializeField] private AwayReportRowUI _rowDreamPoint;
-
+    [SerializeField] private AwayReportRowUI[] _rows;
     [SerializeField] private UIButtonComponent _btnConfirm;
 
     private Sequence _countUpSequence;
     private Tween _openTween;
+
+    private AwayReport _report;
+
+    private bool _hasReport;
+    private bool _isCloseRequested;
 
     public override Tween PlayOpenAnimation()
     {
@@ -44,6 +45,13 @@ public class AwayReportUI : UIBase
 
         _openTween = null;
 
+        if (_hasReport && !_isCloseRequested)
+        {
+            AwayReportFlow.OnReportClosed(null);
+        }
+
+        _hasReport = false;
+
         if (null == _btnConfirm)
         {
             return;
@@ -54,9 +62,31 @@ public class AwayReportUI : UIBase
 
     public void SetReport(AwayReport report)
     {
+        _report = report;
+        _hasReport = true;
+        _isCloseRequested = false;
+
+        AwayReportFlow.OnReportOpened();
+
         SetAwayDuration(report.AwayDuration);
 
-        PlayCountUp(report);
+        PlayCountUp();
+    }
+
+    public override void OnClickCloseButton()
+    {
+        if (_isCloseRequested)
+        {
+            return;
+        }
+
+        _isCloseRequested = true;
+
+        KillCountUp();
+
+        AwayReportFlow.OnReportClosed(_rows);
+
+        base.OnClickCloseButton();
     }
 
     private void SetAwayDuration(TimeSpan duration)
@@ -70,26 +100,42 @@ public class AwayReportUI : UIBase
         _txtAwayDuration.text = Utils.FormatDuration((float)duration.TotalSeconds);
     }
 
-    private void PlayCountUp(AwayReport report)
+    private void PlayCountUp()
     {
         KillCountUp();
+
+        if (null == _rows)
+        {
+            Logger.LogError("자리비움 리포트 행이 연결되지 않았습니다.");
+            return;
+        }
 
         _countUpSequence = DOTween.Sequence().SetUpdate(true);
 
         float at = GetOpenRemainSeconds() + COUNT_UP_OPEN_GAP;
 
-        at = InsertRow(_rowEnergy, report.Energy, at);
-        at = InsertRow(_rowMoney, report.Money, at);
-        at = InsertRow(_rowDreamPoint, report.DreamPoint, at);
+        for (int i = 0; i < _rows.Length; i++)
+        {
+            at = InsertRow(_rows[i], at);
+        }
 
         _countUpSequence.OnKill(OnCountUpKilled);
     }
 
-    private float InsertRow(AwayReportRowUI row, long amount, float atPosition)
+    private float InsertRow(AwayReportRowUI row, float atPosition)
     {
         if (null == row)
         {
             Logger.LogError("자리비움 리포트 행이 연결되지 않았습니다.");
+            return atPosition;
+        }
+
+        long amount = _report.GetAmount(row.CurrencyType);
+
+        row.gameObject.SetActive(0 < amount);
+
+        if (amount <= 0)
+        {
             return atPosition;
         }
 
