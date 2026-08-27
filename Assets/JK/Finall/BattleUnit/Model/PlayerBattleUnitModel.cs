@@ -1,11 +1,15 @@
-﻿using UnityEngine;
-
-public class PlayerBattleUnitModel : BattleUnitModelBase
+﻿public class PlayerBattleUnitModel : BattleUnitModelBase
 {
+    public PlayerBattleUnitModel(int battlePosition) : base(battlePosition) { }
+
+    public override void SetActive(bool isActive)
+    {
+        BattleManager.Instance.RequestUpdatePlayerUnitActive(BattlePosition, isActive);
+    }
+
     protected override void UseSkill(int battlePosition, string skillId)
     {
-        Debug.Log($"아군 {battlePosition} : {skillId} 사용");
-        //SkillExecutionData skillExecutionData = new SkillExecutionData(_attack, _criticalChance, _criticalDamageMultiplier);
-        //BattleManager.Instance.RequestPlayerUseSkill(battlePosition, skillId, skillExecutionData);
+        SkillExecutionData skillExecutionData = new SkillExecutionData(_attack, _criticalChance, _criticalDamageMultiplier);
+        BattleManager.Instance.RequestPlayerSkillExecution(battlePosition, skillId, skillExecutionData);
     }
 }

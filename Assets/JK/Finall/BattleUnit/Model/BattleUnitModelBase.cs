@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public abstract class BattleUnitModelBase : ModelBase
 {
-    private string _unitId;
-    private string _animKey;
+    private int _battlePosition;
+
+    private string _uId;
+    private string _animationSetKey;
 
     protected float _maxHp;
     protected float _hp;
@@ -18,8 +21,8 @@ public abstract class BattleUnitModelBase : ModelBase
     private string _basicAttackSkillId;
     private string _signatureSkillId;
 
-    private float _baseBasicAttackSkillCooldown;
-    private float _baseSignatureSkillCooldown;
+    private float _basicAttackSkillCooldown;
+    private float _signatureSkillCooldown;
 
     private float _calculatedBasicAttackSkillCooldown;
     private float _calculatedsignatureSkillCooldown;
@@ -29,9 +32,28 @@ public abstract class BattleUnitModelBase : ModelBase
 
     private bool _isDead;
 
+    private bool _isInitialized;
+
+    public event Action<bool> DeadStateChanged;
+
+    public int BattlePosition
+    {
+        get { return _battlePosition; }
+    }
+
     public string AnimKey
     {
-        get { return _animKey; }
+        get { return _animationSetKey; }
+    }
+
+    public float MaxHp
+    {
+        get { return _maxHp; }
+    }
+
+    public bool IsInitialized
+    {
+        get { return _isInitialized; }
     }
 
     public float Hp
@@ -87,31 +109,13 @@ public abstract class BattleUnitModelBase : ModelBase
 
             _isDead = value;
             OnPropertyChanged();
+            OnDeadStateChanged();
         }
     }
 
-    //공격속도 변경 로직 추가시 사용
-    private float AttackSpeed
+    public BattleUnitModelBase(int battlePosition)
     {
-        set
-        {
-            if (_attackSpeed == value) { return; }
-
-            _attackSpeed = value;
-            UpdateBasicAttackSkillCooldown();
-        }
-    }
-
-    //쿨타임 감소 변경 로직 추가시 사용
-    private float CooldownReduction
-    {
-        set
-        {
-            if (_cooldownReduction == value) { return; }
-
-            _cooldownReduction = value;
-            UpdateSignatureSkillCooldown();
-        }
+        _battlePosition = battlePosition;
     }
 
     public void Initialize(BattleUnitData battleUnitData)
@@ -130,44 +134,71 @@ public abstract class BattleUnitModelBase : ModelBase
         OnPropertyChanged(nameof(IsBasicAttackSkillReady));
         OnPropertyChanged(nameof(IsSignatureSkillReady));
     }
+    
+    public void Clear()
+    {
+        ClearIdentity();
+        ClearUnitStats();
+        ClearUnitSkills();
+        ClearSkillCooldowns();
+        InitializeOnce();
+    }
 
-    public void StartBattle()
+    public void EnterBattle()
     {
         BasicAttackSkillCooldown();
         SignatureSkillCooldown();
     }
 
-    public void UseBasicAttackSkill(int battlePosition)
+    public void ExitBattle()
+    {
+        CancelBasicAttackSkillCooldown();
+        CancelSignatureSkillCooldown();
+    }
+
+    public bool CheckBasicAttackSkillUsable()
     {
         if (!IsBasicAttackSkillReady)
         {
-            return;
+            return false;
         }
 
+        bool isUsable = BattleManager.Instance.CheckPlayerSkillUsable(_basicAttackSkillId);
+        return isUsable;
+    }
+
+    public bool CheckSignatureSkillUsable()
+    {
+        if (!IsSignatureSkillReady)
+        {
+            return false;
+        }
+
+        bool isUsable = BattleManager.Instance.CheckPlayerSkillUsable(_signatureSkillId);
+        return isUsable;
+    }
+
+    public void UseBasicAttackSkill(int battlePosition)
+    {
         IsBasicAttackSkillReady = false;
-
         UseSkill(battlePosition, _basicAttackSkillId);
-
         BasicAttackSkillCooldown();
     }
 
     public void UseSignatureSkill(int battlePosition)
     {
-        if (!IsSignatureSkillReady)
-        {
-            return;
-        }
-
         IsSignatureSkillReady = false;
-
         UseSkill(battlePosition, _signatureSkillId);
-
         SignatureSkillCooldown();
     }
 
-    public void TakeDamage(float damage)
+    public void ReceiveAttack(SkillExecutionData skillExecutionData)
     {
-        Hp -= damage;
+        DefenseStats defenseStats = new DefenseStats(_defense);
+
+        float damage = BattleUtility.CalculateDamage(skillExecutionData, defenseStats);
+
+        TakeDamage(damage);
     }
 
     public void Heal(float amount)
@@ -177,8 +208,9 @@ public abstract class BattleUnitModelBase : ModelBase
 
     private void InitializeIdentity(BattleUnitData battleUnitData)
     {
-        _unitId = battleUnitData.UnitId;
-        _animKey = battleUnitData.Key;
+        _uId = battleUnitData.UId;
+        _animationSetKey = battleUnitData.AnimationSetKey;
+        _isInitialized = true;
     }
 
     private void InitializeUnitStats(BattleUnitData battleUnitData)
@@ -191,6 +223,7 @@ public abstract class BattleUnitModelBase : ModelBase
         _criticalDamageMultiplier = battleUnitData.CriticalDamageMultiplier;
         _attackSpeed = battleUnitData.AttackSpeed;
         _cooldownReduction = battleUnitData.CooldownReduction;
+        _isDead = false;
     }
 
     private void InitializeUnitSkills(BattleUnitData battleUnitData)
@@ -216,8 +249,8 @@ public abstract class BattleUnitModelBase : ModelBase
             return;
         }
 
-        _baseBasicAttackSkillCooldown = basicAttackSkillData.CoolTime;
-        _baseSignatureSkillCooldown = signatureSkillData.CoolTime;
+        _basicAttackSkillCooldown = basicAttackSkillData.CoolTime;
+        _signatureSkillCooldown = signatureSkillData.CoolTime;
 
         UpdateBasicAttackSkillCooldown();
         UpdateSignatureSkillCooldown();
@@ -226,20 +259,61 @@ public abstract class BattleUnitModelBase : ModelBase
         _isSignatureSkillReady = _calculatedsignatureSkillCooldown <= 0f;
     }
 
-    public void Clear()
+    private void ClearIdentity()
     {
-        Hp = 0;
-        Debug.Log("초기화");
+        _uId = string.Empty;
+        _animationSetKey = string.Empty;
+        _isInitialized = false;
+    }
+
+    private void ClearUnitStats()
+    {
+        _maxHp = 0f;
+        _hp = 0f;
+        _attack = 0f;
+        _defense = 0f;
+        _criticalChance = 0f;
+        _criticalDamageMultiplier = 0f;
+        _attackSpeed = 0f;
+        _cooldownReduction = 0f;
+        _isDead = false;
+    }
+
+    private void ClearUnitSkills()
+    {
+        _basicAttackSkillId = string.Empty;
+        _signatureSkillId = string.Empty;
+    }
+
+    private void ClearSkillCooldowns()
+    {
+        _basicAttackSkillCooldown = 0f;
+        _signatureSkillCooldown = 0f;
+        _calculatedBasicAttackSkillCooldown = 0f;
+        _calculatedsignatureSkillCooldown = 0f;
+
+        IsBasicAttackSkillReady = false;
+        IsSignatureSkillReady = false;
     }
 
     private void BasicAttackSkillCooldown()
     {
-        TimeManagerTemp.Instance.RequestStartCooldown($"{_unitId}_{_basicAttackSkillId}", _calculatedBasicAttackSkillCooldown, OnBasicAttackSkillCooldownCompleted);
+        TimeManagerTemp.Instance.RequestStartCooldown($"{_uId}_{_basicAttackSkillId}", _calculatedBasicAttackSkillCooldown, OnBasicAttackSkillCooldownCompleted);
     }
 
     private void SignatureSkillCooldown()
     {
-        TimeManagerTemp.Instance.RequestStartCooldown($"{_unitId}_{_signatureSkillId}", _calculatedsignatureSkillCooldown, OnSignatureSkillCooldownCompleted);
+        TimeManagerTemp.Instance.RequestStartCooldown($"{_uId}_{_signatureSkillId}", _calculatedsignatureSkillCooldown, OnSignatureSkillCooldownCompleted);
+    }
+
+    private void CancelBasicAttackSkillCooldown()
+    {
+        TimeManagerTemp.Instance.RequestCancelCooldown($"{_uId}_{_basicAttackSkillId}");
+    }
+
+    private void CancelSignatureSkillCooldown()
+    {
+        TimeManagerTemp.Instance.RequestCancelCooldown($"{_uId}_{_signatureSkillId}");
     }
 
     private void OnBasicAttackSkillCooldownCompleted()
@@ -254,13 +328,29 @@ public abstract class BattleUnitModelBase : ModelBase
 
     private void UpdateBasicAttackSkillCooldown()
     {
-        _calculatedBasicAttackSkillCooldown = BattleUtility.CalculateBasicAttackSkillCooldown(_baseBasicAttackSkillCooldown, _attackSpeed);
+        _calculatedBasicAttackSkillCooldown = BattleUtility.CalculateBasicAttackSkillCooldown(_basicAttackSkillCooldown, _attackSpeed);
     }
 
     private void UpdateSignatureSkillCooldown()
     {
-        _calculatedsignatureSkillCooldown = BattleUtility.CalculateSignatureSkillCooldown(_baseSignatureSkillCooldown, _cooldownReduction);
+        _calculatedsignatureSkillCooldown = BattleUtility.CalculateSignatureSkillCooldown(_signatureSkillCooldown, _cooldownReduction);
     }
-    
+
+    private void TakeDamage(float damage)
+    {
+        Hp -= damage;
+    }
+
+    private void OnDeadStateChanged()
+    {
+        if (DeadStateChanged == null)
+        {
+            return;
+        }
+
+        DeadStateChanged.Invoke(_isDead);
+    }
+
+    public abstract void SetActive(bool isActive);
     protected abstract void UseSkill(int battlePosition, string skillId);
 }

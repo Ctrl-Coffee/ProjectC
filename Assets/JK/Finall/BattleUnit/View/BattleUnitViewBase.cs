@@ -9,7 +9,7 @@ public static class BehaviorGraphVariableNames
 }
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(CircleCollider2D))]
 public abstract class BattleUnitViewBase : MonoBehaviour
 {
     [SerializeField] private BehaviorGraphAgent _behaviorGraphAgent;
@@ -18,14 +18,12 @@ public abstract class BattleUnitViewBase : MonoBehaviour
     private BlackboardVariable<bool> _isBasicAttackSkillReady;
     private BlackboardVariable<bool> _isSignatureSkillReady;
 
-    private int _battlePosition;
-
     private BattleUnitAnimator _battleUnitAnimator;
     private BattleUnitViewModel _battleUnitViewModel;
 
     public int BattlePosition
     {
-        get { return _battlePosition; }
+        get { return _battleUnitViewModel.BattlePosition; }
     }
 
     public bool IsIdle
@@ -60,22 +58,27 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         _battleUnitViewModel.Dispose();
     }
 
-    public void Initialize(int battlePosition, BattleUnitModelBase baseBattleUnitModel)
+    public void Initialize(BattleUnitModelBase baseBattleUnitModel)
     {
-        _battlePosition = battlePosition;
         InitializeViewModel(baseBattleUnitModel);
     }
 
     public void StartBattle()
     {
-        _behaviorGraphAgent.enabled = true;
-        _battleUnitViewModel.StartBattle();
+        if (!_battleUnitViewModel.IsInitialized)
+        {
+            _battleUnitViewModel.RequestSetActive(false);
+            return;
+        }
+
+        _behaviorGraphAgent.Restart();
+        _battleUnitViewModel.EnterBattle();
     }
 
     public void EndBattle()
     {
-        // _battleUnitViewModel.EndBattle();
-        _behaviorGraphAgent.enabled = false;
+        _battleUnitViewModel.ExitBattle();
+        _behaviorGraphAgent.End();
     }
 
     public void UseBasicAttackSkill()
@@ -85,7 +88,12 @@ public abstract class BattleUnitViewBase : MonoBehaviour
             return;
         }
 
-        _battleUnitViewModel.RequestUseBasicAttackSkill(_battlePosition);
+        if (!_battleUnitViewModel.RequestCheckBasicAttackSkillUsable())
+        {
+            return;
+        }
+
+
         _battleUnitAnimator.Play(BattleUnitAnimationType.BasicAttack);
     }
 
@@ -96,8 +104,22 @@ public abstract class BattleUnitViewBase : MonoBehaviour
             return;
         }
 
-        _battleUnitViewModel.RequestUseSignatureSkill(_battlePosition);
+        if (!_battleUnitViewModel.RequestCheckSignatureSkillUsable())
+        {
+            return;
+        }
+
         _battleUnitAnimator.Play(BattleUnitAnimationType.Signature);
+    }
+
+    public void OnBasicAttackAction()
+    {
+        _battleUnitViewModel.RequestUseBasicAttackSkill(_battleUnitViewModel.BattlePosition);
+    }
+
+    public void OnSignatureAction()
+    {
+        _battleUnitViewModel.RequestUseSignatureSkill(_battleUnitViewModel.BattlePosition);
     }
 
     private void CacheBehaviorVariables()
@@ -128,11 +150,6 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         _battleUnitAnimator.ApplyAnimationSet(addressableKey);
     }
 
-    private void UpdateHpBar(float hp)
-    {
-        Debug.Log($"체력 변경 {hp}");
-    }
-
     private void UpdateBasicAttackSkillReady(bool isReady)
     {
         _isBasicAttackSkillReady.Value = isReady;
@@ -157,9 +174,7 @@ public abstract class BattleUnitViewBase : MonoBehaviour
     {
         if (isDead)
         {
-            Debug.Log($"{gameObject.name} 사망");
-
-            gameObject.SetActive(false);
+            Death().Forget();
         }
     }
 
@@ -169,7 +184,9 @@ public abstract class BattleUnitViewBase : MonoBehaviour
 
         await UniTask.WaitUntil(_battleUnitAnimator.IsDeathAnimationCompleted);
 
-        gameObject.SetActive(false);
+        EndBattle();
+
+        _battleUnitViewModel.RequestSetActive(false);
     }
 
     private void NotifySkillReadyStateChanged(UnitSkillType unitSkillType)
@@ -183,9 +200,6 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         {
             case nameof(_battleUnitViewModel.AnimKey):
                 UpdateAnimation(_battleUnitViewModel.AnimKey);
-                break;
-            case nameof(_battleUnitViewModel.Hp):
-                UpdateHpBar(_battleUnitViewModel.Hp);
                 break;
             case nameof(_battleUnitViewModel.IsBasicAttackSkillReady):
                 UpdateBasicAttackSkillReady(_battleUnitViewModel.IsBasicAttackSkillReady);

@@ -8,6 +8,17 @@ public class BattleUnitViewModel
 
     public event Action<string> PropertyChanged;
 
+    public int BattlePosition
+    {
+        get { return _battleUnitModelBase.BattlePosition; }
+    }
+
+
+    public bool IsInitialized
+    {
+        get { return _battleUnitModelBase.IsInitialized; }
+    }
+
     public string AnimKey
     {
         get { return _battleUnitModelBase.AnimKey; }
@@ -41,6 +52,11 @@ public class BattleUnitViewModel
             return;
         }
 
+        if (_battleUnitModelBase != null)
+        {
+            _battleUnitModelBase.PropertyChanged -= OnPropertyChanged;
+        }
+
         _battleUnitModelBase = battleUnitModel;
         _battleUnitModelBase.PropertyChanged += OnPropertyChanged;
     }
@@ -56,9 +72,26 @@ public class BattleUnitViewModel
         _battleUnitModelBase = null;
     }
 
-    public void StartBattle()
+    public void EnterBattle()
     {
-        _battleUnitModelBase.StartBattle();
+        _battleUnitModelBase.EnterBattle();
+    }
+
+    public void ExitBattle()
+    {
+        _battleUnitModelBase.ExitBattle();
+    }
+
+    public bool RequestCheckBasicAttackSkillUsable()
+    {
+        bool isUsable = _battleUnitModelBase.CheckBasicAttackSkillUsable();
+        return isUsable;
+    }
+
+    public bool RequestCheckSignatureSkillUsable()
+    {
+        bool isUsable = _battleUnitModelBase.CheckSignatureSkillUsable();
+        return isUsable;
     }
 
     public void RequestUseBasicAttackSkill(int battlePosition)
@@ -69,6 +102,11 @@ public class BattleUnitViewModel
     public void RequestUseSignatureSkill(int battlePosition)
     {
         _battleUnitModelBase.UseSignatureSkill(battlePosition);
+    }
+
+    public void RequestSetActive(bool isActive)
+    {
+        _battleUnitModelBase.SetActive(isActive);
     }
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
