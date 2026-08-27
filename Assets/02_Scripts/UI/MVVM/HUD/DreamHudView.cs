@@ -1,9 +1,7 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
-public class DreamHudUI : UIBase
+public class DreamHudView : ViewBase
 {
     [SerializeField] private TextMeshProUGUI _dreamPoint;
     [SerializeField] private TextMeshProUGUI _fragmentDream;
@@ -20,8 +18,17 @@ public class DreamHudUI : UIBase
 
     private UIBase _currentContent;
 
+    private CurrencyViewModel _currencyViewModel;
+
     private void OnEnable()
     {
+        if (_currencyViewModel == null)
+        {
+            BindViewModel();
+        }
+
+        Subscribe();
+
         _companionBtn.BindButtonEvent(OnOpenCompanion);
         _stageBtn.BindButtonEvent(OnStage);
         _heroBtn.BindButtonEvent(OnOpenHero);
@@ -30,10 +37,46 @@ public class DreamHudUI : UIBase
 
     private void OnDisable()
     {
+        UnSubscribe();
+
         _companionBtn.UnBindButtonAllEvent();
         _stageBtn.UnBindButtonAllEvent();
         _heroBtn.UnBindButtonAllEvent();
         _lobbyBtn.UnBindButtonAllEvent();
+    }
+
+    protected override void BindViewModel()
+    {
+        _currencyViewModel = GameManager.ViewModel.CreateCurrencyViewModel();
+    }
+
+    protected override void OnPropertyChanged(string propertyName)
+    {
+        switch(propertyName)
+        {
+            case nameof(CurrencyViewModel.DreamPoint):
+                _dreamPoint.text = _currencyViewModel.DreamPoint.ToString();
+                break;
+            case nameof(CurrencyViewModel.DreamFragment):
+                _fragmentDream.text = _currencyViewModel.DreamFragment.ToString();
+                break;
+            case nameof(CurrencyViewModel.DreamScroll):
+                _scrollDream.text = _currencyViewModel.DreamScroll.ToString();
+                break;
+            case nameof(CurrencyViewModel.Inspiration):
+                _inspiration.text = _currencyViewModel.Inspiration.ToString();
+                break;
+        }
+    }
+
+    protected override void Subscribe()
+    {
+        _currencyViewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
+    }
+
+    protected override void UnSubscribe()
+    {
+        _currencyViewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
     }
 
     private void OnChangeSceenToReal()

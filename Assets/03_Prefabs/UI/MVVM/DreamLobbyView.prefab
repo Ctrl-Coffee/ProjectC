@@ -2129,9 +2129,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 606477927605477511}
-  - component: {fileID: 910722875868794528}
+  - component: {fileID: 4753510629721155190}
   m_Layer: 5
-  m_Name: DreamLobbyUI
+  m_Name: DreamLobbyView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2158,7 +2158,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &910722875868794528
+--- !u!114 &4753510629721155190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2167,11 +2167,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6844817169732586087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aa45b3f6aedc3144b13510ee55b6596, type: 3}
+  m_Script: {fileID: 11500000, guid: 18da45af952023e49a6ef6b60e75a8ed, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DreamLobbyUI
+  m_EditorClassIdentifier: Assembly-CSharp::DreamHudView
   _isPlayAnimation: 0
-  _panel: {fileID: 0}
+  _panel: {fileID: 606477927605477511}
   _dreamPoint: {fileID: 788088180741091950}
   _fragmentDream: {fileID: 8627561463746496329}
   _scrollDream: {fileID: 6401714778865222755}

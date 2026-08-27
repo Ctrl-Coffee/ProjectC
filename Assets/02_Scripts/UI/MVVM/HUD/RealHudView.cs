@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class RealHudUI : UIBase
+public class RealHudView : ViewBase
 {
     [SerializeField] private TextMeshProUGUI _money;
     [SerializeField] private TextMeshProUGUI _energy;
@@ -16,8 +16,17 @@ public class RealHudUI : UIBase
     [SerializeField] private UIButtonComponent _computerBtn;
     [SerializeField] private UIButtonComponent _perkBtn;
 
+    private CurrencyViewModel _currencyViewModel;
+
     private void OnEnable()
     {
+        if(_currencyViewModel == null)
+        {
+            BindViewModel();
+        }
+
+        Subscribe();
+
         _settingBtn.BindButtonEvent(OnOpenSettingUI);
 
         _goDreamBtn.BindButtonEvent(OnChangeSceenToDream);
@@ -28,12 +37,48 @@ public class RealHudUI : UIBase
 
     private void OnDisable()
     {
+        UnSubscribe();
+
         _settingBtn.UnBindButtonAllEvent();
         _goDreamBtn.UnBindButtonAllEvent();
 
         _coffeeBtn.UnBindButtonAllEvent();
         _computerBtn.UnBindButtonAllEvent();
         _perkBtn.UnBindButtonAllEvent();
+    }
+
+    protected override void BindViewModel()
+    {
+        _currencyViewModel = GameManager.ViewModel.CreateCurrencyViewModel();
+    }
+
+    protected override void Subscribe()
+    {
+        _currencyViewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
+    }
+
+    protected override void UnSubscribe()
+    {
+        _currencyViewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
+    }
+
+    protected override void OnPropertyChanged(string propertyName)
+    {
+        switch (propertyName)
+        {
+            case nameof(CurrencyViewModel.Money):
+                _money.text = _currencyViewModel.Money.ToString();
+                break;
+            case nameof(CurrencyViewModel.Energy):
+                _energy.text = _currencyViewModel.Energy.ToString();
+                break;
+            case nameof(CurrencyViewModel.DreamPoint):
+                _dreamPoint.text = _currencyViewModel.DreamPoint.ToString();
+                break;
+            case nameof(CurrencyViewModel.Inspiration):
+                _inspiration.text = _currencyViewModel.Inspiration.ToString();
+                break;
+        }
     }
 
     private void OnOpenSettingUI()
