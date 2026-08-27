@@ -89,10 +89,10 @@ public class DataTableManager
         if (null == PlayerLevelDataTable) return null;
         return PlayerLevelDataTable.TryGetValue(level.ToString(), out var data) ? data : null;
     }
-    public EquipmentLevelData GetEquipmentLevelData(int level)
+    public EquipmentLevelData GetEquipmentLevelData(string id)
     {
         if (null == EquipmentLevelDataTable) return null;
-        return EquipmentLevelDataTable.TryGetValue(level.ToString(), out var data) ? data : null;
+        return EquipmentLevelDataTable.TryGetValue(id, out var data) ? data : null;
     }
     public EquipmentData GetEquipmentData(string id)
     {

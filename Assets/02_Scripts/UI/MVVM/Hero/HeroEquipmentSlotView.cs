@@ -87,20 +87,32 @@ public class HeroEquipmentSlotView : ViewBase
 
     private async void LoadIconAsync()
     {
-        if(_heroEquipmentId == null)
+        if (_heroEquipmentId == null)
         {
             _icon.sprite = null;
+            _icon.gameObject.SetActive(false);
+
+            _level.gameObject.SetActive(false);
+
             return;
-        }   
+        }
 
         _icon.sprite = await GameManager.Resource.LoadAssetAsync<Sprite>
             (GameManager.DataTable.GetEquipmentData(_heroEquipmentId).IconPath);
+        _icon.gameObject.SetActive(true);
+
+        _level.gameObject.SetActive(true);
+
     }
 
     private void OnClickSlot()
     {
         _viewModel.UnEquip(_type);
+
+        _level.gameObject.SetActive(false);
+
         _icon.sprite = null;
+        _icon.gameObject.SetActive(false);
     }
 }
 

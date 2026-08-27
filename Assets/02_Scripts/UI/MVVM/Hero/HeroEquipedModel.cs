@@ -27,7 +27,7 @@ public class HeroEquipedModel : ModelBase
             case EquipmentType.Armor:
                 EquipedArmorId = equipmentId;
                 break;
-            case EquipmentType.Accessories:
+            case EquipmentType.Accessory:
                 EquipedAccessoryId = equipmentId;
                 break;
         }
@@ -45,7 +45,7 @@ public class HeroEquipedModel : ModelBase
             case EquipmentType.Armor:
                 EquipedArmorId = null;
                 break;
-            case EquipmentType.Accessories:
+            case EquipmentType.Accessory:
                 EquipedAccessoryId = null;
                 break;
         }
@@ -59,7 +59,7 @@ public class HeroEquipedModel : ModelBase
         {
             EquipmentType.Weapon => EquipedWeaponId,
             EquipmentType.Armor => EquipedArmorId,
-            EquipmentType.Accessories => EquipedAccessoryId,
+            EquipmentType.Accessory => EquipedAccessoryId,
             _ => null,
         };
     }

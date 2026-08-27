@@ -17,52 +17,26 @@ public class GrowthSystem
         return new CharacterStatData(levelData.BaseAttack, levelData.BaseDefense, levelData.HP);
     }
 
-    public CharacterStatData GetEquipmentFinalStat(string equipmentId, int level)
-    {
-        EquipmentLevelData levelData = GameManager.DataTable.GetEquipmentLevelData(level);
-        EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
+    //public CharacterStatData GetEquipmentFinalStat(string equipmentId, int level)
+    //{
+    //    EquipmentLevelData levelData = GameManager.DataTable.GetEquipmentLevelData(level);
+    //    EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
 
-        if (levelData == null)
-        {
-            Debug.LogError($"장비 레벨데이터가 없습니다. 레벨 : {level}");
-            return null;
-        }
+    //    if (levelData == null)
+    //    {
+    //        Debug.LogError($"장비 레벨데이터가 없습니다. 레벨 : {level}");
+    //        return null;
+    //    }
 
-        if (equipmentData == null)
-        {
-            Debug.LogError($"장비 데이터가 없습니다. 장비 : {equipmentId}");
-            return null;
-        }
+    //    if (equipmentData == null)
+    //    {
+    //        Debug.LogError($"장비 데이터가 없습니다. 장비 : {equipmentId}");
+    //        return null;
+    //    }
 
-        float multiplier = levelData.StatMultiplier;
-        return new CharacterStatData(equipmentData.BaseAttack * multiplier, equipmentData.BaseDefense * multiplier, equipmentData.BaseHp * multiplier);
-    }
-
-    public CharacterSkillEffectData GetEquipmentFinalSkill(string equipmentId, int level)
-    {
-        EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
-        if (equipmentData == null)
-        {
-            Debug.LogError($"장비 데이터가 없습니다 장비 : {equipmentId}");
-            return null;
-        }
-
-        SkillData skillData = GameManager.DataTable.GetSkillData(equipmentData.SkillId);
-        if (skillData == null)
-        {
-            Debug.LogError($"스킬 데이터가 없습니다. 스킬 : {equipmentData.SkillId}");
-            return null;
-        }
-
-        EquipmentLevelData levelData = GameManager.DataTable.GetEquipmentLevelData(level);
-        if (levelData == null)
-        {
-            Debug.LogError($"장비 레벨 데이터가 없습니다. 레벨 : {level}");
-            return null;
-        }
-
-        return new CharacterSkillEffectData(skillData, skillData.BaseEffect * levelData.SkillMultiplier);
-    }
+    //    float multiplier = levelData.StatMultiplier;
+    //    return new CharacterStatData(equipmentData.BaseAttack * multiplier, equipmentData.BaseDefense * multiplier, equipmentData.BaseHp * multiplier);
+    //}
 
     #endregion
 
@@ -96,34 +70,34 @@ public class GrowthSystem
 
         return GameManager.Session.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
     }
-    public bool IsEquipmentMaxLevel(int level)
-    {
-        return GameManager.DataTable.GetEquipmentLevelData(level + 1) == null;
-    }
+    //public bool IsEquipmentMaxLevel(int level)
+    //{
+    //    return GameManager.DataTable.GetEquipmentLevelData(level + 1) == null;
+    //}
 
-    public bool CheckEquipmentCanLevelUp(int level)
-    {
-        if (IsEquipmentMaxLevel(level))
-        {
-            return false;
-        }
+    //public bool CheckEquipmentCanLevelUp(int level)
+    //{
+    //    if (IsEquipmentMaxLevel(level))
+    //    {
+    //        return false;
+    //    }
 
-        EquipmentLevelData nextLevelData = GameManager.DataTable.GetEquipmentLevelData(level + 1);
+    //    EquipmentLevelData nextLevelData = GameManager.DataTable.GetEquipmentLevelData(level + 1);
 
-        return GameManager.Session.Currency.DreamFragment >= (long)nextLevelData.UpgradeCost;
-    }
+    //    return GameManager.Session.Currency.DreamFragment >= (long)nextLevelData.UpgradeCost;
+    //}
 
-    public bool TryPayEquipmentLevelUpCost(int level)
-    {
-        if(CheckEquipmentCanLevelUp(level) == false)
-        {
-            return false;
-        }
+    //public bool TryPayEquipmentLevelUpCost(int level)
+    //{
+    //    if(CheckEquipmentCanLevelUp(level) == false)
+    //    {
+    //        return false;
+    //    }
 
-        EquipmentLevelData nextLevelData = GameManager.DataTable.GetEquipmentLevelData(level + 1);
+    //    EquipmentLevelData nextLevelData = GameManager.DataTable.GetEquipmentLevelData(level + 1);
 
-        return GameManager.Session.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
-    }
+    //    return GameManager.Session.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost);
+    //}
 
     #endregion
 
