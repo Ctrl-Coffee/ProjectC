@@ -1,50 +1,46 @@
-﻿using System.Collections.Generic;
+﻿using Cysharp.Threading.Tasks;
 
 public class GameSession
 {
-    public CurrencyModel Currency { get; }
+    public CurrencyModel Currency { get; private set; }
+    public CompanionModel Companion { get; private set; }
+    public HeroEquipmentModel HeroEquipment { get; private set; }
+    public HeroEquipedModel HeroEquiped { get; private set; }
+    public GachaModel Gacha { get; private set; }
+
+
     public PlayerGrowthModel PlayerGrowth { get; }
     public PlayerStatModel PlayerStat { get; }
 
-    public CompanionModel Companion { get; }
-    public HeroEquipmentModel HeroEquipment { get; }
-    public HeroEquipedModel HeroEquiped { get; }
+
 
 
     private NetworkManager _networkManager;
 
 
-    public GameSession()
+    public GameSession(NetworkManager networkManager)
     {
-        // 네트워크 매니저가 수신한 데이터를 받아 모델들을 생성.
-
-        // GameSaveData 한번에 모든 데이터가 담겨 있지 않게 도메인 별로 나누자.
-
-        // 임시
-        Currency = new();
+        _networkManager = networkManager;
 
         PlayerGrowth = new(new());
+        Gacha = new();
+    }
 
-        List<CompanionState> companionStates = new()
-        {
-            new("111", 1), new("112", 2), new("113", 3)
-            , new("211", 2), new("212", 3), new("213", 4)
-            , new("311", 3)
-        };
-        Companion = new(companionStates);
+    public async UniTask LoadAllData()
+    {
+        var currencyData = await _networkManager.LoadCurrencyAsync();
+        Currency = new(currencyData.data);
 
+        var companionData = await _networkManager.LoadCompanionAsync();
+        CompanionWrapperDto companionWwrapperDto =  companionData.data;
+        Companion = new(companionWwrapperDto.companions);
 
-        List<HeroEquipmentState> heroEquipmentStates = new()
-        {
-            new("Equipment_001", 1), new("Equipment_002", 2), new("Equipment_003", 3)
-            , new("Equipment_004", 4), new("Equipment_005", 5), new("Equipment_006", 6)
-            , new("Equipment_007", 7), new("Equipment_008", 8), new("Equipment_009", 9)
-            , new("Equipment_010", 10)
-        };
-        HeroEquipment = new(heroEquipmentStates);
+        var equipmentData = await _networkManager.LoadEquipmentAsync();
+        EquipmentWrapperDto equipmentWwrapperDto = equipmentData.data;
+        HeroEquipment = new(equipmentWwrapperDto.equipments);
 
-        HeroEquiped = new();
-
-        PlayerStat = new(PlayerGrowth, HeroEquiped, HeroEquipment);
+        var equipmentLoadoutData = await _networkManager.LoadEquipmentLoadoutAsync();
+        EquipmentLoadoutDto equipmentLoadoutDto = equipmentLoadoutData.data;
+        HeroEquiped = new(equipmentLoadoutDto);
     }
 }

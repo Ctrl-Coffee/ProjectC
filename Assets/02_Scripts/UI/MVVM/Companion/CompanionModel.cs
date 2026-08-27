@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 
 public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState>
@@ -9,14 +10,16 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
 
     public Dictionary<string, CompanionState> Companions { get => _companions; }
 
-    public CompanionModel(IEnumerable<CompanionState> dbData)
+    public CompanionModel(List<CompanionDto> companions)
     {
-        foreach (CompanionState companionDBData in dbData)
+        foreach (CompanionDto companionDto in companions)
         {
-            CompanionState companion = new CompanionState(companionDBData);
+            CompanionState companState = new CompanionState(companionDto);
 
-            _companions.Add(companion.CompanionId, companion);
+            _companions.Add(companionDto.companionId, companState);
         }
+
+        InitializeOnce();
     }
 
     public override void InitializeOnce()
@@ -31,6 +34,7 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
             CompanionState companion = new CompanionState(companionId, 1);
             _companions.Add(companionId, companion);
             ContainerPropertyChanged?.Invoke(nameof(Companions), ContainerPropertyChangedEvent.Add, companion);
+            SaveUtil.RequestSaveCompanion();
         }
     }
 
@@ -65,6 +69,8 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
 
         companion.LevelUp();
         ContainerPropertyChanged?.Invoke(nameof(Companions), ContainerPropertyChangedEvent.Update, companion);
+
+        SaveUtil.RequestSaveCompanion();
 
         return LevelUpResult.Success;
     }

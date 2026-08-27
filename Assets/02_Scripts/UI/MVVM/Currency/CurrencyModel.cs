@@ -16,6 +16,16 @@ public class CurrencyModel : ModelBase
     [SerializeField] private long _inspiration;
     [SerializeField] private long _energyRecoveredAt;
 
+    public CurrencyModel(CurrencyDto currencyDto)
+    {
+        _money = currencyDto.money;
+        _dreamPoint = currencyDto.dreamPoint;
+        _energy = currencyDto.energy;
+        _dreamFragment = currencyDto.dreamFragment;
+        _dreamScroll = currencyDto.dreamScroll;
+        _inspiration = currencyDto.inspiration;
+    }
+
     public long Money
     {
         get
@@ -159,16 +169,24 @@ public class CurrencyModel : ModelBase
 
     public override void InitializeOnce()
     {
+        OnPropertyChanged(nameof(Money));
+        OnPropertyChanged(nameof(DreamPoint));
+        OnPropertyChanged(nameof(Energy));
+        OnPropertyChanged(nameof(DreamFragment));
+        OnPropertyChanged(nameof(DreamScroll));
+        OnPropertyChanged(nameof(Inspiration));
     }
 
     public void AddMoney(long amount)
     {
         Money += amount;
+        SaveUtil.RequestSaveCurrency();
     }
 
     public void AddDreamPoint(long amount)
     {
         DreamPoint += amount;
+        SaveUtil.RequestSaveCurrency();
     }
 
     public void AddEnergy(long amount)
@@ -181,21 +199,29 @@ public class CurrencyModel : ModelBase
         }
 
         Energy = Math.Min(maxEnergy, Energy + amount);
+        SaveUtil.RequestSaveCurrency();
     }
 
     public void AddDreamFragment(long amount)
     {
         DreamFragment += amount;
+        SaveUtil.RequestSaveCurrency();
     }
     
     public void AddDreamScroll(long amount)
     {
         DreamScroll += amount;
+        SaveUtil.RequestSaveCurrency();
     }
 
     public void AddInspiration(long amount)
     {
         Inspiration += amount;
+        SaveUtil.RequestSaveCurrency();
+    }
+    public bool CanSpendMoney(long amount)
+    {
+        return CanSpend(Money, amount);
     }
 
     public bool TrySpendMoney(long amount)
@@ -206,6 +232,7 @@ public class CurrencyModel : ModelBase
         }
 
         Money -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }
@@ -218,6 +245,7 @@ public class CurrencyModel : ModelBase
         }
 
         DreamPoint -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }
@@ -235,6 +263,7 @@ public class CurrencyModel : ModelBase
         }
 
         Energy -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }
@@ -247,6 +276,7 @@ public class CurrencyModel : ModelBase
         }
 
         DreamFragment -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }
@@ -259,6 +289,7 @@ public class CurrencyModel : ModelBase
         }
 
         DreamScroll -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }
@@ -271,6 +302,7 @@ public class CurrencyModel : ModelBase
         }
 
         Inspiration -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }

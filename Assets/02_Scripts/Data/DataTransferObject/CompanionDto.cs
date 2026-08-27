@@ -3,6 +3,6 @@
 [Serializable]
 public class CompanionDto
 {
-    public string CompanionId;
-    public int Level;
+    public string companionId;
+    public int level;
 }

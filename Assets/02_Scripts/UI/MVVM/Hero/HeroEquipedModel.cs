@@ -1,6 +1,15 @@
 ﻿
 public class HeroEquipedModel : ModelBase
 {
+    public HeroEquipedModel(EquipmentLoadoutDto equipmentLoadoutDto)
+    {
+        EquipedWeaponId = equipmentLoadoutDto.weaponEquipmentId;
+        EquipedArmorId = equipmentLoadoutDto.armorEquipmentId;
+        EquipedAccessoryId = equipmentLoadoutDto.accessoryEquipmentId;
+
+        InitializeOnce();
+    }
+
     public override void InitializeOnce()
     {
         OnPropertyChanged(nameof(EquipedWeaponId));
@@ -22,6 +31,8 @@ public class HeroEquipedModel : ModelBase
                 EquipedAccessoryId = equipmentId;
                 break;
         }
+
+        SaveUtil.RequestSaveEquipmentLoadout();
     }
 
     public void UnEquip(EquipmentType type)
@@ -38,6 +49,8 @@ public class HeroEquipedModel : ModelBase
                 EquipedAccessoryId = null;
                 break;
         }
+
+        SaveUtil.RequestSaveEquipmentLoadout();
     }
 
     public string GetEquipedId(EquipmentType type)

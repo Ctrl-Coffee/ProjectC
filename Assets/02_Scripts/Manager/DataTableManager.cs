@@ -18,9 +18,16 @@ public class DataTableManager
     public Dictionary<string, PlayerData> PlayerDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentLevelData> EquipmentLevelDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentData> EquipmentDataTable { get; private set; } = new();
+    public Dictionary<string, GachaProbabilityData> GachaProbabilityDataTable { get; private set; } = new();
     public Dictionary<string, PerkNodeData> PerkNodeDataTable { get; private set; } = new();
     public Dictionary<string, PerkEffectData> PerkEffectDataTable { get; private set; } = new();
     public Dictionary<string, WorkStatData> WorkStatDataTable { get; private set; } = new();
+
+    private Dictionary<int, List<CompanionData>> _companionsByGrade = new();
+
+    private Dictionary<GachaType, List<GachaProbabilityData>> _probabilitiesByGachaType = new();
+    
+    private Dictionary<int, List<EquipmentData>> _equipmentsByGrade = new();
 
     #endregion
 
@@ -39,9 +46,14 @@ public class DataTableManager
         PlayerDataTable = LoadData<PlayerData>(nameof(PlayerData));
         EquipmentLevelDataTable = LoadData<EquipmentLevelData>(nameof(EquipmentLevelData));
         EquipmentDataTable = LoadData<EquipmentData>(nameof(EquipmentData));
+        GachaProbabilityDataTable = LoadData<GachaProbabilityData>(nameof(GachaProbabilityData));
         PerkNodeDataTable = LoadData<PerkNodeData>(nameof(PerkNodeData));
         PerkEffectDataTable = LoadData<PerkEffectData>(nameof(PerkEffectData));
         WorkStatDataTable = LoadData<WorkStatData>(nameof(WorkStatData));
+
+        BuildCompanionGradeIndex();
+        BuildGachaProbabilityIndex();
+        BuildEquipmentGradeIndex();
     }
 
     #region Getters
@@ -112,6 +124,39 @@ public class DataTableManager
         return ConfirmDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
+    public IReadOnlyList<CompanionData> GetCompanionsByGrade(int grade)
+    {
+        if (!_companionsByGrade.TryGetValue(grade, out List<CompanionData> companions))
+        {
+            Debug.LogError($"해당 등급의 동료 데이터가 없습니다. 등급 : {grade}");
+            return null;
+        }
+
+        return companions;
+    }
+
+    public IReadOnlyList<EquipmentData> GetEquipmentsByGrade(int grade)
+    {
+        if (!_equipmentsByGrade.TryGetValue(grade, out List<EquipmentData> equipments))
+        {
+            Debug.LogError($"해당 등급의 장비 데이터가 없습니다 등급 : {grade}");
+            return null;
+        }
+
+        return equipments;
+    }
+
+    public IReadOnlyList<GachaProbabilityData> GetGachaProbabilityData(GachaType gachaType)
+    {
+        if (!_probabilitiesByGachaType.TryGetValue(gachaType, out List<GachaProbabilityData> probability))
+        {
+            Debug.LogError($"해당 가챠 종류가 존재하지 않습니다. 종류 : {gachaType}");
+            return null;
+        }
+
+        return probability;
+    }
+
     public PerkNodeData GetPerkNodeData(string id)
     {
         if (null == PerkNodeDataTable || string.IsNullOrEmpty(id)) return null;
@@ -173,5 +218,55 @@ public class DataTableManager
         }
 
         return new Dictionary<string, T>();
+    }
+
+    private void BuildCompanionGradeIndex()
+    {
+        _companionsByGrade.Clear();
+
+        foreach (CompanionData data in CompanionDataTable.Values)
+        {
+            if (!_companionsByGrade.TryGetValue(data.Grade, out List<CompanionData> list))
+            {
+                list = new List<CompanionData>();
+                _companionsByGrade.Add(data.Grade, list);
+            }
+
+            list.Add(data);
+        }
+    }
+
+    private void BuildGachaProbabilityIndex()
+    {
+        _probabilitiesByGachaType.Clear();
+
+        foreach (GachaProbabilityData data in  GachaProbabilityDataTable.Values)
+        {
+            if(!_probabilitiesByGachaType.TryGetValue(data.GachaType, out List<GachaProbabilityData> list))
+            {
+                list = new List<GachaProbabilityData>();
+                _probabilitiesByGachaType.Add(data.GachaType, list);
+            }
+
+            list.Add(data);
+        }
+    }
+
+    private void BuildEquipmentGradeIndex()
+    {
+        _equipmentsByGrade.Clear();
+
+        foreach (EquipmentData data in EquipmentDataTable.Values)
+        {
+            int grade = (int)data.EquipmentGrade;
+
+            if (!_equipmentsByGrade.TryGetValue(grade, out List<EquipmentData> list))
+            {
+                list = new List<EquipmentData>();
+                _equipmentsByGrade.Add(grade, list);
+            }
+
+            list.Add(data);
+        }
     }
 }

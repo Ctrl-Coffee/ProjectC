@@ -43,6 +43,13 @@
         return viewModel;
     }
 
+    public GachaViewModel CreateGachaViewModel()
+    {
+        GachaModel model = _session.Gacha;
+        GachaViewModel viewModel = new GachaViewModel(model);
+        return viewModel;
+    }
+
     public HeroInventoryViewModel CreateHeroInventoryViewModel()
     {
         HeroEquipmentModel model = _session.HeroEquipment;
@@ -54,6 +61,13 @@
     {
         HeroEquipmentModel model = _session.HeroEquipment;
         HeroEquipmentSlotViewModel viewModel = new HeroEquipmentSlotViewModel(model, heroEquipmentId);
+        return viewModel;
+    }
+
+    public CurrencyViewModel CreateCurrencyViewModel()
+    {
+        CurrencyModel model = _session.Currency;
+        CurrencyViewModel viewModel = new CurrencyViewModel(model);
         return viewModel;
     }
 }

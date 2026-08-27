@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,25 +12,25 @@ public static class UIManagerExtension
 {
     public static void OpenRealHud(this UIManager uiManager)
     {
-        uiManager.OpenHUDUI<RealHudUI>().Forget();
+        uiManager.OpenHUDUI<RealHudView>().Forget();
     }
 
     public static void OpenDreamHud(this UIManager uiManager)
     {
-        uiManager.OpenHUDUI<DreamHudUI>().Forget();
+        uiManager.OpenHUDUI<DreamHudView>().Forget();
     }
 
     public static void CloseRealHud(this UIManager uiManager)
     {
-        uiManager.CloseHUDUI<RealHudUI>().Forget();
+        uiManager.CloseHUDUI<RealHudView>().Forget();
     }
 
     public static void CloseDreamHud(this UIManager uiManager)
     {
-        uiManager.CloseHUDUI<DreamHudUI>().Forget();
+        uiManager.CloseHUDUI<DreamHudView>().Forget();
     }
 
-    public static async void OpenConfirmUI(this UIManager uiManager, ConfirmData confirmData, ConfirmButtonAction buttonAction)
+    public static async void OpenConfirmUI(this UIManager uiManager, ConfirmData confirmData, ConfirmButtonAction buttonAction = null)
     {
         var ui = await uiManager.OpenPopupUI<ConfirmUI>();
         ui.SetConfirmUI(confirmData, buttonAction);
@@ -38,6 +39,11 @@ public static class UIManagerExtension
     public static void OpenSettingUI(this UIManager uiManager)
     {
         uiManager.OpenPopupUI<SettingUI>().Forget();
+    }
+
+    public static void OpenLoginUI(this UIManager uiManager)
+    {
+        uiManager.OpenPopupUI<LoginUI>().Forget();
     }
 
     public static UniTask<CompanionInventoryView> OpenCompanionInventory(this UIManager uiManager)
@@ -112,6 +118,17 @@ public static class UIManagerExtension
     public static UniTask<MiniGameResultUI> OpenMiniGameResultUI(this UIManager uiManager)
     {
         return uiManager.OpenOverlayUI<MiniGameResultUI>();
+    }
+
+    public static UniTask<GachaView> OpenGachaView(this UIManager uiManager)
+    {
+        return uiManager.OpenPopupUI<GachaView>();
+    }
+
+    public static async void OpenGachaResultUI(this UIManager uiManager, IReadOnlyList<GachaResultData> results)
+    {
+        GachaResultUI ui = await uiManager.OpenPopupUI<GachaResultUI>();
+        ui.Init(results);
     }
 
     public static async void OpenAwayReportUI(this UIManager uiManager, AwayReport report)
