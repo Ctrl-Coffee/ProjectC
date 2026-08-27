@@ -13,13 +13,23 @@ public static class EnergyRecovery
     {
         while (!token.IsCancellationRequested)
         {
-            Recover();
+            if (!AwayRewardPayout.IsHolding)
+            {
+                Recover();
+            }
 
             await UniTask.Delay(TimeSpan.FromSeconds(CHECK_INTERVAL), ignoreTimeScale: true, cancellationToken: token);
         }
     }
 
     public static void Recover()
+    {
+        long amount = ConsumeRecover();
+
+        Pay(amount);
+    }
+
+    public static long ConsumeRecover()
     {
         CurrencyModel currency = GameManager.Session.Currency;
 
@@ -29,13 +39,13 @@ public static class EnergyRecovery
         if (lastRecoverTicks <= 0 || nowTicks < lastRecoverTicks)
         {
             currency.EnergyRecoveredAt = nowTicks;
-            return;
+            return 0;
         }
 
         if (currency.MaxEnergy <= currency.Energy)
         {
             currency.EnergyRecoveredAt = nowTicks;
-            return;
+            return 0;
         }
 
         long intervalTicks = GetRecoverIntervalTicks();
@@ -43,19 +53,60 @@ public static class EnergyRecovery
 
         if (recoverCount <= 0)
         {
-            return;
+            return 0;
         }
 
         currency.EnergyRecoveredAt = lastRecoverTicks + recoverCount * intervalTicks;
 
-        // 실제로 오른 양만 기록하기
-        long beforeEnergy = currency.Energy;
+        return GetCappedAmount(currency, recoverCount * RECOVER_AMOUNT);
+    }
 
-        currency.AddEnergy(recoverCount * RECOVER_AMOUNT);
+    public static long PeekRecoverAmount()
+    {
+        CurrencyModel currency = GameManager.Session.Currency;
 
-        AwayReportCollector.RecordEnergy(currency.Energy - beforeEnergy);
+        long nowTicks = GameManager.Time.UtcNow.Ticks;
+        long lastRecoverTicks = currency.EnergyRecoveredAt;
 
-        Logger.Log($"에너지 회복 {recoverCount * RECOVER_AMOUNT} - 현재 {currency.Energy} / {currency.MaxEnergy}");
+        if (lastRecoverTicks <= 0 || nowTicks < lastRecoverTicks)
+        {
+            return 0;
+        }
+
+        if (currency.MaxEnergy <= currency.Energy)
+        {
+            return 0;
+        }
+
+        long recoverCount = (nowTicks - lastRecoverTicks) / GetRecoverIntervalTicks();
+
+        if (recoverCount <= 0)
+        {
+            return 0;
+        }
+
+        return GetCappedAmount(currency, recoverCount * RECOVER_AMOUNT);
+    }
+
+    private static void Pay(long amount)
+    {
+        if (amount <= 0)
+        {
+            return;
+        }
+
+        CurrencyModel currency = GameManager.Session.Currency;
+
+        currency.AddEnergy(amount);
+
+        Logger.Log($"에너지 회복 {amount} - 현재 {currency.Energy} / {currency.MaxEnergy}");
+    }
+
+    private static long GetCappedAmount(CurrencyModel currency, long amount)
+    {
+        long capped = Math.Min(currency.MaxEnergy, currency.Energy + amount) - currency.Energy;
+
+        return 0 < capped ? capped : 0;
     }
 
     private static long GetRecoverIntervalTicks()

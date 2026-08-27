@@ -20,4 +20,19 @@ public struct AwayReport
             return 0 < Money || 0 < DreamPoint || 0 < Energy;
         }
     }
+
+    public long GetAmount(CurrencyType currencyType)
+    {
+        switch (currencyType)
+        {
+            case CurrencyType.Money:
+                return Money;
+            case CurrencyType.DreamPoint:
+                return DreamPoint;
+            case CurrencyType.Energy:
+                return Energy;
+        }
+
+        return 0;
+    }
 }

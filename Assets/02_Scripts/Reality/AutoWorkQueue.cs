@@ -189,22 +189,37 @@ public static class AutoWorkQueue
         {
             await UniTask.Delay(TimeSpan.FromSeconds(COLLECT_INTERVAL), ignoreTimeScale: true, cancellationToken: token);
 
+            if (AwayRewardPayout.IsHolding)
+            {
+                continue;
+            }
+
             CollectCompleted();
         }
     }
 
     public static int CollectCompleted()
     {
+        Reward reward = ConsumeCompleted();
+
+        Pay(reward);
+
+        return reward.Count;
+    }
+
+    public static Reward ConsumeCompleted()
+    {
         List<AutoWorkSlot> slots = Slots;
         long nowTicks = GameManager.Time.UtcNow.Ticks;
-        int collectedCount = 0;
+
+        Reward reward = Reward.Create();
 
         while (slots.Count > 0 && nowTicks >= slots[0].EndTicks)
         {
             WorkData data = GameManager.DataTable.GetWorkData(slots[0].WorkId);
 
             slots.RemoveAt(0);
-            collectedCount++;
+            reward.Count++;
 
             if (null == data)
             {
@@ -215,21 +230,93 @@ public static class AutoWorkQueue
             long money = GameManager.Perk.Stat.GetLong(WorkStatType.AutoWorkRewardMoney, data.RewardMoney);
             long dp = GameManager.Perk.Stat.GetLong(WorkStatType.AutoWorkRewardDP, data.RewardDP);
 
-            GameManager.Session.Currency.AddMoney(money);
-            GameManager.Session.Currency.AddDreamPoint(dp);
+            reward.Money += money;
+            reward.DreamPoint += dp;
 
-            AwayReportCollector.RecordWork(data.Id, money, dp);
+            reward.AddWorkCount(data.Id);
 
             Logger.Log($"자동업무 완료 - {data.Name} / 돈 {money} / DP {dp}");
         }
 
-        if (collectedCount > 0)
+        if (reward.Count > 0)
         {
-
             NotifyQueueChanged();
         }
 
-        return collectedCount;
+        return reward;
+    }
+
+    public static Reward PeekCompletedReward()
+    {
+        List<AutoWorkSlot> slots = Slots;
+        long nowTicks = GameManager.Time.UtcNow.Ticks;
+
+        Reward reward = Reward.Create();
+
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (nowTicks < slots[i].EndTicks)
+            {
+                break;
+            }
+
+            WorkData data = GameManager.DataTable.GetWorkData(slots[i].WorkId);
+
+            reward.Count++;
+
+            if (null == data)
+            {
+                continue;
+            }
+
+            reward.Money += GameManager.Perk.Stat.GetLong(WorkStatType.AutoWorkRewardMoney, data.RewardMoney);
+            reward.DreamPoint += GameManager.Perk.Stat.GetLong(WorkStatType.AutoWorkRewardDP, data.RewardDP);
+
+            reward.AddWorkCount(data.Id);
+        }
+
+        return reward;
+    }
+
+    private static void Pay(Reward reward)
+    {
+        if (0 < reward.Money)
+        {
+            GameManager.Session.Currency.AddMoney(reward.Money);
+        }
+
+        if (0 < reward.DreamPoint)
+        {
+            GameManager.Session.Currency.AddDreamPoint(reward.DreamPoint);
+        }
+    }
+
+    public struct Reward
+    {
+        public long Money;
+        public long DreamPoint;
+        public int Count;
+
+        public Dictionary<string, int> WorkCounts;
+
+        public static Reward Create()
+        {
+            return new Reward
+            {
+                WorkCounts = new Dictionary<string, int>(),
+            };
+        }
+
+        public void AddWorkCount(string workId)
+        {
+            if (string.IsNullOrEmpty(workId) || null == WorkCounts)
+            {
+                return;
+            }
+
+            WorkCounts.TryGetValue(workId, out int count);
+            WorkCounts[workId] = count + 1;
+        }
     }
 
     public static float GetTotalRemainSeconds()
