@@ -11,7 +11,6 @@ public class UIButtonComponent : MonoBehaviour
     private void Awake()
     {
         InitUIButton();
-        _button.onClick.AddListener(AudioPlay);
     }
 
     private void InitUIButton()
@@ -31,6 +30,7 @@ public class UIButtonComponent : MonoBehaviour
     {
         if (_button == null) return;
 
+        _button.onClick.AddListener(AudioPlay);
         _button.onClick.AddListener(onClickCallback.Invoke);
     }
 
@@ -46,6 +46,11 @@ public class UIButtonComponent : MonoBehaviour
         if (_text == null) return;
 
         _text.text = buttonStr;
+    }
+
+    public void ChangeButtonImage(Sprite sprite)
+    {
+        _button.image.sprite = sprite;
     }
 
     public void SetInteractable(bool isInteractable)

@@ -50,4 +50,11 @@
         HeroEquipmentSlotViewModel viewModel = new HeroEquipmentSlotViewModel(model, heroEquipmentId);
         return viewModel;
     }
+
+    public CurrencyViewModel CreateCurrencyViewModel()
+    {
+        CurrencyModel model = _session.Currency;
+        CurrencyViewModel viewModel = new CurrencyViewModel(model);
+        return viewModel;
+    }
 }

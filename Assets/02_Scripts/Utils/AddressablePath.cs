@@ -18,6 +18,7 @@
         public const string REALITY = "Reality";
         public const string DREAM = "Dream";
         public const string LOADDING = "Loading";
+        public const string LOGIN = "Login";
     }
 
     public static class Audio
@@ -35,5 +36,11 @@
         public const string DICE_ROLLING = "Audio/SFX/DiceRolling";
         public const string STAMP_SUCCESS = "Audio/SFX/StampSuccess";
         public const string STAMP_FAIL = "Audio/SFX/StampFail";
+    }
+
+    public static class Sprite
+    {
+        public const string LOGIN_PASSWORD_VIEW_ON = "Sprite/ViewOn";
+        public const string LOGIN_PASSWORD_VIEW_OFF = "Sprite/ViewOff";
     }
 }

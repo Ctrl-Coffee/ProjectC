@@ -5,10 +5,10 @@ public class HeroEquipmentState
     public string HeroEquipmentId;
     public int Level;
 
-    public HeroEquipmentState(HeroEquipmentState other)
+    public HeroEquipmentState(EquipmentDto equipmentDto)
     {
-        HeroEquipmentId = other.HeroEquipmentId;
-        Level = other.Level;
+        HeroEquipmentId = equipmentDto.equipmentId;
+        Level = equipmentDto.level;
     }
 
     public HeroEquipmentState(string id, int level)

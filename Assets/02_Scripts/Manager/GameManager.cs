@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 public class GameManager : SingletonBehaviour<GameManager>
@@ -15,6 +16,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static GameSession Session { get { return Instance._gameSession; } }
     public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
     public static SoundManager Sound { get { return Instance._soundManager; } }
+
+
 
 
     #region Manager Variables
@@ -35,14 +38,10 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     #endregion
 
-    #region Variables
-
-    private bool _initComplete = false;
-
     private LobbyController _realLobbyController;
     private LobbyController _dreamLobbyController;
 
-    #endregion
+
 
     #region Init
 
@@ -52,45 +51,49 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         _dataTable.LoadAllData();
 
-        InitializeAsync().Forget();
+        InitializeLoginAsync().Forget();
     }
 
-    private async UniTask InitializeAsync()
+    private async UniTask InitializeLoginAsync()
     {
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.LOADDING);
-
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.LOGIN);
         await _uiManager.Init();
-        LoadingUI loadingUI = await UI.OpenLoading();
 
+        _soundManager.Init(gameObject);
+        _uiManager.OpenLoginUI();
+    }
 
-        // TODO: 네트워크로 부터 데이터를 받은 뒤 생성 - 비동기 await
+    public async UniTask InitializeAfterLoginAsync(Action<float> onProgress)
+    {
+        onProgress?.Invoke(0f);
 
+        onProgress?.Invoke(0.15f);
 
-        // TODO: 네트워크 매니저로 부터 데이터 요청 awit, 이 때 네트워크 매니저 주입
-        _gameSession = new();
+        await _resourceManager.LoadAllLabelAssetAsync(
+            progress => 
+            { 
+                onProgress?.Invoke(0.15f + progress * 0.65f); 
+            });
 
-        // TODO 네트워크 매니저의 서비스 로직들 초기화
+        GameSession gameSession = new(_networkManager);
+        await gameSession.LoadAllData();
+        _gameSession = gameSession;
 
-        _viewModelFactory = new(Session, DataTable);
+        _viewModelFactory = new(_gameSession, _dataTable);
 
-        await _resourceManager.LoadAllLabelAssetAsync(loadingUI.SetProgress);
-        await loadingUI.WaitUntilFilledAsync();
+        onProgress?.Invoke(0.85f);
 
-        _soundManager.Init(this.gameObject);
-
-        var poolRoot = Utils.CreateEmptyGameObject("PoolRoot", this.gameObject.transform).transform;
+        Transform poolRoot = Utils.CreateEmptyGameObject("PoolRoot",transform).transform;
         await _poolManager.InitAsync(poolRoot);
-
-        _initComplete = true;
 
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
-        EnterReal();
-        loadingUI.CloseUI();
-    }
+        onProgress?.Invoke(1f);
 
-    #endregion
+        EnterReal();
+    }                                                                     
+    #endregion                                                            
 
     public void EnterReal()
     {
@@ -127,5 +130,26 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         _dreamLobbyController.Release();
         UI.CloseDreamHud();
+    }
+
+    public void RequestQuit()
+    {
+        QuitAfterSaveAsync().Forget();
+    }
+
+    private async UniTask QuitAfterSaveAsync()
+    {
+        await SaveUtil.SaveAllDataAsync();
+        Application.Quit();
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus == false || _gameSession == null)
+        {
+            return;
+        }
+
+        SaveUtil.SaveAllDataAsync().Forget();
     }
 }

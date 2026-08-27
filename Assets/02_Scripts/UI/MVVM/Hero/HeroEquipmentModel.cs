@@ -9,14 +9,16 @@ public class HeroEquipmentModel : ModelBase, ContainerPropertyChanged<HeroEquipm
 
     private Dictionary<string, HeroEquipmentState> _equipments = new();
 
-    public HeroEquipmentModel(IEnumerable<HeroEquipmentState> dbData)
+    public HeroEquipmentModel(List<EquipmentDto> equipmentDtoes)
     {
-        foreach (HeroEquipmentState data in dbData)
+        foreach (EquipmentDto equipmentDto in equipmentDtoes)
         {
-            HeroEquipmentState state = new HeroEquipmentState(data);
+            HeroEquipmentState state = new HeroEquipmentState(equipmentDto);
 
             _equipments.Add(state.HeroEquipmentId, state);
         }
+
+        InitializeOnce();
     }
 
 
@@ -33,6 +35,7 @@ public class HeroEquipmentModel : ModelBase, ContainerPropertyChanged<HeroEquipm
             HeroEquipmentState state = new HeroEquipmentState(heroEquipmentId, 1);
             _equipments.Add(heroEquipmentId, state);
             ContainerPropertyChanged?.Invoke(nameof(Equipments), ContainerPropertyChangedEvent.Add, state);
+            SaveUtil.RequestSaveEquipment();
         }
     }
 
@@ -67,6 +70,8 @@ public class HeroEquipmentModel : ModelBase, ContainerPropertyChanged<HeroEquipm
 
         state.LevelUp();
         ContainerPropertyChanged?.Invoke(nameof(Equipments), ContainerPropertyChangedEvent.Update, state);
+
+        SaveUtil.RequestSaveEquipment();
 
         return LevelUpResult.Success;
     }

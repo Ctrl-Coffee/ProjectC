@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿
 
 public static class ConfirmDataKey
 {
-    public const string TEST_CONFIRM = "TEST_CONFIRM";
+    public const string LOGIN_FAIL = "LoginFail";
+    public const string SIGNUP_FAIL = "SignUpFail";
 }

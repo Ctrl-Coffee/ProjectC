@@ -3,10 +3,10 @@
     public string CompanionId { get; }
     public int Level { get; private set; }
 
-    public CompanionState(CompanionState other)
+    public CompanionState(CompanionDto companionDto)
     {
-        CompanionId = other.CompanionId;
-        Level = other.Level;
+        CompanionId = companionDto.companionId;
+        Level = companionDto.level;
     }
 
     public CompanionState(string companionId, int level)
