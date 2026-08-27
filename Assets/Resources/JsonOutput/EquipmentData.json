@@ -254,5 +254,53 @@
     "AcitveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_69]",
     "Description": null
+  },
+  {
+    "Id": "Equipment_Armor_011",
+    "Name": "용사의 갑옷",
+    "Grade": "Rare",
+    "BaseAttack": 0,
+    "BaseHp": 0,
+    "BaseDefense": 0,
+    "BaseCriticalChance": 0,
+    "BasicAttackHaste": 0,
+    "BasicActiveSkillHaste": 0,
+    "EquipmentTypeString": "Armor",
+    "BaseSkillId": null,
+    "AcitveSkillId": null,
+    "IconPath": "UI/Equipments[Equipment_15]",
+    "Description": null
+  },
+  {
+    "Id": "Equipment_Weapon_004",
+    "Name": "용사의 검",
+    "Grade": "Rare",
+    "BaseAttack": 0,
+    "BaseHp": 0,
+    "BaseDefense": 0,
+    "BaseCriticalChance": 0,
+    "BasicAttackHaste": 0,
+    "BasicActiveSkillHaste": 0,
+    "EquipmentTypeString": "Weapon",
+    "BaseSkillId": null,
+    "AcitveSkillId": null,
+    "IconPath": "UI/Equipments[Equipment_51]",
+    "Description": null
+  },
+  {
+    "Id": "Equipment_Accessory_004",
+    "Name": "용사의 반지",
+    "Grade": "Rare",
+    "BaseAttack": 0,
+    "BaseHp": 0,
+    "BaseDefense": 0,
+    "BaseCriticalChance": 0,
+    "BasicAttackHaste": 0,
+    "BasicActiveSkillHaste": 0,
+    "EquipmentTypeString": "Accessory",
+    "BaseSkillId": null,
+    "AcitveSkillId": null,
+    "IconPath": "UI/Equipments[Equipment_69]",
+    "Description": null
   }
 ]

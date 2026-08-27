@@ -157,24 +157,24 @@ public class GrowthSystem
     //    return GetEquipmentFinalSkill(equipped.EquipmentId, equipped.Level);
     //}
 
-    public CharacterSkillEffectData GetCompanionBattleSkill(string companionId)
-    {
-        CompanionData companion = GameManager.DataTable.GetCompanionData(companionId);
-        if (companion == null)
-        {
-            Debug.LogError($"동료 데이터가 없습니다. 동료 : {companionId}");
-            return null;
-        }
+    //public CharacterSkillEffectData GetCompanionBattleSkill(string companionId)
+    //{
+    //    CompanionData companion = GameManager.DataTable.GetCompanionData(companionId);
+    //    if (companion == null)
+    //    {
+    //        Debug.LogError($"동료 데이터가 없습니다. 동료 : {companionId}");
+    //        return null;
+    //    }
 
-        SkillData skillData = GameManager.DataTable.GetSkillData(companion.SkillId);
-        if (skillData == null)
-        {
-            Debug.LogError($"스킬 데이터가 없습니다. 스킬 : {companion.SkillId}");
-            return null;
-        }
+    //    SkillData skillData = GameManager.DataTable.GetSkillData(companion.SkillId);
+    //    if (skillData == null)
+    //    {
+    //        Debug.LogError($"스킬 데이터가 없습니다. 스킬 : {companion.SkillId}");
+    //        return null;
+    //    }
 
-        return new CharacterSkillEffectData(skillData, skillData.BaseEffect);
-    }
+    //    return new CharacterSkillEffectData(skillData, skillData.BaseEffect);
+    //}
 
     #endregion
 }
