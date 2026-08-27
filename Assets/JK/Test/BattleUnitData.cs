@@ -1,6 +1,6 @@
 ﻿public struct BattleUnitData
 {
-    public string UnitId;
+    public string UId;
     public float MaxHp;
     public float Attack;
     public float Defense;
@@ -10,11 +10,11 @@
     public float CooldownReduction;
     public string BasicAttackSkillId;
     public string SignatureSkillId;
-    public string Key;
+    public string AnimationSetKey;
 
-    public BattleUnitData(string unitId, float maxHp, float attack, float defense, float criticalChance, float criticalDamageMultiplier, float attackSpeed, float cooldownReduction, string basicAttackSkillId, string signature, string animKey)
+    public BattleUnitData(string uId, float maxHp, float attack, float defense, float criticalChance, float criticalDamageMultiplier, float attackSpeed, float cooldownReduction, string basicAttackSkillId, string signatureSkillId, string animationSetKey)
     {
-        UnitId = unitId;
+        UId = uId;
         MaxHp = maxHp;
         Attack = attack;
         Defense = defense;
@@ -23,7 +23,7 @@
         AttackSpeed = attackSpeed;
         CooldownReduction = cooldownReduction;
         BasicAttackSkillId = basicAttackSkillId;
-        SignatureSkillId = signature;
-        Key = animKey;
+        SignatureSkillId = signatureSkillId;
+        AnimationSetKey = animationSetKey;
     }
 }
