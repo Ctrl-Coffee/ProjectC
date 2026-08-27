@@ -16,10 +16,20 @@ public class ConfirmUI : UIBase
         _okButtonn.ChangeButtonText(confirmData.OKText);
         _cancelButtonn.ChangeButtonText(confirmData.CancelText);
 
-        _okButtonn.BindButtonEvent(buttonAction.OnClickOKButton);
-        _okButtonn.BindButtonEvent(OnCloseUI);
+        if(buttonAction != null)
+        {
+            if (buttonAction.OnClickOKButton != null)
+            {
+                _okButtonn.BindButtonEvent(buttonAction.OnClickOKButton);
+            }
 
-        _cancelButtonn.BindButtonEvent(buttonAction.OnClickCancelButton);
+            if (buttonAction.OnClickCancelButton != null)
+            {
+                _cancelButtonn.BindButtonEvent(buttonAction.OnClickCancelButton);
+            }
+        }
+
+        _okButtonn.BindButtonEvent(OnCloseUI);
         _cancelButtonn.BindButtonEvent(OnCloseUI);
 
         _okButtonn.gameObject.SetActive(true);

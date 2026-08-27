@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 public class NetworkManager
 {
-    private readonly string _baseUrl = "http://localhost:5256";
+    private readonly string _baseUrl = "http://3.26.146.195";
     private long _userId;
     private string _token;
 
