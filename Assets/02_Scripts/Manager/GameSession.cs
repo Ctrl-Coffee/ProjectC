@@ -10,7 +10,7 @@ public class GameSession
 
 
     public PlayerGrowthModel PlayerGrowth { get; }
-    public HeroInfoModel HeroInfo { get; }
+    public HeroInfoModel HeroInfo { get; private set; }
 
 
 
@@ -42,5 +42,7 @@ public class GameSession
         var equipmentLoadoutData = await _networkManager.LoadEquipmentLoadoutAsync();
         EquipmentLoadoutDto equipmentLoadoutDto = equipmentLoadoutData.data;
         HeroEquiped = new(equipmentLoadoutDto);
+
+        HeroInfo = new(PlayerGrowth, HeroEquiped, HeroEquipment);
     }
 }

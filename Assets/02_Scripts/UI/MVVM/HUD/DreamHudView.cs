@@ -34,7 +34,7 @@ public class DreamHudView : ViewBase
         _stageBtn.BindButtonEvent(OnStage);
         _heroBtn.BindButtonEvent(OnOpenHero);
         _lobbyBtn.BindButtonEvent(OnChangeSceenToReal);
-        _heroInfoBtn.BindButtonEvent(OnOpenHero);
+        _heroInfoBtn.BindButtonEvent(OnOpenHeroInfo);
     }
 
     private void OnDisable()
