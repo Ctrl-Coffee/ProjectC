@@ -73,10 +73,10 @@ public class DataTableManager
         return CompanionDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
-    public CompanionLevelData GetCompanionLevelData(string companionId, int level)
+    public CompanionLevelData GetCompanionLevelData(int level)
     {
-        if (null == CompanionLevelDataTable || string.IsNullOrEmpty(companionId)) return null;
-        string id = $"{companionId}_{level}";
+        if (null == CompanionLevelDataTable) return null;
+        string id = $"companion_level_{level}";
         return CompanionLevelDataTable.TryGetValue(id, out var data) ? data : null;
     }
     public SkillData GetSkillData(string id)
