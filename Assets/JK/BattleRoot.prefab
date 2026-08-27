@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2002391199104791905}
   - component: {fileID: 5071718125347830074}
   - component: {fileID: 5106754535789017643}
-  - component: {fileID: 1436812971792672737}
+  - component: {fileID: 6603119382074721023}
   - component: {fileID: 9207762492915772845}
   - component: {fileID: 8642476220201455171}
   m_Layer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1026421069465089014}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1, y: -1.31, z: 0}
+  m_LocalPosition: {x: 3.5, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 846397645, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -117,8 +117,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &1436812971792672737
-CapsuleCollider2D:
+--- !u!58 &6603119382074721023
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -151,9 +151,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 1}
+  m_Radius: 1
 --- !u!114 &9207762492915772845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBattleUnitView
   _behaviorGraphAgent: {fileID: 9207762492915772845}
-  HP: 0
 --- !u!1 &2978656370913483907
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +247,7 @@ GameObject:
   - component: {fileID: 8400797191505521684}
   - component: {fileID: 5947014958819159498}
   - component: {fileID: 8079711916322036806}
-  - component: {fileID: 2883956135584616624}
+  - component: {fileID: 7979498857453777231}
   - component: {fileID: 3114989240083599018}
   - component: {fileID: 5483188565245649147}
   m_Layer: 0
@@ -268,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 4455275286843988099}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.04, y: -0.78, z: 0}
+  m_LocalPosition: {x: -3.5, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -323,7 +321,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 2142432406, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -343,7 +341,7 @@ Animator:
   m_GameObject: {fileID: 4455275286843988099}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ca0da643bdcdeb247b5b00a3b5151c9d, type: 2}
+  m_Controller: {fileID: 22100000, guid: af15821e0a2dbed46b11bf3cc69bd372, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -355,8 +353,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &2883956135584616624
-CapsuleCollider2D:
+--- !u!58 &7979498857453777231
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -389,9 +387,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 1}
+  m_Radius: 1
 --- !u!114 &3114989240083599018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,7 +440,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompanionBattleUnitView
   _behaviorGraphAgent: {fileID: 3114989240083599018}
-  HP: 0
 --- !u!1 &5415995287497116206
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +451,7 @@ GameObject:
   - component: {fileID: 2861445430779763764}
   - component: {fileID: 7871020916059842977}
   - component: {fileID: 5197215682893226702}
-  - component: {fileID: 4567196798539786182}
+  - component: {fileID: 4004514476333158570}
   - component: {fileID: 6056849095606025116}
   - component: {fileID: 1971904667341931504}
   m_Layer: 0
@@ -474,7 +470,7 @@ Transform:
   m_GameObject: {fileID: 5415995287497116206}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.16, y: 0.42, z: 0}
+  m_LocalPosition: {x: 2, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -529,12 +525,12 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 581046308, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4.4329004, y: 3.116883}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -561,8 +557,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &4567196798539786182
-CapsuleCollider2D:
+--- !u!58 &4004514476333158570
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -595,9 +591,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 1}
+  m_Radius: 1
 --- !u!114 &6056849095606025116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +644,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBattleUnitView
   _behaviorGraphAgent: {fileID: 6056849095606025116}
-  HP: 0
 --- !u!1 &5440297698249652870
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +655,7 @@ GameObject:
   - component: {fileID: 7341399546513223370}
   - component: {fileID: 713583051059620913}
   - component: {fileID: 8407836891807109895}
-  - component: {fileID: 8587598554149521341}
+  - component: {fileID: 8840472684504819764}
   - component: {fileID: 1362051520634854443}
   - component: {fileID: 4853505784912346247}
   m_Layer: 0
@@ -680,7 +674,7 @@ Transform:
   m_GameObject: {fileID: 5440297698249652870}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.97, y: 0.62, z: 0}
+  m_LocalPosition: {x: -2, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -735,12 +729,12 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 368761460, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4.4329004, y: 3.116883}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -755,7 +749,7 @@ Animator:
   m_GameObject: {fileID: 5440297698249652870}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ca0da643bdcdeb247b5b00a3b5151c9d, type: 2}
+  m_Controller: {fileID: 22100000, guid: af15821e0a2dbed46b11bf3cc69bd372, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -767,8 +761,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &8587598554149521341
-CapsuleCollider2D:
+--- !u!58 &8840472684504819764
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -801,9 +795,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 1}
+  m_Radius: 1
 --- !u!114 &1362051520634854443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,7 +848,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeroBattleUnitView
   _behaviorGraphAgent: {fileID: 1362051520634854443}
-  HP: 0
 --- !u!1 &6006179756395191690
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +893,7 @@ GameObject:
   - component: {fileID: 6047208266540061431}
   - component: {fileID: 7723694794137979262}
   - component: {fileID: 8589173380984250720}
-  - component: {fileID: 6615954498295972861}
+  - component: {fileID: 6207592840130034515}
   - component: {fileID: 6902389160075155463}
   - component: {fileID: 8096782783841547075}
   m_Layer: 0
@@ -920,7 +912,7 @@ Transform:
   m_GameObject: {fileID: 6307192331399447172}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.94, y: 2.21, z: 0}
+  m_LocalPosition: {x: 3.5, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -975,7 +967,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 846397645, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -1007,8 +999,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &6615954498295972861
-CapsuleCollider2D:
+--- !u!58 &6207592840130034515
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1041,9 +1033,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 1}
+  m_Radius: 1
 --- !u!114 &6902389160075155463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,7 +1086,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBattleUnitView
   _behaviorGraphAgent: {fileID: 6902389160075155463}
-  HP: 0
 --- !u!1 &7311577766825784402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,7 +1186,7 @@ GameObject:
   - component: {fileID: 7016013836136402711}
   - component: {fileID: 3224485056605353619}
   - component: {fileID: 4078431999068939372}
-  - component: {fileID: 7613753518879585104}
+  - component: {fileID: 7362775358949800644}
   - component: {fileID: 8641224135295079621}
   - component: {fileID: 5335911453196091293}
   m_Layer: 0
@@ -1215,7 +1205,7 @@ Transform:
   m_GameObject: {fileID: 9129107897744784993}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.04, y: 1.96, z: 0}
+  m_LocalPosition: {x: -3.5, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1270,7 +1260,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 2142432406, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1290,7 +1280,7 @@ Animator:
   m_GameObject: {fileID: 9129107897744784993}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ca0da643bdcdeb247b5b00a3b5151c9d, type: 2}
+  m_Controller: {fileID: 22100000, guid: af15821e0a2dbed46b11bf3cc69bd372, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1302,8 +1292,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &7613753518879585104
-CapsuleCollider2D:
+--- !u!58 &7362775358949800644
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1336,9 +1326,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 1}
+  m_Radius: 1
 --- !u!114 &8641224135295079621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1390,7 +1379,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompanionBattleUnitView
   _behaviorGraphAgent: {fileID: 8641224135295079621}
-  HP: 0
 --- !u!1 &9178942897646606341
 GameObject:
   m_ObjectHideFlags: 0
