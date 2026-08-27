@@ -42,18 +42,7 @@ public class CooldownService
             return;
         }
 
-        foreach (string id in _finishedIds)
-        {
-            _cooldownEndTimes.Remove(id);
-
-            if (_cooldownCallbacks.TryGetValue(id, out Action callback))
-            {
-                _cooldownCallbacks.Remove(id);
-                callback?.Invoke();
-            }
-        }
-
-        _finishedIds.Clear();
+        ProcessFinishedCooldowns();
     }
 
     public void StartCooldown(string id, float duration, float currentTime, Action onCompleted)
@@ -88,5 +77,21 @@ public class CooldownService
     {
         _cooldownEndTimes.Clear();
         _cooldownCallbacks.Clear();
+    }
+
+    private void ProcessFinishedCooldowns()
+    {
+        foreach (string id in _finishedIds)
+        {
+            _cooldownEndTimes.Remove(id);
+
+            if (_cooldownCallbacks.TryGetValue(id, out Action callback))
+            {
+                _cooldownCallbacks.Remove(id);
+                callback?.Invoke();
+            }
+        }
+
+        _finishedIds.Clear();
     }
 }
