@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 public class GameManager : SingletonBehaviour<GameManager>
@@ -9,10 +10,14 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static PoolManager Pool { get { return Instance._poolManager; } }
     public static TimeManager Time { get { return Instance._timeManager; } }
     public static UIManager UI { get { return Instance._uiManager; } }
-    public static ViewModelManager ViewModel { get { return Instance._viewModelManager; } }
-    public static SaveManager Save { get { return Instance._saveManager; } }
-    public static UserData User { get { return Instance._saveManager.User; } }
     public static GrowthSystem Growth { get { return Instance._growthSystem; } }
+    public static PerkManager Perk { get { return Instance._perkManager; } }
+
+    public static GameSession Session { get { return Instance._gameSession; } }
+    public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
+    public static SoundManager Sound { get { return Instance._soundManager; } }
+
+
 
 
     #region Manager Variables
@@ -23,18 +28,20 @@ public class GameManager : SingletonBehaviour<GameManager>
     private PoolManager _poolManager = new();
     private TimeManager _timeManager = new();
     private UIManager _uiManager = new();
-    private ViewModelManager _viewModelManager = new();
-    private SaveManager _saveManager = new();
     private GrowthSystem _growthSystem = new();
+    private SoundManager _soundManager = new();
+    private PerkManager _perkManager = new();
+
+    private GameSession _gameSession;
+    private ViewModelFactory _viewModelFactory;
+
 
     #endregion
 
-    #region Variables
+    private LobbyController _realLobbyController;
+    private LobbyController _dreamLobbyController;
 
-    private bool _initComplete = false;
 
-
-    #endregion
 
     #region Init
 
@@ -42,53 +49,107 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         base.Init();
 
-        _saveManager.Load();
         _dataTable.LoadAllData();
 
-        // TODO: ui, network init
-
-        InitializeAsync().Forget();
+        InitializeLoginAsync().Forget();
     }
 
-    // TODO: 모바일은 OnApplicationPause(true)에서도 저장 필요
-    private void OnApplicationQuit()
+    private async UniTask InitializeLoginAsync()
     {
-        _saveManager.Save();
-    }
-
-    private async UniTask InitializeAsync()
-    {
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.LOGIN);
         await _uiManager.Init();
 
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.Common);
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.Reality);
-        await _resourceManager.LoadContentAsync(AddressablePath.Label.Dream);
+        _soundManager.Init(gameObject);
+        _uiManager.OpenLoginUI();
+    }
 
+    public async UniTask InitializeAfterLoginAsync(Action<float> onProgress)
+    {
+        onProgress?.Invoke(0f);
 
-        var poolRoot = Utils.CreateEmptyGameObject("PoolRoot", this.gameObject.transform).transform;
+        onProgress?.Invoke(0.15f);
+
+        await _resourceManager.LoadAllLabelAssetAsync(
+            progress => 
+            { 
+                onProgress?.Invoke(0.15f + progress * 0.65f); 
+            });
+
+        GameSession gameSession = new(_networkManager);
+        await gameSession.LoadAllData();
+        _gameSession = gameSession;
+
+        _viewModelFactory = new(_gameSession, _dataTable);
+
+        onProgress?.Invoke(0.85f);
+
+        Transform poolRoot = Utils.CreateEmptyGameObject("PoolRoot",transform).transform;
         await _poolManager.InitAsync(poolRoot);
-
-        _initComplete = true;
 
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
-        // TODO: 로딩/로비가 생기면 지우기
-        await _uiManager.OpenWorkInfoUI();
-    }
+        onProgress?.Invoke(1f);
 
-    #endregion
+        EnterReal();
+    }                                                                     
+    #endregion                                                            
 
-
-    [ContextMenu("OpenTestHUDUI")]
-    public void OpenTestHUDUI()
+    public void EnterReal()
     {
-        UI.OpenTestHUDUI();
-    }
-    [ContextMenu("ExampleVoidFunc")]
-    public void ExampleVoidFunc()
-    {
-        UI.ExampleVoidFunc();
+        if(_realLobbyController == null)
+        {
+            _realLobbyController = new();
+        }
+
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.REAL_LOBBY_BACKGROUND);
+        _realLobbyController.Enter(backgroundPrefab);
+        UI.OpenRealHud();
+        Sound.PlayBGM(AddressablePath.Audio.BGM_LOBBY);
     }
 
+    public void ExitReal()
+    {
+        _realLobbyController.Release();
+        UI.CloseRealHud();
+    }
+
+    public void EnterDream()
+    {
+        if (_dreamLobbyController == null)
+        {
+            _dreamLobbyController = new();
+        }
+
+        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DREAM_LOBBY_BACKGROUND);
+        _dreamLobbyController.Enter(backgroundPrefab);
+        UI.OpenDreamHud();
+    }
+
+    public void ExitDream()
+    {
+        _dreamLobbyController.Release();
+        UI.CloseDreamHud();
+    }
+
+    public void RequestQuit()
+    {
+        QuitAfterSaveAsync().Forget();
+    }
+
+    private async UniTask QuitAfterSaveAsync()
+    {
+        await SaveUtil.SaveAllDataAsync();
+        Application.Quit();
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus == false || _gameSession == null)
+        {
+            return;
+        }
+
+        SaveUtil.SaveAllDataAsync().Forget();
+    }
 }

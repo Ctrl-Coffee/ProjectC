@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SubtitleEditGameUI : MiniGameBase
 {
-    private const float MIN_FALL_SPEED = 1f;
-
     [Header("배치")]
     [SerializeField] private RectTransform _playArea;
     [SerializeField] private RectTransform _targetSlot;
@@ -16,22 +14,37 @@ public class SubtitleEditGameUI : MiniGameBase
     // TODO: 김경훈 (26.08.10) 자막 여러개가 되면 PoolManager로 옮기기
     private FallingSubtitle _subtitleInstance;
 
-    [Header("난이도 - 기본값")]
-    [SerializeField] private float _baseFallSpeed = 400f;
-    [SerializeField] private float _baseTolerance = 150f;
-    [SerializeField] private float _basePerfectRadius = 30f;
-
-    [Header("난이도 - 업무 레벨당 증감")]
-    [SerializeField] private float _fallSpeedPerLevel = 20f;
-    [SerializeField] private float _tolerancePerLevel = 5f;
-    [SerializeField] private float _minTolerance = 40f;
-    [SerializeField] private float _perfectRadiusPerLevel = 1f;
-    [SerializeField] private float _minPerfectRadius = 8f;
+    [Header("난이도")]
+    [SerializeField] private float _fallSpeedRatio = 0.5f;
+    [SerializeField] private float _toleranceRatio = 0.1f;
+    [SerializeField] private float _perfectRadiusRatio = 0.02f;
 
     private bool _hasAttachResult = false;
     private float _attachAccuracy = 0f;
-    private float _currentTolerance = 0f;
-    private float _currentPerfectRadius = 0f;
+
+    private float FallSpeed
+    {
+        get
+        {
+            return _fallSpeedRatio * _playArea.rect.height;
+        }
+    }
+
+    private float Tolerance
+    {
+        get
+        {
+            return _toleranceRatio * _playArea.rect.height;
+        }
+    }
+
+    private float PerfectRadius
+    {
+        get
+        {
+            return _perfectRadiusRatio * _playArea.rect.height;
+        }
+    }
 
     public override async UniTask<MiniGameResult> PlayAsync(MiniGameContext context, CancellationToken token)
     {
@@ -39,10 +52,6 @@ public class SubtitleEditGameUI : MiniGameBase
         {
             return MiniGameResult.Canceled;
         }
-
-        float fallSpeed = GetFallSpeed(context.WorkLevel);
-        _currentTolerance = GetTolerance(context.WorkLevel);
-        _currentPerfectRadius = GetPerfectRadius(context.WorkLevel);
 
         if (!SetupRound())
         {
@@ -53,18 +62,14 @@ public class SubtitleEditGameUI : MiniGameBase
 
         try
         {
-            float accuracy = await RunSubtitleAsync(fallSpeed, _currentTolerance, token);
+            float accuracy = await RunSubtitleAsync(token);
 
-            return new MiniGameResult
-            {
-                IsCompleted = true,
-                Accuracy = accuracy,
-                Grade = MiniGameGradeTable.GetGrade(accuracy),
-            };
+            return MiniGameResult.Completed(accuracy);
         }
         finally
         {
             UnbindInput();
+            HideSubtitle();
         }
     }
 
@@ -77,10 +82,27 @@ public class SubtitleEditGameUI : MiniGameBase
 
         _subtitleInstance.SetPosition(GetSubtitleStartPosition());
 
+        _subtitleInstance.gameObject.SetActive(true);
+
         _hasAttachResult = false;
         _attachAccuracy = 0f;
 
         return true;
+    }
+
+    protected override void ClearGame()
+    {
+        HideSubtitle();
+    }
+
+    private void HideSubtitle()
+    {
+        if (null == _subtitleInstance)
+        {
+            return;
+        }
+
+        _subtitleInstance.gameObject.SetActive(false);
     }
 
     private FallingSubtitle EnsureSubtitle()
@@ -109,9 +131,10 @@ public class SubtitleEditGameUI : MiniGameBase
         return startPosition;
     }
 
-    private async UniTask<float> RunSubtitleAsync(float fallSpeed, float tolerance, CancellationToken token)
+    private async UniTask<float> RunSubtitleAsync(CancellationToken token)
     {
-        float missLineY = _targetSlot.anchoredPosition.y - tolerance;
+        float fallSpeed = FallSpeed;
+        float missLineY = _targetSlot.anchoredPosition.y - Tolerance;
 
         while (true)
         {
@@ -132,7 +155,7 @@ public class SubtitleEditGameUI : MiniGameBase
         }
     }
 
-    private float EvaluateAttach(float perfectRadius, float tolerance)
+    private float EvaluateAttach()
     {
         if (null == _subtitleInstance)
         {
@@ -141,55 +164,7 @@ public class SubtitleEditGameUI : MiniGameBase
 
         float distance = Vector2.Distance(_subtitleInstance.RectTransform.anchoredPosition, _targetSlot.anchoredPosition);
 
-        return CalculateAccuracy(distance, perfectRadius, tolerance);
-    }
-
-    private float CalculateAccuracy(float distance, float perfectRadius, float tolerance)
-    {
-        if (tolerance <= 0f)
-        {
-            return 0f;
-        }
-
-        if (distance <= perfectRadius)
-        {
-            return 1f;
-        }
-
-        float falloffRange = tolerance - perfectRadius;
-
-        if (falloffRange <= 0f)
-        {
-            return 0f;
-        }
-
-        float accuracy = 1f - ((distance - perfectRadius) / falloffRange);
-
-        return Mathf.Clamp01(accuracy);
-    }
-
-    private float GetFallSpeed(int workLevel)
-    {
-        int levelStep = Mathf.Max(0, workLevel - 1);
-        float fallSpeed = _baseFallSpeed + (_fallSpeedPerLevel * levelStep);
-
-        return Mathf.Max(MIN_FALL_SPEED, fallSpeed);
-    }
-
-    private float GetTolerance(int workLevel)
-    {
-        int levelStep = Mathf.Max(0, workLevel - 1);
-        float tolerance = _baseTolerance - (_tolerancePerLevel * levelStep);
-
-        return Mathf.Max(_minTolerance, tolerance);
-    }
-
-    private float GetPerfectRadius(int workLevel)
-    {
-        int levelStep = Mathf.Max(0, workLevel - 1);
-        float perfectRadius = _basePerfectRadius - (_perfectRadiusPerLevel * levelStep);
-
-        return Mathf.Max(_minPerfectRadius, perfectRadius);
+        return MiniGameScore.FromDistance(distance, PerfectRadius, Tolerance);
     }
 
     private void BindInput()
@@ -219,18 +194,8 @@ public class SubtitleEditGameUI : MiniGameBase
             return;
         }
 
-        _attachAccuracy = EvaluateAttach(_currentPerfectRadius, _currentTolerance);
+        _attachAccuracy = EvaluateAttach();
         _hasAttachResult = true;
-    }
-
-    private float GetDeltaTime()
-    {
-        if (null == GameManager.Instance)
-        {
-            return Time.deltaTime;
-        }
-
-        return GameManager.Time.GameDeltaTime;
     }
 
     private bool ValidateReferences()
@@ -238,6 +203,12 @@ public class SubtitleEditGameUI : MiniGameBase
         if (null == _playArea || null == _targetSlot || null == _subtitlePrefab)
         {
             Logger.LogError("참조 비어있음 (PlayArea / TargetSlot / Subtitle)");
+            return false;
+        }
+
+        if (_playArea.rect.height <= 0f)
+        {
+            Logger.LogError("PlayArea의 높이가 0.");
             return false;
         }
 

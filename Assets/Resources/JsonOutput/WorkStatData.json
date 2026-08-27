@@ -1,0 +1,92 @@
+[
+  {
+    "Id": "ManualWorkRewardMoney",
+    "Name": "수동 업무 획득 돈",
+    "RoundMode": "Round",
+    "MinValue": 0,
+    "MaxValue": -1,
+    "MinRate": -1,
+    "MaxRate": -1,
+    "Description": "미니게임 완료 시 얻는 돈"
+  },
+  {
+    "Id": "ManualWorkRewardDP",
+    "Name": "수동 업무 획득 DP",
+    "RoundMode": "Round",
+    "MinValue": 0,
+    "MaxValue": -1,
+    "MinRate": -1,
+    "MaxRate": -1,
+    "Description": "미니게임 완료 시 얻는 DP"
+  },
+  {
+    "Id": "AutoWorkRewardMoney",
+    "Name": "자동 업무 획득 돈",
+    "RoundMode": "Round",
+    "MinValue": 0,
+    "MaxValue": -1,
+    "MinRate": -1,
+    "MaxRate": -1,
+    "Description": "자동 업무 정산 시 얻는 돈"
+  },
+  {
+    "Id": "AutoWorkRewardDP",
+    "Name": "자동 업무 획득 DP",
+    "RoundMode": "Round",
+    "MinValue": 0,
+    "MaxValue": -1,
+    "MinRate": -1,
+    "MaxRate": -1,
+    "Description": "자동 업무 정산 시 얻는 DP"
+  },
+  {
+    "Id": "WorkDuration",
+    "Name": "자동 업무 소요 시간",
+    "RoundMode": "Round",
+    "MinValue": 60,
+    "MaxValue": -1,
+    "MinRate": 0.3,
+    "MaxRate": 3,
+    "Description": "감소가 이득. 이펙트에 음수로 기입"
+  },
+  {
+    "Id": "WorkEnergyCost",
+    "Name": "업무 에너지 소모",
+    "RoundMode": "Floor",
+    "MinValue": 1,
+    "MaxValue": -1,
+    "MinRate": -1,
+    "MaxRate": -1,
+    "Description": "감소가 이득. 0이 되면 무한 반복 가능하므로 최소 1"
+  },
+  {
+    "Id": "AutoWorkSlotCount",
+    "Name": "자동 업무 슬롯 수",
+    "RoundMode": "Floor",
+    "MinValue": 1,
+    "MaxValue": 10,
+    "MinRate": -1,
+    "MaxRate": -1,
+    "Description": "동시에 걸어둘 수 있는 자동 업무 개수"
+  },
+  {
+    "Id": "EnergyMax",
+    "Name": "에너지 최대치",
+    "RoundMode": "Floor",
+    "MinValue": 10,
+    "MaxValue": -1,
+    "MinRate": 0.5,
+    "MaxRate": -1,
+    "Description": "교차 노드의 음수 이펙트 방어용 하한"
+  },
+  {
+    "Id": "EnergyRecoverRate",
+    "Name": "에너지 회복 속도",
+    "RoundMode": "None",
+    "MinValue": 1,
+    "MaxValue": -1,
+    "MinRate": -1,
+    "MaxRate": -1,
+    "Description": "회복 속도 배율. 높을수록 회복 주기가 짧아짐 (반올림 없이 적용)"
+  }
+]

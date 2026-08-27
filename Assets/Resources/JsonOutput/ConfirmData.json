@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "LoginFail",
+    "TitleTxet": "로그인 실패",
+    "DescTxet": "다시 시도해 주세요.",
+    "OKText": "확인",
+    "CancelText": null,
+    "ConfirmType": "OK"
+  },
+  {
+    "Id": "SignUpFail",
+    "TitleTxet": "회원가입 실패",
+    "DescTxet": "다시 시도해 주세요",
+    "OKText": "확인",
+    "CancelText": null,
+    "ConfirmType": "OK"
+  }
+]

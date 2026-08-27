@@ -4,12 +4,52 @@
     "Name": "Edit Subtitle",
     "WorkType": "Manual",
     "MiniGame": "SubtitleEdit",
-    "ReqEnergy": 1,
+    "ReqEnergy": 10,
+    "ReqGold": 0,
     "DurationSeconds": 0,
     "RewardMoney": 50,
-    "RewardDP": 3,
-    "IconKey": null,
-    "Description": null
+    "RewardDP": 5,
+    "IconKey": "Sprites/Icon_Work[Icon_Work_0]",
+    "Description": "자막 편집 업무를 수행합니다"
+  },
+  {
+    "Id": "Work_Manual_02",
+    "Name": "Motion Tracking",
+    "WorkType": "Manual",
+    "MiniGame": "MotionTracking",
+    "ReqEnergy": 25,
+    "ReqGold": 0,
+    "DurationSeconds": 0,
+    "RewardMoney": 100,
+    "RewardDP": 8,
+    "IconKey": "Sprites/Icon_Work[Icon_Work_1]",
+    "Description": "모션 캡쳐 알바를 신청합니다"
+  },
+  {
+    "Id": "Work_Manual_03",
+    "Name": "Roll Dice",
+    "WorkType": "Manual",
+    "MiniGame": "DiceGamble",
+    "ReqEnergy": 10,
+    "ReqGold": 200,
+    "DurationSeconds": 0,
+    "RewardMoney": 2000,
+    "RewardDP": 0,
+    "IconKey": "Sprites/Icon_Work[Icon_Work_2]",
+    "Description": "주사위 굴리기!!"
+  },
+  {
+    "Id": "Work_Manual_04",
+    "Name": "Write a novel",
+    "WorkType": "Manual",
+    "MiniGame": "None",
+    "ReqEnergy": 1,
+    "ReqGold": 0,
+    "DurationSeconds": 0,
+    "RewardMoney": 0,
+    "RewardDP": 10,
+    "IconKey": "Sprites/Icon_Work[Icon_Work_3]",
+    "Description": "소설 쓰기"
   },
   {
     "Id": "Work_Auto_01",
@@ -17,11 +57,12 @@
     "WorkType": "Auto",
     "MiniGame": "None",
     "ReqEnergy": 0,
+    "ReqGold": 0,
     "DurationSeconds": 1800,
     "RewardMoney": 100,
     "RewardDP": 5,
-    "IconKey": null,
-    "Description": null
+    "IconKey": "Sprites/Icon_Work[Icon_Work_4]",
+    "Description": "동영상 싱크 조절 업무입니다"
   },
   {
     "Id": "Work_Auto_02",
@@ -29,11 +70,12 @@
     "WorkType": "Auto",
     "MiniGame": "None",
     "ReqEnergy": 0,
+    "ReqGold": 0,
     "DurationSeconds": 3600,
     "RewardMoney": 250,
     "RewardDP": 12,
-    "IconKey": null,
-    "Description": null
+    "IconKey": "Sprites/Icon_Work[Icon_Work_5]",
+    "Description": "영상 썸네일을 그립니다"
   },
   {
     "Id": "Work_Auto_03",
@@ -41,22 +83,50 @@
     "WorkType": "Auto",
     "MiniGame": "None",
     "ReqEnergy": 0,
+    "ReqGold": 0,
     "DurationSeconds": 5400,
     "RewardMoney": 420,
     "RewardDP": 20,
-    "IconKey": null,
-    "Description": null
+    "IconKey": "Sprites/Icon_Work[Icon_Work_6]",
+    "Description": "영상 인코딩 업무를 배웁니다"
   },
   {
     "Id": "Work_Auto_04",
-    "Name": "Backup Video",
+    "Name": "Backup Files",
     "WorkType": "Auto",
     "MiniGame": "None",
     "ReqEnergy": 0,
+    "ReqGold": 0,
     "DurationSeconds": 7200,
     "RewardMoney": 600,
     "RewardDP": 30,
-    "IconKey": null,
-    "Description": null
+    "IconKey": "Sprites/Icon_Work[Icon_Work_7]",
+    "Description": "자료 백업"
+  },
+  {
+    "Id": "Work_Auto_05",
+    "Name": "Translate Movie",
+    "WorkType": "Auto",
+    "MiniGame": "None",
+    "ReqEnergy": 0,
+    "ReqGold": 0,
+    "DurationSeconds": 9600,
+    "RewardMoney": 800,
+    "RewardDP": 40,
+    "IconKey": "Sprites/Icon_Work[Icon_Work_8]",
+    "Description": "해외 영화를 번역합니다"
+  },
+  {
+    "Id": "Work_Auto_06",
+    "Name": "Game planning",
+    "WorkType": "Auto",
+    "MiniGame": "None",
+    "ReqEnergy": 0,
+    "ReqGold": 0,
+    "DurationSeconds": 10800,
+    "RewardMoney": 1000,
+    "RewardDP": 50,
+    "IconKey": "Sprites/Icon_Work[Icon_Work_9]",
+    "Description": "게임 컨텐츠 기획을 실행합니다"
   }
 ]

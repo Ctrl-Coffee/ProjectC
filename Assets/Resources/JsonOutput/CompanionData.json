@@ -2,61 +2,31 @@
   {
     "Id": "Companion_001",
     "Name": "김환",
-    "GradeStar": 1,
-    "BaseAtk": 10,
-    "BaseHp": 100,
-    "BaseDef": 10,
-    "GrowthAtk": 5,
-    "GrowthHp": 12,
-    "GrowthDef": 4,
+    "Grade": 1,
     "SkillId": "Skill_001"
   },
   {
     "Id": "Companion_002",
     "Name": "이아진",
-    "GradeStar": 1,
-    "BaseAtk": 13,
-    "BaseHp": 80,
-    "BaseDef": 8,
-    "GrowthAtk": 7,
-    "GrowthHp": 10,
-    "GrowthDef": 3,
+    "Grade": 1,
     "SkillId": "Skill_002"
   },
   {
     "Id": "Companion_003",
     "Name": "김경민",
-    "GradeStar": 2,
-    "BaseAtk": 14,
-    "BaseHp": 110,
-    "BaseDef": 10,
-    "GrowthAtk": 7,
-    "GrowthHp": 11,
-    "GrowthDef": 5,
+    "Grade": 2,
     "SkillId": "Skill_003"
   },
   {
     "Id": "Companion_004",
     "Name": "장준성",
-    "GradeStar": 3,
-    "BaseAtk": 15,
-    "BaseHp": 115,
-    "BaseDef": 15,
-    "GrowthAtk": 9,
-    "GrowthHp": 13,
-    "GrowthDef": 7,
+    "Grade": 4,
     "SkillId": "Skill_004"
   },
   {
     "Id": "Companion_005",
     "Name": "김희주",
-    "GradeStar": 3,
-    "BaseAtk": 15,
-    "BaseHp": 120,
-    "BaseDef": 16,
-    "GrowthAtk": 8,
-    "GrowthHp": 15,
-    "GrowthDef": 8,
+    "Grade": 3,
     "SkillId": "Skill_005"
   }
 ]

@@ -1,0 +1,194 @@
+[
+  {
+    "Id": "Effect_ManualMoney_Add",
+    "EffectType": "Stat",
+    "StatType": "ManualWorkRewardMoney",
+    "ModType": "Additive",
+    "TargetId": null,
+    "Description": "수동 업무 획득 돈 (합연산)"
+  },
+  {
+    "Id": "Effect_ManualMoney_Comp",
+    "EffectType": "Stat",
+    "StatType": "ManualWorkRewardMoney",
+    "ModType": "Compound",
+    "TargetId": null,
+    "Description": "수동 업무 획득 돈 (곱연산)"
+  },
+  {
+    "Id": "Effect_ManualDP_Add",
+    "EffectType": "Stat",
+    "StatType": "ManualWorkRewardDP",
+    "ModType": "Additive",
+    "TargetId": null,
+    "Description": "수동 업무 획득 DP (합연산)"
+  },
+  {
+    "Id": "Effect_ManualDP_Comp",
+    "EffectType": "Stat",
+    "StatType": "ManualWorkRewardDP",
+    "ModType": "Compound",
+    "TargetId": null,
+    "Description": "수동 업무 획득 DP (곱연산)"
+  },
+  {
+    "Id": "Effect_AutoMoney_Add",
+    "EffectType": "Stat",
+    "StatType": "AutoWorkRewardMoney",
+    "ModType": "Additive",
+    "TargetId": null,
+    "Description": "자동 업무 획득 돈 (합연산)"
+  },
+  {
+    "Id": "Effect_AutoMoney_Comp",
+    "EffectType": "Stat",
+    "StatType": "AutoWorkRewardMoney",
+    "ModType": "Compound",
+    "TargetId": null,
+    "Description": "자동 업무 획득 돈 (곱연산)"
+  },
+  {
+    "Id": "Effect_AutoDP_Add",
+    "EffectType": "Stat",
+    "StatType": "AutoWorkRewardDP",
+    "ModType": "Additive",
+    "TargetId": null,
+    "Description": "자동 업무 획득 DP (합연산)"
+  },
+  {
+    "Id": "Effect_AutoDP_Comp",
+    "EffectType": "Stat",
+    "StatType": "AutoWorkRewardDP",
+    "ModType": "Compound",
+    "TargetId": null,
+    "Description": "자동 업무 획득 DP (곱연산)"
+  },
+  {
+    "Id": "Effect_Duration_Add",
+    "EffectType": "Stat",
+    "StatType": "WorkDuration",
+    "ModType": "Additive",
+    "TargetId": null,
+    "Description": "자동 업무 소요 시간 (합연산)"
+  },
+  {
+    "Id": "Effect_Duration_Comp",
+    "EffectType": "Stat",
+    "StatType": "WorkDuration",
+    "ModType": "Compound",
+    "TargetId": null,
+    "Description": "자동 업무 소요 시간 (곱연산)"
+  },
+  {
+    "Id": "Effect_EnergyCost_Flat",
+    "EffectType": "Stat",
+    "StatType": "WorkEnergyCost",
+    "ModType": "Flat",
+    "TargetId": null,
+    "Description": "업무 에너지 소모 (정수 가감)"
+  },
+  {
+    "Id": "Effect_EnergyCost_Add",
+    "EffectType": "Stat",
+    "StatType": "WorkEnergyCost",
+    "ModType": "Additive",
+    "TargetId": null,
+    "Description": "업무 에너지 소모 (합연산)"
+  },
+  {
+    "Id": "Effect_EnergyCost_Comp",
+    "EffectType": "Stat",
+    "StatType": "WorkEnergyCost",
+    "ModType": "Compound",
+    "TargetId": null,
+    "Description": "업무 에너지 소모 (곱연산)"
+  },
+  {
+    "Id": "Effect_SlotCount_Flat",
+    "EffectType": "Stat",
+    "StatType": "AutoWorkSlotCount",
+    "ModType": "Flat",
+    "TargetId": null,
+    "Description": "자동 업무 슬롯 수 (정수 가감)"
+  },
+  {
+    "Id": "Effect_EnergyMax_Flat",
+    "EffectType": "Stat",
+    "StatType": "EnergyMax",
+    "ModType": "Flat",
+    "TargetId": null,
+    "Description": "에너지 최대치 (정수 가감)"
+  },
+  {
+    "Id": "Effect_EnergyMax_Add",
+    "EffectType": "Stat",
+    "StatType": "EnergyMax",
+    "ModType": "Additive",
+    "TargetId": null,
+    "Description": "에너지 최대치 (합연산)"
+  },
+  {
+    "Id": "Effect_EnergyMax_Comp",
+    "EffectType": "Stat",
+    "StatType": "EnergyMax",
+    "ModType": "Compound",
+    "TargetId": null,
+    "Description": "에너지 최대치 (곱연산)"
+  },
+  {
+    "Id": "Effect_EnergyRecover_Flat",
+    "EffectType": "Stat",
+    "StatType": "EnergyRecoverRate",
+    "ModType": "Flat",
+    "TargetId": null,
+    "Description": "에너지 회복량 (정수 가감)"
+  },
+  {
+    "Id": "Effect_EnergyRecover_Add",
+    "EffectType": "Stat",
+    "StatType": "EnergyRecoverRate",
+    "ModType": "Additive",
+    "TargetId": null,
+    "Description": "에너지 회복량 (합연산)"
+  },
+  {
+    "Id": "Effect_EnergyRecover_Comp",
+    "EffectType": "Stat",
+    "StatType": "EnergyRecoverRate",
+    "ModType": "Compound",
+    "TargetId": null,
+    "Description": "에너지 회복량 (곱연산)"
+  },
+  {
+    "Id": "Effect_Unlock_Auto05",
+    "EffectType": "Unlock",
+    "StatType": null,
+    "ModType": null,
+    "TargetId": "Work_Auto_05",
+    "Description": "자동 업무 '해외 영화 번역' 해금"
+  },
+  {
+    "Id": "Effect_Unlock_Auto06",
+    "EffectType": "Unlock",
+    "StatType": null,
+    "ModType": null,
+    "TargetId": "Work_Auto_06",
+    "Description": "자동 업무 '게임 기획하기' 해금"
+  },
+  {
+    "Id": "Effect_Unlock_Gambling01",
+    "EffectType": "Unlock",
+    "StatType": null,
+    "ModType": null,
+    "TargetId": "Work_Manual_03",
+    "Description": "도박 업무 '주사위 굴리기 게임' 해금"
+  },
+  {
+    "Id": "Effect_Unlock_Creative01",
+    "EffectType": "Unlock",
+    "StatType": null,
+    "ModType": null,
+    "TargetId": "Work_Manual_04",
+    "Description": "창작 업무 '소설 쓰기' 해금"
+  }
+]

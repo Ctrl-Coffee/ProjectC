@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class UIBase : MonoBehaviour
 {
+    [SerializeField] private bool _isPlayAnimation = true;
+    [SerializeField] protected RectTransform _panel;
+    public bool IsPlayAnimation => _isPlayAnimation;
+
     public void OpenUI()
     {
         PlayOpenAnimation();
@@ -15,23 +19,25 @@ public class UIBase : MonoBehaviour
 
     public virtual Tween PlayOpenAnimation()
     {
-        transform.localScale = Vector3.zero;
+        if(_isPlayAnimation == false)
+            return null;
 
-        transform.DOKill();
-        return transform.DOScale(1f, 1f).SetEase(Ease.OutBack).SetUpdate(true);
+        _panel.localScale = Vector3.zero;
+
+        _panel.DOKill();
+        return _panel.DOScale(1f, 0.5f).SetEase(Ease.OutBack).SetUpdate(true);
     }
 
     public virtual Tween PlayCloseAnimation()
     {
-        transform.DOKill();
-        return transform.DOScale(0f, 1f)
+        _panel.DOKill();
+        return _panel.DOScale(0f, 0.5f)
             .SetEase(Ease.InBack)
             .SetUpdate(true);
     }
 
     public virtual void OnClickCloseButton()
     {
-        // TODO(김익환): audio
         CloseUI();
     }
 }

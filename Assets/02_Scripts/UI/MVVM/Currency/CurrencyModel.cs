@@ -4,9 +4,9 @@ using UnityEngine;
 [Serializable]
 public class CurrencyModel : ModelBase
 {
-    // 테스트용 설정. 최대치 100, 시작치 30
-    private const long START_ENERGY = 30;
-    private const long MAX_ENERGY = 100;
+    // 테스트용 설정. 최대치 200, 시작치 50
+    private const long START_ENERGY = 50;
+    private const long MAX_ENERGY = 200;
 
     [SerializeField] private long _money;
     [SerializeField] private long _dreamPoint;
@@ -14,6 +14,16 @@ public class CurrencyModel : ModelBase
     [SerializeField] private long _dreamFragment;
     [SerializeField] private long _dreamScroll;
     [SerializeField] private long _inspiration;
+
+    public CurrencyModel(CurrencyDto currencyDto)
+    {
+        _money = currencyDto.money;
+        _dreamPoint = currencyDto.dreamPoint;
+        _energy = currencyDto.energy;
+        _dreamFragment = currencyDto.dreamFragment;
+        _dreamScroll = currencyDto.dreamScroll;
+        _inspiration = currencyDto.inspiration;
+    }
 
     public long Money
     {
@@ -73,9 +83,24 @@ public class CurrencyModel : ModelBase
     {
         get
         {
+            return GameManager.Perk.Stat.GetLong(WorkStatType.EnergyMax, MAX_ENERGY);
+        }
+    }
+
+    public void NotifyMaxEnergyChanged()
+    {
+        OnPropertyChanged(nameof(MaxEnergy));
+    }
+
+#if UNITY_EDITOR
+    public long DebugBaseMaxEnergy
+    {
+        get
+        {
             return MAX_ENERGY;
         }
     }
+#endif
 
     public long DreamFragment
     {
@@ -133,41 +158,59 @@ public class CurrencyModel : ModelBase
 
     public override void InitializeOnce()
     {
+        OnPropertyChanged(nameof(Money));
+        OnPropertyChanged(nameof(DreamPoint));
+        OnPropertyChanged(nameof(Energy));
+        OnPropertyChanged(nameof(DreamFragment));
+        OnPropertyChanged(nameof(DreamScroll));
+        OnPropertyChanged(nameof(Inspiration));
     }
 
     public void AddMoney(long amount)
     {
         Money += amount;
+        SaveUtil.RequestSaveCurrency();
     }
 
     public void AddDreamPoint(long amount)
     {
         DreamPoint += amount;
+        SaveUtil.RequestSaveCurrency();
     }
 
     public void AddEnergy(long amount)
     {
-        if (MAX_ENERGY <= Energy)
+        long maxEnergy = MaxEnergy;
+
+        if (maxEnergy <= Energy)
         {
             return;
         }
 
-        Energy = Math.Min(MAX_ENERGY, Energy + amount);
+        Energy = Math.Min(maxEnergy, Energy + amount);
+        SaveUtil.RequestSaveCurrency();
     }
 
     public void AddDreamFragment(long amount)
     {
         DreamFragment += amount;
+        SaveUtil.RequestSaveCurrency();
     }
     
     public void AddDreamScroll(long amount)
     {
         DreamScroll += amount;
+        SaveUtil.RequestSaveCurrency();
     }
 
     public void AddInspiration(long amount)
     {
         Inspiration += amount;
+        SaveUtil.RequestSaveCurrency();
+    }
+    public bool CanSpendMoney(long amount)
+    {
+        return CanSpend(Money, amount);
     }
 
     public bool TrySpendMoney(long amount)
@@ -178,6 +221,7 @@ public class CurrencyModel : ModelBase
         }
 
         Money -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }
@@ -190,8 +234,14 @@ public class CurrencyModel : ModelBase
         }
 
         DreamPoint -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
+    }
+
+    public bool CanSpendEnergy(long amount)
+    {
+        return CanSpend(Energy, amount);
     }
 
     public bool TrySpendEnergy(long amount)
@@ -202,6 +252,7 @@ public class CurrencyModel : ModelBase
         }
 
         Energy -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }
@@ -214,6 +265,7 @@ public class CurrencyModel : ModelBase
         }
 
         DreamFragment -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }
@@ -226,6 +278,7 @@ public class CurrencyModel : ModelBase
         }
 
         DreamScroll -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }
@@ -238,6 +291,7 @@ public class CurrencyModel : ModelBase
         }
 
         Inspiration -= amount;
+        SaveUtil.RequestSaveCurrency();
 
         return true;
     }
