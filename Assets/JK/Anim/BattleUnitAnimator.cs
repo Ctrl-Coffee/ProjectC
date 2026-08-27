@@ -91,6 +91,15 @@ public class BattleUnitAnimator
     //TODO 임시
     private async UniTask Init(string id)
     {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            ApplyAnimationClip(AnimationConstants.IDLE, null);
+            ApplyAnimationClip(AnimationConstants.BASIC_ATTACK, null);
+            ApplyAnimationClip(AnimationConstants.SIGNATURE, null);
+            ApplyAnimationClip(AnimationConstants.DEATH, null);
+            return;
+        }
+
         UnitAnimationSet unitAnimationSet = await Addressables.LoadAssetAsync<UnitAnimationSet>(id);
 
         ApplyAnimationClip(AnimationConstants.IDLE, unitAnimationSet.IdleClip);
