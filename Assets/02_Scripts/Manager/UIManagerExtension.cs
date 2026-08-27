@@ -56,9 +56,9 @@ public static class UIManagerExtension
         return uiManager.OpenContentUI<HeroInventoryView>();
     }
 
-    public static UniTask<PlayerStatView> OpenPlayerStat(this UIManager uiManager)
+    public static UniTask<HeroInfoView> OpenHeroInfo(this UIManager uiManager)
     {
-        return uiManager.OpenPopupUI<PlayerStatView>();
+        return uiManager.OpenPopupUI<HeroInfoView>();
     }
 
     public static UniTask<PerkStatView> OpenPerkStat(this UIManager uiManager)

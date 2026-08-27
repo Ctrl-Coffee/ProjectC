@@ -27,14 +27,14 @@ public class PlayerGrowthViewModel : ViewModelBase<PlayerGrowthModel>
 
     private void Refresh()
     {
-        PlayerStatModel stat = GameManager.Session.PlayerStat;
+        HeroInfoModel Info = GameManager.Session.HeroInfo;
         PlayerData playerData = GameManager.DataTable.GetPlayerData(CharacterId.PLAYER_DATA);
 
         Name = null == playerData ? string.Empty : playerData.Name;
         Level = _model.Level;
-        Atk = stat.Attack;
-        Def = stat.Defense;
-        Hp = stat.Hp;
+        Atk = Info.Attack;
+        Def = Info.Defense;
+        Hp = Info.Hp;
     }
 
     public void LevelUp()

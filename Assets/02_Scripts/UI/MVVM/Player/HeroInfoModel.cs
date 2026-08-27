@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-public class PlayerStatModel : ModelBase, IStatData
+public class HeroInfoModel : ModelBase, IStatData
 {
     private struct StatSum
     {
@@ -123,7 +123,7 @@ public class PlayerStatModel : ModelBase, IStatData
         }
     }
 
-    public PlayerStatModel(PlayerGrowthModel growth, HeroEquipedModel equiped, HeroEquipmentModel equipment)
+    public HeroInfoModel(PlayerGrowthModel growth, HeroEquipedModel equiped, HeroEquipmentModel equipment)
     {
         _growth = growth;
         _equiped = equiped;

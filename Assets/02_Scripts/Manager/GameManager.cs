@@ -151,11 +151,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         }
 
         SaveUtil.SaveAllDataAsync().Forget();
-    }
-
-    private void OnApplicationPause(bool isPaused)
-    {
-        AwayReportFlow.SetAppActive(!isPaused);
+        AwayReportFlow.SetAppActive(!pauseStatus);
     }
 
     private void OnApplicationFocus(bool hasFocus)

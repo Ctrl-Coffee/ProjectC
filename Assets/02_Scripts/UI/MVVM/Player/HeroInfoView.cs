@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class PlayerStatView : ViewBase
+public class HeroInfoView : ViewBase
 {
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _levelText;
@@ -17,7 +17,7 @@ public class PlayerStatView : ViewBase
     [SerializeField] private UIButtonComponent _blocker;
     [SerializeField] private UIButtonComponent _btnClose;
 
-    private PlayerStatViewModel _viewModel;
+    private HeroInfoViewModel _viewModel;
 
     private void OnEnable()
     {
@@ -67,7 +67,7 @@ public class PlayerStatView : ViewBase
 
     protected override void BindViewModel()
     {
-        _viewModel = GameManager.ViewModel.CreatePlayerStatViewModel();
+        _viewModel = GameManager.ViewModel.CreateHeroInfoViewModel();
     }
 
     protected override void Subscribe()
@@ -91,35 +91,35 @@ public class PlayerStatView : ViewBase
     {
         switch (propertyName)
         {
-            case nameof(PlayerStatViewModel.Level):
+            case nameof(HeroInfoViewModel.Level):
                 RefreshLevel();
                 break;
 
-            case nameof(PlayerStatViewModel.Attack):
+            case nameof(HeroInfoViewModel.Attack):
                 RefreshAttack();
                 break;
 
-            case nameof(PlayerStatViewModel.Hp):
+            case nameof(HeroInfoViewModel.Hp):
                 RefreshHp();
                 break;
 
-            case nameof(PlayerStatViewModel.Defense):
+            case nameof(HeroInfoViewModel.Defense):
                 RefreshDefense();
                 break;
 
-            case nameof(PlayerStatViewModel.CriticalRate):
+            case nameof(HeroInfoViewModel.CriticalRate):
                 RefreshCriticalRate();
                 break;
 
-            case nameof(PlayerStatViewModel.NormalSkillHaste):
+            case nameof(HeroInfoViewModel.NormalSkillHaste):
                 RefreshNormalSkillHaste();
                 break;
 
-            case nameof(PlayerStatViewModel.SpecialSkillHaste):
+            case nameof(HeroInfoViewModel.SpecialSkillHaste):
                 RefreshSpecialSkillHaste();
                 break;
 
-            case nameof(PlayerStatViewModel.CombatPower):
+            case nameof(HeroInfoViewModel.CombatPower):
                 RefreshCombatPower();
                 break;
 

@@ -16,10 +16,10 @@
         return viewModel;
     }
 
-    public PlayerStatViewModel CreatePlayerStatViewModel()
+    public HeroInfoViewModel CreateHeroInfoViewModel()
     {
-        PlayerStatModel model = _session.PlayerStat;
-        PlayerStatViewModel viewModel = new PlayerStatViewModel(model);
+        HeroInfoModel model = _session.HeroInfo;
+        HeroInfoViewModel viewModel = new HeroInfoViewModel(model);
         return viewModel;
     }
 

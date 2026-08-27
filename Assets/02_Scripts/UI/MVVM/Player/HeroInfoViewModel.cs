@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-public class PlayerStatViewModel : ViewModelBase<PlayerStatModel>
+public class HeroInfoViewModel : ViewModelBase<HeroInfoModel>
 {
     public string Name { get; private set; }
     public int Level { get; private set; }
@@ -15,7 +15,7 @@ public class PlayerStatViewModel : ViewModelBase<PlayerStatModel>
     public float SpecialSkillCooldownReduceRate { get; private set; }
     public float CombatPower { get; private set; }
 
-    public PlayerStatViewModel(PlayerStatModel model) : base(model)
+    public HeroInfoViewModel(HeroInfoModel model) : base(model)
     {
     }
 

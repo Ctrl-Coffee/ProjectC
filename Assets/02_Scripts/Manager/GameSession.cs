@@ -10,7 +10,7 @@ public class GameSession
 
 
     public PlayerGrowthModel PlayerGrowth { get; }
-    public PlayerStatModel PlayerStat { get; }
+    public HeroInfoModel HeroInfo { get; }
 
 
 
