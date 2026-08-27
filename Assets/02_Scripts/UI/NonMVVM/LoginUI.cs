@@ -57,7 +57,21 @@ public class LoginUI : UIBase
 
         try
         {
-            LoginResponse response = await GameManager.Network.LoginAsync(_mailInputField.text, _passwordInputField.text);
+            string mail;
+            string password;
+
+            if (string.IsNullOrEmpty(_mailInputField.text) || string.IsNullOrEmpty(_passwordInputField.text))
+            {
+                mail = TestAccount.EMAIL;
+                password = TestAccount.PASSWORD;
+            }
+            else
+            {
+                mail = _mailInputField.text;
+                password = _passwordInputField.text;
+            }
+
+            LoginResponse response = await GameManager.Network.LoginAsync(mail, password);
 
             if (response.result != 0 || response.userId <= 0 || string.IsNullOrEmpty(response.token))
             {

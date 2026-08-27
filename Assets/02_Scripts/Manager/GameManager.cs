@@ -75,8 +75,9 @@ public class GameManager : SingletonBehaviour<GameManager>
                 onProgress?.Invoke(0.15f + progress * 0.65f); 
             });
 
-        _gameSession = new(_networkManager);
-        await _gameSession.LoadAllData();
+        GameSession gameSession = new(_networkManager);
+        await gameSession.LoadAllData();
+        _gameSession = gameSession;
 
         _viewModelFactory = new(_gameSession, _dataTable);
 
@@ -144,7 +145,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void OnApplicationPause(bool pauseStatus)
     {
-        if (pauseStatus == false)
+        if (pauseStatus == false || _gameSession == null)
         {
             return;
         }
