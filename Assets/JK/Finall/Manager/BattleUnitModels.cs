@@ -31,17 +31,20 @@ public class BattleUnitModels
     {
         for (int a = 0; a < _playerBattleUnitModels.Length; a++)
         {
-            _playerBattleUnitModels[a] = new PlayerBattleUnitModel();
+            _playerBattleUnitModels[a] = new PlayerBattleUnitModel(a);
         }
 
         for (int a = 0; a < _enemyBattleUnitModels.Length; a++)
         {
-            _enemyBattleUnitModels[a] = new EnemyBattleUnitModel();
+            _enemyBattleUnitModels[a] = new EnemyBattleUnitModel(a);
         }
+        string unitUid1 = BattleUtility.CreateUniqueId();
+        string unitUid2 = BattleUtility.CreateUniqueId();
+        string unitUid3 = BattleUtility.CreateUniqueId();
 
-        BattleUnitData companionDataA = new BattleUnitData("Companion_001", 800f, 120f, 40f, 0.2f, 1.8f, 0.15f, 0.1f, "Skill_001", "Skill_002");
-        BattleUnitData companionDataB = new BattleUnitData("Companion_001", 1000f, 100f, 50f, 0.1f, 1.5f, 0.1f, 0.2f, "Skill_001", "Skill_002");
-        BattleUnitData companionDataC = new BattleUnitData("Companion_001", 1200f, 80f, 70f, 0.05f, 1.3f, 0.05f, 0.3f, "Skill_001", "Skill_002");
+        BattleUnitData companionDataA = new BattleUnitData(unitUid1, 800f, 1f, 40f, 0.2f, 1.8f, 0.15f, 0.1f, "Skill_001", "Skill_002", "AnimKey");
+        BattleUnitData companionDataB = new BattleUnitData(unitUid2, 1000f, 1f, 50f, 0.1f, 1.5f, 0.1f, 0.2f, "Skill_001", "Skill_002", "AnimKey");
+        BattleUnitData companionDataC = new BattleUnitData(unitUid3, 1200f, 1f, 70f, 0.05f, 1.3f, 0.05f, 0.3f, "Skill_001", "Skill_002", "AnimKey2");
 
         _tempCompanionModel.Add("Companion_001", companionDataA);
         _tempCompanionModel.Add("Companion_002", companionDataB);
@@ -53,7 +56,6 @@ public class BattleUnitModels
 
     public void InitalizeStage(string stageId)
     {
-        Debug.Log($"스테이지 초기화: {stageId}");
         InitializeHeroModel();
         InitializeCompanionModels();
         InitializeEnemyModels(stageId);
@@ -64,7 +66,7 @@ public class BattleUnitModels
         PlayerBattleUnitModel heroBattleUnitModel = _playerBattleUnitModels[BattleConstants.HERO_BATTLE_POSITIONS];
 
         //TODO 캐릭터 모델 가져와서 만듣기
-        BattleUnitData battleUnitData = new("Hero_001", 10000000, 10000000, 10000000, 0.05f, 1.4f, 0.05f, 0.3f, "Skill_001", "Skill_002");
+        BattleUnitData battleUnitData = new("Hero_001", 10000000, 10000000, 10000000, 0.05f, 1.4f, 0.05f, 0.3f, "Skill_001", "Skill_002", "AnimKey");
 
         heroBattleUnitModel.Initialize(battleUnitData);
     }
@@ -138,7 +140,9 @@ public class BattleUnitModels
                 continue;
             }
 
-            BattleUnitData battleUnitData = new(enemyId, enemyData.BaseHP, enemyData.BaseATK, enemyData.BaseDEF, 0.05f, enemyData.AttackInterval, 0.05f, 0.3f, "Skill_001", "Skill_002");
+            string unitUid = BattleUtility.CreateUniqueId();
+
+            BattleUnitData battleUnitData = new(unitUid, enemyData.BaseHP, enemyData.BaseATK, enemyData.BaseDEF, 0.05f, enemyData.AttackInterval, 0.05f, 0.3f, "Skill_001", "Skill_002", "AnimKey");
             _enemyBattleUnitModels[index].Initialize(battleUnitData);
         }
     }
@@ -169,6 +173,18 @@ public class BattleUnitModels
         ClearCompanion(battlePosition);
     }
 
+    public BattleUnitModelBase FindEnemyTarget(int battlePosition)
+    {
+        BattleUnitModelBase targetModel = FindTargetModel(_enemyBattleUnitModels, battlePosition);
+        return targetModel;
+    }
+    
+    public BattleUnitModelBase FindPlayerTarget(int battlePosition)
+    {
+        BattleUnitModelBase targetModel = FindTargetModel(_playerBattleUnitModels, battlePosition);
+        return targetModel;
+    }
+
     private void ClearCompanion(int battlePosition)
     {
         _playerBattleUnitModels[battlePosition].Clear();
@@ -186,39 +202,23 @@ public class BattleUnitModels
 
         _saveDataPartyCompanionIds[index] = companionId;
     }
+
+    private BattleUnitModelBase FindTargetModel(BattleUnitModelBase[] battleUnitModels, int battlePosition)
+    {
+        for (int index = 0; index < battleUnitModels.Length; index++)
+        {
+            int targetIndex = (battlePosition + index) % battleUnitModels.Length;
+
+            BattleUnitModelBase battleUnitModel = battleUnitModels[targetIndex];
+
+            if (battleUnitModel.IsDead)
+            {
+                continue;
+            }
+
+            return battleUnitModel;
+        }
+
+        return null;
+    }
 }
-
-
-
-
-    //public BaseBattleUnitView FindEnemyTarget(int slotIndex)
-    //{
-    //    BaseBattleUnitView target = FindTarget(_enemyBattleUnitViews, slotIndex); 
-    //    return target;
-    //}
-
-    //public BaseBattleUnitView FindPlayerTarget(int slotIndex)
-    //{
-    //    BaseBattleUnitView target = FindTarget(_playerBattleUnitViews, slotIndex);
-    //    return target;
-    //}
-
-    //private BaseBattleUnitView FindTarget(BaseBattleUnitView[] battleUnitViews, int slotIndex)
-    //{
-    //    for (int index = 0; index < battleUnitViews.Length; index++)
-    //    {
-    //        int targetIndex = (slotIndex + index) % battleUnitViews.Length;
-
-    //        BaseBattleUnitView battleUnitView = battleUnitViews[targetIndex];
-
-    //        if (battleUnitView == null || battleUnitView.IsDead)
-    //        {
-    //            continue;
-    //        }
-
-    //        return battleUnitView;
-    //    }
-
-    //    return null;
-    //}
-//}

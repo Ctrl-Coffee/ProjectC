@@ -2,7 +2,7 @@
 
 public class CompanionFormation
 {
-    private readonly Dictionary<int, string> _companionIdByPosition = new Dictionary<int, string>();
+    private readonly Dictionary<int, string> _companionIdByBattlePosition = new Dictionary<int, string>();
 
     public CompanionFormation()
     {
@@ -12,15 +12,13 @@ public class CompanionFormation
     //TODO 나중에 편성 데이터 가져와서 가져와서 초기화
     private void InitializePositions()
     {
-        foreach (int position in BattleConstants.COMPANION_BATTLE_POSITIONS)
-        {
-            _companionIdByPosition.Add(position, null);
-        }
+        _companionIdByBattlePosition.Add(BattleConstants.COMPANION_BATTLE_POSITIONS[0], "Companion_001");
+        _companionIdByBattlePosition.Add(BattleConstants.COMPANION_BATTLE_POSITIONS[1], "Companion_002");
     }
 
-    public bool SetCompanionToPosition(int position, string companionId)
+    public bool SetCompanionToPosition(int battlePosition, string companionId)
     {
-        if (!IsValidPosition(position))
+        if (!IsValidPosition(battlePosition))
         {
             return false;
         }
@@ -35,7 +33,7 @@ public class CompanionFormation
             return false;
         }
 
-        _companionIdByPosition[position] = companionId;
+        _companionIdByBattlePosition[battlePosition] = companionId;
 
         return true;
     }
@@ -56,12 +54,12 @@ public class CompanionFormation
 
         foreach (int position in BattleConstants.COMPANION_BATTLE_POSITIONS)
         {
-            if (!string.IsNullOrWhiteSpace(_companionIdByPosition[position]))
+            if (!string.IsNullOrWhiteSpace(_companionIdByBattlePosition[position]))
             {
                 continue;
             }
 
-            _companionIdByPosition[position] = companionId;
+            _companionIdByBattlePosition[position] = companionId;
             targetPosition = position;
 
             return true;
@@ -70,19 +68,19 @@ public class CompanionFormation
         return false;
     }
 
-    public bool RemoveCompanion(int position)
+    public bool RemoveCompanion(int battlePosition)
     {
-        if (!IsValidPosition(position))
+        if (!IsValidPosition(battlePosition))
         {
             return false;
         }
 
-        if (string.IsNullOrWhiteSpace(_companionIdByPosition[position]))
+        if (string.IsNullOrWhiteSpace(_companionIdByBattlePosition[battlePosition]))
         {
             return false;
         }
 
-        _companionIdByPosition[position] = null;
+        _companionIdByBattlePosition[battlePosition] = null;
 
         return true;
     }
@@ -98,12 +96,12 @@ public class CompanionFormation
 
         foreach (int position in BattleConstants.COMPANION_BATTLE_POSITIONS)
         {
-            if (_companionIdByPosition[position] != companionId)
+            if (_companionIdByBattlePosition[position] != companionId)
             {
                 continue;
             }
 
-            _companionIdByPosition[position] = null;
+            _companionIdByBattlePosition[position] = null;
             targetPosition = position;
 
             return true;
@@ -124,18 +122,18 @@ public class CompanionFormation
             return false;
         }
 
-        string firstCompanionId = _companionIdByPosition[firstPosition];
-        string secondCompanionId = _companionIdByPosition[secondPosition];
+        string firstCompanionId = _companionIdByBattlePosition[firstPosition];
+        string secondCompanionId = _companionIdByBattlePosition[secondPosition];
 
-        _companionIdByPosition[firstPosition] = secondCompanionId;
-        _companionIdByPosition[secondPosition] = firstCompanionId;
+        _companionIdByBattlePosition[firstPosition] = secondCompanionId;
+        _companionIdByBattlePosition[secondPosition] = firstCompanionId;
 
         return true;
     }
 
-    public string GetCompanionId(int position)
+    public string GetCompanionId(int battlePosition)
     {
-        if (!_companionIdByPosition.TryGetValue(position, out string companionId))
+        if (!_companionIdByBattlePosition.TryGetValue(battlePosition, out string companionId))
         {
             return null;
         }
@@ -143,9 +141,9 @@ public class CompanionFormation
         return companionId;
     }
 
-    private bool IsValidPosition(int position)
+    private bool IsValidPosition(int battlePosition)
     {
-        bool isValidPosition = _companionIdByPosition.ContainsKey(position);
+        bool isValidPosition = _companionIdByBattlePosition.ContainsKey(battlePosition);
 
         return isValidPosition;
     }
@@ -157,7 +155,7 @@ public class CompanionFormation
             return false;
         }
 
-        foreach (string positionCompanionId in _companionIdByPosition.Values)
+        foreach (string positionCompanionId in _companionIdByBattlePosition.Values)
         {
             if (positionCompanionId != companionId)
             {
