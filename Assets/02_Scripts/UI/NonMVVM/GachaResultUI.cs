@@ -1,0 +1,123 @@
+﻿using DG.Tweening;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GachaResultUI : UIBase
+{
+    [SerializeField] private Transform _slotRoot;
+    [SerializeField] private Button _closeButton;
+
+    private const float _slotInterval = 0.05f;
+
+    private const float _openInterval = 0.1f;
+    private const float _closeInterval = 0.05f;
+    private Tween _openTween;
+
+    private List<GachaResultSlotUI> _slot = new();
+
+    private void OnEnable()
+    {
+        _closeButton.onClick.AddListener(OnClickCloseButton);
+    }
+
+    private void OnDisable()
+    {
+        _closeButton.onClick.RemoveListener(OnClickCloseButton);
+    }
+    public void Init(IReadOnlyList<GachaResultData> results)
+    {
+        _closeButton.gameObject.SetActive(false);
+
+        RemoveAllSlot();
+
+        if (results == null) return;
+
+        foreach (GachaResultData result in results)
+        {
+            CreateSlot(result);
+        }
+
+        if (_openTween == null || _openTween.IsActive() == false)
+        {
+            PlaySlotAnimations();
+            return;
+        }
+
+        _openTween.OnComplete(PlaySlotAnimations);
+    }
+
+    private void PlaySlotAnimations()
+    {
+        Tween lastTween = null;
+
+        for (int index = 0; index < _slot.Count; index++)
+        {
+            Tween slotTween = _slot[index].PlayOpenAnimation();
+            slotTween?.SetDelay(index * _openInterval);
+            lastTween = slotTween;
+        }
+
+        if (lastTween == null)
+        {
+            ShowCloseButton();
+            return;
+        }
+
+        lastTween.OnComplete(ShowCloseButton);
+    }
+
+    private void ShowCloseButton()
+    {
+        _closeButton.gameObject.SetActive(true);
+    }
+    private void CreateSlot(GachaResultData result)
+    {
+        GameObject slotPrefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.GetUIPath(typeof(GachaResultSlotUI)));
+        if (slotPrefab == null)
+        {
+            Logger.LogError("결과 슬롯 프리팹을 찾을수 없습니다");
+            return;
+        }
+
+        GameObject slotInstance = Instantiate(slotPrefab, _slotRoot);
+        if (slotInstance == null) return;
+
+        var slotComponent = slotInstance.GetComponent<GachaResultSlotUI>();
+        if (slotComponent == null) return;
+
+        slotComponent.Init(result);
+        slotComponent.Hide();
+
+        _slot.Add(slotComponent);
+    }
+
+    private void RemoveAllSlot()
+    {
+        foreach (GachaResultSlotUI slot in _slot)
+        {
+            Destroy(slot.gameObject);
+        }
+        
+        _slot.Clear();
+    }
+
+    public override Tween PlayOpenAnimation()
+    {
+        _openTween = base.PlayOpenAnimation();
+        return _openTween;
+    }
+    public override Tween PlayCloseAnimation()
+    {
+        _closeButton.gameObject.SetActive(false);
+
+        for (int index = 0; index < _slot.Count; index++)
+        {
+            _slot[index].PlayCloseAnimation().SetDelay(index * _closeInterval);
+        }
+
+        float slotTotalTime = _slot.Count > 0 ? GachaResultSlotUI.CloseDuration + _closeInterval * (_slot.Count - 1) : 0f;
+
+        return base.PlayCloseAnimation().SetDelay(slotTotalTime);
+    }
+}

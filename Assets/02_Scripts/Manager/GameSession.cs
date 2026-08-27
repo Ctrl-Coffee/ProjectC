@@ -4,11 +4,15 @@ using System.Collections.Generic;
 public class GameSession
 {
     public CurrencyModel Currency { get; private set; }
-    public PlayerGrowthModel PlayerGrowth { get; }
-
     public CompanionModel Companion { get; private set; }
     public HeroEquipmentModel HeroEquipment { get; private set; }
     public HeroEquipedModel HeroEquiped { get; private set; }
+    public GachaModel Gacha { get; private set; }
+
+
+    public PlayerGrowthModel PlayerGrowth { get; }
+
+
 
 
     private NetworkManager _networkManager;
@@ -19,6 +23,7 @@ public class GameSession
         _networkManager = networkManager;
 
         PlayerGrowth = new(new());
+        Gacha = new();
     }
 
     public async UniTask LoadAllData()

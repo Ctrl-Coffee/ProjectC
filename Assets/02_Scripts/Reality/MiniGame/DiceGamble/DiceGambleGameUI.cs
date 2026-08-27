@@ -163,10 +163,10 @@ public class DiceGambleGameUI : MiniGameBase
         stampRect.localScale = Vector3.one * _stampStartScale;
         stampRect.localEulerAngles = new Vector3(0f, 0f, _stampAngle);
 
-        await stampRect.DOScale(1f, _stampDuration)
-            .SetEase(Ease.InQuad)
-            .SetUpdate(true)
-            .ToUniTask(cancellationToken: token);
+        await stampRect.DOScale(1f, _stampDuration).SetEase(Ease.InQuad).SetUpdate(true).ToUniTask(cancellationToken: token);
+
+        string stampSoundPath = isSuccess ? AddressablePath.Audio.STAMP_SUCCESS : AddressablePath.Audio.STAMP_FAIL;
+        GameManager.Sound.PlaySFX(stampSoundPath);
     }
     private async UniTask PlayRollAnimationAsync(int finalValue, CancellationToken token)
     {
@@ -176,6 +176,7 @@ public class DiceGambleGameUI : MiniGameBase
         float frameTimer = 0f;
         int frameIndex = 0;
 
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.DICE_ROLLING);
         while (elapsed < _orbitDuration)
         {
             float delta = GetDeltaTime();
