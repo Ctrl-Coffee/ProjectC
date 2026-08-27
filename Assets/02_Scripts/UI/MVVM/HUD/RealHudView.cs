@@ -47,6 +47,17 @@ public class RealHudView : ViewBase
         _perkBtn.UnBindButtonAllEvent();
     }
 
+    private void OnDestroy()
+    {
+        UnSubscribe();
+
+        if (_currencyViewModel != null)
+        {
+            _currencyViewModel.UnBind();
+            _currencyViewModel = null;
+        }
+    }
+
     protected override void BindViewModel()
     {
         _currencyViewModel = GameManager.ViewModel.CreateCurrencyViewModel();
@@ -55,6 +66,7 @@ public class RealHudView : ViewBase
     protected override void Subscribe()
     {
         _currencyViewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
+        RefreshAll();
     }
 
     protected override void UnSubscribe()
@@ -100,5 +112,13 @@ public class RealHudView : ViewBase
     private void OnOpenPerkInfoUI()
     {
         GameManager.UI.OpenPerkInfoUI();
+    }
+
+    private void RefreshAll()
+    {
+        _money.text = _currencyViewModel.Money.ToString();
+        _energy.text = _currencyViewModel.Energy.ToString();
+        _dreamPoint.text = _currencyViewModel.DreamPoint.ToString();
+        _inspiration.text = _currencyViewModel.Inspiration.ToString();
     }
 }

@@ -45,6 +45,17 @@ public class DreamHudView : ViewBase
         _lobbyBtn.UnBindButtonAllEvent();
     }
 
+    private void OnDestroy()
+    {
+        UnSubscribe();
+
+        if (_currencyViewModel != null)
+        {
+            _currencyViewModel.UnBind();
+            _currencyViewModel = null;
+        }
+    }
+
     protected override void BindViewModel()
     {
         _currencyViewModel = GameManager.ViewModel.CreateCurrencyViewModel();
@@ -72,6 +83,7 @@ public class DreamHudView : ViewBase
     protected override void Subscribe()
     {
         _currencyViewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
+        RefreshAll();
     }
 
     protected override void UnSubscribe()
@@ -120,5 +132,13 @@ public class DreamHudView : ViewBase
         }
 
         _currentContent = content;
+    }
+    
+    private void RefreshAll()
+    {
+        _dreamPoint.text = _currencyViewModel.DreamPoint.ToString();
+        _fragmentDream.text = _currencyViewModel.DreamFragment.ToString();
+        _scrollDream.text = _currencyViewModel.DreamScroll.ToString();
+        _inspiration.text = _currencyViewModel.Inspiration.ToString();
     }
 }

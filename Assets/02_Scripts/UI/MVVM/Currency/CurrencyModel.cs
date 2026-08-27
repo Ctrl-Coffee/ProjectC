@@ -23,8 +23,6 @@ public class CurrencyModel : ModelBase
         _dreamFragment = currencyDto.dreamFragment;
         _dreamScroll = currencyDto.dreamScroll;
         _inspiration = currencyDto.inspiration;
-
-        InitializeOnce();
     }
 
     public long Money
