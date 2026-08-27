@@ -1,18 +1,14 @@
-﻿using DG.Tweening;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 public static class AwayReportFlow
 {
     private const float MIN_AWAY_SECONDS = 60f;
 
-    private const float SHOW_SAFETY_SECONDS = 5f;
-
     private static bool _isRealLobby;
     private static bool _isPending;
 
     private static TimeSpan _awayDuration;
-    private static Tween _showSafety;
 
     public static void SetAppActive(bool isActive)
     {
@@ -42,8 +38,6 @@ public static class AwayReportFlow
 
     public static void OnReportOpened()
     {
-        KillShowSafety();
-
         _isPending = false;
     }
 
@@ -84,6 +78,9 @@ public static class AwayReportFlow
 
         _isPending = true;
 
+        // [주의] 여기서 자동 정산을 멈춘다. 리포트를 닫을 때(OnReportClosed)만 풀린다.
+        // 게임 중에 자동업무 보상이나 에너지 회복이 안 들어오면 이 보류가 안 풀린 것이다.
+        // AwayRewardPayout.IsHolding 이 true 로 남아 있는지부터 확인할 것.
         AwayRewardPayout.BeginHold();
 
         TryShowPending();
@@ -105,10 +102,6 @@ public static class AwayReportFlow
             SettleSilently();
             return;
         }
-
-        KillShowSafety();
-
-        _showSafety = DOVirtual.DelayedCall(SHOW_SAFETY_SECONDS, OnShowFailed).SetUpdate(true);
 
         GameManager.UI.OpenAwayReportUI(report);
     }
@@ -134,33 +127,6 @@ public static class AwayReportFlow
 
         AutoWorkQueue.CollectCompleted();
         EnergyRecovery.Recover();
-    }
-
-    private static void OnShowFailed()
-    {
-        _showSafety = null;
-
-        if (!_isPending)
-        {
-            return;
-        }
-
-        Logger.LogWarning("자리비움 리포트가 뜨지 않아 조용히 정산합니다.");
-
-        _isPending = false;
-
-        SettleSilently();
-    }
-
-    private static void KillShowSafety()
-    {
-        if (null == _showSafety)
-        {
-            return;
-        }
-
-        _showSafety.Kill();
-        _showSafety = null;
     }
 
 #if UNITY_EDITOR

@@ -189,6 +189,8 @@ public static class AutoWorkQueue
         {
             await UniTask.Delay(TimeSpan.FromSeconds(COLLECT_INTERVAL), ignoreTimeScale: true, cancellationToken: token);
 
+            // [주의] 자리비움 리포트가 뜨는 동안 정산을 미룬다. 리포트를 닫으면 풀린다.
+            // 자동업무 보상이 안 들어오면 여기서 계속 걸러지고 있는지부터 확인할 것.
             if (AwayRewardPayout.IsHolding)
             {
                 continue;
@@ -212,7 +214,7 @@ public static class AutoWorkQueue
         List<AutoWorkSlot> slots = Slots;
         long nowTicks = GameManager.Time.UtcNow.Ticks;
 
-        Reward reward = Reward.Create();
+        Reward reward = new Reward();
 
         while (slots.Count > 0 && nowTicks >= slots[0].EndTicks)
         {
@@ -251,7 +253,7 @@ public static class AutoWorkQueue
         List<AutoWorkSlot> slots = Slots;
         long nowTicks = GameManager.Time.UtcNow.Ticks;
 
-        Reward reward = Reward.Create();
+        Reward reward = new Reward();
 
         for (int i = 0; i < slots.Count; i++)
         {
@@ -299,19 +301,16 @@ public static class AutoWorkQueue
 
         public Dictionary<string, int> WorkCounts;
 
-        public static Reward Create()
-        {
-            return new Reward
-            {
-                WorkCounts = new Dictionary<string, int>(),
-            };
-        }
-
         public void AddWorkCount(string workId)
         {
-            if (string.IsNullOrEmpty(workId) || null == WorkCounts)
+            if (string.IsNullOrEmpty(workId))
             {
                 return;
+            }
+
+            if (null == WorkCounts)
+            {
+                WorkCounts = new Dictionary<string, int>();
             }
 
             WorkCounts.TryGetValue(workId, out int count);

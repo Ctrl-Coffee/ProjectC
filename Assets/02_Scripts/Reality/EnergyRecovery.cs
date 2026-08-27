@@ -13,6 +13,8 @@ public static class EnergyRecovery
     {
         while (!token.IsCancellationRequested)
         {
+            // [주의] 자리비움 리포트가 뜨는 동안 회복을 미룬다. 리포트를 닫으면 풀린다.
+            // 에너지가 안 차오르면 여기서 계속 걸러지고 있는지부터 확인할 것.
             if (!AwayRewardPayout.IsHolding)
             {
                 Recover();
