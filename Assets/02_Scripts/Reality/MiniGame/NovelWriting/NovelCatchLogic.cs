@@ -43,4 +43,5 @@ public class NovelCatchLogic
     {
         return zone.Left <= keyLeft && keyRight <= zone.Right;
     }
+
 }

@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -17,7 +18,8 @@ public class NovelWritingGameUI : MiniGameBase
     [SerializeField] private TextMeshProUGUI _keyText;
     [SerializeField] private TextMeshProUGUI _countdownText;
     [SerializeField] private TextMeshProUGUI _timerText;
-
+    [SerializeField] private float _zoneHeight = 110f;
+    [SerializeField] private float _typingInterval = 0.05f;
 
     private bool _isKeyMoving;
     private float _roundStartTime;
@@ -61,6 +63,7 @@ public class NovelWritingGameUI : MiniGameBase
         {
             while (true)
             {
+
                 Logger.Log($"3초 후 라운드 시작...");
                 _delayStartTime = Time.unscaledTime;
                 _isCountingDown = true;
@@ -103,6 +106,8 @@ public class NovelWritingGameUI : MiniGameBase
 
                     if (isSuccess)
                     {
+                        GameManager.Sound.PlaySFX(AddressablePath.Audio.NOVEL_WRITING);
+                        await PlayTypingAsync(keyText, token);
                         successCount++;
                     }
 
@@ -128,6 +133,17 @@ public class NovelWritingGameUI : MiniGameBase
         Logger.Log($"정산 — {roundCount}라운드 중 {successCount}회 성공");
         return MiniGameScore.FromNovel(successCount);
     }
+    private async UniTask PlayTypingAsync(string word, CancellationToken token)
+    {
+        List<string> frames = HangulUtil.BuildTypingFrames(word);
+
+        foreach (string frame in frames)
+        {
+            _keyText.text = frame;
+            await UniTask.Delay((int)(_typingInterval * 1000), ignoreTimeScale: true, cancellationToken: token);
+        }
+    }
+
 
     protected override void ClearGame()
     {
@@ -191,9 +207,9 @@ public class NovelWritingGameUI : MiniGameBase
 
     private void ShowZone(CatchZone zone)
     {
-        _zoneRect.anchorMin = new Vector2(zone.Left, 0f);
-        _zoneRect.anchorMax = new Vector2(zone.Right, 1f);
-        _zoneRect.offsetMin = Vector2.zero;
-        _zoneRect.offsetMax = Vector2.zero;
+        _zoneRect.anchorMin = new Vector2(zone.Left, 0.5f);
+        _zoneRect.anchorMax = new Vector2(zone.Right, 0.5f);
+        _zoneRect.sizeDelta = new Vector2(0f, _zoneHeight);
+        _zoneRect.anchoredPosition = Vector2.zero;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using UnityEngine;
 
 // TODO 희준 : 영지 로비(길드/대장간) 버튼이 생기면 이 스크립트는 삭제하고 로비 버튼에 OpenGachaView를 연결한다.
@@ -36,6 +37,17 @@ public class TestGachaUI : MonoBehaviour
             return;
         }
         _workHandler.StartMiniGameAsync(data).Forget();
+    }
+
+    [ContextMenu("소설 텍스트 검사")]
+    private void TestNovelText()
+    {
+        List<string> frames = HangulUtil.BuildTypingFrames("아름다운");
+
+        foreach (string frame in frames)
+        {
+            Logger.Log(frame);
+        }
     }
 
     [ContextMenu("몽상의 스크롤 지급")]
