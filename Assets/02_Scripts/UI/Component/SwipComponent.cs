@@ -1,10 +1,12 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class SwipComponent : MonoBehaviour
 {
+    [Header("Tap Settings")]
+    [SerializeField] private float _tapDistanceRate = 0.02f;
+
     [Header("Swipe Settings")]
     [SerializeField] private SwipeDirect _swipeDirect = SwipeDirect.Horizontal;
     [SerializeField] private float _swipeDistanceRate = 0.2f;
@@ -183,10 +185,21 @@ public class SwipComponent : MonoBehaviour
         Drag(touchPosition);
         _isDragging = false;
 
-        float swipeDistance = GetAxisValue(touchPosition - _startTouchPosition);
-        float screenSize = _swipeDirect == SwipeDirect.Horizontal ? Screen.width : Screen.height;
+        Vector2 pointerDelta = touchPosition - _startTouchPosition;
 
-        if (Mathf.Abs(swipeDistance) < screenSize * _swipeDistanceRate)
+        float swipeDistance = GetAxisValue(pointerDelta);
+        float swipeScreenSize = _swipeDirect == SwipeDirect.Horizontal ? Screen.width : Screen.height;
+
+        float tapDistance = Mathf.Min(Screen.width, Screen.height) * _tapDistanceRate;
+
+        if (pointerDelta.sqrMagnitude <= tapDistance * tapDistance)
+        {
+            TrySelectStage(touchPosition);
+            Swipe(_currentPage);
+            return;
+        }
+
+        if (Mathf.Abs(swipeDistance) < swipeScreenSize * _swipeDistanceRate)
         {
             Swipe(_currentPage);
             return;
@@ -243,5 +256,19 @@ public class SwipComponent : MonoBehaviour
     private Vector3 GetAxisVector(float value)
     {
         return _swipeDirect == SwipeDirect.Horizontal ? new Vector3(value, 0f, 0f) : new Vector3(0f, value, 0f);
+    }
+
+    private void TrySelectStage(Vector2 screenPosition)
+    {
+        Vector3 worldPosition = GetWorldPosition(screenPosition);
+        Collider2D targetCollider = Physics2D.OverlapPoint(worldPosition);
+
+        if (targetCollider == null)
+            return;
+
+        if (targetCollider.TryGetComponent(out StageSelectHandler stageSelectHandler))
+        {
+            stageSelectHandler.SelectStage();
+        }
     }
 }
