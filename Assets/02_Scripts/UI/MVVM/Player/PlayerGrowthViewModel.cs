@@ -24,16 +24,17 @@ public class PlayerGrowthViewModel : ViewModelBase<PlayerGrowthModel>
         Refresh();
         base.OnPropertyChanged(sender, e);
     }
+
     private void Refresh()
     {
-        CharacterStatData stat = GameManager.Growth.GetPlayerFinalStat(_model.Level);
-        if (stat == null) return;
-        // TODO 희준 : 이름 데이터 정해지면 교체
-        Name = "임시용사";
+        HeroInfoModel Info = GameManager.Session.HeroInfo;
+        PlayerData playerData = GameManager.DataTable.GetPlayerData(CharacterId.PLAYER_DATA);
+
+        Name = null == playerData ? string.Empty : playerData.Name;
         Level = _model.Level;
-        Atk = stat.FinalAtk;
-        Def = stat.FinalDef;
-        Hp = stat.FinalHp;
+        Atk = Info.Attack;
+        Def = Info.Defense;
+        Hp = Info.Hp;
     }
 
     public void LevelUp()

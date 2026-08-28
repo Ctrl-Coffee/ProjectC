@@ -5,6 +5,7 @@
         public const string UIROOT = "UI/UIRoot";
         public const string REAL_LOBBY_BACKGROUND = "RealLobbyBackground";
         public const string DREAM_LOBBY_BACKGROUND = "DreamLobbyBackground";
+        public const string BATTLE_ROOT = "BattleRoot";
     }
 
     public static string GetUIPath(System.Type uiType)

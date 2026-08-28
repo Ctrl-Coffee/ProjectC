@@ -56,6 +56,16 @@ public static class UIManagerExtension
         return uiManager.OpenContentUI<HeroInventoryView>();
     }
 
+    public static UniTask<HeroInfoView> OpenHeroInfo(this UIManager uiManager)
+    {
+        return uiManager.OpenPopupUI<HeroInfoView>();
+    }
+
+    public static UniTask<PerkStatView> OpenPerkStat(this UIManager uiManager)
+    {
+        return uiManager.OpenOverlayUI<PerkStatView>();
+    }
+
     public static async void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Func<LevelUpResult> onClickLevelUp)
     {
         var ui = await uiManager.OpenPopupUI<CompanionDetailUI>();
@@ -119,5 +129,45 @@ public static class UIManagerExtension
     {
         GachaResultUI ui = await uiManager.OpenPopupUI<GachaResultUI>();
         ui.Init(results);
+    }
+
+    public static async void OpenAwayReportUI(this UIManager uiManager, AwayReport report)
+    {
+        var ui = await uiManager.OpenPopupUI<AwayReportUI>();
+
+        if (null == ui) return;
+
+        ui.SetReport(report);
+    }
+
+
+    public static void OpenBattleHpBarHud(this UIManager uiManager)
+    {
+        uiManager.OpenHUDUI<BattleHpBarHud>().Forget();
+    }
+
+    public static void CloseBattleHpBarHud(this UIManager uiManager)
+    {
+        uiManager.CloseHUDUI<BattleHpBarHud>().Forget();
+    }
+
+    public static void OpenStageClearUI(this UIManager uiManager)
+    {
+        uiManager.OpenPopupUI<StageClearUI>().Forget();
+    }
+
+    public static void CloseStageClearUI(this UIManager uiManager)
+    {
+        uiManager.CloseHUDUI<StageClearUI>().Forget();
+    }
+
+    public static void OpenStageFailUI(this UIManager uiManager)
+    {
+        uiManager.OpenPopupUI<StageFailUI>().Forget();
+    }
+
+    public static void CloseStageFailUI(this UIManager uiManager)
+    {
+        uiManager.CloseHUDUI<StageFailUI>().Forget();
     }
 }

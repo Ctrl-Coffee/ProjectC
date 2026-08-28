@@ -15,12 +15,14 @@ public class DataTableManager
     public Dictionary<string, CompanionLevelData> CompanionLevelDataTable { get; private set; } = new();
     public Dictionary<string, SkillData> SkillDataTable { get; private set; } = new();
     public Dictionary<string, PlayerLevelData> PlayerLevelDataTable { get; private set; } = new();
+    public Dictionary<string, PlayerData> PlayerDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentLevelData> EquipmentLevelDataTable { get; private set; } = new();
     public Dictionary<string, EquipmentData> EquipmentDataTable { get; private set; } = new();
     public Dictionary<string, GachaProbabilityData> GachaProbabilityDataTable { get; private set; } = new();
     public Dictionary<string, PerkNodeData> PerkNodeDataTable { get; private set; } = new();
     public Dictionary<string, PerkEffectData> PerkEffectDataTable { get; private set; } = new();
     public Dictionary<string, WorkStatData> WorkStatDataTable { get; private set; } = new();
+    public Dictionary<string, EnemyData> EnemyDataTable { get; private set; } = new();
 
     private Dictionary<int, List<CompanionData>> _companionsByGrade = new();
 
@@ -42,12 +44,14 @@ public class DataTableManager
         CompanionLevelDataTable = LoadData<CompanionLevelData>(nameof(CompanionLevelData));
         SkillDataTable = LoadData<SkillData>(nameof(SkillData));
         PlayerLevelDataTable = LoadData<PlayerLevelData>(nameof(PlayerLevelData));
+        PlayerDataTable = LoadData<PlayerData>(nameof(PlayerData));
         EquipmentLevelDataTable = LoadData<EquipmentLevelData>(nameof(EquipmentLevelData));
         EquipmentDataTable = LoadData<EquipmentData>(nameof(EquipmentData));
         GachaProbabilityDataTable = LoadData<GachaProbabilityData>(nameof(GachaProbabilityData));
         PerkNodeDataTable = LoadData<PerkNodeData>(nameof(PerkNodeData));
         PerkEffectDataTable = LoadData<PerkEffectData>(nameof(PerkEffectData));
         WorkStatDataTable = LoadData<WorkStatData>(nameof(WorkStatData));
+        EnemyDataTable = LoadData<EnemyData>(nameof(EnemyData));
 
         BuildCompanionGradeIndex();
         BuildGachaProbabilityIndex();
@@ -84,10 +88,26 @@ public class DataTableManager
         if (null == SkillDataTable || string.IsNullOrEmpty(id)) return null;
         return SkillDataTable.TryGetValue(id, out var data) ? data : null;
     }
+
     public PlayerLevelData GetPlayerLevelData(int level)
     {
         if (null == PlayerLevelDataTable) return null;
-        return PlayerLevelDataTable.TryGetValue(level.ToString(), out var data) ? data : null;
+
+        foreach (PlayerLevelData data in PlayerLevelDataTable.Values)
+        {
+            if (data.Level == level)
+            {
+                return data;
+            }
+        }
+
+        return null;
+    }
+
+    public PlayerData GetPlayerData(string id)
+    {
+        if (null == PlayerDataTable || string.IsNullOrEmpty(id)) return null;
+        return PlayerDataTable.TryGetValue(id, out var data) ? data : null;
     }
     public EquipmentLevelData GetEquipmentLevelData(int level)
     {
@@ -157,6 +177,11 @@ public class DataTableManager
         return WorkStatDataTable.TryGetValue(statType.ToString(), out var data) ? data : null;
     }
 
+    public EnemyData GetEnemyData(string id)
+    {
+        if (null == EnemyDataTable || string.IsNullOrEmpty(id)) return null;
+        return EnemyDataTable.TryGetValue(id, out var data) ? data : null;
+    }
     #endregion
 
     [Serializable]

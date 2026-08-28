@@ -12,11 +12,11 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static UIManager UI { get { return Instance._uiManager; } }
     public static GrowthSystem Growth { get { return Instance._growthSystem; } }
     public static PerkManager Perk { get { return Instance._perkManager; } }
+    public static SoundManager Sound { get { return Instance._soundManager; } }
+    public static BattleManager Battle { get { return Instance._battleManager; } }
 
     public static GameSession Session { get { return Instance._gameSession; } }
     public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
-    public static SoundManager Sound { get { return Instance._soundManager; } }
-
 
 
 
@@ -31,6 +31,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private GrowthSystem _growthSystem = new();
     private SoundManager _soundManager = new();
     private PerkManager _perkManager = new();
+    private BattleManager _battleManager = new();
 
     private GameSession _gameSession;
     private ViewModelFactory _viewModelFactory;
@@ -41,7 +42,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     private LobbyController _realLobbyController;
     private LobbyController _dreamLobbyController;
 
-
+    private void Update()
+    {
+        Time.OnUpdate();
+    }
 
     #region Init
 
@@ -151,5 +155,11 @@ public class GameManager : SingletonBehaviour<GameManager>
         }
 
         SaveUtil.SaveAllDataAsync().Forget();
+        AwayReportFlow.SetAppActive(!pauseStatus);
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        AwayReportFlow.SetAppActive(hasFocus);
     }
 }

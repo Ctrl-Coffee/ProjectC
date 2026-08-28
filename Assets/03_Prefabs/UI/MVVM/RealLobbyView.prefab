@@ -688,6 +688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 228154300430383883}
+  - component: {fileID: 2294957661245623337}
   m_Layer: 5
   m_Name: CurrencySlotUI (3)
   m_TagString: Untagged
@@ -717,6 +718,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2294957661245623337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2840986382474816605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5717be448f30aa43a72f225369ee7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrencyGainAnchor
+  _currencyType: 5
 --- !u!1 &2957261414362346015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,6 +1078,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 596611676428275610}
+  - component: {fileID: 7300505886037399926}
   m_Layer: 5
   m_Name: CurrencySlotUI (1)
   m_TagString: Untagged
@@ -1093,6 +1108,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7300505886037399926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3170587018217969868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5717be448f30aa43a72f225369ee7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrencyGainAnchor
+  _currencyType: 2
 --- !u!1 &3567362687377390766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,6 +1130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1569071564045937656}
+  - component: {fileID: 3604284018496047797}
   m_Layer: 5
   m_Name: CurrencySlotUI (2)
   m_TagString: Untagged
@@ -1131,6 +1160,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3604284018496047797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3567362687377390766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5717be448f30aa43a72f225369ee7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrencyGainAnchor
+  _currencyType: 1
 --- !u!1 &3648227058879323019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,6 +1257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1681162741836952526}
+  - component: {fileID: 8698906617943502603}
   m_Layer: 5
   m_Name: CurrencySlotUI
   m_TagString: Untagged
@@ -1244,6 +1287,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8698906617943502603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3680311347202188440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5717be448f30aa43a72f225369ee7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrencyGainAnchor
+  _currencyType: 0
 --- !u!1 &4081262300798087898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,6 +2145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224435858158979666}
   - component: {fileID: 291673704785588453}
+  - component: {fileID: 6654966362492476048}
   m_Layer: 5
   m_Name: RealLobbyView
   m_TagString: Untagged
@@ -2142,6 +2199,18 @@ MonoBehaviour:
   _coffeeBtn: {fileID: 4529148226490909029}
   _computerBtn: {fileID: 6464943511743407887}
   _perkBtn: {fileID: 5109043690596959538}
+--- !u!114 &6654966362492476048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481261500303794909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1ac9d43fca963428aa9c42f4509e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AwayReportTrigger
 --- !u!1 &6917538545558948779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,7 +2686,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5e3048ac2f69549f4a807dbcc04ade83, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4f0d45e479358240a04dec348a92e66, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2692,7 +2761,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5e3048ac2f69549f4a807dbcc04ade83, type: 3}
+  m_Sprite: {fileID: 2828309583515013855, guid: 8cb51a27683add14ab47cea3ad295ae3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2904,7 +2973,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5e3048ac2f69549f4a807dbcc04ade83, type: 3}
+  m_Sprite: {fileID: -6657241413553307363, guid: df87e0d8c4de5684ca72c4e6c105b4b9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3153,7 +3222,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5e3048ac2f69549f4a807dbcc04ade83, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 81b8c16e3f8f0db4fb93fe5b78dae48e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

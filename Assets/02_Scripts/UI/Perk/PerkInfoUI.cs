@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PerkInfoUI : UIBase
 {
     [SerializeField] private UIButtonComponent _btnClose;
     [SerializeField] private PerkTreeLineDrawer _lineDrawer;
+    [SerializeField] private Button _btnPerkStat;
 
     [Header("노드 아이콘")]
     [SerializeField] private Sprite _minorIcon;
@@ -14,6 +17,7 @@ public class PerkInfoUI : UIBase
 
     private List<PerkNodeUI> _nodes = new();
     private bool _isBound = false;
+    private PerkStatView _perkStatView;
 
     public PerkTreeLineDrawer LineDrawer
     {
@@ -32,6 +36,27 @@ public class PerkInfoUI : UIBase
         }
 
         _btnClose.BindButtonEvent(OnClickCloseButton);
+
+        if (null != _btnPerkStat)
+        {
+            _btnPerkStat.onClick.AddListener(OnClickPerkStat);
+        }
+    }
+
+    private async void OnClickPerkStat()
+    {
+        _perkStatView = await GameManager.UI.OpenPerkStat();
+    }
+
+    private void ClosePerkStat()
+    {
+        if (null == _perkStatView)
+        {
+            return;
+        }
+
+        _perkStatView.CloseUI();
+        _perkStatView = null;
     }
 
     private void OnEnable()
@@ -45,6 +70,8 @@ public class PerkInfoUI : UIBase
     private void OnDisable()
     {
         GameManager.Perk.OnPerkChanged -= RefreshAll;
+
+        ClosePerkStat();
     }
 
     public void RefreshAll()
