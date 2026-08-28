@@ -34,7 +34,7 @@ public class DreamHudView : ViewBase
         _gachaBtn.BindButtonEvent(OnOpenGacha);
         _companionBtn.BindButtonEvent(OnOpenCompanion);
         _stageBtn.BindButtonEvent(OnStage);
-        _heroBtn.BindButtonEvent(OnOpenHero);
+        _heroBtn.BindButtonEvent(OnOpenHeroInventory);
 
         _lobbyBtn.BindButtonEvent(OnChangeSceenToReal);
 
@@ -125,7 +125,7 @@ public class DreamHudView : ViewBase
     }
 
 
-    private async void OnOpenHero()
+    private async void OnOpenHeroInventory()
     {
         var content = await GameManager.UI.OpenHeroInventory();
         HideLobbyButton();
@@ -148,6 +148,7 @@ public class DreamHudView : ViewBase
     private async void OnOpenHeroInfo()
     {
         var content = await GameManager.UI.OpenHeroInfo();
+
         CloseCurrentContent(content);
     }
 

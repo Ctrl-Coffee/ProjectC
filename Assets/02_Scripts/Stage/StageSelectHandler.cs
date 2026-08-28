@@ -1,14 +1,35 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class StageSelectHandler : MonoBehaviour
 {
-    [SerializeField] private string _chapter;
-    [SerializeField] private string _stage;
+    private BackgroundInputHandler _inputHandler;
 
-    public void SelectStage()
+    private void Awake()
     {
-        Logger.Log($"stage_{_chapter}_{_stage} 스테이지 선택");
+        _inputHandler = GetComponent<BackgroundInputHandler>();
     }
 
+    private void OnEnable()
+    {
+        _inputHandler.Tapped += SelectStage;
+    }
+
+    private void OnDisable()
+    {
+        _inputHandler.Tapped -= SelectStage;
+    }
+
+    private void SelectStage(Vector2 screenPosition)
+    {
+        Vector3 worldPosition = _inputHandler.GetWorldPosition(screenPosition);
+        Collider2D targetCollider = Physics2D.OverlapPoint(worldPosition);
+
+        if (targetCollider == null)
+            return;
+
+        if (targetCollider.TryGetComponent(out StagePoint stagePoint))
+        {
+            stagePoint.SelectStage();
+        }
+    }
 }
