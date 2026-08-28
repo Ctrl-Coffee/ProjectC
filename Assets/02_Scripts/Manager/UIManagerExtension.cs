@@ -139,4 +139,35 @@ public static class UIManagerExtension
 
         ui.SetReport(report);
     }
+
+
+    public static void OpenBattleHpBarHud(this UIManager uiManager)
+    {
+        uiManager.OpenHUDUI<BattleHpBarHud>().Forget();
+    }
+
+    public static void CloseBattleHpBarHud(this UIManager uiManager)
+    {
+        uiManager.CloseHUDUI<BattleHpBarHud>().Forget();
+    }
+
+    public static void OpenStageClearUI(this UIManager uiManager)
+    {
+        uiManager.OpenPopupUI<StageClearUI>().Forget();
+    }
+
+    public static void CloseStageClearUI(this UIManager uiManager)
+    {
+        uiManager.CloseHUDUI<StageClearUI>().Forget();
+    }
+
+    public static void OpenStageFailUI(this UIManager uiManager)
+    {
+        uiManager.OpenPopupUI<StageFailUI>().Forget();
+    }
+
+    public static void CloseStageFailUI(this UIManager uiManager)
+    {
+        uiManager.CloseHUDUI<StageFailUI>().Forget();
+    }
 }

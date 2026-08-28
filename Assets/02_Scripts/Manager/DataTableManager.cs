@@ -22,6 +22,7 @@ public class DataTableManager
     public Dictionary<string, PerkNodeData> PerkNodeDataTable { get; private set; } = new();
     public Dictionary<string, PerkEffectData> PerkEffectDataTable { get; private set; } = new();
     public Dictionary<string, WorkStatData> WorkStatDataTable { get; private set; } = new();
+    public Dictionary<string, EnemyData> EnemyDataTable { get; private set; } = new();
 
     private Dictionary<int, List<CompanionData>> _companionsByGrade = new();
 
@@ -50,6 +51,7 @@ public class DataTableManager
         PerkNodeDataTable = LoadData<PerkNodeData>(nameof(PerkNodeData));
         PerkEffectDataTable = LoadData<PerkEffectData>(nameof(PerkEffectData));
         WorkStatDataTable = LoadData<WorkStatData>(nameof(WorkStatData));
+        EnemyDataTable = LoadData<EnemyData>(nameof(EnemyData));
 
         BuildCompanionGradeIndex();
         BuildGachaProbabilityIndex();
@@ -175,6 +177,11 @@ public class DataTableManager
         return WorkStatDataTable.TryGetValue(statType.ToString(), out var data) ? data : null;
     }
 
+    public EnemyData GetEnemyData(string id)
+    {
+        if (null == EnemyDataTable || string.IsNullOrEmpty(id)) return null;
+        return EnemyDataTable.TryGetValue(id, out var data) ? data : null;
+    }
     #endregion
 
     [Serializable]
