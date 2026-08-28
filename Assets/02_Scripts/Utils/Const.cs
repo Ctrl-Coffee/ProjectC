@@ -21,6 +21,7 @@
 
     // UI 문구, 추후 삭제
     public const string NO_PERK_BUFF = "적용 중인 퍽 효과가 없습니다.";
+    public const string MAX_LEVEL_TEXT = "MAX";
     public const string COLOR_GOOD = "#7FD97F";
     public const string COLOR_BAD = "#FF7B7B";
 }

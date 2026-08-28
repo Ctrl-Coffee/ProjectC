@@ -14,10 +14,15 @@ public class HeroInfoView : ViewBase
     [SerializeField] private TextMeshProUGUI _normalSkillHasteText;
     [SerializeField] private TextMeshProUGUI _specialSkillHasteText;
 
+    [Header("레벨업")]
+    [SerializeField] private UIButtonComponent _btnLevelUp;
+    [SerializeField] private TextMeshProUGUI _levelUpCostText;
+
     [SerializeField] private UIButtonComponent _blocker;
     [SerializeField] private UIButtonComponent _btnClose;
 
     private HeroInfoViewModel _viewModel;
+    private CurrencyViewModel _currencyViewModel;
 
     private void OnEnable()
     {
@@ -37,6 +42,11 @@ public class HeroInfoView : ViewBase
         {
             _btnClose.BindButtonEvent(OnClickClose);
         }
+
+        if (_btnLevelUp != null)
+        {
+            _btnLevelUp.BindButtonEvent(OnClickLevelUp);
+        }
     }
 
     private void OnDisable()
@@ -52,6 +62,11 @@ public class HeroInfoView : ViewBase
         {
             _btnClose.UnBindButtonAllEvent();
         }
+
+        if (_btnLevelUp != null)
+        {
+            _btnLevelUp.UnBindButtonAllEvent();
+        }
     }
 
     private void OnDestroy()
@@ -63,16 +78,24 @@ public class HeroInfoView : ViewBase
             _viewModel.UnBind();
             _viewModel = null;
         }
+
+        if (_currencyViewModel != null)
+        {
+            _currencyViewModel.UnBind();
+            _currencyViewModel = null;
+        }
     }
 
     protected override void BindViewModel()
     {
         _viewModel = GameManager.ViewModel.CreateHeroInfoViewModel();
+        _currencyViewModel = GameManager.ViewModel.CreateCurrencyViewModel();
     }
 
     protected override void Subscribe()
     {
         _viewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
+        _currencyViewModel.OnPropertyChanged_ViewModel += OnCurrencyPropertyChanged;
 
         _viewModel.InitializeModel();
 
@@ -81,6 +104,11 @@ public class HeroInfoView : ViewBase
 
     protected override void UnSubscribe()
     {
+        if (_currencyViewModel != null)
+        {
+            _currencyViewModel.OnPropertyChanged_ViewModel -= OnCurrencyPropertyChanged;
+        }
+
         if (_viewModel != null)
         {
             _viewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
@@ -93,6 +121,7 @@ public class HeroInfoView : ViewBase
         {
             case nameof(HeroInfoViewModel.Level):
                 RefreshLevel();
+                RefreshLevelUp();
                 break;
 
             case nameof(HeroInfoViewModel.Attack):
@@ -134,6 +163,42 @@ public class HeroInfoView : ViewBase
         CloseUI();
     }
 
+    private void OnCurrencyPropertyChanged(string propertyName)
+    {
+        if (propertyName != nameof(CurrencyViewModel.DreamFragment))
+        {
+            return;
+        }
+
+        if (_viewModel == null) return;
+
+        _viewModel.RefreshLevelUpState();
+
+        RefreshLevelUp();
+    }
+
+    private void OnClickLevelUp()
+    {
+        if (_viewModel == null) return;
+
+        _viewModel.TryLevelUp();
+
+        RefreshAll();
+    }
+
+    private void RefreshLevelUp()
+    {
+        if (_levelUpCostText != null)
+        {
+            _levelUpCostText.text = _viewModel.IsMaxLevel ? Const.MAX_LEVEL_TEXT : _viewModel.LevelUpCost.ToString("N0");
+        }
+
+        if (_btnLevelUp != null)
+        {
+            _btnLevelUp.SetInteractable(_viewModel.CanLevelUp);
+        }
+    }
+
     private void RefreshAll()
     {
         if (_viewModel == null) return;
@@ -150,6 +215,7 @@ public class HeroInfoView : ViewBase
         RefreshNormalSkillHaste();
         RefreshSpecialSkillHaste();
 
+        RefreshLevelUp();
     }
 
     private void RefreshLevel()

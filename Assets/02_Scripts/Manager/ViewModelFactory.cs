@@ -9,13 +9,6 @@
         _dataTable = dataTable;
     }
 
-    public PlayerGrowthViewModel CreatePlayerGrowthViewModel()
-    {
-        PlayerGrowthModel model = _session.PlayerGrowth;
-        PlayerGrowthViewModel viewModel = new PlayerGrowthViewModel(model);
-        return viewModel;
-    }
-
     public HeroInfoViewModel CreateHeroInfoViewModel()
     {
         HeroInfoModel model = _session.HeroInfo;

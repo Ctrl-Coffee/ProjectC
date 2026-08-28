@@ -22,7 +22,7 @@ public class HeroInfoModel : ModelBase, IStatData
         }
     }
 
-    private PlayerGrowthModel _growth;
+    private OwnedPlayerData _ownedPlayerData;
     private HeroEquipedModel _equiped;
     private HeroEquipmentModel _equipment;
 
@@ -123,14 +123,13 @@ public class HeroInfoModel : ModelBase, IStatData
         }
     }
 
-    public HeroInfoModel(PlayerGrowthModel growth, HeroEquipedModel equiped, HeroEquipmentModel equipment)
+    public HeroInfoModel(OwnedPlayerData ownedPlayerData, HeroEquipedModel equiped, HeroEquipmentModel equipment)
     {
-        _growth = growth;
+        _ownedPlayerData = ownedPlayerData;
         _equiped = equiped;
         _equipment = equipment;
 
-        // 레벨업 / 장비 착용 / 장비 강화 시 최종 스텟이 바뀌므로 구독
-        _growth.PropertyChanged += OnGrowthChanged;
+        // 장비 착용 / 장비 강화 시 최종 스텟이 바뀌므로 구독. 레벨은 이 모델이 직접 소유한다.
         _equiped.PropertyChanged += OnEquipedChanged;
         _equipment.ContainerPropertyChanged += OnEquipmentChanged;
 
@@ -142,20 +141,88 @@ public class HeroInfoModel : ModelBase, IStatData
         Recalculate();
     }
 
-    public void Dispose()
+    public bool IsMaxLevel
     {
-        _growth.PropertyChanged -= OnGrowthChanged;
-        _equiped.PropertyChanged -= OnEquipedChanged;
-        _equipment.ContainerPropertyChanged -= OnEquipmentChanged;
-
-        _growth = null;
-        _equiped = null;
-        _equipment = null;
+        get
+        {
+            return null == GetNextLevelData();
+        }
     }
 
-    private void OnGrowthChanged(object sender, PropertyChangedEventArgs e)
+    public long LevelUpCost
     {
+        get
+        {
+            PlayerLevelData nextLevelData = GetNextLevelData();
+
+            return null == nextLevelData ? 0 : (long)nextLevelData.UpgradeCost;
+        }
+    }
+
+    public bool CanLevelUp
+    {
+        get
+        {
+            if (IsMaxLevel)
+            {
+                return false;
+            }
+
+            return GameManager.Session.Currency.DreamFragment >= LevelUpCost;
+        }
+    }
+
+    public LevelUpResult TryLevelUp()
+    {
+        if (null == _ownedPlayerData)
+        {
+            return LevelUpResult.Error;
+        }
+
+        PlayerLevelData nextLevelData = GetNextLevelData();
+
+        if (null == nextLevelData)
+        {
+            return LevelUpResult.MaxLevel;
+        }
+
+        if (!GameManager.Session.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost))
+        {
+            return LevelUpResult.NotEnoughCurrency;
+        }
+
+        _ownedPlayerData.Level += 1;
+
         Recalculate();
+
+        return LevelUpResult.Success;
+    }
+
+    private PlayerLevelData GetNextLevelData()
+    {
+        if (null == _ownedPlayerData)
+        {
+            return null;
+        }
+
+        return GameManager.DataTable.GetPlayerLevelData(_ownedPlayerData.Level + 1);
+    }
+
+    public void Dispose()
+    {
+        if (null != _equiped)
+        {
+            _equiped.PropertyChanged -= OnEquipedChanged;
+        }
+
+        if (null != _equipment)
+        {
+            _equipment.ContainerPropertyChanged -= OnEquipmentChanged;
+        }
+
+        _ownedPlayerData = null;
+        _equiped = null;
+        _equipment = null;
     }
 
     private void OnEquipedChanged(object sender, PropertyChangedEventArgs e)
@@ -171,7 +238,7 @@ public class HeroInfoModel : ModelBase, IStatData
     /// <summary>
     /// 기본 스텟 + 레벨 보너스 + 착용 장비 스텟을 다시 합산
     /// </summary>
-    public void Recalculate()
+    private void Recalculate()
     {
         StatSum sum = GetBaseStat();
 
@@ -180,7 +247,7 @@ public class HeroInfoModel : ModelBase, IStatData
         sum.Add(GetEquipmentStat(EquipmentType.Armor));
         sum.Add(GetEquipmentStat(EquipmentType.Accessories));
 
-        Level = null == _growth ? 0 : _growth.Level;
+        Level = null == _ownedPlayerData ? 0 : _ownedPlayerData.Level;
 
         Attack = sum.Attack;
         Hp = sum.Hp;
@@ -218,7 +285,12 @@ public class HeroInfoModel : ModelBase, IStatData
     {
         StatSum sum = new StatSum();
 
-        for (int level = Const.FIRST_BONUS_LEVEL; level <= _growth.Level; level++)
+        if (null == _ownedPlayerData)
+        {
+            return sum;
+        }
+
+        for (int level = Const.FIRST_BONUS_LEVEL; level <= _ownedPlayerData.Level; level++)
         {
             PlayerLevelData levelData = GameManager.DataTable.GetPlayerLevelData(level);
 
@@ -248,6 +320,7 @@ public class HeroInfoModel : ModelBase, IStatData
             return sum;
         }
 
+        // 등급도 가지고 오기
         EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
 
         if (null == equipmentData)

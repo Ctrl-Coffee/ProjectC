@@ -15,6 +15,10 @@ public class HeroInfoViewModel : ViewModelBase<HeroInfoModel>
     public float SpecialSkillCooldownReduceRate { get; private set; }
     public float CombatPower { get; private set; }
 
+    public long LevelUpCost { get; private set; }
+    public bool IsMaxLevel { get; private set; }
+    public bool CanLevelUp { get; private set; }
+
     public HeroInfoViewModel(HeroInfoModel model) : base(model)
     {
     }
@@ -50,5 +54,23 @@ public class HeroInfoViewModel : ViewModelBase<HeroInfoModel>
         NormalSkillCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(NormalSkillHaste);
         SpecialSkillCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(SpecialSkillHaste);
         CombatPower = _model.CombatPower;
+
+        RefreshLevelUpState();
+    }
+
+    public void RefreshLevelUpState()
+    {
+        LevelUpCost = _model.LevelUpCost;
+        IsMaxLevel = _model.IsMaxLevel;
+        CanLevelUp = _model.CanLevelUp;
+    }
+
+    public LevelUpResult TryLevelUp()
+    {
+        LevelUpResult result = _model.TryLevelUp();
+
+        RefreshStats();
+
+        return result;
     }
 }
