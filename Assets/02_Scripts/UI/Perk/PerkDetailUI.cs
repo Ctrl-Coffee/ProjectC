@@ -258,6 +258,8 @@ public class PerkDetailUI : UIBase
             return;
         }
 
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.PERK_ACTIVE);
+
         CloseUI();
     }
 
@@ -268,6 +270,8 @@ public class PerkDetailUI : UIBase
             Refresh();
             return;
         }
+
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.PERK_DEACTIVE);
 
         CloseUI();
     }

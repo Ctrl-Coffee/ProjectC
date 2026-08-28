@@ -14,6 +14,9 @@ public class SubtitleEditGameUI : MiniGameBase
     // TODO: 김경훈 (26.08.10) 자막 여러개가 되면 PoolManager로 옮기기
     private FallingSubtitle _subtitleInstance;
 
+    [Header("결과 연출")]
+    [SerializeField] private int _resultDelayMs = 800;
+
     [Header("난이도")]
     [SerializeField] private float _fallSpeedRatio = 0.5f;
     [SerializeField] private float _toleranceRatio = 0.1f;
@@ -142,6 +145,9 @@ public class SubtitleEditGameUI : MiniGameBase
 
             if (_hasAttachResult)
             {
+                // 붙인 자리에 그대로 세워 둔 채로 잠깐 보여 준다. 얼마나 어긋났는지 확인시키는 구간.
+                await UniTask.Delay(_resultDelayMs, ignoreTimeScale: true, cancellationToken: token);
+
                 return _attachAccuracy;
             }
 
@@ -196,6 +202,8 @@ public class SubtitleEditGameUI : MiniGameBase
 
         _attachAccuracy = EvaluateAttach();
         _hasAttachResult = true;
+
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.SUBTITLE);
     }
 
     private bool ValidateReferences()
