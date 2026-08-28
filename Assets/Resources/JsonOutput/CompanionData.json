@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "Id": "companion_001",
     "Name": "임시1",
@@ -11,9 +11,9 @@
     "DefenseGrowthPerLevel": 1.8,
     "BaseCriticalChance": 0.1,
     "BasicAttackHaste": 0,
-    "ActiveSkillHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "skill_companion_001_basic",
-    "ActiveSkillId": "skill_companion_001_active"
+    "SignatureSkillId": "skill_companion_001_active"
   },
   {
     "Id": "companion_002",
@@ -27,9 +27,9 @@
     "DefenseGrowthPerLevel": 2.1,
     "BaseCriticalChance": 0.1,
     "BasicAttackHaste": 0,
-    "ActiveSkillHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "skill_companion_002_basic",
-    "ActiveSkillId": "skill_companion_002_active"
+    "SignatureSkillId": "skill_companion_002_active"
   },
   {
     "Id": "companion_003",
@@ -43,9 +43,9 @@
     "DefenseGrowthPerLevel": 2.4,
     "BaseCriticalChance": 0.1,
     "BasicAttackHaste": 0,
-    "ActiveSkillHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "skill_companion_003_basic",
-    "ActiveSkillId": "skill_companion_003_active"
+    "SignatureSkillId": "skill_companion_003_active"
   },
   {
     "Id": "companion_004",
@@ -59,8 +59,8 @@
     "DefenseGrowthPerLevel": 2.8,
     "BaseCriticalChance": 0.1,
     "BasicAttackHaste": 0,
-    "ActiveSkillHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "skill_companion_004_basic",
-    "ActiveSkillId": "skill_companion_004_active"
+    "SignatureSkillId": "skill_companion_004_active"
   }
 ]

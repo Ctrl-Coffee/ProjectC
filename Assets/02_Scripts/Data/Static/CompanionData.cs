@@ -13,7 +13,7 @@ public class CompanionData : BaseData
     public float DefenseGrowthPerLevel;
     public float BaseCriticalChance;
     public float BasicAttackHaste;
-    public float ActiveSkillHaste;
+    public float SignatureSkillHaste;
     public string BasicAttackSkillId;
-    public string ActiveSkillId;
+    public string SignatureSkillId;
 }
