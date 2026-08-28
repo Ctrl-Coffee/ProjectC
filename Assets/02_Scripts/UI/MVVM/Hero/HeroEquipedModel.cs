@@ -1,8 +1,16 @@
 ﻿
 public class HeroEquipedModel : ModelBase
 {
-    public HeroEquipedModel(EquipmentLoadoutDto equipmentLoadoutDto)
+    public HeroEquipmentState EquipedWeapon => _equipedWeapon;
+    public HeroEquipmentState EquipedArmor => _equipedArmor;
+    public HeroEquipmentState EquipedAccessory => _equipedAccessory;
+
+    private HeroEquipmentModel _equipmentModel;
+
+    public HeroEquipedModel(EquipmentLoadoutDto equipmentLoadoutDto, HeroEquipmentModel heroEquipmentModel)
     {
+        _equipmentModel = heroEquipmentModel; 
+
         EquipedWeaponId = equipmentLoadoutDto.weaponEquipmentId;
         EquipedArmorId = equipmentLoadoutDto.armorEquipmentId;
         EquipedAccessoryId = equipmentLoadoutDto.accessoryEquipmentId;
@@ -22,7 +30,10 @@ public class HeroEquipedModel : ModelBase
         switch(type)
         {
             case EquipmentType.Weapon:
-                EquipedWeaponId = equipmentId;
+                {
+                    EquipedWeaponId = equipmentId;
+                    _equipedWeapon = _equipmentModel.GetHeroEquipment(equipmentId);
+                }
                 break;
             case EquipmentType.Armor:
                 EquipedArmorId = equipmentId;
@@ -103,4 +114,8 @@ public class HeroEquipedModel : ModelBase
             }
         }
     }
+
+    private HeroEquipmentState _equipedWeapon;
+    private HeroEquipmentState _equipedArmor;
+    private HeroEquipmentState _equipedAccessory;
 }

@@ -23,10 +23,10 @@ public class HeroEquipmentSlotView : ViewBase
         if (TryGetComponent<EquipmentSlotInput>(out var input))
         {
             _input = input;
-            GetComponent<EquipmentSlotInput>().Init(_heroEquipmentId, OnClickSlot, onClickDetail);
         }
 
         Refresh();
+        GetComponent<EquipmentSlotInput>().Init(_heroEquipmentId, OnClickSlot, onClickDetail);
     }
 
     private void OnDestroy()
@@ -42,7 +42,8 @@ public class HeroEquipmentSlotView : ViewBase
 
     protected override void BindViewModel()
     {
-        _viewModel = GameManager.ViewModel.CreateHeroEquipmentSlotViewModel(_heroEquipmentId);
+        _viewModel = GameManager.ViewModel.CreateHeroEquipmentSlotViewModel();
+        _viewModel.SetType(_type);
     }
 
     protected override void Subscribe()
@@ -67,10 +68,12 @@ public class HeroEquipmentSlotView : ViewBase
 
     private void OnContainerChanged(string propertyName, ContainerPropertyChangedEvent changedEvent, HeroEquipmentState state)
     {
-        if (changedEvent == ContainerPropertyChangedEvent.Update)
+        if (changedEvent != ContainerPropertyChangedEvent.Update || state.HeroEquipmentId != _heroEquipmentId)
         {
-            Refresh();
+            return;
         }
+
+        Refresh();
     }
 
     private void Refresh()

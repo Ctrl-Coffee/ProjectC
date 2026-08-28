@@ -63,8 +63,6 @@ public class EquipmentDetailUI : UIBase
     {
         int level = GameManager.Session.HeroEquipment.GetLevel(_equipmentId);
 
-        _levelText.SetText("Lv:{0}", level);
-
         EquipmentLevelData levelData =
             GameManager.DataTable.GetEquipmentLevelData(Utils.GetEquipmentLevelDataId(_equipmentData.Grade, level));
 
@@ -75,19 +73,20 @@ public class EquipmentDetailUI : UIBase
         _attackHasteText.SetText("{0}", _equipmentData.BasicActiveSkillHaste * levelData.StatMultiplier);
         _activeSkillHasteText.SetText("{0}", _equipmentData.BasicActiveSkillHaste * levelData.StatMultiplier);
 
+        bool isMaxLevel = levelData.UpgradeCost == 0;
 
-        if(levelData.UpgradeCost == 0)
+        _levelUpButton.SetInteractable(!isMaxLevel);
+        _levelUpButton.ChangeButtonText(isMaxLevel ? "Max Level" : "Level Up");
+
+        if (levelData.UpgradeCost == 0)
         {
             _currencyText.SetText("Max Level");
-
-            _levelUpButton.SetInteractable(false);
-            _levelUpButton.ChangeButtonText("Max Level");
-
             _levelText.SetText("Max Level");
 
             return;
         }
 
+        _levelText.SetText("Lv:{0}", level);
         _currencyText.SetText("{0}/{1}", levelData.UpgradeCost, GameManager.Session.Currency.DreamFragment);
     }
 
