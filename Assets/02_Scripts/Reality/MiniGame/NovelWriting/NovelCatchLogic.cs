@@ -4,16 +4,15 @@ public class NovelCatchLogic
     private const float ZONE_WIDTH = 0.3f;
     private const float KEY_SPEED = 0.6f;
 
+    // TODO 희준 : 기획 단어 표 확정 후 데이터 테이블로 이동
+    private static readonly string[] KEY_WORDS =
+    {
+    "달빛", "모험", "새벽", "그림자", "이야기", "메아리", "용사", "마법", "운명", "여행", "별자리", "높은음자리", "지나치다", "아름다운", "생각할수록", "쌍둥이자리",
+    };
+
     public string CreateKeyText()
     {
-        int letterLength = Random.Range(2, 6);
-        string txt = "";
-
-        for (int i = 0; i < letterLength; i++)
-        {
-            char letter = (char)('가' + Random.Range(0, 11172));
-            txt += letter;
-        }
+        string txt = KEY_WORDS[Random.Range(0, KEY_WORDS.Length)];
 
         return txt;
     }

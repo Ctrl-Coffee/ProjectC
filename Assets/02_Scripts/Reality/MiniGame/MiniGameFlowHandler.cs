@@ -150,27 +150,31 @@ public class MiniGameFlowHandler
         long energyCost = GetEnergyCost(workData);
         long goldCost = GetGoldCost(workData);
 
-        if (!GameManager.Session.Currency.TrySpendEnergy(energyCost))
+        bool isRoundCostType = workData.MiniGameType == MiniGameType.NovelWriting;
+
+        if (isRoundCostType == false)
         {
-            Logger.LogError($"에너지 차감에 실패했습니다. {workData.Name} / 필요 {energyCost}");
-            ui.CloseUI();
-            return MiniGameResult.Canceled;
-        }
+            if (!GameManager.Session.Currency.TrySpendEnergy(energyCost))
+            {
+                Logger.LogError($"에너지 차감에 실패했습니다. {workData.Name} / 필요 {energyCost}");
+                ui.CloseUI();
+                return MiniGameResult.Canceled;
+            }
 
-        if (0 < goldCost && !GameManager.Session.Currency.TrySpendMoney(goldCost))
-        {
-            Logger.LogError($"골드 차감에 실패했습니다. {workData.Name} / 필요 {goldCost}");
+            if (0 < goldCost && !GameManager.Session.Currency.TrySpendMoney(goldCost))
+            {
+                Logger.LogError($"골드 차감에 실패했습니다. {workData.Name} / 필요 {goldCost}");
 
-            RefundCost(energyCost, 0);
+                RefundCost(energyCost, 0);
 
-            ui.CloseUI();
-            return MiniGameResult.Canceled;
-
+                ui.CloseUI();
+                return MiniGameResult.Canceled;
+            }
         }
 
         Logger.Log($"미니게임 시작 - {workData.Name} / 남은 에너지 {GameManager.Session.Currency.Energy} / 남은 골드 {GameManager.Session.Currency.Money}");
 
-        MiniGameContext context = new MiniGameContext();
+        MiniGameContext context = new MiniGameContext { EnergyCost = energyCost };
 
         _cancelToken = new CancellationTokenSource();
         CancellationToken token = _cancelToken.Token;
@@ -196,7 +200,7 @@ public class MiniGameFlowHandler
         {
             if (result.IsCompleted == false)
             {
-                RefundCost(energyCost, goldCost);
+                RefundCost(isRoundCostType ? 0 : energyCost, goldCost);
             }
 
             ui.CloseUI();

@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -15,7 +16,6 @@ public class NovelWritingGameUI : MiniGameBase
     [SerializeField] private RectTransform _zoneRect;
     [SerializeField] private TextMeshProUGUI _keyText;
 
-    private float startTime;
     private bool _isKeyMoving;
     private float _roundStartTime;
     private float _currentKeyWidth;
@@ -41,51 +41,66 @@ public class NovelWritingGameUI : MiniGameBase
 
         int roundCount = 0;
         int successCount = 0;
-        
-        while (true)
+
+        try
         {
-            Logger.Log($"3초 후 라운드 시작...");
-            bool isContinue = await WaitForNextRoundAsync(token);
-            if (isContinue == false) break;
-            roundCount++;
-            // TODO 희준 : 여기서 라운드 에너지 차감 (FlowHandler 협의 후)
-
-            string keyText = _logic.CreateKeyText();
-            _keyText.text = keyText;
-            float keyWidth = _keyText.preferredWidth / _barRect.rect.width;
-
-            CatchZone zone = _logic.CreateZone(keyWidth);
-            ShowZone(zone);
-            _roundStartTime = Time.unscaledTime;
-            _currentKeyWidth = keyWidth;
-            _isKeyMoving = true;
-
-            bool isCatched = await WaitForCatchAsync(token);
-
-            if (isCatched)
+            while (true)
             {
-                float elapsed = Time.unscaledTime - startTime;
-                float center = _logic.GetKeyCenter(elapsed, keyWidth);
-                bool isSuccess = _logic.Judge(center - (keyWidth / 2), center + (keyWidth / 2), zone);
+                Logger.Log($"3초 후 라운드 시작...");
+                bool isContinue = await WaitForNextRoundAsync(token);
+                if (isContinue == false) break;
 
-                if(isSuccess)
+                if (GameManager.Session.Currency.TrySpendEnergy(context.EnergyCost) == false)
                 {
-                    successCount++;
+                    Logger.Log("에너지 부족 — 강제 정산");
+                    break;
                 }
+                roundCount++;
 
-                Logger.Log($"키 중심 {center:F2}, 영역 {zone.Left:F2}~{zone.Right:F2} → {(isSuccess ? "성공" : "실패")}");
-            }
-            else
-            {
-                Logger.Log("시간 초과 — 실패");
-            }
+                string keyText = _logic.CreateKeyText();
+                _keyText.text = keyText;
+                float keyWidth = _keyText.preferredWidth / _barRect.rect.width;
 
+                CatchZone zone = _logic.CreateZone(keyWidth);
+                ShowZone(zone);
+                _roundStartTime = Time.unscaledTime;
+                _currentKeyWidth = keyWidth;
+
+                _isKeyMoving = true;
+
+                NovelRoundResult roundResult = await WaitForCatchAsync(token);
+                _isKeyMoving = false;
+
+                if (roundResult == NovelRoundResult.Stop) break;
+
+                if (roundResult == NovelRoundResult.Catch)
+                {
+                    float elapsed = Time.unscaledTime - _roundStartTime;
+                    float center = _logic.GetKeyCenter(elapsed, keyWidth);
+                    bool isSuccess = _logic.Judge(center - (keyWidth / 2), center + (keyWidth / 2), zone);
+
+                    if (isSuccess)
+                    {
+                        successCount++;
+                    }
+
+                    Logger.Log($"키 중심 {center:F2}, 영역 {zone.Left:F2}~{zone.Right:F2} → {(isSuccess ? "성공" : "실패")}");
+                }
+                else
+                {
+                    Logger.Log("시간 초과 — 실패");
+
+                }
+            }
+        }
+        catch (OperationCanceledException)
+        {
             _isKeyMoving = false;
-
+            Logger.Log("게임 중단 - 성공한 라운드까지 정산");
         }
 
         Logger.Log($"정산 — {roundCount}라운드 중 {successCount}회 성공");
-        return MiniGameResult.Canceled;   // 임시 — 정산 조각에서 교체
+        return MiniGameScore.FromNovel(successCount);
     }
 
     protected override void ClearGame()
@@ -95,20 +110,30 @@ public class NovelWritingGameUI : MiniGameBase
         _contentRoot.SetActive(false);
     }
 
-    private async UniTask<bool> WaitForCatchAsync(CancellationToken token)
+    private async UniTask<NovelRoundResult> WaitForCatchAsync(CancellationToken token)
     {
         _catchRequestedSource = new UniTaskCompletionSource();
+        _stopRequestedSource = new UniTaskCompletionSource();
         _catchButton.BindButtonEvent(OnClickCatch);
+        _stopButton.BindButtonEvent(OnClickStop);
 
         try
         {
-            int winner = await UniTask.WhenAny(_catchRequestedSource.Task.AttachExternalCancellation(token), UniTask.Delay((int)(_roundTimeLimit * 1000), ignoreTimeScale: true, cancellationToken: token));
+            int winner = await UniTask.WhenAny(_catchRequestedSource.Task.AttachExternalCancellation(token), UniTask.Delay((int)(_roundTimeLimit * 1000), ignoreTimeScale: true, cancellationToken: token), _stopRequestedSource.Task.AttachExternalCancellation(token));
 
-            return winner == 0;
+            switch (winner)
+            {
+                case 0: return NovelRoundResult.Catch;
+                case 1: return NovelRoundResult.Timeout;
+                default: return NovelRoundResult.Stop;
+
+            }
         }
         finally
         {
             _catchButton.UnBindButtonAllEvent();
+            _stopButton.UnBindButtonAllEvent();
+            _stopRequestedSource = null;
             _catchRequestedSource = null;
         }
     }

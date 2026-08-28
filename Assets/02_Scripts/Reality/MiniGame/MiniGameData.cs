@@ -4,6 +4,7 @@
 // MiniGameBase / PlayAsync 시그니처를 건드리지 않으려고 빈 구조체로 유지 중. 지우지 말 것.
 public struct MiniGameContext
 {
+    public long EnergyCost;
 }
 
 public struct MiniGameResult
@@ -110,6 +111,13 @@ public static class MiniGameScore
         result.Accuracy = Mathf.Clamp01(GetScratchSymbolRate(result.MatchedSymbol));
         result.RewardMultiplier = GetScratchCountMultiplier(result.MatchedCount);
         result.Grade = GetScratchGrade(result.MatchedSymbol);
+
+        return result;
+    }
+    public static MiniGameResult FromNovel(int successCount)
+    {
+        MiniGameResult result = MiniGameResult.Completed(1f);
+        result.RewardMultiplier = successCount;
 
         return result;
     }
