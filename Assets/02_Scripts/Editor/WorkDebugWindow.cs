@@ -115,6 +115,38 @@ public class WorkDebugWindow : EditorWindow
         }
 
         EditorGUILayout.EndHorizontal();
+
+        DrawAwayReport();
+    }
+
+    // 에디터에서는 백그라운드 전환이 실제로 안 들어와서 복귀 리포트를 수동으로 띄운다.
+    private void DrawAwayReport()
+    {
+        EditorGUILayout.LabelField("자리비움 리포트", EditorStyles.boldLabel);
+
+        EditorGUILayout.BeginHorizontal();
+
+        DrawSimulateAwayButton("10분 비움", TimeSpan.FromMinutes(10));
+        DrawSimulateAwayButton("1시간 비움", TimeSpan.FromHours(1));
+        DrawSimulateAwayButton("8시간 비움", TimeSpan.FromHours(8));
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void DrawSimulateAwayButton(string label, TimeSpan duration)
+    {
+        if (!GUILayout.Button(label))
+        {
+            return;
+        }
+
+        if (null == GameManager.Instance)
+        {
+            Debug.LogWarning("플레이 중에만 자리비움을 시뮬레이션할 수 있습니다.");
+            return;
+        }
+
+        AwayReportFlow.DebugSimulateAway(duration);
     }
 
     private void ResetDebugTime()
@@ -234,7 +266,7 @@ public class WorkDebugWindow : EditorWindow
 
         EditorGUILayout.Space();
 
-        DrawCompare("적용 슬롯 수", AutoWorkQueue.DebugBaseSlotCount, AutoWorkQueue.MaxSlotCount, "0");
+        DrawCompare("적용 슬롯 수", AutoWorkQueue.BaseSlotCount, AutoWorkQueue.MaxSlotCount, "0");
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("업무별 적용 결과", EditorStyles.boldLabel);
@@ -292,7 +324,7 @@ public class WorkDebugWindow : EditorWindow
         EditorGUILayout.LabelField("최대 에너지", EditorStyles.boldLabel);
 
         DrawModifier(WorkStatType.EnergyMax);
-        DrawCompare("최대치", currency.DebugBaseMaxEnergy, currency.MaxEnergy, "0");
+        DrawCompare("최대치", currency.BaseMaxEnergy, currency.MaxEnergy, "0");
         EditorGUILayout.LabelField("현재", $"{currency.Energy} / {currency.MaxEnergy}");
 
         EditorGUILayout.Space();
@@ -300,10 +332,10 @@ public class WorkDebugWindow : EditorWindow
 
         DrawModifier(WorkStatType.EnergyRecoverRate);
 
-        float baseInterval = EnergyRecovery.DebugBaseIntervalSeconds;
-        float appliedInterval = EnergyRecovery.DebugRecoverIntervalSeconds;
+        float baseInterval = EnergyRecovery.BaseIntervalSeconds;
+        float appliedInterval = EnergyRecovery.RecoverIntervalSeconds;
 
-        float speed = EnergyRecovery.DebugRecoverSpeed;
+        float speed = EnergyRecovery.RecoverSpeed;
 
         EditorGUILayout.LabelField("속도", $"x{speed:0.##}   ({FormatPercent(speed - 1f)})");
         DrawCompare("회복 주기(초)", baseInterval, appliedInterval, "0.##");

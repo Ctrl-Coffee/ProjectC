@@ -9,5 +9,6 @@ public class WorkStatData : BaseData
     public float MaxValue;
     public float MinRate;
     public float MaxRate;
+    public string IconKey;
     public string Description;
 }

@@ -16,6 +16,19 @@
         return viewModel;
     }
 
+    public HeroInfoViewModel CreateHeroInfoViewModel()
+    {
+        HeroInfoModel model = _session.HeroInfo;
+        HeroInfoViewModel viewModel = new HeroInfoViewModel(model);
+        return viewModel;
+    }
+
+    public PerkStatViewModel CreatePerkStatViewModel()
+    {
+        PerkStatViewModel viewModel = new PerkStatViewModel();
+        return viewModel;
+    }
+
     public CompanionInventoryViewModel CreateCompanionInventoryViewModel()
     {
         CompanionModel model = _session.Companion;

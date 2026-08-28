@@ -56,6 +56,16 @@ public static class UIManagerExtension
         return uiManager.OpenContentUI<HeroInventoryView>();
     }
 
+    public static UniTask<HeroInfoView> OpenHeroInfo(this UIManager uiManager)
+    {
+        return uiManager.OpenPopupUI<HeroInfoView>();
+    }
+
+    public static UniTask<PerkStatView> OpenPerkStat(this UIManager uiManager)
+    {
+        return uiManager.OpenOverlayUI<PerkStatView>();
+    }
+
     public static async void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Func<LevelUpResult> onClickLevelUp)
     {
         var ui = await uiManager.OpenPopupUI<CompanionDetailUI>();
@@ -119,5 +129,14 @@ public static class UIManagerExtension
     {
         GachaResultUI ui = await uiManager.OpenPopupUI<GachaResultUI>();
         ui.Init(results);
+    }
+
+    public static async void OpenAwayReportUI(this UIManager uiManager, AwayReport report)
+    {
+        var ui = await uiManager.OpenPopupUI<AwayReportUI>();
+
+        if (null == ui) return;
+
+        ui.SetReport(report);
     }
 }

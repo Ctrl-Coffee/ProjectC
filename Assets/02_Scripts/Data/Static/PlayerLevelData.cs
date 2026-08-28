@@ -4,8 +4,9 @@
 public class PlayerLevelData : BaseData
 {
     public int Level;
-    public float HP;
-    public float BaseAttack;
-    public float BaseDefense;
+    public float BonusHP;
+    public float BonusAttack;
+    public float BonusDefense;
+    public float BonusCriticalRate;
     public int UpgradeCost;
 }
