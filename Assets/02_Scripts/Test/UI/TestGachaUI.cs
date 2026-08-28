@@ -5,6 +5,8 @@ using UnityEngine;
 public class TestGachaUI : MonoBehaviour
 {
     private const string DICE_ID = "Work_Manual_03";
+    private const string NOVEL_ID = "Work_Manual_04";
+
     [SerializeField] private long _testScrollAmount = 1000;
     private MiniGameFlowHandler _workHandler = new();
 
@@ -22,6 +24,18 @@ public class TestGachaUI : MonoBehaviour
         {
             Logger.LogError("GachaView를 열지 못했습니다.");
         }
+    }
+
+    [ContextMenu("소설쓰기 게임 진입")]
+    private void PlayNovelWriting()
+    {
+        WorkData data = GameManager.DataTable.GetWorkData(NOVEL_ID);
+        if (data == null)
+        {
+            Logger.LogError($"data가 null {NOVEL_ID}");
+            return;
+        }
+        _workHandler.StartMiniGameAsync(data).Forget();
     }
 
     [ContextMenu("몽상의 스크롤 지급")]

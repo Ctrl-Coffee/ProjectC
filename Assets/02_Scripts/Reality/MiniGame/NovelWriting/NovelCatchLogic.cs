@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 public class NovelCatchLogic
 {
-    private const float ZONE_WIDTH = 0.25f;
-    private const float KEY_SPEED = 0.5f;
+    private const float ZONE_WIDTH = 0.3f;
+    private const float KEY_SPEED = 0.6f;
 
     public string CreateKeyText()
     {

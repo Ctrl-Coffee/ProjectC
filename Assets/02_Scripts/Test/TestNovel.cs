@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Metrics;
+﻿using Cysharp.Threading.Tasks;
+using System.Diagnostics.Metrics;
 using UnityEngine;
 
 public class TestNovel : MonoBehaviour

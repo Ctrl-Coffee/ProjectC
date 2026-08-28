@@ -128,6 +128,9 @@ public class MiniGameFlowHandler
             case MiniGameType.ScratchLottery:
                 return PlayMiniGameAsync<ScratchLotteryGameUI>(workData);
 
+            case MiniGameType.NovelWriting:
+                return PlayMiniGameAsync<NovelWritingGameUI>(workData);
+
             default:
                 Logger.LogError($"지원하지 않는 미니게임입니다. type: {workData.MiniGameType}");
                 return UniTask.FromResult(MiniGameResult.Canceled);

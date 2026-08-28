@@ -4,5 +4,6 @@
     SubtitleEdit,
     MotionTracking,
     ScratchLottery,
-    DiceGamble
+    DiceGamble,
+    NovelWriting,
 }
