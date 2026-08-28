@@ -1,32 +1,66 @@
-[
+﻿[
   {
-    "Id": "Companion_001",
-    "Name": "김환",
+    "Id": "companion_001",
+    "Name": "임시1",
     "Grade": 1,
-    "SkillId": "Skill_001"
+    "BaseHp": 520,
+    "HpGrowthPerLevel": 40,
+    "BaseAttack": 48,
+    "AttackGrowthPerLevel": 4,
+    "BaseDefense": 23,
+    "DefenseGrowthPerLevel": 1.8,
+    "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
+    "BasicAttackSkillId": "skill_companion_001_basic",
+    "SignatureSkillId": "skill_companion_001_active"
   },
   {
-    "Id": "Companion_002",
-    "Name": "이아진",
-    "Grade": 1,
-    "SkillId": "Skill_002"
-  },
-  {
-    "Id": "Companion_003",
-    "Name": "김경민",
+    "Id": "companion_002",
+    "Name": "임시2",
     "Grade": 2,
-    "SkillId": "Skill_003"
+    "BaseHp": 510,
+    "HpGrowthPerLevel": 46,
+    "BaseAttack": 50,
+    "AttackGrowthPerLevel": 4.6,
+    "BaseDefense": 22,
+    "DefenseGrowthPerLevel": 2.1,
+    "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
+    "BasicAttackSkillId": "skill_companion_002_basic",
+    "SignatureSkillId": "skill_companion_002_active"
   },
   {
-    "Id": "Companion_004",
-    "Name": "장준성",
-    "Grade": 4,
-    "SkillId": "Skill_004"
-  },
-  {
-    "Id": "Companion_005",
-    "Name": "김희주",
+    "Id": "companion_003",
+    "Name": "임시3",
     "Grade": 3,
-    "SkillId": "Skill_005"
+    "BaseHp": 530,
+    "HpGrowthPerLevel": 52,
+    "BaseAttack": 49,
+    "AttackGrowthPerLevel": 5.2,
+    "BaseDefense": 24,
+    "DefenseGrowthPerLevel": 2.4,
+    "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
+    "BasicAttackSkillId": "skill_companion_003_basic",
+    "SignatureSkillId": "skill_companion_003_active"
+  },
+  {
+    "Id": "companion_004",
+    "Name": "임시4",
+    "Grade": 4,
+    "BaseHp": 520,
+    "HpGrowthPerLevel": 60,
+    "BaseAttack": 52,
+    "AttackGrowthPerLevel": 6,
+    "BaseDefense": 23,
+    "DefenseGrowthPerLevel": 2.8,
+    "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
+    "BasicAttackSkillId": "skill_companion_004_basic",
+    "SignatureSkillId": "skill_companion_004_active"
   }
 ]
