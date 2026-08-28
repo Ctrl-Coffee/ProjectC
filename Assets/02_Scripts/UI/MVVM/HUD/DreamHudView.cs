@@ -16,6 +16,7 @@ public class DreamHudView : ViewBase
     [SerializeField] private UIButtonComponent _heroBtn;
 
     [SerializeField] private UIButtonComponent _lobbyBtn;
+    [SerializeField] private UIButtonComponent _heroInfoBtn;
 
     private UIBase _currentContent;
 
@@ -38,6 +39,7 @@ public class DreamHudView : ViewBase
         _lobbyBtn.BindButtonEvent(OnChangeSceenToReal);
 
         _settingBtn.BindButtonEvent(OnOpenSettingUI);
+        _heroInfoBtn.BindButtonEvent(OnOpenHeroInfo);
     }
 
     private void OnDisable()
@@ -49,6 +51,7 @@ public class DreamHudView : ViewBase
         _stageBtn.UnBindButtonAllEvent();
         _heroBtn.UnBindButtonAllEvent();
         _lobbyBtn.UnBindButtonAllEvent();
+        _heroInfoBtn.UnBindButtonAllEvent();
         _settingBtn.UnBindButtonAllEvent();
     }
 
@@ -140,6 +143,12 @@ public class DreamHudView : ViewBase
     private void OnOpenSettingUI()
     {
         GameManager.UI.OpenSettingUI();
+    }
+
+    private async void OnOpenHeroInfo()
+    {
+        var content = await GameManager.UI.OpenHeroInfo();
+        CloseCurrentContent(content);
     }
 
     private void CloseCurrentContent(UIBase content)

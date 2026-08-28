@@ -14,6 +14,7 @@ public class CurrencyModel : ModelBase
     [SerializeField] private long _dreamFragment;
     [SerializeField] private long _dreamScroll;
     [SerializeField] private long _inspiration;
+    [SerializeField] private long _energyRecoveredAt;
 
     public CurrencyModel(CurrencyDto currencyDto)
     {
@@ -92,15 +93,25 @@ public class CurrencyModel : ModelBase
         OnPropertyChanged(nameof(MaxEnergy));
     }
 
-#if UNITY_EDITOR
-    public long DebugBaseMaxEnergy
+    public long EnergyRecoveredAt
+    {
+        get
+        {
+            return _energyRecoveredAt;
+        }
+        set
+        {
+            _energyRecoveredAt = value;
+        }
+    }
+
+    public long BaseMaxEnergy
     {
         get
         {
             return MAX_ENERGY;
         }
     }
-#endif
 
     public long DreamFragment
     {
