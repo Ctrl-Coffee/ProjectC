@@ -4,10 +4,10 @@ using UnityEngine;
 public class BattleRoot : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private BattleUnitViewBase[] _playerBattleUnitViews = new BattleUnitViewBase[BattleConstants.MAX_PLAYER_COUNT];
+    [SerializeField] private BattleUnitViewBase[] _playerBattleUnitViews = new BattleUnitViewBase[Const.MAX_PLAYER_COUNT];
 
     [Header("Enemy")]
-    [SerializeField] private BattleUnitViewBase[] _enemyBattleUnitViews = new BattleUnitViewBase[BattleConstants.MAX_ENEMY_COUNT];
+    [SerializeField] private BattleUnitViewBase[] _enemyBattleUnitViews = new BattleUnitViewBase[Const.MAX_ENEMY_COUNT];
 
     private void Awake()
     {

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BattleHpBarHud : UIBase
 {
-    [SerializeField] private BattleUnitHpBarView[] _playerBattleUnitHpBarViews = new BattleUnitHpBarView[BattleConstants.MAX_PLAYER_COUNT];
-    [SerializeField] private BattleUnitHpBarView[] _enemyBattleUnitHpBarViews = new BattleUnitHpBarView[BattleConstants.MAX_ENEMY_COUNT];
+    [SerializeField] private BattleUnitHpBarView[] _playerBattleUnitHpBarViews = new BattleUnitHpBarView[Const.MAX_PLAYER_COUNT];
+    [SerializeField] private BattleUnitHpBarView[] _enemyBattleUnitHpBarViews = new BattleUnitHpBarView[Const.MAX_ENEMY_COUNT];
 
     private void Start()
     {

@@ -12,8 +12,8 @@ public class CompanionFormation
     //TODO 나중에 편성 데이터 가져와서 가져와서 초기화
     private void InitializePositions()
     {
-        _companionIdByBattlePosition.Add(BattleConstants.COMPANION_BATTLE_POSITIONS[0], "Companion_001");
-        _companionIdByBattlePosition.Add(BattleConstants.COMPANION_BATTLE_POSITIONS[1], "Companion_002");
+        _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[0], "Companion_001");
+        _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[1], "Companion_002");
     }
 
     public bool SetCompanionToPosition(int battlePosition, string companionId)
@@ -40,7 +40,7 @@ public class CompanionFormation
 
     public bool TrySetCompanionToEmptyPosition(string companionId, out int targetPosition)
     {
-        targetPosition = BattleConstants.INVALID_BATTLE_POSITION;
+        targetPosition = Const.INVALID_BATTLE_POSITION;
 
         if (string.IsNullOrWhiteSpace(companionId))
         {
@@ -52,7 +52,7 @@ public class CompanionFormation
             return false;
         }
 
-        foreach (int position in BattleConstants.COMPANION_BATTLE_POSITIONS)
+        foreach (int position in Const.COMPANION_BATTLE_POSITIONS)
         {
             if (!string.IsNullOrWhiteSpace(_companionIdByBattlePosition[position]))
             {
@@ -87,14 +87,14 @@ public class CompanionFormation
 
     public bool TryRemoveCompanion(string companionId, out int targetPosition)
     {
-        targetPosition = BattleConstants.INVALID_BATTLE_POSITION;
+        targetPosition = Const.INVALID_BATTLE_POSITION;
 
         if (string.IsNullOrWhiteSpace(companionId))
         {
             return false;
         }
 
-        foreach (int position in BattleConstants.COMPANION_BATTLE_POSITIONS)
+        foreach (int position in Const.COMPANION_BATTLE_POSITIONS)
         {
             if (_companionIdByBattlePosition[position] != companionId)
             {

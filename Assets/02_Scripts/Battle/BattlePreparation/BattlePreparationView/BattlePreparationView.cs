@@ -13,7 +13,7 @@ public class BattlePreparationView : MonoBehaviour
 
     private Camera _mainCamera;
 
-    private int _selectedCompanionBattlePosition = BattleConstants.INVALID_BATTLE_POSITION;
+    private int _selectedCompanionBattlePosition = Const.INVALID_BATTLE_POSITION;
     private string _selectedCompanionSelectionId;
 
     private readonly List<CompanionSelectionSlotUI> _companionSelectionSlotPool = new List<CompanionSelectionSlotUI>();
@@ -79,7 +79,7 @@ public class BattlePreparationView : MonoBehaviour
 
     private bool TryGetClickedCompanionPosition(out int battlePosition)
     {
-        battlePosition = BattleConstants.INVALID_BATTLE_POSITION;
+        battlePosition = Const.INVALID_BATTLE_POSITION;
 
         Vector2 screenPosition = Pointer.current.position.ReadValue();
         Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(screenPosition);
@@ -146,7 +146,7 @@ public class BattlePreparationView : MonoBehaviour
 
     private bool TrySelectCompanionPosition(int battlePosition)
     {
-        if (_selectedCompanionBattlePosition != BattleConstants.INVALID_BATTLE_POSITION)
+        if (_selectedCompanionBattlePosition != Const.INVALID_BATTLE_POSITION)
         {
             return false;
         }
@@ -175,7 +175,7 @@ public class BattlePreparationView : MonoBehaviour
 
     private void ClearSelectedCompanionPosition()
     {
-        _selectedCompanionBattlePosition = BattleConstants.INVALID_BATTLE_POSITION;
+        _selectedCompanionBattlePosition = Const.INVALID_BATTLE_POSITION;
     }
 
     private void ClearSelectedCompanionId()
@@ -264,7 +264,7 @@ public class BattlePreparationView : MonoBehaviour
 
     private bool TrySetCompanionToSelectedPosition(string companionId)
     {
-        if (_selectedCompanionBattlePosition == BattleConstants.INVALID_BATTLE_POSITION)
+        if (_selectedCompanionBattlePosition == Const.INVALID_BATTLE_POSITION)
         {
             return false;
         }

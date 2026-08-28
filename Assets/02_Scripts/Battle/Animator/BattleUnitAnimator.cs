@@ -20,7 +20,7 @@ public class BattleUnitAnimator
                 return false;
             }
 
-            return _animator.GetCurrentAnimatorStateInfo(AnimationConstants.BASE_LAYER).shortNameHash == idleHash;
+            return _animator.GetCurrentAnimatorStateInfo(Const.BASE_LAYER).shortNameHash == idleHash;
         }
     }
 
@@ -79,7 +79,7 @@ public class BattleUnitAnimator
 
     public bool IsDeathAnimationCompleted()
     {
-        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(AnimationConstants.BASE_LAYER);
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(Const.BASE_LAYER);
 
         bool isDeathState = stateInfo.shortNameHash == _animationHashes[BattleUnitAnimationType.Death];
 
@@ -93,35 +93,35 @@ public class BattleUnitAnimator
     {
         if (string.IsNullOrWhiteSpace(id))
         {
-            ApplyAnimationClip(AnimationConstants.IDLE, null);
-            ApplyAnimationClip(AnimationConstants.BASIC_ATTACK, null);
-            ApplyAnimationClip(AnimationConstants.SIGNATURE, null);
-            ApplyAnimationClip(AnimationConstants.DEATH, null);
+            ApplyAnimationClip(Const.IDLE, null);
+            ApplyAnimationClip(Const.BASIC_ATTACK, null);
+            ApplyAnimationClip(Const.SIGNATURE, null);
+            ApplyAnimationClip(Const.DEATH, null);
             return;
         }
 
         UnitAnimationSet unitAnimationSet = await Addressables.LoadAssetAsync<UnitAnimationSet>(id);
 
-        ApplyAnimationClip(AnimationConstants.IDLE, unitAnimationSet.IdleClip);
-        ApplyAnimationClip(AnimationConstants.BASIC_ATTACK, unitAnimationSet.BasicAttackClip);
-        ApplyAnimationClip(AnimationConstants.SIGNATURE, unitAnimationSet.SignatureClip);
-        ApplyAnimationClip(AnimationConstants.DEATH, unitAnimationSet.DeathClip);
+        ApplyAnimationClip(Const.IDLE, unitAnimationSet.IdleClip);
+        ApplyAnimationClip(Const.BASIC_ATTACK, unitAnimationSet.BasicAttackClip);
+        ApplyAnimationClip(Const.SIGNATURE, unitAnimationSet.SignatureClip);
+        ApplyAnimationClip(Const.DEATH, unitAnimationSet.DeathClip);
     }
 
     private void InitializeAnimationHashes()
     {
-        _animationHashes[BattleUnitAnimationType.Idle] = Animator.StringToHash(AnimationConstants.IDLE);
-        _animationHashes[BattleUnitAnimationType.BasicAttack] = Animator.StringToHash(AnimationConstants.BASIC_ATTACK);
-        _animationHashes[BattleUnitAnimationType.Signature] = Animator.StringToHash(AnimationConstants.SIGNATURE);
-        _animationHashes[BattleUnitAnimationType.Death] = Animator.StringToHash(AnimationConstants.DEATH);
+        _animationHashes[BattleUnitAnimationType.Idle] = Animator.StringToHash(Const.IDLE);
+        _animationHashes[BattleUnitAnimationType.BasicAttack] = Animator.StringToHash(Const.BASIC_ATTACK);
+        _animationHashes[BattleUnitAnimationType.Signature] = Animator.StringToHash(Const.SIGNATURE);
+        _animationHashes[BattleUnitAnimationType.Death] = Animator.StringToHash(Const.DEATH);
     }
 
     private void InitializeDefaultClips()
     {
-        _defaultClips[AnimationConstants.IDLE] = _animatorOverrideController[AnimationConstants.IDLE];
-        _defaultClips[AnimationConstants.BASIC_ATTACK] = _animatorOverrideController[AnimationConstants.BASIC_ATTACK];
-        _defaultClips[AnimationConstants.SIGNATURE] = _animatorOverrideController[AnimationConstants.SIGNATURE];
-        _defaultClips[AnimationConstants.DEATH] = _animatorOverrideController[AnimationConstants.DEATH];
+        _defaultClips[Const.IDLE] = _animatorOverrideController[Const.IDLE];
+        _defaultClips[Const.BASIC_ATTACK] = _animatorOverrideController[Const.BASIC_ATTACK];
+        _defaultClips[Const.SIGNATURE] = _animatorOverrideController[Const.SIGNATURE];
+        _defaultClips[Const.DEATH] = _animatorOverrideController[Const.DEATH];
     }
 
     private void ApplyAnimationClip(string animationName, AnimationClip animationClip)

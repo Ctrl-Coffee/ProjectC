@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BattleUnitModels
 {
-    private readonly PlayerBattleUnitModel[] _playerBattleUnitModels = new PlayerBattleUnitModel[BattleConstants.MAX_PLAYER_COUNT];
-    private readonly EnemyBattleUnitModel[] _enemyBattleUnitModels = new EnemyBattleUnitModel[BattleConstants.MAX_ENEMY_COUNT];
+    private readonly PlayerBattleUnitModel[] _playerBattleUnitModels = new PlayerBattleUnitModel[Const.MAX_PLAYER_COUNT];
+    private readonly EnemyBattleUnitModel[] _enemyBattleUnitModels = new EnemyBattleUnitModel[Const.MAX_ENEMY_COUNT];
 
     private readonly IReadOnlyDictionary<string, CompanionState> _companionDictCache; 
     private readonly List<string> _saveDataPartyCompanionIds;
@@ -54,7 +54,7 @@ public class BattleUnitModels
 
     private void InitializeHeroModel()
     {
-        PlayerBattleUnitModel heroBattleUnitModel = _playerBattleUnitModels[BattleConstants.HERO_BATTLE_POSITIONS];
+        PlayerBattleUnitModel heroBattleUnitModel = _playerBattleUnitModels[Const.HERO_BATTLE_POSITIONS];
 
         //TODO 캐릭터 모델 가져와서 만듣기
         BattleUnitData battleUnitData = BattleUtility.CreatePlayerBattleUnitData();
@@ -64,7 +64,7 @@ public class BattleUnitModels
 
     private void InitializeCompanionModels()
     {
-        if (_saveDataPartyCompanionIds.Count != BattleConstants.MAX_COMPANION_COUNT)
+        if (_saveDataPartyCompanionIds.Count != Const.MAX_COMPANION_COUNT)
         {
             Debug.LogError("동료 ID 목록 개수가 포메이션 슬롯 개수와 일치하지 않습니다.");
             return;
@@ -72,7 +72,7 @@ public class BattleUnitModels
 
         for (int index = 0; index < _saveDataPartyCompanionIds.Count; index++)
         {
-            int companionBattlePosition = BattleConstants.COMPANION_BATTLE_POSITIONS[index];
+            int companionBattlePosition = Const.COMPANION_BATTLE_POSITIONS[index];
 
             string companionId = _saveDataPartyCompanionIds[index];
 
@@ -183,7 +183,7 @@ public class BattleUnitModels
 
     private void UpdateSaveDataPartyCompanionId(int battlePosition, string companionId = null)
     {
-        int index = Array.IndexOf(BattleConstants.COMPANION_BATTLE_POSITIONS, battlePosition);
+        int index = Array.IndexOf(Const.COMPANION_BATTLE_POSITIONS, battlePosition);
 
         if (index < 0)
         {
