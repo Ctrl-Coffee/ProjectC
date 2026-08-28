@@ -1,0 +1,459 @@
+fileFormatVersion: 2
+guid: cc4547dbcdf38c44c98036c9ac5bea87
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6292422692337654037
+    second: BasicEffect_0
+  - first:
+      213: -6141063402787034965
+    second: BasicEffect_1
+  - first:
+      213: 5996765657611988160
+    second: BasicEffect_2
+  - first:
+      213: 385919218767322274
+    second: BasicEffect_3
+  - first:
+      213: -5150214784359105517
+    second: BasicEffect_4
+  - first:
+      213: -1105222709049076486
+    second: BasicEffect_5
+  - first:
+      213: -4691891983171256050
+    second: BasicEffect_6
+  - first:
+      213: -572215833327782837
+    second: BasicEffect_7
+  - first:
+      213: 1979583529923020625
+    second: BasicEffect_8
+  - first:
+      213: 4725657124217042997
+    second: BasicEffect_9
+  - first:
+      213: 8917409687022042083
+    second: BasicEffect_10
+  - first:
+      213: -5258710326557975629
+    second: BasicEffect_11
+  - first:
+      213: 236560648259098971
+    second: BasicEffect_12
+  - first:
+      213: -9125313570412713977
+    second: BasicEffect_13
+  - first:
+      213: 2653692700550786210
+    second: BasicEffect_14
+  - first:
+      213: 4109475626454738273
+    second: BasicEffect_15
+  - first:
+      213: -9022606365836985761
+    second: BasicEffect_16
+  - first:
+      213: -4646449885218869937
+    second: BasicEffect_17
+  - first:
+      213: -7970974686373960890
+    second: BasicEffect_18
+  - first:
+      213: 6797074561734265687
+    second: BasicEffect_19
+  - first:
+      213: -5228482057851453598
+    second: BasicEffect_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Effect_ManualWorkMoney
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 708
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5199469991d235750800000000000000
+      internalID: 6292422692337654037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_AutoWorkMoney
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 705
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba82ab53f5f86caa0800000000000000
+      internalID: -6141063402787034965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_ManualWorkDP
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 709
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cc6937e79ac83350800000000000000
+      internalID: 5996765657611988160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_AutoWorkDP
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 706
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ac5f9a1c7f0b5500800000000000000
+      internalID: 385919218767322274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_AutoWorkDuration
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 380
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e01039a991d03eeb0800000000000000
+      internalID: -4691891983171256050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_EnergyMax
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 377
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b44b4a73bb41f08f0800000000000000
+      internalID: -572215833327782837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_EnergyRecovery
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 377
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 538304bed18e49140800000000000000
+      internalID: 4725657124217042997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_AutoWorkSlot
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 45
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59d15ff7ae684300800000000000000
+      internalID: 236560648259098971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_UnlockWork
+      rect:
+        serializedVersion: 2
+        x: 786
+        y: 45
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ac6067837fc3d420800000000000000
+      internalID: 2653692700550786210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_EnergyReduce
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 377
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fec533ab57b05c2448b784c62c2bf596
+      internalID: -773508016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 75a2ef088b091a1449152c45f7c50602
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BasicEffect_11: -5258710326557975629
+      BasicEffect_13: -9125313570412713977
+      BasicEffect_15: 4109475626454738273
+      BasicEffect_16: -9022606365836985761
+      BasicEffect_17: -4646449885218869937
+      BasicEffect_18: -7970974686373960890
+      BasicEffect_19: 6797074561734265687
+      BasicEffect_20: -5228482057851453598
+      BasicEffect_7: 8917409687022042083
+      BasicEffect_9: 1979583529923020625
+      Effect_AutoWorkDP: 385919218767322274
+      Effect_AutoWorkDuration: -4691891983171256050
+      Effect_AutoWorkMoney: -6141063402787034965
+      Effect_AutoWorkSlot: 236560648259098971
+      Effect_EnergyMax: -572215833327782837
+      Effect_EnergyRecovery: 4725657124217042997
+      Effect_EnergyReduce: 1182795349
+      Effect_ManualWorkDP: 5996765657611988160
+      Effect_ManualWorkMoney: 6292422692337654037
+      Effect_UnlockWork: 2653692700550786210
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

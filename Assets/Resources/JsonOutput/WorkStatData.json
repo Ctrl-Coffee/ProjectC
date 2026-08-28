@@ -7,6 +7,7 @@
     "MaxValue": -1,
     "MinRate": -1,
     "MaxRate": -1,
+    "IconKey": "Sprites/Icon_Buff[Effect_ManualWorkMoney]",
     "Description": "미니게임 완료 시 얻는 돈"
   },
   {
@@ -17,6 +18,7 @@
     "MaxValue": -1,
     "MinRate": -1,
     "MaxRate": -1,
+    "IconKey": "Sprites/Icon_Buff[Effect_ManualWorkDP]",
     "Description": "미니게임 완료 시 얻는 DP"
   },
   {
@@ -27,6 +29,7 @@
     "MaxValue": -1,
     "MinRate": -1,
     "MaxRate": -1,
+    "IconKey": "Sprites/Icon_Buff[Effect_AutoWorkMoney]",
     "Description": "자동 업무 정산 시 얻는 돈"
   },
   {
@@ -37,6 +40,7 @@
     "MaxValue": -1,
     "MinRate": -1,
     "MaxRate": -1,
+    "IconKey": "Sprites/Icon_Buff[Effect_AutoWorkDP]",
     "Description": "자동 업무 정산 시 얻는 DP"
   },
   {
@@ -47,6 +51,7 @@
     "MaxValue": -1,
     "MinRate": 0.3,
     "MaxRate": 3,
+    "IconKey": "Sprites/Icon_Buff[Effect_AutoWorkDuration]",
     "Description": "감소가 이득. 이펙트에 음수로 기입"
   },
   {
@@ -57,6 +62,7 @@
     "MaxValue": -1,
     "MinRate": -1,
     "MaxRate": -1,
+    "IconKey": "Sprites/Icon_Buff[Effect_EnergyReduce]",
     "Description": "감소가 이득. 0이 되면 무한 반복 가능하므로 최소 1"
   },
   {
@@ -67,6 +73,7 @@
     "MaxValue": 10,
     "MinRate": -1,
     "MaxRate": -1,
+    "IconKey": "Sprites/Icon_Buff[Effect_AutoWorkSlot]",
     "Description": "동시에 걸어둘 수 있는 자동 업무 개수"
   },
   {
@@ -77,16 +84,18 @@
     "MaxValue": -1,
     "MinRate": 0.5,
     "MaxRate": -1,
+    "IconKey": "Sprites/Icon_Buff[Effect_EnergyMax]",
     "Description": "교차 노드의 음수 이펙트 방어용 하한"
   },
   {
     "Id": "EnergyRecoverRate",
-    "Name": "에너지 회복 속도",
-    "RoundMode": "None",
+    "Name": "에너지 회복량",
+    "RoundMode": "Floor",
     "MinValue": 1,
     "MaxValue": -1,
     "MinRate": -1,
     "MaxRate": -1,
-    "Description": "회복 속도 배율. 높을수록 회복 주기가 짧아짐 (반올림 없이 적용)"
+    "IconKey": "Sprites/Icon_Buff[Effect_EnergyRecovery]",
+    "Description": "회복 주기당 지급량"
   }
 ]
