@@ -1,72 +1,282 @@
 [
   {
-    "Id": "1",
+    "Id": "equipment_level_rare_1",
+    "Grade": "Rare",
     "Level": 1,
     "StatMultiplier": 1,
-    "SkillMultiplier": 1,
-    "UpgradeCost": 0
+    "UpgradeCost": 5
   },
   {
-    "Id": "2",
+    "Id": "equipment_level_rare_2",
+    "Grade": "Rare",
     "Level": 2,
-    "StatMultiplier": 1.1,
-    "SkillMultiplier": 1.08,
+    "StatMultiplier": 1.08,
     "UpgradeCost": 8
   },
   {
-    "Id": "3",
+    "Id": "equipment_level_rare_3",
+    "Grade": "Rare",
     "Level": 3,
-    "StatMultiplier": 1.21,
-    "SkillMultiplier": 1.1664,
+    "StatMultiplier": 1.16,
     "UpgradeCost": 12
   },
   {
-    "Id": "4",
+    "Id": "equipment_level_rare_4",
+    "Grade": "Rare",
     "Level": 4,
-    "StatMultiplier": 1.331,
-    "SkillMultiplier": 1.2597,
+    "StatMultiplier": 1.24,
+    "UpgradeCost": 18
+  },
+  {
+    "Id": "equipment_level_rare_5",
+    "Grade": "Rare",
+    "Level": 5,
+    "StatMultiplier": 1.32,
+    "UpgradeCost": 25
+  },
+  {
+    "Id": "equipment_level_rare_6",
+    "Grade": "Rare",
+    "Level": 6,
+    "StatMultiplier": 1.4,
+    "UpgradeCost": 35
+  },
+  {
+    "Id": "equipment_level_rare_7",
+    "Grade": "Rare",
+    "Level": 7,
+    "StatMultiplier": 1.48,
+    "UpgradeCost": 50
+  },
+  {
+    "Id": "equipment_level_rare_8",
+    "Grade": "Rare",
+    "Level": 8,
+    "StatMultiplier": 1.56,
+    "UpgradeCost": 70
+  },
+  {
+    "Id": "equipment_level_rare_9",
+    "Grade": "Rare",
+    "Level": 9,
+    "StatMultiplier": 1.64,
+    "UpgradeCost": 100
+  },
+  {
+    "Id": "equipment_level_rare_10",
+    "Grade": "Rare",
+    "Level": 10,
+    "StatMultiplier": 1.72,
+    "UpgradeCost": 0
+  },
+  {
+    "Id": "equipment_level_epic_1",
+    "Grade": "Epic",
+    "Level": 1,
+    "StatMultiplier": 1,
+    "UpgradeCost": 7
+  },
+  {
+    "Id": "equipment_level_epic_2",
+    "Grade": "Epic",
+    "Level": 2,
+    "StatMultiplier": 1.1,
+    "UpgradeCost": 11
+  },
+  {
+    "Id": "equipment_level_epic_3",
+    "Grade": "Epic",
+    "Level": 3,
+    "StatMultiplier": 1.2,
     "UpgradeCost": 16
   },
   {
-    "Id": "5",
-    "Level": 5,
-    "StatMultiplier": 1.4641,
-    "SkillMultiplier": 1.3605,
+    "Id": "equipment_level_epic_4",
+    "Grade": "Epic",
+    "Level": 4,
+    "StatMultiplier": 1.3,
     "UpgradeCost": 24
   },
   {
-    "Id": "6",
+    "Id": "equipment_level_epic_5",
+    "Grade": "Epic",
+    "Level": 5,
+    "StatMultiplier": 1.4,
+    "UpgradeCost": 34
+  },
+  {
+    "Id": "equipment_level_epic_6",
+    "Grade": "Epic",
     "Level": 6,
-    "StatMultiplier": 1.6105,
-    "SkillMultiplier": 1.4693,
-    "UpgradeCost": 32
+    "StatMultiplier": 1.5,
+    "UpgradeCost": 47
   },
   {
-    "Id": "7",
+    "Id": "equipment_level_epic_7",
+    "Grade": "Epic",
     "Level": 7,
-    "StatMultiplier": 1.7716,
-    "SkillMultiplier": 1.5869,
-    "UpgradeCost": 44
+    "StatMultiplier": 1.6,
+    "UpgradeCost": 68
   },
   {
-    "Id": "8",
+    "Id": "equipment_level_epic_8",
+    "Grade": "Epic",
     "Level": 8,
-    "StatMultiplier": 1.9487,
-    "SkillMultiplier": 1.7138,
+    "StatMultiplier": 1.7,
+    "UpgradeCost": 95
+  },
+  {
+    "Id": "equipment_level_epic_9",
+    "Grade": "Epic",
+    "Level": 9,
+    "StatMultiplier": 1.8,
+    "UpgradeCost": 135
+  },
+  {
+    "Id": "equipment_level_epic_10",
+    "Grade": "Epic",
+    "Level": 10,
+    "StatMultiplier": 1.9,
+    "UpgradeCost": 0
+  },
+  {
+    "Id": "equipment_level_unique_1",
+    "Grade": "Unique",
+    "Level": 1,
+    "StatMultiplier": 1,
+    "UpgradeCost": 9
+  },
+  {
+    "Id": "equipment_level_unique_2",
+    "Grade": "Unique",
+    "Level": 2,
+    "StatMultiplier": 1.12,
+    "UpgradeCost": 14
+  },
+  {
+    "Id": "equipment_level_unique_3",
+    "Grade": "Unique",
+    "Level": 3,
+    "StatMultiplier": 1.24,
+    "UpgradeCost": 20
+  },
+  {
+    "Id": "equipment_level_unique_4",
+    "Grade": "Unique",
+    "Level": 4,
+    "StatMultiplier": 1.36,
+    "UpgradeCost": 31
+  },
+  {
+    "Id": "equipment_level_unique_5",
+    "Grade": "Unique",
+    "Level": 5,
+    "StatMultiplier": 1.48,
+    "UpgradeCost": 43
+  },
+  {
+    "Id": "equipment_level_unique_6",
+    "Grade": "Unique",
+    "Level": 6,
+    "StatMultiplier": 1.6,
     "UpgradeCost": 60
   },
   {
-    "Id": "9",
-    "Level": 9,
-    "StatMultiplier": 2.1436,
-    "SkillMultiplier": 1.8509,
-    "UpgradeCost": 80
+    "Id": "equipment_level_unique_7",
+    "Grade": "Unique",
+    "Level": 7,
+    "StatMultiplier": 1.72,
+    "UpgradeCost": 85
   },
   {
-    "Id": "10",
+    "Id": "equipment_level_unique_8",
+    "Grade": "Unique",
+    "Level": 8,
+    "StatMultiplier": 1.84,
+    "UpgradeCost": 119
+  },
+  {
+    "Id": "equipment_level_unique_9",
+    "Grade": "Unique",
+    "Level": 9,
+    "StatMultiplier": 1.96,
+    "UpgradeCost": 170
+  },
+  {
+    "Id": "equipment_level_unique_10",
+    "Grade": "Unique",
     "Level": 10,
-    "StatMultiplier": 2.3579,
-    "SkillMultiplier": 1.999,
+    "StatMultiplier": 2.08,
+    "UpgradeCost": 0
+  },
+  {
+    "Id": "equipment_level_legendary_1",
+    "Grade": "Legendary",
+    "Level": 1,
+    "StatMultiplier": 1,
+    "UpgradeCost": 11
+  },
+  {
+    "Id": "equipment_level_legendary_2",
+    "Grade": "Legendary",
+    "Level": 2,
+    "StatMultiplier": 1.14,
+    "UpgradeCost": 18
+  },
+  {
+    "Id": "equipment_level_legendary_3",
+    "Grade": "Legendary",
+    "Level": 3,
+    "StatMultiplier": 1.28,
+    "UpgradeCost": 26
+  },
+  {
+    "Id": "equipment_level_legendary_4",
+    "Grade": "Legendary",
+    "Level": 4,
+    "StatMultiplier": 1.42,
+    "UpgradeCost": 40
+  },
+  {
+    "Id": "equipment_level_legendary_5",
+    "Grade": "Legendary",
+    "Level": 5,
+    "StatMultiplier": 1.56,
+    "UpgradeCost": 55
+  },
+  {
+    "Id": "equipment_level_legendary_6",
+    "Grade": "Legendary",
+    "Level": 6,
+    "StatMultiplier": 1.7,
+    "UpgradeCost": 77
+  },
+  {
+    "Id": "equipment_level_legendary_7",
+    "Grade": "Legendary",
+    "Level": 7,
+    "StatMultiplier": 1.84,
     "UpgradeCost": 110
+  },
+  {
+    "Id": "equipment_level_legendary_8",
+    "Grade": "Legendary",
+    "Level": 8,
+    "StatMultiplier": 1.98,
+    "UpgradeCost": 154
+  },
+  {
+    "Id": "equipment_level_legendary_9",
+    "Grade": "Legendary",
+    "Level": 9,
+    "StatMultiplier": 2.12,
+    "UpgradeCost": 220
+  },
+  {
+    "Id": "equipment_level_legendary_10",
+    "Grade": "Legendary",
+    "Level": 10,
+    "StatMultiplier": 2.26,
+    "UpgradeCost": 0
   }
 ]
