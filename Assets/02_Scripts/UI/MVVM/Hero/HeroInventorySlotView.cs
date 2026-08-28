@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HeroInventorySlotView : ViewBase
 {
-    [SerializeField] private Image _icon;
+    [SerializeField] private Image _itemIcon;
     [SerializeField] private Image _selectedImage;
     [SerializeField] private TMPro.TextMeshProUGUI _level;
 
@@ -25,7 +25,7 @@ public class HeroInventorySlotView : ViewBase
 
         LoadIconAsync(iconPath);
 
-        SetSelected(_viewModel.IsEquipped(_type));
+        SetSelected(_heroEquipmentId == _viewModel.GetEquippedId(_type));
         Refresh();
     }
 
@@ -42,7 +42,8 @@ public class HeroInventorySlotView : ViewBase
 
     protected override void BindViewModel()
     {
-        _viewModel = GameManager.ViewModel.CreateHeroEquipmentSlotViewModel(_heroEquipmentId);
+        _viewModel = GameManager.ViewModel.CreateHeroEquipmentSlotViewModel();
+        _viewModel.SetType(_type);
     }
 
     protected override void Subscribe()
@@ -71,10 +72,12 @@ public class HeroInventorySlotView : ViewBase
 
     private void OnContainerChanged(string propertyName, ContainerPropertyChangedEvent changedEvent, HeroEquipmentState state)
     {
-        if (changedEvent == ContainerPropertyChangedEvent.Update)
+        if (changedEvent != ContainerPropertyChangedEvent.Update || state.HeroEquipmentId != _heroEquipmentId)
         {
-            Refresh();
+            return;
         }
+
+        Refresh();
     }
 
     private void Refresh()
@@ -85,7 +88,7 @@ public class HeroInventorySlotView : ViewBase
 
     private async void LoadIconAsync(string iconPath)
     {
-        _icon.sprite = await GameManager.Resource.LoadAssetAsync<Sprite>(iconPath);
+        _itemIcon.sprite = await GameManager.Resource.LoadAssetAsync<Sprite>(iconPath);
     }
 
     private void SetSelected(bool isSelected)
@@ -95,7 +98,7 @@ public class HeroInventorySlotView : ViewBase
 
     private void OnClickSlot()
     {
-        if (_viewModel.IsEquipped(_type) == false)
+        if (_viewModel.IsEquipped(_type, _heroEquipmentId) == false)
         {
             _viewModel.Equip(_type, _heroEquipmentId);
         }
