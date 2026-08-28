@@ -15,28 +15,43 @@ public class NovelWritingGameUI : MiniGameBase
     [SerializeField] private RectTransform _barRect;
     [SerializeField] private RectTransform _zoneRect;
     [SerializeField] private TextMeshProUGUI _keyText;
+    [SerializeField] private TextMeshProUGUI _countdownText;
+    [SerializeField] private TextMeshProUGUI _timerText;
+
 
     private bool _isKeyMoving;
     private float _roundStartTime;
     private float _currentKeyWidth;
+    private bool _isCountingDown;
+    private float _delayStartTime;
+    private const float ROUND_DELAY = 3f;
     private UniTaskCompletionSource _stopRequestedSource;
     private UniTaskCompletionSource _catchRequestedSource;
     private NovelCatchLogic _logic = new();
 
     private void Update()
     {
-        if (_isKeyMoving == false) return;
+        if (_isKeyMoving)
+        {
+            float elapsed = Time.unscaledTime - _roundStartTime;
+            float center = _logic.GetKeyCenter(elapsed, _currentKeyWidth);
+            _timerText.text = $"남은시간 : {Mathf.CeilToInt(_roundTimeLimit - elapsed)}"; 
+            _keyText.rectTransform.anchorMin = new Vector2(center, 0.5f);
+            _keyText.rectTransform.anchorMax = new Vector2(center, 0.5f);
+            _keyText.rectTransform.anchoredPosition = Vector2.zero;
+        }
 
-        float elapsed = Time.unscaledTime - _roundStartTime;
-        float center = _logic.GetKeyCenter(elapsed, _currentKeyWidth);
-
-        _keyText.rectTransform.anchorMin = new Vector2(center, 0.5f);
-        _keyText.rectTransform.anchorMax = new Vector2(center, 0.5f);
-        _keyText.rectTransform.anchoredPosition = Vector2.zero;
+        if (_isCountingDown)
+        {
+            float remaining = ROUND_DELAY - (Time.unscaledTime - _delayStartTime);
+            _countdownText.text = Mathf.CeilToInt(remaining).ToString();
+        }
     }
 
     public override async UniTask<MiniGameResult> PlayAsync(MiniGameContext context, CancellationToken token)
     {
+        CancellationTokenSource linkedSource = CancellationTokenSource.CreateLinkedTokenSource(token, this.GetCancellationTokenOnDestroy());
+        token = linkedSource.Token;
         _contentRoot.SetActive(true);
 
         int roundCount = 0;
@@ -47,7 +62,14 @@ public class NovelWritingGameUI : MiniGameBase
             while (true)
             {
                 Logger.Log($"3초 후 라운드 시작...");
+                _delayStartTime = Time.unscaledTime;
+                _isCountingDown = true;
+                _countdownText.gameObject.SetActive(true);
+
                 bool isContinue = await WaitForNextRoundAsync(token);
+                _isCountingDown = false;
+                _countdownText.gameObject.SetActive(false);
+
                 if (isContinue == false) break;
 
                 if (GameManager.Session.Currency.TrySpendEnergy(context.EnergyCost) == false)
@@ -98,6 +120,10 @@ public class NovelWritingGameUI : MiniGameBase
             _isKeyMoving = false;
             Logger.Log("게임 중단 - 성공한 라운드까지 정산");
         }
+        finally
+        {
+            linkedSource.Dispose();
+        }
 
         Logger.Log($"정산 — {roundCount}라운드 중 {successCount}회 성공");
         return MiniGameScore.FromNovel(successCount);
@@ -144,7 +170,7 @@ public class NovelWritingGameUI : MiniGameBase
 
         try
         {
-            int winner = await UniTask.WhenAny(_stopRequestedSource.Task.AttachExternalCancellation(token), UniTask.Delay((3000), ignoreTimeScale: true, cancellationToken: token));
+            int winner = await UniTask.WhenAny(_stopRequestedSource.Task.AttachExternalCancellation(token), UniTask.Delay(((int)(ROUND_DELAY * 1000)), ignoreTimeScale: true, cancellationToken: token));
 
             return winner == 1;
         }
