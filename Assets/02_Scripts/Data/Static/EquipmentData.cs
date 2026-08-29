@@ -10,12 +10,13 @@ public class EquipmentData : BaseData
     public float BaseDefense;
     public float BaseCriticalChance;
     public float BasicAttackHaste;
-    public float BasicActiveSkillHaste;
+    public float SignatureSkillHaste;
     public string EquipmentTypeString;
     public string BaseSkillId;
-    public string ActiveSkillId;
-    public string IconPath;
+    public string SignatureSkillId;
+    public string IconSpriteAddressableKey;
     public string Description;
+    public string AnimationSetKey;
 
     private EquipmentGrade _grade;
     private bool _isParsed = false;
