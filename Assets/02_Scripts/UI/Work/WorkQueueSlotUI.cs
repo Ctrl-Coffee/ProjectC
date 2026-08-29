@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,30 +53,12 @@ public class WorkQueueSlotUI : MonoBehaviour
             return;
         }
 
-        LoadIconAsync(iconKey).Forget();
+        LoadIcon(iconKey);
     }
 
-    private async UniTaskVoid LoadIconAsync(string iconKey)
+    private void LoadIcon(string iconKey)
     {
-        Sprite sprite;
-
-        try
-        {
-            sprite = await GameManager.Resource.LoadAssetAsync<Sprite>(iconKey, this.GetCancellationTokenOnDestroy());
-        }
-        catch (OperationCanceledException)
-        {
-            return;
-        }
-        catch (Exception)
-        {
-            return;
-        }
-
-        if (_iconKey != iconKey)
-        {
-            return;
-        }
+        Sprite sprite = GameManager.Resource.GetLoadedAsset<Sprite>(iconKey);
 
         if (null == sprite || null == _imgIcon)
         {

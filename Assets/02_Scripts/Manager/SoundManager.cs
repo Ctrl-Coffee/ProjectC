@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 
 public class SoundManager
@@ -38,12 +37,12 @@ public class SoundManager
 
     public void PlayBGM(string soundPath)
     {
-        LoadAndPlayAudioClip(_bgmPlayer, soundPath, isLoop: true).Forget();
+        PlayAudioClip(_bgmPlayer, soundPath, isLoop: true);
     }
 
     public void PlaySFX(string soundPath)
     {
-        LoadAndPlayAudioClip(_sfxPlayer, soundPath).Forget();
+        PlayAudioClip(_sfxPlayer, soundPath);
     }
 
     public void StopBGM()
@@ -103,9 +102,9 @@ public class SoundManager
         _mixer.SetFloat(parameterName, decibel);
     }
 
-    private async UniTaskVoid LoadAndPlayAudioClip(AudioSource audioSource, string audioPath, bool isLoop = false)
+    private void PlayAudioClip(AudioSource audioSource, string audioPath, bool isLoop = false)
     {
-        AudioClip clip = await GameManager.Resource.LoadAssetAsync<AudioClip>(audioPath);
+        AudioClip clip = GameManager.Resource.GetLoadedAsset<AudioClip>(audioPath);
         if (clip == null)
         {
             Debug.LogError($"{audioPath}를 찾을 수 없습니다! 어드레서블 설정이 되어 있는지 확인해주세요.");

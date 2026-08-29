@@ -117,24 +117,24 @@ public class DreamHudView : ViewBase
         _currentContent = null;
     }
 
-    private async void OnOpenCompanion()
+    private void OnOpenCompanion()
     {
-        var content = await GameManager.UI.OpenCompanionInventory();
+        CompanionInventoryView content = GameManager.UI.OpenCompanionInventory();
         HideLobbyButton();
         CloseCurrentContent(content);
     }
 
 
-    private async void OnOpenHeroInventory()
+    private void OnOpenHeroInventory()
     {
-        var content = await GameManager.UI.OpenHeroInventory();
+        HeroInventoryView content = GameManager.UI.OpenHeroInventory();
         HideLobbyButton();
         CloseCurrentContent(content);
     }
 
-    private async void OnOpenGacha()
+    private void OnOpenGacha()
     {
-        var content = await GameManager.UI.OpenGachaView();
+        GachaView content = GameManager.UI.OpenGachaView();
 
         ShowLobbyButton();
         CloseCurrentContent(content);
@@ -145,9 +145,9 @@ public class DreamHudView : ViewBase
         GameManager.UI.OpenSettingUI();
     }
 
-    private async void OnOpenHeroInfo()
+    private void OnOpenHeroInfo()
     {
-        var content = await GameManager.UI.OpenHeroInfo();
+        HeroInfoView content = GameManager.UI.OpenHeroInfo();
 
         CloseCurrentContent(content);
     }

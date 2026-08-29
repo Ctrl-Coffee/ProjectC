@@ -61,7 +61,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private async UniTask InitializeLoginAsync()
     {
         await _resourceManager.LoadContentAsync(AddressablePath.Label.LOGIN);
-        await _uiManager.Init();
+        _uiManager.Init();
 
         _soundManager.Init(gameObject);
         _uiManager.OpenLoginUI();
