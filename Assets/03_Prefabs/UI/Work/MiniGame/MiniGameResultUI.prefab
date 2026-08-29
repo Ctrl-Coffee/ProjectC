@@ -328,7 +328,8 @@ MonoBehaviour:
   _panel: {fileID: 2421576655898452491}
   _txtGrade: {fileID: 7431791053510082231}
   _txtAccuracy: {fileID: 2792579285189023866}
-  _btnClose: {fileID: 4690175243491182531}
+  _btnConfirm: {fileID: 4690175243491182531}
+  _btnClose: {fileID: 1537619176117559047}
   _openDuration: 0.25
   _closeDuration: 0.2
 --- !u!1 &5687667175884272776
@@ -457,6 +458,7 @@ GameObject:
   - component: {fileID: 4840467213616322272}
   - component: {fileID: 5510478414275939986}
   - component: {fileID: 3221184779170365597}
+  - component: {fileID: 1537619176117559047}
   m_Layer: 0
   m_Name: btn_close
   m_TagString: Untagged
@@ -565,6 +567,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1537619176117559047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6061357012188903951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6111adf02703a4d8b688b8592cc05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonComponent
+  _button: {fileID: 3221184779170365597}
+  _text: {fileID: 0}
 --- !u!1 &6917020102032096765
 GameObject:
   m_ObjectHideFlags: 0

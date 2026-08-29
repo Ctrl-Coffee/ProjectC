@@ -18,12 +18,16 @@ public class HeroInfoView : ViewBase
     [Header("레벨업")]
     [SerializeField] private UIButtonComponent _btnLevelUp;
     [SerializeField] private TextMeshProUGUI _levelUpCostText;
+    [SerializeField] private HeroLevelUpEffect _levelUpEffect;
 
     [SerializeField] private UIButtonComponent _blocker;
     [SerializeField] private UIButtonComponent _btnClose;
 
     private HeroInfoViewModel _viewModel;
     private CurrencyViewModel _currencyViewModel;
+
+    private HeroStatSum _rollupFrom;
+    private float _rollupFromCombatPower;
 
     private void OnEnable()
     {
@@ -53,7 +57,9 @@ public class HeroInfoView : ViewBase
     private void OnDisable()
     {
         UnSubscribe();
-        
+
+        KillLevelUpEffect();
+
         if (_blocker != null)
         {
             _blocker.UnBindButtonAllEvent();
@@ -73,6 +79,8 @@ public class HeroInfoView : ViewBase
     private void OnDestroy()
     {
         UnSubscribe();
+
+        KillLevelUpEffect();
 
         if (_viewModel != null)
         {
@@ -182,22 +190,130 @@ public class HeroInfoView : ViewBase
     {
         if (_viewModel == null) return;
 
-        _viewModel.TryLevelUp();
+        CaptureRollupStart();
 
-        RefreshAll();
+        LevelUpResult result = _viewModel.TryLevelUp();
+
+        if (result != LevelUpResult.Success)
+        {
+            RefreshAll();
+            return;
+        }
+
+        PlayLevelUpEffect();
     }
 
     private void RefreshLevelUp()
     {
+        if (_viewModel == null) return;
+
         if (_levelUpCostText != null)
         {
-            _levelUpCostText.text = _viewModel.IsMaxLevel ? Const.MAX_LEVEL_TEXT : _viewModel.LevelUpCost.ToString("N0");
+            _levelUpCostText.text = BuildLevelUpCostText();
         }
 
         if (_btnLevelUp != null)
         {
             _btnLevelUp.SetInteractable(_viewModel.CanLevelUp);
         }
+    }
+
+    private string BuildLevelUpCostText()
+    {
+        if (_viewModel.IsMaxLevel == true)
+        {
+            return Const.MAX_LEVEL_TEXT;
+        }
+
+        string costText = _viewModel.LevelUpCost.ToString("N0");
+
+        if (_viewModel.CanLevelUp == false)
+        {
+            return $"<color={Const.COLOR_BAD}>{costText}</color>";
+        }
+
+        return costText;
+    }
+
+    /// <summary>
+    /// 연출 도중 다시 눌렀다면 화면에 보이는 값에서 이어야 숫자가 튀지 않는다.
+    /// </summary>
+    private void CaptureRollupStart()
+    {
+        if (_levelUpEffect != null && _levelUpEffect.IsPlaying == true)
+        {
+            _rollupFrom = _levelUpEffect.CurrentStat;
+            _rollupFromCombatPower = _levelUpEffect.CurrentCombatPower;
+            return;
+        }
+
+        _rollupFrom = BuildDisplayedStat();
+        _rollupFromCombatPower = _viewModel.CombatPower;
+    }
+
+    private void PlayLevelUpEffect()
+    {
+        if (_levelUpEffect == null)
+        {
+            RefreshAll();
+            return;
+        }
+
+        RefreshLevel();
+        RefreshLevelUp();
+
+        _levelUpEffect.Play(this, _rollupFrom, BuildDisplayedStat(), _rollupFromCombatPower, _viewModel.CombatPower);
+    }
+
+    private HeroStatSum BuildDisplayedStat()
+    {
+        HeroStatSum stat = new HeroStatSum();
+
+        stat.Attack = _viewModel.Attack;
+        stat.Hp = _viewModel.Hp;
+        stat.Defense = _viewModel.Defense;
+        stat.CriticalChance = _viewModel.CriticalChance;
+        stat.BasicAttackHaste = _viewModel.BasicAttackHaste;
+        stat.BasicActiveSkillHaste = _viewModel.BasicActiveSkillHaste;
+
+        return stat;
+    }
+
+    public void OnStatRollupProgress(HeroStatSum stat, float combatPower)
+    {
+        if (_viewModel == null) return;
+
+        HeroStatSum equipment = _viewModel.EquipmentStat;
+
+        _attackText.text = BuildStatText(stat.Attack, equipment.Attack);
+        _hpText.text = BuildStatText(stat.Hp, equipment.Hp);
+        _defenseText.text = BuildStatText(stat.Defense, equipment.Defense);
+
+        _criticalChanceText.text = BuildPercentStatText(stat.CriticalChance, equipment.CriticalChance);
+
+        _basicAttackHasteText.text = BuildHasteText(
+            stat.BasicAttackHaste,
+            equipment.BasicAttackHaste,
+            SkillCooldownCalculator.GetCooldownReduceRate(stat.BasicAttackHaste));
+
+        _basicActiveSkillHasteText.text = BuildHasteText(
+            stat.BasicActiveSkillHaste,
+            equipment.BasicActiveSkillHaste,
+            SkillCooldownCalculator.GetCooldownReduceRate(stat.BasicActiveSkillHaste));
+
+        _combatPowerText.text = Mathf.RoundToInt(combatPower).ToString("N0");
+    }
+
+    public void OnStatRollupCompleted()
+    {
+        RefreshAll();
+    }
+
+    private void KillLevelUpEffect()
+    {
+        if (_levelUpEffect == null) return;
+
+        _levelUpEffect.Stop(false);
     }
 
     private void RefreshAll()
