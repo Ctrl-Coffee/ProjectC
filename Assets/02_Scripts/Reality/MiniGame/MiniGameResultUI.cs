@@ -14,6 +14,15 @@ public class MiniGameResultUI : UIBase
     [SerializeField] private float _openDuration = 0.25f;
     [SerializeField] private float _closeDuration = 0.2f;
 
+    [Header("재화 표시")]
+    [SerializeField] private AwayReportRowUI _rowRewardMoney;
+    [SerializeField] private AwayReportRowUI _rowRewardDP;
+    [SerializeField] private AwayReportRowUI _rowSpentEnergy;
+    [SerializeField] private AwayReportRowUI _rowSpentGold;
+
+    [Header("소설쓰기 전용")]
+    [SerializeField] private TextMeshProUGUI _txtNovelSummary;
+
     private UniTaskCompletionSource _closeRequestedSource;
 
     public override Tween PlayOpenAnimation()
@@ -51,6 +60,25 @@ public class MiniGameResultUI : UIBase
         {
             _txtAccuracy.text = $"{result.Accuracy:P0}";
         }
+        SetRow(_rowRewardMoney, result.RewardMoney);
+        SetRow(_rowRewardDP, result.RewardDP);
+        SetRow(_rowSpentEnergy, result.SpentEnergy);
+        SetRow(_rowSpentGold, result.SpentGold);
+
+        bool isNovel = result.RoundCount > 0;  
+
+        if (null != _txtNovelSummary)
+        {
+            _txtNovelSummary.gameObject.SetActive(isNovel);
+
+            if (isNovel)
+            {
+                _txtNovelSummary.text = $"{result.RoundCount}번의 글쓰기, {result.SuccessCount}개의 문장 완성";
+            }
+        }
+
+        if (null != _txtGrade) _txtGrade.gameObject.SetActive(isNovel == false);
+        if (null != _txtAccuracy) _txtAccuracy.gameObject.SetActive(isNovel == false);
     }
 
     public async UniTask WaitForCloseAsync(CancellationToken token)
@@ -79,6 +107,18 @@ public class MiniGameResultUI : UIBase
 
             _closeRequestedSource = null;
             CloseUI();
+        }
+    }
+    private void SetRow(AwayReportRowUI row, long amount)
+    {
+        if (null == row) return;
+
+        bool isVisible = amount > 0;
+        row.gameObject.SetActive(isVisible);
+
+        if (isVisible)
+        {
+            row.SetAmount(amount);
         }
     }
 }

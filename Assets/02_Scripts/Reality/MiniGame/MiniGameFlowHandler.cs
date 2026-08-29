@@ -93,23 +93,28 @@ public class MiniGameFlowHandler
 
         Logger.Log($"미니게임 비용 반환 - 에너지 {energyCost} / 골드 {goldCost}");
     }
-    private void GiveReward(WorkData workData, MiniGameResult result)
+    private MiniGameResult CalculateReward(WorkData workData, MiniGameResult result)
     {
         float rate = Mathf.Clamp01(result.Accuracy) * result.RewardMultiplier;
 
-        long money = (long)Math.Round(GameManager.Perk.Stat.GetFloat(WorkStatType.ManualWorkRewardMoney, workData.RewardMoney) * (double)rate);
-        long dp = (long)Math.Round(GameManager.Perk.Stat.GetFloat(WorkStatType.ManualWorkRewardDP, workData.RewardDP) * (double)rate);
+        result.RewardMoney = (long)Math.Round(GameManager.Perk.Stat.GetFloat(WorkStatType.ManualWorkRewardMoney, workData.RewardMoney) * (double)rate);
+        result.RewardDP = (long)Math.Round(GameManager.Perk.Stat.GetFloat(WorkStatType.ManualWorkRewardDP, workData.RewardDP) * (double)rate);
 
-        if (money <= 0 && dp <= 0)
+        return result;
+    }
+
+    private void GiveReward(WorkData workData, MiniGameResult result)
+    {
+        if (result.RewardMoney <= 0 && result.RewardDP <= 0)
         {
             Logger.Log($"수동업무 보상 없음 - {workData.Name}");
             return;
         }
 
-        GameManager.Session.Currency.AddMoney(money);
-        GameManager.Session.Currency.AddDreamPoint(dp);
+        GameManager.Session.Currency.AddMoney(result.RewardMoney);
+        GameManager.Session.Currency.AddDreamPoint(result.RewardDP);
 
-        Logger.Log($"수동업무 완료 - {workData.Name} / 돈 {money} / DP {dp}");
+        Logger.Log($"수동업무 완료 - {workData.Name} / 돈 {result.RewardMoney} / DP {result.RewardDP}");
     }
 
     private UniTask<MiniGameResult> PlayAsync(WorkData workData)
@@ -184,6 +189,17 @@ public class MiniGameFlowHandler
         try
         {
             result = await ui.RunAsync(context, token);
+
+            if (result.IsCompleted)
+            {
+                result = CalculateReward(workData, result);
+
+                if (isRoundCostType == false)
+                {
+                    result.SpentEnergy = energyCost;
+                    result.SpentGold = goldCost;
+                }
+            }
 
             if (result.IsCompleted && result.SkipResultPopup == false)
             {

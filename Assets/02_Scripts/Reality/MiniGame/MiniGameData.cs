@@ -20,6 +20,15 @@ public struct MiniGameResult
 
     public bool IsSuccess;
 
+    public long SpentEnergy;
+    public long SpentGold;
+    public long RewardMoney;
+    public long RewardDP;
+
+    // 소설쓰기 전용
+    public int RoundCount;
+    public int SuccessCount;
+
     // 주사위 전용 
     public int TargetValue;
     public int[] RolledValues;

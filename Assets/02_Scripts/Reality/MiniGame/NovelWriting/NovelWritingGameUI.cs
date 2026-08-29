@@ -64,7 +64,6 @@ public class NovelWritingGameUI : MiniGameBase
             while (true)
             {
 
-                Logger.Log($"3초 후 라운드 시작...");
                 _delayStartTime = Time.unscaledTime;
                 _isCountingDown = true;
                 _countdownText.gameObject.SetActive(true);
