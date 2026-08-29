@@ -77,10 +77,10 @@ public class DataTableManager
         return CompanionDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
-    public CompanionLevelData GetCompanionLevelData(string companionId, int level)
+    public CompanionLevelData GetCompanionLevelData(int level)
     {
-        if (null == CompanionLevelDataTable || string.IsNullOrEmpty(companionId)) return null;
-        string id = $"{companionId}_{level}";
+        if (null == CompanionLevelDataTable) return null;
+        string id = $"companion_level_{level}";
         return CompanionLevelDataTable.TryGetValue(id, out var data) ? data : null;
     }
     public SkillData GetSkillData(string id)
@@ -109,10 +109,10 @@ public class DataTableManager
         if (null == PlayerDataTable || string.IsNullOrEmpty(id)) return null;
         return PlayerDataTable.TryGetValue(id, out var data) ? data : null;
     }
-    public EquipmentLevelData GetEquipmentLevelData(int level)
+    public EquipmentLevelData GetEquipmentLevelData(string id)
     {
         if (null == EquipmentLevelDataTable) return null;
-        return EquipmentLevelDataTable.TryGetValue(level.ToString(), out var data) ? data : null;
+        return EquipmentLevelDataTable.TryGetValue(id, out var data) ? data : null;
     }
     public EquipmentData GetEquipmentData(string id)
     {

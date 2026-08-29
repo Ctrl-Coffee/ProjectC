@@ -29,7 +29,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private UIManager _uiManager = new();
     private SoundManager _soundManager = new();
     private PerkManager _perkManager = new();
-    private BattleManager _battleManager = new();
+    private BattleManager _battleManager;
 
     private GameSession _gameSession;
     private ViewModelFactory _viewModelFactory;
@@ -80,6 +80,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         GameSession gameSession = new(_networkManager);
         await gameSession.LoadAllData();
         _gameSession = gameSession;
+
+        _battleManager = new();
 
         _viewModelFactory = new(_gameSession, _dataTable);
 

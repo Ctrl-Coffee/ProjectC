@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState>
@@ -55,7 +54,7 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
             return LevelUpResult.Error;
         }
 
-        var nextLevelData = GameManager.DataTable.GetCompanionLevelData(companionId, companion.Level + 1);
+        var nextLevelData = GameManager.DataTable.GetCompanionLevelData(companion.Level + 1);
 
         if (nextLevelData == null)
         {

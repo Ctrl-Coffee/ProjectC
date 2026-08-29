@@ -39,7 +39,7 @@ public class GameSession
 
         var equipmentLoadoutData = await _networkManager.LoadEquipmentLoadoutAsync();
         EquipmentLoadoutDto equipmentLoadoutDto = equipmentLoadoutData.data;
-        HeroEquiped = new(equipmentLoadoutDto);
+        HeroEquiped = new(equipmentLoadoutDto, HeroEquipment);
 
         if (null != HeroInfo)
         {
