@@ -1,137 +1,101 @@
 [
   {
-    "Id": "Skill_001",
-    "Name": "베기",
-    "SkillType": 0,
-    "TargetCount": 1,
-    "CoolDown": 5,
-    "BaseEffect": 5,
-    "BuffDuration": 0
+    "Id": "skill_enemy_ch1_001_basic",
+    "Name": "초원 슬라임 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.5,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "Skill_002",
-    "Name": "공증버프",
-    "SkillType": 2,
-    "TargetCount": 3,
-    "CoolDown": 8,
-    "BaseEffect": 3,
-    "BuffDuration": 5
+    "Id": "skill_enemy_ch1_002_basic",
+    "Name": "고블린 사수 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.8,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "Skill_003",
-    "Name": "전체 힐",
-    "SkillType": 1,
-    "TargetCount": 3,
-    "CoolDown": 9,
-    "BaseEffect": 4,
-    "BuffDuration": 0
+    "Id": "skill_enemy_ch1_003_basic",
+    "Name": "고블린 두목 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 2,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "Skill_004",
-    "Name": "파이어볼",
-    "SkillType": 0,
-    "TargetCount": 3,
-    "CoolDown": 8,
-    "BaseEffect": 6,
-    "BuffDuration": 0
+    "Id": "skill_boss_ch1_001_basic",
+    "Name": "킹 슬라임 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.6,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "Skill_005",
-    "Name": "찌르기",
-    "SkillType": 0,
-    "TargetCount": 1,
-    "CoolDown": 4,
-    "BaseEffect": 6,
-    "BuffDuration": 0
+    "Id": "skill_boss_ch1_001_active",
+    "Name": "거대 도약",
+    "SkillType": "Active",
+    "TargetType": "AllOpponents",
+    "DamageMultiplier": 0.8,
+    "BaseCooldown": 8,
+    "Description": "상대 전체에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "Skill_101",
-    "Name": "베개 휘두르기",
-    "SkillType": 0,
-    "TargetCount": 1,
-    "CoolDown": 5,
-    "BaseEffect": 5,
-    "BuffDuration": 0
+    "Id": "skill_enemy_ch2_001_basic",
+    "Name": "깊은숲 늑대 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.5,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "Skill_102",
-    "Name": "소맷자락 일격",
-    "SkillType": 0,
-    "TargetCount": 1,
-    "CoolDown": 4,
-    "BaseEffect": 7,
-    "BuffDuration": 0
+    "Id": "skill_enemy_ch2_002_basic",
+    "Name": "깊은숲 박쥐 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.8,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "Skill_103",
-    "Name": "마력 탄",
-    "SkillType": 0,
-    "TargetCount": 1,
-    "CoolDown": 6,
-    "BaseEffect": 8,
-    "BuffDuration": 0
+    "Id": "skill_enemy_ch2_003_basic",
+    "Name": "이끼 골렘 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 2,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "Skill_104",
-    "Name": "방어 태세",
-    "SkillType": 2,
-    "TargetCount": 1,
-    "CoolDown": 10,
-    "BaseEffect": 3,
-    "BuffDuration": 6
+    "Id": "skill_boss_ch2_001_basic",
+    "Name": "깊은 숲의 고룡 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.5,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "Skill_105",
-    "Name": "조준 사격",
-    "SkillType": 0,
-    "TargetCount": 1,
-    "CoolDown": 5,
-    "BaseEffect": 9,
-    "BuffDuration": 0
+    "Id": "skill_boss_ch2_001_active",
+    "Name": "고룡의 숨결",
+    "SkillType": "Active",
+    "TargetType": "AllOpponents",
+    "DamageMultiplier": 1.2,
+    "BaseCooldown": 10,
+    "Description": "상대 전체에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "Skill_106",
-    "Name": "꿈결 치유",
-    "SkillType": 1,
-    "TargetCount": 3,
-    "CoolDown": 9,
-    "BaseEffect": 6,
-    "BuffDuration": 0
-  },
-  {
-    "Id": "Skill_107",
-    "Name": "은빛 반격",
-    "SkillType": 0,
-    "TargetCount": 2,
-    "CoolDown": 7,
-    "BaseEffect": 10,
-    "BuffDuration": 0
-  },
-  {
-    "Id": "Skill_108",
-    "Name": "수면 낙인",
-    "SkillType": 0,
-    "TargetCount": 1,
-    "CoolDown": 4,
-    "BaseEffect": 12,
-    "BuffDuration": 0
-  },
-  {
-    "Id": "Skill_109",
-    "Name": "별빛 세례",
-    "SkillType": 0,
-    "TargetCount": 3,
-    "CoolDown": 8,
-    "BaseEffect": 11,
-    "BuffDuration": 0
-  },
-  {
-    "Id": "Skill_110",
-    "Name": "몽환의 일격",
-    "SkillType": 0,
-    "TargetCount": 3,
-    "CoolDown": 10,
-    "BaseEffect": 14,
-    "BuffDuration": 0
+    "Id": "skill_player_001_basic",
+    "Name": null,
+    "SkillType": null,
+    "TargetType": null,
+    "DamageMultiplier": null,
+    "BaseCooldown": null,
+    "Description": null
   }
 ]

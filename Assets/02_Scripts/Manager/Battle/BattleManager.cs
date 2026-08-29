@@ -11,6 +11,10 @@ public class BattleManager: UnityEngine.Object
     private readonly CompanionFormation _companionFormation = new CompanionFormation();
     private readonly BattleService _battleService = new BattleService();
 
+    private StageModel _stageModel = new StageModel();
+
+    public StageModel StageModel { get { return _stageModel; } }
+
     public IReadOnlyList<PlayerBattleUnitModel> PlayerBattleUnitModels
     {
         get { return _battleUnitModels.PlayerBattleUnitModels; }
@@ -19,6 +23,13 @@ public class BattleManager: UnityEngine.Object
     public IReadOnlyList<EnemyBattleUnitModel> EnemyBattleUnitModels
     {
         get { return _battleUnitModels.EnemyBattleUnitModels; }
+    }
+
+    public void Initalize()
+    {
+        CreateBattleRoot();
+        //_companionFormation.InitializePositions();
+        //_battleUnitModels.Initalize();
     }
 
     public void CreateBattleRoot()

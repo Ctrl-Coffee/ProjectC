@@ -169,6 +169,13 @@ public class UIManager
         return ui;
     }
 
+    public T ClosePopupUI<T>() where T : UIBase
+    {
+        T ui = GetOrCreateUI<T>(UIRootType.Popup);
+        ui.CloseUI();
+        return ui;
+    }
+
     public T CloseHUDUI<T>() where T : UIBase
     {
         T ui = GetOrCreateUI<T>(UIRootType.Hud);

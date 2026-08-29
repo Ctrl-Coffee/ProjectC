@@ -7,9 +7,9 @@ public class CompanionState : IStatData
     public float Attack { get; private set; }
     public float Hp { get; private set; }
     public float Defense { get; private set; }
-    public float CriticalRate { get; private set; }
-    public float NormalSkillHaste { get; private set; }
-    public float SpecialSkillHaste { get; private set; }
+    public float CriticalChance { get; private set; }
+    public float BasicAttackHaste { get; private set; }
+    public float SignatureSkillHaste { get; private set; }
     public float CombatPower { get; private set; }
 
     private StatSum _baseStat;
@@ -59,9 +59,9 @@ public class CompanionState : IStatData
         _baseStat.Attack = companionData.BaseAttack;
         _baseStat.Hp = companionData.BaseHp;
         _baseStat.Defense = companionData.BaseDefense;
-        _baseStat.CriticalRate = companionData.BaseCriticalChance * Const.PERCENT_TO_RATE;
-        _baseStat.NormalSkillHaste = companionData.BasicAttackHaste;
-        _baseStat.SpecialSkillHaste = companionData.SignatureSkillHaste;
+        _baseStat.CriticalChance = companionData.BaseCriticalChance;
+        _baseStat.BasicAttackHaste = companionData.BasicAttackHaste;
+        _baseStat.SignatureSkillHaste = companionData.SignatureSkillHaste;
     }
 
     // 체력, 공격력, 방어력 만 상승

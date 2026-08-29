@@ -147,7 +147,7 @@ public static class UIManagerExtension
 
     public static void CloseStageClearUI(this UIManager uiManager)
     {
-        uiManager.CloseHUDUI<StageClearUI>();
+        uiManager.ClosePopupUI<StageClearUI>();
     }
 
     public static void OpenStageFailUI(this UIManager uiManager)
@@ -157,6 +157,18 @@ public static class UIManagerExtension
 
     public static void CloseStageFailUI(this UIManager uiManager)
     {
+        uiManager.ClosePopupUI<StageFailUI>();
+    }
+
+    public static void OpenStageInfo(this UIManager uiManager, string stageId)
+    {
+        StageInfoView stageInfoView = uiManager.OpenPopupUI<StageInfoView>();
+        stageInfoView.SetStage(stageId);
+    }
+
+    public static void CloseStagePopup(this UIManager uiManager)
+    {
+        uiManager.ClosePopupUI<StageInfoView>();
         uiManager.CloseHUDUI<StageFailUI>();
     }
 }
