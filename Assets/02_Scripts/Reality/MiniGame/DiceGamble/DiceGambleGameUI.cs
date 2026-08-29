@@ -211,7 +211,7 @@ public class DiceGambleGameUI : MiniGameBase
 
         _imgDice.transform.DOKill();
         _imgDice.transform.localScale = Vector3.one * 1.4f;
-        _imgDice.transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack).SetUpdate(true);
+        await _imgDice.transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack).SetUpdate(true);
     }
     protected override void ClearGame()
     {

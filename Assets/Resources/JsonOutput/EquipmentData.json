@@ -11,7 +11,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": "Skill_101",
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_0]",
     "Description": null
   },
@@ -27,7 +27,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": "Skill_102",
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_1]",
     "Description": null
   },
@@ -43,7 +43,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": "Skill_103",
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_3]",
     "Description": null
   },
@@ -59,7 +59,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": "Skill_104",
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_4]",
     "Description": null
   },
@@ -75,7 +75,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": "Skill_105",
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_5]",
     "Description": null
   },
@@ -91,7 +91,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": "Skill_106",
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_6]",
     "Description": null
   },
@@ -107,7 +107,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": "Skill_107",
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_7]",
     "Description": null
   },
@@ -123,7 +123,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": "Skill_108",
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_8]",
     "Description": null
   },
@@ -139,7 +139,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": "Skill_109",
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_9]",
     "Description": null
   },
@@ -155,7 +155,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": "Skill_110",
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_10]",
     "Description": null
   },
@@ -171,7 +171,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Weapon",
     "BaseSkillId": null,
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_28]",
     "Description": null
   },
@@ -187,7 +187,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Weapon",
     "BaseSkillId": null,
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_26]",
     "Description": null
   },
@@ -203,7 +203,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Weapon",
     "BaseSkillId": null,
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_37]",
     "Description": null
   },
@@ -219,7 +219,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Accessory",
     "BaseSkillId": null,
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_70]",
     "Description": null
   },
@@ -235,7 +235,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Accessory",
     "BaseSkillId": null,
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_71]",
     "Description": null
   },
@@ -251,7 +251,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Accessory",
     "BaseSkillId": null,
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_69]",
     "Description": null
   },
@@ -267,7 +267,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
     "BaseSkillId": null,
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_15]",
     "Description": null
   },
@@ -283,7 +283,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Weapon",
     "BaseSkillId": null,
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_51]",
     "Description": null
   },
@@ -299,7 +299,7 @@
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Accessory",
     "BaseSkillId": null,
-    "AcitveSkillId": null,
+    "ActiveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_69]",
     "Description": null
   }
