@@ -1,18 +1,19 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
+[RequireComponent(typeof(CircleCollider2D))]
 public class StagePoint : MonoBehaviour
 {
-    private int _chapter;
-    private int _stage;
+    [SerializeField] private string _stageId;
 
     private void Awake()
     {
-        _chapter = transform.parent.GetSiblingIndex() + 1;
-        _stage = transform.GetSiblingIndex() + 1;
+        CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
+        circleCollider2D.isTrigger = true;
     }
 
     public void SelectStage()
     {
-        Logger.Log($"{_chapter} 챕터, {_stage} 스테이지 선택!");
+        GameManager.UI.OpenStageInfo(_stageId).Forget();
     }
 }

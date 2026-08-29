@@ -170,6 +170,13 @@ public class UIManager
         return ui;
     }
 
+    public async UniTask<T> ClosePopupUI<T>() where T : UIBase
+    {
+        var ui = await GetOrCreateUI<T>(UIRootType.Popup);
+        ui.CloseUI();
+        return ui;
+    }
+
     public async UniTask<T> CloseHUDUI<T>() where T : UIBase
     {
         var ui = await GetOrCreateUI<T>(UIRootType.Hud);

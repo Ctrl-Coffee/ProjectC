@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e24f85feaab8649b8cb20cb0746833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePoint
+  _stageId: stage_1_3
 --- !u!1 &2369495903771507007
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e24f85feaab8649b8cb20cb0746833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePoint
+  _stageId: stage_2_2
 --- !u!1 &2650272291417769912
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e24f85feaab8649b8cb20cb0746833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePoint
+  _stageId: stage_1_4
 --- !u!1 &3012196982715789310
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e24f85feaab8649b8cb20cb0746833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePoint
+  _stageId: stage_1_5
 --- !u!1 &5357176792690273337
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e24f85feaab8649b8cb20cb0746833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePoint
+  _stageId: stage_2_5
 --- !u!1 &6731652227290955376
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e24f85feaab8649b8cb20cb0746833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePoint
+  _stageId: stage_2_3
 --- !u!1 &6973727668630096561
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e24f85feaab8649b8cb20cb0746833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePoint
+  _stageId: stage_2_1
 --- !u!1 &7590164108602104371
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,6 +925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e24f85feaab8649b8cb20cb0746833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePoint
+  _stageId: stage_2_4
 --- !u!1 &7898460924905591643
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e24f85feaab8649b8cb20cb0746833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePoint
+  _stageId: stage_1_2
 --- !u!1 &8537864797975815019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,3 +1089,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e24f85feaab8649b8cb20cb0746833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StagePoint
+  _stageId: stage_1_1
