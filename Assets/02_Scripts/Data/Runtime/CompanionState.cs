@@ -35,8 +35,8 @@ public class CompanionState : IStatData
         _attackGrowthPerLevel = companionData.AttackGrowthPerLevel;
         _defenseGrowthPerLevel = companionData.DefenseGrowthPerLevel;
 
-        GetBaseStat(companionData);
-        SetCombatPower();
+        GetBaseStat(companionData); 
+        Recalculate();
     }
 
     public CompanionState(string companionId, int level)
@@ -45,18 +45,11 @@ public class CompanionState : IStatData
         Level = level;
     }
 
-
-    // 체력, 공격력, 방어력 만 상승
-    // 기본 능력치 + 레벨당 성장치 × (현재 레벨 - 1)
     public void LevelUp()
     {
         Level++;
 
-        Attack = _baseStat.Attack + _attackGrowthPerLevel * (Level - 1);
-        Hp = _baseStat.Hp + _hpGrowthPerLevel * (Level - 1);
-        Defense = _baseStat.Defense + _defenseGrowthPerLevel * (Level - 1);
-
-        SetCombatPower();
+        Recalculate();
     }
 
     private void GetBaseStat(CompanionData companionData)
@@ -69,6 +62,17 @@ public class CompanionState : IStatData
         _baseStat.CriticalRate = companionData.BaseCriticalChance * Const.PERCENT_TO_RATE;
         _baseStat.NormalSkillHaste = companionData.BasicAttackHaste;
         _baseStat.SpecialSkillHaste = companionData.SignatureSkillHaste;
+    }
+
+    // 체력, 공격력, 방어력 만 상승
+    // 기본 능력치 + 레벨당 성장치 × (현재 레벨 - 1)
+    private void Recalculate()
+    {
+        Attack = _baseStat.Attack + _attackGrowthPerLevel * (Level - 1);
+        Hp = _baseStat.Hp + _hpGrowthPerLevel * (Level - 1);
+        Defense = _baseStat.Defense + _defenseGrowthPerLevel * (Level - 1);
+
+        SetCombatPower();
     }
 
     private void SetCombatPower()

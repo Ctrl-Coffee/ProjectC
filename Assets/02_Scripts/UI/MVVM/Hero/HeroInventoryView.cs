@@ -168,7 +168,7 @@ public class HeroInventoryView : ViewBase
         EquipmentData equipmentData = _equipmentDataTable[state.HeroEquipmentId];
         EquipmentType equipmentType = Utils.ParseEnum<EquipmentType>(equipmentData.EquipmentTypeString);
 
-        slotComponent.Init(equipmentType, state.HeroEquipmentId, OnDetailSlot, equipmentData.IconPath);
+        slotComponent.Init(equipmentType, state.HeroEquipmentId, OnDetailSlot, equipmentData.IconSpriteAddressableKey);
         slotComponent.PlayOpenAnimation();
 
         _slotDict.Add(state.HeroEquipmentId, slotComponent);
