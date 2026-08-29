@@ -4,13 +4,13 @@ public class HeroEquipmentSlotViewModel : ViewModelBase<HeroEquipmentModel>
 {
     public event System.Action<string, ContainerPropertyChangedEvent, HeroEquipmentState> OnContainerChanged_ViewModel;
 
-    private string _equipmentId;
+    //private string _equipmentId;
 
-    private HeroEquipedModel _equipedModel;
+    private HeroEquipedModel _equipedModel; 
+    private EquipmentType _type;
 
-    public HeroEquipmentSlotViewModel(HeroEquipmentModel model, string equipmentId) : base(model)
+    public HeroEquipmentSlotViewModel(HeroEquipmentModel model) : base(model)
     {
-        _equipmentId = equipmentId;
         _equipedModel = GameManager.Session.HeroEquiped;
         _equipedModel.PropertyChanged += OnPropertyChanged;
         _model.ContainerPropertyChanged += OnContainerChanged;
@@ -24,14 +24,21 @@ public class HeroEquipmentSlotViewModel : ViewModelBase<HeroEquipmentModel>
         base.UnBind();
     }
 
-    public void Equip(EquipmentType type, string id)
+    public void Equip(EquipmentType type, string equipmentId)
     {
-        _equipedModel.Equip(type, id);
+        //_equipmentId = equipmentId;
+        _equipedModel.Equip(type, equipmentId);
     }
 
     public void UnEquip(EquipmentType type)
     {
+        //_equipmentId = null;
         _equipedModel.UnEquip(type);
+    }
+
+    public void SetType(EquipmentType type)
+    {
+        _type = type;
     }
 
     public string GetEquippedId(EquipmentType type)
@@ -39,15 +46,10 @@ public class HeroEquipmentSlotViewModel : ViewModelBase<HeroEquipmentModel>
         return _equipedModel.GetEquipedId(type);
     }
 
-    public bool IsEquipped(EquipmentType type)
+    public bool IsEquipped(EquipmentType type, string checkEquipmentId)
     {
         var equiedmentId = _equipedModel.GetEquipedId(type);
-        if (equiedmentId == null)
-        {
-            return false;
-        }
-
-        return equiedmentId == _equipmentId;
+        return checkEquipmentId == equiedmentId;
     }
 
     public int GetLevel(string id)
@@ -62,14 +64,6 @@ public class HeroEquipmentSlotViewModel : ViewModelBase<HeroEquipmentModel>
 
     private void OnContainerChanged(string propertyName, ContainerPropertyChangedEvent changedEvent, HeroEquipmentState state)
     {
-        if (propertyName != nameof(HeroEquipmentModel.Equipments))
-        {
-            return;
-        }
-
-        if (state.HeroEquipmentId == _equipmentId)
-        {
-            OnContainerChanged_ViewModel?.Invoke(propertyName, changedEvent, state);
-        }
+        OnContainerChanged_ViewModel?.Invoke(propertyName, changedEvent, state);
     }
 }

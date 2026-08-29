@@ -57,10 +57,10 @@
         return viewModel;
     }
 
-    public HeroEquipmentSlotViewModel CreateHeroEquipmentSlotViewModel(string heroEquipmentId)
+    public HeroEquipmentSlotViewModel CreateHeroEquipmentSlotViewModel()
     {
         HeroEquipmentModel model = _session.HeroEquipment;
-        HeroEquipmentSlotViewModel viewModel = new HeroEquipmentSlotViewModel(model, heroEquipmentId);
+        HeroEquipmentSlotViewModel viewModel = new HeroEquipmentSlotViewModel(model);
         return viewModel;
     }
 

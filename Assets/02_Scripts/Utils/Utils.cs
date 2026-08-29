@@ -121,4 +121,9 @@ public static class Utils
 
         return false;
     }
+
+    public static string GetEquipmentLevelDataId(string grade, int level)
+    {
+        return $"equipment_level_{grade.ToLower()}_{level}";
+    }
 }

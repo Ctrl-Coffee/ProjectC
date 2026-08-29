@@ -56,14 +56,15 @@ public class HeroEquipmentModel : ModelBase, ContainerPropertyChanged<HeroEquipm
             return LevelUpResult.Error;
         }
 
-        var nextleveldata = GameManager.DataTable.GetEquipmentLevelData(state.Level + 1);
+        var equipmentData = GameManager.DataTable.GetEquipmentData(heroEquipmentId);
+        var leveldata = GameManager.DataTable.GetEquipmentLevelData(Utils.GetEquipmentLevelDataId(equipmentData.Grade, state.Level));
 
-        if (nextleveldata == null)
+        if (leveldata.UpgradeCost == 0)
         {
             return LevelUpResult.MaxLevel;
         }
 
-        if (!GameManager.Session.Currency.TrySpendDreamFragment((long)nextleveldata.UpgradeCost))
+        if (!GameManager.Session.Currency.TrySpendDreamFragment(leveldata.UpgradeCost))
         {
             return LevelUpResult.NotEnoughCurrency;
         }
