@@ -192,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1275180192886898827}
   - component: {fileID: 3245464420265447212}
+  - component: {fileID: 2454880040142294400}
   m_Layer: 0
   m_Name: LobbyBackground
   m_TagString: Untagged
@@ -229,11 +230,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d903f07432468644a633bb9d037c984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwipComponent
-  _camera: {fileID: 0}
+  _inputHandler: {fileID: 2454880040142294400}
   _swipeTime: 0.2
   _swipeDistanceRate: 0.2
   _swipeDirect: 1
   _startPage: 1
+--- !u!114 &2454880040142294400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291219291759528719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045facc25115473e87de1339765d48b6, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundInputHandler
+  _tapDistanceRate: 0.02
 --- !u!1 &7992618845938634288
 GameObject:
   m_ObjectHideFlags: 0

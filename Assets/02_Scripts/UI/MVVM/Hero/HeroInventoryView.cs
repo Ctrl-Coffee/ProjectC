@@ -5,12 +5,15 @@ public class HeroInventoryView : ViewBase
 {
     [SerializeField] private Transform _slotRoot;
     [SerializeField] private Transform _equippedSlotRoot;
+
     [SerializeField] private TMPro.TMP_Dropdown _sortDropdown;
+    [SerializeField] private TMPro.TextMeshProUGUI _combatPowerText;
 
     private Dictionary<string, HeroInventorySlotView> _slotDict = new();
     private Dictionary<string, EquipmentData> _equipmentDataTable;
 
     private HeroInventoryViewModel _viewModel;
+    private HeroInfoViewModel _heroInfoViewModel;
 
     private void OnEnable()
     {
@@ -19,7 +22,7 @@ public class HeroInventoryView : ViewBase
             LoadDataTable();
         }
 
-        if (_viewModel == null)
+        if (_viewModel == null || _heroInfoViewModel == null)
         {
             BindViewModel();
         }
@@ -47,6 +50,7 @@ public class HeroInventoryView : ViewBase
 
     protected override void BindViewModel()
     {
+        _heroInfoViewModel = GameManager.ViewModel.CreateHeroInfoViewModel();
         _viewModel = GameManager.ViewModel.CreateHeroInventoryViewModel();
         CreatEquipedSlot();
     }
@@ -55,6 +59,7 @@ public class HeroInventoryView : ViewBase
     {
         _viewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
         _viewModel.OnContainerChanged_ViewModel += OnContainerChanged;
+        _heroInfoViewModel.OnPropertyChanged_ViewModel += OnPropertyChangedHeroInfo;
         _viewModel.InitializeModel();
     }
 
@@ -64,6 +69,7 @@ public class HeroInventoryView : ViewBase
         {
             _viewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
             _viewModel.OnContainerChanged_ViewModel -= OnContainerChanged;
+            _heroInfoViewModel.OnPropertyChanged_ViewModel -= OnPropertyChangedHeroInfo;
         }
     }
 
@@ -73,6 +79,16 @@ public class HeroInventoryView : ViewBase
         {
             case nameof(HeroEquipmentModel.Equipments):
                 ResetSlotAndCreateAll();
+                break;
+        }
+    }
+
+    private void OnPropertyChangedHeroInfo(string propertyName)
+    {
+        switch (propertyName)
+        {
+            case nameof(HeroInfoModel.CombatPower):
+                _combatPowerText.text = Mathf.RoundToInt(_heroInfoViewModel.CombatPower).ToString("N0");
                 break;
         }
     }
@@ -168,7 +184,7 @@ public class HeroInventoryView : ViewBase
         EquipmentData equipmentData = _equipmentDataTable[state.HeroEquipmentId];
         EquipmentType equipmentType = Utils.ParseEnum<EquipmentType>(equipmentData.EquipmentTypeString);
 
-        slotComponent.Init(equipmentType, state.HeroEquipmentId, OnDetailSlot, equipmentData.IconPath);
+        slotComponent.Init(equipmentType, state.HeroEquipmentId, OnDetailSlot, equipmentData.IconSpriteAddressableKey);
         slotComponent.PlayOpenAnimation();
 
         _slotDict.Add(state.HeroEquipmentId, slotComponent);

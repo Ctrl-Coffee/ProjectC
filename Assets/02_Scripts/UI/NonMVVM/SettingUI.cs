@@ -15,6 +15,7 @@ public class SettingUI : UIBase
     [SerializeField] private UIButtonComponent _sfxButton;
     [SerializeField] private UIButtonComponent _privacyPolicyButton;
     [SerializeField] private UIButtonComponent _closeButton;
+    [SerializeField] private UIButtonComponent _dimmedButton;
 
     [SerializeField] private Slider _bgmSlider;
     [SerializeField] private Slider _sfxSlider;
@@ -42,6 +43,7 @@ public class SettingUI : UIBase
         _bgmButton.BindButtonEvent(OnToggleBGM);
         _privacyPolicyButton.BindButtonEvent(OnPrivacyPolicyURL);
         _closeButton.BindButtonEvent(OnClose);
+        _dimmedButton.BindButtonEvent(OnClose);
     }
 
     private void OnDisable()
@@ -50,6 +52,7 @@ public class SettingUI : UIBase
         _bgmButton.UnBindButtonAllEvent();
         _privacyPolicyButton.UnBindButtonAllEvent();
         _closeButton.UnBindButtonAllEvent();
+        _dimmedButton.UnBindButtonAllEvent();
     }
 
     public void SetBGMVolume(float volume)

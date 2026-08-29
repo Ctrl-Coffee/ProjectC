@@ -13,6 +13,10 @@ public class UIManager
 
     private List<Transform> _canvasLayer;
 
+    private int _openedUICount = 0;
+
+    public bool IsWorldInputBlocked => _openedUICount > 0;
+
     public async UniTask Init()
     {
         if (_canvasLayer == null)
@@ -55,6 +59,11 @@ public class UIManager
             {
                 ui.transform.SetAsLastSibling();
                 _popupStack.Push(uiType);
+            }
+
+            if(uiRootType != UIRootType.Hud)
+            {
+                _openedUICount++;
             }
 
             _uiStates[uiType] = UIState.Opened;
@@ -124,7 +133,7 @@ public class UIManager
         }
     }
 
-    public UIBase GetCurrentFrontUI()
+    public UIBase GetCurrentFrontPopupUI()
     {
         if (_popupStack.Count == 0)
         {
@@ -157,6 +166,13 @@ public class UIManager
     public async UniTask<T> CloseContentUI<T>() where T : UIBase
     {
         var ui = await GetOrCreateUI<T>(UIRootType.Content);
+        ui.CloseUI();
+        return ui;
+    }
+
+    public async UniTask<T> ClosePopupUI<T>() where T : UIBase
+    {
+        var ui = await GetOrCreateUI<T>(UIRootType.Popup);
         ui.CloseUI();
         return ui;
     }
@@ -220,6 +236,11 @@ public class UIManager
     private void CompleteClose(UIBase ui)
     {
         var uiType = ui.GetType();
+
+        if (_uiRootTypes[uiType] != UIRootType.Hud)
+        {
+            _openedUICount--;
+        }
 
         _uiStates[uiType] = UIState.Closed;
 

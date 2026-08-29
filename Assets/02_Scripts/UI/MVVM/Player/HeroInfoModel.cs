@@ -2,26 +2,6 @@
 
 public class HeroInfoModel : ModelBase, IStatData
 {
-    private struct StatSum
-    {
-        public float Attack;
-        public float Hp;
-        public float Defense;
-        public float CriticalRate;
-        public float NormalSkillHaste;
-        public float SpecialSkillHaste;
-
-        public void Add(StatSum other)
-        {
-            Attack += other.Attack;
-            Hp += other.Hp;
-            Defense += other.Defense;
-            CriticalRate += other.CriticalRate;
-            NormalSkillHaste += other.NormalSkillHaste;
-            SpecialSkillHaste += other.SpecialSkillHaste;
-        }
-    }
-
     private PlayerGrowthModel _growth;
     private HeroEquipedModel _equiped;
     private HeroEquipmentModel _equipment;
@@ -178,7 +158,7 @@ public class HeroInfoModel : ModelBase, IStatData
         sum.Add(GetLevelBonus());
         sum.Add(GetEquipmentStat(EquipmentType.Weapon));
         sum.Add(GetEquipmentStat(EquipmentType.Armor));
-        sum.Add(GetEquipmentStat(EquipmentType.Accessories));
+        sum.Add(GetEquipmentStat(EquipmentType.Accessory));
 
         Level = null == _growth ? 0 : _growth.Level;
 
@@ -256,12 +236,12 @@ public class HeroInfoModel : ModelBase, IStatData
             return sum;
         }
 
-        int level = _equipment.GetLevel(equipmentId);
-        EquipmentLevelData levelData = GameManager.DataTable.GetEquipmentLevelData(level);
+        EquipmentLevelData levelData = GameManager.DataTable.GetEquipmentLevelData(
+            Utils.GetEquipmentLevelDataId(equipmentData.Grade, _equipment.GetLevel(equipmentId)));
 
         if (null == levelData)
         {
-            Logger.LogError($"장비 레벨 데이터가 없습니다. 장비 : {equipmentId}, 레벨 : {level}");
+            Logger.LogError($"장비 레벨 데이터가 없습니다. 장비 : {equipmentId}");
             return sum;
         }
 

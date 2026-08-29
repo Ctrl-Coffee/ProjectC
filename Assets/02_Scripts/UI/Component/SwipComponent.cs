@@ -1,10 +1,10 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class SwipComponent : MonoBehaviour
 {
+    [SerializeField] private BackgroundInputHandler _inputHandler;
+
     [Header("Swipe Settings")]
     [SerializeField] private SwipeDirect _swipeDirect = SwipeDirect.Horizontal;
     [SerializeField] private float _swipeDistanceRate = 0.2f;
@@ -22,34 +22,33 @@ public class SwipComponent : MonoBehaviour
     private int _currentPage;
     private int _maxPage;
 
-    private bool _isSwiping;
     private bool _isDragging;
-    private bool _isTouchInput;
 
     private Tween _swipeTween;
 
-    private Camera _camera;
-
     private void Awake()
     {
-        if (_camera == null)
-        {
-            _camera = Camera.main;
-        }
-
         SetPagePositions();
         Swipe(Mathf.Clamp(_startPage, 0, _maxPage), true);
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        UpdateInput();
+        _inputHandler.DragStarted += BeginDrag;
+        _inputHandler.Dragged += Drag;
+        _inputHandler.DragEnded += EndDrag;
+        _inputHandler.Canceled += CancelDrag;
     }
 
     private void OnDisable()
     {
+        _inputHandler.DragStarted -= BeginDrag;
+        _inputHandler.Dragged -= Drag;
+        _inputHandler.DragEnded -= EndDrag;
+        _inputHandler.Canceled -= CancelDrag;
+
         _swipeTween?.Kill();
-        _isSwiping = false;
+        _inputHandler.SetInteractionBlocked(false);
         _isDragging = false;
     }
 
@@ -106,63 +105,17 @@ public class SwipComponent : MonoBehaviour
         _maxPage = pageCount - 1;
     }
 
-    private void UpdateInput()
-    {
-        if (_isSwiping == true)
-            return;
-
-        if (Touchscreen.current != null)
-        {
-            if (Touchscreen.current.primaryTouch.press.wasPressedThisFrame == true)
-            {
-                _isTouchInput = true;
-                BeginDrag(Touchscreen.current.primaryTouch.position.ReadValue());
-                return;
-            }
-
-            if (_isDragging == true && _isTouchInput == true)
-            {
-                Vector2 touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
-
-                if (Touchscreen.current.primaryTouch.press.wasReleasedThisFrame == true)
-                    EndDrag(touchPosition);
-                else
-                    Drag(touchPosition);
-
-                return;
-            }
-        }
-
-        if (Mouse.current == null)
-            return;
-
-        if (Mouse.current.leftButton.wasPressedThisFrame == true)
-        {
-            _isTouchInput = false;
-            BeginDrag(Mouse.current.position.ReadValue());
-        }
-        else if (_isDragging == true && _isTouchInput == false)
-        {
-            Vector2 mousePosition = Mouse.current.position.ReadValue();
-
-            if (Mouse.current.leftButton.wasReleasedThisFrame == true)
-                EndDrag(mousePosition);
-            else if (Mouse.current.leftButton.isPressed == true)
-                Drag(mousePosition);
-        }
-    }
-
     private void BeginDrag(Vector2 touchPosition)
     {
         _startTouchPosition = touchPosition;
-        _startTouchWorldPosition = GetWorldPosition(touchPosition);
+        _startTouchWorldPosition = _inputHandler.GetWorldPosition(touchPosition);
         _dragStartPosition = transform.position;
         _isDragging = true;
     }
 
     private void Drag(Vector2 touchPosition)
     {
-        float dragDistance = GetAxisValue(GetWorldPosition(touchPosition) - _startTouchWorldPosition);
+        float dragDistance = GetAxisValue(_inputHandler.GetWorldPosition(touchPosition) - _startTouchWorldPosition);
         float targetPosition = GetAxisValue(_dragStartPosition) + dragDistance;
         float firstPagePosition = GetAxisValue(_pagePositions[0]);
         float lastPagePosition = GetAxisValue(_pagePositions[_maxPage]);
@@ -181,9 +134,9 @@ public class SwipComponent : MonoBehaviour
         _isDragging = false;
 
         float swipeDistance = GetAxisValue(touchPosition - _startTouchPosition);
-        float screenSize = _swipeDirect == SwipeDirect.Horizontal ? Screen.width : Screen.height;
+        float swipeScreenSize = _swipeDirect == SwipeDirect.Horizontal ? Screen.width : Screen.height;
 
-        if (Mathf.Abs(swipeDistance) < screenSize * _swipeDistanceRate)
+        if (Mathf.Abs(swipeDistance) < swipeScreenSize * _swipeDistanceRate)
         {
             Swipe(_currentPage);
             return;
@@ -203,21 +156,30 @@ public class SwipComponent : MonoBehaviour
         Swipe(_currentPage);
     }
 
+    private void CancelDrag()
+    {
+        if (_isDragging == false)
+            return;
+
+        _isDragging = false;
+        Swipe(_currentPage);
+    }
+
     private void Swipe(int index, bool immediately = false)
     {
         _swipeTween?.Kill();
+        _inputHandler.SetInteractionBlocked(false);
         _currentPage = index;
 
         if (immediately == true)
         {
             transform.position = _pagePositions[index];
+            return;
         }
-        else
-        {
-            _isSwiping = true;
-            _swipeTween = transform.DOMove(_pagePositions[index], _swipeTime)
-                .OnComplete(() => _isSwiping = false);
-        }
+
+        _inputHandler.SetInteractionBlocked(true);
+        _swipeTween = transform.DOMove(_pagePositions[index], _swipeTime)
+            .OnComplete(() => _inputHandler.SetInteractionBlocked(false));
     }
 
     private float GetAxisValue(Vector2 value)
@@ -228,13 +190,6 @@ public class SwipComponent : MonoBehaviour
     private float GetAxisValue(Vector3 value)
     {
         return _swipeDirect == SwipeDirect.Horizontal ? value.x : value.y;
-    }
-
-    private Vector3 GetWorldPosition(Vector2 screenPosition)
-    {
-        float cameraDistance = Vector3.Dot(transform.position - _camera.transform.position, _camera.transform.forward);
-
-        return _camera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, cameraDistance));
     }
 
     private Vector3 GetAxisVector(float value)
