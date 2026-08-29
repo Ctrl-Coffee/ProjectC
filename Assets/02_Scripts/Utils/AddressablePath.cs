@@ -20,6 +20,7 @@
         public const string DREAM = "Dream";
         public const string LOADDING = "Loading";
         public const string LOGIN = "Login";
+        public const string UIROOT = "UIRoot";
     }
 
     public static class Audio

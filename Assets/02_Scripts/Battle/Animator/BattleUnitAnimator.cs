@@ -1,7 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 public class BattleUnitAnimator
 {
@@ -51,7 +49,7 @@ public class BattleUnitAnimator
 
     public void ApplyAnimationSet(string addressableKey)
     {
-        Init(addressableKey).Forget();
+        Init(addressableKey);
         //TODO 나중에 데이터 연동시 할당
         //UnitAnimationSet unitAnimationSet = GameManager.Resource.GetLoadedAsset<UnitAnimationSet>(key);
 
@@ -89,7 +87,7 @@ public class BattleUnitAnimator
     }
 
     //TODO 임시
-    private async UniTask Init(string id)
+    private void Init(string id)
     {
         if (string.IsNullOrWhiteSpace(id))
         {
@@ -100,7 +98,12 @@ public class BattleUnitAnimator
             return;
         }
 
-        UnitAnimationSet unitAnimationSet = await Addressables.LoadAssetAsync<UnitAnimationSet>(id);
+        UnitAnimationSet unitAnimationSet = GameManager.Resource.GetLoadedAsset<UnitAnimationSet>(id);
+
+        if (unitAnimationSet == null)
+        {
+            return;
+        }
 
         ApplyAnimationClip(Const.IDLE, unitAnimationSet.IdleClip);
         ApplyAnimationClip(Const.BASIC_ATTACK, unitAnimationSet.BasicAttackClip);

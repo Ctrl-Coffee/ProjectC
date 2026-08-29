@@ -1,139 +1,128 @@
-﻿using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 /// <summary>
-/// 완료 시점을 알아야 하나?
-/// Yes: Async 함수 - ex) fade, loading, 선택 결과 기다리기, 후속 작업 필요한 ui
-/// No: void 함수
-/// 예시 함수 참고
+/// 선로딩된 UI를 열고 닫는 확장 함수
 /// </summary>
 public static class UIManagerExtension
 {
     public static void OpenRealHud(this UIManager uiManager)
     {
-        uiManager.OpenHUDUI<RealHudView>().Forget();
+        uiManager.OpenHUDUI<RealHudView>();
     }
 
     public static void OpenDreamHud(this UIManager uiManager)
     {
-        uiManager.OpenHUDUI<DreamHudView>().Forget();
+        uiManager.OpenHUDUI<DreamHudView>();
     }
 
     public static void CloseRealHud(this UIManager uiManager)
     {
-        uiManager.CloseHUDUI<RealHudView>().Forget();
+        uiManager.CloseHUDUI<RealHudView>();
     }
 
     public static void CloseDreamHud(this UIManager uiManager)
     {
-        uiManager.CloseHUDUI<DreamHudView>().Forget();
+        uiManager.CloseHUDUI<DreamHudView>();
     }
 
-    public static async void OpenConfirmUI(this UIManager uiManager, ConfirmData confirmData, ConfirmButtonAction buttonAction = null)
+    public static void OpenConfirmUI(this UIManager uiManager, ConfirmData confirmData, ConfirmButtonAction buttonAction = null)
     {
-        var ui = await uiManager.OpenPopupUI<ConfirmUI>();
+        ConfirmUI ui = uiManager.OpenPopupUI<ConfirmUI>();
         ui.SetConfirmUI(confirmData, buttonAction);
     }
 
     public static void OpenSettingUI(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<SettingUI>().Forget();
+        uiManager.OpenPopupUI<SettingUI>();
     }
 
     public static void OpenLoginUI(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<LoginUI>().Forget();
+        uiManager.OpenPopupUI<LoginUI>();
     }
 
-    public static UniTask<CompanionInventoryView> OpenCompanionInventory(this UIManager uiManager)
+    public static CompanionInventoryView OpenCompanionInventory(this UIManager uiManager)
     {
         return uiManager.OpenContentUI<CompanionInventoryView>();
     }
 
-    public static UniTask<HeroInventoryView> OpenHeroInventory(this UIManager uiManager)
+    public static HeroInventoryView OpenHeroInventory(this UIManager uiManager)
     {
         return uiManager.OpenContentUI<HeroInventoryView>();
     }
 
-    public static UniTask<HeroInfoView> OpenHeroInfo(this UIManager uiManager)
+    public static HeroInfoView OpenHeroInfo(this UIManager uiManager)
     {
         return uiManager.OpenPopupUI<HeroInfoView>();
     }
 
-    public static UniTask<PerkStatView> OpenPerkStat(this UIManager uiManager)
+    public static PerkStatView OpenPerkStat(this UIManager uiManager)
     {
         return uiManager.OpenOverlayUI<PerkStatView>();
     }
 
-    public static async void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Func<LevelUpResult> onClickLevelUp)
+    public static void OpenCompanionDetailPopup(this UIManager uiManager, CompanionState companionState, System.Func<LevelUpResult> onClickLevelUp)
     {
-        var ui = await uiManager.OpenPopupUI<CompanionDetailUI>();
+        CompanionDetailUI ui = uiManager.OpenPopupUI<CompanionDetailUI>();
         ui.Init(companionState, onClickLevelUp);
     }
 
-    public static async void OpenEquipmentDetailPopup(this UIManager uiManager
+    public static void OpenEquipmentDetailPopup(this UIManager uiManager
         , System.Func<LevelUpResult> onClickLevelUp, EquipmentData data, string equipmentId)
     {
-        var ui = await uiManager.OpenPopupUI<EquipmentDetailUI>();
-
-
-        //무기 = 공격력, 공격속도, 스킬 쿨다운 감소,
-        //의복 = 체력, 방어력,
-        //장신구 = 공격력, 치명타율,
-
+        EquipmentDetailUI ui = uiManager.OpenPopupUI<EquipmentDetailUI>();
 
         ui.Init(onClickLevelUp, data, equipmentId);
     }
 
-    public static UniTask<LoadingUI> OpenLoading(this UIManager uiManager)
+    public static LoadingUI OpenLoading(this UIManager uiManager)
     {
         return uiManager.OpenContentUI<LoadingUI>();
     }
 
-    public static UniTask<WorkInfoUI> OpenWorkInfoUI(this UIManager uiManager)
+    public static WorkInfoUI OpenWorkInfoUI(this UIManager uiManager)
     {
         return uiManager.OpenPopupUI<WorkInfoUI>();
     }
 
-    public static UniTask<PerkInfoUI> OpenPerkInfoUI(this UIManager uiManager)
+    public static PerkInfoUI OpenPerkInfoUI(this UIManager uiManager)
     {
         return uiManager.OpenPopupUI<PerkInfoUI>();
     }
 
-    public static async void OpenPerkDetailUI(this UIManager uiManager, string perkId)
+    public static void OpenPerkDetailUI(this UIManager uiManager, string perkId)
     {
-        var ui = await uiManager.OpenPopupUI<PerkDetailUI>();
+        PerkDetailUI ui = uiManager.OpenPopupUI<PerkDetailUI>();
 
         if (null == ui) return;
 
         ui.SetPerk(perkId);
     }
 
-    public static UniTask<T> OpenMiniGameUI<T>(this UIManager uiManager) where T : MiniGameBase
+    public static T OpenMiniGameUI<T>(this UIManager uiManager) where T : MiniGameBase
     {
         return uiManager.OpenPopupUI<T>();
     }
 
-    public static UniTask<MiniGameResultUI> OpenMiniGameResultUI(this UIManager uiManager)
+    public static MiniGameResultUI OpenMiniGameResultUI(this UIManager uiManager)
     {
         return uiManager.OpenOverlayUI<MiniGameResultUI>();
     }
 
-    public static UniTask<GachaView> OpenGachaView(this UIManager uiManager)
+    public static GachaView OpenGachaView(this UIManager uiManager)
     {
         return uiManager.OpenPopupUI<GachaView>();
     }
 
-    public static async void OpenGachaResultUI(this UIManager uiManager, IReadOnlyList<GachaResultData> results)
+    public static void OpenGachaResultUI(this UIManager uiManager, IReadOnlyList<GachaResultData> results)
     {
-        GachaResultUI ui = await uiManager.OpenPopupUI<GachaResultUI>();
+        GachaResultUI ui = uiManager.OpenPopupUI<GachaResultUI>();
         ui.Init(results);
     }
 
-    public static async void OpenAwayReportUI(this UIManager uiManager, AwayReport report)
+    public static void OpenAwayReportUI(this UIManager uiManager, AwayReport report)
     {
-        var ui = await uiManager.OpenPopupUI<AwayReportUI>();
+        AwayReportUI ui = uiManager.OpenPopupUI<AwayReportUI>();
 
         if (null == ui) return;
 
@@ -143,42 +132,43 @@ public static class UIManagerExtension
 
     public static void OpenBattleHpBarHud(this UIManager uiManager)
     {
-        uiManager.OpenHUDUI<BattleHpBarHud>().Forget();
+        uiManager.OpenHUDUI<BattleHpBarHud>();
     }
 
     public static void CloseBattleHpBarHud(this UIManager uiManager)
     {
-        uiManager.CloseHUDUI<BattleHpBarHud>().Forget();
+        uiManager.CloseHUDUI<BattleHpBarHud>();
     }
 
     public static void OpenStageClearUI(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<StageClearUI>().Forget();
+        uiManager.OpenPopupUI<StageClearUI>();
     }
 
     public static void CloseStageClearUI(this UIManager uiManager)
     {
-        uiManager.ClosePopupUI<StageClearUI>().Forget();
+        uiManager.ClosePopupUI<StageClearUI>();
     }
 
     public static void OpenStageFailUI(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<StageFailUI>().Forget();
+        uiManager.OpenPopupUI<StageFailUI>();
     }
 
     public static void CloseStageFailUI(this UIManager uiManager)
     {
-        uiManager.ClosePopupUI<StageFailUI>().Forget();
+        uiManager.ClosePopupUI<StageFailUI>();
     }
 
-    public static async UniTask OpenStageInfo(this UIManager uiManager, string stageId)
+    public static void OpenStageInfo(this UIManager uiManager, string stageId)
     {
-        StageInfoView stageInfoView = await uiManager.OpenPopupUI<StageInfoView>();
+        StageInfoView stageInfoView = uiManager.OpenPopupUI<StageInfoView>();
         stageInfoView.SetStage(stageId);
     }
 
     public static void CloseStagePopup(this UIManager uiManager)
     {
-        uiManager.ClosePopupUI<StageInfoView>().Forget();
+        uiManager.ClosePopupUI<StageInfoView>();
+        uiManager.CloseHUDUI<StageFailUI>();
     }
 }

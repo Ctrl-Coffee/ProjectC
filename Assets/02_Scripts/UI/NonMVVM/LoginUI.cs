@@ -82,7 +82,7 @@ public class LoginUI : UIBase
             }
 
             await GameManager.Resource.LoadContentAsync(AddressablePath.Label.LOADDING);
-            LoadingUI loadingUI = await GameManager.UI.OpenLoading();
+            LoadingUI loadingUI = GameManager.UI.OpenLoading();
             CloseUI();
 
             await GameManager.Instance.InitializeAfterLoginAsync(loadingUI.SetProgress);

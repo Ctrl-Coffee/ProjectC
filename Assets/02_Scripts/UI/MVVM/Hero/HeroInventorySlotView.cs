@@ -23,7 +23,7 @@ public class HeroInventorySlotView : ViewBase
 
         GetComponent<EquipmentSlotInput>().Init(_heroEquipmentId, OnClickSlot, onClickDetail);
 
-        LoadIconAsync(iconPath);
+        LoadIcon(iconPath);
 
         SetSelected(_heroEquipmentId == _viewModel.GetEquippedId(_type));
         Refresh();
@@ -86,9 +86,9 @@ public class HeroInventorySlotView : ViewBase
         _level.SetText("Lv.{0}", level);
     }
 
-    private async void LoadIconAsync(string iconPath)
+    private void LoadIcon(string iconPath)
     {
-        _itemIcon.sprite = await GameManager.Resource.LoadAssetAsync<Sprite>(iconPath);
+        _itemIcon.sprite = GameManager.Resource.GetLoadedAsset<Sprite>(iconPath);
     }
 
     private void SetSelected(bool isSelected)
