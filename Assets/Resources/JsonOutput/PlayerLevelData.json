@@ -5,7 +5,7 @@
     "BonusHP": 120,
     "BonusAttack": 10,
     "BonusDefense": 4,
-    "BonusCriticalRate": 0.005,
+    "BonusCriticalChance": 0.005,
     "UpgradeCost": 10
   },
   {
@@ -14,7 +14,7 @@
     "BonusHP": 134,
     "BonusAttack": 11,
     "BonusDefense": 4,
-    "BonusCriticalRate": 0.01,
+    "BonusCriticalChance": 0.01,
     "UpgradeCost": 15
   },
   {
@@ -23,7 +23,7 @@
     "BonusHP": 151,
     "BonusAttack": 12,
     "BonusDefense": 5,
-    "BonusCriticalRate": 0.01,
+    "BonusCriticalChance": 0.01,
     "UpgradeCost": 20
   },
   {
@@ -32,7 +32,7 @@
     "BonusHP": 169,
     "BonusAttack": 13,
     "BonusDefense": 5,
-    "BonusCriticalRate": 0.01,
+    "BonusCriticalChance": 0.01,
     "UpgradeCost": 30
   },
   {
@@ -41,7 +41,7 @@
     "BonusHP": 188,
     "BonusAttack": 15,
     "BonusDefense": 5,
-    "BonusCriticalRate": 0.015,
+    "BonusCriticalChance": 0.015,
     "UpgradeCost": 40
   },
   {
@@ -50,7 +50,7 @@
     "BonusHP": 212,
     "BonusAttack": 16,
     "BonusDefense": 6,
-    "BonusCriticalRate": 0.01,
+    "BonusCriticalChance": 0.01,
     "UpgradeCost": 55
   },
   {
@@ -59,7 +59,7 @@
     "BonusHP": 237,
     "BonusAttack": 18,
     "BonusDefense": 7,
-    "BonusCriticalRate": 0.01,
+    "BonusCriticalChance": 0.01,
     "UpgradeCost": 75
   },
   {
@@ -68,7 +68,7 @@
     "BonusHP": 265,
     "BonusAttack": 19,
     "BonusDefense": 7,
-    "BonusCriticalRate": 0.015,
+    "BonusCriticalChance": 0.015,
     "UpgradeCost": 100
   },
   {
@@ -77,7 +77,7 @@
     "BonusHP": 297,
     "BonusAttack": 22,
     "BonusDefense": 7,
-    "BonusCriticalRate": 0.015,
+    "BonusCriticalChance": 0.015,
     "UpgradeCost": 140
   }
 ]

@@ -40,9 +40,9 @@ public class BattleUnitModels
             _enemyBattleUnitModels[a] = new EnemyBattleUnitModel(a, unitUid);
         }
 
-        _companionDictCache = GameManager.Session.Companion.Companions;
-        //TODO 세이브 데이터에서 가져오기
-        _saveDataPartyCompanionIds = new List<string> { "Companion_001", "Companion_002" };
+        //_companionDictCache = GameManager.Session.Companion.Companions;
+        ////TODO 세이브 데이터에서 가져오기
+        //_saveDataPartyCompanionIds = new List<string> { "Companion_001", "Companion_002" };
     }
 
     public void InitalizeStage(string stageId)
