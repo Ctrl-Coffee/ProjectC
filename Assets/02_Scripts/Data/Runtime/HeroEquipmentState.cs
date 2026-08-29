@@ -8,9 +8,9 @@ public class HeroEquipmentState : IStatData
     public float Attack { get; private set; }
     public float Hp { get; private set; }
     public float Defense { get; private set; }
-    public float CriticalRate { get; private set; }
-    public float NormalSkillHaste { get; private set; }
-    public float SpecialSkillHaste { get; private set; }
+    public float CriticalChance { get; private set; }
+    public float BasicAttackHaste { get; private set; }
+    public float BasicActiveSkillHaste { get; private set; }
     public float CombatPower { get; private set; }
 
     private StatSum _baseStat;
@@ -55,9 +55,9 @@ public class HeroEquipmentState : IStatData
         _baseStat.Attack = equipmentData.BaseAttack;
         _baseStat.Hp = equipmentData.BaseHp;
         _baseStat.Defense = equipmentData.BaseDefense;
-        _baseStat.CriticalRate = equipmentData.BaseCriticalChance * Const.PERCENT_TO_RATE;
-        _baseStat.NormalSkillHaste = equipmentData.BasicAttackHaste;
-        _baseStat.SpecialSkillHaste = equipmentData.SignatureSkillHaste;
+        _baseStat.CriticalChance = equipmentData.BaseCriticalChance * Const.PERCENT_TO_RATE;
+        _baseStat.BasicAttackHaste = equipmentData.BasicAttackHaste;
+        _baseStat.SignatureSkillHaste = equipmentData.SignatureSkillHaste;
     }
 
     // 공격력·체력·방어력 EquipmentLevelData.StatMultiplier 적용

@@ -26,7 +26,7 @@ public class HeroInfoView : ViewBase
     private HeroInfoViewModel _viewModel;
     private CurrencyViewModel _currencyViewModel;
 
-    private HeroStatSum _rollupFrom;
+    private StatSum _rollupFrom;
     private float _rollupFromCombatPower;
 
     private void OnEnable()
@@ -265,25 +265,25 @@ public class HeroInfoView : ViewBase
         _levelUpEffect.Play(this, _rollupFrom, BuildDisplayedStat(), _rollupFromCombatPower, _viewModel.CombatPower);
     }
 
-    private HeroStatSum BuildDisplayedStat()
+    private StatSum BuildDisplayedStat()
     {
-        HeroStatSum stat = new HeroStatSum();
+        StatSum stat = new StatSum();
 
         stat.Attack = _viewModel.Attack;
         stat.Hp = _viewModel.Hp;
         stat.Defense = _viewModel.Defense;
         stat.CriticalChance = _viewModel.CriticalChance;
         stat.BasicAttackHaste = _viewModel.BasicAttackHaste;
-        stat.BasicActiveSkillHaste = _viewModel.BasicActiveSkillHaste;
+        stat.SignatureSkillHaste = _viewModel.BasicActiveSkillHaste;
 
         return stat;
     }
 
-    public void OnStatRollupProgress(HeroStatSum stat, float combatPower)
+    public void OnStatRollupProgress(StatSum stat, float combatPower)
     {
         if (_viewModel == null) return;
 
-        HeroStatSum equipment = _viewModel.EquipmentStat;
+        StatSum equipment = _viewModel.EquipmentStat;
 
         _attackText.text = BuildStatText(stat.Attack, equipment.Attack);
         _hpText.text = BuildStatText(stat.Hp, equipment.Hp);
@@ -297,9 +297,9 @@ public class HeroInfoView : ViewBase
             SkillCooldownCalculator.GetCooldownReduceRate(stat.BasicAttackHaste));
 
         _basicActiveSkillHasteText.text = BuildHasteText(
-            stat.BasicActiveSkillHaste,
-            equipment.BasicActiveSkillHaste,
-            SkillCooldownCalculator.GetCooldownReduceRate(stat.BasicActiveSkillHaste));
+            stat.SignatureSkillHaste,
+            equipment.SignatureSkillHaste,
+            SkillCooldownCalculator.GetCooldownReduceRate(stat.SignatureSkillHaste));
 
         _combatPowerText.text = Mathf.RoundToInt(combatPower).ToString("N0");
     }
@@ -374,7 +374,7 @@ public class HeroInfoView : ViewBase
     private void RefreshBasicActiveSkillHaste()
     {
         _basicActiveSkillHasteText.text = BuildHasteText(
-            _viewModel.BasicActiveSkillHaste, _viewModel.EquipmentStat.BasicActiveSkillHaste, _viewModel.BasicActiveSkillCooldownReduceRate);
+            _viewModel.BasicActiveSkillHaste, _viewModel.EquipmentStat.SignatureSkillHaste, _viewModel.BasicActiveSkillCooldownReduceRate);
     }
 
     private string BuildStatText(float total, float equipment)

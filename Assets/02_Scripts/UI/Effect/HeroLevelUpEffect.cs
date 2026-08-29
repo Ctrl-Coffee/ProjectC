@@ -16,12 +16,12 @@ public class HeroLevelUpEffect : MonoBehaviour
 
     private HeroInfoView _view;
 
-    private HeroStatSum _from;
-    private HeroStatSum _to;
+    private StatSum _from;
+    private StatSum _to;
     private float _fromCombatPower;
     private float _toCombatPower;
 
-    private HeroStatSum _currentStat;
+    private StatSum _currentStat;
     private float _currentCombatPower;
 
     private Tween _rollupTween;
@@ -31,7 +31,7 @@ public class HeroLevelUpEffect : MonoBehaviour
         get { return null != _rollupTween; }
     }
 
-    public HeroStatSum CurrentStat
+    public StatSum CurrentStat
     {
         get { return _currentStat; }
     }
@@ -41,7 +41,7 @@ public class HeroLevelUpEffect : MonoBehaviour
         get { return _currentCombatPower; }
     }
 
-    public void Play(HeroInfoView view, HeroStatSum from, HeroStatSum to, float fromCombatPower, float toCombatPower)
+    public void Play(HeroInfoView view, StatSum from, StatSum to, float fromCombatPower, float toCombatPower)
     {
         if (null == view)
         {
@@ -140,14 +140,14 @@ public class HeroLevelUpEffect : MonoBehaviour
             return;
         }
 
-        HeroStatSum stat = new HeroStatSum();
+        StatSum stat = new StatSum();
 
         stat.Attack = Mathf.Lerp(_from.Attack, _to.Attack, progress);
         stat.Hp = Mathf.Lerp(_from.Hp, _to.Hp, progress);
         stat.Defense = Mathf.Lerp(_from.Defense, _to.Defense, progress);
         stat.CriticalChance = Mathf.Lerp(_from.CriticalChance, _to.CriticalChance, progress);
         stat.BasicAttackHaste = Mathf.Lerp(_from.BasicAttackHaste, _to.BasicAttackHaste, progress);
-        stat.BasicActiveSkillHaste = Mathf.Lerp(_from.BasicActiveSkillHaste, _to.BasicActiveSkillHaste, progress);
+        stat.SignatureSkillHaste = Mathf.Lerp(_from.SignatureSkillHaste, _to.SignatureSkillHaste, progress);
 
         float combatPower = Mathf.Lerp(_fromCombatPower, _toCombatPower, progress);
 

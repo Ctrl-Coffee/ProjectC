@@ -15,8 +15,8 @@ public class HeroInfoViewModel : ViewModelBase<HeroInfoModel>
     public float BasicActiveSkillCooldownReduceRate { get; private set; }
     public float CombatPower { get; private set; }
 
-    public HeroStatSum BaseStat { get; private set; }
-    public HeroStatSum EquipmentStat { get; private set; }
+    public StatSum BaseStat { get; private set; }
+    public StatSum EquipmentStat { get; private set; }
 
     public long LevelUpCost { get; private set; }
     public bool IsMaxLevel { get; private set; }

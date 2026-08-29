@@ -28,8 +28,8 @@ public class BattleManager: UnityEngine.Object
     public void Initalize()
     {
         CreateBattleRoot();
-        _companionFormation.InitializePositions();
-        _battleUnitModels.Initalize();
+        //_companionFormation.InitializePositions();
+        //_battleUnitModels.Initalize();
     }
 
     public void CreateBattleRoot()
