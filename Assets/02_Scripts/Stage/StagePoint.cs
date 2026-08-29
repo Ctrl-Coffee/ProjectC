@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class StagePoint : MonoBehaviour
 {
     private int _chapter;
@@ -9,6 +10,7 @@ public class StagePoint : MonoBehaviour
     {
         _chapter = transform.parent.GetSiblingIndex() + 1;
         _stage = transform.GetSiblingIndex() + 1;
+        GetComponent<Collider2D>().isTrigger = true;
     }
 
     public void SelectStage()
