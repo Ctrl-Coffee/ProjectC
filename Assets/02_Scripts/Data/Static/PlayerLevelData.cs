@@ -7,6 +7,6 @@ public class PlayerLevelData : BaseData
     public float BonusHP;
     public float BonusAttack;
     public float BonusDefense;
-    public float BonusCriticalRate;
+    public float BonusCriticalChance;
     public int UpgradeCost;
 }

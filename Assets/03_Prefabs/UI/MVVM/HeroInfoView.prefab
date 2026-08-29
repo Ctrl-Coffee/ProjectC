@@ -811,7 +811,7 @@ MonoBehaviour:
   _defenseText: {fileID: 7100000000000000253}
   _criticalChanceText: {fileID: 7100000000000000273}
   _basicAttackHasteText: {fileID: 7100000000000000293}
-  _basicActiveSkillHasteText: {fileID: 7100000000000000313}
+  _signatureSkillHasteText: {fileID: 7100000000000000313}
   _btnLevelUp: {fileID: 4921754984883775515}
   _levelUpCostText: {fileID: 327167605040953102}
   _levelUpEffect: {fileID: 1336993004699412978}
@@ -3411,7 +3411,7 @@ GameObject:
   - component: {fileID: 7100000000000000312}
   - component: {fileID: 7100000000000000313}
   m_Layer: 5
-  m_Name: txt_ActiveSkillHasteValue
+  m_Name: txt_SignatureSkillHasteValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

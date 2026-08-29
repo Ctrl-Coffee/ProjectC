@@ -13,7 +13,7 @@ public class HeroInfoView : ViewBase
     [SerializeField] private TextMeshProUGUI _defenseText;
     [SerializeField] private TextMeshProUGUI _criticalChanceText;
     [SerializeField] private TextMeshProUGUI _basicAttackHasteText;
-    [SerializeField] private TextMeshProUGUI _basicActiveSkillHasteText;
+    [SerializeField] private TextMeshProUGUI _signatureSkillHasteText;
 
     [Header("레벨업")]
     [SerializeField] private UIButtonComponent _btnLevelUp;
@@ -153,8 +153,8 @@ public class HeroInfoView : ViewBase
                 RefreshBasicAttackHaste();
                 break;
 
-            case nameof(HeroInfoViewModel.BasicActiveSkillHaste):
-                RefreshBasicActiveSkillHaste();
+            case nameof(HeroInfoViewModel.SignatureSkillHaste):
+                RefreshSignatureSkillHaste();
                 break;
 
             case nameof(HeroInfoViewModel.CombatPower):
@@ -274,7 +274,7 @@ public class HeroInfoView : ViewBase
         stat.Defense = _viewModel.Defense;
         stat.CriticalChance = _viewModel.CriticalChance;
         stat.BasicAttackHaste = _viewModel.BasicAttackHaste;
-        stat.SignatureSkillHaste = _viewModel.BasicActiveSkillHaste;
+        stat.SignatureSkillHaste = _viewModel.SignatureSkillHaste;
 
         return stat;
     }
@@ -296,7 +296,7 @@ public class HeroInfoView : ViewBase
             equipment.BasicAttackHaste,
             SkillCooldownCalculator.GetCooldownReduceRate(stat.BasicAttackHaste));
 
-        _basicActiveSkillHasteText.text = BuildHasteText(
+        _signatureSkillHasteText.text = BuildHasteText(
             stat.SignatureSkillHaste,
             equipment.SignatureSkillHaste,
             SkillCooldownCalculator.GetCooldownReduceRate(stat.SignatureSkillHaste));
@@ -330,7 +330,7 @@ public class HeroInfoView : ViewBase
         RefreshDefense();
         RefreshCriticalChance();
         RefreshBasicAttackHaste();
-        RefreshBasicActiveSkillHaste();
+        RefreshSignatureSkillHaste();
 
         RefreshLevelUp();
     }
@@ -371,10 +371,10 @@ public class HeroInfoView : ViewBase
             _viewModel.BasicAttackHaste, _viewModel.EquipmentStat.BasicAttackHaste, _viewModel.BasicAttackCooldownReduceRate);
     }
 
-    private void RefreshBasicActiveSkillHaste()
+    private void RefreshSignatureSkillHaste()
     {
-        _basicActiveSkillHasteText.text = BuildHasteText(
-            _viewModel.BasicActiveSkillHaste, _viewModel.EquipmentStat.SignatureSkillHaste, _viewModel.BasicActiveSkillCooldownReduceRate);
+        _signatureSkillHasteText.text = BuildHasteText(
+            _viewModel.SignatureSkillHaste, _viewModel.EquipmentStat.SignatureSkillHaste, _viewModel.SignatureSkillCooldownReduceRate);
     }
 
     private string BuildStatText(float total, float equipment)

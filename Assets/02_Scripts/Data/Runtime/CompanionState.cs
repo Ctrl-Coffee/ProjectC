@@ -9,7 +9,7 @@ public class CompanionState : IStatData
     public float Defense { get; private set; }
     public float CriticalChance { get; private set; }
     public float BasicAttackHaste { get; private set; }
-    public float BasicActiveSkillHaste { get; private set; }
+    public float SignatureSkillHaste { get; private set; }
     public float CombatPower { get; private set; }
 
     private StatSum _baseStat;
@@ -59,7 +59,7 @@ public class CompanionState : IStatData
         _baseStat.Attack = companionData.BaseAttack;
         _baseStat.Hp = companionData.BaseHp;
         _baseStat.Defense = companionData.BaseDefense;
-        _baseStat.CriticalChance = companionData.BaseCriticalChance * Const.PERCENT_TO_RATE;
+        _baseStat.CriticalChance = companionData.BaseCriticalChance;
         _baseStat.BasicAttackHaste = companionData.BasicAttackHaste;
         _baseStat.SignatureSkillHaste = companionData.SignatureSkillHaste;
     }

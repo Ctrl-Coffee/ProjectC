@@ -6,7 +6,7 @@
 
     float CriticalChance { get; }
     float BasicAttackHaste { get; }
-    float BasicActiveSkillHaste { get; }
+    float SignatureSkillHaste { get; }
 
     float CombatPower { get; }
 }

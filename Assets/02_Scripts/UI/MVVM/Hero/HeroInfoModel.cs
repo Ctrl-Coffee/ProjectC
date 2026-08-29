@@ -14,7 +14,7 @@ public class HeroInfoModel : ModelBase, IStatData
     private float _defense;
     private float _criticalChance;
     private float _basicAttackHaste;
-    private float _basicActiveSkillHaste;
+    private float _signatureSkillHaste;
     private float _combatPower;
     private int _level;
 
@@ -84,13 +84,13 @@ public class HeroInfoModel : ModelBase, IStatData
         }
     }
 
-    public float BasicActiveSkillHaste
+    public float SignatureSkillHaste
     {
-        get { return _basicActiveSkillHaste; }
+        get { return _signatureSkillHaste; }
         private set
         {
-            if (_basicActiveSkillHaste == value) return;
-            _basicActiveSkillHaste = value;
+            if (_signatureSkillHaste == value) return;
+            _signatureSkillHaste = value;
             OnPropertyChanged();
         }
     }
@@ -268,7 +268,7 @@ public class HeroInfoModel : ModelBase, IStatData
         Defense = sum.Defense;
         CriticalChance = sum.CriticalChance;
         BasicAttackHaste = sum.BasicAttackHaste;
-        BasicActiveSkillHaste = sum.SignatureSkillHaste;
+        SignatureSkillHaste = sum.SignatureSkillHaste;
 
         CombatPower = CombatPowerCalculator.Calculate(this);
     }
@@ -288,9 +288,9 @@ public class HeroInfoModel : ModelBase, IStatData
         sum.Attack = playerData.BaseAttack;
         sum.Hp = playerData.BaseHp;
         sum.Defense = playerData.BaseDefense;
-        sum.CriticalChance = playerData.BaseCritRate * Const.PERCENT_TO_RATE;
-        sum.BasicAttackHaste = playerData.BaseNormalSkillHaste;
-        sum.SignatureSkillHaste = playerData.BaseSpecialSkillHaste;
+        sum.CriticalChance = playerData.BaseCriticalChance;
+        sum.BasicAttackHaste = playerData.BasicAttackHaste;
+        sum.SignatureSkillHaste = playerData.SignatureSkillHaste;
 
         return sum;
     }
@@ -317,7 +317,7 @@ public class HeroInfoModel : ModelBase, IStatData
             sum.Attack += levelData.BonusAttack;
             sum.Hp += levelData.BonusHP;
             sum.Defense += levelData.BonusDefense;
-            sum.CriticalChance += levelData.BonusCriticalRate;
+            sum.CriticalChance += levelData.BonusCriticalChance;
         }
 
         return sum;

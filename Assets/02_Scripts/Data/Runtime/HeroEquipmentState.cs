@@ -10,7 +10,7 @@ public class HeroEquipmentState : IStatData
     public float Defense { get; private set; }
     public float CriticalChance { get; private set; }
     public float BasicAttackHaste { get; private set; }
-    public float BasicActiveSkillHaste { get; private set; }
+    public float SignatureSkillHaste { get; private set; }
     public float CombatPower { get; private set; }
 
     private StatSum _baseStat;
@@ -55,7 +55,7 @@ public class HeroEquipmentState : IStatData
         _baseStat.Attack = equipmentData.BaseAttack;
         _baseStat.Hp = equipmentData.BaseHp;
         _baseStat.Defense = equipmentData.BaseDefense;
-        _baseStat.CriticalChance = equipmentData.BaseCriticalChance * Const.PERCENT_TO_RATE;
+        _baseStat.CriticalChance = equipmentData.BaseCriticalChance;
         _baseStat.BasicAttackHaste = equipmentData.BasicAttackHaste;
         _baseStat.SignatureSkillHaste = equipmentData.SignatureSkillHaste;
     }

@@ -17,6 +17,6 @@ public static class CombatPowerCalculator
             + (stat.Hp * Const.HEALTH_WEIGHT)
             + (stat.Defense * Const.DEFENSE_WEIGHT)
             + (stat.BasicAttackHaste * Const.NORMAL_SKILL_HASTE_WEIGHT)
-            + (stat.BasicActiveSkillHaste * Const.SPECIAL_SKILL_HASTE_WEIGHT);
+            + (stat.SignatureSkillHaste * Const.SPECIAL_SKILL_HASTE_WEIGHT);
     }
 }

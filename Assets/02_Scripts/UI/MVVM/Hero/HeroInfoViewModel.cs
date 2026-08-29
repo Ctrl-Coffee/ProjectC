@@ -10,9 +10,9 @@ public class HeroInfoViewModel : ViewModelBase<HeroInfoModel>
     public float Defense { get; private set; }
     public float CriticalChance { get; private set; }
     public float BasicAttackHaste { get; private set; }
-    public float BasicActiveSkillHaste { get; private set; }
+    public float SignatureSkillHaste { get; private set; }
     public float BasicAttackCooldownReduceRate { get; private set; }
-    public float BasicActiveSkillCooldownReduceRate { get; private set; }
+    public float SignatureSkillCooldownReduceRate { get; private set; }
     public float CombatPower { get; private set; }
 
     public StatSum BaseStat { get; private set; }
@@ -52,13 +52,13 @@ public class HeroInfoViewModel : ViewModelBase<HeroInfoModel>
         Defense = _model.Defense;
         CriticalChance = _model.CriticalChance;
         BasicAttackHaste = _model.BasicAttackHaste;
-        BasicActiveSkillHaste = _model.BasicActiveSkillHaste;
+        SignatureSkillHaste = _model.SignatureSkillHaste;
 
         BaseStat = _model.BaseStat;
         EquipmentStat = _model.EquipmentStat;
 
         BasicAttackCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(BasicAttackHaste);
-        BasicActiveSkillCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(BasicActiveSkillHaste);
+        SignatureSkillCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(SignatureSkillHaste);
         CombatPower = _model.CombatPower;
 
         RefreshLevelUpState();
