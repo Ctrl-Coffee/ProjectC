@@ -35,7 +35,7 @@ public class EquipmentDetailUI : UIBase
 
         Refresh();
 
-        _iconImage.sprite = GameManager.Resource.GetLoadedAsset<Sprite>(data.IconPath);
+        _iconImage.sprite = GameManager.Resource.GetLoadedAsset<Sprite>(data.IconSpriteAddressableKey);
         _nameText.text = data.Name;
 
         _levelUpButton.BindButtonEvent(OnClickLevelUp);
@@ -70,8 +70,8 @@ public class EquipmentDetailUI : UIBase
         _hpText.SetText("{0}", _equipmentData.BaseHp * levelData.StatMultiplier);
         _defenseText.SetText("{0}", _equipmentData.BaseDefense * levelData.StatMultiplier);
         _criticalChanceText.SetText("{0}", _equipmentData.BaseCriticalChance * levelData.StatMultiplier);
-        _attackHasteText.SetText("{0}", _equipmentData.BasicActiveSkillHaste * levelData.StatMultiplier);
-        _activeSkillHasteText.SetText("{0}", _equipmentData.BasicActiveSkillHaste * levelData.StatMultiplier);
+        _attackHasteText.SetText("{0}", _equipmentData.BasicAttackHaste * levelData.StatMultiplier);
+        _activeSkillHasteText.SetText("{0}", _equipmentData.SignatureSkillHaste * levelData.StatMultiplier);
 
         bool isMaxLevel = levelData.UpgradeCost == 0;
 

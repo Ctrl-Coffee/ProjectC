@@ -32,7 +32,9 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
         {
             CompanionState companion = new CompanionState(companionId, 1);
             _companions.Add(companionId, companion);
+
             ContainerPropertyChanged?.Invoke(nameof(Companions), ContainerPropertyChangedEvent.Add, companion);
+
             SaveUtil.RequestSaveCompanion();
         }
     }

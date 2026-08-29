@@ -101,7 +101,7 @@ public class HeroEquipmentSlotView : ViewBase
         }
 
         _icon.sprite = await GameManager.Resource.LoadAssetAsync<Sprite>
-            (GameManager.DataTable.GetEquipmentData(_heroEquipmentId).IconPath);
+            (GameManager.DataTable.GetEquipmentData(_heroEquipmentId).IconSpriteAddressableKey);
         _icon.gameObject.SetActive(true);
 
         _level.gameObject.SetActive(true);
