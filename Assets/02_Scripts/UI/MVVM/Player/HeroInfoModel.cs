@@ -2,36 +2,19 @@
 
 public class HeroInfoModel : ModelBase, IStatData
 {
-    private struct StatSum
-    {
-        public float Attack;
-        public float Hp;
-        public float Defense;
-        public float CriticalRate;
-        public float NormalSkillHaste;
-        public float SpecialSkillHaste;
-
-        public void Add(StatSum other)
-        {
-            Attack += other.Attack;
-            Hp += other.Hp;
-            Defense += other.Defense;
-            CriticalRate += other.CriticalRate;
-            NormalSkillHaste += other.NormalSkillHaste;
-            SpecialSkillHaste += other.SpecialSkillHaste;
-        }
-    }
-
     private OwnedPlayerData _ownedPlayerData;
     private HeroEquipedModel _equiped;
     private HeroEquipmentModel _equipment;
 
+    private HeroStatSum _baseStat;
+    private HeroStatSum _equipmentStat;
+
     private float _attack;
     private float _hp;
     private float _defense;
-    private float _criticalRate;
-    private float _normalSkillHaste;
-    private float _specialSkillHaste;
+    private float _criticalChance;
+    private float _basicAttackHaste;
+    private float _basicActiveSkillHaste;
     private float _combatPower;
     private int _level;
 
@@ -79,35 +62,35 @@ public class HeroInfoModel : ModelBase, IStatData
         }
     }
 
-    public float CriticalRate
+    public float CriticalChance
     {
-        get { return _criticalRate; }
+        get { return _criticalChance; }
         private set
         {
-            if (_criticalRate == value) return;
-            _criticalRate = value;
+            if (_criticalChance == value) return;
+            _criticalChance = value;
             OnPropertyChanged();
         }
     }
 
-    public float NormalSkillHaste
+    public float BasicAttackHaste
     {
-        get { return _normalSkillHaste; }
+        get { return _basicAttackHaste; }
         private set
         {
-            if (_normalSkillHaste == value) return;
-            _normalSkillHaste = value;
+            if (_basicAttackHaste == value) return;
+            _basicAttackHaste = value;
             OnPropertyChanged();
         }
     }
 
-    public float SpecialSkillHaste
+    public float BasicActiveSkillHaste
     {
-        get { return _specialSkillHaste; }
+        get { return _basicActiveSkillHaste; }
         private set
         {
-            if (_specialSkillHaste == value) return;
-            _specialSkillHaste = value;
+            if (_basicActiveSkillHaste == value) return;
+            _basicActiveSkillHaste = value;
             OnPropertyChanged();
         }
     }
@@ -119,6 +102,28 @@ public class HeroInfoModel : ModelBase, IStatData
         {
             if (_combatPower == value) return;
             _combatPower = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public HeroStatSum BaseStat
+    {
+        get { return _baseStat; }
+        private set
+        {
+            if (_baseStat.IsSame(value)) return;
+            _baseStat = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public HeroStatSum EquipmentStat
+    {
+        get { return _equipmentStat; }
+        private set
+        {
+            if (_equipmentStat.IsSame(value)) return;
+            _equipmentStat = value;
             OnPropertyChanged();
         }
     }
@@ -240,28 +245,37 @@ public class HeroInfoModel : ModelBase, IStatData
     /// </summary>
     private void Recalculate()
     {
-        StatSum sum = GetBaseStat();
+        HeroStatSum baseStat = GetBaseStat();
 
-        sum.Add(GetLevelBonus());
-        sum.Add(GetEquipmentStat(EquipmentType.Weapon));
-        sum.Add(GetEquipmentStat(EquipmentType.Armor));
-        sum.Add(GetEquipmentStat(EquipmentType.Accessory));
+        baseStat.Add(GetLevelBonus());
+
+        HeroStatSum equipmentStat = GetEquipmentStat(EquipmentType.Weapon);
+
+        equipmentStat.Add(GetEquipmentStat(EquipmentType.Armor));
+        equipmentStat.Add(GetEquipmentStat(EquipmentType.Accessory));
+
+        HeroStatSum sum = baseStat;
+
+        sum.Add(equipmentStat);
 
         Level = null == _ownedPlayerData ? 0 : _ownedPlayerData.Level;
+
+        BaseStat = baseStat;
+        EquipmentStat = equipmentStat;
 
         Attack = sum.Attack;
         Hp = sum.Hp;
         Defense = sum.Defense;
-        CriticalRate = sum.CriticalRate;
-        NormalSkillHaste = sum.NormalSkillHaste;
-        SpecialSkillHaste = sum.SpecialSkillHaste;
+        CriticalChance = sum.CriticalChance;
+        BasicAttackHaste = sum.BasicAttackHaste;
+        BasicActiveSkillHaste = sum.BasicActiveSkillHaste;
 
         CombatPower = CombatPowerCalculator.Calculate(this);
     }
 
-    private StatSum GetBaseStat()
+    private HeroStatSum GetBaseStat()
     {
-        StatSum sum = new StatSum();
+        HeroStatSum sum = new HeroStatSum();
 
         PlayerData playerData = GameManager.DataTable.GetPlayerData(CharacterId.PLAYER_DATA);
 
@@ -274,16 +288,16 @@ public class HeroInfoModel : ModelBase, IStatData
         sum.Attack = playerData.BaseAttack;
         sum.Hp = playerData.BaseHp;
         sum.Defense = playerData.BaseDefense;
-        sum.CriticalRate = playerData.BaseCritRate * Const.PERCENT_TO_RATE;
-        sum.NormalSkillHaste = playerData.BaseNormalSkillHaste;
-        sum.SpecialSkillHaste = playerData.BaseSpecialSkillHaste;
+        sum.CriticalChance = playerData.BaseCritRate * Const.PERCENT_TO_RATE;
+        sum.BasicAttackHaste = playerData.BaseNormalSkillHaste;
+        sum.BasicActiveSkillHaste = playerData.BaseSpecialSkillHaste;
 
         return sum;
     }
 
-    private StatSum GetLevelBonus()
+    private HeroStatSum GetLevelBonus()
     {
-        StatSum sum = new StatSum();
+        HeroStatSum sum = new HeroStatSum();
 
         if (null == _ownedPlayerData)
         {
@@ -303,15 +317,15 @@ public class HeroInfoModel : ModelBase, IStatData
             sum.Attack += levelData.BonusAttack;
             sum.Hp += levelData.BonusHP;
             sum.Defense += levelData.BonusDefense;
-            sum.CriticalRate += levelData.BonusCriticalRate;
+            sum.CriticalChance += levelData.BonusCriticalRate;
         }
 
         return sum;
     }
 
-    private StatSum GetEquipmentStat(EquipmentType type)
+    private HeroStatSum GetEquipmentStat(EquipmentType type)
     {
-        StatSum sum = new StatSum();
+        HeroStatSum sum = new HeroStatSum();
 
         string equipmentId = _equiped.GetEquipedId(type);
 
@@ -320,7 +334,6 @@ public class HeroInfoModel : ModelBase, IStatData
             return sum;
         }
 
-        // 등급도 가지고 오기
         EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(equipmentId);
 
         if (null == equipmentData)
@@ -343,6 +356,10 @@ public class HeroInfoModel : ModelBase, IStatData
         sum.Attack = equipmentData.BaseAttack * multiplier;
         sum.Hp = equipmentData.BaseHp * multiplier;
         sum.Defense = equipmentData.BaseDefense * multiplier;
+
+        sum.CriticalChance = equipmentData.BaseCriticalChance * multiplier;
+        sum.BasicAttackHaste = equipmentData.BasicAttackHaste * multiplier;
+        sum.BasicActiveSkillHaste = equipmentData.BasicActiveSkillHaste * multiplier;
 
         return sum;
     }

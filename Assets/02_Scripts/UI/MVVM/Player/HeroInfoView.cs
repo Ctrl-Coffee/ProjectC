@@ -7,12 +7,13 @@ public class HeroInfoView : ViewBase
     [SerializeField] private TextMeshProUGUI _levelText;
     [SerializeField] private TextMeshProUGUI _combatPowerText;
 
+    [Header("스텟")]
     [SerializeField] private TextMeshProUGUI _attackText;
     [SerializeField] private TextMeshProUGUI _hpText;
     [SerializeField] private TextMeshProUGUI _defenseText;
-    [SerializeField] private TextMeshProUGUI _criticalRateText;
-    [SerializeField] private TextMeshProUGUI _normalSkillHasteText;
-    [SerializeField] private TextMeshProUGUI _specialSkillHasteText;
+    [SerializeField] private TextMeshProUGUI _criticalChanceText;
+    [SerializeField] private TextMeshProUGUI _basicAttackHasteText;
+    [SerializeField] private TextMeshProUGUI _basicActiveSkillHasteText;
 
     [Header("레벨업")]
     [SerializeField] private UIButtonComponent _btnLevelUp;
@@ -136,16 +137,16 @@ public class HeroInfoView : ViewBase
                 RefreshDefense();
                 break;
 
-            case nameof(HeroInfoViewModel.CriticalRate):
-                RefreshCriticalRate();
+            case nameof(HeroInfoViewModel.CriticalChance):
+                RefreshCriticalChance();
                 break;
 
-            case nameof(HeroInfoViewModel.NormalSkillHaste):
-                RefreshNormalSkillHaste();
+            case nameof(HeroInfoViewModel.BasicAttackHaste):
+                RefreshBasicAttackHaste();
                 break;
 
-            case nameof(HeroInfoViewModel.SpecialSkillHaste):
-                RefreshSpecialSkillHaste();
+            case nameof(HeroInfoViewModel.BasicActiveSkillHaste):
+                RefreshBasicActiveSkillHaste();
                 break;
 
             case nameof(HeroInfoViewModel.CombatPower):
@@ -211,9 +212,9 @@ public class HeroInfoView : ViewBase
         RefreshAttack();
         RefreshHp();
         RefreshDefense();
-        RefreshCriticalRate();
-        RefreshNormalSkillHaste();
-        RefreshSpecialSkillHaste();
+        RefreshCriticalChance();
+        RefreshBasicAttackHaste();
+        RefreshBasicActiveSkillHaste();
 
         RefreshLevelUp();
     }
@@ -230,49 +231,82 @@ public class HeroInfoView : ViewBase
 
     private void RefreshAttack()
     {
-        _attackText.text = Mathf.RoundToInt(_viewModel.Attack).ToString();
+        _attackText.text = BuildStatText(_viewModel.Attack, _viewModel.EquipmentStat.Attack);
     }
 
     private void RefreshHp()
     {
-        _hpText.text = Mathf.RoundToInt(_viewModel.Hp).ToString();
+        _hpText.text = BuildStatText(_viewModel.Hp, _viewModel.EquipmentStat.Hp);
     }
 
     private void RefreshDefense()
     {
-        _defenseText.text = Mathf.RoundToInt(_viewModel.Defense).ToString();
+        _defenseText.text = BuildStatText(_viewModel.Defense, _viewModel.EquipmentStat.Defense);
     }
 
-    private void RefreshCriticalRate()
+    private void RefreshCriticalChance()
     {
-        _criticalRateText.text = $"{_viewModel.CriticalRate * Const.RATE_TO_PERCENT:0.#}%";
+        _criticalChanceText.text = BuildPercentStatText(_viewModel.CriticalChance, _viewModel.EquipmentStat.CriticalChance);
     }
 
-    private void RefreshNormalSkillHaste()
+    private void RefreshBasicAttackHaste()
     {
-        _normalSkillHasteText.text = BuildHasteText(_viewModel.NormalSkillHaste, _viewModel.NormalSkillCooldownReduceRate);
+        _basicAttackHasteText.text = BuildHasteText(
+            _viewModel.BasicAttackHaste, _viewModel.EquipmentStat.BasicAttackHaste, _viewModel.BasicAttackCooldownReduceRate);
     }
 
-    private void RefreshSpecialSkillHaste()
+    private void RefreshBasicActiveSkillHaste()
     {
-        _specialSkillHasteText.text = BuildHasteText(_viewModel.SpecialSkillHaste, _viewModel.SpecialSkillCooldownReduceRate);
+        _basicActiveSkillHasteText.text = BuildHasteText(
+            _viewModel.BasicActiveSkillHaste, _viewModel.EquipmentStat.BasicActiveSkillHaste, _viewModel.BasicActiveSkillCooldownReduceRate);
     }
 
-    private string BuildHasteText(float haste, float reduceRate)
+    private string BuildStatText(float total, float equipment)
     {
-        int hasteValue = Mathf.RoundToInt(haste);
-        int reducePercent = Mathf.RoundToInt(reduceRate * Const.RATE_TO_PERCENT);
+        int totalValue = Mathf.RoundToInt(total);
+        int equipmentValue = Mathf.RoundToInt(equipment);
 
-        if (0 == reducePercent)
+        if (0 == equipmentValue)
         {
-            return hasteValue.ToString();
+            return totalValue.ToString();
         }
 
-        if (0 < reducePercent)
+        int baseValue = totalValue - equipmentValue;
+
+        return $"{totalValue} ({baseValue} + <color={Const.COLOR_GOOD}>{equipmentValue}</color>)";
+    }
+
+    private string BuildPercentStatText(float totalRate, float equipmentRate)
+    {
+        float totalPercent = totalRate * Const.RATE_TO_PERCENT;
+        float equipmentPercent = equipmentRate * Const.RATE_TO_PERCENT;
+
+        if (Mathf.Approximately(0f, equipmentPercent))
         {
-            return $"{hasteValue} <color={Const.COLOR_GOOD}>(-{reducePercent}%)</color>";
+            return $"{totalPercent:0.#}%";
         }
 
-        return $"{hasteValue} <color={Const.COLOR_BAD}>(+{-reducePercent}%)</color>";
+        float basePercent = totalPercent - equipmentPercent;
+
+        return $"{totalPercent:0.#}% ({basePercent:0.#}% + <color={Const.COLOR_GOOD}>{equipmentPercent:0.#}%</color>)";
+    }
+
+    private string BuildHasteText(float haste, float equipmentHaste, float reduceRate)
+    {
+        string valueText = BuildStatText(haste, equipmentHaste);
+
+        float reducePercent = reduceRate * Const.RATE_TO_PERCENT;
+
+        if (0f < reducePercent)
+        {
+            return $"{valueText} <color={Const.COLOR_GOOD}>(-{reducePercent:0.#}%)</color>";
+        }
+
+        if (0f > reducePercent)
+        {
+            return $"{valueText} <color={Const.COLOR_BAD}>(+{-reducePercent:0.#}%)</color>";
+        }
+
+        return $"{valueText} (0%)";
     }
 }

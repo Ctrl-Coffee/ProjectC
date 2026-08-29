@@ -8,12 +8,15 @@ public class HeroInfoViewModel : ViewModelBase<HeroInfoModel>
     public float Attack { get; private set; }
     public float Hp { get; private set; }
     public float Defense { get; private set; }
-    public float CriticalRate { get; private set; }
-    public float NormalSkillHaste { get; private set; }
-    public float SpecialSkillHaste { get; private set; }
-    public float NormalSkillCooldownReduceRate { get; private set; }
-    public float SpecialSkillCooldownReduceRate { get; private set; }
+    public float CriticalChance { get; private set; }
+    public float BasicAttackHaste { get; private set; }
+    public float BasicActiveSkillHaste { get; private set; }
+    public float BasicAttackCooldownReduceRate { get; private set; }
+    public float BasicActiveSkillCooldownReduceRate { get; private set; }
     public float CombatPower { get; private set; }
+
+    public HeroStatSum BaseStat { get; private set; }
+    public HeroStatSum EquipmentStat { get; private set; }
 
     public long LevelUpCost { get; private set; }
     public bool IsMaxLevel { get; private set; }
@@ -47,12 +50,15 @@ public class HeroInfoViewModel : ViewModelBase<HeroInfoModel>
         Attack = _model.Attack;
         Hp = _model.Hp;
         Defense = _model.Defense;
-        CriticalRate = _model.CriticalRate;
-        NormalSkillHaste = _model.NormalSkillHaste;
-        SpecialSkillHaste = _model.SpecialSkillHaste;
+        CriticalChance = _model.CriticalChance;
+        BasicAttackHaste = _model.BasicAttackHaste;
+        BasicActiveSkillHaste = _model.BasicActiveSkillHaste;
 
-        NormalSkillCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(NormalSkillHaste);
-        SpecialSkillCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(SpecialSkillHaste);
+        BaseStat = _model.BaseStat;
+        EquipmentStat = _model.EquipmentStat;
+
+        BasicAttackCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(BasicAttackHaste);
+        BasicActiveSkillCooldownReduceRate = SkillCooldownCalculator.GetCooldownReduceRate(BasicActiveSkillHaste);
         CombatPower = _model.CombatPower;
 
         RefreshLevelUpState();

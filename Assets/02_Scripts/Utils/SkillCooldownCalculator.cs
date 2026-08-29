@@ -7,12 +7,12 @@ public static class SkillCooldownCalculator
 {
     public static float GetNormalSkillCooldown(float baseCooldown, IStatData stat)
     {
-        return Calculate(baseCooldown, null == stat ? 0f : stat.NormalSkillHaste);
+        return Calculate(baseCooldown, null == stat ? 0f : stat.BasicAttackHaste);
     }
 
     public static float GetSpecialSkillCooldown(float baseCooldown, IStatData stat)
     {
-        return Calculate(baseCooldown, null == stat ? 0f : stat.SpecialSkillHaste);
+        return Calculate(baseCooldown, null == stat ? 0f : stat.BasicActiveSkillHaste);
     }
 
     public static float GetCooldownReduceRate(float haste)

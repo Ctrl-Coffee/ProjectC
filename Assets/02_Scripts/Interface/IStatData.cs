@@ -4,9 +4,9 @@
     float Hp { get; }
     float Defense { get; }
 
-    float CriticalRate { get; }
-    float NormalSkillHaste { get; }
-    float SpecialSkillHaste { get; }
+    float CriticalChance { get; }
+    float BasicAttackHaste { get; }
+    float BasicActiveSkillHaste { get; }
 
     float CombatPower { get; }
 }
