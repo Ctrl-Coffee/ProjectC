@@ -15,6 +15,8 @@ public class HeroEquipmentState : IStatData
 
     private StatSum _baseStat;
 
+    private string _grade;
+
     public HeroEquipmentState(EquipmentDto equipmentDto)
     {
         HeroEquipmentId = equipmentDto.equipmentId;
@@ -27,6 +29,8 @@ public class HeroEquipmentState : IStatData
             Logger.LogError($"{HeroEquipmentId} 장비 데이터 찾을 수 없음");
             return;
         }
+
+        _grade = equipmentData.Grade;
 
         GetBaseStat(equipmentData);
         Recalculate();
@@ -60,7 +64,7 @@ public class HeroEquipmentState : IStatData
     // 최종 장비 능력치 = EquipmentData 기본 능력치 × StatMultiplier
     private void Recalculate()
     {
-        var equipmentLevelData = GameManager.DataTable.GetEquipmentLevelData(Utils.GetEquipmentLevelDataId(HeroEquipmentId, Level));
+        var equipmentLevelData = GameManager.DataTable.GetEquipmentLevelData(Utils.GetEquipmentLevelDataId(_grade, Level));
 
         Attack = _baseStat.Attack * equipmentLevelData.StatMultiplier;
         Hp = _baseStat.Hp * equipmentLevelData.StatMultiplier;
