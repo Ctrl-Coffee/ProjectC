@@ -17,6 +17,17 @@ public class PerkManager
     private PerkStatCalculator _statCalculator = new();
     private PerkUnlockChecker _unlockChecker = new();
 
+    public async void LoadDataAsync()
+    {
+        var perkResponse = await GameManager.Network.LoadPerkAsync();
+
+        if (null == perkResponse)
+            return;
+
+        var perkWrapper = perkResponse.data;
+        _unlockedPerkIds = perkWrapper.perkNodeIds;
+    }
+
     public PerkStatCalculator Stat
     {
         get
@@ -143,6 +154,8 @@ public class PerkManager
         GameManager.Session.Currency.NotifyMaxEnergyChanged();
         OnPerkChanged?.Invoke();
 
+        SaveUtil.RequestSavePerkData();
+
         return true;
     }
 
@@ -200,6 +213,8 @@ public class PerkManager
 
         GameManager.Session.Currency.NotifyMaxEnergyChanged();
         OnPerkChanged?.Invoke();
+
+        SaveUtil.RequestSavePerkData();
 
         return true;
     }

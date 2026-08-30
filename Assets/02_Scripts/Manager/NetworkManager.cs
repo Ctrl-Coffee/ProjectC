@@ -197,6 +197,62 @@ public class NetworkManager
         return PostAsync<LoadHeroLevelResponse>("/api/herolevel/load", _authenticatedRequest);
     }
 
+    public UniTask<SavePerkResponse> SavePerkAsync()
+    {
+        PerkWrapperDto wrapperDto = new PerkWrapperDto()
+        {
+            perkNodeIds = new List<string>(GameManager.Perk.GetUnlockedPerkIds())
+        };
+
+        PerkRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            PerkData = wrapperDto
+        };
+
+        return PostAsync<SavePerkResponse>("/api/perk/save", request);
+    }
+
+    public UniTask<LoadPerkResponse> LoadPerkAsync()
+    {
+        return PostAsync<LoadPerkResponse>("/api/perk/load", _authenticatedRequest);
+    }
+
+    public UniTask<SaveAutoWorkSlotReponse> SaveAutoWorkSlotAsync()
+    {
+        List<AutoWorkSlotDto> autoWorkSlotDtos = new();
+
+        foreach (var slot in AutoWorkQueue.GetSlots())
+        {
+            autoWorkSlotDtos.Add(new AutoWorkSlotDto()
+            {
+                workId = slot.WorkId,
+                startTicks = slot.StartTicks,
+                endTicks = slot.EndTicks
+            });
+        }
+
+        AutoWorkSlotWrapperDto wrapperDto = new()
+        {
+            slots = autoWorkSlotDtos
+        };
+
+        AutoWorkSlotRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            AutoWorkSlotData = wrapperDto
+        };
+
+        return PostAsync<SaveAutoWorkSlotReponse>("/api/autoworkslot/save", request);
+    }
+
+    public UniTask<LoadAutoWorkSlotResponse> LoadAutoWorkSlotAsync()
+    {
+        return PostAsync<LoadAutoWorkSlotResponse>("/api/autoworkslot/load", _authenticatedRequest);
+    }
+
     private async UniTask<TResponse> PostAsync<TResponse>(string path, object requestData)
     {
         string requestJson = JsonUtility.ToJson(requestData);
