@@ -9,4 +9,5 @@ public class CurrencyDto
     public long dreamFragment;
     public long dreamScroll;
     public long inspiration;
+    public long energyRecoveredAt;
 }

@@ -82,7 +82,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         await gameSession.LoadAllData();
         _gameSession = gameSession;
 
-        _perkManager.LoadDataAsync();
+        await _perkManager.LoadDataAsync();
         await AutoWorkQueue.RestoreSlots();
 
         _battleManager = new();
