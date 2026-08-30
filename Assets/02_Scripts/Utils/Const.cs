@@ -38,4 +38,9 @@
     public const string BASIC_ATTACK = "BasicAttack";
     public const string SIGNATURE = "Signature";
     public const string DEATH = "Death";
+
+    //BT 변수명
+    public const string SkillReadyEvent = "SkillReadyEvent";
+    public const string IsBasicAttackSkillReady = "IsBasicAttackSkillReady";
+    public const string IsSignatureSkillReady = "IsSignatureSkillReady";
 }

@@ -1068,7 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74c49d11107e534d8f9c020d79140de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageClearUI
-  _isPlayAnimation: 1
+  _isPlayAnimation: 0
   _panel: {fileID: 0}
   _returnButton: {fileID: 8425499026778873769}
   _nextStageButton: {fileID: 4267648252717250902}

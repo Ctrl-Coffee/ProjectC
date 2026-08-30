@@ -30,11 +30,6 @@ public class StageInfoView : ViewBase
         UnBindViewModel();
     }
 
-    public void SetStage(string stageId)
-    {
-        _stageInfoViewModel.Initialize(stageId);
-    }
-
     protected override void BindViewModel()
     {
         _stageInfoViewModel = new StageInfoViewModel();
@@ -67,7 +62,9 @@ public class StageInfoView : ViewBase
 
     private void OpenBattleRoot()
     {
-        Debug.Log("루트 열기");
+        GameManager.Battle.EnterBattle();
+        GameManager.UI.CloseDreamHud();
+        GameManager.UI.CloseStagePopup();
     }
 
     private void CloseStagePopup()

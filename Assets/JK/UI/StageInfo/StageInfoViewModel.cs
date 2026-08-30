@@ -22,7 +22,7 @@ public class StageInfoViewModel
 
     public void InitializeModel()
     {
-        _stageModel = GameManager.Battle.StageModel;
+        _stageModel = GameManager.Stage.StageModel;
         _stageModel.PropertyChanged += OnPropertyChanged;
     }
 
@@ -30,11 +30,6 @@ public class StageInfoViewModel
     {
         _stageModel.PropertyChanged -= OnPropertyChanged;
         _stageModel = null;
-    }
-
-    public void Initialize(string stageId)
-    {
-        _stageModel.SetStage(stageId);
     }
 
     private string GetStageDisplayText()

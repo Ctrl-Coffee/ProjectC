@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "Id": "stage_1_1",
     "Chapter": 1,
@@ -9,7 +9,9 @@
     "EnemyGroupId": "null,enemy_ch1_001,null",
     "DreamShardReward": 30,
     "InspirationReward": 1,
-    "DPCost": 10
+    "DPCost": 10,
+    "NextStageId": "stage_1_2",
+    "SpriteAddressableKey": "TestBackground"
   },
   {
     "Id": "stage_1_2",
@@ -21,7 +23,9 @@
     "EnemyGroupId": "enemy_ch1_001,enemy_ch1_001,null",
     "DreamShardReward": 40,
     "InspirationReward": 1,
-    "DPCost": 10
+    "DPCost": 10,
+    "NextStageId": "stage_1_3",
+    "SpriteAddressableKey": "TestBackground"
   },
   {
     "Id": "stage_1_3",
@@ -33,7 +37,9 @@
     "EnemyGroupId": "enemy_ch1_002,enemy_ch1_001,null",
     "DreamShardReward": 50,
     "InspirationReward": 1,
-    "DPCost": 10
+    "DPCost": 10,
+    "NextStageId": "stage_1_4",
+    "SpriteAddressableKey": "TestBackground"
   },
   {
     "Id": "stage_1_4",
@@ -45,7 +51,9 @@
     "EnemyGroupId": "enemy_ch1_002,enemy_ch1_003,enemy_ch1_001",
     "DreamShardReward": 60,
     "InspirationReward": 1,
-    "DPCost": 10
+    "DPCost": 10,
+    "NextStageId": "stage_1_5",
+    "SpriteAddressableKey": "TestBackground"
   },
   {
     "Id": "stage_1_5",
@@ -57,7 +65,9 @@
     "EnemyGroupId": "null,boss_ch1_001,null",
     "DreamShardReward": 100,
     "InspirationReward": 3,
-    "DPCost": 15
+    "DPCost": 15,
+    "NextStageId": "stage_2_1",
+    "SpriteAddressableKey": "TestBackground"
   },
   {
     "Id": "stage_2_1",
@@ -69,7 +79,9 @@
     "EnemyGroupId": "null,enemy_ch2_001,null",
     "DreamShardReward": 70,
     "InspirationReward": 1,
-    "DPCost": 10
+    "DPCost": 10,
+    "NextStageId": "stage_2_2",
+    "SpriteAddressableKey": "TestBackground"
   },
   {
     "Id": "stage_2_2",
@@ -81,7 +93,9 @@
     "EnemyGroupId": "enemy_ch2_002,enemy_ch2_001,null",
     "DreamShardReward": 90,
     "InspirationReward": 1,
-    "DPCost": 10
+    "DPCost": 10,
+    "NextStageId": "stage_2_3",
+    "SpriteAddressableKey": "TestBackground"
   },
   {
     "Id": "stage_2_3",
@@ -93,7 +107,9 @@
     "EnemyGroupId": "enemy_ch2_002,enemy_ch2_003,null",
     "DreamShardReward": 120,
     "InspirationReward": 2,
-    "DPCost": 10
+    "DPCost": 10,
+    "NextStageId": "stage_2_4",
+    "SpriteAddressableKey": "TestBackground"
   },
   {
     "Id": "stage_2_4",
@@ -105,7 +121,8 @@
     "EnemyGroupId": "enemy_ch2_002,enemy_ch2_003,enemy_ch2_001",
     "DreamShardReward": 160,
     "InspirationReward": 2,
-    "DPCost": 10
+    "DPCost": 10,
+    "SpriteAddressableKey": "TestBackground"
   },
   {
     "Id": "stage_2_5",
@@ -117,6 +134,8 @@
     "EnemyGroupId": "null,boss_ch2_001,null",
     "DreamShardReward": 250,
     "InspirationReward": 5,
-    "DPCost": 15
+    "DPCost": 15,
+    "NextStageId": null,
+    "SpriteAddressableKey": "TestBackground"
   }
 ]

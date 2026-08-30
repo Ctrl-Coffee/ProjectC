@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "Id": "Equipment_Armor_001",
     "Name": "줄무늬 잠옷",
@@ -10,7 +10,7 @@
     "BasicAttackHaste": 0,
     "BasicActiveSkillHaste": 0,
     "EquipmentTypeString": "Armor",
-    "BaseSkillId": "Skill_101",
+    "BaseSkillId": "enemy_skill_ch1_melee_basic",
     "AcitveSkillId": null,
     "IconPath": "UI/Equipments[Equipment_0]",
     "Description": null

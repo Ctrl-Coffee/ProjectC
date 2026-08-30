@@ -5,19 +5,20 @@ public static class BattleUtility
 {
     private const int K = 100;
 
-    public static BattleUnitData CreatePlayerBattleUnitData()
+    public static BattleUnitData CreatePlayerBattleUnitData(HeroInfoModel heroInfoModel, EquipmentData equipmentData)
     {
         BattleUnitData battleUnitData = new BattleUnitData();
 
-        //battleUnitData.MaxHp = companionData.BaseHp;
-        //battleUnitData.Attack = companionData.BaseAttack;
-        //battleUnitData.Defense = companionData.BaseDefense;
-        //battleUnitData.CriticalChance = companionData.BaseCriticalChance;
-        //battleUnitData.AttackSpeed = companionData.BasicAttackHaste;
-        //battleUnitData.CooldownReduction = companionData.SignatureSkillHaste;
-        //battleUnitData.BasicAttackSkillId = companionData.BasicAttackSkillId;
-        //battleUnitData.SignatureSkillId = companionData.SignatureSkillId;
-        //battleUnitData.AnimationSetKey = "TestAnimKey";
+        battleUnitData.MaxHp = heroInfoModel.Hp;
+        battleUnitData.Attack = heroInfoModel.Attack;
+        battleUnitData.Defense = heroInfoModel.Defense;
+        battleUnitData.CriticalChance = heroInfoModel.CriticalRate;
+        battleUnitData.AttackSpeed = heroInfoModel.NormalSkillHaste;
+        battleUnitData.CooldownReduction = heroInfoModel.SpecialSkillHaste;
+        battleUnitData.BasicAttackSkillId = equipmentData.BaseSkillId;
+        battleUnitData.SignatureSkillId = equipmentData.BaseSkillId;
+        //battleUnitData.SignatureSkillId = equipmentData.ActiveSkillId;
+        battleUnitData.AnimationSetKey = "Animation/HeroBaseArmor";
 
         return battleUnitData;
     }
@@ -51,7 +52,7 @@ public static class BattleUtility
         battleUnitData.CooldownReduction = 0;
         battleUnitData.BasicAttackSkillId = enemyData.BasicAttackSkillId;
         battleUnitData.SignatureSkillId = enemyData.SignatureSkillId;
-        battleUnitData.AnimationSetKey = "TestAnimKey";
+        battleUnitData.AnimationSetKey = "Animation/HeroBaseArmor";
 
         return battleUnitData;
     }

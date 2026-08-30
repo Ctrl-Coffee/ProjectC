@@ -140,6 +140,15 @@ public static class UIManagerExtension
         ui.SetReport(report);
     }
 
+    public static void OpenBattlePreparation(this UIManager uiManager)
+    {
+        uiManager.OpenContentUI<BattlePreparationUI>().Forget();
+    }
+
+    public static void CloseBattlePreparation(this UIManager uiManager)
+    {
+        uiManager.CloseContentUI<BattlePreparationUI>().Forget();
+    }
 
     public static void OpenBattleHpBarHud(this UIManager uiManager)
     {
@@ -174,7 +183,7 @@ public static class UIManagerExtension
     public static async UniTask OpenStageInfo(this UIManager uiManager, string stageId)
     {
         StageInfoView stageInfoView = await uiManager.OpenPopupUI<StageInfoView>();
-        stageInfoView.SetStage(stageId);
+        GameManager.Stage.SetStage(stageId);   
     }
 
     public static void CloseStagePopup(this UIManager uiManager)

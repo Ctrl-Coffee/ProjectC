@@ -24,7 +24,7 @@ public abstract class BattleUnitModelBase : ModelBase
     private float _signatureSkillCooldown;
 
     private float _calculatedBasicAttackSkillCooldown;
-    private float _calculatedsignatureSkillCooldown;
+    private float _calculatedSignatureSkillCooldown;
 
     private bool _isBasicAttackSkillReady;
     private bool _isSignatureSkillReady;
@@ -163,7 +163,7 @@ public abstract class BattleUnitModelBase : ModelBase
             return false;
         }
 
-        bool isUsable = GameManager.Battle.CheckPlayerSkillUsable(_basicAttackSkillId);
+        bool isUsable = CheckSkillUseable(_basicAttackSkillId);
         return isUsable;
     }
 
@@ -174,7 +174,7 @@ public abstract class BattleUnitModelBase : ModelBase
             return false;
         }
 
-        bool isUsable = GameManager.Battle.CheckPlayerSkillUsable(_signatureSkillId);
+        bool isUsable = CheckSkillUseable(_signatureSkillId);
         return isUsable;
     }
 
@@ -182,6 +182,14 @@ public abstract class BattleUnitModelBase : ModelBase
     {
         IsBasicAttackSkillReady = false;
         UseSkill(battlePosition, _basicAttackSkillId);
+
+        bool isUsable = CheckSkillUseable(_basicAttackSkillId);
+        
+        if (!isUsable)
+        {
+            return;
+        }
+
         BasicAttackSkillCooldown();
     }
 
@@ -189,6 +197,14 @@ public abstract class BattleUnitModelBase : ModelBase
     {
         IsSignatureSkillReady = false;
         UseSkill(battlePosition, _signatureSkillId);
+
+        bool isUsable = CheckSkillUseable(_signatureSkillId);
+
+        if (!isUsable)
+        {
+            return;
+        }
+
         SignatureSkillCooldown();
     }
 
@@ -240,7 +256,7 @@ public abstract class BattleUnitModelBase : ModelBase
     {
         if (string.IsNullOrWhiteSpace(_basicAttackSkillId))
         {
-            Debug.LogError($"'{_basicAttackSkillId}' 기본 공격 스킬은 null 일 수 없습니다.");
+            Logger.LogError($"'{_basicAttackSkillId}' 기본 공격 스킬은 null 일 수 없습니다.");
             return;
         }
 
@@ -248,7 +264,7 @@ public abstract class BattleUnitModelBase : ModelBase
 
         if (basicAttackSkillData == null)
         {
-            Debug.LogError($"'{_basicAttackSkillId}' 기본 공격 스킬 데이터를 찾을 수 없습니다.");
+            Logger.LogError($"'{_basicAttackSkillId}' 기본 공격 스킬 데이터를 찾을 수 없습니다.");
             return;
         }
 
@@ -269,13 +285,13 @@ public abstract class BattleUnitModelBase : ModelBase
 
         if (signatureSkillData == null)
         {
-            Debug.LogError($"'{_signatureSkillId}' 시그니처 스킬 데이터를 찾을 수 없습니다.");
+            Logger.LogError($"'{_signatureSkillId}' 시그니처 스킬 데이터를 찾을 수 없습니다.");
             return;
         }
 
         _signatureSkillCooldown = signatureSkillData.BaseCooldown;
         UpdateSignatureSkillCooldown();
-        _isSignatureSkillReady = _calculatedsignatureSkillCooldown <= 0f;
+        _isSignatureSkillReady = _calculatedSignatureSkillCooldown <= 0f;
     }
 
     private void ClearIdentity()
@@ -293,7 +309,7 @@ public abstract class BattleUnitModelBase : ModelBase
         _criticalChance = 0f;
         _attackSpeed = 0f;
         _cooldownReduction = 0f;
-        _isDead = false;
+        _isDead = true;
     }
 
     private void ClearUnitSkills()
@@ -318,13 +334,14 @@ public abstract class BattleUnitModelBase : ModelBase
     private void ClearSignatureCooldown()
     {
         _signatureSkillCooldown = 0f;
-        _calculatedsignatureSkillCooldown = 0f;
+        _calculatedSignatureSkillCooldown = 0f;
         IsSignatureSkillReady = false;
     }
 
     private void BasicAttackSkillCooldown()
     {
-        GameManager.Time.RequestStartCooldown($"{_uId}_{_basicAttackSkillId}", _calculatedBasicAttackSkillCooldown, OnBasicAttackSkillCooldownCompleted);
+        string basicAttackCooldownId = GetBasicAttackCooldownId();
+        GameManager.Time.RequestStartCooldown(basicAttackCooldownId, _calculatedBasicAttackSkillCooldown, OnBasicAttackSkillCooldownCompleted);
     }
 
     private void SignatureSkillCooldown()
@@ -334,12 +351,14 @@ public abstract class BattleUnitModelBase : ModelBase
             return;
         }
 
-        GameManager.Time.RequestStartCooldown($"{_uId}_{_signatureSkillId}", _calculatedsignatureSkillCooldown, OnSignatureSkillCooldownCompleted);
+        string signatureCooldownId = GetSignatureCooldownId();
+        GameManager.Time.RequestStartCooldown(signatureCooldownId, _calculatedSignatureSkillCooldown, OnSignatureSkillCooldownCompleted);
     }
 
     private void CancelBasicAttackSkillCooldown()
     {
-        GameManager.Time.RequestCancelCooldown($"{_uId}_{_basicAttackSkillId}");
+        string basicAttackCooldownId = GetBasicAttackCooldownId();
+        GameManager.Time.RequestCancelCooldown(basicAttackCooldownId);
     }
 
     private void CancelSignatureSkillCooldown()
@@ -349,7 +368,8 @@ public abstract class BattleUnitModelBase : ModelBase
             return;
         }
 
-        GameManager.Time.RequestCancelCooldown($"{_uId}_{_signatureSkillId}");
+        string signatureCooldownId = GetBasicAttackCooldownId();
+        GameManager.Time.RequestCancelCooldown(signatureCooldownId);
     }
 
     private void OnBasicAttackSkillCooldownCompleted()
@@ -369,7 +389,7 @@ public abstract class BattleUnitModelBase : ModelBase
 
     private void UpdateSignatureSkillCooldown()
     {
-        _calculatedsignatureSkillCooldown = BattleUtility.CalculateSignatureSkillCooldown(_signatureSkillCooldown, _cooldownReduction);
+        _calculatedSignatureSkillCooldown = BattleUtility.CalculateSignatureSkillCooldown(_signatureSkillCooldown, _cooldownReduction);
     }
 
     private void TakeDamage(float damage)
@@ -387,6 +407,17 @@ public abstract class BattleUnitModelBase : ModelBase
         DeadStateChanged.Invoke(_isDead);
     }
 
+    private string GetBasicAttackCooldownId()
+    {
+        return $"{_uId}_{_basicAttackSkillId}";
+    }
+
+    private string GetSignatureCooldownId()
+    {
+        return $"{_uId}_{_signatureSkillId}";
+    }
+
     public abstract void SetActive(bool isActive);
+    protected abstract bool CheckSkillUseable(string skillId);
     protected abstract void UseSkill(int battlePosition, string skillId);
 }

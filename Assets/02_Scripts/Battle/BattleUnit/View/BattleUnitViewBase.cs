@@ -1,12 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using Unity.Behavior;
 using UnityEngine;
-public static class BehaviorGraphVariableNames
-{
-    public const string SkillReadyEvent = "SkillReadyEvent";
-    public const string IsBasicAttackSkillReady = "IsBasicAttackSkillReady";
-    public const string IsSignatureSkillReady = "IsSignatureSkillReady";
-}
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -60,7 +55,7 @@ public abstract class BattleUnitViewBase : MonoBehaviour
 
     public void Initialize(BattleUnitModelBase baseBattleUnitModel)
     {
-        InitializeViewModel(baseBattleUnitModel);
+        _battleUnitViewModel.Initialize(baseBattleUnitModel);
     }
 
     public void StartBattle()
@@ -77,8 +72,12 @@ public abstract class BattleUnitViewBase : MonoBehaviour
 
     public void EndBattle()
     {
-        _battleUnitViewModel.ExitBattle();
-        _behaviorGraphAgent.End();
+        if (_battleUnitViewModel.IsDead)
+        {
+            return;
+        }
+
+        HandleBattleExit();
     }
 
     public void UseBasicAttackSkill()
@@ -124,25 +123,20 @@ public abstract class BattleUnitViewBase : MonoBehaviour
 
     private void CacheBehaviorVariables()
     {
-        if (!_behaviorGraphAgent.GetVariable(BehaviorGraphVariableNames.SkillReadyEvent, out _skillReadyEvent))
+        if (!_behaviorGraphAgent.GetVariable(Const.SkillReadyEvent, out _skillReadyEvent))
         {
-            Debug.LogError($"[BT] {BehaviorGraphVariableNames.SkillReadyEvent} 변수를 찾을 수 없습니다.");
+            Logger.LogError($"'{Const.SkillReadyEvent}' 변수를 찾을 수 없습니다.");
         }
 
-        if (!_behaviorGraphAgent.GetVariable(BehaviorGraphVariableNames.IsBasicAttackSkillReady, out _isBasicAttackSkillReady))
+        if (!_behaviorGraphAgent.GetVariable(Const.IsBasicAttackSkillReady, out _isBasicAttackSkillReady))
         {
-            Debug.LogError($"[BT] {BehaviorGraphVariableNames.IsBasicAttackSkillReady} 변수를 찾을 수 없습니다.");
+            Logger.LogError($"'{Const.IsBasicAttackSkillReady}' 변수를 찾을 수 없습니다.");
         }
 
-        if (!_behaviorGraphAgent.GetVariable(BehaviorGraphVariableNames.IsSignatureSkillReady, out _isSignatureSkillReady))
+        if (!_behaviorGraphAgent.GetVariable(Const.IsSignatureSkillReady, out _isSignatureSkillReady))
         {
-            Debug.LogError($"[BT] {BehaviorGraphVariableNames.IsSignatureSkillReady} 변수를 찾을 수 없습니다.");
+            Logger.LogError($"'{Const.IsSignatureSkillReady}' 변수를 찾을 수 없습니다.");
         }
-    }
-
-    private void InitializeViewModel(BattleUnitModelBase baseBattleUnitModel)
-    {
-        _battleUnitViewModel.Initialize(baseBattleUnitModel);
     }
 
     private void UpdateAnimation(string addressableKey)
@@ -170,28 +164,41 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         }
     }
 
-    private void UpdateActiveState(bool isDead)
+    private async UniTask UpdateActiveState(bool isDead)
     {
         if (isDead)
         {
-            Death().Forget();
+            await PlayDeathSequence();
         }
+
+        _battleUnitViewModel.RequestSetActive(!isDead);
     }
 
-    private async UniTask Death()
+    private async UniTask PlayDeathSequence()
     {
         _battleUnitAnimator.Play(BattleUnitAnimationType.Death);
 
-        await UniTask.WaitUntil(_battleUnitAnimator.IsDeathAnimationCompleted);
+        HandleBattleExit();
 
-        EndBattle();
-
-        _battleUnitViewModel.RequestSetActive(false);
+        try
+        {
+            await UniTask.WaitUntil(_battleUnitAnimator.IsDeathAnimationCompleted, cancellationToken: this.GetCancellationTokenOnDestroy());
+        }
+        catch(OperationCanceledException)
+        {
+            return;
+        }
     }
 
     private void NotifySkillReadyStateChanged(UnitSkillType unitSkillType)
     {
         _skillReadyEvent.Value.SendEventMessage(unitSkillType);
+    }
+
+    private void HandleBattleExit()
+    {
+        _battleUnitViewModel.ExitBattle();
+        _behaviorGraphAgent.End();
     }
 
     private void OnPropertyChanged(string propertyName)
@@ -208,7 +215,7 @@ public abstract class BattleUnitViewBase : MonoBehaviour
                 UpdateSignatureSkillReady(_battleUnitViewModel.IsSignatureSkillReady);
                 break;
             case nameof(_battleUnitViewModel.IsDead):
-                UpdateActiveState(_battleUnitViewModel.IsDead);
+                UpdateActiveState(_battleUnitViewModel.IsDead).Forget();
                 break;
         }
     }

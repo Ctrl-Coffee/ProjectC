@@ -49,7 +49,7 @@ public class CooldownService
     {
         if (duration < 0f)
         {
-            Debug.LogError($"'{duration}' 유효하지 않은 쿨타임 값입니다.");
+            Logger.LogError($"'{duration}' 유효하지 않은 쿨타임 값입니다.");
             return;
         }
 

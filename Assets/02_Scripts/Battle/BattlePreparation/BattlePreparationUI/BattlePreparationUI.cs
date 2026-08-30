@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BattlePreparationView : MonoBehaviour
+public class BattlePreparationUI : UIBase
 {
     [Header("Companion Selection")]
     [SerializeField] private Transform _companionSelectionContent;
@@ -291,10 +291,9 @@ public class BattlePreparationView : MonoBehaviour
         return isCompanionRemoved;
     }
 
-    //TODO
     private void HandleStartBattleButtonClicked()
     {
         GameManager.Battle.StartBattle();
-        gameObject.SetActive(false);
+        GameManager.UI.CloseBattlePreparation();
     }
 }

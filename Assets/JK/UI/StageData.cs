@@ -12,4 +12,6 @@ public class StageData : BaseData
     public int DreamShardReward;
     public int InspirationReward;
     public int DPCost;
+    public string NextStageId;
+    public string SpriteAddressableKey;
 }

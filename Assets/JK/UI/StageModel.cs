@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StageModel : ModelBase
@@ -13,6 +14,8 @@ public class StageModel : ModelBase
     private int _dreamShardReward;
     private int _inspirationReward;
     private int _dpCost;
+    private string _nextStageId;
+    private string _spriteAddressableKey;
 
     public int Chapter
     {
@@ -27,6 +30,21 @@ public class StageModel : ModelBase
     public int IsBoss
     {
         get { return _isBoss; }
+    }
+
+    public string NextStageId
+    {
+        get { return _nextStageId; }
+    }
+
+    public string SpriteAddressableKey
+    {
+        get { return _spriteAddressableKey; }
+    }
+
+    public IReadOnlyList<string> EnemyGroupIds
+    {
+        get { return _enemyGroupIds; }
     }
 
     public void SetStage(string stageId)
@@ -57,6 +75,8 @@ public class StageModel : ModelBase
         _dreamShardReward = stageData.DreamShardReward;
         _inspirationReward = stageData.InspirationReward;
         _dpCost = stageData.DPCost;
+        _nextStageId = stageData.NextStageId;
+        _spriteAddressableKey = stageData.SpriteAddressableKey;
 
         SetEnemyGroupIds(stageData.EnemyGroupId);
     }
@@ -90,6 +110,12 @@ public class StageModel : ModelBase
         for (int i = 0; i < _enemyGroupIds.Length; i++)
         {
             string enemyId = enemyGroupIds[i].Trim();
+
+            if (enemyId.Equals("null", StringComparison.OrdinalIgnoreCase))
+            {
+                enemyId = null;
+            }
+
             _enemyGroupIds[i] = enemyId;
         }
     }
