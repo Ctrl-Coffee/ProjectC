@@ -123,19 +123,19 @@ public abstract class BattleUnitViewBase : MonoBehaviour
 
     private void CacheBehaviorVariables()
     {
-        if (!_behaviorGraphAgent.GetVariable(Const.SkillReadyEvent, out _skillReadyEvent))
+        if (!_behaviorGraphAgent.GetVariable(Const.SKILL_READY_EVENT, out _skillReadyEvent))
         {
-            Logger.LogError($"'{Const.SkillReadyEvent}' 변수를 찾을 수 없습니다.");
+            Logger.LogError($"'{Const.SKILL_READY_EVENT}' 변수를 찾을 수 없습니다.");
         }
 
-        if (!_behaviorGraphAgent.GetVariable(Const.IsBasicAttackSkillReady, out _isBasicAttackSkillReady))
+        if (!_behaviorGraphAgent.GetVariable(Const.BASIC_ATTACK_SKILL_READY, out _isBasicAttackSkillReady))
         {
-            Logger.LogError($"'{Const.IsBasicAttackSkillReady}' 변수를 찾을 수 없습니다.");
+            Logger.LogError($"'{Const.BASIC_ATTACK_SKILL_READY}' 변수를 찾을 수 없습니다.");
         }
 
-        if (!_behaviorGraphAgent.GetVariable(Const.IsSignatureSkillReady, out _isSignatureSkillReady))
+        if (!_behaviorGraphAgent.GetVariable(Const.SIGNATURE_SKILL_READY, out _isSignatureSkillReady))
         {
-            Logger.LogError($"'{Const.IsSignatureSkillReady}' 변수를 찾을 수 없습니다.");
+            Logger.LogError($"'{Const.SIGNATURE_SKILL_READY}' 변수를 찾을 수 없습니다.");
         }
     }
 

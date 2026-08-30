@@ -14,8 +14,8 @@ public abstract class BattleUnitModelBase : ModelBase
     protected float _defense;
     protected float _criticalChance;
 
-    private float _attackSpeed;
-    private float _cooldownReduction;
+    private float _basicAttackHaste;
+    private float _signatureSkillHaste;
 
     private string _basicAttackSkillId;
     private string _signatureSkillId;
@@ -235,8 +235,8 @@ public abstract class BattleUnitModelBase : ModelBase
         _attack = battleUnitData.Attack;
         _defense = battleUnitData.Defense;
         _criticalChance = battleUnitData.CriticalChance;
-        _attackSpeed = battleUnitData.AttackSpeed;
-        _cooldownReduction = battleUnitData.CooldownReduction;
+        _basicAttackHaste = battleUnitData.BasicAttackHaste;
+        _signatureSkillHaste = battleUnitData.SignatureSkillHaste;
         _isDead = false;
     }
 
@@ -307,8 +307,8 @@ public abstract class BattleUnitModelBase : ModelBase
         _attack = 0f;
         _defense = 0f;
         _criticalChance = 0f;
-        _attackSpeed = 0f;
-        _cooldownReduction = 0f;
+        _basicAttackHaste = 0f;
+        _signatureSkillHaste = 0f;
         _isDead = true;
     }
 
@@ -384,12 +384,12 @@ public abstract class BattleUnitModelBase : ModelBase
 
     private void UpdateBasicAttackSkillCooldown()
     {
-        _calculatedBasicAttackSkillCooldown = BattleUtility.CalculateBasicAttackSkillCooldown(_basicAttackSkillCooldown, _attackSpeed);
+        _calculatedBasicAttackSkillCooldown = BattleUtility.CalculateBasicAttackSkillCooldown(_basicAttackSkillCooldown, _basicAttackHaste);
     }
 
     private void UpdateSignatureSkillCooldown()
     {
-        _calculatedSignatureSkillCooldown = BattleUtility.CalculateSignatureSkillCooldown(_signatureSkillCooldown, _cooldownReduction);
+        _calculatedSignatureSkillCooldown = BattleUtility.CalculateSignatureSkillCooldown(_signatureSkillCooldown, _signatureSkillHaste);
     }
 
     private void TakeDamage(float damage)

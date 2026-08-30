@@ -41,7 +41,11 @@
     public const string DEATH = "Death";
 
     //BT 변수명
-    public const string SkillReadyEvent = "SkillReadyEvent";
-    public const string IsBasicAttackSkillReady = "IsBasicAttackSkillReady";
-    public const string IsSignatureSkillReady = "IsSignatureSkillReady";
+    public const string SKILL_READY_EVENT = "SkillReadyEvent";
+    public const string BASIC_ATTACK_SKILL_READY = "IsBasicAttackSkillReady";
+    public const string SIGNATURE_SKILL_READY = "IsSignatureSkillReady";
+
+    //색
+    public const string STAGE_DANGER_COLOR = "#D81B60";
+    public const string STAGE_SAFE_COLOR = "#222222";
 }

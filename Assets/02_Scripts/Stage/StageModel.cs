@@ -32,6 +32,31 @@ public class StageModel : ModelBase
         get { return _isBoss; }
     }
 
+    public int RecommendedPlayerLevel
+    {
+        get { return _recommendedPlayerLevel; }
+    }
+
+    public float EnemyStatMultiplier
+    {
+        get { return _enemyStatMultiplier; }
+    }
+
+    public int DreamShardReward
+    {
+        get { return _dreamShardReward; }
+    }
+
+    public int InspirationReward
+    {
+        get { return _inspirationReward; }
+    }
+
+    public int DpCost
+    {
+        get { return _dpCost; }
+    }
+
     public string NextStageId
     {
         get { return _nextStageId; }
@@ -92,6 +117,8 @@ public class StageModel : ModelBase
         _dreamShardReward = 0;
         _inspirationReward = 0;
         _dpCost = 0;
+        _nextStageId = null;
+        _spriteAddressableKey = null;
 
         Array.Clear(_enemyGroupIds, 0, _enemyGroupIds.Length);
     }
@@ -124,5 +151,9 @@ public class StageModel : ModelBase
     {
         OnPropertyChanged(nameof(Chapter));
         OnPropertyChanged(nameof(StageNumber));
+        OnPropertyChanged(nameof(RecommendedPlayerLevel));
+        OnPropertyChanged(nameof(DreamShardReward));
+        OnPropertyChanged(nameof(InspirationReward));
+        OnPropertyChanged(nameof(DpCost));
     }
 }

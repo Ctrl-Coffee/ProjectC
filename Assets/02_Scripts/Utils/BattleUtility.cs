@@ -12,12 +12,12 @@ public static class BattleUtility
         battleUnitData.MaxHp = heroInfoModel.Hp;
         battleUnitData.Attack = heroInfoModel.Attack;
         battleUnitData.Defense = heroInfoModel.Defense;
-        battleUnitData.CriticalChance = heroInfoModel.CriticalRate;
-        battleUnitData.AttackSpeed = heroInfoModel.NormalSkillHaste;
-        battleUnitData.CooldownReduction = heroInfoModel.SpecialSkillHaste;
+        battleUnitData.CriticalChance = heroInfoModel.CriticalChance;
+        battleUnitData.BasicAttackHaste = heroInfoModel.BasicAttackHaste;
+        battleUnitData.SignatureSkillHaste = heroInfoModel.SignatureSkillHaste;
         battleUnitData.BasicAttackSkillId = equipmentData.BaseSkillId;
         battleUnitData.SignatureSkillId = equipmentData.BaseSkillId;
-        //battleUnitData.SignatureSkillId = equipmentData.ActiveSkillId;
+        battleUnitData.SignatureSkillId = equipmentData.SignatureSkillId;
         battleUnitData.AnimationSetKey = "Animation/HeroBaseArmor";
 
         return battleUnitData;
@@ -48,8 +48,8 @@ public static class BattleUtility
         battleUnitData.Attack = enemyData.BaseAttack;
         battleUnitData.Defense = enemyData.BaseDefense;
         battleUnitData.CriticalChance = enemyData.BaseCriticalChance;
-        battleUnitData.AttackSpeed = 0;
-        battleUnitData.CooldownReduction = 0;
+        battleUnitData.BasicAttackHaste = enemyData.BasicAttackHaste;
+        battleUnitData.SignatureSkillHaste = enemyData.SignatureSkillHaste;
         battleUnitData.BasicAttackSkillId = enemyData.BasicAttackSkillId;
         battleUnitData.SignatureSkillId = enemyData.SignatureSkillId;
         battleUnitData.AnimationSetKey = "Animation/HeroBaseArmor";

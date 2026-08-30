@@ -5,8 +5,8 @@
     public float Attack;
     public float Defense;
     public float CriticalChance;
-    public float AttackSpeed;
-    public float CooldownReduction;
+    public float BasicAttackHaste;
+    public float SignatureSkillHaste;
     public string BasicAttackSkillId;
     public string SignatureSkillId;
     public string AnimationSetKey;
