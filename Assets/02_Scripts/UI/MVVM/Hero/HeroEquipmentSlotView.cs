@@ -82,13 +82,13 @@ public class HeroEquipmentSlotView : ViewBase
 
         _input.SetEquipmentId(_heroEquipmentId);
 
-        LoadIconAsync();
+        LoadIcon();
 
         int level = _viewModel.GetLevel(_heroEquipmentId);
         _level.SetText("Lv.{0}", level);
     }
 
-    private async void LoadIconAsync()
+    private void LoadIcon()
     {
         if (_heroEquipmentId == null)
         {
@@ -100,8 +100,8 @@ public class HeroEquipmentSlotView : ViewBase
             return;
         }
 
-        _icon.sprite = await GameManager.Resource.LoadAssetAsync<Sprite>
-            (GameManager.DataTable.GetEquipmentData(_heroEquipmentId).IconPath);
+        _icon.sprite = GameManager.Resource.GetLoadedAsset<Sprite>
+            (GameManager.DataTable.GetEquipmentData(_heroEquipmentId).IconSpriteAddressableKey);
         _icon.gameObject.SetActive(true);
 
         _level.gameObject.SetActive(true);

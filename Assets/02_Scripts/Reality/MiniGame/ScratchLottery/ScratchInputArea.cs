@@ -28,7 +28,7 @@ public class ScratchInputArea : MonoBehaviour, IPointerDownHandler, IDragHandler
     {
         Vector2 currentPosition = eventData.position;
 
-        if (_hasPrevious = false)
+        if (_hasPrevious == false)
         {
             _previousPosition = currentPosition;
             _hasPrevious = true;

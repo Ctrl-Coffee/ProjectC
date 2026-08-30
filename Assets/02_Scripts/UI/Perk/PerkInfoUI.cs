@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,9 +42,9 @@ public class PerkInfoUI : UIBase
         }
     }
 
-    private async void OnClickPerkStat()
+    private void OnClickPerkStat()
     {
-        _perkStatView = await GameManager.UI.OpenPerkStat();
+        _perkStatView = GameManager.UI.OpenPerkStat();
     }
 
     private void ClosePerkStat()

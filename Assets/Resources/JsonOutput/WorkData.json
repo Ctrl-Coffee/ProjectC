@@ -42,7 +42,7 @@
     "Id": "Work_Manual_04",
     "Name": "Write a novel",
     "WorkType": "Manual",
-    "MiniGame": "None",
+    "MiniGame": "NovelWriting",
     "ReqEnergy": 1,
     "ReqGold": 0,
     "DurationSeconds": 0,

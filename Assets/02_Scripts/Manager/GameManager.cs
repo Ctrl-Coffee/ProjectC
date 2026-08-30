@@ -10,7 +10,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static PoolManager Pool { get { return Instance._poolManager; } }
     public static TimeManager Time { get { return Instance._timeManager; } }
     public static UIManager UI { get { return Instance._uiManager; } }
-    public static GrowthSystem Growth { get { return Instance._growthSystem; } }
     public static PerkManager Perk { get { return Instance._perkManager; } }
     public static SoundManager Sound { get { return Instance._soundManager; } }
     public static BattleManager Battle { get { return Instance._battleManager; } }
@@ -27,7 +26,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     private PoolManager _poolManager = new();
     private TimeManager _timeManager = new();
     private UIManager _uiManager = new();
-    private GrowthSystem _growthSystem = new();
     private SoundManager _soundManager = new();
     private PerkManager _perkManager = new();
     private BattleManager _battleManager = new();
@@ -60,8 +58,9 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private async UniTask InitializeLoginAsync()
     {
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.UIROOT);
         await _resourceManager.LoadContentAsync(AddressablePath.Label.LOGIN);
-        await _uiManager.Init();
+        _uiManager.Init();
 
         _soundManager.Init(gameObject);
         _uiManager.OpenLoginUI();

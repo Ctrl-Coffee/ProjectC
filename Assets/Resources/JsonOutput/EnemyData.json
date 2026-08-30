@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "Id": "enemy_ch1_001",
     "Name": "초원 슬라임",
@@ -6,8 +6,11 @@
     "BaseAttack": 60,
     "BaseDefense": 25,
     "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "enemy_skill_ch1_melee_basic",
-    "SignatureSkillId": null
+    "SignatureSkillId": null,
+    "AnimationSetKey": "Anim/enemy_ch1_001"
   },
   {
     "Id": "enemy_ch1_002",
@@ -16,8 +19,11 @@
     "BaseAttack": 105,
     "BaseDefense": 15,
     "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "enemy_skill_ch1_ranged_basic",
-    "SignatureSkillId": null
+    "SignatureSkillId": null,
+    "AnimationSetKey": "Anim/enemy_ch1_002"
   },
   {
     "Id": "enemy_ch1_003",
@@ -26,8 +32,11 @@
     "BaseAttack": 50,
     "BaseDefense": 35,
     "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "enemy_skill_ch1_tank_basic",
-    "SignatureSkillId": null
+    "SignatureSkillId": null,
+    "AnimationSetKey": "Anim/enemy_ch1_003"
   },
   {
     "Id": "boss_ch1_001",
@@ -36,8 +45,11 @@
     "BaseAttack": 180,
     "BaseDefense": 115,
     "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "enemy_skill_ch1_boss_basic",
-    "SignatureSkillId": "enemy_skill_ch1_boss_active"
+    "SignatureSkillId": "enemy_skill_ch1_boss_active",
+    "AnimationSetKey": "Anim/boss_ch1_001"
   },
   {
     "Id": "enemy_ch2_001",
@@ -46,8 +58,11 @@
     "BaseAttack": 90,
     "BaseDefense": 45,
     "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "enemy_skill_ch2_melee_basic",
-    "SignatureSkillId": null
+    "SignatureSkillId": null,
+    "AnimationSetKey": "Anim/enemy_ch2_001"
   },
   {
     "Id": "enemy_ch2_002",
@@ -56,8 +71,11 @@
     "BaseAttack": 120,
     "BaseDefense": 30,
     "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "enemy_skill_ch2_ranged_basic",
-    "SignatureSkillId": null
+    "SignatureSkillId": null,
+    "AnimationSetKey": "Anim/enemy_ch2_002"
   },
   {
     "Id": "enemy_ch2_003",
@@ -66,8 +84,11 @@
     "BaseAttack": 65,
     "BaseDefense": 55,
     "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "enemy_skill_ch2_tank_basic",
-    "SignatureSkillId": null
+    "SignatureSkillId": null,
+    "AnimationSetKey": "Anim/enemy_ch2_003"
   },
   {
     "Id": "boss_ch2_001",
@@ -76,7 +97,10 @@
     "BaseAttack": 350,
     "BaseDefense": 120,
     "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
     "BasicAttackSkillId": "enemy_skill_ch2_boss_basic",
-    "SignatureSkillId": "enemy_skill_ch2_boss_active"
+    "SignatureSkillId": "enemy_skill_ch2_boss_active",
+    "AnimationSetKey": "Anim/boss_ch2_001"
   }
 ]

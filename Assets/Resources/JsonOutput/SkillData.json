@@ -88,5 +88,14 @@
     "DamageMultiplier": 1.2,
     "BaseCooldown": 10,
     "Description": "상대 전체에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_player_001_basic",
+    "Name": null,
+    "SkillType": null,
+    "TargetType": null,
+    "DamageMultiplier": null,
+    "BaseCooldown": null,
+    "Description": null
   }
 ]
