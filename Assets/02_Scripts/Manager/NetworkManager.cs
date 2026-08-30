@@ -163,6 +163,24 @@ public class NetworkManager
         return PostAsync<LoadEquipmentLoadoutResponse>("/api/equipmentloadout/load", _authenticatedRequest);
     }
 
+    public UniTask<SaveStageRecordResponse> SaveStageAsync(int stage)
+    {
+        StageRecordRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            StageRecordData = new StageRecordDto() { lastClearedStage = stage }
+        };
+
+        return PostAsync<SaveStageRecordResponse>("/api/stagerecord/save", request);
+    }
+
+    public UniTask<LoadStageRecordResponse> LoadStageAsync()
+    {
+        return PostAsync<LoadStageRecordResponse>("/api/stagerecord/load", _authenticatedRequest);
+    }
+
+
     private async UniTask<TResponse> PostAsync<TResponse>(string path, object requestData)
     {
         string requestJson = JsonUtility.ToJson(requestData);

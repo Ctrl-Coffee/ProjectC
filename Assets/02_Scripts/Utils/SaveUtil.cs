@@ -27,15 +27,20 @@ public static class SaveUtil
         _equipmentLoadoutSaveRequest.Request();
     }
 
-    public static async UniTask SaveAllDataAsync()
+    public static async UniTask SaveStageData(int stage)
     {
-        await UniTask.WhenAll(SaveCurrencyAsync(), SaveEquipmentLoadoutAsync());
+        await GameManager.Network.SaveStageAsync(stage);
     }
 
 
 
 
 
+
+    public static async UniTask SaveAllDataAsync()
+    {
+        await UniTask.WhenAll(SaveCurrencyAsync(), SaveEquipmentLoadoutAsync());
+    }
 
     private static async UniTask SaveCurrencyAsync()
     {
