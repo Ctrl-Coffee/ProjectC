@@ -6,6 +6,7 @@ public static class SaveUtil
     private static readonly SaveRequest _companionSaveRequest = new(SaveCompanionAsync);
     private static readonly SaveRequest _equipmentSaveRequest = new(SaveEquipmentAsync);
     private static readonly SaveRequest _equipmentLoadoutSaveRequest = new(SaveEquipmentLoadoutAsync);
+    private static readonly SaveRequest _heroLevelSaveRequest = new(SaveHeroLevelAsync);
 
     public static void RequestSaveCurrency()
     {
@@ -27,12 +28,15 @@ public static class SaveUtil
         _equipmentLoadoutSaveRequest.Request();
     }
 
-    public static async UniTask SaveStageData(int stage)
+    public static async UniTask RequestSaveStageData(int stage)
     {
         await GameManager.Network.SaveStageAsync(stage);
     }
 
-
+    public static void RequestSaveHeroLevelData()
+    {
+        _heroLevelSaveRequest.Request();
+    }
 
 
 
@@ -60,5 +64,10 @@ public static class SaveUtil
     private static async UniTask SaveCompanionAsync()
     {
         await GameManager.Network.SaveCompanionAsync(GameManager.Session.Companion);
+    }
+
+    private static async UniTask SaveHeroLevelAsync()
+    {
+        await GameManager.Network.SaveHeroLevelAsync(GameManager.Session.HeroInfo);
     }
 }

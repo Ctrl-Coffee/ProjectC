@@ -180,6 +180,22 @@ public class NetworkManager
         return PostAsync<LoadStageRecordResponse>("/api/stagerecord/load", _authenticatedRequest);
     }
 
+    public UniTask<SaveHeroLevelResponse> SaveHeroLevelAsync(HeroInfoModel heroInfoModel)
+    {
+        HeroLevelRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            HeroLevelData = new HeroLevelDto() { userLevel = heroInfoModel.Level }
+        };
+
+        return PostAsync<SaveHeroLevelResponse>("/api/herolevel/save", request);
+    }
+
+    public UniTask<LoadHeroLevelResponse> LoadHeroLevelAsync()
+    {
+        return PostAsync<LoadHeroLevelResponse>("/api/herolevel/load", _authenticatedRequest);
+    }
 
     private async UniTask<TResponse> PostAsync<TResponse>(string path, object requestData)
     {
