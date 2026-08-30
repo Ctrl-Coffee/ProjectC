@@ -253,6 +253,31 @@ public class NetworkManager
         return PostAsync<LoadAutoWorkSlotResponse>("/api/autoworkslot/load", _authenticatedRequest);
     }
 
+    public UniTask<SaveCompanionPartyResponse> SaveCompanionPartyAsync()
+    {
+        CompanionPartyDto companionPartyDto = new();
+
+        // TODO: 현재 파티 편성된 동료 id 가져오기
+        companionPartyDto.companionIds[0] = null;
+        companionPartyDto.companionIds[1] = null;
+
+        CompanionPartyRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            CompanionPartyData = companionPartyDto
+        };
+
+        return PostAsync<SaveCompanionPartyResponse>("/api/companionparty/save", request);
+    }
+
+    public UniTask<LoadCompanionPartyResponse> LoadCompanionPartyAsync()
+    {
+        return PostAsync<LoadCompanionPartyResponse>("/api/companionparty/load", _authenticatedRequest);
+    }
+
+
+
     private async UniTask<TResponse> PostAsync<TResponse>(string path, object requestData)
     {
         string requestJson = JsonUtility.ToJson(requestData);

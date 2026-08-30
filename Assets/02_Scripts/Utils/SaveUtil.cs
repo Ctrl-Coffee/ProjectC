@@ -9,6 +9,7 @@ public static class SaveUtil
     private static readonly SaveRequest _heroLevelSaveRequest = new(SaveHeroLevelAsync);
     private static readonly SaveRequest _perkSaveRequest = new(SavePerkAsync);
     private static readonly SaveRequest _autoWorkSaveRequest = new(SaveAutoWorkAsync);
+    private static readonly SaveRequest _companionPartySaveRequest = new(SaveCompanionPartyAsync);
 
     public static void RequestSaveCurrency()
     {
@@ -50,6 +51,10 @@ public static class SaveUtil
         _autoWorkSaveRequest.Request();
     }
 
+    public static void RequestSaveCompanionPartyData()
+    {
+        _companionPartySaveRequest.Request();
+    }
 
 
     public static async UniTask SaveAllDataAsync()
@@ -90,5 +95,10 @@ public static class SaveUtil
     private static async UniTask SaveAutoWorkAsync()
     {
         await GameManager.Network.SaveAutoWorkSlotAsync();
+    }
+
+    private static async UniTask SaveCompanionPartyAsync()
+    {
+        await GameManager.Network.SaveCompanionPartyAsync();
     }
 }
