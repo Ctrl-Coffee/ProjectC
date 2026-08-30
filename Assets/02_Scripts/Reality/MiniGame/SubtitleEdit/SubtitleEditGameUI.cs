@@ -1,13 +1,14 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SubtitleEditGameUI : MiniGameBase
 {
     [Header("배치")]
     [SerializeField] private RectTransform _playArea;
     [SerializeField] private RectTransform _targetSlot;
-    [SerializeField] private UIButtonComponent _btnAttach;
+    [SerializeField] private Button _btnAttach;
 
     [SerializeField] private FallingSubtitle _subtitlePrefab;
 
@@ -180,7 +181,8 @@ public class SubtitleEditGameUI : MiniGameBase
             return;
         }
 
-        _btnAttach.BindButtonEvent(OnClickAttach);
+        _btnAttach.onClick.RemoveListener(OnClickAttach);
+        _btnAttach.onClick.AddListener(OnClickAttach);
     }
 
     private void UnbindInput()
@@ -190,7 +192,7 @@ public class SubtitleEditGameUI : MiniGameBase
             return;
         }
 
-        _btnAttach.UnBindButtonAllEvent();
+        _btnAttach.onClick.RemoveListener(OnClickAttach);
     }
 
     private void OnClickAttach()

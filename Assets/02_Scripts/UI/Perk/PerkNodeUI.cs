@@ -149,6 +149,8 @@ public class PerkNodeUI : MonoBehaviour
     {
         PlayPressAnimation();
 
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.BUTTON_CLICK);
+
         if (null == _owner)
         {
             return;
