@@ -82,6 +82,9 @@ public class GameManager : SingletonBehaviour<GameManager>
         await gameSession.LoadAllData();
         _gameSession = gameSession;
 
+        await _perkManager.LoadDataAsync();
+        await AutoWorkQueue.RestoreSlots();
+
         _battleManager = new();
 
         _viewModelFactory = new(_gameSession, _dataTable);

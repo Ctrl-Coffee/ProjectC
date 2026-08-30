@@ -128,12 +128,12 @@ public class HeroInfoModel : ModelBase, IStatData
         }
     }
 
-    public HeroInfoModel(OwnedPlayerData ownedPlayerData, HeroEquipedModel equiped, HeroEquipmentModel equipment)
+    public HeroInfoModel(OwnedPlayerData ownedPlayerData, HeroEquipedModel equiped, HeroEquipmentModel equipment, int level)
     {
         _ownedPlayerData = ownedPlayerData;
         _equiped = equiped;
         _equipment = equipment;
-
+        _level = level;
         // 장비 착용 / 장비 강화 시 최종 스텟이 바뀌므로 구독. 레벨은 이 모델이 직접 소유한다.
         _equiped.PropertyChanged += OnEquipedChanged;
         _equipment.ContainerPropertyChanged += OnEquipmentChanged;
@@ -199,6 +199,8 @@ public class HeroInfoModel : ModelBase, IStatData
         _ownedPlayerData.Level += 1;
 
         Recalculate();
+
+        SaveUtil.RequestSaveHeroLevelData();
 
         return LevelUpResult.Success;
     }
