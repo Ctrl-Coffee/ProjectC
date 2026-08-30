@@ -82,13 +82,14 @@ public class LoginUI : UIBase
             }
 
             await GameManager.Resource.LoadContentAsync(AddressablePath.Label.LOADDING);
-            LoadingUI loadingUI = await GameManager.UI.OpenLoading();
+            LoadingUI loadingUI = GameManager.UI.OpenLoading();
             CloseUI();
 
             await GameManager.Instance.InitializeAfterLoginAsync(loadingUI.SetProgress);
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            Logger.LogError($"로그인 또는 로딩 중 예외 발생\n{exception}");
             _loginAndSignupButton.SetInteractable(true);
             ShowLoginFail();
         }
@@ -113,8 +114,9 @@ public class LoginUI : UIBase
 
             await LoginAndLoadAsync();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            Logger.LogError($"회원가입 후 예외 발생\n{exception}");
             ConfirmData data = GameManager.DataTable.GetConfirmData(ConfirmDataKey.SIGNUP_FAIL);
             GameManager.UI.OpenConfirmUI(data);
             _loginAndSignupButton.SetInteractable(true);

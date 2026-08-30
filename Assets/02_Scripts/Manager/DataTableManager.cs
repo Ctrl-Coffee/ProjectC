@@ -22,6 +22,8 @@ public class DataTableManager
     public Dictionary<string, PerkNodeData> PerkNodeDataTable { get; private set; } = new();
     public Dictionary<string, PerkEffectData> PerkEffectDataTable { get; private set; } = new();
     public Dictionary<string, WorkStatData> WorkStatDataTable { get; private set; } = new();
+    public Dictionary<string, EnemyData> EnemyDataTable { get; private set; } = new();
+    public Dictionary<string, StageData> StageDataTable { get; private set; } = new();
 
     private Dictionary<int, List<CompanionData>> _companionsByGrade = new();
 
@@ -50,6 +52,8 @@ public class DataTableManager
         PerkNodeDataTable = LoadData<PerkNodeData>(nameof(PerkNodeData));
         PerkEffectDataTable = LoadData<PerkEffectData>(nameof(PerkEffectData));
         WorkStatDataTable = LoadData<WorkStatData>(nameof(WorkStatData));
+        EnemyDataTable = LoadData<EnemyData>(nameof(EnemyData));
+        StageDataTable = LoadData<StageData>(nameof(StageData));
 
         BuildCompanionGradeIndex();
         BuildGachaProbabilityIndex();
@@ -75,10 +79,10 @@ public class DataTableManager
         return CompanionDataTable.TryGetValue(id, out var data) ? data : null;
     }
 
-    public CompanionLevelData GetCompanionLevelData(string companionId, int level)
+    public CompanionLevelData GetCompanionLevelData(int level)
     {
-        if (null == CompanionLevelDataTable || string.IsNullOrEmpty(companionId)) return null;
-        string id = $"{companionId}_{level}";
+        if (null == CompanionLevelDataTable) return null;
+        string id = $"companion_level_{level}";
         return CompanionLevelDataTable.TryGetValue(id, out var data) ? data : null;
     }
     public SkillData GetSkillData(string id)
@@ -107,10 +111,10 @@ public class DataTableManager
         if (null == PlayerDataTable || string.IsNullOrEmpty(id)) return null;
         return PlayerDataTable.TryGetValue(id, out var data) ? data : null;
     }
-    public EquipmentLevelData GetEquipmentLevelData(int level)
+    public EquipmentLevelData GetEquipmentLevelData(string id)
     {
         if (null == EquipmentLevelDataTable) return null;
-        return EquipmentLevelDataTable.TryGetValue(level.ToString(), out var data) ? data : null;
+        return EquipmentLevelDataTable.TryGetValue(id, out var data) ? data : null;
     }
     public EquipmentData GetEquipmentData(string id)
     {
@@ -175,6 +179,17 @@ public class DataTableManager
         return WorkStatDataTable.TryGetValue(statType.ToString(), out var data) ? data : null;
     }
 
+    public EnemyData GetEnemyData(string id)
+    {
+        if (null == EnemyDataTable || string.IsNullOrEmpty(id)) return null;
+        return EnemyDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public StageData GetStageData(string id)
+    {
+        if (null == StageDataTable || string.IsNullOrEmpty(id)) return null;
+        return StageDataTable.TryGetValue(id, out var data) ? data : null;
+    }
     #endregion
 
     [Serializable]

@@ -11,12 +11,12 @@ public static class CombatPowerCalculator
             return 0f;
         }
 
-        float criticalMultiplier = 1f + stat.CriticalRate * Const.CRITICAL_WEIGHT;
+        float criticalMultiplier = 1f + stat.CriticalChance * Const.CRITICAL_WEIGHT;
 
         return (stat.Attack * Const.ATTACK_WEIGHT * criticalMultiplier)
             + (stat.Hp * Const.HEALTH_WEIGHT)
             + (stat.Defense * Const.DEFENSE_WEIGHT)
-            + (stat.NormalSkillHaste * Const.NORMAL_SKILL_HASTE_WEIGHT)
-            + (stat.SpecialSkillHaste * Const.SPECIAL_SKILL_HASTE_WEIGHT);
+            + (stat.BasicAttackHaste * Const.NORMAL_SKILL_HASTE_WEIGHT)
+            + (stat.SignatureSkillHaste * Const.SPECIAL_SKILL_HASTE_WEIGHT);
     }
 }

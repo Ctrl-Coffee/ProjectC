@@ -23,10 +23,10 @@ public class HeroEquipmentSlotView : ViewBase
         if (TryGetComponent<EquipmentSlotInput>(out var input))
         {
             _input = input;
-            GetComponent<EquipmentSlotInput>().Init(_heroEquipmentId, OnClickSlot, onClickDetail);
         }
 
         Refresh();
+        GetComponent<EquipmentSlotInput>().Init(_heroEquipmentId, OnClickSlot, onClickDetail);
     }
 
     private void OnDestroy()
@@ -42,7 +42,8 @@ public class HeroEquipmentSlotView : ViewBase
 
     protected override void BindViewModel()
     {
-        _viewModel = GameManager.ViewModel.CreateHeroEquipmentSlotViewModel(_heroEquipmentId);
+        _viewModel = GameManager.ViewModel.CreateHeroEquipmentSlotViewModel();
+        _viewModel.SetType(_type);
     }
 
     protected override void Subscribe()
@@ -67,10 +68,12 @@ public class HeroEquipmentSlotView : ViewBase
 
     private void OnContainerChanged(string propertyName, ContainerPropertyChangedEvent changedEvent, HeroEquipmentState state)
     {
-        if (changedEvent == ContainerPropertyChangedEvent.Update)
+        if (changedEvent != ContainerPropertyChangedEvent.Update || state.HeroEquipmentId != _heroEquipmentId)
         {
-            Refresh();
+            return;
         }
+
+        Refresh();
     }
 
     private void Refresh()
@@ -79,28 +82,40 @@ public class HeroEquipmentSlotView : ViewBase
 
         _input.SetEquipmentId(_heroEquipmentId);
 
-        LoadIconAsync();
+        LoadIcon();
 
         int level = _viewModel.GetLevel(_heroEquipmentId);
         _level.SetText("Lv.{0}", level);
     }
 
-    private async void LoadIconAsync()
+    private void LoadIcon()
     {
-        if(_heroEquipmentId == null)
+        if (_heroEquipmentId == null)
         {
             _icon.sprite = null;
-            return;
-        }   
+            _icon.gameObject.SetActive(false);
 
-        _icon.sprite = await GameManager.Resource.LoadAssetAsync<Sprite>
-            (GameManager.DataTable.GetEquipmentData(_heroEquipmentId).IconPath);
+            _level.gameObject.SetActive(false);
+
+            return;
+        }
+
+        _icon.sprite = GameManager.Resource.GetLoadedAsset<Sprite>
+            (GameManager.DataTable.GetEquipmentData(_heroEquipmentId).IconSpriteAddressableKey);
+        _icon.gameObject.SetActive(true);
+
+        _level.gameObject.SetActive(true);
+
     }
 
     private void OnClickSlot()
     {
         _viewModel.UnEquip(_type);
+
+        _level.gameObject.SetActive(false);
+
         _icon.sprite = null;
+        _icon.gameObject.SetActive(false);
     }
 }
 

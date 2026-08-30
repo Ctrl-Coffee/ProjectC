@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using DG.Tweening;
+﻿using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,15 +12,19 @@ public class UIManager
 
     private List<Transform> _canvasLayer;
 
-    public async UniTask Init()
+    private int _openedUICount = 0;
+
+    public bool IsWorldInputBlocked => _openedUICount > 0;
+
+    public void Init()
     {
         if (_canvasLayer == null)
         {
-            await CreateUIRoot();
+            CreateUIRoot();
         }
     }
 
-    public async UniTask<T> OpenUI<T>(UIRootType uiRootType) where T : UIBase
+    public T OpenUI<T>(UIRootType uiRootType) where T : UIBase
     {
         Type uiType = typeof(T);
 
@@ -40,7 +43,7 @@ public class UIManager
 
         try
         {
-            var ui = await GetOrCreateUI<T>(uiRootType);
+            T ui = GetOrCreateUI<T>(uiRootType);
 
             if (null == ui)
             {
@@ -55,6 +58,11 @@ public class UIManager
             {
                 ui.transform.SetAsLastSibling();
                 _popupStack.Push(uiType);
+            }
+
+            if(uiRootType != UIRootType.Hud)
+            {
+                _openedUICount++;
             }
 
             _uiStates[uiType] = UIState.Opened;
@@ -124,7 +132,7 @@ public class UIManager
         }
     }
 
-    public UIBase GetCurrentFrontUI()
+    public UIBase GetCurrentFrontPopupUI()
     {
         if (_popupStack.Count == 0)
         {
@@ -134,41 +142,48 @@ public class UIManager
         return _createdUI[_popupStack.Peek()];
     }
 
-    public UniTask<T> OpenContentUI<T>() where T : UIBase
+    public T OpenContentUI<T>() where T : UIBase
     {
         return OpenUI<T>(UIRootType.Content);
     }
 
-    public UniTask<T> OpenHUDUI<T>() where T : UIBase
+    public T OpenHUDUI<T>() where T : UIBase
     {
         return OpenUI<T>(UIRootType.Hud);
     }
 
-    public UniTask<T> OpenPopupUI<T>() where T : UIBase
+    public T OpenPopupUI<T>() where T : UIBase
     {
         return OpenUI<T>(UIRootType.Popup);
     }
 
-    public UniTask<T> OpenOverlayUI<T>() where T : UIBase
+    public T OpenOverlayUI<T>() where T : UIBase
     {
         return OpenUI<T>(UIRootType.Overlay);
     }
 
-    public async UniTask<T> CloseContentUI<T>() where T : UIBase
+    public T CloseContentUI<T>() where T : UIBase
     {
-        var ui = await GetOrCreateUI<T>(UIRootType.Content);
+        T ui = GetOrCreateUI<T>(UIRootType.Content);
         ui.CloseUI();
         return ui;
     }
 
-    public async UniTask<T> CloseHUDUI<T>() where T : UIBase
+    public T ClosePopupUI<T>() where T : UIBase
     {
-        var ui = await GetOrCreateUI<T>(UIRootType.Hud);
+        T ui = GetOrCreateUI<T>(UIRootType.Popup);
         ui.CloseUI();
         return ui;
     }
 
-    private async UniTask<T> GetOrCreateUI<T>(UIRootType uiRootType) where T : UIBase
+    public T CloseHUDUI<T>() where T : UIBase
+    {
+        T ui = GetOrCreateUI<T>(UIRootType.Hud);
+        ui.CloseUI();
+        return ui;
+    }
+
+    private T GetOrCreateUI<T>(UIRootType uiRootType) where T : UIBase
     {
         var uiType = typeof(T);
 
@@ -180,7 +195,7 @@ public class UIManager
             return ui;
         }
 
-        var uiPrefab = await GameManager.Resource.LoadAssetAsync<GameObject>(AddressablePath.GetUIPath(uiType));
+        var uiPrefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.GetUIPath(uiType));
 
         if (uiPrefab == null)
         {
@@ -202,9 +217,9 @@ public class UIManager
         return ui;
     }
 
-    private async UniTask CreateUIRoot()
+    private void CreateUIRoot()
     {
-        GameObject uiRootPrefab = await GameManager.Resource.LoadAssetAsync<GameObject>(AddressablePath.Prefab.UIROOT);
+        GameObject uiRootPrefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.UIROOT);
 
         if (uiRootPrefab == null)
         {
@@ -220,6 +235,11 @@ public class UIManager
     private void CompleteClose(UIBase ui)
     {
         var uiType = ui.GetType();
+
+        if (_uiRootTypes[uiType] != UIRootType.Hud)
+        {
+            _openedUICount--;
+        }
 
         _uiStates[uiType] = UIState.Closed;
 

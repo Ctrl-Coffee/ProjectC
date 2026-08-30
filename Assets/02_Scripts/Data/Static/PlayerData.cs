@@ -7,8 +7,8 @@ public class PlayerData : BaseData
     public float BaseHp;
     public float BaseAttack;
     public float BaseDefense;
-    public float BaseCritRate;
-    public float BaseNormalSkillHaste;
-    public float BaseSpecialSkillHaste;
+    public float BaseCriticalChance;
+    public float BasicAttackHaste;
+    public float SignatureSkillHaste;
     public string NormalSkillId;
 }

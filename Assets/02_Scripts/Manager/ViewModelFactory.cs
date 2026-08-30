@@ -9,13 +9,6 @@
         _dataTable = dataTable;
     }
 
-    public PlayerGrowthViewModel CreatePlayerGrowthViewModel()
-    {
-        PlayerGrowthModel model = _session.PlayerGrowth;
-        PlayerGrowthViewModel viewModel = new PlayerGrowthViewModel(model);
-        return viewModel;
-    }
-
     public HeroInfoViewModel CreateHeroInfoViewModel()
     {
         HeroInfoModel model = _session.HeroInfo;
@@ -57,10 +50,10 @@
         return viewModel;
     }
 
-    public HeroEquipmentSlotViewModel CreateHeroEquipmentSlotViewModel(string heroEquipmentId)
+    public HeroEquipmentSlotViewModel CreateHeroEquipmentSlotViewModel()
     {
         HeroEquipmentModel model = _session.HeroEquipment;
-        HeroEquipmentSlotViewModel viewModel = new HeroEquipmentSlotViewModel(model, heroEquipmentId);
+        HeroEquipmentSlotViewModel viewModel = new HeroEquipmentSlotViewModel(model);
         return viewModel;
     }
 

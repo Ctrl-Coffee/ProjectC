@@ -9,7 +9,6 @@ public class GameSession
     public GachaModel Gacha { get; private set; }
 
 
-    public PlayerGrowthModel PlayerGrowth { get; }
     public HeroInfoModel HeroInfo { get; private set; }
 
 
@@ -22,7 +21,6 @@ public class GameSession
     {
         _networkManager = networkManager;
 
-        PlayerGrowth = new(new());
         Gacha = new();
     }
 
@@ -41,8 +39,13 @@ public class GameSession
 
         var equipmentLoadoutData = await _networkManager.LoadEquipmentLoadoutAsync();
         EquipmentLoadoutDto equipmentLoadoutDto = equipmentLoadoutData.data;
-        HeroEquiped = new(equipmentLoadoutDto);
+        HeroEquiped = new(equipmentLoadoutDto, HeroEquipment);
 
-        HeroInfo = new(PlayerGrowth, HeroEquiped, HeroEquipment);
+        if (null != HeroInfo)
+        {
+            HeroInfo.Dispose();
+        }
+
+        HeroInfo = new(new OwnedPlayerData(), HeroEquiped, HeroEquipment);
     }
 }

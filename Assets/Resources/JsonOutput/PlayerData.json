@@ -5,9 +5,9 @@
     "BaseHp": 1000,
     "BaseAttack": 100,
     "BaseDefense": 50,
-    "BaseCritRate": 10,
-    "BaseNormalSkillHaste": 0,
-    "BaseSpecialSkillHaste": 0,
-    "NormalSkillId": "player_skill_normal_001"
+    "BaseCriticalChance": 0.1,
+    "BasicAttackHaste": 0,
+    "SignatureSkillHaste": 0,
+    "NormalSkillId": "skill_player_001_basic"
   }
 ]
