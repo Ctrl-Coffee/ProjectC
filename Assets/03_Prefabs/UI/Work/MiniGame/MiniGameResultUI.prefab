@@ -1155,6 +1155,7 @@ MonoBehaviour:
   _panel: {fileID: 2421576655898452491}
   _txtGrade: {fileID: 7431791053510082231}
   _txtAccuracy: {fileID: 2792579285189023866}
+  _btnConfirm: {fileID: 3862111623490379328}
   _btnClose: {fileID: 4690175243491182531}
   _extraFailStamps:
   - {fileID: 3757813632775741785}
@@ -1447,6 +1448,7 @@ GameObject:
   - component: {fileID: 4840467213616322272}
   - component: {fileID: 5510478414275939986}
   - component: {fileID: 3221184779170365597}
+  - component: {fileID: 3862111623490379328}
   m_Layer: 0
   m_Name: btn_close
   m_TagString: Untagged
@@ -1555,6 +1557,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3862111623490379328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6061357012188903951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6111adf02703a4d8b688b8592cc05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonComponent
+  _button: {fileID: 3221184779170365597}
+  _text: {fileID: 0}
 --- !u!1 &6242780793363648430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,6 +1851,8 @@ MonoBehaviour:
   _icon: {fileID: 8023310923066127898}
   _txtLabel: {fileID: 5666331430608976310}
   _txtValue: {fileID: 4805085065821089265}
+  _fewIconThreshold: 10
+  _manyIconThreshold: 100
 --- !u!1 &6907984609911811177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,6 +1908,8 @@ MonoBehaviour:
   _icon: {fileID: 3109145551363449307}
   _txtLabel: {fileID: 9113183322800395425}
   _txtValue: {fileID: 6439227725931352339}
+  _fewIconThreshold: 10
+  _manyIconThreshold: 100
 --- !u!1 &6917020102032096765
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,6 +2238,8 @@ MonoBehaviour:
   _icon: {fileID: 2973633799877032529}
   _txtLabel: {fileID: 8144436949051587659}
   _txtValue: {fileID: 4135856965208450260}
+  _fewIconThreshold: 10
+  _manyIconThreshold: 100
 --- !u!1 &7517377859787521574
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +2569,8 @@ MonoBehaviour:
   _icon: {fileID: 4885204782094991571}
   _txtLabel: {fileID: 4570149747501566034}
   _txtValue: {fileID: 7601490057903510920}
+  _fewIconThreshold: 10
+  _manyIconThreshold: 100
 --- !u!1 &8535400510050341234
 GameObject:
   m_ObjectHideFlags: 0
