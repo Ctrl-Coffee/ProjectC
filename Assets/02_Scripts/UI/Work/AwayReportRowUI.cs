@@ -70,13 +70,18 @@ public class AwayReportRowUI : MonoBehaviour, ICurrencyEffectSource
 
     public void SetAmount(long amount)
     {
+        SetAmount(amount, false);
+    }
+
+    public void SetAmount(long amount, bool isSpent)
+    {
         if (null == _txtValue)
         {
             Logger.LogError($"{name} 의 값 텍스트가 연결되지 않았습니다.");
             return;
         }
 
-        _txtValue.text = Format(amount);
+        _txtValue.text = Format(amount, isSpent);
     }
 
     public void SetLabel(string label)
@@ -147,6 +152,10 @@ public class AwayReportRowUI : MonoBehaviour, ICurrencyEffectSource
 
     private string Format(long amount)
     {
-        return $"+{amount:N0}";
+        return Format(amount, false);
+    }
+    private string Format(long amount, bool isSpent)
+    {
+        return $"{(isSpent ? "-" : "+")}{amount:N0}";
     }
 }

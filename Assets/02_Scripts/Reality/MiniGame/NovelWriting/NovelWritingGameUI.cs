@@ -110,7 +110,6 @@ public class NovelWritingGameUI : MiniGameBase
                         successCount++;
                     }
 
-                    Logger.Log($"키 중심 {center:F2}, 영역 {zone.Left:F2}~{zone.Right:F2} → {(isSuccess ? "성공" : "실패")}");
                 }
                 else
                 {
@@ -122,15 +121,13 @@ public class NovelWritingGameUI : MiniGameBase
         catch (OperationCanceledException)
         {
             _isKeyMoving = false;
-            Logger.Log("게임 중단 - 성공한 라운드까지 정산");
         }
         finally
         {
             linkedSource.Dispose();
         }
 
-        Logger.Log($"정산 — {roundCount}라운드 중 {successCount}회 성공");
-        return MiniGameScore.FromNovel(successCount);
+        return MiniGameScore.FromNovel(roundCount, successCount, roundCount * context.EnergyCost);
     }
     private async UniTask PlayTypingAsync(string word, CancellationToken token)
     {

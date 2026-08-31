@@ -24,6 +24,7 @@ public struct MiniGameResult
     public long SpentGold;
     public long RewardMoney;
     public long RewardDP;
+    public MiniGameType GameType;
 
     // 소설쓰기 전용
     public int RoundCount;
@@ -54,6 +55,7 @@ public struct MiniGameResult
             RewardMultiplier = 1f,
         };
     }
+    
 
     public static MiniGameResult Canceled
     {
@@ -98,8 +100,7 @@ public static class MiniGameScore
         result.Accuracy = Mathf.Clamp01(rate);
         result.Grade = MiniGameGradeTable.GetGrade(result.Accuracy);
         result.RewardMultiplier = result.IsCriticalSuccess ? DICE_CRITICAL_SUCCESS_MULTIPLIER : 1f;
-
-        result.SkipResultPopup = true;
+        result.GameType = MiniGameType.DiceGamble;
 
         return result;
     }
@@ -123,10 +124,15 @@ public static class MiniGameScore
 
         return result;
     }
-    public static MiniGameResult FromNovel(int successCount)
+    public static MiniGameResult FromNovel(int roundCount, int successCount, long spentEnergy)
     {
         MiniGameResult result = MiniGameResult.Completed(1f);
         result.RewardMultiplier = successCount;
+
+        result.RoundCount = roundCount;
+        result.SuccessCount = successCount;
+        result.SpentEnergy = spentEnergy;
+        result.GameType = MiniGameType.NovelWriting;
 
         return result;
     }
