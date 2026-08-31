@@ -12,6 +12,29 @@ public static class AutoWorkQueue
 
     private static List<AutoWorkSlot> _slots = new();
 
+    public static IReadOnlyList<AutoWorkSlot> GetSlots()
+    {
+        return Slots;
+    }
+
+    public static async UniTask RestoreSlots()
+    {
+        var response =  await GameManager.Network.LoadAutoWorkSlotAsync();
+        var autoWorkSlotWrapperDto = response.data;
+
+        foreach (var slot in autoWorkSlotWrapperDto.slots)
+        {
+            _slots.Add(new AutoWorkSlot
+            {
+                WorkId = slot.workId,
+                StartTicks = slot.startTicks,
+                EndTicks = slot.endTicks,
+            });
+        }
+
+        OnQueueChanged?.Invoke();
+    }
+
     public static int MaxSlotCount
     {
         get
@@ -88,6 +111,8 @@ public static class AutoWorkQueue
         });
 
         NotifyQueueChanged();
+
+        SaveUtil.RequestSaveAutoWorkData();
 
         return true;
     }
@@ -236,6 +261,8 @@ public static class AutoWorkQueue
             reward.DreamPoint += dp;
 
             reward.AddWorkCount(data.Id);
+
+            SaveUtil.RequestSaveAutoWorkData();
 
             Logger.Log($"자동업무 완료 - {data.Name} / 돈 {money} / DP {dp}");
         }
