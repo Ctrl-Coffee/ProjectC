@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 
 public class PerkManager
@@ -16,6 +17,19 @@ public class PerkManager
 
     private PerkStatCalculator _statCalculator = new();
     private PerkUnlockChecker _unlockChecker = new();
+
+    public async UniTask LoadDataAsync()
+    {
+        var perkResponse = await GameManager.Network.LoadPerkAsync();
+
+        if (null == perkResponse)
+            return;
+
+        var perkWrapper = perkResponse.data;
+        _unlockedPerkIds = perkWrapper.perkNodeIds;
+
+        InvalidateCache();
+    }
 
     public PerkStatCalculator Stat
     {
@@ -143,6 +157,8 @@ public class PerkManager
         GameManager.Session.Currency.NotifyMaxEnergyChanged();
         OnPerkChanged?.Invoke();
 
+        SaveUtil.RequestSavePerkData();
+
         return true;
     }
 
@@ -200,6 +216,8 @@ public class PerkManager
 
         GameManager.Session.Currency.NotifyMaxEnergyChanged();
         OnPerkChanged?.Invoke();
+
+        SaveUtil.RequestSavePerkData();
 
         return true;
     }
