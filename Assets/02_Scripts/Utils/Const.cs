@@ -25,7 +25,7 @@
     public const string COLOR_GOOD = "#7FD97F";
     public const string COLOR_BAD = "#FF7B7B";
 
-    //전투 관련
+    //전투 편성 관련
     public const int INVALID_BATTLE_POSITION = -1;
     public const int MAX_PLAYER_COUNT = 3;
     public const int MAX_ENEMY_COUNT = 3;
