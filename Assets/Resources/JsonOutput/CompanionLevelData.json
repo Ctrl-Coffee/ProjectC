@@ -2,51 +2,51 @@
   {
     "Id": "companion_level_1",
     "Level": 1,
-    "UpgradeCost": 0
+    "UpgradeCost": 10
   },
   {
     "Id": "companion_level_2",
     "Level": 2,
-    "UpgradeCost": 10
+    "UpgradeCost": 15
   },
   {
     "Id": "companion_level_3",
     "Level": 3,
-    "UpgradeCost": 15
+    "UpgradeCost": 20
   },
   {
     "Id": "companion_level_4",
     "Level": 4,
-    "UpgradeCost": 20
+    "UpgradeCost": 30
   },
   {
     "Id": "companion_level_5",
     "Level": 5,
-    "UpgradeCost": 30
+    "UpgradeCost": 40
   },
   {
     "Id": "companion_level_6",
     "Level": 6,
-    "UpgradeCost": 40
+    "UpgradeCost": 55
   },
   {
     "Id": "companion_level_7",
     "Level": 7,
-    "UpgradeCost": 55
+    "UpgradeCost": 75
   },
   {
     "Id": "companion_level_8",
     "Level": 8,
-    "UpgradeCost": 75
+    "UpgradeCost": 100
   },
   {
     "Id": "companion_level_9",
     "Level": 9,
-    "UpgradeCost": 100
+    "UpgradeCost": 140
   },
   {
     "Id": "companion_level_10",
     "Level": 10,
-    "UpgradeCost": 140
+    "UpgradeCost": 0
   }
 ]

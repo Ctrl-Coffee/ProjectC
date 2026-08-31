@@ -6,7 +6,7 @@ public class HeroEquipmentSlotViewModel : ViewModelBase<HeroEquipmentModel>
 
     //private string _equipmentId;
 
-    private HeroEquipedModel _equipedModel; 
+    private HeroEquipedModel _equipedModel;
     private EquipmentType _type;
 
     public HeroEquipmentSlotViewModel(HeroEquipmentModel model) : base(model)

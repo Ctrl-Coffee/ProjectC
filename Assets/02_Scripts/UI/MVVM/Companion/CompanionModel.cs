@@ -56,14 +56,14 @@ public class CompanionModel : ModelBase, ContainerPropertyChanged<CompanionState
             return LevelUpResult.Error;
         }
 
-        var nextLevelData = GameManager.DataTable.GetCompanionLevelData(companion.Level + 1);
+        var levelData = GameManager.DataTable.GetCompanionLevelData(companion.Level);
 
-        if (nextLevelData == null)
+        if (levelData.UpgradeCost == 0)
         {
             return LevelUpResult.MaxLevel;
         }
 
-        if (!GameManager.Session.Currency.TrySpendDreamFragment((long)nextLevelData.UpgradeCost))
+        if (!GameManager.Session.Currency.TrySpendDreamFragment((long)levelData.UpgradeCost))
         {
             return LevelUpResult.NotEnoughCurrency;
         }

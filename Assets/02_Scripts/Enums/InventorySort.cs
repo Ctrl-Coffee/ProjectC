@@ -3,5 +3,5 @@
 public enum InventorySort
 {
     Level,
-    LevelReverse
+    CombatPower,
 }
