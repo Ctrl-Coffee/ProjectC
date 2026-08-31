@@ -9,5 +9,6 @@
     public float SignatureSkillHaste;
     public string BasicAttackSkillId;
     public string SignatureSkillId;
+    public float CombatPower;
     public string AnimationSetKey;
 }

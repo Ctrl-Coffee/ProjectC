@@ -4,12 +4,13 @@ public class CompanionFormation
 {
     private readonly Dictionary<int, string> _companionIdByBattlePosition = new Dictionary<int, string>();
 
-    public void InitializePositions()
+    public void InitializePositions(CompanionPartyDto companionPartyDto)
     {
-        //GameManager.Session.Companion
+        string firstCompanionId = companionPartyDto.companionIds[0];
+        string SecondCompanionId = companionPartyDto.companionIds[0];
 
-        _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[0], null);
-        _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[1], null);
+        _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[0], firstCompanionId);
+        _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[1], SecondCompanionId);
     }
 
     public bool SetCompanionToPosition(int battlePosition, string companionId)

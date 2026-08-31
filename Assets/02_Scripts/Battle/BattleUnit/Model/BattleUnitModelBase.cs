@@ -33,7 +33,10 @@ public abstract class BattleUnitModelBase : ModelBase
 
     private bool _isInitialized;
 
+    private float _combatPower;
+
     public event Action<bool> DeadStateChanged;
+    public event Action<DamageResult> OnTakeDamage;
 
     public int BattlePosition
     {
@@ -53,6 +56,11 @@ public abstract class BattleUnitModelBase : ModelBase
     public bool IsInitialized
     {
         get { return _isInitialized; }
+    }
+
+    public float CombatPower
+    {
+        get { return _combatPower; }
     }
 
     public float Hp
@@ -208,13 +216,13 @@ public abstract class BattleUnitModelBase : ModelBase
         SignatureSkillCooldown();
     }
 
-    public void ReceiveAttack(SkillExecutionData skillExecutionData)
+    public void ReceiveAttack(AttackStats attackStats)
     {
         DefenseStats defenseStats = new DefenseStats(_defense);
 
-        float damage = BattleUtility.CalculateDamage(skillExecutionData, defenseStats);
+        DamageResult damageResult = BattleUtility.CalculateDamage(attackStats, defenseStats);
 
-        TakeDamage(damage);
+        TakeDamage(damageResult);
     }
 
     public void Heal(float amount)
@@ -237,6 +245,7 @@ public abstract class BattleUnitModelBase : ModelBase
         _criticalChance = battleUnitData.CriticalChance;
         _basicAttackHaste = battleUnitData.BasicAttackHaste;
         _signatureSkillHaste = battleUnitData.SignatureSkillHaste;
+        _combatPower = battleUnitData.CombatPower;
         _isDead = false;
     }
 
@@ -309,6 +318,7 @@ public abstract class BattleUnitModelBase : ModelBase
         _criticalChance = 0f;
         _basicAttackHaste = 0f;
         _signatureSkillHaste = 0f;
+        _combatPower = 0;
         _isDead = true;
     }
 
@@ -384,17 +394,19 @@ public abstract class BattleUnitModelBase : ModelBase
 
     private void UpdateBasicAttackSkillCooldown()
     {
-        _calculatedBasicAttackSkillCooldown = BattleUtility.CalculateBasicAttackSkillCooldown(_basicAttackSkillCooldown, _basicAttackHaste);
+        _calculatedBasicAttackSkillCooldown = BattleUtility.CalculateCooldown(_basicAttackSkillCooldown, _basicAttackHaste);
     }
 
     private void UpdateSignatureSkillCooldown()
     {
-        _calculatedSignatureSkillCooldown = BattleUtility.CalculateSignatureSkillCooldown(_signatureSkillCooldown, _signatureSkillHaste);
+        _calculatedSignatureSkillCooldown = BattleUtility.CalculateCooldown(_signatureSkillCooldown, _signatureSkillHaste);
     }
 
-    private void TakeDamage(float damage)
+    private void TakeDamage(DamageResult damageResult)
     {
-        Hp -= damage;
+        Hp -= damageResult.Damage;
+
+        OnTakeDamage?.Invoke(damageResult);
     }
 
     private void OnDeadStateChanged()

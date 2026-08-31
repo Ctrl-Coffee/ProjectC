@@ -36,9 +36,9 @@ public class BattleService
         return HasValidTarget(SkillTargetType.Enemy, aliveAllyCount, aliveEnemyCount);
     }
 
-    public void ApplyAttack(BattleUnitModelBase targetModel, SkillExecutionData skillExecutionData)
+    public void ApplyAttack(BattleUnitModelBase targetModel, AttackStats attackStats)
     {
-        targetModel.ReceiveAttack(skillExecutionData);
+        targetModel.ReceiveAttack(attackStats);
     }
 
     private bool HasValidTarget(SkillTargetType targetType, int aliveAllyCount, int aliveEnemyCount)

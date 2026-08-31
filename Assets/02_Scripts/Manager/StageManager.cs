@@ -6,9 +6,19 @@ public class StageManager
 
     public StageModel StageModel { get { return _stageModel; } }
 
+    public string StageName
+    {
+        get { return GetStageName(); }
+    }
+
     public IReadOnlyList<string> EnemyGroupIds
     {
         get { return _stageModel.EnemyGroupIds; }
+    }
+
+    public float EnemyStatMultiplier
+    {
+        get { return _stageModel.EnemyStatMultiplier; }
     }
 
     public string NextStageId
@@ -35,5 +45,11 @@ public class StageManager
         }
 
         _stageModel.SetStage(_stageModel.NextStageId);
+    }
+
+    private string GetStageName()
+    {
+        string stageName = $"{_stageModel.Chapter}-{_stageModel.StageNumber}";
+        return stageName;
     }
 }

@@ -7,8 +7,8 @@ public class BattleUnitModels
     private readonly PlayerBattleUnitModel[] _playerBattleUnitModels = new PlayerBattleUnitModel[Const.MAX_PLAYER_COUNT];
     private readonly EnemyBattleUnitModel[] _enemyBattleUnitModels = new EnemyBattleUnitModel[Const.MAX_ENEMY_COUNT];
 
-    private  IReadOnlyDictionary<string, CompanionState> _companionDictCache; 
-    private  List<string> _saveDataPartyCompanionIds;
+    private  IReadOnlyDictionary<string, CompanionState> _companionStateDictCache; 
+    private  string[] _cachedCompanionIds;
 
     public IReadOnlyList<PlayerBattleUnitModel> PlayerBattleUnitModels
     {
@@ -26,7 +26,7 @@ public class BattleUnitModels
         }
     }
 
-    public void Initialize()
+    public void Initialize(CompanionPartyDto companionPartyDto)
     {
         for (int a = 0; a < _playerBattleUnitModels.Length; a++)
         {
@@ -40,8 +40,8 @@ public class BattleUnitModels
             _enemyBattleUnitModels[a] = new EnemyBattleUnitModel(a, unitUid);
         }
 
-        _companionDictCache = GameManager.Session.Companion.Companions;
-        _saveDataPartyCompanionIds = new List<string> { null, null };
+        _companionStateDictCache = GameManager.Session.Companion.Companions;
+        _cachedCompanionIds = companionPartyDto.companionIds;
     }
 
     public void InitializeStage()
@@ -81,6 +81,30 @@ public class BattleUnitModels
         return count;
     }
 
+    public int GetPlayerTotalCombatPower()
+    {
+        float totalCombatPower = 0;
+
+        foreach (PlayerBattleUnitModel playerBattleUnitModel in _playerBattleUnitModels)
+        {
+            totalCombatPower += playerBattleUnitModel.CombatPower;
+        }
+
+        return (int)totalCombatPower;
+    }
+
+    public int GetEnemyTotalCombatPower()
+    {
+        float totalCombatPower = 0;
+
+        foreach (EnemyBattleUnitModel enemyBattleUnitModel in _enemyBattleUnitModels)
+        {
+            totalCombatPower += enemyBattleUnitModel.CombatPower;
+        }
+
+        return (int)totalCombatPower;
+    }
+
     private void InitializeHeroModel()
     {
         PlayerBattleUnitModel heroBattleUnitModel = _playerBattleUnitModels[Const.HERO_BATTLE_POSITIONS];
@@ -88,14 +112,14 @@ public class BattleUnitModels
         HeroInfoModel heroInfo = GameManager.Session.HeroInfo;
         HeroEquipedModel heroEquiped = GameManager.Session.HeroEquiped;
 
-        //string equipedArmorId = heroEquiped.EquipedArmorId;
-        string equipedArmorId = "Equipment_Armor_001";
+       // string equipedWeaponId = heroEquiped.EquipedWeaponId;
+        string equipedWeaponId = "equipment_weapon_001";
 
-        EquipmentData armorData = GameManager.DataTable.GetEquipmentData(equipedArmorId);
+        EquipmentData armorData = GameManager.DataTable.GetEquipmentData(equipedWeaponId);
 
         if (armorData == null)
         {
-            Logger.LogError($"'{equipedArmorId}' 장비 데이터를 찾을 수 없습니다.");
+            Logger.LogError($"'{equipedWeaponId}' 장비 데이터를 찾을 수 없습니다.");
             return;
         }
 
@@ -106,17 +130,17 @@ public class BattleUnitModels
 
     private void InitializeCompanionModels()
     {
-        if (_saveDataPartyCompanionIds.Count != Const.MAX_COMPANION_COUNT)
+        if (_cachedCompanionIds.Length != Const.MAX_COMPANION_COUNT)
         {
-            Debug.LogError("동료 ID 목록 개수가 포메이션 슬롯 개수와 일치하지 않습니다.");
+            Logger.LogError("동료 ID 목록 개수가 포메이션 슬롯 개수와 일치하지 않습니다.");
             return;
         }
 
-        for (int index = 0; index < _saveDataPartyCompanionIds.Count; index++)
+        for (int index = 0; index < _cachedCompanionIds.Length; index++)
         {
             int companionBattlePosition = Const.COMPANION_BATTLE_POSITIONS[index];
 
-            string companionId = _saveDataPartyCompanionIds[index];
+            string companionId = _cachedCompanionIds[index];
 
             if (string.IsNullOrWhiteSpace(companionId))
             {
@@ -124,18 +148,11 @@ public class BattleUnitModels
                 continue;
             }
 
-            //TODO 동료 보유 모델에서 가져오기
-            //BattleUnitData battleUnitData  = BattleUtility.CreateCompanionBattleUnitData();
-
-            //if (tempCompanionData == null)
-            //{
-            //    Debug.LogError($"'{companionId}' 보유 동료 모델을 찾을 수 없습니다.");
-
-            //    _playerBattleUnitModels[companionBattlePosition].Clear();
-            //    continue;
-            //}
-
-            BattleUnitData battleUnitData = BattleUtility.CreateCompanionBattleUnitData();
+            if (!TryCreateCompanionBattleUnitData(companionId, out BattleUnitData battleUnitData))
+            {
+                _playerBattleUnitModels[companionBattlePosition].Clear();
+                continue;
+            }
 
             _playerBattleUnitModels[companionBattlePosition].Initialize(battleUnitData);
         }
@@ -147,7 +164,7 @@ public class BattleUnitModels
 
         if (enemyGroupIds.Count != _enemyBattleUnitModels.Length)
         {
-            Debug.LogError($"스테이지 적 수({enemyGroupIds.Count})가 시스템 최대 적 수({_enemyBattleUnitModels.Length})와 일치하지 않습니다.");
+            Logger.LogError($"스테이지 적 수({enemyGroupIds.Count})가 시스템 최대 적 수({_enemyBattleUnitModels.Length})와 일치하지 않습니다.");
             return;
         }
 
@@ -165,15 +182,39 @@ public class BattleUnitModels
            
             if (enemyData == null)
             {
-                Debug.LogError($"'{enemyId}' 적 데이터를 찾을 수 없습니다.");
+                Logger.LogError($"'{enemyId}' 적 데이터를 찾을 수 없습니다.");
 
                 _enemyBattleUnitModels[index].Clear();
                 continue;
             }
 
-            BattleUnitData battleUnitData = BattleUtility.CreateEnemyBattleUnitData(enemyData);
+            float enemyStatMultiplier = GameManager.Stage.EnemyStatMultiplier;
+
+            BattleUnitData battleUnitData = BattleUtility.CreateEnemyBattleUnitData(enemyData, enemyStatMultiplier);
             _enemyBattleUnitModels[index].Initialize(battleUnitData);
         }
+    }
+
+    private bool TryCreateCompanionBattleUnitData(string companionId, out BattleUnitData battleUnitData)
+    {
+        battleUnitData = default;
+
+        if (!_companionStateDictCache.TryGetValue(companionId, out CompanionState companionState))
+        {
+            Logger.LogError($"'{companionId}' 보유하지 않은 동료 아이디 입니다.");
+            return false;
+        }
+
+        CompanionData companionData = GameManager.DataTable.GetCompanionData(companionId);
+
+        if (companionData == null)
+        {
+            Logger.LogError($"'{companionId}' 동료 데이터가 없습니다.");
+            return false;
+        }
+
+        battleUnitData = BattleUtility.CreateCompanionBattleUnitData(companionState, companionData);
+        return true;
     }
 
     public void SetCompanion(int battlePosition, string companionId)
@@ -184,16 +225,20 @@ public class BattleUnitModels
             return;
         }
 
-        //TODO 동료 모델 가져와서 만들기
-        if (!_companionDictCache.TryGetValue(companionId, out _))
+        if (!_companionStateDictCache.TryGetValue(companionId, out _))
         {
-            Debug.LogError($"'{companionId}' 보유하지 않은 동료 아이디 입니다.");
+            Logger.LogError($"'{companionId}' 보유하지 않은 동료 아이디 입니다.");
 
             ClearCompanion(battlePosition);
             return;
         }
 
-        BattleUnitData battleUnitData = BattleUtility.CreateCompanionBattleUnitData();
+        if (!TryCreateCompanionBattleUnitData(companionId, out BattleUnitData battleUnitData))
+        {
+            _playerBattleUnitModels[battlePosition].Clear();
+            return;
+        }
+
         _playerBattleUnitModels[battlePosition].Initialize(battleUnitData);
 
         UpdateSaveDataPartyCompanionId(battlePosition, companionId);
@@ -231,7 +276,7 @@ public class BattleUnitModels
             return;
         }
 
-        _saveDataPartyCompanionIds[index] = companionId;
+        _cachedCompanionIds[index] = companionId;
     }
 
     private BattleUnitModelBase FindTargetModel(BattleUnitModelBase[] battleUnitModels, int battlePosition)

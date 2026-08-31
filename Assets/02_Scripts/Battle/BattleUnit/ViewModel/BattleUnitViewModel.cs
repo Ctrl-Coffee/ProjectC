@@ -7,6 +7,7 @@ public class BattleUnitViewModel
     private BattleUnitModelBase _battleUnitModelBase;
 
     public event Action<string> PropertyChanged;
+    public event Action<DamageResult> TakeDamage;
 
     public int BattlePosition
     {
@@ -55,10 +56,12 @@ public class BattleUnitViewModel
         if (_battleUnitModelBase != null)
         {
             _battleUnitModelBase.PropertyChanged -= OnPropertyChanged;
+            _battleUnitModelBase.OnTakeDamage -= OnTakeDamage;
         }
 
         _battleUnitModelBase = battleUnitModel;
         _battleUnitModelBase.PropertyChanged += OnPropertyChanged;
+        _battleUnitModelBase.OnTakeDamage += OnTakeDamage;
     }
 
     public void Dispose()
@@ -69,6 +72,7 @@ public class BattleUnitViewModel
         }
 
         _battleUnitModelBase.PropertyChanged -= OnPropertyChanged;
+        _battleUnitModelBase.OnTakeDamage -= OnTakeDamage;
         _battleUnitModelBase = null;
     }
 
@@ -112,5 +116,10 @@ public class BattleUnitViewModel
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         PropertyChanged?.Invoke(e.PropertyName);
+    }
+
+    private void OnTakeDamage(DamageResult damageResult)
+    {
+        TakeDamage?.Invoke(damageResult);
     }
 }
