@@ -14,6 +14,6 @@ public class StagePoint : MonoBehaviour
 
     public void SelectStage()
     {
-        GameManager.UI.OpenStageInfo(_stageId).Forget();
+        GameManager.UI.OpenStageInfo(_stageId);
     }
 }

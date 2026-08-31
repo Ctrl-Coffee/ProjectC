@@ -4,16 +4,12 @@ public class CompanionFormation
 {
     private readonly Dictionary<int, string> _companionIdByBattlePosition = new Dictionary<int, string>();
 
-    public CompanionFormation()
+    public void InitializePositions()
     {
-        InitializePositions();
-    }
+        //GameManager.Session.Companion
 
-    //TODO 나중에 편성 데이터 가져와서 가져와서 초기화
-    private void InitializePositions()
-    {
-        _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[0], "Companion_001");
-        _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[1], "Companion_002");
+        _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[0], null);
+        _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[1], null);
     }
 
     public bool SetCompanionToPosition(int battlePosition, string companionId)

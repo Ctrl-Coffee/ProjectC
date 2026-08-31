@@ -14,12 +14,7 @@ public class TestGachaUI : MonoBehaviour
     [ContextMenu("가챠 UI 열기")]
     private void OpenGachaUI()
     {
-        OpenGachaUIAsync().Forget();
-    }
-
-    private async UniTask OpenGachaUIAsync()
-    {
-        GachaView view = await GameManager.UI.OpenGachaView();
+        GachaView view = GameManager.UI.OpenGachaView();
 
         if (view == null)
         {

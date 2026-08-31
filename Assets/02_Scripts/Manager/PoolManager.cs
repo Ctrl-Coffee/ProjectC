@@ -10,7 +10,7 @@ public class PoolManager
     private Dictionary<string, GameObject> _prefabs = new();
     private Transform _poolRoot;
 
-    public async UniTask InitAsync(Transform poolRoot)
+    public UniTask InitAsync(Transform poolRoot)
     {
         _poolRoot = poolRoot;
         var poolDataTable = GameManager.DataTable.PoolDataTable;
@@ -19,7 +19,7 @@ public class PoolManager
         {
             _objectPools.Add(poolId, new Queue<GameObject>());
 
-            GameObject prefab = await LoadGameObjectAsync(poolId);
+            GameObject prefab = LoadGameObject(poolId);
             _prefabs.Add(poolId, prefab);
 
             for (int i = 0; i < poolDataTable[poolId].InitSize; i++)
@@ -27,6 +27,8 @@ public class PoolManager
                 CreateNewObject(poolId, prefab);
             }
         }
+
+        return UniTask.CompletedTask;
     }
 
     public GameObject SpawnFromPool(string poolId)
@@ -162,17 +164,16 @@ public class PoolManager
         return obj;
     }
 
-    private async UniTask<GameObject> LoadGameObjectAsync(string address)
+    private GameObject LoadGameObject(string address)
     {
-        try
+        GameObject gameObject = GameManager.Resource.GetLoadedAsset<GameObject>(address);
+
+        if (gameObject != null)
         {
-            GameObject gameObject = await GameManager.Resource.LoadAssetAsync<GameObject>(address);
             return gameObject;
         }
-        catch (Exception exception)
-        {
-            Logger.LogWarning($"어드레서블에 등록되지 않은 에셋으로, 리소시즈에서 로드합니다. {exception.Message}");
-        }
+
+        Logger.LogWarning($"{address}를 선로딩된 에셋에서 찾지 못해 Resources에서 로드합니다.");
 
         GameObject resource = Resources.Load<GameObject>($"Pool/{address}");
 

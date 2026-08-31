@@ -5,17 +5,27 @@ public struct StatSum
     public float Attack;
     public float Hp;
     public float Defense;
-    public float CriticalRate;
-    public float NormalSkillHaste;
-    public float SpecialSkillHaste;
+    public float CriticalChance;
+    public float BasicAttackHaste;
+    public float SignatureSkillHaste;
 
     public void Add(StatSum other)
     {
         Attack += other.Attack;
         Hp += other.Hp;
         Defense += other.Defense;
-        CriticalRate += other.CriticalRate;
-        NormalSkillHaste += other.NormalSkillHaste;
-        SpecialSkillHaste += other.SpecialSkillHaste;
+        CriticalChance += other.CriticalChance;
+        BasicAttackHaste += other.BasicAttackHaste;
+        SignatureSkillHaste += other.SignatureSkillHaste;
+    }
+
+    public bool IsSame(StatSum other)
+    {
+        return Attack == other.Attack
+            && Hp == other.Hp
+            && Defense == other.Defense
+            && CriticalChance == other.CriticalChance
+            && BasicAttackHaste == other.BasicAttackHaste
+            && SignatureSkillHaste == other.SignatureSkillHaste;
     }
 }

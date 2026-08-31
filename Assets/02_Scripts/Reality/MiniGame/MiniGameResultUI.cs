@@ -10,6 +10,7 @@ public class MiniGameResultUI : UIBase
 {
     [SerializeField] private TextMeshProUGUI _txtGrade;
     [SerializeField] private TextMeshProUGUI _txtAccuracy;
+    [SerializeField] private UIButtonComponent _btnConfirm;
     [SerializeField] private UIButtonComponent _btnClose;
     [SerializeField] private TextMeshProUGUI[] _extraFailStamps;
     [SerializeField] private float[] _extraStampAngles = { 8f, -25f };
@@ -141,6 +142,15 @@ public class MiniGameResultUI : UIBase
         {
             Logger.LogError("CloseButton이 연결되지 않아 결과창을 닫을 수 없습니다.");
         }
+        
+        if (null != _btnConfirm)
+        {
+            _btnConfirm.BindButtonEvent(OnClickCloseButton);
+        }
+        else
+        {
+            Logger.LogError("ConfirmButton이 연결되지 않아 결과창을 닫을 수 없습니다.");
+        }
 
         try
         {
@@ -151,6 +161,11 @@ public class MiniGameResultUI : UIBase
             if (null != _btnClose)
             {
                 _btnClose.UnBindButtonAllEvent();
+            }
+
+            if (null != _btnConfirm)
+            {
+                _btnConfirm.UnBindButtonAllEvent();
             }
 
             _closeRequestedSource = null;

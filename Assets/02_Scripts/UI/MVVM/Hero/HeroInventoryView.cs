@@ -29,6 +29,7 @@ public class HeroInventoryView : ViewBase
 
         Subscribe();
         _sortDropdown.onValueChanged.AddListener(OnClickSort);
+        CombatPowerRefash();
     }
 
     private void OnDisable()
@@ -61,6 +62,7 @@ public class HeroInventoryView : ViewBase
         _viewModel.OnContainerChanged_ViewModel += OnContainerChanged;
         _heroInfoViewModel.OnPropertyChanged_ViewModel += OnPropertyChangedHeroInfo;
         _viewModel.InitializeModel();
+        _heroInfoViewModel.InitializeModel();
     }
 
     protected override void UnSubscribe()
@@ -88,7 +90,7 @@ public class HeroInventoryView : ViewBase
         switch (propertyName)
         {
             case nameof(HeroInfoModel.CombatPower):
-                _combatPowerText.text = Mathf.RoundToInt(_heroInfoViewModel.CombatPower).ToString("N0");
+                CombatPowerRefash();
                 break;
         }
     }
@@ -228,5 +230,10 @@ public class HeroInventoryView : ViewBase
     private void LoadDataTable()
     {
         _equipmentDataTable = GameManager.DataTable.EquipmentDataTable;
+    }
+
+    private void CombatPowerRefash()
+    {
+        _combatPowerText.text = Mathf.RoundToInt(_heroInfoViewModel.CombatPower).ToString("N0");
     }
 }

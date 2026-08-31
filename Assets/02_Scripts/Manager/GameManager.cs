@@ -10,15 +10,13 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static PoolManager Pool { get { return Instance._poolManager; } }
     public static TimeManager Time { get { return Instance._timeManager; } }
     public static UIManager UI { get { return Instance._uiManager; } }
-    public static GrowthSystem Growth { get { return Instance._growthSystem; } }
     public static PerkManager Perk { get { return Instance._perkManager; } }
     public static SoundManager Sound { get { return Instance._soundManager; } }
     public static BattleManager Battle { get { return Instance._battleManager; } }
+    public static StageManager Stage { get { return Instance._stageManager; } }
 
     public static GameSession Session { get { return Instance._gameSession; } }
     public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
-
-
 
     #region Manager Variables
 
@@ -28,10 +26,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     private PoolManager _poolManager = new();
     private TimeManager _timeManager = new();
     private UIManager _uiManager = new();
-    private GrowthSystem _growthSystem = new();
     private SoundManager _soundManager = new();
     private PerkManager _perkManager = new();
-    private BattleManager _battleManager;
+    private BattleManager _battleManager = new();
+    private StageManager _stageManager = new();
 
     private GameSession _gameSession;
     private ViewModelFactory _viewModelFactory;
@@ -60,8 +58,9 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private async UniTask InitializeLoginAsync()
     {
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.UIROOT);
         await _resourceManager.LoadContentAsync(AddressablePath.Label.LOGIN);
-        await _uiManager.Init();
+        _uiManager.Init();
 
         _soundManager.Init(gameObject);
         _uiManager.OpenLoginUI();
@@ -83,7 +82,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         await gameSession.LoadAllData();
         _gameSession = gameSession;
 
-        _battleManager = new();
+        await _perkManager.LoadDataAsync();
+        await AutoWorkQueue.RestoreSlots();
 
         _viewModelFactory = new(_gameSession, _dataTable);
 
@@ -91,6 +91,10 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         Transform poolRoot = Utils.CreateEmptyGameObject("PoolRoot",transform).transform;
         await _poolManager.InitAsync(poolRoot);
+
+        _battleManager.Initialize();
+
+        AwayReportFlow.OnRelaunch();
 
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();

@@ -12,6 +12,11 @@ public class BattleUnitHpBarView : MonoBehaviour
         _battleUnitHpBarViewModel.PropertyChanged += OnPropertyChanged;
     }
 
+    private void OnEnable()
+    {
+        _battleUnitHpBarViewModel.Refresh();
+    }
+
     private void OnDestroy()
     {
         _battleUnitHpBarViewModel.PropertyChanged -= OnPropertyChanged;

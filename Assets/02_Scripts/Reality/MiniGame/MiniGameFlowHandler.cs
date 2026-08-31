@@ -144,7 +144,7 @@ public class MiniGameFlowHandler
 
     private async UniTask<MiniGameResult> PlayMiniGameAsync<T>(WorkData workData) where T : MiniGameBase
     {
-        T ui = await GameManager.UI.OpenMiniGameUI<T>();
+        T ui = GameManager.UI.OpenMiniGameUI<T>();
 
         if (null == ui)
         {
@@ -228,7 +228,7 @@ public class MiniGameFlowHandler
 
     private async UniTask ShowResultAsync(MiniGameResult result, CancellationToken token)
     {
-        MiniGameResultUI resultUI = await GameManager.UI.OpenMiniGameResultUI();
+        MiniGameResultUI resultUI = GameManager.UI.OpenMiniGameResultUI();
 
         if (null == resultUI)
         {

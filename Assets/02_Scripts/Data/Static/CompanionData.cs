@@ -16,4 +16,7 @@ public class CompanionData : BaseData
     public float SignatureSkillHaste;
     public string BasicAttackSkillId;
     public string SignatureSkillId;
+    public string SlotSpriteAddressableKey;
+    public string PortraitSpriteAddressableKey;
+    public string AnimationSetKey;
 }

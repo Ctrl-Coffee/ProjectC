@@ -24,6 +24,7 @@ public class CurrencyModel : ModelBase
         _dreamFragment = currencyDto.dreamFragment;
         _dreamScroll = currencyDto.dreamScroll;
         _inspiration = currencyDto.inspiration;
+        _energyRecoveredAt = currencyDto.energyRecoveredAt;
     }
 
     public long Money
