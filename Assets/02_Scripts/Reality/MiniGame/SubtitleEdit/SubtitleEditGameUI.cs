@@ -1,18 +1,22 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SubtitleEditGameUI : MiniGameBase
 {
     [Header("배치")]
     [SerializeField] private RectTransform _playArea;
     [SerializeField] private RectTransform _targetSlot;
-    [SerializeField] private UIButtonComponent _btnAttach;
+    [SerializeField] private Button _btnAttach;
 
     [SerializeField] private FallingSubtitle _subtitlePrefab;
 
     // TODO: 김경훈 (26.08.10) 자막 여러개가 되면 PoolManager로 옮기기
     private FallingSubtitle _subtitleInstance;
+
+    [Header("결과 연출")]
+    [SerializeField] private int _resultDelayMs = 800;
 
     [Header("난이도")]
     [SerializeField] private float _fallSpeedRatio = 0.5f;
@@ -142,6 +146,9 @@ public class SubtitleEditGameUI : MiniGameBase
 
             if (_hasAttachResult)
             {
+                // 붙인 자리에 그대로 세워 둔 채로 잠깐 보여 준다. 얼마나 어긋났는지 확인시키는 구간.
+                await UniTask.Delay(_resultDelayMs, ignoreTimeScale: true, cancellationToken: token);
+
                 return _attachAccuracy;
             }
 
@@ -174,7 +181,8 @@ public class SubtitleEditGameUI : MiniGameBase
             return;
         }
 
-        _btnAttach.BindButtonEvent(OnClickAttach);
+        _btnAttach.onClick.RemoveListener(OnClickAttach);
+        _btnAttach.onClick.AddListener(OnClickAttach);
     }
 
     private void UnbindInput()
@@ -184,7 +192,7 @@ public class SubtitleEditGameUI : MiniGameBase
             return;
         }
 
-        _btnAttach.UnBindButtonAllEvent();
+        _btnAttach.onClick.RemoveListener(OnClickAttach);
     }
 
     private void OnClickAttach()
@@ -196,6 +204,8 @@ public class SubtitleEditGameUI : MiniGameBase
 
         _attachAccuracy = EvaluateAttach();
         _hasAttachResult = true;
+
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.SUBTITLE);
     }
 
     private bool ValidateReferences()

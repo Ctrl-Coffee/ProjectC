@@ -208,11 +208,12 @@ public abstract class BattleUnitModelBase : ModelBase
         SignatureSkillCooldown();
     }
 
-    public void ReceiveAttack(SkillExecutionData skillExecutionData)
+    public void ReceiveAttack(AttackerStats attackerStats)
     {
+        AttackStats attackStats = new AttackStats();
         DefenseStats defenseStats = new DefenseStats(_defense);
 
-        float damage = BattleUtility.CalculateDamage(skillExecutionData, defenseStats);
+        float damage = BattleUtility.CalculateDamage(attackStats, defenseStats);
 
         TakeDamage(damage);
     }
@@ -384,12 +385,12 @@ public abstract class BattleUnitModelBase : ModelBase
 
     private void UpdateBasicAttackSkillCooldown()
     {
-        _calculatedBasicAttackSkillCooldown = BattleUtility.CalculateBasicAttackSkillCooldown(_basicAttackSkillCooldown, _basicAttackHaste);
+        _calculatedBasicAttackSkillCooldown = BattleUtility.CalculateCooldown(_basicAttackSkillCooldown, _basicAttackHaste);
     }
 
     private void UpdateSignatureSkillCooldown()
     {
-        _calculatedSignatureSkillCooldown = BattleUtility.CalculateSignatureSkillCooldown(_signatureSkillCooldown, _signatureSkillHaste);
+        _calculatedSignatureSkillCooldown = BattleUtility.CalculateCooldown(_signatureSkillCooldown, _signatureSkillHaste);
     }
 
     private void TakeDamage(float damage)

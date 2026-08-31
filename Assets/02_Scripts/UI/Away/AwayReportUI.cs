@@ -68,6 +68,8 @@ public class AwayReportUI : UIBase
 
         AwayReportFlow.OnReportOpened();
 
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.AWAY_REWARD);
+
         SetAwayDuration(report.AwayDuration);
 
         PlayCountUp();

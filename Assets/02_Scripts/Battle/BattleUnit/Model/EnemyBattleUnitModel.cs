@@ -15,7 +15,7 @@
 
     protected override void UseSkill(int battlePosition, string skillId)
     {
-        SkillExecutionData skillExecutionData = new SkillExecutionData(_attack, _criticalChance);
-        GameManager.Battle.RequestEnemySkillExecution(battlePosition, skillId, skillExecutionData);
+        AttackerStats attackerStats = new AttackerStats(_attack, _criticalChance);
+        GameManager.Battle.RequestEnemySkillExecution(battlePosition, skillId, attackerStats);
     }
 }

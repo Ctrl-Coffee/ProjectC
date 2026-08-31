@@ -59,7 +59,8 @@ public class NetworkManager
             energy = currencyModel.Energy,
             dreamFragment = currencyModel.DreamFragment,
             dreamScroll = currencyModel.DreamScroll,
-            inspiration = currencyModel.Inspiration
+            inspiration = currencyModel.Inspiration,
+            energyRecoveredAt = currencyModel.EnergyRecoveredAt
         };
 
         SaveCurrencyRequest request = new()

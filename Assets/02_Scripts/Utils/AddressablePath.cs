@@ -38,6 +38,13 @@
         public const string DICE_ROLLING = "Audio/SFX/DiceRolling";
         public const string STAMP_SUCCESS = "Audio/SFX/StampSuccess";
         public const string STAMP_FAIL = "Audio/SFX/StampFail";
+        public const string PERK_ACTIVE = "Audio/SFX/PerkActive";
+        public const string PERK_DEACTIVE = "Audio/SFX/PerkDeactive";
+        public const string GAUGE_MOVE = "Audio/SFX/GaugeMove";
+
+        public const string AWAY_REWARD = "Audio/SFX/AwayReward";
+        public const string CURRENCY_GAIN = "Audio/SFX/CurrencyGain";
+        public const string LEVEL_UP = "Audio/SFX/LevelUp";
     }
 
     public static class Sprite

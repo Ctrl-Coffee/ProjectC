@@ -55,7 +55,7 @@ MonoBehaviour:
   _nameText: {fileID: 6640306996089216973}
   _descriptionText: {fileID: 1684622501404597300}
   _costText: {fileID: 6214172306992537716}
-  _btnClose: {fileID: 1794566506642038216}
+  _btnClose: {fileID: 5268619954394240258}
   _upgradeButton: {fileID: 970161024943993062}
   _cancelButton: {fileID: 3255248088804983102}
   _slidePanel: {fileID: 7575510803389675621}

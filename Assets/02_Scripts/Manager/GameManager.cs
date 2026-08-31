@@ -94,6 +94,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         _battleManager.Initialize();
 
+        AwayReportFlow.OnRelaunch();
+
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
