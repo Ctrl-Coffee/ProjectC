@@ -37,9 +37,6 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     #endregion
 
-    private LobbyController _realLobbyController;
-    private LobbyController _dreamLobbyController;
-
     private void Update()
     {
         Time.OnUpdate();
@@ -107,38 +104,22 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void EnterReal()
     {
-        if(_realLobbyController == null)
-        {
-            _realLobbyController = new();
-        }
-
-        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.REAL_LOBBY_BACKGROUND);
-        _realLobbyController.Enter(backgroundPrefab);
         UI.OpenRealHud();
         Sound.PlayBGM(AddressablePath.Audio.BGM_LOBBY);
     }
 
     public void ExitReal()
     {
-        _realLobbyController.Release();
         UI.CloseRealHud();
     }
 
     public void EnterDream()
     {
-        if (_dreamLobbyController == null)
-        {
-            _dreamLobbyController = new();
-        }
-
-        GameObject backgroundPrefab = Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DREAM_LOBBY_BACKGROUND);
-        _dreamLobbyController.Enter(backgroundPrefab);
         UI.OpenDreamHud();
     }
 
     public void ExitDream()
     {
-        _dreamLobbyController.Release();
         UI.CloseDreamHud();
     }
 

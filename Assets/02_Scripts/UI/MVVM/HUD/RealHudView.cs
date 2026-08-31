@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Mono.Cecil;
+using TMPro;
 using UnityEngine;
 
 public class RealHudView : ViewBase
@@ -16,7 +17,15 @@ public class RealHudView : ViewBase
     [SerializeField] private UIButtonComponent _computerBtn;
     [SerializeField] private UIButtonComponent _perkBtn;
 
+    private GameObject _backgroundInstance;
+
     private CurrencyViewModel _currencyViewModel;
+
+    private void Awake()
+    {
+        GameObject prefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.REAL_LOBBY_BACKGROUND);
+        _backgroundInstance = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity);
+    }
 
     private void OnEnable()
     {
@@ -33,6 +42,8 @@ public class RealHudView : ViewBase
 
         _computerBtn.BindButtonEvent(OnOpenWorkInfoUI);
         _perkBtn.BindButtonEvent(OnOpenPerkInfoUI);
+
+        _backgroundInstance.SetActive(true);
     }
 
     private void OnDisable()
@@ -45,6 +56,9 @@ public class RealHudView : ViewBase
         _coffeeBtn.UnBindButtonAllEvent();
         _computerBtn.UnBindButtonAllEvent();
         _perkBtn.UnBindButtonAllEvent();
+
+        if (_backgroundInstance != null)
+            _backgroundInstance.SetActive(false);
     }
 
     private void OnDestroy()

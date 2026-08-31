@@ -18,9 +18,17 @@ public class DreamHudView : ViewBase
     [SerializeField] private UIButtonComponent _lobbyBtn;
     [SerializeField] private UIButtonComponent _heroInfoBtn;
 
+    private GameObject _backgroundInstance;
+
     private UIBase _currentContent;
 
     private CurrencyViewModel _currencyViewModel;
+
+    private void Awake()
+    {
+        GameObject prefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DREAM_LOBBY_BACKGROUND);
+        _backgroundInstance = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity);
+    }
 
     private void OnEnable()
     {
@@ -40,6 +48,8 @@ public class DreamHudView : ViewBase
 
         _settingBtn.BindButtonEvent(OnOpenSettingUI);
         _heroInfoBtn.BindButtonEvent(OnOpenHeroInfo);
+
+        _backgroundInstance.SetActive(true);
     }
 
     private void OnDisable()
@@ -53,6 +63,9 @@ public class DreamHudView : ViewBase
         _lobbyBtn.UnBindButtonAllEvent();
         _heroInfoBtn.UnBindButtonAllEvent();
         _settingBtn.UnBindButtonAllEvent();
+
+        if(_backgroundInstance != null)
+            _backgroundInstance.SetActive(false);
     }
 
     private void OnDestroy()
