@@ -77,6 +77,19 @@ public class UIManager
         }
     }
 
+    public T GetUI<T>() where T : UIBase
+    {
+        Type uiType = typeof(T);
+
+        if (_uiStates[uiType] != UIState.Opened)
+        {
+            Logger.LogError($"{uiType} UI가 열려있지 않습니다.");
+            return null;
+        }
+
+        return _createdUI[uiType] as T;
+    }
+
     public void CloseUI(UIBase ui, bool isCloseAll = false)
     {
         var uiType = ui.GetType();
