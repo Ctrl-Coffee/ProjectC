@@ -300,6 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd60fabb67b24034da7f43bc07c6d4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleHpBarHud
+  _isPlayAnimation: 0
+  _panel: {fileID: 0}
   _playerBattleUnitHpBarViews:
   - {fileID: 4947467596252423597}
   - {fileID: 43840644049229433}

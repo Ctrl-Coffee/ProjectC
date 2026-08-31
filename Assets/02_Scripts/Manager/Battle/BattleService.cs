@@ -33,7 +33,7 @@ public class BattleService
         int aliveAllyCount = isPlayer ? AlivePlayerCount : AliveEnemyCount;
         int aliveEnemyCount = isPlayer ? AliveEnemyCount : AlivePlayerCount;
 
-        return HasValidTarget(SkillTargetType.Self, aliveAllyCount, aliveEnemyCount);
+        return HasValidTarget(SkillTargetType.Enemy, aliveAllyCount, aliveEnemyCount);
     }
 
     public void ApplyAttack(BattleUnitModelBase targetModel, SkillExecutionData skillExecutionData)

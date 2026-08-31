@@ -81,16 +81,16 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1482512767
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -51100511
+  m_SortingLayer: 2
+  m_SortingOrder: 100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 846397645, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.12, y: 3.84}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -317,16 +317,16 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1482512767
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -51100511
+  m_SortingLayer: 2
+  m_SortingOrder: 100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2142432406, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4.266667, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -341,7 +341,7 @@ Animator:
   m_GameObject: {fileID: 4455275286843988099}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: af15821e0a2dbed46b11bf3cc69bd372, type: 2}
+  m_Controller: {fileID: 9100000, guid: b4b75ee37abef144494dd8a4ffc26d67, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -521,16 +521,16 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1482512767
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -51100511
+  m_SortingLayer: 2
+  m_SortingOrder: 100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 581046308, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.4329004, y: 3.116883}
+  m_Size: {x: 5.12, y: 3.84}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -725,16 +725,16 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1482512767
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -51100511
+  m_SortingLayer: 2
+  m_SortingOrder: 100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 368761460, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.4329004, y: 3.116883}
+  m_Size: {x: 5.12, y: 3.84}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -749,7 +749,7 @@ Animator:
   m_GameObject: {fileID: 5440297698249652870}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: af15821e0a2dbed46b11bf3cc69bd372, type: 2}
+  m_Controller: {fileID: 9100000, guid: b4b75ee37abef144494dd8a4ffc26d67, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -963,16 +963,16 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1482512767
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -51100511
+  m_SortingLayer: 2
+  m_SortingOrder: 100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 846397645, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.12, y: 3.84}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -1167,6 +1167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e772ee0fd7f37246b7da03b62d7fb0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleUnitSpawner
+  _backgroundSpriteRenderer: {fileID: 9051731286111488035}
   _playerBattleUnitViews:
   - {fileID: 5335911453196091293}
   - {fileID: 4853505784912346247}
@@ -1256,16 +1257,16 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1482512767
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -51100511
+  m_SortingLayer: 2
+  m_SortingOrder: 100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2142432406, guid: 3e39c3eef4fbd0a42bcb57d446cf8937, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 14.48, y: 10.86}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -1280,7 +1281,7 @@ Animator:
   m_GameObject: {fileID: 9129107897744784993}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: af15821e0a2dbed46b11bf3cc69bd372, type: 2}
+  m_Controller: {fileID: 9100000, guid: b4b75ee37abef144494dd8a4ffc26d67, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1390,7 +1391,7 @@ GameObject:
   - component: {fileID: 500607472649452921}
   - component: {fileID: 9051731286111488035}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SpriteRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1456,11 +1457,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1266784451
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -51100511
+  m_SortingLayer: 2
+  m_SortingOrder: -100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: eb47afb682978fe46b7e42dc1ade32d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1468,5 +1469,5 @@ SpriteRenderer:
   m_Size: {x: 9.41, y: 16.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0

@@ -25,7 +25,7 @@
     public const string COLOR_GOOD = "#7FD97F";
     public const string COLOR_BAD = "#FF7B7B";
 
-    //전투 관련
+    //전투 편성 관련
     public const int INVALID_BATTLE_POSITION = -1;
     public const int MAX_PLAYER_COUNT = 3;
     public const int MAX_ENEMY_COUNT = 3;
@@ -39,4 +39,13 @@
     public const string BASIC_ATTACK = "BasicAttack";
     public const string SIGNATURE = "Signature";
     public const string DEATH = "Death";
+
+    //BT 변수명
+    public const string SKILL_READY_EVENT = "SkillReadyEvent";
+    public const string BASIC_ATTACK_SKILL_READY = "IsBasicAttackSkillReady";
+    public const string SIGNATURE_SKILL_READY = "IsSignatureSkillReady";
+
+    //색
+    public const string STAGE_DANGER_COLOR = "#D81B60";
+    public const string STAGE_SAFE_COLOR = "#222222";
 }
