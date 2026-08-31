@@ -158,20 +158,20 @@ public class BattleManager
         return isUsable;
     }
 
-    public void RequestPlayerSkillExecution(int battlePosition, string skillId, SkillExecutionData skillExecutionData)
+    public void RequestPlayerSkillExecution(int battlePosition, string skillId, AttackerStats attackerStats)
     {
         BattleUnitModelBase targetModel = _battleUnitModels.FindEnemyTarget(battlePosition);
 
-        ExcuteSkill(targetModel, skillId, skillExecutionData);
+        ExcuteSkill(targetModel, skillId, attackerStats);
     }
 
 
 
-    public void RequestEnemySkillExecution(int battlePosition, string skillId, SkillExecutionData skillExecutionData)
+    public void RequestEnemySkillExecution(int battlePosition, string skillId, AttackerStats attackerStats)
     {
         BattleUnitModelBase targetModel = _battleUnitModels.FindPlayerTarget(battlePosition);
 
-        ExcuteSkill(targetModel, skillId, skillExecutionData);
+        ExcuteSkill(targetModel, skillId, attackerStats);
     }
 
     public void RequestUpdatePlayerUnitActive(int battlePosition, bool isActive)
@@ -249,7 +249,7 @@ public class BattleManager
         }
     }
 
-    private bool ExcuteSkill(BattleUnitModelBase targetModel, string skillId, SkillExecutionData skillExecutionData)
+    private bool ExcuteSkill(BattleUnitModelBase targetModel, string skillId, AttackerStats attackerStats)
     {
         if (targetModel == null)
         {
@@ -258,7 +258,7 @@ public class BattleManager
 
         //TODO 스킬아이디로 할만한 처리들
 
-        _battleService.ApplyAttack(targetModel, skillExecutionData);
+        _battleService.ApplyAttack(targetModel, attackerStats);
         return true;
     }
 
