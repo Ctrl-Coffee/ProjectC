@@ -49,7 +49,6 @@
     public const string STAGE_DANGER_COLOR = "#D81B60";
     public const string STAGE_SAFE_COLOR = "#222222";
 
-
     // 기본 장비 ID
     public const string DEFAULT_WEAPON_EQUIPMENT_ID = "equipment_weapon_001";
     public const string DEFAULT_ARMOR_EQUIPMENT_ID = "equipment_armor_001";
@@ -60,3 +59,4 @@
     public const string SIGNUP_FAIL = "SignUpFail";
     public const string DEFAULT_EQUIPMENT = "Default_Equipment";
 }
+    
