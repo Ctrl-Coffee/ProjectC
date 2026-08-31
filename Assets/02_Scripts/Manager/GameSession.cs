@@ -43,7 +43,19 @@ public class GameSession
         }
 
         var heroLevelResponse = await _networkManager.LoadHeroLevelAsync();
-        HeroLevelDto heroLevelDto = heroLevelResponse.data;
-        HeroInfo = new(new OwnedPlayerData(), HeroEquiped, HeroEquipment, heroLevelDto.userLevel);
+        var profileResponse = await _networkManager.LoadProfileAsync();
+
+        int userLevel = Const.FIRST_LEVEL;
+
+        if ((int)ServerErrorCode.Success == heroLevelResponse.result)
+        {
+            userLevel = heroLevelResponse.data.userLevel;
+        }
+        else
+        {
+            Logger.LogWarning($"주인공 레벨을 받지 못해 최소 레벨로 시작합니다. result : {heroLevelResponse.result}, message : {heroLevelResponse.message}");
+        }
+
+        HeroInfo = new(HeroEquiped, HeroEquipment, userLevel, profileResponse.nickname);
     }
 }

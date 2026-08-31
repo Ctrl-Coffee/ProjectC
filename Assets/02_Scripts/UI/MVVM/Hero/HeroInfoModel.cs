@@ -2,7 +2,6 @@
 
 public class HeroInfoModel : ModelBase, IStatData
 {
-    private OwnedPlayerData _ownedPlayerData;
     private HeroEquipedModel _equiped;
     private HeroEquipmentModel _equipment;
 
@@ -17,6 +16,7 @@ public class HeroInfoModel : ModelBase, IStatData
     private float _signatureSkillHaste;
     private float _combatPower;
     private int _level;
+    public string Nickname { get; private set; }
 
     public int Level
     {
@@ -128,13 +128,15 @@ public class HeroInfoModel : ModelBase, IStatData
         }
     }
 
-    public HeroInfoModel(OwnedPlayerData ownedPlayerData, HeroEquipedModel equiped, HeroEquipmentModel equipment, int level)
+    public HeroInfoModel(HeroEquipedModel equiped, HeroEquipmentModel equipment, int level, string nickname)
     {
-        _ownedPlayerData = ownedPlayerData;
         _equiped = equiped;
         _equipment = equipment;
-        _level = level;
-        // 장비 착용 / 장비 강화 시 최종 스텟이 바뀌므로 구독. 레벨은 이 모델이 직접 소유한다.
+
+        //  최소 레벨은 보장하기
+        _level = level < Const.FIRST_LEVEL ? Const.FIRST_LEVEL : level;
+        Nickname = nickname;
+
         _equiped.PropertyChanged += OnEquipedChanged;
         _equipment.ContainerPropertyChanged += OnEquipmentChanged;
 
@@ -179,11 +181,6 @@ public class HeroInfoModel : ModelBase, IStatData
 
     public LevelUpResult TryLevelUp()
     {
-        if (null == _ownedPlayerData)
-        {
-            return LevelUpResult.Error;
-        }
-
         PlayerLevelData nextLevelData = GetNextLevelData();
 
         if (null == nextLevelData)
@@ -196,7 +193,7 @@ public class HeroInfoModel : ModelBase, IStatData
             return LevelUpResult.NotEnoughCurrency;
         }
 
-        _ownedPlayerData.Level += 1;
+        Level = _level + 1;
 
         Recalculate();
 
@@ -207,12 +204,7 @@ public class HeroInfoModel : ModelBase, IStatData
 
     private PlayerLevelData GetNextLevelData()
     {
-        if (null == _ownedPlayerData)
-        {
-            return null;
-        }
-
-        return GameManager.DataTable.GetPlayerLevelData(_ownedPlayerData.Level + 1);
+        return GameManager.DataTable.GetPlayerLevelData(_level + 1);
     }
 
     public void Dispose()
@@ -227,7 +219,6 @@ public class HeroInfoModel : ModelBase, IStatData
             _equipment.ContainerPropertyChanged -= OnEquipmentChanged;
         }
 
-        _ownedPlayerData = null;
         _equiped = null;
         _equipment = null;
     }
@@ -259,8 +250,6 @@ public class HeroInfoModel : ModelBase, IStatData
         StatSum sum = baseStat;
 
         sum.Add(equipmentStat);
-
-        Level = null == _ownedPlayerData ? 0 : _ownedPlayerData.Level;
 
         BaseStat = baseStat;
         EquipmentStat = equipmentStat;
@@ -301,12 +290,7 @@ public class HeroInfoModel : ModelBase, IStatData
     {
         StatSum sum = new StatSum();
 
-        if (null == _ownedPlayerData)
-        {
-            return sum;
-        }
-
-        for (int level = Const.FIRST_BONUS_LEVEL; level <= _ownedPlayerData.Level; level++)
+        for (int level = Const.FIRST_BONUS_LEVEL; level <= _level; level++)
         {
             PlayerLevelData levelData = GameManager.DataTable.GetPlayerLevelData(level);
 
