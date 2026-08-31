@@ -12,7 +12,7 @@ public class HeroLevelUpEffect : MonoBehaviour
     [SerializeField] private float _rollupDuration = 0.35f;
 
     [Header("사운드")]
-    [SerializeField] private string _sfxPath = AddressablePath.Audio.STAMP_SUCCESS;
+    [SerializeField] private string _sfxPath = AddressablePath.Audio.LEVEL_UP;
 
     private HeroInfoView _view;
 

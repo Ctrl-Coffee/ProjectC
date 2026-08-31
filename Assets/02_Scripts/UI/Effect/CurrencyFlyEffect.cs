@@ -12,7 +12,7 @@ public class CurrencyFlyEffect : MonoBehaviour
     private const float SCATTER_RADIUS = 70f;
     private const float SCATTER_ANGLE_JITTER = 18f;
 
-    private const float ICON_DELAY_STEP = 0.06f;
+    private const float ICON_DELAY_STEP = 0.1f;
     private const float CURRENCY_DELAY_STEP = 0.18f;
 
     private const float PUNCH_SCALE = 0.3f;
@@ -144,6 +144,8 @@ public class CurrencyFlyEffect : MonoBehaviour
     private void OnIconArrived(CurrencyFlyIcon icon)
     {
         _flyingCount--;
+
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.CURRENCY_GAIN);
 
         PunchAnchor(icon.CurrencyType);
 

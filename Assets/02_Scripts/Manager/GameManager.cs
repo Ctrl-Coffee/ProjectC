@@ -94,6 +94,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         Transform poolRoot = Utils.CreateEmptyGameObject("PoolRoot",transform).transform;
         await _poolManager.InitAsync(poolRoot);
 
+        AwayReportFlow.OnRelaunch();
+
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
