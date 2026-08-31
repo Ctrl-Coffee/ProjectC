@@ -83,7 +83,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -51100511
   m_SortingLayer: 2
-  m_SortingOrder: 100
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
+  m_Graph: {fileID: -6544195377873741831, guid: 5aa78f46d1bb2334bb1d6c61735f9ac5, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 2353026919307935835
   - rid: 2353026922625630289
@@ -319,7 +319,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -51100511
   m_SortingLayer: 2
-  m_SortingOrder: 100
+  m_SortingOrder: 300
   m_MaskInteraction: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -523,7 +523,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -51100511
   m_SortingLayer: 2
-  m_SortingOrder: 100
+  m_SortingOrder: 200
   m_MaskInteraction: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
+  m_Graph: {fileID: -6544195377873741831, guid: 5aa78f46d1bb2334bb1d6c61735f9ac5, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 2353026919307935836
   - rid: 2353026922625630288
@@ -727,7 +727,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -51100511
   m_SortingLayer: 2
-  m_SortingOrder: 100
+  m_SortingOrder: 200
   m_MaskInteraction: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: -6544195377873741831, guid: e6df2ec87191453468c3a746e5d28c99, type: 2}
+  m_Graph: {fileID: -6544195377873741831, guid: 5aa78f46d1bb2334bb1d6c61735f9ac5, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 2353026919307935837
   - rid: 2353026922625630287
@@ -1461,7 +1461,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: -100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: eb47afb682978fe46b7e42dc1ade32d2, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1469,5 +1469,5 @@ SpriteRenderer:
   m_Size: {x: 9.41, y: 16.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
