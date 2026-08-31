@@ -1,0 +1,937 @@
+fileFormatVersion: 2
+guid: 76c9e4eacb88d474a923dbaa646a94ee
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3976651947060640387
+    second: king_slime_attack_sheet_6col_0
+  - first:
+      213: -1680281716596944844
+    second: king_slime_attack_sheet_6col_1
+  - first:
+      213: 8101980400720561387
+    second: king_slime_attack_sheet_6col_2
+  - first:
+      213: -8900317103373174186
+    second: king_slime_attack_sheet_6col_3
+  - first:
+      213: 2155530569830499845
+    second: king_slime_attack_sheet_6col_4
+  - first:
+      213: 2813719100518699822
+    second: king_slime_attack_sheet_6col_5
+  - first:
+      213: 1115594511516135855
+    second: king_slime_attack_sheet_6col_6
+  - first:
+      213: -3573282922140768666
+    second: king_slime_attack_sheet_6col_7
+  - first:
+      213: -5827797284279065269
+    second: king_slime_attack_sheet_6col_8
+  - first:
+      213: -6398160709068777345
+    second: king_slime_attack_sheet_6col_9
+  - first:
+      213: 6001645345908520646
+    second: king_slime_attack_sheet_6col_10
+  - first:
+      213: -2052126299910960880
+    second: king_slime_attack_sheet_6col_11
+  - first:
+      213: -444818343487925556
+    second: king_slime_attack_sheet_6col_12
+  - first:
+      213: 6123785250355772421
+    second: king_slime_attack_sheet_6col_13
+  - first:
+      213: -4036065325865856995
+    second: king_slime_attack_sheet_6col_14
+  - first:
+      213: 6102602315365580855
+    second: king_slime_attack_sheet_6col_15
+  - first:
+      213: 7074434825651121224
+    second: king_slime_attack_sheet_6col_16
+  - first:
+      213: -31462771174585042
+    second: king_slime_attack_sheet_6col_17
+  - first:
+      213: -5112888004516524931
+    second: king_slime_attack_sheet_6col_18
+  - first:
+      213: -3296469763265307056
+    second: king_slime_attack_sheet_6col_19
+  - first:
+      213: 3946428701123007182
+    second: king_slime_attack_sheet_6col_20
+  - first:
+      213: -7258485669761328554
+    second: king_slime_attack_sheet_6col_21
+  - first:
+      213: -3498907611872514164
+    second: king_slime_attack_sheet_6col_22
+  - first:
+      213: -898041905668482373
+    second: king_slime_attack_sheet_6col_23
+  - first:
+      213: -2700982442412574589
+    second: king_slime_attack_sheet_6col_24
+  - first:
+      213: 6350497566895540794
+    second: king_slime_attack_sheet_6col_25
+  - first:
+      213: -2662005956035968500
+    second: king_slime_attack_sheet_6col_26
+  - first:
+      213: -3010730560480138739
+    second: king_slime_attack_sheet_6col_27
+  - first:
+      213: 7133125418011984032
+    second: king_slime_attack_sheet_6col_28
+  - first:
+      213: -5490995062542750271
+    second: king_slime_attack_sheet_6col_29
+  - first:
+      213: 8221801839780838928
+    second: king_slime_attack_sheet_6col_30
+  - first:
+      213: 4833953482349742586
+    second: king_slime_attack_sheet_6col_31
+  - first:
+      213: -4911615299207873932
+    second: king_slime_attack_sheet_6col_32
+  - first:
+      213: -1176212639051045123
+    second: king_slime_attack_sheet_6col_33
+  - first:
+      213: 1046337526668847984
+    second: king_slime_attack_sheet_6col_34
+  - first:
+      213: -8751740052467453540
+    second: king_slime_attack_sheet_6col_35
+  - first:
+      213: -348287745482526630
+    second: king_slime_attack_sheet_6col_36
+  - first:
+      213: -8289612164143116042
+    second: king_slime_attack_sheet_6col_37
+  - first:
+      213: 4891920963726142640
+    second: king_slime_attack_sheet_6col_38
+  - first:
+      213: 3715568552008919885
+    second: king_slime_attack_sheet_6col_39
+  - first:
+      213: -1519085130488073196
+    second: king_slime_attack_sheet_6col_40
+  - first:
+      213: 5223702331018148876
+    second: king_slime_attack_sheet_6col_41
+  - first:
+      213: -4882062549386059620
+    second: king_slime_attack_sheet_6col_42
+  - first:
+      213: -903930615334049758
+    second: king_slime_attack_sheet_6col_43
+  - first:
+      213: -2344989866655354977
+    second: king_slime_attack_sheet_6col_44
+  - first:
+      213: 5365840586161081640
+    second: king_slime_attack_sheet_6col_45
+  - first:
+      213: -3870413030426396624
+    second: king_slime_attack_sheet_6col_46
+  - first:
+      213: 4583794216527489452
+    second: king_slime_attack_sheet_6col_47
+  - first:
+      213: -4603567902764376970
+    second: king_slime_attack_sheet_6col_48
+  - first:
+      213: -542825586994375459
+    second: king_slime_attack_sheet_6col_49
+  - first:
+      213: 7723836013465481152
+    second: king_slime_attack_sheet_6col_50
+  - first:
+      213: 1916798744350468617
+    second: king_slime_attack_sheet_6col_51
+  - first:
+      213: 6251296179053939592
+    second: king_slime_attack_sheet_6col_52
+  - first:
+      213: -8161216818677934480
+    second: king_slime_attack_sheet_6col_53
+  - first:
+      213: 3011451406910188009
+    second: king_slime_attack_sheet_6col_54
+  - first:
+      213: -5319266007968973617
+    second: king_slime_attack_sheet_6col_55
+  - first:
+      213: 5481023662675708764
+    second: king_slime_attack_sheet_6col_56
+  - first:
+      213: 551384272975191219
+    second: king_slime_attack_sheet_6col_57
+  - first:
+      213: -7118577991620987118
+    second: king_slime_attack_sheet_6col_58
+  - first:
+      213: -7737596674972460943
+    second: king_slime_attack_sheet_6col_59
+  - first:
+      213: -4820670642141432272
+    second: king_slime_attack_sheet_6col_60
+  - first:
+      213: 2295591018635761328
+    second: king_slime_attack_sheet_6col_61
+  - first:
+      213: -8009189948772194997
+    second: king_slime_attack_sheet_6col_62
+  - first:
+      213: 5348660790997467334
+    second: king_slime_attack_sheet_6col_63
+  - first:
+      213: 2777209899423604971
+    second: king_slime_attack_sheet_6col_64
+  - first:
+      213: 1078965360690129383
+    second: king_slime_attack_sheet_6col_65
+  - first:
+      213: -5300686283580293473
+    second: king_slime_attack_sheet_6col_66
+  - first:
+      213: 1745217847511135247
+    second: king_slime_attack_sheet_6col_67
+  - first:
+      213: -4193852589425272189
+    second: king_slime_attack_sheet_6col_68
+  - first:
+      213: -2381691248694556865
+    second: king_slime_attack_sheet_6col_69
+  - first:
+      213: 4336435831569004768
+    second: king_slime_attack_sheet_6col_70
+  - first:
+      213: -3317666809269639221
+    second: king_slime_attack_sheet_6col_71
+  - first:
+      213: 6115587824371945209
+    second: king_slime_attack_sheet_6col_72
+  - first:
+      213: 7442988528054738327
+    second: king_slime_attack_sheet_6col_73
+  - first:
+      213: 478378893611200589
+    second: king_slime_attack_sheet_6col_74
+  - first:
+      213: -7936141825046585400
+    second: king_slime_attack_sheet_6col_75
+  - first:
+      213: -2112068606846838949
+    second: king_slime_attack_sheet_6col_76
+  - first:
+      213: 4610611815097483432
+    second: king_slime_attack_sheet_6col_77
+  - first:
+      213: 1266413454389832017
+    second: king_slime_attack_sheet_6col_78
+  - first:
+      213: 6843535574116306694
+    second: king_slime_attack_sheet_6col_79
+  - first:
+      213: 8868742747285158123
+    second: king_slime_attack_sheet_6col_80
+  - first:
+      213: 1547048186678969634
+    second: king_slime_attack_sheet_6col_81
+  - first:
+      213: 7565032037520716196
+    second: king_slime_attack_sheet_6col_82
+  - first:
+      213: -1859756384710164963
+    second: king_slime_attack_sheet_6col_83
+  - first:
+      213: -2196924551653419931
+    second: king_slime_attack_sheet_6col_84
+  - first:
+      213: 5875141942103796047
+    second: king_slime_attack_sheet_6col_85
+  - first:
+      213: 6736200584284522504
+    second: king_slime_attack_sheet_6col_86
+  - first:
+      213: 2610048186025822491
+    second: king_slime_attack_sheet_6col_87
+  - first:
+      213: 8532576544658199733
+    second: king_slime_attack_sheet_6col_88
+  - first:
+      213: 3872461375939973769
+    second: king_slime_attack_sheet_6col_89
+  - first:
+      213: -2318900723298580442
+    second: king_slime_attack_sheet_6col_90
+  - first:
+      213: 1388461800533145917
+    second: king_slime_attack_sheet_6col_91
+  - first:
+      213: -4397527265121003417
+    second: king_slime_attack_sheet_6col_92
+  - first:
+      213: -4975375141989429687
+    second: king_slime_attack_sheet_6col_93
+  - first:
+      213: -1734721230327063973
+    second: king_slime_attack_sheet_6col_94
+  - first:
+      213: 2121379235033914409
+    second: king_slime_attack_sheet_6col_95
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 50
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: king_slime_attack_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c92f9257a9ff934799a70859017ef02
+      internalID: 534991017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_01
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 469c9e4f9504a134592fedf2e2d0a322
+      internalID: 1507212002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_02
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed30d4c488132a4ca392c21a3f29fb4
+      internalID: 1421170771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_03
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05ea4a1580d87a94bb9f4d9d733c9819
+      internalID: 909220624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_04
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71038c6507277314f97509503031731f
+      internalID: 1745991683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_05
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5078fdf3180d4c448175002c1d63bbc
+      internalID: -1700870295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 955dcbfd73a57344f9b40774a79f617e
+      internalID: 797803755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_07
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 419d7b7a21c65df4cad091ef8a00d47d
+      internalID: -1116917854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_08
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d76f12e47f9d2ca4d9b6df00729594a5
+      internalID: -1096607256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_09
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c530a601e47eeed499423f4f539adeb8
+      internalID: 2066036018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_10
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df89210ac7023af49b558c2d5440f752
+      internalID: -1299501379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_11
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2479141d206bab34eb52e544fad766fa
+      internalID: 393370785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 442395e1df268c14da1d769c793065d0
+      internalID: 1191980399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_13
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d462baf5972403d4681ce3ddaf65b42b
+      internalID: 400882084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_14
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fad510820c7969b46a58c4f6d87a01ac
+      internalID: 1178206176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_15
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc29e1b97271ebd49ad4d4a26e4cbbfe
+      internalID: 225830136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_16
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6998d6a9cfbe3a4987fa611037d5563
+      internalID: -1736263419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_17
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35ee419ff459ac14ca4a63cc6c4f7269
+      internalID: -30833822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cec366175b7287d4799494558179ed01
+      internalID: -2127956446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_19
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4c3deaaa0ec58c4eb8c95ea4a2bf1a9
+      internalID: -32272489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_20
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77985463242a14448adfa402f3779d37
+      internalID: 1479241926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: king_slime_attack_21
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.114583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c6f6b65fb7a2643814ef28be9a6602
+      internalID: 1123577358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2fc8c135fae17e34ca2972d2af7958bf
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      king_slime_attack_00: 534991017
+      king_slime_attack_01: 1507212002
+      king_slime_attack_02: 1421170771
+      king_slime_attack_03: 909220624
+      king_slime_attack_04: 1745991683
+      king_slime_attack_05: -1700870295
+      king_slime_attack_06: 797803755
+      king_slime_attack_07: -1116917854
+      king_slime_attack_08: -1096607256
+      king_slime_attack_09: 2066036018
+      king_slime_attack_10: -1299501379
+      king_slime_attack_11: 393370785
+      king_slime_attack_12: 1191980399
+      king_slime_attack_13: 400882084
+      king_slime_attack_14: 1178206176
+      king_slime_attack_15: 225830136
+      king_slime_attack_16: -1736263419
+      king_slime_attack_17: -30833822
+      king_slime_attack_18: -2127956446
+      king_slime_attack_19: -32272489
+      king_slime_attack_20: 1479241926
+      king_slime_attack_21: 1123577358
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
