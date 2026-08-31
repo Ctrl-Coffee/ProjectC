@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74830dde37789f341bca17a1a62ea265, type: 3}
+  m_Name: DragonBoss
+  m_EditorClassIdentifier: Assembly-CSharp::UnitAnimationSet
+  _idleClip: {fileID: 7400000, guid: 8055948d3cfd8e94cab2f9214b5e76aa, type: 2}
+  _deathClip: {fileID: 7400000, guid: aa6ef36f0db98604da13677074bb370d, type: 2}
+  _basicAttackClip: {fileID: 7400000, guid: f8f3f67cbecc88340a1cb772b0525be8, type: 2}
+  _signatureClip: {fileID: 7400000, guid: 487ebab8b1bbd344e8af74daa356db36, type: 2}

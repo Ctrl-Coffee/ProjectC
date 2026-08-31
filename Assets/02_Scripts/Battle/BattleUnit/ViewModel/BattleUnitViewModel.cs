@@ -48,7 +48,7 @@ public class BattleUnitViewModel
     {
         if (battleUnitModel == null)
         {
-            Debug.LogError("BattleUnitModel이 null입니다.");
+            Logger.LogError("BattleUnitModel이 null입니다.");
             return;
         }
 

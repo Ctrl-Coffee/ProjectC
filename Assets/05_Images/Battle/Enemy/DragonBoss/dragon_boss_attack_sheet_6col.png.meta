@@ -1,0 +1,614 @@
+fileFormatVersion: 2
+guid: dec59bc5f85d6994fa57f360ed4730ae
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1979546998857083624
+    second: dragon_boss_attack_sheet_6col_0
+  - first:
+      213: 8949059034872149711
+    second: dragon_boss_attack_sheet_6col_1
+  - first:
+      213: 6149325025936291069
+    second: dragon_boss_attack_sheet_6col_2
+  - first:
+      213: 65438129842722844
+    second: dragon_boss_attack_sheet_6col_3
+  - first:
+      213: 1851812056874509647
+    second: dragon_boss_attack_sheet_6col_4
+  - first:
+      213: 6192102425029692845
+    second: dragon_boss_attack_sheet_6col_5
+  - first:
+      213: 9043443382302082859
+    second: dragon_boss_attack_sheet_6col_6
+  - first:
+      213: 5383859390042393535
+    second: dragon_boss_attack_sheet_6col_7
+  - first:
+      213: -1726622973006641733
+    second: dragon_boss_attack_sheet_6col_8
+  - first:
+      213: 7608794871211047197
+    second: dragon_boss_attack_sheet_6col_9
+  - first:
+      213: -5017402054093652955
+    second: dragon_boss_attack_sheet_6col_10
+  - first:
+      213: -5540962652941342866
+    second: dragon_boss_attack_sheet_6col_11
+  - first:
+      213: 2637806838746818246
+    second: dragon_boss_attack_sheet_6col_12
+  - first:
+      213: -3324568222029495537
+    second: dragon_boss_attack_sheet_6col_13
+  - first:
+      213: 694075041260764041
+    second: dragon_boss_attack_sheet_6col_14
+  - first:
+      213: -3744229467132242141
+    second: dragon_boss_attack_sheet_6col_15
+  - first:
+      213: 3673762205696608945
+    second: dragon_boss_attack_sheet_6col_16
+  - first:
+      213: -9020427268877325569
+    second: dragon_boss_attack_sheet_6col_17
+  - first:
+      213: -2890242302497132427
+    second: dragon_boss_attack_sheet_6col_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 60
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dragon_boss_attack_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b40489f2e4999d40a11b1f93b20219d
+      internalID: -1626392807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_01
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53ddc5bbd9b2de04c9e509c7a80f0110
+      internalID: -1184733910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_02
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 802c884338bc178449421941980b0e61
+      internalID: -450866506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_03
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad9cb48f62b7f3f47a2badc6dc9faba6
+      internalID: -1520524438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_04
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97e0550e54e30064e8157e81c8abd74d
+      internalID: 83988122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_05
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d74199bd503c944abcbe2c8c796e4ba
+      internalID: 382098379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2373959380e6c34bad51520766f36ba
+      internalID: 224072489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_07
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 864faf84bf5fad348bce9035e57eb88e
+      internalID: 1055963837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_08
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a57d3d393a874c43b69aa6919feb53c
+      internalID: -1571171772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_09
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f001885aad0e0840a7c15ae83a0ae2b
+      internalID: -1020185574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_10
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef27ee4c139c87d479bcac63d7e2ada6
+      internalID: 1337353393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_11
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a93205dc7c551a349bfaecdf26cfc59b
+      internalID: 149183850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b55c52806cedce842874969f5f0cddab
+      internalID: -1953774290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_13
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0098c55cd3cbb584b9009b01eae01c78
+      internalID: 1366455476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_14
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f503f98874ca24a4fbafa028c5db3215
+      internalID: -1956936541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_15
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c166a4a4b040e53459b4efa6b2d6e7d1
+      internalID: 166876029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_16
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 286662ed47ad29543acb8be45f9ea167
+      internalID: 1146818372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_attack_17
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 654c53460afa3da4881db8179101aa62
+      internalID: -1611859825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a7514b381563a8a4fbe6e6cf4b4ae20a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dragon_boss_attack_00: -1626392807
+      dragon_boss_attack_01: -1184733910
+      dragon_boss_attack_02: -450866506
+      dragon_boss_attack_03: -1520524438
+      dragon_boss_attack_04: 83988122
+      dragon_boss_attack_05: 382098379
+      dragon_boss_attack_06: 224072489
+      dragon_boss_attack_07: 1055963837
+      dragon_boss_attack_08: -1571171772
+      dragon_boss_attack_09: -1020185574
+      dragon_boss_attack_10: 1337353393
+      dragon_boss_attack_11: 149183850
+      dragon_boss_attack_12: -1953774290
+      dragon_boss_attack_13: 1366455476
+      dragon_boss_attack_14: -1956936541
+      dragon_boss_attack_15: 166876029
+      dragon_boss_attack_16: 1146818372
+      dragon_boss_attack_17: -1611859825
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,467 @@
+fileFormatVersion: 2
+guid: 2c3e0cc53748ccd488c33f07ed269015
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2203205228798437073
+    second: dragon_boss_idle_sheet_4col_0
+  - first:
+      213: -2699119729272383226
+    second: dragon_boss_idle_sheet_4col_1
+  - first:
+      213: -4723204225876318817
+    second: dragon_boss_idle_sheet_4col_2
+  - first:
+      213: -356740715825319749
+    second: dragon_boss_idle_sheet_4col_3
+  - first:
+      213: -163080786287967430
+    second: dragon_boss_idle_sheet_4col_4
+  - first:
+      213: 7206520000056408796
+    second: dragon_boss_idle_sheet_4col_5
+  - first:
+      213: 3962279538012386413
+    second: dragon_boss_idle_sheet_4col_6
+  - first:
+      213: -6993099119819142271
+    second: dragon_boss_idle_sheet_4col_7
+  - first:
+      213: -6001165148101170332
+    second: dragon_boss_idle_sheet_4col_8
+  - first:
+      213: -6404008058833065381
+    second: dragon_boss_idle_sheet_4col_9
+  - first:
+      213: 1001328125662075354
+    second: dragon_boss_idle_sheet_4col_10
+  - first:
+      213: -418691472631892992
+    second: dragon_boss_idle_sheet_4col_11
+  - first:
+      213: 7276678855725956291
+    second: dragon_boss_idle_sheet_4col_12
+  - first:
+      213: 4055340753466651902
+    second: dragon_boss_idle_sheet_4col_13
+  - first:
+      213: -2896487278164130035
+    second: dragon_boss_idle_sheet_4col_14
+  - first:
+      213: 5168798253132578968
+    second: dragon_boss_idle_sheet_4col_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 60
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dragon_boss_idle_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56ef0d65eb9130242913c31dfaf75f69
+      internalID: -1519840862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_01
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4b97e57338e2444b97244a6f5254469
+      internalID: 1353630129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_02
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f0e94213b2378a449e370333db99f97
+      internalID: -523497298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_03
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64e9a36555b25c14193e2b85f09ea790
+      internalID: -1822949959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_04
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e23104f2d1551848bbe6c1dbc06cf93
+      internalID: 749250626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_05
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d07d21e4dab524479cd42c636de885a
+      internalID: -241664969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_06
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4858a5c249e55df4292f20fce446ad7d
+      internalID: -850592828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_07
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0338fda27f7120428be9c33ca902797
+      internalID: -1294936494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_08
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d23836430dbbb7a439d766a9d0313d74
+      internalID: 871469651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_09
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7730145fb7cd02341bc43aa0a1f5a790
+      internalID: 210070551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_10
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea42260a422d1ff4f8936ea393f9a0c6
+      internalID: 1236493240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_idle_11
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1a192c0dd192f14e9c82fcfe5d04dfa
+      internalID: -769722535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d9d3a4d9a775e004c9710b3bada855fe
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dragon_boss_idle_00: -1519840862
+      dragon_boss_idle_01: 1353630129
+      dragon_boss_idle_02: -523497298
+      dragon_boss_idle_03: -1822949959
+      dragon_boss_idle_04: 749250626
+      dragon_boss_idle_05: -241664969
+      dragon_boss_idle_06: -850592828
+      dragon_boss_idle_07: -1294936494
+      dragon_boss_idle_08: 871469651
+      dragon_boss_idle_09: 210070551
+      dragon_boss_idle_10: 1236493240
+      dragon_boss_idle_11: -769722535
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

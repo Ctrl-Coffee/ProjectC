@@ -777,7 +777,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN;UNITASK_DOTWEEN_SUPPORT
+    Android: DOTWEEN;UNITASK_DOTWEEN_SUPPORT;DEV_VER
     EmbeddedLinux: DOTWEEN;UNITASK_DOTWEEN_SUPPORT
     GameCoreScarlett: DOTWEEN;UNITASK_DOTWEEN_SUPPORT
     GameCoreXboxOne: DOTWEEN;UNITASK_DOTWEEN_SUPPORT

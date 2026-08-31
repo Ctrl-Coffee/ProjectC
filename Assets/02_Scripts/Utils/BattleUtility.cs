@@ -1,23 +1,26 @@
 ﻿using System;
-using UnityEngine;
 
 public static class BattleUtility
 {
-    private const int K = 100;
 
-    public static BattleUnitData CreatePlayerBattleUnitData()
+    private static readonly Random Random = new Random();
+
+    public static BattleUnitData CreatePlayerBattleUnitData(HeroInfoModel heroInfoModel, EquipmentData equipmentData)
     {
         BattleUnitData battleUnitData = new BattleUnitData();
 
-        //battleUnitData.MaxHp = companionData.BaseHp;
-        //battleUnitData.Attack = companionData.BaseAttack;
-        //battleUnitData.Defense = companionData.BaseDefense;
-        //battleUnitData.CriticalChance = companionData.BaseCriticalChance;
-        //battleUnitData.AttackSpeed = companionData.BasicAttackHaste;
-        //battleUnitData.CooldownReduction = companionData.SignatureSkillHaste;
-        //battleUnitData.BasicAttackSkillId = companionData.BasicAttackSkillId;
-        //battleUnitData.SignatureSkillId = companionData.SignatureSkillId;
-        //battleUnitData.AnimationSetKey = "TestAnimKey";
+        battleUnitData.MaxHp = heroInfoModel.Hp;
+        battleUnitData.Attack = heroInfoModel.Attack;
+        battleUnitData.Defense = heroInfoModel.Defense;
+        battleUnitData.CriticalChance = heroInfoModel.CriticalChance;
+        battleUnitData.BasicAttackHaste = heroInfoModel.BasicAttackHaste;
+        battleUnitData.SignatureSkillHaste = heroInfoModel.SignatureSkillHaste;
+        battleUnitData.BasicAttackSkillId = "enemy_skill_ch1_melee_basic";
+       //battleUnitData.BasicAttackSkillId = equipmentData.BasicAttackSkillId;
+        battleUnitData.SignatureSkillId = "enemy_skill_ch1_melee_basic";
+        //battleUnitData.SignatureSkillId = equipmentData.SignatureSkillId;
+        battleUnitData.AnimationSetKey = "Assets/07_ScriptableObject/Hero/HeroBaseArmor.asset";
+        //battleUnitData.AnimationSetKey = equipmentData.AnimationSetKey;
 
         return battleUnitData;
     }
@@ -47,11 +50,11 @@ public static class BattleUtility
         battleUnitData.Attack = enemyData.BaseAttack;
         battleUnitData.Defense = enemyData.BaseDefense;
         battleUnitData.CriticalChance = enemyData.BaseCriticalChance;
-        battleUnitData.AttackSpeed = 0;
-        battleUnitData.CooldownReduction = 0;
+        battleUnitData.BasicAttackHaste = enemyData.BasicAttackHaste;
+        battleUnitData.SignatureSkillHaste = enemyData.SignatureSkillHaste;
         battleUnitData.BasicAttackSkillId = enemyData.BasicAttackSkillId;
         battleUnitData.SignatureSkillId = enemyData.SignatureSkillId;
-        battleUnitData.AnimationSetKey = "TestAnimKey";
+        battleUnitData.AnimationSetKey = enemyData.AnimationSetKey;
 
         return battleUnitData;
     }
@@ -65,36 +68,27 @@ public static class BattleUtility
         return createdUid;
     }
 
-    public static float CalculateDamage(SkillExecutionData attackStats, DefenseStats defenseStats)
+    public static float CalculateDamage(AttackStats attackStats, DefenseStats defenseStats)
     {
-        float damage = 1;
+        float baseDamage = attackStats.Damage;
 
-        float defdamage = (damage * K) / (K + defenseStats.Defense);
+        float reducedDamage = (baseDamage * Const.RATE_TO_PERCENT) / (Const.RATE_TO_PERCENT + defenseStats.Defense);
 
         bool isCritical = CalculateCritical(attackStats.CriticalChance);
 
-        return 500;
+        float calculatedDamage = isCritical ? reducedDamage * Const.CRITICAL_DAMAGE_MULTIPLIER : reducedDamage;
+        return calculatedDamage;
     }
 
-    public static float CalculateBasicAttackSkillCooldown(float baseCooldown, float attackSpeed)
+    public static float CalculateCooldown(float baseCooldown, float skillHaste)
     {
-        float calculatedCooldown = baseCooldown / (1f + attackSpeed);
-
+        float calculatedCooldown = baseCooldown * 100 / (100 + skillHaste);
         return calculatedCooldown;
     } 
 
-    public static float CalculateSignatureSkillCooldown(float baseCooldown, float cooldownReduction)
+    private static bool CalculateCritical(float criticalChance)
     {
-        cooldownReduction = Mathf.Clamp01(cooldownReduction);
-
-        float calculatedCooldown = baseCooldown * (1f - cooldownReduction);
-
-        return calculatedCooldown;
-    }
-
-    private static bool CalculateCritical(float critical)
-    {
-        bool isCritical = critical > 0;
+        bool isCritical = Random.NextDouble() < criticalChance;
         return isCritical;
     }
 }

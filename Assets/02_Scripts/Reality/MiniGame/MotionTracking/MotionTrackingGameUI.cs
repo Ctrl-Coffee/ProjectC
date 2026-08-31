@@ -33,8 +33,14 @@ public class MotionTrackingGameUI : MiniGameBase
     [SerializeField] private float _fillRate = 0.16f;
     [SerializeField] private float _drainRate = 0.08f;
 
+    [Header("게이지 사운드")]
+    [SerializeField] private float _gaugeMinPitch = 0.8f;
+    [SerializeField] private float _gaugeMaxPitch = 1.6f;
+
     private TrackingMarker _marker = new();
     private TrackingTarget _target = new();
+
+    private GaugeSoundLoop _gaugeSound = new();
 
     private float _progress = 0f;
     private float _elapsedTime = 0f;
@@ -48,9 +54,16 @@ public class MotionTrackingGameUI : MiniGameBase
 
         SetupRound();
 
-        float accuracy = await RunTrackingAsync(token);
+        try
+        {
+            float accuracy = await RunTrackingAsync(token);
 
-        return MiniGameResult.Completed(accuracy);
+            return MiniGameResult.Completed(accuracy);
+        }
+        finally
+        {
+            _gaugeSound.Stop();
+        }
     }
 
     protected override void ClearGame()
@@ -62,6 +75,8 @@ public class MotionTrackingGameUI : MiniGameBase
 
         ResetPlayState();
         RefreshView();
+
+        _gaugeSound.Stop();
     }
 
     private void SetupRound()
@@ -73,6 +88,9 @@ public class MotionTrackingGameUI : MiniGameBase
 
         SetTargetSize();
         RefreshView();
+
+        _gaugeSound.Init(gameObject, _gaugeMinPitch, _gaugeMaxPitch);
+        _gaugeSound.Play();
     }
 
     private void ResetPlayState()
@@ -145,6 +163,8 @@ public class MotionTrackingGameUI : MiniGameBase
         {
             _txtTimer.text = GetRemainingSeconds().ToString("F1");
         }
+
+        _gaugeSound.SetProgress(_progress);
     }
 
     private float GetRemainingSeconds()

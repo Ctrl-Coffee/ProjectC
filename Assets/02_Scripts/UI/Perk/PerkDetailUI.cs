@@ -11,7 +11,7 @@ public class PerkDetailUI : UIBase
     [SerializeField] private TextMeshProUGUI _descriptionText;
     [SerializeField] private TextMeshProUGUI _costText;
 
-    [SerializeField] private UIButtonComponent _btnClose;
+    [SerializeField] private Button _btnClose;
     [SerializeField] private UIButtonComponent _upgradeButton;
     [SerializeField] private UIButtonComponent _cancelButton;
 
@@ -50,7 +50,7 @@ public class PerkDetailUI : UIBase
             return;
         }
 
-        _btnClose.BindButtonEvent(OnClickCloseButton);
+        _btnClose.onClick.AddListener(OnClickCloseButton);
         _upgradeButton.BindButtonEvent(OnClickUpgrade);
         _cancelButton.BindButtonEvent(OnClickCancel);
     }
@@ -258,6 +258,8 @@ public class PerkDetailUI : UIBase
             return;
         }
 
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.PERK_ACTIVE);
+
         CloseUI();
     }
 
@@ -268,6 +270,8 @@ public class PerkDetailUI : UIBase
             Refresh();
             return;
         }
+
+        GameManager.Sound.PlaySFX(AddressablePath.Audio.PERK_DEACTIVE);
 
         CloseUI();
     }

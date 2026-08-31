@@ -20,15 +20,13 @@ public class StageFailUI : UIBase
 
     private void RetrunToBattlePreparation()
     {
-        GameManager.Battle.RequestInitalizeCurrentStage();
-
-        gameObject.SetActive(false);
+        GameManager.Battle.EnterBattle();
+        GameManager.UI.CloseStageFailUI();
     }
 
     private void RestartStage()
     {
-        GameManager.Battle.RequestInitalizeNextStage();
-
-        gameObject.SetActive(false);
+        GameManager.Battle.RestartBattle();
+        GameManager.UI.CloseStageFailUI();
     }
 }

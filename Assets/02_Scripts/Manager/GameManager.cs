@@ -13,11 +13,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static PerkManager Perk { get { return Instance._perkManager; } }
     public static SoundManager Sound { get { return Instance._soundManager; } }
     public static BattleManager Battle { get { return Instance._battleManager; } }
+    public static StageManager Stage { get { return Instance._stageManager; } }
 
     public static GameSession Session { get { return Instance._gameSession; } }
     public static ViewModelFactory ViewModel { get { return Instance._viewModelFactory; } }
-
-
 
     #region Manager Variables
 
@@ -29,7 +28,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     private UIManager _uiManager = new();
     private SoundManager _soundManager = new();
     private PerkManager _perkManager = new();
-    private BattleManager _battleManager;
+    private BattleManager _battleManager = new();
+    private StageManager _stageManager = new();
 
     private GameSession _gameSession;
     private ViewModelFactory _viewModelFactory;
@@ -85,14 +85,16 @@ public class GameManager : SingletonBehaviour<GameManager>
         await _perkManager.LoadDataAsync();
         await AutoWorkQueue.RestoreSlots();
 
-        _battleManager = new();
-
         _viewModelFactory = new(_gameSession, _dataTable);
 
         onProgress?.Invoke(0.85f);
 
         Transform poolRoot = Utils.CreateEmptyGameObject("PoolRoot",transform).transform;
         await _poolManager.InitAsync(poolRoot);
+
+        _battleManager.Initialize();
+
+        AwayReportFlow.OnRelaunch();
 
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();

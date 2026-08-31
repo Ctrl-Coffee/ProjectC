@@ -129,6 +129,15 @@ public static class UIManagerExtension
         ui.SetReport(report);
     }
 
+    public static void OpenBattlePreparation(this UIManager uiManager)
+    {
+        uiManager.OpenContentUI<BattlePreparationUI>();
+    }
+
+    public static void CloseBattlePreparation(this UIManager uiManager)
+    {
+        uiManager.CloseContentUI<BattlePreparationUI>();
+    }
 
     public static void OpenBattleHpBarHud(this UIManager uiManager)
     {
@@ -162,13 +171,12 @@ public static class UIManagerExtension
 
     public static void OpenStageInfo(this UIManager uiManager, string stageId)
     {
-        StageInfoView stageInfoView = uiManager.OpenPopupUI<StageInfoView>();
-        stageInfoView.SetStage(stageId);
+        uiManager.OpenPopupUI<StageInfoView>();
+        GameManager.Stage.SetStage(stageId);   
     }
 
     public static void CloseStagePopup(this UIManager uiManager)
     {
         uiManager.ClosePopupUI<StageInfoView>();
-        uiManager.CloseHUDUI<StageFailUI>();
     }
 }
