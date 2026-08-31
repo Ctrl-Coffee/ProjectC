@@ -7,11 +7,7 @@ public class GameSession
     public HeroEquipmentModel HeroEquipment { get; private set; }
     public HeroEquipedModel HeroEquiped { get; private set; }
     public GachaModel Gacha { get; private set; }
-
-
     public HeroInfoModel HeroInfo { get; private set; }
-
-
 
 
     private NetworkManager _networkManager;
@@ -26,19 +22,19 @@ public class GameSession
 
     public async UniTask LoadAllData()
     {
-        var currencyData = await _networkManager.LoadCurrencyAsync();
-        Currency = new(currencyData.data);
+        var currencyResponse = await _networkManager.LoadCurrencyAsync();
+        Currency = new(currencyResponse.data);
 
-        var companionData = await _networkManager.LoadCompanionAsync();
-        CompanionWrapperDto companionWwrapperDto =  companionData.data;
+        var companionResponse = await _networkManager.LoadCompanionAsync();
+        CompanionWrapperDto companionWwrapperDto =  companionResponse.data;
         Companion = new(companionWwrapperDto.companions);
 
-        var equipmentData = await _networkManager.LoadEquipmentAsync();
-        EquipmentWrapperDto equipmentWwrapperDto = equipmentData.data;
+        var equipmentResponse = await _networkManager.LoadEquipmentAsync();
+        EquipmentWrapperDto equipmentWwrapperDto = equipmentResponse.data;
         HeroEquipment = new(equipmentWwrapperDto.equipments);
 
-        var equipmentLoadoutData = await _networkManager.LoadEquipmentLoadoutAsync();
-        EquipmentLoadoutDto equipmentLoadoutDto = equipmentLoadoutData.data;
+        var equipmentLoadoutResponse = await _networkManager.LoadEquipmentLoadoutAsync();
+        EquipmentLoadoutDto equipmentLoadoutDto = equipmentLoadoutResponse.data;
         HeroEquiped = new(equipmentLoadoutDto, HeroEquipment);
 
         if (null != HeroInfo)
@@ -46,6 +42,8 @@ public class GameSession
             HeroInfo.Dispose();
         }
 
-        HeroInfo = new(new OwnedPlayerData(), HeroEquiped, HeroEquipment);
+        var heroLevelResponse = await _networkManager.LoadHeroLevelAsync();
+        HeroLevelDto heroLevelDto = heroLevelResponse.data;
+        HeroInfo = new(new OwnedPlayerData(), HeroEquiped, HeroEquipment, heroLevelDto.userLevel);
     }
 }

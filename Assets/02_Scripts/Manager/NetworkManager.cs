@@ -163,6 +163,121 @@ public class NetworkManager
         return PostAsync<LoadEquipmentLoadoutResponse>("/api/equipmentloadout/load", _authenticatedRequest);
     }
 
+    public UniTask<SaveStageRecordResponse> SaveStageAsync(int stage)
+    {
+        StageRecordRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            StageRecordData = new StageRecordDto() { lastClearedStage = stage }
+        };
+
+        return PostAsync<SaveStageRecordResponse>("/api/stagerecord/save", request);
+    }
+
+    public UniTask<LoadStageRecordResponse> LoadStageAsync()
+    {
+        return PostAsync<LoadStageRecordResponse>("/api/stagerecord/load", _authenticatedRequest);
+    }
+
+    public UniTask<SaveHeroLevelResponse> SaveHeroLevelAsync(HeroInfoModel heroInfoModel)
+    {
+        HeroLevelRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            HeroLevelData = new HeroLevelDto() { userLevel = heroInfoModel.Level }
+        };
+
+        return PostAsync<SaveHeroLevelResponse>("/api/herolevel/save", request);
+    }
+
+    public UniTask<LoadHeroLevelResponse> LoadHeroLevelAsync()
+    {
+        return PostAsync<LoadHeroLevelResponse>("/api/herolevel/load", _authenticatedRequest);
+    }
+
+    public UniTask<SavePerkResponse> SavePerkAsync()
+    {
+        PerkWrapperDto wrapperDto = new PerkWrapperDto()
+        {
+            perkNodeIds = new List<string>(GameManager.Perk.GetUnlockedPerkIds())
+        };
+
+        PerkRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            PerkData = wrapperDto
+        };
+
+        return PostAsync<SavePerkResponse>("/api/perk/save", request);
+    }
+
+    public UniTask<LoadPerkResponse> LoadPerkAsync()
+    {
+        return PostAsync<LoadPerkResponse>("/api/perk/load", _authenticatedRequest);
+    }
+
+    public UniTask<SaveAutoWorkSlotReponse> SaveAutoWorkSlotAsync()
+    {
+        List<AutoWorkSlotDto> autoWorkSlotDtos = new();
+
+        foreach (var slot in AutoWorkQueue.GetSlots())
+        {
+            autoWorkSlotDtos.Add(new AutoWorkSlotDto()
+            {
+                workId = slot.WorkId,
+                startTicks = slot.StartTicks,
+                endTicks = slot.EndTicks
+            });
+        }
+
+        AutoWorkSlotWrapperDto wrapperDto = new()
+        {
+            slots = autoWorkSlotDtos
+        };
+
+        AutoWorkSlotRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            AutoWorkSlotData = wrapperDto
+        };
+
+        return PostAsync<SaveAutoWorkSlotReponse>("/api/autoworkslot/save", request);
+    }
+
+    public UniTask<LoadAutoWorkSlotResponse> LoadAutoWorkSlotAsync()
+    {
+        return PostAsync<LoadAutoWorkSlotResponse>("/api/autoworkslot/load", _authenticatedRequest);
+    }
+
+    public UniTask<SaveCompanionPartyResponse> SaveCompanionPartyAsync()
+    {
+        CompanionPartyDto companionPartyDto = new();
+
+        // TODO: 현재 파티 편성된 동료 id 가져오기
+        companionPartyDto.companionIds[0] = null;
+        companionPartyDto.companionIds[1] = null;
+
+        CompanionPartyRequest request = new()
+        {
+            userId = _userId,
+            token = _token,
+            CompanionPartyData = companionPartyDto
+        };
+
+        return PostAsync<SaveCompanionPartyResponse>("/api/companionparty/save", request);
+    }
+
+    public UniTask<LoadCompanionPartyResponse> LoadCompanionPartyAsync()
+    {
+        return PostAsync<LoadCompanionPartyResponse>("/api/companionparty/load", _authenticatedRequest);
+    }
+
+
+
     private async UniTask<TResponse> PostAsync<TResponse>(string path, object requestData)
     {
         string requestJson = JsonUtility.ToJson(requestData);
