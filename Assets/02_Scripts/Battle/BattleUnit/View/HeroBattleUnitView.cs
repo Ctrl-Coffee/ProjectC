@@ -1,4 +1,4 @@
-﻿public class HeroBattleUnitView : BattleUnitViewBase
+﻿public class HeroBattleUnitView : PlayerBattleUnitView
 {
 
 }

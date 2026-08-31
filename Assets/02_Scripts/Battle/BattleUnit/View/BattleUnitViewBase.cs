@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public abstract class BattleUnitViewBase : MonoBehaviour
 {
-    [SerializeField] private BehaviorGraphAgent _behaviorGraphAgent;
+    [SerializeField] protected BehaviorGraphAgent _behaviorGraphAgent;
    
     private BlackboardVariable<SkillReadyEvent> _skillReadyEvent;
     private BlackboardVariable<bool> _isBasicAttackSkillReady;
@@ -38,14 +38,16 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         _battleUnitViewModel = new BattleUnitViewModel();
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _battleUnitViewModel.PropertyChanged += OnPropertyChanged;
+        _battleUnitViewModel.TakeDamage += HandleTakeDamage;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         _battleUnitViewModel.PropertyChanged -= OnPropertyChanged;
+        _battleUnitViewModel.TakeDamage -= HandleTakeDamage;
     }
 
     private void OnDestroy()
@@ -121,7 +123,7 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         _battleUnitViewModel.RequestUseSignatureSkill(_battleUnitViewModel.BattlePosition);
     }
 
-    private void CacheBehaviorVariables()
+    protected virtual void CacheBehaviorVariables()
     {
         if (!_behaviorGraphAgent.GetVariable(Const.SKILL_READY_EVENT, out _skillReadyEvent))
         {
@@ -199,6 +201,11 @@ public abstract class BattleUnitViewBase : MonoBehaviour
     {
         _battleUnitViewModel.ExitBattle();
         _behaviorGraphAgent.End();
+    }
+
+    private void HandleTakeDamage(DamageResult damageResult)
+    {
+        GameManager.UI.ShowDamageText(damageResult, transform.position);
     }
 
     private void OnPropertyChanged(string propertyName)
