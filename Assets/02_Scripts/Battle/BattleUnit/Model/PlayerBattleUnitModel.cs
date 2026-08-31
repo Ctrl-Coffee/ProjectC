@@ -7,9 +7,15 @@
         GameManager.Battle.RequestUpdatePlayerUnitActive(BattlePosition, isActive);
     }
 
+    protected override bool CheckSkillUseable(string skillId)
+    {
+        bool isUseable = GameManager.Battle.CheckPlayerSkillUsable(skillId);
+        return isUseable;
+    }
+
     protected override void UseSkill(int battlePosition, string skillId)
     {
-        SkillExecutionData skillExecutionData = new SkillExecutionData(_attack, _criticalChance);
-        GameManager.Battle.RequestPlayerSkillExecution(battlePosition, skillId, skillExecutionData);
+        AttackerStats attackerStats = new AttackerStats(_attack, _criticalChance);
+        GameManager.Battle.RequestPlayerSkillExecution(battlePosition, skillId, attackerStats);
     }
 }

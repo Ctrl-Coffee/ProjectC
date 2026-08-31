@@ -7,7 +7,7 @@ public class CompanionSelectionSlotUI : MonoBehaviour
     [SerializeField] private UIButtonComponent _slotButton;
     [SerializeField] private Image _slotImage;
 
-    private string _companionDataId;
+    private string _companionId;
 
     public event Action<string> SlotClicked;
 
@@ -27,34 +27,33 @@ public class CompanionSelectionSlotUI : MonoBehaviour
         _slotButton.UnBindButtonAllEvent();
     }
 
-    public void Initialize(string companionDataId)
+    public void Initialize(string companionId)
     {
-        _companionDataId = companionDataId;
-        UpdateSlotSprite(companionDataId);
+        _companionId = companionId;
+        UpdateSlotSprite(companionId);
     }
 
     public void Clear()
     {
-        _companionDataId = null;
+        _companionId = null;
         _slotImage.sprite = null;
     }
 
-    private void UpdateSlotSprite(string companionDataId)
+    private void UpdateSlotSprite(string companionId)
     {
-        CompanionData companionData = GameManager.DataTable.GetCompanionData(companionDataId);
+        CompanionData companionData = GameManager.DataTable.GetCompanionData(companionId);
 
         if (companionData == null)
         {
-            Debug.LogError($"'{companionDataId}' 동료 데이터를 찾을 수 없습니다.");
+            Logger.LogError($"'{companionId}' 동료 데이터를 찾을 수 없습니다.");
             return;
         }
 
-        // TODO: 동료 데이터 연동 후 실제 스프라이트 키 적용
-        Sprite slotSprite = GameManager.Resource.GetLoadedAsset<Sprite>("TestSlotSprite");
+        Sprite slotSprite = GameManager.Resource.GetLoadedAsset<Sprite>(companionData.SlotSpriteAddressableKey);
 
         if (slotSprite == null)
         {
-            Debug.LogError($"슬롯 스프라이트를 로드하지 못했습니다.");
+            Logger.LogError($"'{companionId}' 슬롯 스프라이트를 로드하지 못했습니다.");
             return;
         }
 
@@ -63,6 +62,6 @@ public class CompanionSelectionSlotUI : MonoBehaviour
 
     private void HandleSlotClicked()
     {
-        SlotClicked?.Invoke(_companionDataId);
+        SlotClicked?.Invoke(_companionId);
     }
 }

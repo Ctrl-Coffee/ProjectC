@@ -59,7 +59,8 @@ public class NetworkManager
             energy = currencyModel.Energy,
             dreamFragment = currencyModel.DreamFragment,
             dreamScroll = currencyModel.DreamScroll,
-            inspiration = currencyModel.Inspiration
+            inspiration = currencyModel.Inspiration,
+            energyRecoveredAt = currencyModel.EnergyRecoveredAt
         };
 
         SaveCurrencyRequest request = new()
@@ -274,6 +275,11 @@ public class NetworkManager
     public UniTask<LoadCompanionPartyResponse> LoadCompanionPartyAsync()
     {
         return PostAsync<LoadCompanionPartyResponse>("/api/companionparty/load", _authenticatedRequest);
+    }
+
+    public UniTask<ProfileResponse> LoadProfileAsync()
+    {
+        return PostAsync<ProfileResponse>("/api/account/profile", _authenticatedRequest);
     }
 
 

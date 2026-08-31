@@ -20,15 +20,14 @@ public class StageClearUI : UIBase
 
     private void RetrunToBattlePreparation()
     {
-        GameManager.Battle.RequestInitalizeCurrentStage();
-
-        gameObject.SetActive(false);
+        GameManager.Battle.EnterBattle();
+        GameManager.UI.CloseStageClearUI();
     }
 
     private void GoToNextStage()
     {
-        GameManager.Battle.RequestInitalizeNextStage();
-
-        gameObject.SetActive(false);
+        GameManager.Stage.SetNextStage();
+        GameManager.Battle.EnterBattle();
+        GameManager.UI.CloseStageClearUI();
     }
 }

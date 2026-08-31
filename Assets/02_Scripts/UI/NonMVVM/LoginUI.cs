@@ -106,7 +106,7 @@ public class LoginUI : UIBase
             if (response.result != 0)
             {
                 Logger.LogWarning($"SignUp Failed: {response.message}");
-                ConfirmData data = GameManager.DataTable.GetConfirmData(ConfirmDataKey.SIGNUP_FAIL);
+                ConfirmData data = GameManager.DataTable.GetConfirmData(Const.SIGNUP_FAIL);
                 GameManager.UI.OpenConfirmUI(data);
                 _loginAndSignupButton.SetInteractable(true);
                 return;
@@ -117,7 +117,7 @@ public class LoginUI : UIBase
         catch (Exception exception)
         {
             Logger.LogError($"회원가입 후 예외 발생\n{exception}");
-            ConfirmData data = GameManager.DataTable.GetConfirmData(ConfirmDataKey.SIGNUP_FAIL);
+            ConfirmData data = GameManager.DataTable.GetConfirmData(Const.SIGNUP_FAIL);
             GameManager.UI.OpenConfirmUI(data);
             _loginAndSignupButton.SetInteractable(true);
         }
@@ -155,12 +155,7 @@ public class LoginUI : UIBase
 
     private void ShowLoginFail()
     {
-        ConfirmData data = GameManager.DataTable.GetConfirmData(ConfirmDataKey.LOGIN_FAIL);
+        ConfirmData data = GameManager.DataTable.GetConfirmData(Const.LOGIN_FAIL);
         GameManager.UI.OpenConfirmUI(data);
-    }
-
-    private void GameLoading()
-    {
-
     }
 }

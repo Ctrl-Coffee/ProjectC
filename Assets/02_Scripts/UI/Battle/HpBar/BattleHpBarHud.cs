@@ -6,7 +6,7 @@ public class BattleHpBarHud : UIBase
     [SerializeField] private BattleUnitHpBarView[] _playerBattleUnitHpBarViews = new BattleUnitHpBarView[Const.MAX_PLAYER_COUNT];
     [SerializeField] private BattleUnitHpBarView[] _enemyBattleUnitHpBarViews = new BattleUnitHpBarView[Const.MAX_ENEMY_COUNT];
 
-    private void Start()
+    private void Awake()
     {
         IReadOnlyList<PlayerBattleUnitModel> playerBattleUnitModels = GameManager.Battle.PlayerBattleUnitModels;
         IReadOnlyList<EnemyBattleUnitModel> enemyBattleUnitModels = GameManager.Battle.EnemyBattleUnitModels;

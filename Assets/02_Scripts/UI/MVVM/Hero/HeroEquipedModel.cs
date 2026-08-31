@@ -7,6 +7,12 @@ public class HeroEquipedModel : ModelBase
 
     private HeroEquipmentModel _equipmentModel;
 
+    private ConfirmData _confirmData;
+
+    private HeroEquipmentState _equipedWeapon;
+    private HeroEquipmentState _equipedArmor;
+    private HeroEquipmentState _equipedAccessory;
+
     public HeroEquipedModel(EquipmentLoadoutDto equipmentLoadoutDto, HeroEquipmentModel heroEquipmentModel)
     {
         _equipmentModel = heroEquipmentModel; 
@@ -15,7 +21,11 @@ public class HeroEquipedModel : ModelBase
         EquipedArmorId = equipmentLoadoutDto.armorEquipmentId;
         EquipedAccessoryId = equipmentLoadoutDto.accessoryEquipmentId;
 
+        SetDefaultEquipment();
+
         InitializeOnce();
+
+        _confirmData = GameManager.DataTable.GetConfirmData(Const.DEFAULT_EQUIPMENT);
     }
 
     public override void InitializeOnce()
@@ -36,10 +46,16 @@ public class HeroEquipedModel : ModelBase
                 }
                 break;
             case EquipmentType.Armor:
-                EquipedArmorId = equipmentId;
+                {
+                    EquipedArmorId = equipmentId;
+                    _equipedArmor = _equipmentModel.GetHeroEquipment(equipmentId);
+                }
                 break;
             case EquipmentType.Accessory:
-                EquipedAccessoryId = equipmentId;
+                {
+                    EquipedAccessoryId = equipmentId;
+                    _equipedAccessory = _equipmentModel.GetHeroEquipment(equipmentId);
+                }
                 break;
         }
 
@@ -51,13 +67,34 @@ public class HeroEquipedModel : ModelBase
         switch (type)
         {
             case EquipmentType.Weapon:
-                EquipedWeaponId = null;
+                {
+                    if(_euipedWeaponId == Const.DEFAULT_WEAPON_EQUIPMENT_ID)
+                    {
+                        GameManager.UI.OpenConfirmUI(_confirmData);
+                        return;
+                    }
+                    Equip(EquipmentType.Weapon, Const.DEFAULT_WEAPON_EQUIPMENT_ID);
+                }
                 break;
             case EquipmentType.Armor:
-                EquipedArmorId = null;
+                {
+                    if (_euipedArmorId == Const.DEFAULT_ARMOR_EQUIPMENT_ID)
+                    {
+                        GameManager.UI.OpenConfirmUI(_confirmData);
+                        return;
+                    }
+                    Equip(EquipmentType.Armor, Const.DEFAULT_ARMOR_EQUIPMENT_ID);
+                }
                 break;
             case EquipmentType.Accessory:
-                EquipedAccessoryId = null;
+                {
+                    if (_euipedAccessoryId == Const.DEFAULT_ACCESSORY_EQUIPMENT_ID)
+                    {
+                        GameManager.UI.OpenConfirmUI(_confirmData);
+                        return;
+                    }
+                    Equip(EquipmentType.Accessory, Const.DEFAULT_ACCESSORY_EQUIPMENT_ID);
+                }
                 break;
         }
 
@@ -115,7 +152,21 @@ public class HeroEquipedModel : ModelBase
         }
     }
 
-    private HeroEquipmentState _equipedWeapon;
-    private HeroEquipmentState _equipedArmor;
-    private HeroEquipmentState _equipedAccessory;
+    private void SetDefaultEquipment()
+    {
+        if(EquipedWeaponId == null)
+        {
+            Equip(EquipmentType.Weapon, Const.DEFAULT_WEAPON_EQUIPMENT_ID);
+        }
+
+        if(EquipedArmorId == null)
+        {
+            Equip(EquipmentType.Armor, Const.DEFAULT_ARMOR_EQUIPMENT_ID);
+        }
+
+        if(EquipedAccessoryId == null)
+        {
+            Equip(EquipmentType.Accessory, Const.DEFAULT_ACCESSORY_EQUIPMENT_ID);
+        }
+    }
 }
