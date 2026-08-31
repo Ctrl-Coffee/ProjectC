@@ -276,6 +276,11 @@ public class NetworkManager
         return PostAsync<LoadCompanionPartyResponse>("/api/companionparty/load", _authenticatedRequest);
     }
 
+    public UniTask<ProfileResponse> LoadProfileAsync()
+    {
+        return PostAsync<ProfileResponse>("/api/account/profile", _authenticatedRequest);
+    }
+
 
 
     private async UniTask<TResponse> PostAsync<TResponse>(string path, object requestData)
