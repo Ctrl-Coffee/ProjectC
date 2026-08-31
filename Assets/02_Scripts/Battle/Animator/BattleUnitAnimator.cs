@@ -13,12 +13,7 @@ public class BattleUnitAnimator
     {
         get
         {
-            if (!_animationHashes.TryGetValue(BattleUnitAnimationType.Idle, out int idleHash))
-            {
-                return false;
-            }
-
-            return _animator.GetCurrentAnimatorStateInfo(Const.BASE_LAYER).shortNameHash == idleHash;
+            return IsCurrentState(BattleUnitAnimationType.Idle);
         }
     }
 
@@ -26,21 +21,18 @@ public class BattleUnitAnimator
     {
         if (animator == null)
         {
-            Debug.LogError($"'{nameof(BattleUnitAnimator)}' Animator가 Null입니다.");
+            Logger.LogError($"'{nameof(BattleUnitAnimator)}' Animator가 Null입니다.");
             return;
         }
 
-        RuntimeAnimatorController controller = animator.runtimeAnimatorController;
-
-        if (controller == null)
+        if (animator.runtimeAnimatorController == null)
         {
-            Debug.LogError($"'{nameof(BattleUnitAnimator)}' RuntimeAnimatorController가 Null입니다.");
+            Logger.LogError($"'{nameof(BattleUnitAnimator)}' RuntimeAnimatorController가 Null입니다.");
             return;
         }
 
         _animator = animator;
-        _animatorOverrideController = new AnimatorOverrideController(controller);
-
+        _animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = _animatorOverrideController;
 
         InitializeAnimationHashes();
@@ -49,30 +41,41 @@ public class BattleUnitAnimator
 
     public void ApplyAnimationSet(string addressableKey)
     {
-        Init(addressableKey);
-        //TODO 나중에 데이터 연동시 할당
-        //UnitAnimationSet unitAnimationSet = GameManager.Resource.GetLoadedAsset<UnitAnimationSet>(key);
+        if (string.IsNullOrWhiteSpace(addressableKey))
+        {
+            ResetToDefaultClips();
+            return;
+        }
 
-        //_animatorOverrideController[""] = unitAnimationSet.Idle;
-        //_animatorOverrideController[""] = unitAnimationSet.BasicAttack;
-        //_animatorOverrideController["Attack"] = unitAnimationSet.Skill;
-        //_animatorOverrideController["Hit"] = unitAnimationSet.Hit;
-        //_animatorOverrideController["Dead"] = unitAnimationSet.Dead;
+        UnitAnimationSet unitAnimationSet = GameManager.Resource.GetLoadedAsset<UnitAnimationSet>(addressableKey);
+
+        if (unitAnimationSet == null)
+        {
+            Logger.LogError($"'{addressableKey}' 애니메이션 세트를 로드하지 못했습니다.");
+            ResetToDefaultClips();
+            return;
+        }
+
+        ApplyAnimationClip(Const.IDLE, unitAnimationSet.IdleClip);
+        ApplyAnimationClip(Const.BASIC_ATTACK, unitAnimationSet.BasicAttackClip);
+        ApplyAnimationClip(Const.SIGNATURE, unitAnimationSet.SignatureClip);
+        ApplyAnimationClip(Const.DEATH, unitAnimationSet.DeathClip);
     }
 
     public void Play(BattleUnitAnimationType animType)
     {
+        if (!_animationHashes.TryGetValue(animType, out int animHash))
+        {
+            return;
+        }
+
         if (animType == BattleUnitAnimationType.Idle)
         {
+            _animator.Play(animHash, 0, 0f);
             return;
         }
 
-        if (!_animationHashes.TryGetValue(animType, out int triggerHash))
-        {
-            return;
-        }
-
-        _animator.SetTrigger(triggerHash);
+        _animator.SetTrigger(animHash);
     }
 
     public bool IsDeathAnimationCompleted()
@@ -84,31 +87,6 @@ public class BattleUnitAnimator
         bool isAnimationCompleted = stateInfo.normalizedTime >= 1f;
 
         return isDeathState && isAnimationCompleted;
-    }
-
-    //TODO 임시
-    private void Init(string id)
-    {
-        if (string.IsNullOrWhiteSpace(id))
-        {
-            ApplyAnimationClip(Const.IDLE, null);
-            ApplyAnimationClip(Const.BASIC_ATTACK, null);
-            ApplyAnimationClip(Const.SIGNATURE, null);
-            ApplyAnimationClip(Const.DEATH, null);
-            return;
-        }
-
-        UnitAnimationSet unitAnimationSet = GameManager.Resource.GetLoadedAsset<UnitAnimationSet>(id);
-
-        if (unitAnimationSet == null)
-        {
-            return;
-        }
-
-        ApplyAnimationClip(Const.IDLE, unitAnimationSet.IdleClip);
-        ApplyAnimationClip(Const.BASIC_ATTACK, unitAnimationSet.BasicAttackClip);
-        ApplyAnimationClip(Const.SIGNATURE, unitAnimationSet.SignatureClip);
-        ApplyAnimationClip(Const.DEATH, unitAnimationSet.DeathClip);
     }
 
     private void InitializeAnimationHashes()
@@ -135,5 +113,23 @@ public class BattleUnitAnimator
         }
 
         _animatorOverrideController[animationName] = animationClip;
+    }
+
+    private void ResetToDefaultClips()
+    {
+        ApplyAnimationClip(Const.IDLE, null);
+        ApplyAnimationClip(Const.BASIC_ATTACK, null);
+        ApplyAnimationClip(Const.SIGNATURE, null);
+        ApplyAnimationClip(Const.DEATH, null);
+    }
+
+    private bool IsCurrentState(BattleUnitAnimationType animType)
+    {
+        if (!_animationHashes.TryGetValue(animType, out int hash))
+        {
+            return false;
+        }
+
+        return _animator.GetCurrentAnimatorStateInfo(Const.BASE_LAYER).shortNameHash == hash;
     }
 }

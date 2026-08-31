@@ -77,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1635302301
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6900941109924988560, guid: 75b0cbfa63d211646b4027209d879a17, type: 3}
@@ -168,8 +168,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1635302301
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4784959685264316918, guid: 98f7bf068dbf52b4794a109d64c2b7f0, type: 3}
@@ -231,9 +231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwipComponent
   _inputHandler: {fileID: 2454880040142294400}
-  _swipeTime: 0.2
-  _swipeDistanceRate: 0.2
   _swipeDirect: 1
+  _swipeDistanceRate: 0.2
+  _swipeTime: 0.2
   _startPage: 1
 --- !u!114 &2454880040142294400
 MonoBehaviour:
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 045facc25115473e87de1339765d48b6, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BackgroundInputHandler
   _tapDistanceRate: 0.02
 --- !u!1 &7992618845938634288
@@ -325,8 +325,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1635302301
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8944091814101306621, guid: b2cfd3ffda3996449b039b29f004a76f, type: 3}

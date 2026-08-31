@@ -46,6 +46,11 @@ public class BattleUnitHpBarViewModel
         _battleUnitModelBase = null;
     }
 
+    public void Refresh()
+    {
+        _battleUnitModelBase.InitializeOnce();
+    }
+
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         PropertyChanged?.Invoke(e.PropertyName);

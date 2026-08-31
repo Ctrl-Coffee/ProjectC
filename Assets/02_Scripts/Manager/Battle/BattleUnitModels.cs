@@ -7,8 +7,8 @@ public class BattleUnitModels
     private readonly PlayerBattleUnitModel[] _playerBattleUnitModels = new PlayerBattleUnitModel[Const.MAX_PLAYER_COUNT];
     private readonly EnemyBattleUnitModel[] _enemyBattleUnitModels = new EnemyBattleUnitModel[Const.MAX_ENEMY_COUNT];
 
-    private readonly IReadOnlyDictionary<string, CompanionState> _companionDictCache; 
-    private readonly List<string> _saveDataPartyCompanionIds;
+    private  IReadOnlyDictionary<string, CompanionState> _companionDictCache; 
+    private  List<string> _saveDataPartyCompanionIds;
 
     public IReadOnlyList<PlayerBattleUnitModel> PlayerBattleUnitModels
     {
@@ -26,7 +26,7 @@ public class BattleUnitModels
         }
     }
 
-    public BattleUnitModels()
+    public void Initialize()
     {
         for (int a = 0; a < _playerBattleUnitModels.Length; a++)
         {
@@ -40,24 +40,66 @@ public class BattleUnitModels
             _enemyBattleUnitModels[a] = new EnemyBattleUnitModel(a, unitUid);
         }
 
-        //_companionDictCache = GameManager.Session.Companion.Companions;
-        ////TODO 세이브 데이터에서 가져오기
-        //_saveDataPartyCompanionIds = new List<string> { "Companion_001", "Companion_002" };
+        _companionDictCache = GameManager.Session.Companion.Companions;
+        _saveDataPartyCompanionIds = new List<string> { null, null };
     }
 
-    public void InitalizeStage(string stageId)
+    public void InitializeStage()
     {
         InitializeHeroModel();
         InitializeCompanionModels();
-        InitializeEnemyModels(stageId);
+        InitializeEnemyModels();
+    }
+
+    public int GetAlivePlayerCount()
+    {
+        int count = 0;
+
+        foreach (PlayerBattleUnitModel playerBattleUnitModel in _playerBattleUnitModels)
+        {
+            if (playerBattleUnitModel.IsInitialized)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public int GetAliveEnemyCount()
+    {
+        int count = 0;
+
+        foreach (EnemyBattleUnitModel enemyBattleUnitModel in _enemyBattleUnitModels)
+        {
+            if (enemyBattleUnitModel.IsInitialized)
+            {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     private void InitializeHeroModel()
     {
         PlayerBattleUnitModel heroBattleUnitModel = _playerBattleUnitModels[Const.HERO_BATTLE_POSITIONS];
 
-        //TODO 캐릭터 모델 가져와서 만듣기
-        BattleUnitData battleUnitData = BattleUtility.CreatePlayerBattleUnitData();
+        HeroInfoModel heroInfo = GameManager.Session.HeroInfo;
+        HeroEquipedModel heroEquiped = GameManager.Session.HeroEquiped;
+
+        //string equipedArmorId = heroEquiped.EquipedArmorId;
+        string equipedArmorId = "Equipment_Armor_001";
+
+        EquipmentData armorData = GameManager.DataTable.GetEquipmentData(equipedArmorId);
+
+        if (armorData == null)
+        {
+            Logger.LogError($"'{equipedArmorId}' 장비 데이터를 찾을 수 없습니다.");
+            return;
+        }
+
+        BattleUnitData battleUnitData = BattleUtility.CreatePlayerBattleUnitData(heroInfo, armorData);
 
         heroBattleUnitModel.Initialize(battleUnitData);
     }
@@ -99,20 +141,19 @@ public class BattleUnitModels
         }
     }
 
-    private void InitializeEnemyModels(string stageId)
+    private void InitializeEnemyModels()
     {
-        // TODO: stageId를 기준으로 적 ID 목록 조회
-        List<string> enemyIds = new List<string>() { "enemy_ch1_001", "enemy_ch1_001", "enemy_ch1_001" };
+        IReadOnlyList<string> enemyGroupIds = GameManager.Stage.EnemyGroupIds;
 
-        if (enemyIds.Count != _enemyBattleUnitModels.Length)
+        if (enemyGroupIds.Count != _enemyBattleUnitModels.Length)
         {
-            Debug.LogError($"스테이지 적 수({enemyIds.Count})가 시스템 최대 적 수({_enemyBattleUnitModels.Length})와 일치하지 않습니다.");
+            Debug.LogError($"스테이지 적 수({enemyGroupIds.Count})가 시스템 최대 적 수({_enemyBattleUnitModels.Length})와 일치하지 않습니다.");
             return;
         }
 
         for (int index = 0; index < _enemyBattleUnitModels.Length; index++)
         {
-            string enemyId = enemyIds[index];
+            string enemyId = enemyGroupIds[index];
       
             if (string.IsNullOrWhiteSpace(enemyId))
             {

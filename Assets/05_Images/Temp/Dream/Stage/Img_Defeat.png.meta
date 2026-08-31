@@ -1,0 +1,792 @@
+fileFormatVersion: 2
+guid: 2f3bb0e0b86c18f418208007f1b2047c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6484194884504252178
+    second: Img_Defeat_0
+  - first:
+      213: 5030147233864334541
+    second: Img_Defeat_1
+  - first:
+      213: -572683829919421383
+    second: Img_Defeat_2
+  - first:
+      213: -6265560162519407919
+    second: Img_Defeat_3
+  - first:
+      213: -1879811840248070151
+    second: Img_Defeat_4
+  - first:
+      213: -7999556368747105376
+    second: Img_Defeat_5
+  - first:
+      213: 4315589844662631774
+    second: Img_Defeat_6
+  - first:
+      213: 3560513671573210874
+    second: Img_Defeat_7
+  - first:
+      213: 8859007606505219619
+    second: Img_Defeat_8
+  - first:
+      213: -4399202035057094717
+    second: Img_Defeat_9
+  - first:
+      213: 5755260612056889546
+    second: Img_Defeat_10
+  - first:
+      213: -7347936797379141540
+    second: Img_Defeat_11
+  - first:
+      213: 7260979160087374774
+    second: Img_Defeat_12
+  - first:
+      213: 1560518904044035502
+    second: Img_Defeat_13
+  - first:
+      213: -3343436620606713199
+    second: Img_Defeat_14
+  - first:
+      213: -3045925271280959361
+    second: Img_Defeat_15
+  - first:
+      213: -307379883638322372
+    second: Img_Defeat_16
+  - first:
+      213: 7399015140737157533
+    second: Img_Defeat_17
+  - first:
+      213: -8395801913330111365
+    second: Img_Defeat_18
+  - first:
+      213: -594214840768038926
+    second: Img_Defeat_19
+  - first:
+      213: 4694255392042692615
+    second: Img_Defeat_20
+  - first:
+      213: -4345170363203315774
+    second: Img_Defeat_21
+  - first:
+      213: -4987623503874091336
+    second: Img_Defeat_22
+  - first:
+      213: 4770495212398449458
+    second: Img_Defeat_23
+  - first:
+      213: -4150975983038095528
+    second: Img_Defeat_24
+  - first:
+      213: -2183017802349454925
+    second: Img_Defeat_25
+  - first:
+      213: 685039897409025987
+    second: Img_Defeat_26
+  - first:
+      213: 5355795691355435136
+    second: Img_Defeat_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Img_Defeat_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 504
+        width: 366
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee018b67b138306a0800000000000000
+      internalID: -6484194884504252178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 465
+        width: 351
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 21, y: 0, z: 20, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dccb562224caec540800000000000000
+      internalID: 5030147233864334541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_2
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 297
+        width: 344
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 31, z: 0, w: 57}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93cea05471b6d08f0800000000000000
+      internalID: -572683829919421383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_3
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 276
+        width: 346
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d221328a324c09a0800000000000000
+      internalID: -6265560162519407919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_7
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 214
+        width: 52
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af60b04e15c796130800000000000000
+      internalID: 3560513671573210874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_8
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 217
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3262a382b7481fa70800000000000000
+      internalID: 8859007606505219619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_9
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 217
+        width: 47
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cf0f3d9e05e2f2c0800000000000000
+      internalID: -4399202035057094717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_10
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 217
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac8b273b80bcedf40800000000000000
+      internalID: 5755260612056889546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_11
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 152
+        width: 168
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 33, y: 0, z: 36, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c50e130f962e60a90800000000000000
+      internalID: -7347936797379141540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_12
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 179
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bba586631e24c460800000000000000
+      internalID: 7260979160087374774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_13
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 185
+        width: 141
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ead93dcdca318a510800000000000000
+      internalID: 1560518904044035502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_14
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 131
+        width: 32
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19254bb9b1ab991d0800000000000000
+      internalID: -3343436620606713199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_15
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 131
+        width: 35
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f70c9e09a13bab5d0800000000000000
+      internalID: -3045925271280959361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_16
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 130
+        width: 58
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3b03a8df97fbbbf0800000000000000
+      internalID: -307379883638322372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_17
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 127
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d99006f91159ea660800000000000000
+      internalID: 7399015140737157533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_18
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 127
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7ce96784ae1c7b80800000000000000
+      internalID: -8395801913330111365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_19
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 127
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f771c720cce0c7f0800000000000000
+      internalID: -594214840768038926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_20
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 127
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 700baa76868552140800000000000000
+      internalID: 4694255392042692615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_21
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 117
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c716bc839ad2b3c0800000000000000
+      internalID: -4345170363203315774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_22
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 22
+        width: 55
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b6123a49d668cab0800000000000000
+      internalID: -4987623503874091336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_23
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 22
+        width: 56
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23316b9de14343240800000000000000
+      internalID: 4770495212398449458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_24
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 22
+        width: 56
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85f16d31655c466c0800000000000000
+      internalID: -4150975983038095528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_25
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 22
+        width: 58
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b95b98ffdc54b1e0800000000000000
+      internalID: -2183017802349454925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_26
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 22
+        width: 55
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c7f80e3820c18900800000000000000
+      internalID: 685039897409025987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Defeat_27
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 22
+        width: 62
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 080fec81ecb935a40800000000000000
+      internalID: 5355795691355435136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 6b7d6d815b1077b42a2913f8c6e7d769
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Img_Defeat_0: -6484194884504252178
+      Img_Defeat_1: 5030147233864334541
+      Img_Defeat_10: 5755260612056889546
+      Img_Defeat_11: -7347936797379141540
+      Img_Defeat_12: 7260979160087374774
+      Img_Defeat_13: 1560518904044035502
+      Img_Defeat_14: -3343436620606713199
+      Img_Defeat_15: -3045925271280959361
+      Img_Defeat_16: -307379883638322372
+      Img_Defeat_17: 7399015140737157533
+      Img_Defeat_18: -8395801913330111365
+      Img_Defeat_19: -594214840768038926
+      Img_Defeat_2: -572683829919421383
+      Img_Defeat_20: 4694255392042692615
+      Img_Defeat_21: -4345170363203315774
+      Img_Defeat_22: -4987623503874091336
+      Img_Defeat_23: 4770495212398449458
+      Img_Defeat_24: -4150975983038095528
+      Img_Defeat_25: -2183017802349454925
+      Img_Defeat_26: 685039897409025987
+      Img_Defeat_27: 5355795691355435136
+      Img_Defeat_3: -6265560162519407919
+      Img_Defeat_4: -1879811840248070151
+      Img_Defeat_5: -7999556368747105376
+      Img_Defeat_6: 4315589844662631774
+      Img_Defeat_7: 3560513671573210874
+      Img_Defeat_8: 8859007606505219619
+      Img_Defeat_9: -4399202035057094717
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

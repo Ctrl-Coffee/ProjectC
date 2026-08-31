@@ -417,6 +417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7958568832454006070}
+  - component: {fileID: -4431853241231502149}
   m_Layer: 5
   m_Name: StageFailUI
   m_TagString: Untagged
@@ -448,6 +449,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &-4431853241231502149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411872307960668926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb889282e26b51e469913dbddb0c4b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageFailUI
+  _isPlayAnimation: 0
+  _panel: {fileID: 0}
+  _returnButton: {fileID: 8425499026778873769}
+  _restartStageButton: {fileID: 4267648252717250902}
 --- !u!1 &6794192328041113542
 GameObject:
   m_ObjectHideFlags: 0
