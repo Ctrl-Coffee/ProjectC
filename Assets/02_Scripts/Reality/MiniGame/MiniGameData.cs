@@ -74,7 +74,7 @@ public struct MiniGameResult
 public static class MiniGameScore
 {
     private const float DICE_SUCCESS_RATE = 1f;
-    private const float DICE_FAIL_RATE = 0.5f;
+    private const float DICE_FAIL_RATE = 0f;
     private const float DICE_CRITICAL_FAIL_RATE = 0f;
     private const float DICE_CRITICAL_SUCCESS_MULTIPLIER = 2f;
 

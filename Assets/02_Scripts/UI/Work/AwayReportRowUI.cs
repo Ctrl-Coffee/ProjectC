@@ -72,9 +72,9 @@ public class AwayReportRowUI : MonoBehaviour, ICurrencyEffectSource
     {
         get
         {
-            if (_targetAmount >= _manyIconThreshold) return 20;
-            if (_targetAmount >= _fewIconThreshold) return 10;
-            return 5;
+            if (_targetAmount >= _manyIconThreshold) return 10;
+            if (_targetAmount >= _fewIconThreshold) return 5;
+            return 3;
         }
     }
 

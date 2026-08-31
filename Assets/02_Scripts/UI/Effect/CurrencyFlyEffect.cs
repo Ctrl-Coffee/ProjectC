@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CurrencyFlyEffect : MonoBehaviour
 {
-    private const int MAX_ICON_COUNT = 20;
+    private const int MAX_ICON_COUNT = 10;
     private const float ICON_SIZE = 56f;
 
     private const float SCATTER_RADIUS = 70f;
