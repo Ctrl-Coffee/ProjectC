@@ -1,44 +1,86 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleRoot : MonoBehaviour
 {
+    [Header("Background")]
+    [SerializeField] private SpriteRenderer _backgroundSpriteRenderer;
+
     [Header("Player")]
     [SerializeField] private BattleUnitViewBase[] _playerBattleUnitViews = new BattleUnitViewBase[Const.MAX_PLAYER_COUNT];
 
     [Header("Enemy")]
     [SerializeField] private BattleUnitViewBase[] _enemyBattleUnitViews = new BattleUnitViewBase[Const.MAX_ENEMY_COUNT];
 
+    private string _currentBackground;
+    private bool _isBattleStarted;
+
     private void Awake()
     {
+        UnityUtility.ValidateReference(_backgroundSpriteRenderer, nameof(_backgroundSpriteRenderer));
         UnityUtility.ValidateArrayReference(_playerBattleUnitViews, nameof(_playerBattleUnitViews));
         UnityUtility.ValidateArrayReference(_enemyBattleUnitViews, nameof(_enemyBattleUnitViews));
     }
 
     public void StartBattle()
     {
-        foreach (var a in _playerBattleUnitViews)
+        if (_isBattleStarted)
         {
-            a.StartBattle();
+            return;
         }
 
-        foreach (var a in _enemyBattleUnitViews)
+        _isBattleStarted = true;
+
+        foreach (BattleUnitViewBase playerbattleUnitView in _playerBattleUnitViews)
         {
-            a.StartBattle();
+            playerbattleUnitView.StartBattle();
+        }
+
+        foreach (BattleUnitViewBase enemybattleUnitView in _enemyBattleUnitViews)
+        {
+            enemybattleUnitView.StartBattle();
         }
     }
 
     public void EndBattle()
     {
-        foreach (var a in _playerBattleUnitViews)
+        if (!_isBattleStarted)
         {
-            a.EndBattle();
+            return;
         }
 
-        foreach (var a in _enemyBattleUnitViews)
+        _isBattleStarted = false;
+
+        foreach (BattleUnitViewBase battleUnitViewBase in _playerBattleUnitViews)
         {
-            a.EndBattle();
+            battleUnitViewBase.EndBattle();
         }
+
+        foreach (BattleUnitViewBase battleUnitViewBase in _enemyBattleUnitViews)
+        {
+            battleUnitViewBase.EndBattle();
+        }
+    }
+
+    public void SetBackground(string addressableKey)
+    {
+        if (_currentBackground == addressableKey)
+        {
+            return;
+        }
+
+        _currentBackground = addressableKey;
+
+        Sprite backgroundSprite = GameManager.Resource.GetLoadedAsset<Sprite>(addressableKey);
+
+        if (backgroundSprite != null) 
+        {
+            Logger.LogError($"'{addressableKey}' 로드된 배경 에셋이 없습니다.");
+            return;
+        }
+
+        _backgroundSpriteRenderer.sprite = backgroundSprite;
     }
 
     public void InitializeBattleUnits(IReadOnlyList<PlayerBattleUnitModel> playerBattleUnitModels, IReadOnlyList<EnemyBattleUnitModel> enemyBattleUnitModels)
@@ -49,14 +91,14 @@ public class BattleRoot : MonoBehaviour
 
     public void ResetUnitActiveState()
     {
-        foreach (var a in _playerBattleUnitViews)
+        foreach (BattleUnitViewBase battleUnitViewBase in _playerBattleUnitViews)
         {
-            a.gameObject.SetActive(true);
+            battleUnitViewBase.gameObject.SetActive(true);
         }
 
-        foreach (var a in _enemyBattleUnitViews)
+        foreach (BattleUnitViewBase battleUnitViewBase in _enemyBattleUnitViews)
         {
-            a.gameObject.SetActive(true);
+            battleUnitViewBase.gameObject.SetActive(true);
         }
     }
 

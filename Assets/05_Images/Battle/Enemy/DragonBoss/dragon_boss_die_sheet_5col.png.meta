@@ -1,0 +1,705 @@
+fileFormatVersion: 2
+guid: 1daaf99f7f8c60446853da355fa38c20
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4551877982591158009
+    second: dragon_boss_die_sheet_5col_0
+  - first:
+      213: 4319474014624547488
+    second: dragon_boss_die_sheet_5col_1
+  - first:
+      213: -685024945748725731
+    second: dragon_boss_die_sheet_5col_2
+  - first:
+      213: 5393126882411998108
+    second: dragon_boss_die_sheet_5col_3
+  - first:
+      213: 5064194500959289113
+    second: dragon_boss_die_sheet_5col_4
+  - first:
+      213: -3498054671965672608
+    second: dragon_boss_die_sheet_5col_5
+  - first:
+      213: 6681124297957081466
+    second: dragon_boss_die_sheet_5col_6
+  - first:
+      213: -1646404335363551932
+    second: dragon_boss_die_sheet_5col_7
+  - first:
+      213: 6217218232797896072
+    second: dragon_boss_die_sheet_5col_8
+  - first:
+      213: -2499603823637414071
+    second: dragon_boss_die_sheet_5col_9
+  - first:
+      213: -2845662654861023430
+    second: dragon_boss_die_sheet_5col_10
+  - first:
+      213: 6704557412426985751
+    second: dragon_boss_die_sheet_5col_11
+  - first:
+      213: 7885701202433583089
+    second: dragon_boss_die_sheet_5col_12
+  - first:
+      213: 448377367589413374
+    second: dragon_boss_die_sheet_5col_13
+  - first:
+      213: -4591186618524957175
+    second: dragon_boss_die_sheet_5col_14
+  - first:
+      213: 2330436147771398441
+    second: dragon_boss_die_sheet_5col_15
+  - first:
+      213: -3573269765672587073
+    second: dragon_boss_die_sheet_5col_16
+  - first:
+      213: 517532092036436915
+    second: dragon_boss_die_sheet_5col_17
+  - first:
+      213: -4916426577539677359
+    second: dragon_boss_die_sheet_5col_18
+  - first:
+      213: 5459124033446456798
+    second: dragon_boss_die_sheet_5col_19
+  - first:
+      213: 1034603504848246705
+    second: dragon_boss_die_sheet_5col_20
+  - first:
+      213: 431831923748693982
+    second: dragon_boss_die_sheet_5col_21
+  - first:
+      213: -8914468485271826546
+    second: dragon_boss_die_sheet_5col_22
+  - first:
+      213: 5064226965792392106
+    second: dragon_boss_die_sheet_5col_23
+  - first:
+      213: 9195336296948639262
+    second: dragon_boss_die_sheet_5col_24
+  - first:
+      213: 260770802272077428
+    second: dragon_boss_die_sheet_5col_25
+  - first:
+      213: 8693643672974831642
+    second: dragon_boss_die_sheet_5col_26
+  - first:
+      213: -5730698706891710155
+    second: dragon_boss_die_sheet_5col_27
+  - first:
+      213: 3240791232606786455
+    second: dragon_boss_die_sheet_5col_28
+  - first:
+      213: -6852702626041714193
+    second: dragon_boss_die_sheet_5col_29
+  - first:
+      213: -9032484931845657685
+    second: dragon_boss_die_sheet_5col_30
+  - first:
+      213: -4368662481564492008
+    second: dragon_boss_die_sheet_5col_31
+  - first:
+      213: 4067660454068818253
+    second: dragon_boss_die_sheet_5col_32
+  - first:
+      213: -2426390300249507257
+    second: dragon_boss_die_sheet_5col_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 60
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dragon_boss_die_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1296
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8605e5d1a96a2184380f2dc2ffc83795
+      internalID: 1054716778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_01
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 1296
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8ac7d786aaf9424bab419c37e9f2e6f
+      internalID: 108553263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_02
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1296
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e614ef33388b854ca9ee46de0844a11
+      internalID: -426224923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_03
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 1296
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a425a8a1ef3fbc34c97deca086c3167d
+      internalID: -1748568520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_04
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1296
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9d69f6eb021b8940842f4a29a705fb6
+      internalID: -1269341839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_05
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 172c739fdddb236448e9db5b4f595863
+      internalID: -974628000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_06
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c23541a9e70224745acd5b3480f25ef5
+      internalID: 341327739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_07
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddb1cf26da95a8c4fb11df39c7d1a1a2
+      internalID: 1101676163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_08
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6e851b9c604e7542a6446c06adf0e9e
+      internalID: 275132834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_09
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 864
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c27416f266314484abee2154d1762452
+      internalID: -2098080747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1d0e1bd2f7dcbd4d915441e4ae1bd1f
+      internalID: -2128016876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_11
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 626506fc8ca31af49b6d05d630403b8c
+      internalID: 1872610536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_12
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ccb6e6377db54543aa8c856497deb03
+      internalID: -1064549924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_13
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 989fc1575f0017049a63224af925053b
+      internalID: 1425123850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_14
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 432
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c81c9dc9b4bc7d64da8e920c0d266b9e
+      internalID: -897071778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f315f6569c64e2469994bd28f8e869a
+      internalID: 1280108896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_16
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5491441eb4b9eec4881d31e2a1f1ac32
+      internalID: -1303822888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_17
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2985d9cb53be0f4dae9a0e335a28b61
+      internalID: 1953467878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_18
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.3, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47a1db51dc5f988439107d1bbb558871
+      internalID: -895038731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_boss_die_19
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 768
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 028ddd7f43d83174c8207c55784a5883
+      internalID: 1856319471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f2627bc26053406468cb5c24f5448b46
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dragon_boss_die_00: 1054716778
+      dragon_boss_die_01: 108553263
+      dragon_boss_die_02: -426224923
+      dragon_boss_die_03: -1748568520
+      dragon_boss_die_04: -1269341839
+      dragon_boss_die_05: -974628000
+      dragon_boss_die_06: 341327739
+      dragon_boss_die_07: 1101676163
+      dragon_boss_die_08: 275132834
+      dragon_boss_die_09: -2098080747
+      dragon_boss_die_10: -2128016876
+      dragon_boss_die_11: 1872610536
+      dragon_boss_die_12: -1064549924
+      dragon_boss_die_13: 1425123850
+      dragon_boss_die_14: -897071778
+      dragon_boss_die_15: 1280108896
+      dragon_boss_die_16: -1303822888
+      dragon_boss_die_17: 1953467878
+      dragon_boss_die_18: -895038731
+      dragon_boss_die_19: 1856319471
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

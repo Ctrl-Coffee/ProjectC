@@ -1,19 +1,14 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleManager: UnityEngine.Object
+public class BattleManager
 {
     private BattleRoot _battleRoot;
 
     private readonly BattleUnitModels _battleUnitModels = new BattleUnitModels();
     private readonly CompanionFormation _companionFormation = new CompanionFormation();
     private readonly BattleService _battleService = new BattleService();
-
-    private StageModel _stageModel = new StageModel();
-
-    public StageModel StageModel { get { return _stageModel; } }
 
     public IReadOnlyList<PlayerBattleUnitModel> PlayerBattleUnitModels
     {
@@ -25,70 +20,66 @@ public class BattleManager: UnityEngine.Object
         get { return _battleUnitModels.EnemyBattleUnitModels; }
     }
 
-    public void Initalize()
+    public void Initialize()
     {
+        _companionFormation.InitializePositions();
+        _battleUnitModels.Initialize();
+
         CreateBattleRoot();
-        //_companionFormation.InitializePositions();
-        //_battleUnitModels.Initalize();
     }
 
-    public void CreateBattleRoot()
+    public void EnterBattle()
     {
-        GameObject prefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.BATTLE_ROOT);
+        ResetBattleRoot();
+        InitializeStage();
 
-        GameObject battleRoot = Instantiate(prefab);
+        GameManager.UI.OpenBattlePreparation();
+    }
 
-        if (!battleRoot.TryGetComponent(out _battleRoot))
-        {
-            Debug.LogError($"{nameof(BattleRoot)} 컴포넌트를 찾을 수 없습니다.");
-            Destroy(battleRoot);
-            return;
-        }
+    public void ExitBattle()
+    {
+        EndBattle();
 
-        _battleRoot.InitializeBattleUnits(_battleUnitModels.PlayerBattleUnitModels, _battleUnitModels.EnemyBattleUnitModels);
+        _battleRoot.gameObject.SetActive(false);
     }
 
     public void StartBattle()
     {
-        SubscribeUnitModelEvents(_battleUnitModels.PlayerBattleUnitModels, HandlePlayerUnitDeadStateChanged);
-        SubscribeUnitModelEvents(_battleUnitModels.EnemyBattleUnitModels, HandleEnemyUnitDeadStateChanged);
+        SubscribeUnitModelDeadStateChangedEvent();
 
-        int alivePlayerCount = 3;
-        int aliveEnemyCount = 3;
-
-        _battleService.InitializeCounts(alivePlayerCount, aliveEnemyCount);
+        InitializeBattleCounts();
 
         GameManager.UI.OpenBattleHpBarHud();
 
         _battleRoot.StartBattle();
     }
 
+    public void RestartBattle()
+    {
+        EndBattle();
+
+        ResetBattleRoot();
+        InitializeStage();
+
+        StartBattle();
+    }
+
     private void EndBattle()
     {
-        UnsubscribeUnitModelEvents(_battleUnitModels.PlayerBattleUnitModels, HandlePlayerUnitDeadStateChanged);
-        UnsubscribeUnitModelEvents(_battleUnitModels.EnemyBattleUnitModels, HandleEnemyUnitDeadStateChanged);
+        UnsubscribeUnitModelDeadStateChangedEvents();
 
         GameManager.UI.CloseBattleHpBarHud();
 
         _battleRoot.EndBattle();
     }
 
-    public void RequestInitalizeStage(string stageId)
+    private void InitializeStage()
     {
-        _battleUnitModels.InitalizeStage(stageId);
-        _battleRoot.ResetUnitActiveState();
-    }
+        string spriteAddressableKey = GameManager.Stage.SpriteAddressableKey;
+        _battleRoot.SetBackground(spriteAddressableKey);
 
-    public void RequestInitalizeCurrentStage()
-    {
-        _battleUnitModels.InitalizeStage("");
         _battleRoot.ResetUnitActiveState();
-    }
-
-    public void RequestInitalizeNextStage()
-    {
-        _battleUnitModels.InitalizeStage("");
-        _battleRoot.ResetUnitActiveState();
+        _battleUnitModels.InitializeStage();
     }
 
     public bool RequestSetCompanionToPosition(int battlePosition, string companionId)
@@ -167,32 +158,20 @@ public class BattleManager: UnityEngine.Object
         return isUsable;
     }
 
-    public void RequestPlayerSkillExecution(int battlePosition, string skillId, SkillExecutionData skillExecutionData)
+    public void RequestPlayerSkillExecution(int battlePosition, string skillId, AttackerStats attackerStats)
     {
         BattleUnitModelBase targetModel = _battleUnitModels.FindEnemyTarget(battlePosition);
 
-        if (targetModel == null)
-        {
-            return;
-        }
-
-        //TODO 스킬아이디로 할만한 처리들
-
-        _battleService.ApplyAttack(targetModel, skillExecutionData);
+        ExcuteSkill(targetModel, skillId, attackerStats);
     }
 
-    public void RequestEnemySkillExecution(int battlePosition, string skillId, SkillExecutionData skillExecutionData)
+
+
+    public void RequestEnemySkillExecution(int battlePosition, string skillId, AttackerStats attackerStats)
     {
         BattleUnitModelBase targetModel = _battleUnitModels.FindPlayerTarget(battlePosition);
-      
-        if (targetModel == null)
-        {
-            return;
-        }
 
-        //TODO 스킬아이디로 할만한 처리들
-
-        _battleService.ApplyAttack(targetModel, skillExecutionData);
+        ExcuteSkill(targetModel, skillId, attackerStats);
     }
 
     public void RequestUpdatePlayerUnitActive(int battlePosition, bool isActive)
@@ -205,15 +184,60 @@ public class BattleManager: UnityEngine.Object
         _battleRoot.UpdateUnitActiveState(battlePosition, isActive, false);
     }
 
+    private void CreateBattleRoot()
+    {
+        GameObject prefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.BATTLE_ROOT);
+
+        GameObject battleRoot = UnityEngine.Object.Instantiate(prefab);
+
+        if (!battleRoot.TryGetComponent(out _battleRoot))
+        {
+            Logger.LogError($"{nameof(BattleRoot)} 컴포넌트를 찾을 수 없습니다.");
+            UnityEngine.Object.Destroy(battleRoot);
+            return;
+        }
+
+        _battleRoot.InitializeBattleUnits(_battleUnitModels.PlayerBattleUnitModels, _battleUnitModels.EnemyBattleUnitModels);
+        _battleRoot.gameObject.SetActive(false);
+    }
+
+    private void ResetBattleRoot()
+    {
+        _battleRoot.gameObject.SetActive(false);
+        _battleRoot.gameObject.SetActive(true);
+    }
+
+    private void InitializeBattleCounts()
+    {
+        int alivePlayerCount = _battleUnitModels.GetAlivePlayerCount();
+        int aliveEnemyCount = _battleUnitModels.GetAliveEnemyCount();
+
+        _battleService.InitializeCounts(alivePlayerCount, aliveEnemyCount);
+    }
+
+    private void SubscribeUnitModelDeadStateChangedEvent()
+    {
+        SubscribeUnitModelEvents(_battleUnitModels.PlayerBattleUnitModels, HandlePlayerUnitDeadStateChanged);
+        SubscribeUnitModelEvents(_battleUnitModels.EnemyBattleUnitModels, HandleEnemyUnitDeadStateChanged);
+    }
+
+    private void UnsubscribeUnitModelDeadStateChangedEvents()
+    {
+        UnsubscribeUnitModelEvents(_battleUnitModels.PlayerBattleUnitModels, HandlePlayerUnitDeadStateChanged);
+        UnsubscribeUnitModelEvents(_battleUnitModels.EnemyBattleUnitModels, HandleEnemyUnitDeadStateChanged);
+    }
+
     private void SubscribeUnitModelEvents(IReadOnlyList<BattleUnitModelBase> battleUnitModelBases, Action<bool> deadStateChangedHandler)
     {
         foreach (BattleUnitModelBase battleUnitModelBase in battleUnitModelBases)
         {
-            if (battleUnitModelBase.IsInitialized)
+            if (!battleUnitModelBase.IsInitialized)
             {
-                battleUnitModelBase.DeadStateChanged -= deadStateChangedHandler;
-                battleUnitModelBase.DeadStateChanged += deadStateChangedHandler;
+                continue;
             }
+
+            battleUnitModelBase.DeadStateChanged -= deadStateChangedHandler;
+            battleUnitModelBase.DeadStateChanged += deadStateChangedHandler;
         }
     }
 
@@ -223,6 +247,19 @@ public class BattleManager: UnityEngine.Object
         {
             battleUnitModelBase.DeadStateChanged -= deadStateChangedHandler;
         }
+    }
+
+    private bool ExcuteSkill(BattleUnitModelBase targetModel, string skillId, AttackerStats attackerStats)
+    {
+        if (targetModel == null)
+        {
+            return false;
+        }
+
+        //TODO 스킬아이디로 할만한 처리들
+
+        _battleService.ApplyAttack(targetModel, attackerStats);
+        return true;
     }
 
     private void HandlePlayerUnitDeadStateChanged(bool isDead)
@@ -247,13 +284,13 @@ public class BattleManager: UnityEngine.Object
     {
         if (_battleService.AlivePlayerCount <= 0)
         {
-            GameManager.UI.OpenStageFailUI();
             EndBattle();
+            GameManager.UI.OpenStageFailUI();
         }
         else if (_battleService.AliveEnemyCount <= 0)
         {
-            GameManager.UI.OpenStageClearUI();
             EndBattle();
+            GameManager.UI.OpenStageClearUI();
         }
     }
 }

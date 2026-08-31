@@ -833,7 +833,7 @@ MonoBehaviour:
   _punchScale: 0.3
   _punchDuration: 0.4
   _rollupDuration: 0.35
-  _sfxPath: Audio/SFX/StampSuccess
+  _sfxPath: Audio/SFX/LevelUp
 --- !u!1 &5800345555992798079
 GameObject:
   m_ObjectHideFlags: 0

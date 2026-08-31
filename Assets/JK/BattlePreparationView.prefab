@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2941008947638595048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c2813a25465fca46b1644486a89211f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PartyFormationView
+  _isPlayAnimation: 0
+  _panel: {fileID: 0}
   _companionSelectionContent: {fileID: 596265135618131389}
   _companionSelectionSlotPrefab: {fileID: 4796609322886058468, guid: 470f70bcac0a1ce45ad9003cc909c64c, type: 3}
   _startBattleButton: {fileID: 7213241849746687450}
@@ -221,7 +223,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 59, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &1574422249228103468
@@ -726,6 +728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5052133879687075042}
   - component: {fileID: 7213241849746687450}
+  - component: {fileID: 1850038728578485637}
   m_Layer: 5
   m_Name: StartBattleButton
   m_TagString: Untagged
@@ -767,3 +770,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonComponent
   _button: {fileID: 557673541890770885}
   _text: {fileID: 8972791624611941188}
+--- !u!114 &1850038728578485637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926423384538609026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
