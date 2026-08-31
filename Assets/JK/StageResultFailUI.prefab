@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 7958568832454006070}
   - component: {fileID: -4431853241231502149}
   m_Layer: 5
-  m_Name: StageFailUI
+  m_Name: StageResultFailUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
