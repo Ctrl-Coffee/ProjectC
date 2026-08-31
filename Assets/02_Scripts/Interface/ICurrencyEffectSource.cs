@@ -9,4 +9,5 @@ public interface ICurrencyEffectSource
     Sprite IconSprite { get; }
 
     bool IsVisible { get; }
+    int IconCount { get; }
 }

@@ -16,7 +16,8 @@ public class AwayReportRowUI : MonoBehaviour, ICurrencyEffectSource
     [SerializeField] private RectTransform _icon;
     [SerializeField] private TextMeshProUGUI _txtLabel;
     [SerializeField] private TextMeshProUGUI _txtValue;
-
+    [SerializeField] private long _fewIconThreshold = 10;    
+    [SerializeField] private long _manyIconThreshold = 100;  
     private long _targetAmount;
 
     private Image _iconImage;
@@ -67,6 +68,15 @@ public class AwayReportRowUI : MonoBehaviour, ICurrencyEffectSource
             return _iconImage.sprite;
         }
     }
+    public int IconCount
+    {
+        get
+        {
+            if (_targetAmount >= _manyIconThreshold) return 20;
+            if (_targetAmount >= _fewIconThreshold) return 10;
+            return 5;
+        }
+    }
 
     public void SetAmount(long amount)
     {
@@ -75,6 +85,7 @@ public class AwayReportRowUI : MonoBehaviour, ICurrencyEffectSource
 
     public void SetAmount(long amount, bool isSpent)
     {
+        _targetAmount = amount;
         if (null == _txtValue)
         {
             Logger.LogError($"{name} 의 값 텍스트가 연결되지 않았습니다.");

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CurrencyFlyEffect : MonoBehaviour
 {
-    private const int ICON_COUNT = 5;
+    private const int MAX_ICON_COUNT = 20;
     private const float ICON_SIZE = 56f;
 
     private const float SCATTER_RADIUS = 70f;
@@ -23,6 +23,7 @@ public class CurrencyFlyEffect : MonoBehaviour
     private static CurrencyFlyEffect _instance;
 
     private Dictionary<CurrencyType, int> _arrivedCounts = new();
+    private Dictionary<CurrencyType, int> _totalCounts = new();
 
     private Action<CurrencyType, float> _onProgress;
     private Action _onCompleted;
@@ -45,16 +46,17 @@ public class CurrencyFlyEffect : MonoBehaviour
 
         _onProgress = onProgress;
         _onCompleted = onCompleted;
-
+        _totalCounts.Clear();
         _arrivedCounts.Clear();
         _flyingCount = 0;
 
         transform.SetAsLastSibling();
 
         int currencyIndex = 0;
-
+        
         for (int i = 0; null != sources && i < sources.Count; i++)
         {
+
             if (TryPlaySource(sources[i], currencyIndex * CURRENCY_DELAY_STEP))
             {
                 currencyIndex++;
@@ -131,11 +133,16 @@ public class CurrencyFlyEffect : MonoBehaviour
             return false;
         }
 
-        for (int i = 0; i < ICON_COUNT; i++)
+        int iconCount = Mathf.Clamp(source.IconCount, 1, MAX_ICON_COUNT);
+
+        _totalCounts.TryGetValue(source.CurrencyType, out int total);
+        _totalCounts[source.CurrencyType] = total + iconCount;
+
+        for (int i = 0; i < iconCount; i++)
         {
             _flyingCount++;
 
-            CreateIcon().Play(source, GetScatterOffset(i), anchor.Rect, currencyDelay + i * ICON_DELAY_STEP, OnIconArrived);
+            CreateIcon().Play(source, GetScatterOffset(i, iconCount), anchor.Rect, currencyDelay + i * ICON_DELAY_STEP, OnIconArrived);
         }
 
         return true;
@@ -155,7 +162,8 @@ public class CurrencyFlyEffect : MonoBehaviour
 
         if (null != _onProgress)
         {
-            _onProgress(icon.CurrencyType, (float)arrived / ICON_COUNT);
+            _totalCounts.TryGetValue(icon.CurrencyType, out int total);
+            _onProgress(icon.CurrencyType, (float)arrived / Mathf.Max(1, total));
         }
 
         if (0 < _flyingCount)
@@ -183,9 +191,9 @@ public class CurrencyFlyEffect : MonoBehaviour
         tween.SetUpdate(true);
     }
 
-    private Vector3 GetScatterOffset(int index)
+    private Vector3 GetScatterOffset(int index, int count)
     {
-        float angle = 360f / ICON_COUNT * index + UnityEngine.Random.Range(-SCATTER_ANGLE_JITTER, SCATTER_ANGLE_JITTER);
+        float angle = 360f / count * index + UnityEngine.Random.Range(-SCATTER_ANGLE_JITTER, SCATTER_ANGLE_JITTER);
         float radian = angle * Mathf.Deg2Rad;
         float radius = SCATTER_RADIUS * UnityEngine.Random.Range(0.6f, 1f);
 
