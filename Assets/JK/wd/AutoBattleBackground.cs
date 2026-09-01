@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TestBackground : MonoBehaviour
+public class AutoBattleBackground : MonoBehaviour
 {
     [SerializeField] private Transform[] _backgrounds;
     [SerializeField] private float _scrollSpeed = 2f;
