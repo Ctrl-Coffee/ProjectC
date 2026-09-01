@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class AutoBattleBackground : MonoBehaviour
 {
-    [SerializeField] private Transform[] _backgrounds;
-    [SerializeField] private float _scrollSpeed = 2f;
-    [SerializeField] private float _backgroundWidth = 20f;
+    // 매 프레임 문자열 조회를 피하려고 ID 를 미리 구해둔다.
+    private static readonly int SCROLL_OFFSET_ID = Shader.PropertyToID("_ScrollOffset");
 
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private float _scrollSpeed = 0.2f;
+
+    // 머티리얼 사본을 만들지 않고 렌더러 단위로만 값을 덮어쓴다.
+    private MaterialPropertyBlock _propertyBlock;
+    private float _offset;
     private bool _isScrolling;
 
     public void StartScroll()
@@ -18,51 +23,54 @@ public class AutoBattleBackground : MonoBehaviour
         _isScrolling = false;
     }
 
-
-    private void Start()
+    public float GetScrollWorldSpeed()
     {
+        if (null == _spriteRenderer)
+        {
+            return 0f;
+        }
+
+        return _scrollSpeed * _spriteRenderer.bounds.size.x;
+    }
+
+    private void Awake()
+    {
+        if (null == _spriteRenderer)
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        _propertyBlock = new MaterialPropertyBlock();
         _isScrolling = true;
+
+        ApplyOffset();
     }
 
     private void Update()
     {
-        if (!_isScrolling)
+        if (false == _isScrolling)
         {
             return;
         }
 
-        float movement = _scrollSpeed * Time.deltaTime;
+        _offset += _scrollSpeed * Time.deltaTime;
 
-        foreach (Transform background in _backgrounds)
-        {
-            background.position += Vector3.left * movement;
+        _offset -= Mathf.Floor(_offset);
 
-            if (background.position.x <= -_backgroundWidth)
-            {
-                MoveToEnd(background);
-            }
-        }
+        ApplyOffset();
     }
 
-    private void MoveToEnd(Transform background)
+    private void ApplyOffset()
     {
-        float rightmostX = float.MinValue;
-
-        foreach (Transform other in _backgrounds)
+        if (null == _spriteRenderer)
         {
-            if (other == background)
-            {
-                continue;
-            }
-
-            rightmostX = Mathf.Max(
-                rightmostX,
-                other.position.x);
+            return;
         }
 
-        Vector3 position = background.position;
-        position.x = rightmostX + _backgroundWidth;
+        _spriteRenderer.GetPropertyBlock(_propertyBlock);
 
-        background.position = position;
+        _propertyBlock.SetFloat(SCROLL_OFFSET_ID, _offset);
+
+        _spriteRenderer.SetPropertyBlock(_propertyBlock);
     }
 }
