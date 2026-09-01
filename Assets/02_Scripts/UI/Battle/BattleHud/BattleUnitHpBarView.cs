@@ -38,6 +38,11 @@ public class BattleUnitHpBarView : MonoBehaviour
 
         float hpRatio = Mathf.Clamp01(currentHp / maxHp);
         _hpFillImage.fillAmount = hpRatio;
+
+        if (currentHp <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnPropertyChanged(string propertyName)
