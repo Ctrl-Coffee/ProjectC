@@ -19,6 +19,7 @@ public class DreamHudView : ViewBase
     [SerializeField] private UIButtonComponent _heroInfoBtn;
 
     private GameObject _backgroundInstance;
+    private GameObject _heroInventoryBGInstance;
 
     private UIBase _currentContent;
 
@@ -26,8 +27,14 @@ public class DreamHudView : ViewBase
 
     private void Awake()
     {
-        GameObject prefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DREAM_LOBBY_BACKGROUND);
+        GameObject prefab = 
+            GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DREAM_LOBBY_BACKGROUND);
         _backgroundInstance = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity);
+
+        GameObject heroInventoryPrefab = 
+            GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.HERO_INVENTORY_BACKGROUND);
+        _heroInventoryBGInstance = Instantiate(heroInventoryPrefab, Vector3.zero, Quaternion.identity);
+        _heroInventoryBGInstance.SetActive(false);
     }
 
     private void OnEnable()
@@ -125,6 +132,12 @@ public class DreamHudView : ViewBase
         if (_currentContent == null)
             return;
 
+        if(_heroInventoryBGInstance.activeSelf == true)
+            _heroInventoryBGInstance.SetActive(false);
+
+        if(_backgroundInstance.activeSelf == false)
+            _backgroundInstance.SetActive(true);
+
         ShowLobbyButton();
         _currentContent.CloseUI();
         _currentContent = null;
@@ -141,8 +154,12 @@ public class DreamHudView : ViewBase
     private void OnOpenHeroInventory()
     {
         HeroInventoryView content = GameManager.UI.OpenHeroInventory();
+
         HideLobbyButton();
         CloseCurrentContent(content);
+
+        _heroInventoryBGInstance.SetActive(true);
+        _backgroundInstance.SetActive(false);
     }
 
     private void OnOpenGacha()

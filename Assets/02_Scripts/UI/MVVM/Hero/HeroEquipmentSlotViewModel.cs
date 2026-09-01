@@ -46,6 +46,11 @@ public class HeroEquipmentSlotViewModel : ViewModelBase<HeroEquipmentModel>
         return _equipedModel.GetEquipedId(type);
     }
 
+    public EquipmentGrade GetGrade(string id)
+    {
+        return GameManager.DataTable.GetEquipmentData(id).EquipmentGrade;
+    }
+
     public bool IsEquipped(EquipmentType type, string checkEquipmentId)
     {
         var equiedmentId = _equipedModel.GetEquipedId(type);
