@@ -24,14 +24,6 @@ public class DiceGambleGameUI : MiniGameBase
     [SerializeField] private float _orbitTurns = 5f;
     [SerializeField] private float _orbitDuration = 3f;
 
-    [Header("도장 연출")]
-    [SerializeField] private TextMeshProUGUI _txtStamp;
-    [SerializeField] private float _stampStartScale = 3f;
-    [SerializeField] private float _stampDuration = 0.25f;
-    [SerializeField] private float _stampAngle = -12f;
-    [SerializeField] private Color _successColor = new Color(0.2f, 0.7f, 0.3f);
-    [SerializeField] private Color _failColor = new Color(0.8f, 0.2f, 0.2f);
-
     [Header("결과 대기")]
     [SerializeField] private int _resultDelayMs = 800;
 
@@ -58,7 +50,6 @@ public class DiceGambleGameUI : MiniGameBase
         }
 
         _contentRoot.SetActive(true);
-        _txtStamp.enabled = false;
 
         DiceModifier modifier = CreateModifier();
 
@@ -67,11 +58,10 @@ public class DiceGambleGameUI : MiniGameBase
         _txtTarget.text = $"목표 : {targetValue}";
 
         await WaitForRollAsync(token);
-
+        
         MiniGameResult result = _roller.Roll(targetValue, modifier);
-
+        
         await PlayRollAnimationAsync(result.FinalValue, token);
-        await PlayStampAsync(result.IsSuccess, token);
         await UniTask.Delay(_resultDelayMs, ignoreTimeScale: true, cancellationToken: token);
 
         return MiniGameScore.FromDice(result);
@@ -118,12 +108,6 @@ public class DiceGambleGameUI : MiniGameBase
             return false;
         }
 
-        if (null == _txtStamp)
-        {
-            Logger.LogError("도장 텍스트가 연결되지 않았습니다.");
-            return false;
-        }
-
         if (null == _faceSprites || _faceSprites.Length != DiceRoller.DICE_SIDES)
         {
             Logger.LogError($"주사위 눈금 스프라이트가 {DiceRoller.DICE_SIDES}개여야 합니다.");
@@ -150,24 +134,7 @@ public class DiceGambleGameUI : MiniGameBase
             // RollCount = GameManager.Perk.Stat.GetInt(WorkStatType.DiceRollCount, 1),
         };
     }
-
-    private async UniTask PlayStampAsync(bool isSuccess, CancellationToken token)
-    {
-        RectTransform stampRect = _txtStamp.rectTransform;
-
-        _txtStamp.text = isSuccess ? "[SUCCESS]" : "[FAILED]";
-        _txtStamp.color = isSuccess ? _successColor : _failColor;
-        _txtStamp.enabled = true;
-
-        stampRect.DOKill();
-        stampRect.localScale = Vector3.one * _stampStartScale;
-        stampRect.localEulerAngles = new Vector3(0f, 0f, _stampAngle);
-
-        await stampRect.DOScale(1f, _stampDuration).SetEase(Ease.InQuad).SetUpdate(true).ToUniTask(cancellationToken: token);
-
-        string stampSoundPath = isSuccess ? AddressablePath.Audio.STAMP_SUCCESS : AddressablePath.Audio.STAMP_FAIL;
-        GameManager.Sound.PlaySFX(stampSoundPath);
-    }
+    
     private async UniTask PlayRollAnimationAsync(int finalValue, CancellationToken token)
     {
         RectTransform diceRect = _imgDice.rectTransform;

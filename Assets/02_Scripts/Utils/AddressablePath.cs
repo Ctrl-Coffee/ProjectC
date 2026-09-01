@@ -45,6 +45,7 @@
         public const string AWAY_REWARD = "Audio/SFX/AwayReward";
         public const string CURRENCY_GAIN = "Audio/SFX/CurrencyGain";
         public const string LEVEL_UP = "Audio/SFX/LevelUp";
+        public const string NOVEL_WRITING = "Audio/SFX/NovelWriting";
     }
 
     public static class Sprite

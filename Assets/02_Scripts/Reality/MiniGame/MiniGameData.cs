@@ -4,6 +4,7 @@
 // MiniGameBase / PlayAsync 시그니처를 건드리지 않으려고 빈 구조체로 유지 중. 지우지 말 것.
 public struct MiniGameContext
 {
+    public long EnergyCost;
 }
 
 public struct MiniGameResult
@@ -18,6 +19,16 @@ public struct MiniGameResult
     public bool SkipResultPopup;
 
     public bool IsSuccess;
+
+    public long SpentEnergy;
+    public long SpentGold;
+    public long RewardMoney;
+    public long RewardDP;
+    public MiniGameType GameType;
+
+    // 소설쓰기 전용
+    public int RoundCount;
+    public int SuccessCount;
 
     // 주사위 전용 
     public int TargetValue;
@@ -44,6 +55,7 @@ public struct MiniGameResult
             RewardMultiplier = 1f,
         };
     }
+    
 
     public static MiniGameResult Canceled
     {
@@ -62,7 +74,7 @@ public struct MiniGameResult
 public static class MiniGameScore
 {
     private const float DICE_SUCCESS_RATE = 1f;
-    private const float DICE_FAIL_RATE = 0.5f;
+    private const float DICE_FAIL_RATE = 0f;
     private const float DICE_CRITICAL_FAIL_RATE = 0f;
     private const float DICE_CRITICAL_SUCCESS_MULTIPLIER = 2f;
 
@@ -88,8 +100,7 @@ public static class MiniGameScore
         result.Accuracy = Mathf.Clamp01(rate);
         result.Grade = MiniGameGradeTable.GetGrade(result.Accuracy);
         result.RewardMultiplier = result.IsCriticalSuccess ? DICE_CRITICAL_SUCCESS_MULTIPLIER : 1f;
-
-        result.SkipResultPopup = true;
+        result.GameType = MiniGameType.DiceGamble;
 
         return result;
     }
@@ -110,6 +121,18 @@ public static class MiniGameScore
         result.Accuracy = Mathf.Clamp01(GetScratchSymbolRate(result.MatchedSymbol));
         result.RewardMultiplier = GetScratchCountMultiplier(result.MatchedCount);
         result.Grade = GetScratchGrade(result.MatchedSymbol);
+
+        return result;
+    }
+    public static MiniGameResult FromNovel(int roundCount, int successCount, long spentEnergy)
+    {
+        MiniGameResult result = MiniGameResult.Completed(1f);
+        result.RewardMultiplier = successCount;
+
+        result.RoundCount = roundCount;
+        result.SuccessCount = successCount;
+        result.SpentEnergy = spentEnergy;
+        result.GameType = MiniGameType.NovelWriting;
 
         return result;
     }
