@@ -11,12 +11,12 @@ public class StageSelectHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputHandler.Tapped += SelectStage;
+        _inputHandler.OnTapped += SelectStage;
     }
 
     private void OnDisable()
     {
-        _inputHandler.Tapped -= SelectStage;
+        _inputHandler.OnTapped -= SelectStage;
     }
 
     private void SelectStage(Vector2 screenPosition)
