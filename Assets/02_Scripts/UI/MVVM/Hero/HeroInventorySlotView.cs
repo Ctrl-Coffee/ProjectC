@@ -5,6 +5,7 @@ public class HeroInventorySlotView : ViewBase
 {
     [SerializeField] private Image _itemIcon;
     [SerializeField] private Image _selectedImage;
+    [SerializeField] private Image _gradeImage;
     [SerializeField] private TMPro.TextMeshProUGUI _level;
 
     private string _heroEquipmentId;
@@ -24,6 +25,11 @@ public class HeroInventorySlotView : ViewBase
         GetComponent<EquipmentSlotInput>().Init(_heroEquipmentId, OnClickSlot, onClickDetail);
 
         LoadIcon(iconPath);
+
+        var equipmentData = GameManager.DataTable.GetEquipmentData(_heroEquipmentId);
+
+        ColorUtility.TryParseHtmlString(Const.GradeColor(equipmentData.EquipmentGrade), out Color newColor);
+        _gradeImage.color = newColor;
 
         SetSelected(_heroEquipmentId == _viewModel.GetEquippedId(_type));
         Refresh();

@@ -85,14 +85,14 @@ public class HeroInventoryViewModel : ViewModelBase<HeroEquipmentModel>
                     x.HeroEquipmentId,
                     y.HeroEquipmentId);
             });
-        else if (_currentSort == InventorySort.LevelReverse)
+        else if (_currentSort == InventorySort.CombatPower)
             _items.Sort((x, y) =>
             {
-                int levelCompare = x.Level.CompareTo(y.Level);
+                int combatPowerCompare = y.CombatPower.CompareTo(x.CombatPower);
 
-                if (levelCompare != 0)
+                if (combatPowerCompare != 0)
                 {
-                    return levelCompare;
+                    return combatPowerCompare;
                 }
 
                 return string.CompareOrdinal(

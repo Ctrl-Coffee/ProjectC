@@ -6,6 +6,7 @@
         public const string REAL_LOBBY_BACKGROUND = "RealLobbyBackground";
         public const string DREAM_LOBBY_BACKGROUND = "DreamLobbyBackground";
         public const string BATTLE_ROOT = "BattleRoot";
+        public const string HERO_INVENTORY_BACKGROUND = "HeroInventoryBackground";
     }
 
     public static string GetUIPath(System.Type uiType)
@@ -46,11 +47,5 @@
         public const string CURRENCY_GAIN = "Audio/SFX/CurrencyGain";
         public const string LEVEL_UP = "Audio/SFX/LevelUp";
         public const string NOVEL_WRITING = "Audio/SFX/NovelWriting";
-    }
-
-    public static class Sprite
-    {
-        public const string LOGIN_PASSWORD_VIEW_ON = "Sprite/ViewOn";
-        public const string LOGIN_PASSWORD_VIEW_OFF = "Sprite/ViewOff";
     }
 }

@@ -368,10 +368,25 @@ public class BattleManager
         else if (_battleService.AliveEnemyCount <= 0)
         {
             EndBattle();
-            AddReward();
-
-            GameManager.UI.OpenBattleVictoryPopup();
+            ProcessStageClearAsync().Forget();
         }
+    }
+
+    private async UniTask ProcessStageClearAsync()
+    {
+        string clearedStageId = GameManager.Stage.CurrentStageId;
+        string lastClearedStageId = GameManager.Stage.LastClearedStageId;
+
+        bool isHigherStage = GameManager.Stage.IsHigherStage(clearedStageId, lastClearedStageId);
+
+        if (isHigherStage)
+        {
+            GameManager.Stage.SetLastClearedStageId(clearedStageId);
+            SaveStageRecordResponse response = await SaveUtil.RequestSaveStageData(clearedStageId);
+        }
+
+        GameManager.UI.OpenBattleVictoryPopup();
+        AddReward();
     }
 
     private void AddReward()

@@ -1,6 +1,6 @@
-﻿[
+[
   {
-    "Id": "enemy_skill_ch1_melee_basic",
+    "Id": "skill_enemy_ch1_001_basic",
     "Name": "초원 슬라임 기본 공격",
     "SkillType": "BasicAttack",
     "TargetType": "SingleOpponent",

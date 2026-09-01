@@ -69,4 +69,17 @@
     public const string LOGIN_FAIL = "LoginFail";
     public const string SIGNUP_FAIL = "SignUpFail";
     public const string DEFAULT_EQUIPMENT = "Default_Equipment";
+
+    public static string GradeColor(EquipmentGrade grade)
+    {
+        return grade switch
+        {
+            EquipmentGrade.Rare => "#4F7FC7",
+            EquipmentGrade.Epic => "#8A62B8",
+            EquipmentGrade.Unique => "#C9A63A",
+            EquipmentGrade.Legendary => "#4F9D72",
+            _ => "#FFFFFF",
+        };
+    }
 }
+    

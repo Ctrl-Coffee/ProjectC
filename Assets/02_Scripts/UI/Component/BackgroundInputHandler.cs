@@ -16,11 +16,11 @@ public class BackgroundInputHandler : MonoBehaviour
 
     private Camera _camera;
 
-    public event Action<Vector2> DragStarted;
-    public event Action<Vector2> Dragged;
-    public event Action<Vector2> DragEnded;
-    public event Action<Vector2> Tapped;
-    public event Action Canceled;
+    public event Action<Vector2> OnDragStarted;
+    public event Action<Vector2> OnDragged;
+    public event Action<Vector2> OnDragEnded;
+    public event Action<Vector2> OnTapped;
+    public event Action OnCanceled;
 
     private void Awake()
     {
@@ -119,10 +119,10 @@ public class BackgroundInputHandler : MonoBehaviour
                 return;
 
             _isDragging = true;
-            DragStarted?.Invoke(_startPointerPosition);
+            OnDragStarted?.Invoke(_startPointerPosition);
         }
 
-        Dragged?.Invoke(pointerPosition);
+        OnDragged?.Invoke(pointerPosition);
     }
 
     private void EndInput(Vector2 pointerPosition)
@@ -130,7 +130,7 @@ public class BackgroundInputHandler : MonoBehaviour
         if (_isDragging == false && IsDragDistance(pointerPosition) == true)
         {
             _isDragging = true;
-            DragStarted?.Invoke(_startPointerPosition);
+            OnDragStarted?.Invoke(_startPointerPosition);
         }
 
         bool wasDragging = _isDragging;
@@ -139,9 +139,9 @@ public class BackgroundInputHandler : MonoBehaviour
         _isDragging = false;
 
         if (wasDragging == true)
-            DragEnded?.Invoke(pointerPosition);
+            OnDragEnded?.Invoke(pointerPosition);
         else
-            Tapped?.Invoke(pointerPosition);
+            OnTapped?.Invoke(pointerPosition);
     }
 
     private bool IsDragDistance(Vector2 pointerPosition)
@@ -162,7 +162,7 @@ public class BackgroundInputHandler : MonoBehaviour
 
         if (wasDragging == true)
         {
-            Canceled?.Invoke();
+            OnCanceled?.Invoke();
         }
     }
 }
