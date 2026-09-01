@@ -622,6 +622,8 @@ MonoBehaviour:
   _playDurationSeconds: 10
   _fillRate: 0.35
   _drainRate: 0.08
+  _gaugeMinPitch: 0.8
+  _gaugeMaxPitch: 1.6
 --- !u!1 &7490197492526754344
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +826,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a1a9f8269a1fb421c91b48d0819f2097, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 02e82382cfcbb314bafc796191309a80, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

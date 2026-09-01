@@ -14,5 +14,13 @@
     "OKText": "확인",
     "CancelText": null,
     "ConfirmType": "OK"
+  },
+  {
+    "Id": "Default_Equipment",
+    "TitleTxet": "장착 해제 불가",
+    "DescTxet": "기본 장비는 장착 해제할 수 없습니다",
+    "OKText": "확인",
+    "CancelText": null,
+    "ConfirmType": "OK"
   }
 ]
