@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -290,7 +291,38 @@ public class BattleManager
         else if (_battleService.AliveEnemyCount <= 0)
         {
             EndBattle();
-            GameManager.UI.OpenStageClearUI();
+            ProcessStageClearAsync().Forget();
         }
+    }
+
+    private async UniTask ProcessStageClearAsync()
+    {
+        // TODO: 로딩 UI 오픈
+        string clearedStageId = GameManager.Stage.CurrentStageId;
+        string lastClearedStageId = GameManager.Stage.LastClearedStageId;
+
+        bool isHigherStage = GameManager.Stage.IsHigherStage(clearedStageId, lastClearedStageId);
+
+        if (isHigherStage)
+        {
+            GameManager.Stage.SetLastClearedStageId(clearedStageId);
+
+            try
+            {
+                SaveStageRecordResponse response = await SaveUtil.RequestSaveStageData(clearedStageId);
+
+                if (response.result != (int)ServerErrorCode.Success)
+                {
+                    Logger.LogWarning($"스테이지 저장 실패: {response.message}");
+                }
+            }
+            catch (Exception exception)
+            {
+                Logger.LogWarning($"스테이지 저장 중 예외 발생: {exception.Message}");
+            }
+        }
+
+        // TODO: 로딩 UI 닫기
+        GameManager.UI.OpenStageClearUI();
     }
 }

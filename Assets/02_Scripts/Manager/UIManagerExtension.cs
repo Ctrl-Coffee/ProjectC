@@ -171,8 +171,12 @@ public static class UIManagerExtension
 
     public static void OpenStageInfo(this UIManager uiManager, string stageId)
     {
+        if (!GameManager.Stage.TrySetStage(stageId))
+        {
+            return;
+        }
+
         uiManager.OpenPopupUI<StageInfoView>();
-        GameManager.Stage.SetStage(stageId);   
     }
 
     public static void CloseStagePopup(this UIManager uiManager)

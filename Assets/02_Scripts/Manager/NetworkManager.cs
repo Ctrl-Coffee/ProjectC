@@ -164,13 +164,13 @@ public class NetworkManager
         return PostAsync<LoadEquipmentLoadoutResponse>("/api/equipmentloadout/load", _authenticatedRequest);
     }
 
-    public UniTask<SaveStageRecordResponse> SaveStageAsync(int stage)
+    public UniTask<SaveStageRecordResponse> SaveStageAsync(string stageId)
     {
         StageRecordRequest request = new()
         {
             userId = _userId,
             token = _token,
-            StageRecordData = new StageRecordDto() { lastClearedStage = stage }
+            StageRecordData = new StageRecordDto() { lastClearedStage = stageId }
         };
 
         return PostAsync<SaveStageRecordResponse>("/api/stagerecord/save", request);

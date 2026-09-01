@@ -79,6 +79,9 @@ public class GameManager : SingletonBehaviour<GameManager>
         await gameSession.LoadAllData();
         _gameSession = gameSession;
 
+        _stageManager.Initialize();
+        await _stageManager.LoadDataAsync();
+
         await _perkManager.LoadDataAsync();
         await AutoWorkQueue.RestoreSlots();
 

@@ -446,6 +446,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LobbyBackground
       objectReference: {fileID: 0}
+    - target: {fileID: 5291219291759528719, guid: 721c89ddd34d5fe408e597a45470aa5c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
