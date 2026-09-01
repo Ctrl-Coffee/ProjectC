@@ -382,8 +382,6 @@ public class BattleManager
         if (isHigherStage)
         {
             GameManager.Stage.SetLastClearedStageId(clearedStageId);
-
-
             SaveStageRecordResponse response = await SaveUtil.RequestSaveStageData(clearedStageId);
         }
 

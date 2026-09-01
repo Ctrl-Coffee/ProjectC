@@ -16,6 +16,8 @@ public class PlayerMove : MonoBehaviour
         _anim = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
+        transform.position = _destination[0].position;
+
         GameManager.Time.RequestStartCooldown("PlayerStay", GetSatyTime(), () =>
         {
             OnMove();

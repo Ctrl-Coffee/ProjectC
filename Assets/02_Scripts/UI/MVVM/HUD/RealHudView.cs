@@ -1,5 +1,4 @@
-﻿using Mono.Cecil;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class RealHudView : ViewBase
@@ -72,6 +71,22 @@ public class RealHudView : ViewBase
         }
     }
 
+    public void OnChangeSceenToDream()
+    {
+        GameManager.Instance.ExitReal();
+        GameManager.Instance.EnterDream();
+    }
+
+    public void OnOpenWorkInfoUI()
+    {
+        GameManager.UI.OpenWorkInfoUI();
+    }
+
+    public void OnCoffeePot()
+    {
+
+    }
+
     protected override void BindViewModel()
     {
         _currencyViewModel = GameManager.ViewModel.CreateCurrencyViewModel();
@@ -110,17 +125,6 @@ public class RealHudView : ViewBase
     private void OnOpenSettingUI()
     {
         GameManager.UI.OpenSettingUI();
-    }
-
-    private void OnChangeSceenToDream()
-    {
-        GameManager.Instance.ExitReal();
-        GameManager.Instance.EnterDream();
-    }
-
-    private void OnOpenWorkInfoUI()
-    {
-        GameManager.UI.OpenWorkInfoUI();
     }
 
     private void OnOpenPerkInfoUI()
