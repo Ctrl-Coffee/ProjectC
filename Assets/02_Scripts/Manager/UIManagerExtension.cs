@@ -152,14 +152,14 @@ public static class UIManagerExtension
         uiManager.CloseHUDUI<BattleHud>();
     }
 
-    public static void OpenStageClearUI(this UIManager uiManager)
+    public static void OpenBattleVictoryPopup(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<StageClearUI>();
+        uiManager.OpenPopupUI<BattleVictoryPopup>();
     }
 
-    public static void CloseStageClearUI(this UIManager uiManager)
+    public static void CloseBattleVictoryPopup(this UIManager uiManager)
     {
-        uiManager.ClosePopupUI<StageClearUI>();
+        uiManager.ClosePopupUI<BattleVictoryPopup>();
     }
 
     public static void OpenStageFailUI(this UIManager uiManager)

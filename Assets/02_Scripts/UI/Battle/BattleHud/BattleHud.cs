@@ -43,6 +43,8 @@ public class BattleHud : UIBase
     private void OnDisable()
     {
         UnbindButtonEvents();
+
+        ActivateBattleUnitViews();
     }
 
     private void ValidateReferences()
@@ -82,6 +84,24 @@ public class BattleHud : UIBase
         for (int index = 0; index < _battleCharacterSlotViews.Length; index++)
         {
             _battleCharacterSlotViews[index].SetModel(playerBattleUnitModels[index]);
+        }
+    }
+
+    private void ActivateBattleUnitViews()
+    {
+        for (int index = 0; index < _playerBattleUnitHpBarViews.Length; index++)
+        {
+            _playerBattleUnitHpBarViews[index].gameObject.SetActive(true);
+        }
+
+        for (int index = 0; index < _enemyBattleUnitHpBarViews.Length; index++)
+        {
+            _enemyBattleUnitHpBarViews[index].gameObject.SetActive(true);
+        }
+
+        for (int index = 0; index < _battleCharacterSlotViews.Length; index++)
+        {
+            _battleCharacterSlotViews[index].gameObject.SetActive(true);
         }
     }
 

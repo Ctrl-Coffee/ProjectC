@@ -163,6 +163,8 @@ public abstract class BattleUnitModelBase : ModelBase
         ClearUnitSkills();
         ClearSkillCooldowns();
         InitializeOnce();
+
+        OnPropertyChanged(nameof(AnimKey));
     }
 
     public void EnterBattle()
@@ -419,7 +421,6 @@ public abstract class BattleUnitModelBase : ModelBase
     private void TakeDamage(DamageResult damageResult)
     {
         Hp -= damageResult.Damage;
-
         OnTakeDamage?.Invoke(damageResult);
     }
 

@@ -31,6 +31,16 @@ public class StageManager
         get { return _stageModel.SpriteAddressableKey; }
     }
 
+    public int DreamShardReward
+    {
+        get { return _stageModel.DreamShardReward; }
+    }
+
+    public int InspirationReward
+    {
+        get { return _stageModel.InspirationReward; }
+    }
+
     public void SetStage(string stageId)
     {
         _stageModel.SetStage(stageId);

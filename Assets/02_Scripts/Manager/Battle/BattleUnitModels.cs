@@ -174,7 +174,7 @@ public class BattleUnitModels
       
             if (string.IsNullOrWhiteSpace(enemyId))
             {
-                _enemyBattleUnitModels[index].Clear();
+                ClearEnemy(index);
                 continue;
             }
 
@@ -183,8 +183,7 @@ public class BattleUnitModels
             if (enemyData == null)
             {
                 Logger.LogError($"'{enemyId}' 적 데이터를 찾을 수 없습니다.");
-
-                _enemyBattleUnitModels[index].Clear();
+                ClearEnemy(index);
                 continue;
             }
 
@@ -241,7 +240,7 @@ public class BattleUnitModels
 
         _playerBattleUnitModels[battlePosition].Initialize(companionId, battleUnitData);
 
-        UpdateSaveDataPartyCompanionId(battlePosition, companionId);
+        UpdateCachedCompanionId(battlePosition, companionId);
     }
 
     public void RemoveCompanion(int battlePosition)
@@ -264,10 +263,16 @@ public class BattleUnitModels
     private void ClearCompanion(int battlePosition)
     {
         _playerBattleUnitModels[battlePosition].Clear();
-        UpdateSaveDataPartyCompanionId(battlePosition);
+        UpdateCachedCompanionId(battlePosition);
     }
 
-    private void UpdateSaveDataPartyCompanionId(int battlePosition, string companionId = null)
+    private void ClearEnemy(int battlePosition)
+    {
+        _enemyBattleUnitModels[battlePosition].Clear();
+        GameManager.Battle.RequestUpdateEnemyUnitActive(battlePosition, false);
+    }
+
+    private void UpdateCachedCompanionId(int battlePosition, string companionId = null)
     {
         int index = Array.IndexOf(Const.COMPANION_BATTLE_POSITIONS, battlePosition);
 

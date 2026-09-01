@@ -359,7 +359,7 @@ public class BattleManager
         else if (_battleService.AliveEnemyCount <= 0)
         {
             EndBattle();
-            GameManager.UI.OpenStageClearUI();
+            GameManager.UI.OpenBattleVictoryPopup();
         }
     }
 }
