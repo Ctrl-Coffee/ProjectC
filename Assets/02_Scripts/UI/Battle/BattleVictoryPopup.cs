@@ -27,6 +27,16 @@ public class BattleVictoryPopup : UIBase
     {
         _dreamShardRewardCount.text = $"X {GameManager.Stage.DreamShardReward}";
         _inspirationRewardCount.text = $"X {GameManager.Stage.InspirationReward}";
+
+        UpdateNextStateButton();
+    }
+
+    private void UpdateNextStateButton()
+    {
+        long dreamPoint = GameManager.Session.Currency.DreamPoint;
+        long dreamPointCost = GameManager.Stage.DpCost;
+
+        _nextStageButton.interactable = dreamPoint >= dreamPointCost;
     }
 
     private void RetrunToBattlePreparation()
