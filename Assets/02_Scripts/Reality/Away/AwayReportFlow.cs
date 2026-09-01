@@ -61,6 +61,42 @@ public static class AwayReportFlow
         effect.Play(sources, AwayRewardPayout.PayProgress, AwayRewardPayout.PayAll);
     }
 
+    // [주의] 정산 루프(AutoWorkQueue / EnergyRecovery)보다 반드시 먼저 불러야 한다.
+    // 루프가 먼저 돌면 오프라인 보상이 조용히 지급되고 리포트가 0 으로 뜬다.
+    public static void OnRelaunch()
+    {
+        if (null == GameManager.Session)
+        {
+            return;
+        }
+
+        long lastSeenTicks = GameManager.Session.Currency.EnergyRecoveredAt;
+
+        if (lastSeenTicks <= 0)
+        {
+            return;
+        }
+
+        long awayTicks = GameManager.Time.UtcNow.Ticks - lastSeenTicks;
+
+        if (awayTicks <= 0)
+        {
+            return;
+        }
+
+        TimeSpan duration = TimeSpan.FromTicks(awayTicks);
+
+        if (duration.TotalSeconds < MIN_AWAY_SECONDS)
+        {
+            return;
+        }
+
+        _awayDuration = duration;
+        _isPending = true;
+
+        AwayRewardPayout.BeginHold();
+    }
+
     private static void OnReturn()
     {
         if (!AwayTimer.IsRunning)

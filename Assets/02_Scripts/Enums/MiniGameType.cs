@@ -5,5 +5,5 @@
     MotionTracking,
     ScratchLottery,
     DiceGamble,
-    NovelWriting
+    NovelWriting,
 }
