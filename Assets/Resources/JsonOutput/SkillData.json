@@ -1,11 +1,11 @@
-﻿[
+[
   {
-    "Id": "enemy_skill_ch1_melee_basic",
+    "Id": "skill_enemy_ch1_001_basic",
     "Name": "초원 슬라임 기본 공격",
     "SkillType": "BasicAttack",
     "TargetType": "SingleOpponent",
     "DamageMultiplier": 1,
-    "BaseCooldown": 1.5,
+    "BaseCooldown": 5,
     "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {

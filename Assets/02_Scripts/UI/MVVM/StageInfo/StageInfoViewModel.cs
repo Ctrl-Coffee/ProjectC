@@ -65,6 +65,11 @@ public class StageInfoViewModel
         _stageModel = null;
     }
 
+    public void Refresh()
+    {
+        _stageModel.InitializeOnce();
+    }
+
     private string GetStageDisplayText()
     {
         if (_stageModel.IsBoss > 0)

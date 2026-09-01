@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class CompanionInventorySlotView : ViewBase
 {
     [SerializeField] private TextMeshProUGUI _level;
-    [SerializeField] private TextMeshProUGUI _tempId;
     [SerializeField] private Image _icon;
     [SerializeField] private UIButtonComponent _button;
 
@@ -18,7 +17,6 @@ public class CompanionInventorySlotView : ViewBase
     public void Init(string id, Action<string> action)
     {
         _companionId = id;
-        _tempId.text = id;
         _onSelectEvent = action;
 
         BindViewModel();
@@ -26,8 +24,7 @@ public class CompanionInventorySlotView : ViewBase
         Subscribe(); 
         Refresh();
 
-        // TODO: 테스트 구분 용도
-        _icon.color = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+        _icon.sprite = GameManager.Resource.GetLoadedAsset<Sprite>(GameManager.DataTable.GetCompanionData(_companionId).SlotSpriteAddressableKey);
     }
 
     private void OnDestroy()

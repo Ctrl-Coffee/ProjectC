@@ -1,4 +1,4 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
 public class SwipComponent : MonoBehaviour
@@ -34,18 +34,18 @@ public class SwipComponent : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputHandler.DragStarted += BeginDrag;
-        _inputHandler.Dragged += Drag;
-        _inputHandler.DragEnded += EndDrag;
-        _inputHandler.Canceled += CancelDrag;
+        _inputHandler.OnDragStarted += BeginDrag;
+        _inputHandler.OnDragged += Drag;
+        _inputHandler.OnDragEnded += EndDrag;
+        _inputHandler.OnCanceled += CancelDrag;
     }
 
     private void OnDisable()
     {
-        _inputHandler.DragStarted -= BeginDrag;
-        _inputHandler.Dragged -= Drag;
-        _inputHandler.DragEnded -= EndDrag;
-        _inputHandler.Canceled -= CancelDrag;
+        _inputHandler.OnDragStarted -= BeginDrag;
+        _inputHandler.OnDragged -= Drag;
+        _inputHandler.OnDragEnded -= EndDrag;
+        _inputHandler.OnCanceled -= CancelDrag;
 
         _swipeTween?.Kill();
         _inputHandler.SetInteractionBlocked(false);

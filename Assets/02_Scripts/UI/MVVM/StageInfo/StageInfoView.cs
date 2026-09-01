@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,8 @@ public class StageInfoView : ViewBase
     private void OnEnable()
     {
         Subscribe();
+
+        Refresh();
     }
 
     private void OnDisable()
@@ -74,6 +77,11 @@ public class StageInfoView : ViewBase
         UnityUtility.ValidateReference(_dpCostText, nameof(_dpCostText));
     }
 
+    private void Refresh()
+    {
+        _stageInfoViewModel.Refresh();
+    }
+
     private void UpdateStageImage(string addressKey)
     {
         Sprite sprite = GameManager.Resource.GetLoadedAsset<Sprite>(addressKey);
@@ -105,10 +113,18 @@ public class StageInfoView : ViewBase
         _dpCostText.text = text;
     }
 
+    private void UpdateOpenRootButtonState()
+    {
+        long dreamPoint = GameManager.Session.Currency.DreamPoint;
+        long dreamPointCost = GameManager.Stage.DpCost;
+
+        _openRootButton.interactable = dreamPoint >= dreamPointCost;
+    }
+
     private void OpenBattleRoot()
     {
         GameManager.Battle.EnterBattle();
-        GameManager.UI.CloseDreamHud();
+        GameManager.Instance.ExitDream();
         GameManager.UI.CloseStagePopup();
     }
 
@@ -135,6 +151,7 @@ public class StageInfoView : ViewBase
                 break;
             case nameof(_stageInfoViewModel.DpCostText):
                 UpdateDpCostText(_stageInfoViewModel.DpCostText);
+                UpdateOpenRootButtonState();
                 break;
         }
     }

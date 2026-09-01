@@ -66,6 +66,10 @@ public class StageModel : ModelBase
     {
         get { return _spriteAddressableKey; }
     }
+    public string StageId
+    {
+        get { return _stageId; }
+    }
 
     public IReadOnlyList<string> EnemyGroupIds
     {
