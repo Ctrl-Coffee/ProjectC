@@ -59,6 +59,14 @@ public class BattleManager
 
     public void StartBattle()
     {
+        int dpCost = GameManager.Stage.DpCost;
+
+        if (!GameManager.Session.Currency.TrySpendDreamPoint(dpCost))
+        {
+            Logger.LogError("꿈 포인트 소비에 실패했습니다.");
+            return;
+        }
+
         SubscribeUnitModelDeadStateChangedEvent();
 
         InitializeBattleCounts();
@@ -359,7 +367,18 @@ public class BattleManager
         else if (_battleService.AliveEnemyCount <= 0)
         {
             EndBattle();
+            AddReward();
+
             GameManager.UI.OpenBattleVictoryPopup();
         }
+    }
+
+    private void AddReward()
+    {
+        int dreamFragmentReward = GameManager.Stage.DreamShardReward;
+        int inspirationReward = GameManager.Stage.InspirationReward;
+
+        GameManager.Session.Currency.AddDreamFragment(dreamFragmentReward);
+        GameManager.Session.Currency.AddInspiration(inspirationReward);
     }
 }

@@ -27,6 +27,7 @@ public class StageInfoView : ViewBase
     private void OnEnable()
     {
         Subscribe();
+
     }
 
     private void OnDisable()
@@ -105,6 +106,14 @@ public class StageInfoView : ViewBase
         _dpCostText.text = text;
     }
 
+    private void UpdateOpenRootButtonState()
+    {
+        long dreamPoint = GameManager.Session.Currency.DreamPoint;
+        long dreamPointCost = GameManager.Stage.DpCost;
+
+        _openRootButton.interactable = dreamPoint >= dreamPointCost;
+    }
+
     private void OpenBattleRoot()
     {
         GameManager.Battle.EnterBattle();
@@ -135,6 +144,7 @@ public class StageInfoView : ViewBase
                 break;
             case nameof(_stageInfoViewModel.DpCostText):
                 UpdateDpCostText(_stageInfoViewModel.DpCostText);
+                UpdateOpenRootButtonState();
                 break;
         }
     }

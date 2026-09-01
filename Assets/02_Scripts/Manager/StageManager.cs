@@ -41,6 +41,11 @@ public class StageManager
         get { return _stageModel.InspirationReward; }
     }
 
+    public int DpCost
+    {
+        get { return _stageModel.DpCost; }
+    }
+
     public void SetStage(string stageId)
     {
         _stageModel.SetStage(stageId);

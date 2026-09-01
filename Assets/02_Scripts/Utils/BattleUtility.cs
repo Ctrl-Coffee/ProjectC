@@ -17,10 +17,14 @@ public static class BattleUtility
         battleUnitData.CriticalChance = heroInfoModel.CriticalChance;
         battleUnitData.BasicAttackHaste = heroInfoModel.BasicAttackHaste;
         battleUnitData.SignatureSkillHaste = heroInfoModel.SignatureSkillHaste;
-        battleUnitData.BasicAttackSkillId = equipmentData.BasicAttackSkillId;
-        battleUnitData.SignatureSkillId = equipmentData.SignatureSkillId;
+        battleUnitData.BasicAttackSkillId = "enemy_skill_ch1_melee_basic";
+        battleUnitData.SignatureSkillId = "skill_enemy_ch1_002_basic";
+        //battleUnitData.BasicAttackSkillId = equipmentData.BasicAttackSkillId;
+        //battleUnitData.SignatureSkillId = equipmentData.SignatureSkillId;
         battleUnitData.CombatPower = heroInfoModel.CombatPower;
-        battleUnitData.AnimationSetKey = equipmentData.AnimationSetKey;
+
+        battleUnitData.AnimationSetKey = "Assets/07_ScriptableObject/Hero/HeroBaseArmor.asset";
+        //battleUnitData.AnimationSetKey = equipmentData.AnimationSetKey;
 
         return battleUnitData;
     }

@@ -5,7 +5,7 @@
     "SkillType": "BasicAttack",
     "TargetType": "SingleOpponent",
     "DamageMultiplier": 1,
-    "BaseCooldown": 1.5,
+    "BaseCooldown": 5,
     "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
