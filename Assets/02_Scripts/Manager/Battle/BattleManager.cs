@@ -41,6 +41,8 @@ public class BattleManager
 
     public void EnterBattle()
     {
+        EndBattle();
+
         ResetBattleRoot();
         InitializeStage();
 
@@ -239,6 +241,11 @@ public class BattleManager
 
     private void EndBattle()
     {
+        if (!_battleRoot.IsBattleStarted)
+        {
+            return;
+        }
+
         UnsubscribeUnitModelDeadStateChangedEvents();
 
         ResetBattleTime();

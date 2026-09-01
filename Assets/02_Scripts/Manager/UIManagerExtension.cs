@@ -193,14 +193,14 @@ public static class UIManagerExtension
         uiManager.CloseHUDUI<DamageTextHud>();
     }
 
-    public static void OpenBattlePauseUI(this UIManager uiManager)
+    public static void OpenBattlePausePopup(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<BattlePauseUI>();
+        uiManager.OpenPopupUI<BattlePausePopup>();
     }
 
-    public static void CloseBattlePauseUI(this UIManager uiManager)
+    public static void CloseBattlePausePopup(this UIManager uiManager)
     {
-        uiManager.ClosePopupUI<BattlePauseUI>();
+        uiManager.ClosePopupUI<BattlePausePopup>();
     }
 
     public static void ShowDamageText(this UIManager uiManager, DamageResult damageResult, Vector2 position)
