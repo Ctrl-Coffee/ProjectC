@@ -44,10 +44,21 @@
     public const string SKILL_READY_EVENT = "SkillReadyEvent";
     public const string BASIC_ATTACK_SKILL_READY = "IsBasicAttackSkillReady";
     public const string SIGNATURE_SKILL_READY = "IsSignatureSkillReady";
+    public const string AUTO_MODE = "IsAutoMode";
 
-    //색
+    //스테이지 권장 레벨 색
     public const string STAGE_DANGER_COLOR = "#D81B60";
     public const string STAGE_SAFE_COLOR = "#222222";
+
+    //데미지 텍스트
+    public const float DAMAGE_TEXT_HORIZONTAL_RANDOM_OFFSET = 30f;
+    public const float DAMAGE_TEXT_VERTICAL_MIN_OFFSET = 150f;
+    public const float DAMAGE_TEXT_VERTICAL_MAX_OFFSET = 200f;
+    public const int DAMAGE_TEXT_POOL_INITIAL_SIZE = 30;
+
+    //데미지 색
+    public const string NORMAL_DAMAGE_COLOR = "#FF5252";
+    public const string CRITICAL_DAMAGE_COLOR = "#B71C1C";
 
     // 기본 장비 ID
     public const string DEFAULT_WEAPON_EQUIPMENT_ID = "equipment_weapon_001";

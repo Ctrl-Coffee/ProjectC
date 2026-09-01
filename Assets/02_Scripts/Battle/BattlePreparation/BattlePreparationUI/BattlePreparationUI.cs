@@ -1,15 +1,26 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BattlePreparationUI : UIBase
 {
+    [Header("Total Combat Power")]
+    [SerializeField] private TMP_Text _playerPowerText;
+    [SerializeField] private TMP_Text _enemyPowerText;
+
+    [Header("StageName")]
+    [SerializeField] private TMP_Text _stageNameText;
+
     [Header("Companion Selection")]
     [SerializeField] private Transform _companionSelectionContent;
     [SerializeField] private CompanionSelectionSlotUI _companionSelectionSlotPrefab;
 
     [Header("Start Battle")]
     [SerializeField] private UIButtonComponent _startBattleButton;
+
+    [Header("Back Battle")]
+    [SerializeField] private UIButtonComponent _backBattleButton;
 
     private Camera _mainCamera;
 
@@ -27,9 +38,16 @@ public class BattlePreparationUI : UIBase
 
     private void OnEnable()
     {
+        UpdateStartButton();
+
+        RefreshStageNameText();
+        RefreshCombatPower();
         RefreshCompanionSelectionSlots();
 
         _startBattleButton.BindButtonEvent(HandleStartBattleButtonClicked);
+        _backBattleButton.BindButtonEvent(HandleBackBattleButtonClicked);
+
+        GameManager.Battle.CompanionChanged += HandleCompanionChanged;
     }
 
     private void Update()
@@ -52,9 +70,12 @@ public class BattlePreparationUI : UIBase
     private void OnDisable()
     {
         _startBattleButton.UnBindButtonAllEvent();
+        _backBattleButton.UnBindButtonAllEvent();
 
         ClearSelectedCompanionPosition();
         ClearSelectedCompanionId();
+
+        GameManager.Battle.CompanionChanged -= HandleCompanionChanged;
     }
 
     private void OnDestroy()
@@ -72,9 +93,13 @@ public class BattlePreparationUI : UIBase
 
     private void ValidateReference()
     {
+        UnityUtility.ValidateReference(_playerPowerText, nameof(_playerPowerText));
+        UnityUtility.ValidateReference(_enemyPowerText, nameof(_enemyPowerText));
+        UnityUtility.ValidateReference(_stageNameText, nameof(_stageNameText));
         UnityUtility.ValidateReference(_companionSelectionContent, nameof(_companionSelectionContent));
         UnityUtility.ValidateReference(_companionSelectionSlotPrefab, nameof(_companionSelectionSlotPrefab));
         UnityUtility.ValidateReference(_startBattleButton, nameof(_startBattleButton));
+        UnityUtility.ValidateReference(_backBattleButton, nameof(_backBattleButton));
     }
 
     private bool TryGetClickedCompanionPosition(out int battlePosition)
@@ -291,9 +316,51 @@ public class BattlePreparationUI : UIBase
         return isCompanionRemoved;
     }
 
+    private void UpdatePlayerCombatPower()
+    {
+        int playerTotalCombatPower = GameManager.Battle.GetPlayerTotalCombatPower();
+        _playerPowerText.text = playerTotalCombatPower.ToString();
+    }
+
+    private void UpdateEnemyCombatPower()
+    {
+        int enemyTotalCombatPower = GameManager.Battle.GetEnemyTotalCombatPower();
+        _enemyPowerText.text = enemyTotalCombatPower.ToString();
+    }
+
+    private void RefreshStageNameText()
+    {
+        _stageNameText.text = GameManager.Stage.StageName;
+    }
+
+    private void RefreshCombatPower()
+    {
+        UpdatePlayerCombatPower();
+        UpdateEnemyCombatPower();
+    }
+
     private void HandleStartBattleButtonClicked()
     {
         GameManager.Battle.StartBattle();
-        GameManager.UI.CloseBattlePreparation();
+        GameManager.UI.CloseBattlePreparationUI();
+    }
+
+    private void HandleBackBattleButtonClicked()
+    {
+        GameManager.Battle.ExitBattle();
+        GameManager.UI.CloseBattlePreparationUI();
+    }
+
+    private void HandleCompanionChanged()
+    {
+        UpdatePlayerCombatPower();
+    }
+
+    private void UpdateStartButton()
+    {
+        long dreamPoint = GameManager.Session.Currency.DreamPoint;
+        long dreamPointCost = GameManager.Stage.DpCost;
+
+        _startBattleButton.SetInteractable(dreamPoint >= dreamPointCost);
     }
 }

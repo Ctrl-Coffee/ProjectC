@@ -16,9 +16,19 @@ public class StageManager
     private StageModel _stageModel = new StageModel();
 
 
+    public string StageName
+    {
+        get { return GetStageName(); }
+    }
+
     public IReadOnlyList<string> EnemyGroupIds
     {
         get { return _stageModel.EnemyGroupIds; }
+    }
+
+    public float EnemyStatMultiplier
+    {
+        get { return _stageModel.EnemyStatMultiplier; }
     }
 
     public string NextStageId
@@ -31,14 +41,29 @@ public class StageManager
         get { return _stageModel.SpriteAddressableKey; }
     }
 
-    public string CurrentStageId
+    public int DreamShardReward
     {
-        get { return _stageModel.StageId; }
+        get { return _stageModel.DreamShardReward; }
+    }
+
+    public int InspirationReward
+    {
+        get { return _stageModel.InspirationReward; }
+    }
+
+    public int DpCost
+    {
+        get { return _stageModel.DpCost; }
     }
 
     public string LastClearedStageId
     {
         get { return _lastClearedStageId; }
+    }
+
+    public string CurrentStageId
+    {
+        get { return _stageModel.StageId; }
     }
 
     public void SetNextStage()
@@ -170,5 +195,10 @@ public class StageManager
 
         _lastClearedStageId = stageId;
         OnStageProgressChanged?.Invoke();
+    }
+    private string GetStageName()
+    {
+        string stageName = $"{_stageModel.Chapter}-{_stageModel.StageNumber}";
+        return stageName;
     }
 }

@@ -40,6 +40,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     private void Update()
     {
         Time.OnUpdate();
+        Battle.OnUpdate();
     }
 
     #region Init
