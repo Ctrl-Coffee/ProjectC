@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// 선로딩된 UI를 열고 닫는 확장 함수
@@ -129,24 +132,24 @@ public static class UIManagerExtension
         ui.SetReport(report);
     }
 
-    public static void OpenBattlePreparation(this UIManager uiManager)
+    public static void OpenBattlePreparationUI(this UIManager uiManager)
     {
         uiManager.OpenContentUI<BattlePreparationUI>();
     }
 
-    public static void CloseBattlePreparation(this UIManager uiManager)
+    public static void CloseBattlePreparationUI(this UIManager uiManager)
     {
         uiManager.CloseContentUI<BattlePreparationUI>();
     }
 
-    public static void OpenBattleHpBarHud(this UIManager uiManager)
+    public static void OpenBattleHud(this UIManager uiManager)
     {
-        uiManager.OpenHUDUI<BattleHpBarHud>();
+        uiManager.OpenHUDUI<BattleHud>();
     }
 
-    public static void CloseBattleHpBarHud(this UIManager uiManager)
+    public static void CloseBattleHud(this UIManager uiManager)
     {
-        uiManager.CloseHUDUI<BattleHpBarHud>();
+        uiManager.CloseHUDUI<BattleHud>();
     }
 
     public static void OpenStageClearUI(this UIManager uiManager)
@@ -178,5 +181,51 @@ public static class UIManagerExtension
     public static void CloseStagePopup(this UIManager uiManager)
     {
         uiManager.ClosePopupUI<StageInfoView>();
+    }
+
+    public static void OpenDamageTextHud(this UIManager uiManager)
+    {
+        uiManager.OpenHUDUI<DamageTextHud>();
+    }
+
+    public static void CloseDamageTextHud(this UIManager uiManager)
+    {
+        uiManager.CloseHUDUI<DamageTextHud>();
+    }
+
+    public static void OpenBattlePauseUI(this UIManager uiManager)
+    {
+        uiManager.OpenPopupUI<BattlePauseUI>();
+    }
+
+    public static void CloseBattlePauseUI(this UIManager uiManager)
+    {
+        uiManager.ClosePopupUI<BattlePauseUI>();
+    }
+
+    public static void ShowDamageText(this UIManager uiManager, DamageResult damageResult, Vector2 position)
+    {
+        DamageTextHud damagePopupHud = uiManager.GetUI<DamageTextHud>();
+
+        if (damagePopupHud == null)
+        {
+            Logger.LogWarning("먼저 DamagePopupHud를 열어주세요.");
+            return;
+        }
+
+        damagePopupHud.ShowDamageText(damageResult, position);
+    }
+
+    public static void HideDamageText(this UIManager uiManager, DamageText damageText)
+    {
+        DamageTextHud damagePopupHud = uiManager.GetUI<DamageTextHud>();
+
+        if (damagePopupHud == null)
+        {
+            Logger.LogWarning("먼저 DamagePopupHud를 열어주세요.");
+            return;
+        }
+
+        damagePopupHud.HideDamageText(damageText);
     }
 }

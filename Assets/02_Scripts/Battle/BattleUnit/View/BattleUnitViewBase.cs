@@ -14,7 +14,7 @@ public abstract class BattleUnitViewBase : MonoBehaviour
     private BlackboardVariable<bool> _isSignatureSkillReady;
 
     private BattleUnitAnimator _battleUnitAnimator;
-    private BattleUnitViewModel _battleUnitViewModel;
+    protected BattleUnitViewModel _battleUnitViewModel;
 
     public int BattlePosition
     {
@@ -89,6 +89,11 @@ public abstract class BattleUnitViewBase : MonoBehaviour
             return;
         }
 
+        if (!_battleUnitViewModel.IsBasicAttackSkillReady)
+        {
+            return;
+        }
+
         if (!_battleUnitViewModel.RequestCheckBasicAttackSkillUsable())
         {
             return;
@@ -105,6 +110,11 @@ public abstract class BattleUnitViewBase : MonoBehaviour
             return;
         }
 
+        if (!_battleUnitViewModel.IsSignatureSkillReady)
+        {
+            return;
+        }
+
         if (!_battleUnitViewModel.RequestCheckSignatureSkillUsable())
         {
             return;
@@ -115,12 +125,12 @@ public abstract class BattleUnitViewBase : MonoBehaviour
 
     public void OnBasicAttackAction()
     {
-        _battleUnitViewModel.RequestUseBasicAttackSkill(_battleUnitViewModel.BattlePosition);
+        _battleUnitViewModel.RequestUseBasicAttackSkill();
     }
 
     public void OnSignatureAction()
     {
-        _battleUnitViewModel.RequestUseSignatureSkill(_battleUnitViewModel.BattlePosition);
+        _battleUnitViewModel.RequestUseSignatureSkill();
     }
 
     protected virtual void CacheBehaviorVariables()
@@ -156,7 +166,7 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         }
     }
 
-    private void UpdateSignatureSkillReady(bool isReady)
+    protected void UpdateSignatureSkillReady(bool isReady)
     {
         _isSignatureSkillReady.Value = isReady;
 

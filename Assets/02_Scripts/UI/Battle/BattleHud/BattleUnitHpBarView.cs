@@ -32,7 +32,7 @@ public class BattleUnitHpBarView : MonoBehaviour
     {
         if (maxHp <= 0f)
         {
-            _hpFillImage.fillAmount = 0f;
+            gameObject.SetActive(false);
             return;
         }
 

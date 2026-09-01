@@ -151,4 +151,31 @@ public class BattleRoot : MonoBehaviour
             battleUnitViews[index].Initialize(battleUnitModels[index]);
         }
     }
+
+    public bool CheckPlayerViewIdle(int battlePosition)
+    {
+        BattleUnitViewBase battleUnitViewBase = _playerBattleUnitViews[battlePosition];
+
+        if (battleUnitViewBase == null)
+        {
+            Logger.LogError($"'{battlePosition}' 유닛 뷰는 Null 입니다.");
+            return false;
+        }
+
+        bool isIdle = battleUnitViewBase.IsIdle;
+        return isIdle;
+    }
+
+    public void UseSignature(int battlePosition)
+    {
+        BattleUnitViewBase battleUnitViewBase = _playerBattleUnitViews[battlePosition];
+
+        if (battleUnitViewBase == null)
+        {
+            Logger.LogError($"'{battlePosition}' 유닛 뷰는 Null 입니다.");
+            return;
+        }
+
+        battleUnitViewBase.UseSignatureSkill();
+    }
 }

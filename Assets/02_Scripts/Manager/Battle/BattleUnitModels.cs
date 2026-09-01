@@ -125,7 +125,7 @@ public class BattleUnitModels
 
         BattleUnitData battleUnitData = BattleUtility.CreatePlayerBattleUnitData(heroInfo, armorData);
 
-        heroBattleUnitModel.Initialize(battleUnitData);
+        heroBattleUnitModel.Initialize(equipedWeaponId, battleUnitData);
     }
 
     private void InitializeCompanionModels()
@@ -154,7 +154,7 @@ public class BattleUnitModels
                 continue;
             }
 
-            _playerBattleUnitModels[companionBattlePosition].Initialize(battleUnitData);
+            _playerBattleUnitModels[companionBattlePosition].Initialize(companionId, battleUnitData);
         }
     }
 
@@ -191,7 +191,7 @@ public class BattleUnitModels
             float enemyStatMultiplier = GameManager.Stage.EnemyStatMultiplier;
 
             BattleUnitData battleUnitData = BattleUtility.CreateEnemyBattleUnitData(enemyData, enemyStatMultiplier);
-            _enemyBattleUnitModels[index].Initialize(battleUnitData);
+            _enemyBattleUnitModels[index].Initialize(enemyId, battleUnitData);
         }
     }
 
@@ -239,7 +239,7 @@ public class BattleUnitModels
             return;
         }
 
-        _playerBattleUnitModels[battlePosition].Initialize(battleUnitData);
+        _playerBattleUnitModels[battlePosition].Initialize(companionId, battleUnitData);
 
         UpdateSaveDataPartyCompanionId(battlePosition, companionId);
     }

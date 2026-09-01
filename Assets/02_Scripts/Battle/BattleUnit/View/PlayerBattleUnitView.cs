@@ -1,4 +1,5 @@
 ﻿using Unity.Behavior;
+using UnityEngine;
 
 public class PlayerBattleUnitView : BattleUnitViewBase
 {
@@ -6,17 +7,17 @@ public class PlayerBattleUnitView : BattleUnitViewBase
 
     protected override void OnEnable()
     {
+        base.OnEnable();
+
         GameManager.Battle.AutoModeChanged += HandleAutoModeChanged;
         SetAutoMode(GameManager.Battle.AutoMode);
-
-        base.OnEnable();
     }
 
     protected override void OnDisable()
     {
-        GameManager.Battle.AutoModeChanged += HandleAutoModeChanged;
-
         base.OnDisable();
+
+        GameManager.Battle.AutoModeChanged -= HandleAutoModeChanged;
     }
 
     protected override void CacheBehaviorVariables()
@@ -32,6 +33,18 @@ public class PlayerBattleUnitView : BattleUnitViewBase
     private void HandleAutoModeChanged(bool autoMode)
     {
         SetAutoMode(autoMode);
+
+        if (!autoMode)
+        {
+            return;
+        }
+
+        if (!_battleUnitViewModel.IsSignatureSkillReady)
+        {
+            return;
+        }
+
+        UseSignatureSkill();
     }
 
     private void SetAutoMode(bool autoMode)

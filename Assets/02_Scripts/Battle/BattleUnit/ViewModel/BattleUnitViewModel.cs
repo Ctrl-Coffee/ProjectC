@@ -98,14 +98,14 @@ public class BattleUnitViewModel
         return isUsable;
     }
 
-    public void RequestUseBasicAttackSkill(int battlePosition)
+    public void RequestUseBasicAttackSkill()
     {
-        _battleUnitModelBase.UseBasicAttackSkill(battlePosition);
+        _battleUnitModelBase.UseBasicAttackSkill();
     }
 
-    public void RequestUseSignatureSkill(int battlePosition)
+    public void RequestUseSignatureSkill()
     {
-        _battleUnitModelBase.UseSignatureSkill(battlePosition);
+        _battleUnitModelBase.UseSignatureSkill();
     }
 
     public void RequestSetActive(bool isActive)

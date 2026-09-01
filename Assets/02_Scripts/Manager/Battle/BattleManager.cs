@@ -91,6 +91,17 @@ public class BattleManager
         return enemyTotalCombatPower;
     }
 
+    public bool RequestCheckPlayerViewIdle(int battlePosition)
+    {
+        bool isIdle = _battleRoot.CheckPlayerViewIdle(battlePosition);
+        return isIdle;
+    }
+
+    public void RequestUnitViewUseSignature(int battlePosition)
+    {
+        _battleRoot.UseSignature(battlePosition);
+    }
+
     public bool RequestSetCompanionToPosition(int battlePosition, string companionId)
     {
         if (!_companionFormation.SetCompanionToPosition(battlePosition, companionId))

@@ -6,6 +6,7 @@ public abstract class BattleUnitModelBase : ModelBase
     private readonly int _battlePosition;
     private readonly string _uId;
 
+    private string _id;
     private string _animationSetKey;
 
     protected float _maxHp;
@@ -38,6 +39,12 @@ public abstract class BattleUnitModelBase : ModelBase
     public event Action<bool> DeadStateChanged;
     public event Action<DamageResult> OnTakeDamage;
 
+
+    public string Id
+    {
+        get { return _id; }
+    }
+
     public int BattlePosition
     {
         get { return _battlePosition; }
@@ -61,6 +68,11 @@ public abstract class BattleUnitModelBase : ModelBase
     public float CombatPower
     {
         get { return _combatPower; }
+    }
+
+    public float CalculatedSignatureSkillCooldown
+    {
+        get { return _calculatedSignatureSkillCooldown; }
     }
 
     public float Hp
@@ -126,9 +138,9 @@ public abstract class BattleUnitModelBase : ModelBase
         _uId = uId;
     }
 
-    public void Initialize(BattleUnitData battleUnitData)
+    public void Initialize(string id, BattleUnitData battleUnitData)
     {
-        InitializeIdentity(battleUnitData);
+        InitializeIdentity(id, battleUnitData);
         InitializeUnitStats(battleUnitData);
         InitializeUnitSkills(battleUnitData);
         InitializeSkillCooldown();
@@ -137,12 +149,13 @@ public abstract class BattleUnitModelBase : ModelBase
 
     public override void InitializeOnce()
     {
+        OnPropertyChanged(nameof(Id));
         OnPropertyChanged(nameof(AnimKey));
         OnPropertyChanged(nameof(Hp));
         OnPropertyChanged(nameof(IsBasicAttackSkillReady));
         OnPropertyChanged(nameof(IsSignatureSkillReady));
     }
-    
+
     public void Clear()
     {
         ClearIdentity();
@@ -186,10 +199,10 @@ public abstract class BattleUnitModelBase : ModelBase
         return isUsable;
     }
 
-    public void UseBasicAttackSkill(int battlePosition)
+    public void UseBasicAttackSkill()
     {
         IsBasicAttackSkillReady = false;
-        UseSkill(battlePosition, _basicAttackSkillId);
+        UseSkill(_battlePosition, _basicAttackSkillId);
 
         bool isUsable = CheckSkillUseable(_basicAttackSkillId);
         
@@ -201,10 +214,10 @@ public abstract class BattleUnitModelBase : ModelBase
         BasicAttackSkillCooldown();
     }
 
-    public void UseSignatureSkill(int battlePosition)
+    public void UseSignatureSkill()
     {
         IsSignatureSkillReady = false;
-        UseSkill(battlePosition, _signatureSkillId);
+        UseSkill(_battlePosition, _signatureSkillId);
 
         bool isUsable = CheckSkillUseable(_signatureSkillId);
 
@@ -230,8 +243,9 @@ public abstract class BattleUnitModelBase : ModelBase
         Hp += amount;
     }
 
-    private void InitializeIdentity(BattleUnitData battleUnitData)
+    private void InitializeIdentity(string id, BattleUnitData battleUnitData)
     {
+        _id = id;
         _animationSetKey = battleUnitData.AnimationSetKey;
         _isInitialized = true;
     }
