@@ -1,5 +1,4 @@
-using System;
-using Unity.Behavior;
+﻿using Unity.Behavior;
 
 [BlackboardEnum]
 public enum UnitSkillType

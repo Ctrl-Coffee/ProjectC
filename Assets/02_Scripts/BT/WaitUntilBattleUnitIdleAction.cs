@@ -9,7 +9,8 @@ using Unity.Properties;
 public partial class WaitUntilBattleUnitIdleAction : Action
 {
     [SerializeReference] public BlackboardVariable<BattleUnitViewBase> BattleUnitView;
-    protected override Status OnUpdate()
+
+    protected override Status OnStart()
     {
         if (BattleUnitView.Value.IsIdle)
         {

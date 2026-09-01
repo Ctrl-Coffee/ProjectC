@@ -7,14 +7,14 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public abstract class BattleUnitViewBase : MonoBehaviour
 {
-    [SerializeField] private BehaviorGraphAgent _behaviorGraphAgent;
+    [SerializeField] protected BehaviorGraphAgent _behaviorGraphAgent;
    
     private BlackboardVariable<SkillReadyEvent> _skillReadyEvent;
     private BlackboardVariable<bool> _isBasicAttackSkillReady;
     private BlackboardVariable<bool> _isSignatureSkillReady;
 
     private BattleUnitAnimator _battleUnitAnimator;
-    private BattleUnitViewModel _battleUnitViewModel;
+    protected BattleUnitViewModel _battleUnitViewModel;
 
     public int BattlePosition
     {
@@ -38,14 +38,16 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         _battleUnitViewModel = new BattleUnitViewModel();
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _battleUnitViewModel.PropertyChanged += OnPropertyChanged;
+        _battleUnitViewModel.TakeDamage += HandleTakeDamage;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         _battleUnitViewModel.PropertyChanged -= OnPropertyChanged;
+        _battleUnitViewModel.TakeDamage -= HandleTakeDamage;
     }
 
     private void OnDestroy()
@@ -87,6 +89,11 @@ public abstract class BattleUnitViewBase : MonoBehaviour
             return;
         }
 
+        if (!_battleUnitViewModel.IsBasicAttackSkillReady)
+        {
+            return;
+        }
+
         if (!_battleUnitViewModel.RequestCheckBasicAttackSkillUsable())
         {
             return;
@@ -103,6 +110,11 @@ public abstract class BattleUnitViewBase : MonoBehaviour
             return;
         }
 
+        if (!_battleUnitViewModel.IsSignatureSkillReady)
+        {
+            return;
+        }
+
         if (!_battleUnitViewModel.RequestCheckSignatureSkillUsable())
         {
             return;
@@ -113,15 +125,15 @@ public abstract class BattleUnitViewBase : MonoBehaviour
 
     public void OnBasicAttackAction()
     {
-        _battleUnitViewModel.RequestUseBasicAttackSkill(_battleUnitViewModel.BattlePosition);
+        _battleUnitViewModel.RequestUseBasicAttackSkill();
     }
 
     public void OnSignatureAction()
     {
-        _battleUnitViewModel.RequestUseSignatureSkill(_battleUnitViewModel.BattlePosition);
+        _battleUnitViewModel.RequestUseSignatureSkill();
     }
 
-    private void CacheBehaviorVariables()
+    protected virtual void CacheBehaviorVariables()
     {
         if (!_behaviorGraphAgent.GetVariable(Const.SKILL_READY_EVENT, out _skillReadyEvent))
         {
@@ -154,7 +166,7 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         }
     }
 
-    private void UpdateSignatureSkillReady(bool isReady)
+    protected void UpdateSignatureSkillReady(bool isReady)
     {
         _isSignatureSkillReady.Value = isReady;
 
@@ -199,6 +211,11 @@ public abstract class BattleUnitViewBase : MonoBehaviour
     {
         _battleUnitViewModel.ExitBattle();
         _behaviorGraphAgent.End();
+    }
+
+    private void HandleTakeDamage(DamageResult damageResult)
+    {
+        GameManager.UI.ShowDamageText(damageResult, transform.position);
     }
 
     private void OnPropertyChanged(string propertyName)

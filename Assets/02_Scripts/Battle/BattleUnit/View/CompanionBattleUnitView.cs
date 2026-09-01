@@ -1,4 +1,4 @@
-﻿public class CompanionBattleUnitView : BattleUnitViewBase
+﻿public class CompanionBattleUnitView : PlayerBattleUnitView
 {
 
 }

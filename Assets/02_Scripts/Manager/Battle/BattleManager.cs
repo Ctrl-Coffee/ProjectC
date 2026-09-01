@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,13 @@ public class BattleManager
     private readonly CompanionFormation _companionFormation = new CompanionFormation();
     private readonly BattleService _battleService = new BattleService();
 
+    public event Action CompanionChanged;
+    public event Action<bool> AutoModeChanged;
+
+    public float BattleTime { get; private set; } 
+
+    public bool AutoMode { get; private set; } 
+
     public IReadOnlyList<PlayerBattleUnitModel> PlayerBattleUnitModels
     {
         get { return _battleUnitModels.PlayerBattleUnitModels; }
@@ -20,10 +28,13 @@ public class BattleManager
         get { return _battleUnitModels.EnemyBattleUnitModels; }
     }
 
-    public void Initialize()
+    public async UniTask Initialize()
     {
-        _companionFormation.InitializePositions();
-        _battleUnitModels.Initialize();
+        LoadCompanionPartyResponse loadCompanionPartyResponse = await GameManager.Network.LoadCompanionPartyAsync();
+        CompanionPartyDto companionPartyDto = loadCompanionPartyResponse.data;
+
+        _companionFormation.InitializePositions(companionPartyDto);
+        _battleUnitModels.Initialize(companionPartyDto);
 
         CreateBattleRoot();
     }
@@ -33,23 +44,36 @@ public class BattleManager
         ResetBattleRoot();
         InitializeStage();
 
-        GameManager.UI.OpenBattlePreparation();
+        GameManager.UI.OpenBattlePreparationUI();
     }
 
     public void ExitBattle()
     {
-        EndBattle();
+        if (_battleRoot.IsBattleStarted)
+        {
+            EndBattle();
+        }
 
+        GameManager.Instance.EnterDream();
         _battleRoot.gameObject.SetActive(false);
     }
 
     public void StartBattle()
     {
+        int dpCost = GameManager.Stage.DpCost;
+
+        if (!GameManager.Session.Currency.TrySpendDreamPoint(dpCost))
+        {
+            Logger.LogError("꿈 포인트 소비에 실패했습니다.");
+            return;
+        }
+
         SubscribeUnitModelDeadStateChangedEvent();
 
         InitializeBattleCounts();
 
-        GameManager.UI.OpenBattleHpBarHud();
+        GameManager.UI.OpenBattleHud();
+        GameManager.UI.OpenDamageTextHud();
 
         _battleRoot.StartBattle();
     }
@@ -64,22 +88,27 @@ public class BattleManager
         StartBattle();
     }
 
-    private void EndBattle()
+    public int GetPlayerTotalCombatPower()
     {
-        UnsubscribeUnitModelDeadStateChangedEvents();
-
-        GameManager.UI.CloseBattleHpBarHud();
-
-        _battleRoot.EndBattle();
+        int playerTotalCombatPower = _battleUnitModels.GetPlayerTotalCombatPower();
+        return playerTotalCombatPower;
     }
 
-    private void InitializeStage()
+    public int GetEnemyTotalCombatPower()
     {
-        string spriteAddressableKey = GameManager.Stage.SpriteAddressableKey;
-        _battleRoot.SetBackground(spriteAddressableKey);
+        int enemyTotalCombatPower = _battleUnitModels.GetEnemyTotalCombatPower();
+        return enemyTotalCombatPower;
+    }
 
-        _battleRoot.ResetUnitActiveState();
-        _battleUnitModels.InitializeStage();
+    public bool RequestCheckPlayerViewIdle(int battlePosition)
+    {
+        bool isIdle = _battleRoot.CheckPlayerViewIdle(battlePosition);
+        return isIdle;
+    }
+
+    public void RequestUnitViewUseSignature(int battlePosition)
+    {
+        _battleRoot.UseSignature(battlePosition);
     }
 
     public bool RequestSetCompanionToPosition(int battlePosition, string companionId)
@@ -90,7 +119,7 @@ public class BattleManager
         }
 
         _battleUnitModels.SetCompanion(battlePosition, companionId);
-
+        CompanionChanged?.Invoke();
         return true;
     }
 
@@ -102,7 +131,7 @@ public class BattleManager
         }
 
         _battleUnitModels.SetCompanion(battlePosition, companionId);
-
+        CompanionChanged?.Invoke();
         return true;
     }
 
@@ -114,7 +143,7 @@ public class BattleManager
         }
 
         _battleUnitModels.RemoveCompanion(battlePosition);
-
+        CompanionChanged?.Invoke();
         return true;
     }
 
@@ -126,7 +155,7 @@ public class BattleManager
         }
 
         _battleUnitModels.RemoveCompanion(battlePosition);
-
+        CompanionChanged?.Invoke();
         return true;
     }
 
@@ -158,20 +187,18 @@ public class BattleManager
         return isUsable;
     }
 
-    public void RequestPlayerSkillExecution(int battlePosition, string skillId, AttackerStats attackerStats)
+    public void RequestPlayerSkillExecution(int battlePosition, string skillId, AttackerStats skillExecutionData)
     {
         BattleUnitModelBase targetModel = _battleUnitModels.FindEnemyTarget(battlePosition);
 
-        ExcuteSkill(targetModel, skillId, attackerStats);
+        ExcuteSkill(targetModel, skillId, skillExecutionData);
     }
 
-
-
-    public void RequestEnemySkillExecution(int battlePosition, string skillId, AttackerStats attackerStats)
+    public void RequestEnemySkillExecution(int battlePosition, string skillId, AttackerStats skillExecutionData)
     {
         BattleUnitModelBase targetModel = _battleUnitModels.FindPlayerTarget(battlePosition);
 
-        ExcuteSkill(targetModel, skillId, attackerStats);
+        ExcuteSkill(targetModel, skillId, skillExecutionData);
     }
 
     public void RequestUpdatePlayerUnitActive(int battlePosition, bool isActive)
@@ -182,6 +209,53 @@ public class BattleManager
     public void RequestUpdateEnemyUnitActive(int battlePosition, bool isActive)
     {
         _battleRoot.UpdateUnitActiveState(battlePosition, isActive, false);
+    }
+
+    public void OnUpdate()
+    {
+        if (_battleRoot == null)
+        {
+            return;
+        }
+
+        if (!_battleRoot.IsBattleStarted)
+        {
+            return;
+        }
+
+        BattleTime += GameManager.Time.GameDeltaTime;
+    }
+
+    public void SetAutoMode(bool autoMode)
+    {
+        AutoMode = autoMode;
+        AutoModeChanged?.Invoke(AutoMode);
+    }
+
+    private void ResetBattleTime()
+    {
+        BattleTime = 0;
+    }
+
+    private void EndBattle()
+    {
+        UnsubscribeUnitModelDeadStateChangedEvents();
+
+        ResetBattleTime();
+
+        GameManager.UI.CloseBattleHud();
+        GameManager.UI.CloseDamageTextHud();
+
+        _battleRoot.EndBattle();
+    }
+
+    private void InitializeStage()
+    {
+        string spriteAddressableKey = GameManager.Stage.SpriteAddressableKey;
+        _battleRoot.SetBackground(spriteAddressableKey);
+
+        _battleRoot.ResetUnitActiveState();
+        _battleUnitModels.InitializeStage();
     }
 
     private void CreateBattleRoot()
@@ -256,9 +330,13 @@ public class BattleManager
             return false;
         }
 
-        //TODO 스킬아이디로 할만한 처리들
+        SkillData skillData = GameManager.DataTable.GetSkillData(skillId);
 
-        _battleService.ApplyAttack(targetModel, attackerStats);
+        float damage = attackerStats.Attack * skillData.DamageMultiplier;
+
+        AttackStats attackerStatss = new AttackStats(damage, attackerStats.CriticalChance);
+
+        _battleService.ApplyAttack(targetModel, attackerStatss);
         return true;
     }
 
@@ -285,12 +363,23 @@ public class BattleManager
         if (_battleService.AlivePlayerCount <= 0)
         {
             EndBattle();
-            GameManager.UI.OpenStageFailUI();
+            GameManager.UI.OpenBattleDefeatPopup();
         }
         else if (_battleService.AliveEnemyCount <= 0)
         {
             EndBattle();
-            GameManager.UI.OpenStageClearUI();
+            AddReward();
+
+            GameManager.UI.OpenBattleVictoryPopup();
         }
+    }
+
+    private void AddReward()
+    {
+        int dreamFragmentReward = GameManager.Stage.DreamShardReward;
+        int inspirationReward = GameManager.Stage.InspirationReward;
+
+        GameManager.Session.Currency.AddDreamFragment(dreamFragmentReward);
+        GameManager.Session.Currency.AddInspiration(inspirationReward);
     }
 }
