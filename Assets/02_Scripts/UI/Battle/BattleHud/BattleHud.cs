@@ -124,7 +124,7 @@ public class BattleHud : UIBase
 
     private void HandlePauseButtonButton()
     {
-        GameManager.UI.OpenBattlePauseUI();
+        GameManager.UI.OpenBattlePausePopup();
     }
 
     private void HandleDoubleSpeedButton()
