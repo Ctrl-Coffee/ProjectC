@@ -38,6 +38,8 @@ public class BattlePreparationUI : UIBase
 
     private void OnEnable()
     {
+        UpdateStartButton();
+
         RefreshStageNameText();
         RefreshCombatPower();
         RefreshCompanionSelectionSlots();
@@ -352,5 +354,13 @@ public class BattlePreparationUI : UIBase
     private void HandleCompanionChanged()
     {
         UpdatePlayerCombatPower();
+    }
+
+    private void UpdateStartButton()
+    {
+        long dreamPoint = GameManager.Session.Currency.DreamPoint;
+        long dreamPointCost = GameManager.Stage.DpCost;
+
+        _startBattleButton.SetInteractable(dreamPoint >= dreamPointCost);
     }
 }
