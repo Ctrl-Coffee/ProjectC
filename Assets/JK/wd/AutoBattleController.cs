@@ -11,11 +11,18 @@ public class AutoBattleController : MonoBehaviour
 
     [Header("Background")]
     [SerializeField] private AutoBattleBackground _background;
+    [SerializeField] private Camera _worldCamera;
+
+    [Header("Drop")]
+    [SerializeField] private AutoBattleDropSpawner _dropSpawner;
 
     [Header("Enemy Movement")]
     [SerializeField] private float _enemyApproachDistance = 3f;
     [SerializeField] private float _enemyApproachDuration = 3f;
-    [SerializeField] private float _enemyVerticalOffset = 0.2f;
+    [SerializeField] private float _groundYOffset;
+    [SerializeField] private float _formationYStep = 0.35f;
+    [SerializeField] private int _formationSortingStep = 1;
+    [SerializeField] private float _spawnMarginX = 2f;
     [SerializeField] private float _enemySpacing = 1.2f;
 
     [Header("Attack")]
@@ -27,12 +34,17 @@ public class AutoBattleController : MonoBehaviour
     [Header("Loop")]
     [SerializeField] private float _nextWaveDelay = 1f;
 
-    // 비워두면 컨트롤러의 기본 클립을 쓴다.
     [Header("애니메이션 세트")]
     [SerializeField] private UnitAnimationSet _playerAnimationSet;
-    [SerializeField] private UnitAnimationSet[] _enemyAnimationSets;
+    [SerializeField] private UnitAnimationSet[] _enemyAnimationSetPool;
+
+    private float _groundY;
+    private int _playerSortingOrder;
 
     private int[] _spawnOrder;
+
+    private UniTask[] _moveTasks;
+
     private CancellationTokenSource _cancellationTokenSource;
 
     private void OnEnable()
@@ -80,9 +92,14 @@ public class AutoBattleController : MonoBehaviour
     {
         _player.Initialize();
         _player.ApplyAnimationSet(_playerAnimationSet);
-        _player.PlayIdle();
+
+        _player.PlayRun();
+
+        _groundY = _player.GetGroundY() + _groundYOffset;
+        _playerSortingOrder = _player.GetSortingOrder();
 
         _spawnOrder = new int[_enemies.Length];
+        _moveTasks = new UniTask[_enemies.Length];
 
         for (int i = 0; i < _enemies.Length; i++)
         {
@@ -94,48 +111,23 @@ public class AutoBattleController : MonoBehaviour
             }
 
             _enemies[i].Initialize();
-        }
-
-        // runtimeAnimatorController 를 갈아끼우면 상태가 초기화되므로 세트를 먼저 입힌다.
-        ApplyEnemyAnimationSets();
-
-        for (int i = 0; i < _enemies.Length; i++)
-        {
-            if (null == _enemies[i])
-            {
-                continue;
-            }
-
             _enemies[i].PlayIdle();
         }
     }
 
-    private void ApplyEnemyAnimationSets()
+    private UnitAnimationSet PickAnimationSet()
     {
-        if (null == _enemyAnimationSets)
+        if (null == _enemyAnimationSetPool || 0 == _enemyAnimationSetPool.Length)
         {
-            return;
+            return null;
         }
 
-        int count = Mathf.Min(_enemies.Length, _enemyAnimationSets.Length);
-
-        for (int i = 0; i < count; i++)
-        {
-            if (null == _enemies[i])
-            {
-                continue;
-            }
-
-            _enemies[i].ApplyAnimationSet(_enemyAnimationSets[i]);
-        }
+        return _enemyAnimationSetPool[UnityEngine.Random.Range(0, _enemyAnimationSetPool.Length)];
     }
 
-    // 스테이지 연동 시 EnemyGroupId 로 찾은 세트를 넘기는 진입점.
-    public void SetEnemyAnimationSets(UnitAnimationSet[] animationSets)
+    public void SetEnemyAnimationSetPool(UnitAnimationSet[] animationSets)
     {
-        _enemyAnimationSets = animationSets;
-
-        ApplyEnemyAnimationSets();
+        _enemyAnimationSetPool = animationSets;
     }
 
     private async UniTaskVoid PlayLoopAsync(CancellationToken cancellationToken)
@@ -170,6 +162,7 @@ public class AutoBattleController : MonoBehaviour
         await ApproachEnemies(cancellationToken);
 
         _background.StopScroll();
+        _player.PlayIdle();
 
         for (int i = 0; i < _enemies.Length; i++)
         {
@@ -181,7 +174,7 @@ public class AutoBattleController : MonoBehaviour
             await DefeatEnemy(_enemies[i], cancellationToken);
         }
 
-        _player.PlayIdle();
+        _player.PlayRun();
 
         _background.StartScroll();
     }
@@ -198,32 +191,27 @@ public class AutoBattleController : MonoBehaviour
 
     private async UniTask ApproachEnemies(CancellationToken cancellationToken)
     {
-        UniTask[] moveTasks = new UniTask[_enemies.Length];
-
-        // 슬롯 번호로 계산하면 한 마리만 나왔을 때 혼자 멀리 선다.
         int lineIndex = 0;
 
         for (int i = 0; i < _enemies.Length; i++)
         {
             if (false == IsAlive(_enemies[i]))
             {
-                moveTasks[i] = UniTask.CompletedTask;
+                _moveTasks[i] = UniTask.CompletedTask;
                 continue;
             }
 
-            float yOffset = UnityEngine.Random.Range(-_enemyVerticalOffset, _enemyVerticalOffset);
-
             Vector3 targetPosition = new Vector3(
                 _player.transform.position.x + _enemyApproachDistance + lineIndex * _enemySpacing,
-                _enemies[i].transform.position.y + yOffset,
+                _enemies[i].transform.position.y,
                 _enemies[i].transform.position.z);
 
-            moveTasks[i] = _enemies[i].MoveTo(targetPosition, _enemyApproachDuration);
+            _moveTasks[i] = _enemies[i].MoveTo(targetPosition, GetApproachDuration(_enemies[i].transform.position, targetPosition));
 
             lineIndex++;
         }
 
-        await UniTask.WhenAll(moveTasks);
+        await UniTask.WhenAll(_moveTasks);
 
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -240,7 +228,6 @@ public class AutoBattleController : MonoBehaviour
     {
         _player.PlayAttack();
 
-        // 실제로 검이 닿는 프레임에 피격 반응을 맞춘다.
         await _player.WaitForAttackHitAsync(_attackDelay, cancellationToken);
 
         enemy.PlayHit();
@@ -252,11 +239,14 @@ public class AutoBattleController : MonoBehaviour
     {
         enemy.PlayDeath();
 
-        // TODO : 처치 보상 지급과 드랍 아이콘 연출을 이 지점에 연결한다.
-
         float deathWaitSeconds = Mathf.Max(_deathDelay, enemy.GetDeathAnimationLength());
 
         await UniTask.Delay(Mathf.RoundToInt(deathWaitSeconds * 1000f), cancellationToken: cancellationToken);
+
+        if (null != _dropSpawner)
+        {
+            _dropSpawner.Spawn(enemy.GetDropPosition());
+        }
 
         enemy.gameObject.SetActive(false);
     }
@@ -270,13 +260,14 @@ public class AutoBattleController : MonoBehaviour
                 continue;
             }
 
-            _enemies[i].ResetPosition();
             _enemies[i].gameObject.SetActive(false);
         }
 
         ShuffleSpawnOrder();
 
         int enemyCount = UnityEngine.Random.Range(1, _enemies.Length + 1);
+
+        float spawnX = GetSpawnX();
 
         for (int i = 0; i < enemyCount; i++)
         {
@@ -289,9 +280,59 @@ public class AutoBattleController : MonoBehaviour
 
             enemy.gameObject.SetActive(true);
 
-            // 직전 웨이브에서 사망 상태로 끝났으므로 Idle 로 되돌린다.
+            enemy.ApplyAnimationSet(PickAnimationSet());
+
             enemy.PlayIdle();
         }
+
+        int lineIndex = 0;
+
+        for (int i = 0; i < _enemies.Length; i++)
+        {
+            if (false == IsAlive(_enemies[i]))
+            {
+                continue;
+            }
+
+            _enemies[i].PlaceOnGround(
+                spawnX + lineIndex * _enemySpacing,
+                _groundY + lineIndex * _formationYStep);
+
+            _enemies[i].SetSortingOrder(_playerSortingOrder - 1 - lineIndex * _formationSortingStep);
+
+            lineIndex++;
+        }
+    }
+
+    private float GetApproachDuration(Vector3 fromPosition, Vector3 toPosition)
+    {
+        float worldSpeed = _background.GetScrollWorldSpeed();
+
+        if (0f >= worldSpeed)
+        {
+            return _enemyApproachDuration;
+        }
+
+        return Mathf.Abs(toPosition.x - fromPosition.x) / worldSpeed;
+    }
+
+    private float GetSpawnX()
+    {
+        Camera camera = _worldCamera;
+
+        if (null == camera)
+        {
+            camera = Camera.main;
+        }
+
+        if (null == camera || false == camera.orthographic)
+        {
+            return _player.transform.position.x + _enemyApproachDistance + _spawnMarginX;
+        }
+
+        float halfWidth = camera.orthographicSize * camera.aspect;
+
+        return camera.transform.position.x + halfWidth + _spawnMarginX;
     }
 
     private void ShuffleSpawnOrder()

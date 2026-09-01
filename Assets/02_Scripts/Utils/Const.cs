@@ -36,6 +36,7 @@
     //전투 애니메이션 관련
     public const int BASE_LAYER = 0;
     public const string IDLE = "Idle";
+    public const string RUN = "Run";
     public const string BASIC_ATTACK = "BasicAttack";
     public const string SIGNATURE = "Signature";
     public const string DEATH = "Death";
