@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class HeroEquipmentSlotView : ViewBase
 {
     [SerializeField] private Image _icon;
+    [SerializeField] private Image _backgroundImage;
     [SerializeField] private TMPro.TextMeshProUGUI _level;
 
     private string _heroEquipmentId;
@@ -90,19 +91,12 @@ public class HeroEquipmentSlotView : ViewBase
 
     private void LoadIcon()
     {
-        if (_heroEquipmentId == null)
-        {
-            _icon.sprite = null;
-            _icon.gameObject.SetActive(false);
-
-            _level.gameObject.SetActive(false);
-
-            return;
-        }
-
         _icon.sprite = GameManager.Resource.GetLoadedAsset<Sprite>
             (GameManager.DataTable.GetEquipmentData(_heroEquipmentId).IconSpriteAddressableKey);
         _icon.gameObject.SetActive(true);
+
+        ColorUtility.TryParseHtmlString(Const.GradeColor(_viewModel.GetGrade(_heroEquipmentId)), out var newColor);
+        _backgroundImage.color = newColor;
 
         _level.gameObject.SetActive(true);
 

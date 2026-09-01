@@ -196,7 +196,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4699268965312525362}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.81333333
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1119,7 +1119,7 @@ MonoBehaviour:
     - m_Text: Level
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
-    - m_Text: LevelReverse
+    - m_Text: Power
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
