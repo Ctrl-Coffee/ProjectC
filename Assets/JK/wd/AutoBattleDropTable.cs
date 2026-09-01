@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AutoBattleDropTable", menuName = "Scriptable Objects/AutoBattleDropTable")]
@@ -8,6 +8,7 @@ public class AutoBattleDropTable : ScriptableObject
     public struct Entry
     {
         public CurrencyType CurrencyType;
+        public Sprite Icon;
         public int Weight;
     }
 
@@ -69,6 +70,6 @@ public class AutoBattleDropTable : ScriptableObject
 
     private bool IsUsable(Entry entry)
     {
-        return 0 < entry.Weight;
+        return 0 < entry.Weight && null != entry.Icon;
     }
 }

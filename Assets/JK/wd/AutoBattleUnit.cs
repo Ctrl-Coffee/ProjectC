@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System.Collections.Generic;
 using System.Threading;
@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class AutoBattleUnit : MonoBehaviour
 {
+    private const float ABSORB_PUNCH_SCALE = 0.2f;
+    private const float ABSORB_PUNCH_DURATION = 0.25f;
+    private const int ABSORB_PUNCH_VIBRATO = 6;
+    private const float ABSORB_PUNCH_ELASTICITY = 0.6f;
+
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
@@ -19,6 +24,7 @@ public class AutoBattleUnit : MonoBehaviour
     private Tween _moveTween;
     private Tween _knockbackTween;
     private Tween _flashTween;
+    private Tween _absorbTween;
     private bool _isInitialized;
 
     private AnimatorOverrideController _overrideController;
@@ -172,6 +178,23 @@ public class AutoBattleUnit : MonoBehaviour
         return _spriteRenderer.bounds.min.y;
     }
 
+    public Vector3 GetCenterPosition()
+    {
+        if (null == _spriteRenderer)
+        {
+            return transform.position;
+        }
+
+        return _spriteRenderer.bounds.center;
+    }
+
+    public void PlayAbsorb()
+    {
+        _absorbTween?.Kill(true);
+
+        _absorbTween = transform.DOPunchScale(Vector3.one * ABSORB_PUNCH_SCALE, ABSORB_PUNCH_DURATION, ABSORB_PUNCH_VIBRATO, ABSORB_PUNCH_ELASTICITY);
+    }
+
     public Vector3 GetDropPosition()
     {
         if (null == _spriteRenderer)
@@ -237,17 +260,14 @@ public class AutoBattleUnit : MonoBehaviour
 
         _spriteRenderer.color = _originalColor;
 
-        _flashTween = _spriteRenderer
-            .DOColor(_hitColor, _hitFlashDuration)
-            .SetLoops(2, LoopType.Yoyo);
+        _flashTween = _spriteRenderer.DOColor(_hitColor, _hitFlashDuration).SetLoops(2, LoopType.Yoyo);
     }
 
     private void PlayHitKnockback()
     {
         _knockbackTween?.Kill(true);
 
-        _knockbackTween = transform
-            .DOPunchPosition(Vector3.right * _hitKnockbackDistance, _hitKnockbackDuration, 1, 0f);
+        _knockbackTween = transform.DOPunchPosition(Vector3.right * _hitKnockbackDistance, _hitKnockbackDuration, 1, 0f);
     }
 
     private void SetTrigger(string triggerName)
@@ -267,9 +287,7 @@ public class AutoBattleUnit : MonoBehaviour
         _knockbackTween?.Kill(true);
         _moveTween?.Kill();
 
-        _moveTween = transform
-            .DOMove(targetPosition, duration)
-            .SetEase(Ease.Linear);
+        _moveTween = transform.DOMove(targetPosition, duration).SetEase(Ease.Linear);
 
         await _moveTween.AsyncWaitForCompletion();
     }
@@ -311,6 +329,9 @@ public class AutoBattleUnit : MonoBehaviour
 
         _flashTween?.Kill();
         _flashTween = null;
+
+        _absorbTween?.Kill(true);
+        _absorbTween = null;
     }
 
     private void OnDestroy()

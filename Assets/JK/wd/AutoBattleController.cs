@@ -245,7 +245,7 @@ public class AutoBattleController : MonoBehaviour
 
         if (null != _dropSpawner)
         {
-            _dropSpawner.Spawn(enemy.GetDropPosition());
+            _dropSpawner.Spawn(enemy.GetDropPosition(), _player, _playerSortingOrder + 1);
         }
 
         enemy.gameObject.SetActive(false);
