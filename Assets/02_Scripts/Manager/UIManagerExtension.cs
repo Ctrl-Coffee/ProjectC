@@ -162,14 +162,14 @@ public static class UIManagerExtension
         uiManager.ClosePopupUI<BattleVictoryPopup>();
     }
 
-    public static void OpenStageFailUI(this UIManager uiManager)
+    public static void OpenBattleDefeatPopup(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<StageFailUI>();
+        uiManager.OpenPopupUI<BattleDefeatPopup>();
     }
 
-    public static void CloseStageFailUI(this UIManager uiManager)
+    public static void CloseBattleDefeatPopup(this UIManager uiManager)
     {
-        uiManager.ClosePopupUI<StageFailUI>();
+        uiManager.ClosePopupUI<BattleDefeatPopup>();
     }
 
     public static void OpenStageInfo(this UIManager uiManager, string stageId)

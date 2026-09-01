@@ -54,6 +54,7 @@ public class BattleManager
             EndBattle();
         }
 
+        GameManager.Instance.EnterDream();
         _battleRoot.gameObject.SetActive(false);
     }
 
@@ -362,7 +363,7 @@ public class BattleManager
         if (_battleService.AlivePlayerCount <= 0)
         {
             EndBattle();
-            GameManager.UI.OpenStageFailUI();
+            GameManager.UI.OpenBattleDefeatPopup();
         }
         else if (_battleService.AliveEnemyCount <= 0)
         {
