@@ -57,8 +57,11 @@ public class MiniGameFlowHandler
             {
                 return;
             }
-
-            GiveReward(workData, result);
+            
+            if (MiniGameRewardPayout.ConsumeClaim() == false)
+            {
+                GiveReward(workData, result);
+            }
 
             Logger.Log($"미니게임 종료 - {result.Grade} / 정확도 {result.Accuracy:P0}");
         }
