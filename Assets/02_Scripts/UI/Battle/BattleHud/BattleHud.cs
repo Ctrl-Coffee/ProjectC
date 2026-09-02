@@ -32,6 +32,7 @@ public class BattleHud : UIBase
 
     private void OnEnable()
     {
+        ActivateBattleUnitViews();
         BindButtonEvents();
     }
 
@@ -43,8 +44,6 @@ public class BattleHud : UIBase
     private void OnDisable()
     {
         UnbindButtonEvents();
-
-        ActivateBattleUnitViews();
     }
 
     private void ValidateReferences()
