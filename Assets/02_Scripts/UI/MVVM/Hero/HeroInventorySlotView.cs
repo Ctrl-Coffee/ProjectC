@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class HeroInventorySlotView : ViewBase
@@ -94,7 +95,8 @@ public class HeroInventorySlotView : ViewBase
 
     private void LoadIcon(string iconPath)
     {
-        _itemIcon.sprite = GameManager.Resource.GetLoadedAsset<Sprite>(iconPath);
+        _itemIcon.sprite = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(AddressablePath.Sprite.EquipmentAtlas)
+            .GetSprite(_heroEquipmentId);
     }
 
     private void SetSelected(bool isSelected)
