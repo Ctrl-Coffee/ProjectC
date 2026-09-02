@@ -92,7 +92,7 @@ public class HeroEquipmentSlotView : ViewBase
 
     private void LoadIcon()
     {
-        _icon.sprite = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(AddressablePath.Sprite.EquipmentAtlas)
+        _icon.sprite = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(AddressablePath.Atlas.EquipmentAtlas)
             .GetSprite(_heroEquipmentId);
         _icon.gameObject.SetActive(true);
 
