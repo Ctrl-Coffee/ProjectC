@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "equipment_weapon_001",
+    "SpriteAddressableKey": "Sprite/weapon_001_slot"
+  },
+  {
+    "Id": "equipment_weapon_002",
+    "SpriteAddressableKey": "Sprite/weapon_002_slot"
+  },
+  {
+    "Id": "equipment_weapon_003",
+    "SpriteAddressableKey": "Sprite/weapon_003_slot"
+  },
+  {
+    "Id": "equipment_weapon_004",
+    "SpriteAddressableKey": "Sprite/weapon_004_slot"
+  },
+  {
+    "Id": "companion_001",
+    "SpriteAddressableKey": "Sprite/companion_001_slot"
+  },
+  {
+    "Id": "companion_002",
+    "SpriteAddressableKey": "Sprite/companion_002_slot"
+  },
+  {
+    "Id": "companion_003",
+    "SpriteAddressableKey": "Sprite/companion_003_slot"
+  },
+  {
+    "Id": "companion_004",
+    "SpriteAddressableKey": "Sprite/companion_004_slot"
+  }
+]

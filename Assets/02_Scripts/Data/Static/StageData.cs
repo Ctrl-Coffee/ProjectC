@@ -15,4 +15,5 @@ public class StageData : BaseData
     public string NextStageId;
     public string SpriteAddressableKey;
     public string BgmAddressableKey;
+    public string InfoSpriteAddressableKey;
 }
