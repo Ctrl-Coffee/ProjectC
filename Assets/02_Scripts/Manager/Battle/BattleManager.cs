@@ -448,8 +448,8 @@ public class BattleManager
     private void PlayBattleBGM()
     {
         string _bgmAddressableKey = GameManager.Stage.BgmAddressableKey;
-
-        //GameManager.Sound.PlayBGM(_bgmAddressableKey);
+        Debug.Log(_bgmAddressableKey);
+        GameManager.Sound.PlayBGM(_bgmAddressableKey);
     }
 
     private async UniTask ProcessStageClearAsync()
