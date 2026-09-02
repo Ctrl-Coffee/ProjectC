@@ -107,7 +107,8 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 8160908818685291126}
   _scatterRadius: 0.6
   _scatterDuration: 0.3
-  _startScale: 0.4
+  _startScale: 0.2
+  _scatterScale: 0.5
   _holdDuration: 0.2
   _flyDuration: 0.4
-  _arriveScale: 0.2
+  _arriveScale: 0.1

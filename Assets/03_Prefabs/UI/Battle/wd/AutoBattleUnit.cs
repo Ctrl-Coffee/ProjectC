@@ -6,11 +6,6 @@ using UnityEngine;
 
 public class AutoBattleUnit : MonoBehaviour
 {
-    private const float ABSORB_PUNCH_SCALE = 0.2f;
-    private const float ABSORB_PUNCH_DURATION = 0.25f;
-    private const int ABSORB_PUNCH_VIBRATO = 6;
-    private const float ABSORB_PUNCH_ELASTICITY = 0.6f;
-
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
@@ -24,7 +19,6 @@ public class AutoBattleUnit : MonoBehaviour
     private Tween _moveTween;
     private Tween _knockbackTween;
     private Tween _flashTween;
-    private Tween _absorbTween;
     private bool _isInitialized;
 
     private AnimatorOverrideController _overrideController;
@@ -188,13 +182,6 @@ public class AutoBattleUnit : MonoBehaviour
         return _spriteRenderer.bounds.center;
     }
 
-    public void PlayAbsorb()
-    {
-        _absorbTween?.Kill(true);
-
-        _absorbTween = transform.DOPunchScale(Vector3.one * ABSORB_PUNCH_SCALE, ABSORB_PUNCH_DURATION, ABSORB_PUNCH_VIBRATO, ABSORB_PUNCH_ELASTICITY);
-    }
-
     public Vector3 GetDropPosition()
     {
         if (null == _spriteRenderer)
@@ -329,9 +316,6 @@ public class AutoBattleUnit : MonoBehaviour
 
         _flashTween?.Kill();
         _flashTween = null;
-
-        _absorbTween?.Kill(true);
-        _absorbTween = null;
     }
 
     private void OnDestroy()

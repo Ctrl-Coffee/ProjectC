@@ -9,12 +9,13 @@ public class AutoBattleDrop : MonoBehaviour
     [Header("튀어오르기")]
     [SerializeField] private float _scatterRadius = 0.6f;
     [SerializeField] private float _scatterDuration = 0.3f;
-    [SerializeField] private float _startScale = 0.4f;
+    [SerializeField] private float _startScale = 0.2f;
+    [SerializeField] private float _scatterScale = 0.5f;
 
     [Header("빨려들어가기")]
     [SerializeField] private float _holdDuration = 0.2f;
     [SerializeField] private float _flyDuration = 0.4f;
-    [SerializeField] private float _arriveScale = 0.2f;
+    [SerializeField] private float _arriveScale = 0.1f;
 
     private Sequence _sequence;
     private CurrencyType _currencyType;
@@ -52,7 +53,7 @@ public class AutoBattleDrop : MonoBehaviour
         _sequence.AppendInterval(delay);
 
         _sequence.Append(transform.DOMove(scatterPosition, _scatterDuration).SetEase(Ease.OutQuad));
-        _sequence.Join(transform.DOScale(1f, _scatterDuration).SetEase(Ease.OutBack));
+        _sequence.Join(transform.DOScale(_scatterScale, _scatterDuration).SetEase(Ease.OutBack));
 
         _sequence.AppendInterval(_holdDuration);
 

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AutoBattleDropSpawner : MonoBehaviour
@@ -17,16 +17,12 @@ public class AutoBattleDropSpawner : MonoBehaviour
 
     private readonly HashSet<string> _warnedMessages = new HashSet<string>();
 
-    private AutoBattleUnit _absorbTarget;
-
     public void Spawn(Vector3 worldPosition, AutoBattleUnit target, int sortingOrder)
     {
         if (false == HasRequiredReferences() || null == target)
         {
             return;
         }
-
-        _absorbTarget = target;
 
         Vector3 spawnPosition = worldPosition;
         spawnPosition.x += _spawnWorldOffset.x;
@@ -56,11 +52,6 @@ public class AutoBattleDropSpawner : MonoBehaviour
         if (_playArriveSound && null != GameManager.Instance)
         {
             GameManager.Sound.PlaySFX(AddressablePath.Audio.CURRENCY_GAIN);
-        }
-
-        if (null != _absorbTarget)
-        {
-            _absorbTarget.PlayAbsorb();
         }
     }
 
