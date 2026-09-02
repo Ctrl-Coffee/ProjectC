@@ -20,6 +20,7 @@ public class DreamHudView : ViewBase
 
     private GameObject _backgroundInstance;
     private GameObject _heroInventoryBGInstance;
+    private GameObject _autoBattleInstance;
 
     private UIBase _currentContent;
 
@@ -35,6 +36,18 @@ public class DreamHudView : ViewBase
             GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.HERO_INVENTORY_BACKGROUND);
         _heroInventoryBGInstance = Instantiate(heroInventoryPrefab, Vector3.zero, Quaternion.identity);
         _heroInventoryBGInstance.SetActive(false);
+
+        GameObject autoBattlePrefab =
+            GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.AUTO_BATTLE);
+
+        if (autoBattlePrefab == null)
+        {
+            Logger.LogError("자동전투 프리팹을 불러오지 못했습니다.");
+            return;
+        }
+
+        _autoBattleInstance = Instantiate(autoBattlePrefab, Vector3.zero, Quaternion.identity);
+        _autoBattleInstance.SetActive(false);
     }
 
     private void OnEnable()
@@ -57,6 +70,7 @@ public class DreamHudView : ViewBase
         _heroInfoBtn.BindButtonEvent(OnOpenHeroInfo);
 
         _backgroundInstance.SetActive(true);
+        SetAutoBattleActive(true);
     }
 
     private void OnDisable()
@@ -73,6 +87,8 @@ public class DreamHudView : ViewBase
 
         if(_backgroundInstance != null)
             _backgroundInstance.SetActive(false);
+
+        SetAutoBattleActive(false);
     }
 
     private void OnDestroy()
@@ -138,6 +154,8 @@ public class DreamHudView : ViewBase
         if(_backgroundInstance.activeSelf == false)
             _backgroundInstance.SetActive(true);
 
+        SetAutoBattleActive(true);
+
         ShowLobbyButton();
         _currentContent.CloseUI();
         _currentContent = null;
@@ -160,6 +178,8 @@ public class DreamHudView : ViewBase
 
         _heroInventoryBGInstance.SetActive(true);
         _backgroundInstance.SetActive(false);
+
+        SetAutoBattleActive(false);
     }
 
     private void OnOpenGacha()
@@ -201,6 +221,14 @@ public class DreamHudView : ViewBase
         _fragmentDream.text = _currencyViewModel.DreamFragment.ToString();
         _scrollDream.text = _currencyViewModel.DreamScroll.ToString();
         _inspiration.text = _currencyViewModel.Inspiration.ToString();
+    }
+
+    private void SetAutoBattleActive(bool isActive)
+    {
+        if (_autoBattleInstance == null)
+            return;
+
+        _autoBattleInstance.SetActive(isActive);
     }
 
     private void HideLobbyButton()

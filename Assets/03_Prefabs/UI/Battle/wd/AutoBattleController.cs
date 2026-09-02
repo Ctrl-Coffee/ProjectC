@@ -13,6 +13,9 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private AutoBattleBackground _background;
     [SerializeField] private Camera _worldCamera;
 
+    [Header("Screen Anchor")]
+    [SerializeField] private float _bottomAnchorOffset;
+
     [Header("Drop")]
     [SerializeField] private AutoBattleDropSpawner _dropSpawner;
 
@@ -85,6 +88,11 @@ public class AutoBattleController : MonoBehaviour
             return false;
         }
 
+        if (null == _dropSpawner)
+        {
+            Logger.LogWarning("자동전투 : 드랍 스포너가 지정되지 않아 재화가 떨어지지 않습니다.");
+        }
+
         return true;
     }
 
@@ -94,6 +102,8 @@ public class AutoBattleController : MonoBehaviour
         _player.ApplyAnimationSet(_playerAnimationSet);
 
         _player.PlayRun();
+
+        AnchorToCameraBottom();
 
         _groundY = _player.GetGroundY() + _groundYOffset;
         _playerSortingOrder = _player.GetSortingOrder();
@@ -316,14 +326,38 @@ public class AutoBattleController : MonoBehaviour
         return Mathf.Abs(toPosition.x - fromPosition.x) / worldSpeed;
     }
 
+    private void AnchorToCameraBottom()
+    {
+        Camera camera = GetWorldCamera();
+
+        if (null == camera || false == camera.orthographic)
+        {
+            return;
+        }
+
+        float targetGroundY = camera.transform.position.y - camera.orthographicSize + _bottomAnchorOffset;
+
+        Vector3 position = transform.position;
+
+        position.x = camera.transform.position.x;
+        position.y += targetGroundY - _player.GetGroundY();
+
+        transform.position = position;
+    }
+
+    private Camera GetWorldCamera()
+    {
+        if (null != _worldCamera)
+        {
+            return _worldCamera;
+        }
+
+        return Camera.main;
+    }
+
     private float GetSpawnX()
     {
-        Camera camera = _worldCamera;
-
-        if (null == camera)
-        {
-            camera = Camera.main;
-        }
+        Camera camera = GetWorldCamera();
 
         if (null == camera || false == camera.orthographic)
         {

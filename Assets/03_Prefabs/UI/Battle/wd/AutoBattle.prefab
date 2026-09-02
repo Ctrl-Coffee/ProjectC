@@ -94,7 +94,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1635302301
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 33dd749bc17754544b2f1784a2c00319, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -399,7 +399,7 @@ Transform:
   m_GameObject: {fileID: 4586963787958432623}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11, y: -6.92, z: 0}
+  m_LocalPosition: {x: -11, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -427,6 +427,7 @@ MonoBehaviour:
   - {fileID: 296627491554458781}
   _background: {fileID: 8615201722443163769}
   _worldCamera: {fileID: 0}
+  _bottomAnchorOffset: 1.4
   _dropSpawner: {fileID: 249190668229357704}
   _enemyApproachDistance: 3
   _enemyApproachDuration: 3
@@ -443,8 +444,9 @@ MonoBehaviour:
   _playerAnimationSet: {fileID: 11400000, guid: 74200e2efea38c041b30fb5f9d467e61, type: 2}
   _enemyAnimationSetPool:
   - {fileID: 11400000, guid: e6907e932ef45e2419fd6f1860e9a368, type: 2}
-  - {fileID: 11400000, guid: ba787dc6b1bbf1d4980c214556b19542, type: 2}
   - {fileID: 11400000, guid: f1393842a39f55b48bbc695155d1add0, type: 2}
+  - {fileID: 11400000, guid: ba787dc6b1bbf1d4980c214556b19542, type: 2}
+  - {fileID: 11400000, guid: 3a3475c76f1c39c4ebd29685311a5f64, type: 2}
 --- !u!114 &249190668229357704
 MonoBehaviour:
   m_ObjectHideFlags: 0
