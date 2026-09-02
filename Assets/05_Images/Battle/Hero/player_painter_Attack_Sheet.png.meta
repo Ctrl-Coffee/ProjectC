@@ -1,0 +1,535 @@
+fileFormatVersion: 2
+guid: b41144cb706be564cafd9edfa16485c6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5065268262242239136
+    second: WanderingPainter_Attack_Sheet_0
+  - first:
+      213: -7261959911711752531
+    second: WanderingPainter_Attack_Sheet_1
+  - first:
+      213: 8912920976673122544
+    second: WanderingPainter_Attack_Sheet_2
+  - first:
+      213: 3090655351218226737
+    second: WanderingPainter_Attack_Sheet_3
+  - first:
+      213: -5208473346634912168
+    second: WanderingPainter_Attack_Sheet_4
+  - first:
+      213: -8918364007112245404
+    second: WanderingPainter_Attack_Sheet_5
+  - first:
+      213: 1082336112785638015
+    second: WanderingPainter_Attack_Sheet_6
+  - first:
+      213: 6385044711318303736
+    second: WanderingPainter_Attack_Sheet_7
+  - first:
+      213: 9006011958826136198
+    second: WanderingPainter_Attack_Sheet_8
+  - first:
+      213: 2162231093010429835
+    second: WanderingPainter_Attack_Sheet_9
+  - first:
+      213: 9099767064887793844
+    second: WanderingPainter_Attack_Sheet_10
+  - first:
+      213: 1033367659023570538
+    second: WanderingPainter_Attack_Sheet_11
+  - first:
+      213: -7816265661416367519
+    second: WanderingPainter_Attack_Sheet_12
+  - first:
+      213: -8365010844248211472
+    second: WanderingPainter_Attack_Sheet_13
+  - first:
+      213: -526360534951701913
+    second: WanderingPainter_Attack_Sheet_14
+  - first:
+      213: -4369907188615756969
+    second: WanderingPainter_Attack_Sheet_15
+  - first:
+      213: 8544619195570208852
+    second: WanderingPainter_Attack_Sheet_16
+  - first:
+      213: -1167003721456040955
+    second: WanderingPainter_Attack_Sheet_17
+  - first:
+      213: 8920572353618066111
+    second: WanderingPainter_Attack_Sheet_18
+  - first:
+      213: 6525243804910452423
+    second: WanderingPainter_Attack_Sheet_19
+  - first:
+      213: 3029192052366554536
+    second: WanderingPainter_Attack_Sheet_20
+  - first:
+      213: 8306124587269608715
+    second: WanderingPainter_Attack_Sheet_21
+  - first:
+      213: 3342612421284051566
+    second: WanderingPainter_Attack_Sheet_22
+  - first:
+      213: 5136743105630281505
+    second: WanderingPainter_Attack_Sheet_23
+  - first:
+      213: -8697209259609780128
+    second: WanderingPainter_Attack_Sheet_24
+  - first:
+      213: -5780872751122993536
+    second: WanderingPainter_Attack_Sheet_25
+  - first:
+      213: 489972485757778216
+    second: WanderingPainter_Attack_Sheet_26
+  - first:
+      213: 8613221169986345799
+    second: WanderingPainter_Attack_Sheet_27
+  - first:
+      213: -6387255295408019843
+    second: WanderingPainter_Attack_Sheet_28
+  - first:
+      213: -4690209030037362627
+    second: WanderingPainter_Attack_Sheet_29
+  - first:
+      213: -7361305261568404741
+    second: WanderingPainter_Attack_Sheet_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 130
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df01430a61e20ab4db91250233f7ca67
+      internalID: -1810517483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_01
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f27c74d5be7b71744b330e6004473048
+      internalID: 1978640492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_02
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9a3a4eaf79ade9488a48b418cf4257a
+      internalID: 1131378053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_03
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e0289d4ee3167b44a2ea221dd8416fe
+      internalID: -1006657213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_04
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df5719fa6733ef74aaaab23c1a47e6bd
+      internalID: -697735788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_05
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41772499b79fe1d478a9b87a3d4a43e7
+      internalID: -1697709001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_06
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e3fa82f699bc024d85eb0e0857a02a8
+      internalID: -742258222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_07
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cac5d8bd6e79b3d4cbdb93eb2f02bf11
+      internalID: 217327780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_08
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 277239aacb909284a80744b253790f2e
+      internalID: 1855071441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_09
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65a7b8df8e0e4d343835e99b1d9fa8ab
+      internalID: 558267080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d710c59f3a508644a41b58810fb7293
+      internalID: 1904804701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_11
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e7ed54168ed6fc4aa9ec19bc6498883
+      internalID: 904446912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_Attack_12
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c62f08d3f8103ac488225a00db5c79e4
+      internalID: 299192558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9f86e6430a3ef8f4da6927e40d0ff034
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      WanderingPainter_Attack_00: -1810517483
+      WanderingPainter_Attack_01: 1978640492
+      WanderingPainter_Attack_02: 1131378053
+      WanderingPainter_Attack_03: -1006657213
+      WanderingPainter_Attack_04: -697735788
+      WanderingPainter_Attack_05: -1697709001
+      WanderingPainter_Attack_06: -742258222
+      WanderingPainter_Attack_07: 217327780
+      WanderingPainter_Attack_08: 1855071441
+      WanderingPainter_Attack_09: 558267080
+      WanderingPainter_Attack_10: 1904804701
+      WanderingPainter_Attack_11: 904446912
+      WanderingPainter_Attack_12: 299192558
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
