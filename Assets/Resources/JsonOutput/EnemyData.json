@@ -47,8 +47,8 @@
     "BaseCriticalChance": 0.1,
     "BasicAttackHaste": 0,
     "SignatureSkillHaste": 0,
-    "BasicAttackSkillId": "enemy_skill_ch1_melee_basic",
-    "SignatureSkillId": "enemy_skill_ch1_melee_basic",
+    "BasicAttackSkillId": "enemy_skill_ch1_boss_basic",
+    "SignatureSkillId": "enemy_skill_ch1_boss_active",
     "AnimationSetKey": "Anim/boss_ch1_001"
   },
   {

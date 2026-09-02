@@ -964,7 +964,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1650012204296266132}
   - component: {fileID: 1363069051106808567}
-  - component: {fileID: 2695073424765757945}
+  - component: {fileID: 3351868758602219718}
   m_Layer: 5
   m_Name: BackGround
   m_TagString: Untagged
@@ -999,7 +999,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6217923131610216193}
   m_CullTransparentMesh: 1
---- !u!114 &2695073424765757945
+--- !u!114 &3351868758602219718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ad11c685bd8f5a0439df651708a5bb7b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1085,6 +1085,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageClearUI
   _isPlayAnimation: 0
   _panel: {fileID: 0}
+  _backgroundSprites:
+  - {fileID: 21300000, guid: 69648eb097dddfc4985f6f5fd2b89fcf, type: 3}
+  - {fileID: 21300000, guid: fbf36f866b3aea340be99fea0890d6a6, type: 3}
+  _backgroundImage: {fileID: 3351868758602219718}
   _dreamShardRewardCount: {fileID: 7796645784020214358}
   _inspirationRewardCount: {fileID: 2092756410805667163}
   _returnPreparationButton: {fileID: 8425499026778873769}

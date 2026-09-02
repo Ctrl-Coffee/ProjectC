@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ad11c685bd8f5a0439df651708a5bb7b
+guid: fbf36f866b3aea340be99fea0890d6a6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7025233155549120274
-    second: BattleVictory_0
+      213: 800323880804312248
+    second: Victory_Cp2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BattleVictory_0
+      name: Victory_Cp2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 941
-        height: 1672
+        width: 832
+        height: 1216
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ee8b2339aab518e90800000000000000
-      internalID: -7025233155549120274
+      spriteID: 8b46a9c44525b1b00800000000000000
+      internalID: 800323880804312248
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BattleVictory_0: -7025233155549120274
+      Victory_Cp2_0: 800323880804312248
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
