@@ -14,4 +14,5 @@ public class StageData : BaseData
     public int DPCost;
     public string NextStageId;
     public string SpriteAddressableKey;
+    public string BgmAddressableKey;
 }

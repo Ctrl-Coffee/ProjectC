@@ -16,6 +16,7 @@ public class StageModel : ModelBase
     private int _dpCost;
     private string _nextStageId;
     private string _spriteAddressableKey;
+    private string _bgmAddressableKey;
 
     public int Chapter
     {
@@ -66,6 +67,12 @@ public class StageModel : ModelBase
     {
         get { return _spriteAddressableKey; }
     }
+
+    public string BgmAddressableKey
+    {
+        get { return _bgmAddressableKey; }
+    }
+
     public string StageId
     {
         get { return _stageId; }
@@ -106,6 +113,7 @@ public class StageModel : ModelBase
         _dpCost = stageData.DPCost;
         _nextStageId = stageData.NextStageId;
         _spriteAddressableKey = stageData.SpriteAddressableKey;
+        _bgmAddressableKey = stageData.BgmAddressableKey;
 
         SetEnemyGroupIds(stageData.EnemyGroupId);
     }
