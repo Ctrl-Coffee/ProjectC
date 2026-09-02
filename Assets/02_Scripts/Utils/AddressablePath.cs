@@ -7,6 +7,7 @@
         public const string DREAM_LOBBY_BACKGROUND = "DreamLobbyBackground";
         public const string BATTLE_ROOT = "BattleRoot";
         public const string HERO_INVENTORY_BACKGROUND = "HeroInventoryBackground";
+        public const string AUTO_BATTLE = "AutoBattle";
     }
 
     public static string GetUIPath(System.Type uiType)
