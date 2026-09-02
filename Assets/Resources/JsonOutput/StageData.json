@@ -11,7 +11,9 @@
     "InspirationReward": 1,
     "DPCost": 10,
     "NextStageId": "stage_1_2",
-    "SpriteAddressableKey": null
+    "SpriteAddressableKey": "Sprite/Stage_1_Normal",
+    "BgmAddressableKey": null,
+    "InfoSpriteAddressableKey": "Sprite/StageInfo_1"
   },
   {
     "Id": "stage_1_2",
@@ -25,7 +27,9 @@
     "InspirationReward": 1,
     "DPCost": 10,
     "NextStageId": "stage_1_3",
-    "SpriteAddressableKey": null
+    "SpriteAddressableKey": "Sprite/Stage_1_Normal",
+    "BgmAddressableKey": null,
+    "InfoSpriteAddressableKey": "Sprite/StageInfo_1"
   },
   {
     "Id": "stage_1_3",
@@ -39,7 +43,9 @@
     "InspirationReward": 1,
     "DPCost": 10,
     "NextStageId": "stage_1_4",
-    "SpriteAddressableKey": null
+    "SpriteAddressableKey": "Sprite/Stage_1_Normal",
+    "BgmAddressableKey": null,
+    "InfoSpriteAddressableKey": "Sprite/StageInfo_1"
   },
   {
     "Id": "stage_1_4",
@@ -53,7 +59,9 @@
     "InspirationReward": 1,
     "DPCost": 10,
     "NextStageId": "stage_1_5",
-    "SpriteAddressableKey": null
+    "SpriteAddressableKey": "Sprite/Stage_1_Normal",
+    "BgmAddressableKey": null,
+    "InfoSpriteAddressableKey": "Sprite/StageInfo_1"
   },
   {
     "Id": "stage_1_5",
@@ -67,7 +75,9 @@
     "InspirationReward": 3,
     "DPCost": 15,
     "NextStageId": "stage_2_1",
-    "SpriteAddressableKey": null
+    "SpriteAddressableKey": "Sprite/Stage_1_Boss",
+    "BgmAddressableKey": null,
+    "InfoSpriteAddressableKey": "Sprite/StageInfo_1"
   },
   {
     "Id": "stage_2_1",
@@ -81,7 +91,9 @@
     "InspirationReward": 1,
     "DPCost": 10,
     "NextStageId": "stage_2_2",
-    "SpriteAddressableKey": null
+    "SpriteAddressableKey": "Sprite/Stage_2_Normal",
+    "BgmAddressableKey": null,
+    "InfoSpriteAddressableKey": "Sprite/StageInfo_2"
   },
   {
     "Id": "stage_2_2",
@@ -95,7 +107,9 @@
     "InspirationReward": 1,
     "DPCost": 10,
     "NextStageId": "stage_2_3",
-    "SpriteAddressableKey": null
+    "SpriteAddressableKey": "Sprite/Stage_2_Normal",
+    "BgmAddressableKey": null,
+    "InfoSpriteAddressableKey": "Sprite/StageInfo_2"
   },
   {
     "Id": "stage_2_3",
@@ -109,7 +123,9 @@
     "InspirationReward": 2,
     "DPCost": 10,
     "NextStageId": "stage_2_4",
-    "SpriteAddressableKey": null
+    "SpriteAddressableKey": "Sprite/Stage_2_Normal",
+    "BgmAddressableKey": null,
+    "InfoSpriteAddressableKey": "Sprite/StageInfo_2"
   },
   {
     "Id": "stage_2_4",
@@ -123,7 +139,9 @@
     "InspirationReward": 2,
     "DPCost": 10,
     "NextStageId": "stage_2_5",
-    "SpriteAddressableKey": null
+    "SpriteAddressableKey": "Sprite/Stage_2_Normal",
+    "BgmAddressableKey": null,
+    "InfoSpriteAddressableKey": "Sprite/StageInfo_2"
   },
   {
     "Id": "stage_2_5",
@@ -137,6 +155,8 @@
     "InspirationReward": 5,
     "DPCost": 15,
     "NextStageId": null,
-    "SpriteAddressableKey": null
+    "SpriteAddressableKey": "Sprite/Stage_2_Boss",
+    "BgmAddressableKey": null,
+    "InfoSpriteAddressableKey": "Sprite/StageInfo_2"
   }
 ]

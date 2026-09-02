@@ -1,9 +1,15 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BattleVictoryPopup : UIBase
 {
+    [Header("BackgroundSprites")]
+    [SerializeField] private List<Sprite> _backgroundSprites = new List<Sprite>();
+
+    [Header("Components")]
+    [SerializeField] private Image _backgroundImage;
     [SerializeField] private TMP_Text _dreamShardRewardCount;
     [SerializeField] private TMP_Text _inspirationRewardCount;
     [SerializeField] private Button _returnPreparationButton;
@@ -28,7 +34,16 @@ public class BattleVictoryPopup : UIBase
         _dreamShardRewardCount.text = $"X {GameManager.Stage.DreamShardReward}";
         _inspirationRewardCount.text = $"X {GameManager.Stage.InspirationReward}";
 
+        UpdateSprite();
         UpdateNextStateButton();
+    }
+
+    private void UpdateSprite()
+    {
+        int chapter = GameManager.Stage.Chapter;
+        int spriteIndex = chapter - 1;
+
+        _backgroundImage.sprite = _backgroundSprites[spriteIndex];
     }
 
     private void UpdateNextStateButton()

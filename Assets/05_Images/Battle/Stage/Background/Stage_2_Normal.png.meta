@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ad11c685bd8f5a0439df651708a5bb7b
+guid: 793b55a8cadd41448af8e21f973a91aa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7025233155549120274
-    second: BattleVictory_0
+      213: 6843078405349462165
+    second: Stage_2_Boss_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BattleVictory_0
+      name: Stage_2_Boss_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ee8b2339aab518e90800000000000000
-      internalID: -7025233155549120274
+      spriteID: 5905001bd8f77fe50800000000000000
+      internalID: 6843078405349462165
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BattleVictory_0: -7025233155549120274
+      Stage_2_Boss_0: 6843078405349462165
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
