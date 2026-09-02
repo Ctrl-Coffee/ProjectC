@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// 선로딩된 UI를 열고 닫는 확장 함수
@@ -129,54 +132,115 @@ public static class UIManagerExtension
         ui.SetReport(report);
     }
 
-    public static void OpenBattlePreparation(this UIManager uiManager)
+    public static bool OpenAutoBattleRewardUI(this UIManager uiManager, AutoBattlePendingReward reward, System.Action onPayout)
+    {
+        AutoBattleRewardUI ui = uiManager.OpenPopupUI<AutoBattleRewardUI>();
+
+        if (null == ui) return false;
+
+        ui.SetReward(reward, onPayout);
+
+        return true;
+    }
+
+    public static void OpenBattlePreparationUI(this UIManager uiManager)
     {
         uiManager.OpenContentUI<BattlePreparationUI>();
     }
 
-    public static void CloseBattlePreparation(this UIManager uiManager)
+    public static void CloseBattlePreparationUI(this UIManager uiManager)
     {
         uiManager.CloseContentUI<BattlePreparationUI>();
     }
 
-    public static void OpenBattleHpBarHud(this UIManager uiManager)
+    public static void OpenBattleHud(this UIManager uiManager)
     {
-        uiManager.OpenHUDUI<BattleHpBarHud>();
+        uiManager.OpenHUDUI<BattleHud>();
     }
 
-    public static void CloseBattleHpBarHud(this UIManager uiManager)
+    public static void CloseBattleHud(this UIManager uiManager)
     {
-        uiManager.CloseHUDUI<BattleHpBarHud>();
+        uiManager.CloseHUDUI<BattleHud>();
     }
 
-    public static void OpenStageClearUI(this UIManager uiManager)
+    public static void OpenBattleVictoryPopup(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<StageClearUI>();
+        uiManager.OpenPopupUI<BattleVictoryPopup>();
     }
 
-    public static void CloseStageClearUI(this UIManager uiManager)
+    public static void CloseBattleVictoryPopup(this UIManager uiManager)
     {
-        uiManager.ClosePopupUI<StageClearUI>();
+        uiManager.ClosePopupUI<BattleVictoryPopup>();
     }
 
-    public static void OpenStageFailUI(this UIManager uiManager)
+    public static void OpenBattleDefeatPopup(this UIManager uiManager)
     {
-        uiManager.OpenPopupUI<StageFailUI>();
+        uiManager.OpenPopupUI<BattleDefeatPopup>();
     }
 
-    public static void CloseStageFailUI(this UIManager uiManager)
+    public static void CloseBattleDefeatPopup(this UIManager uiManager)
     {
-        uiManager.ClosePopupUI<StageFailUI>();
+        uiManager.ClosePopupUI<BattleDefeatPopup>();
     }
 
     public static void OpenStageInfo(this UIManager uiManager, string stageId)
     {
+        if (!GameManager.Stage.TrySetStage(stageId))
+        {
+            return;
+        }
+
         uiManager.OpenPopupUI<StageInfoView>();
-        GameManager.Stage.SetStage(stageId);   
     }
 
     public static void CloseStagePopup(this UIManager uiManager)
     {
         uiManager.ClosePopupUI<StageInfoView>();
+    }
+
+    public static void OpenDamageTextHud(this UIManager uiManager)
+    {
+        uiManager.OpenHUDUI<DamageTextHud>();
+    }
+
+    public static void CloseDamageTextHud(this UIManager uiManager)
+    {
+        uiManager.CloseHUDUI<DamageTextHud>();
+    }
+
+    public static void OpenBattlePausePopup(this UIManager uiManager)
+    {
+        uiManager.OpenPopupUI<BattlePausePopup>();
+    }
+
+    public static void CloseBattlePausePopup(this UIManager uiManager)
+    {
+        uiManager.ClosePopupUI<BattlePausePopup>();
+    }
+
+    public static void ShowDamageText(this UIManager uiManager, DamageResult damageResult, Vector2 position)
+    {
+        DamageTextHud damagePopupHud = uiManager.GetUI<DamageTextHud>();
+
+        if (damagePopupHud == null)
+        {
+            Logger.LogWarning("먼저 DamagePopupHud를 열어주세요.");
+            return;
+        }
+
+        damagePopupHud.ShowDamageText(damageResult, position);
+    }
+
+    public static void HideDamageText(this UIManager uiManager, DamageText damageText)
+    {
+        DamageTextHud damagePopupHud = uiManager.GetUI<DamageTextHud>();
+
+        if (damagePopupHud == null)
+        {
+            Logger.LogWarning("먼저 DamagePopupHud를 열어주세요.");
+            return;
+        }
+
+        damagePopupHud.HideDamageText(damageText);
     }
 }

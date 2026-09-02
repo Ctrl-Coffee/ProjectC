@@ -15,45 +15,45 @@ public static class BattleUtility
         battleUnitData.CriticalChance = heroInfoModel.CriticalChance;
         battleUnitData.BasicAttackHaste = heroInfoModel.BasicAttackHaste;
         battleUnitData.SignatureSkillHaste = heroInfoModel.SignatureSkillHaste;
-        battleUnitData.BasicAttackSkillId = "enemy_skill_ch1_melee_basic";
-       //battleUnitData.BasicAttackSkillId = equipmentData.BasicAttackSkillId;
-        battleUnitData.SignatureSkillId = "enemy_skill_ch1_melee_basic";
-        //battleUnitData.SignatureSkillId = equipmentData.SignatureSkillId;
-        battleUnitData.AnimationSetKey = "Assets/07_ScriptableObject/Hero/HeroBaseArmor.asset";
-        //battleUnitData.AnimationSetKey = equipmentData.AnimationSetKey;
+        battleUnitData.BasicAttackSkillId = equipmentData.BasicAttackSkillId;
+        battleUnitData.SignatureSkillId = equipmentData.SignatureSkillId;
+        battleUnitData.CombatPower = heroInfoModel.CombatPower;
+
+        battleUnitData.AnimationSetKey = equipmentData.AnimationSetKey;
+        return battleUnitData;
+    }
+
+    public static BattleUnitData CreateCompanionBattleUnitData(CompanionState companionState, CompanionData companionData)
+    {
+        BattleUnitData battleUnitData = new BattleUnitData();
+
+        battleUnitData.MaxHp = companionState.Hp;
+        battleUnitData.Attack = companionState.Attack;
+        battleUnitData.Defense = companionState.Defense;
+        battleUnitData.CriticalChance = companionState.CriticalChance;
+        battleUnitData.BasicAttackHaste = companionState.BasicAttackHaste;
+        battleUnitData.SignatureSkillHaste = companionState.SignatureSkillHaste;
+        battleUnitData.BasicAttackSkillId = companionData.BasicAttackSkillId;
+        battleUnitData.SignatureSkillId = companionData.SignatureSkillId;
+        battleUnitData.CombatPower = companionState.CombatPower;
+        battleUnitData.AnimationSetKey = companionData.AnimationSetKey;
 
         return battleUnitData;
     }
 
-    public static BattleUnitData CreateCompanionBattleUnitData()
+    public static BattleUnitData CreateEnemyBattleUnitData(EnemyData enemyData, float multiplier)
     {
         BattleUnitData battleUnitData = new BattleUnitData();
 
-        //battleUnitData.MaxHp = companionData.BaseHp;
-        //battleUnitData.Attack = companionData.BaseAttack;
-        //battleUnitData.Defense = companionData.BaseDefense;
-        //battleUnitData.CriticalChance = companionData.BaseCriticalChance;
-        //battleUnitData.AttackSpeed = companionData.BasicAttackHaste;
-        //battleUnitData.CooldownReduction = companionData.SignatureSkillHaste;
-        //battleUnitData.BasicAttackSkillId = companionData.BasicAttackSkillId;
-        //battleUnitData.SignatureSkillId = companionData.SignatureSkillId;
-        //battleUnitData.AnimationSetKey = "TestAnimKey";
-
-        return battleUnitData;
-    }
-
-    public static BattleUnitData CreateEnemyBattleUnitData(EnemyData enemyData)
-    {
-        BattleUnitData battleUnitData = new BattleUnitData();
-
-        battleUnitData.MaxHp = enemyData.BaseHp;
-        battleUnitData.Attack = enemyData.BaseAttack;
-        battleUnitData.Defense = enemyData.BaseDefense;
+        battleUnitData.MaxHp = enemyData.BaseHp * multiplier;
+        battleUnitData.Attack = enemyData.BaseAttack * multiplier;
+        battleUnitData.Defense = enemyData.BaseDefense * multiplier;
         battleUnitData.CriticalChance = enemyData.BaseCriticalChance;
         battleUnitData.BasicAttackHaste = enemyData.BasicAttackHaste;
         battleUnitData.SignatureSkillHaste = enemyData.SignatureSkillHaste;
         battleUnitData.BasicAttackSkillId = enemyData.BasicAttackSkillId;
         battleUnitData.SignatureSkillId = enemyData.SignatureSkillId;
+        battleUnitData.CombatPower = CalculateCombatPower(battleUnitData);
         battleUnitData.AnimationSetKey = enemyData.AnimationSetKey;
 
         return battleUnitData;
@@ -68,7 +68,7 @@ public static class BattleUtility
         return createdUid;
     }
 
-    public static float CalculateDamage(AttackStats attackStats, DefenseStats defenseStats)
+    public static DamageResult CalculateDamage(AttackStats attackStats, DefenseStats defenseStats)
     {
         float baseDamage = attackStats.Damage;
 
@@ -77,7 +77,9 @@ public static class BattleUtility
         bool isCritical = CalculateCritical(attackStats.CriticalChance);
 
         float calculatedDamage = isCritical ? reducedDamage * Const.CRITICAL_DAMAGE_MULTIPLIER : reducedDamage;
-        return calculatedDamage;
+
+        DamageResult damageResult = new DamageResult(calculatedDamage, isCritical);
+        return damageResult;
     }
 
     public static float CalculateCooldown(float baseCooldown, float skillHaste)
@@ -90,5 +92,18 @@ public static class BattleUtility
     {
         bool isCritical = Random.NextDouble() < criticalChance;
         return isCritical;
+    }
+
+    private static float CalculateCombatPower(BattleUnitData battleUnitData)
+    {
+        float attackPower = battleUnitData.Attack * 10f * (1f + battleUnitData.CriticalChance * 0.5f);
+        float hpPower = battleUnitData.MaxHp;
+        float defensePower = battleUnitData.Defense * 10f;
+        float basicAttackHastePower = battleUnitData.BasicAttackHaste * 5f;
+        float signatureSkillHastePower = battleUnitData.SignatureSkillHaste * 5f;
+
+        float calculatedCombatPower = attackPower + hpPower + defensePower + basicAttackHastePower + signatureSkillHastePower;
+
+        return calculatedCombatPower;
     }
 }

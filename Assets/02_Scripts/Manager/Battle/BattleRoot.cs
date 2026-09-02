@@ -16,6 +16,11 @@ public class BattleRoot : MonoBehaviour
     private string _currentBackground;
     private bool _isBattleStarted;
 
+    public bool IsBattleStarted
+    {
+        get { return _isBattleStarted; }
+    }
+
     private void Awake()
     {
         UnityUtility.ValidateReference(_backgroundSpriteRenderer, nameof(_backgroundSpriteRenderer));
@@ -74,7 +79,7 @@ public class BattleRoot : MonoBehaviour
 
         Sprite backgroundSprite = GameManager.Resource.GetLoadedAsset<Sprite>(addressableKey);
 
-        if (backgroundSprite != null) 
+        if (backgroundSprite == null) 
         {
             Logger.LogError($"'{addressableKey}' 로드된 배경 에셋이 없습니다.");
             return;
@@ -145,5 +150,32 @@ public class BattleRoot : MonoBehaviour
 
             battleUnitViews[index].Initialize(battleUnitModels[index]);
         }
+    }
+
+    public bool CheckPlayerViewIdle(int battlePosition)
+    {
+        BattleUnitViewBase battleUnitViewBase = _playerBattleUnitViews[battlePosition];
+
+        if (battleUnitViewBase == null)
+        {
+            Logger.LogError($"'{battlePosition}' 유닛 뷰는 Null 입니다.");
+            return false;
+        }
+
+        bool isIdle = battleUnitViewBase.IsIdle;
+        return isIdle;
+    }
+
+    public void UseSignature(int battlePosition)
+    {
+        BattleUnitViewBase battleUnitViewBase = _playerBattleUnitViews[battlePosition];
+
+        if (battleUnitViewBase == null)
+        {
+            Logger.LogError($"'{battlePosition}' 유닛 뷰는 Null 입니다.");
+            return;
+        }
+
+        battleUnitViewBase.UseSignatureSkill();
     }
 }

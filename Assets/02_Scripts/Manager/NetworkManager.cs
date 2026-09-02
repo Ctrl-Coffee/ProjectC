@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening.Plugins;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -164,13 +165,13 @@ public class NetworkManager
         return PostAsync<LoadEquipmentLoadoutResponse>("/api/equipmentloadout/load", _authenticatedRequest);
     }
 
-    public UniTask<SaveStageRecordResponse> SaveStageAsync(int stage)
+    public UniTask<SaveStageRecordResponse> SaveStageAsync(string stageId)
     {
         StageRecordRequest request = new()
         {
             userId = _userId,
             token = _token,
-            StageRecordData = new StageRecordDto() { lastClearedStage = stage }
+            StageRecordData = new StageRecordDto() { lastClearedStage = stageId }
         };
 
         return PostAsync<SaveStageRecordResponse>("/api/stagerecord/save", request);
@@ -254,13 +255,12 @@ public class NetworkManager
         return PostAsync<LoadAutoWorkSlotResponse>("/api/autoworkslot/load", _authenticatedRequest);
     }
 
-    public UniTask<SaveCompanionPartyResponse> SaveCompanionPartyAsync()
+    public UniTask<SaveCompanionPartyResponse> SaveCompanionPartyAsync(string[] companionIds)
     {
         CompanionPartyDto companionPartyDto = new();
 
-        // TODO: 현재 파티 편성된 동료 id 가져오기
-        companionPartyDto.companionIds[0] = null;
-        companionPartyDto.companionIds[1] = null;
+        companionPartyDto.companionIds[0] = companionIds[0];
+        companionPartyDto.companionIds[1] = companionIds[2];
 
         CompanionPartyRequest request = new()
         {

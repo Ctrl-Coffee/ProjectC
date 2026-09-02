@@ -383,6 +383,7 @@ MonoBehaviour:
   _panel: {fileID: 8080768393406999863}
   _itemIcon: {fileID: 690114779191110683}
   _selectedImage: {fileID: 7760070575848998022}
+  _gradeImage: {fileID: 1333816067071690420}
   _level: {fileID: 2517779144743132237}
 --- !u!114 &487225019101396760
 MonoBehaviour:

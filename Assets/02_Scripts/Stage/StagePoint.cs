@@ -5,6 +5,7 @@ using UnityEngine;
 public class StagePoint : MonoBehaviour
 {
     [SerializeField] private string _stageId;
+    [SerializeField] private GameObject _lockGameObject;
 
     private void Awake()
     {
@@ -12,8 +13,28 @@ public class StagePoint : MonoBehaviour
         circleCollider2D.isTrigger = true;
     }
 
+    private void OnEnable()
+    {
+        GameManager.Stage.OnStageProgressChanged += RefreshStageState;
+
+        RefreshStageState();
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Stage.OnStageProgressChanged -= RefreshStageState;
+    }
+
+
     public void SelectStage()
     {
         GameManager.UI.OpenStageInfo(_stageId);
+    }
+
+    private void RefreshStageState()
+    {
+        StageState state = GameManager.Stage.GetStageState(_stageId);
+
+        _lockGameObject.SetActive(state == StageState.Locked);
     }
 }

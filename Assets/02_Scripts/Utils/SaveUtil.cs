@@ -1,4 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening.Plugins;
+using System.Diagnostics;
 
 public static class SaveUtil
 {
@@ -31,9 +33,9 @@ public static class SaveUtil
         _equipmentLoadoutSaveRequest.Request();
     }
 
-    public static async UniTask RequestSaveStageData(int stage)
+    public static async UniTask<SaveStageRecordResponse> RequestSaveStageData(string stageId)
     {
-        await GameManager.Network.SaveStageAsync(stage);
+        return await GameManager.Network.SaveStageAsync(stageId);
     }
 
     public static void RequestSaveHeroLevelData()
@@ -59,7 +61,7 @@ public static class SaveUtil
 
     public static async UniTask SaveAllDataAsync()
     {
-        await UniTask.WhenAll(SaveCurrencyAsync(), SaveAutoWorkAsync());
+        await UniTask.WhenAll(SaveCurrencyAsync(), SaveAutoWorkAsync(), SaveStageAsync());
     }
 
     private static async UniTask SaveCurrencyAsync()
@@ -99,6 +101,23 @@ public static class SaveUtil
 
     private static async UniTask SaveCompanionPartyAsync()
     {
-        await GameManager.Network.SaveCompanionPartyAsync();
+        await GameManager.Network.SaveCompanionPartyAsync(GameManager.Battle.CompanionFormationIds);
+    }
+
+    private static async UniTask SaveStageAsync()
+    {
+        string stageId = GameManager.Stage.LastClearedStageId;
+
+        if (string.IsNullOrEmpty(stageId))
+        {
+            return;
+        }
+
+        SaveStageRecordResponse response = await GameManager.Network.SaveStageAsync(stageId);
+
+        if (response.result != (int)ServerErrorCode.Success)
+        {
+            Logger.LogWarning($"스테이지 저장 실패: {response.message}");
+        }
     }
 }

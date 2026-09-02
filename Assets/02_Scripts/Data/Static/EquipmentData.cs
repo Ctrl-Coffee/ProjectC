@@ -12,7 +12,7 @@ public class EquipmentData : BaseData
     public float BasicAttackHaste;
     public float SignatureSkillHaste;
     public string EquipmentTypeString;
-    public string BaseSkillId;
+    public string BasicAttackSkillId;
     public string SignatureSkillId;
     public string IconSpriteAddressableKey;
     public string Description;

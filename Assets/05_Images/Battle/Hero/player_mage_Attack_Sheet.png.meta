@@ -1,0 +1,668 @@
+fileFormatVersion: 2
+guid: fcf32ab0f19dab24e8a8b0ce084132f3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3012148211689788178
+    second: BlueMage_Attack_Sheet_0
+  - first:
+      213: 1785688754001751002
+    second: BlueMage_Attack_Sheet_1
+  - first:
+      213: -7475874559116700454
+    second: BlueMage_Attack_Sheet_2
+  - first:
+      213: -4992389423005627754
+    second: BlueMage_Attack_Sheet_3
+  - first:
+      213: -8383923617065899787
+    second: BlueMage_Attack_Sheet_4
+  - first:
+      213: 676187131529231791
+    second: BlueMage_Attack_Sheet_5
+  - first:
+      213: -8924101265470537798
+    second: BlueMage_Attack_Sheet_6
+  - first:
+      213: 4003517304567112519
+    second: BlueMage_Attack_Sheet_7
+  - first:
+      213: -5331526635280795290
+    second: BlueMage_Attack_Sheet_8
+  - first:
+      213: -6194867373141760201
+    second: BlueMage_Attack_Sheet_9
+  - first:
+      213: -1698758265963484563
+    second: BlueMage_Attack_Sheet_10
+  - first:
+      213: -4166287581603016986
+    second: BlueMage_Attack_Sheet_11
+  - first:
+      213: -5681453490600262117
+    second: BlueMage_Attack_Sheet_12
+  - first:
+      213: -5227882140560462594
+    second: BlueMage_Attack_Sheet_13
+  - first:
+      213: 9085435333952735698
+    second: BlueMage_Attack_Sheet_14
+  - first:
+      213: 1206081110136984966
+    second: BlueMage_Attack_Sheet_15
+  - first:
+      213: 3954292975559175851
+    second: BlueMage_Attack_Sheet_16
+  - first:
+      213: 8987734178122192872
+    second: BlueMage_Attack_Sheet_17
+  - first:
+      213: 4252028203852001442
+    second: BlueMage_Attack_Sheet_18
+  - first:
+      213: 8287493482926700572
+    second: BlueMage_Attack_Sheet_19
+  - first:
+      213: -3616664003605588760
+    second: BlueMage_Attack_Sheet_20
+  - first:
+      213: -848239721409103850
+    second: BlueMage_Attack_Sheet_21
+  - first:
+      213: 4380705650526734798
+    second: BlueMage_Attack_Sheet_22
+  - first:
+      213: 6827547219344432811
+    second: BlueMage_Attack_Sheet_23
+  - first:
+      213: -4257645780341041592
+    second: BlueMage_Attack_Sheet_24
+  - first:
+      213: -8510087057717055021
+    second: BlueMage_Attack_Sheet_25
+  - first:
+      213: 2492325126909735727
+    second: BlueMage_Attack_Sheet_26
+  - first:
+      213: -2626513242756038716
+    second: BlueMage_Attack_Sheet_27
+  - first:
+      213: -5689529686523994129
+    second: BlueMage_Attack_Sheet_28
+  - first:
+      213: -474214236851422993
+    second: BlueMage_Attack_Sheet_29
+  - first:
+      213: 3207654047004978687
+    second: BlueMage_Attack_Sheet_30
+  - first:
+      213: 9049120985147023698
+    second: BlueMage_Attack_Sheet_31
+  - first:
+      213: 6381003562395407254
+    second: BlueMage_Attack_Sheet_32
+  - first:
+      213: -800028607078664847
+    second: BlueMage_Attack_Sheet_33
+  - first:
+      213: 6642168301816227215
+    second: BlueMage_Attack_Sheet_34
+  - first:
+      213: 7008508335557638815
+    second: BlueMage_Attack_Sheet_35
+  - first:
+      213: 3516806089006736718
+    second: BlueMage_Attack_Sheet_36
+  - first:
+      213: 7816493348108708178
+    second: BlueMage_Attack_Sheet_37
+  - first:
+      213: 1862400617565871216
+    second: BlueMage_Attack_Sheet_38
+  - first:
+      213: -8615573245756844387
+    second: BlueMage_Attack_Sheet_39
+  - first:
+      213: -4590872802326329181
+    second: BlueMage_Attack_Sheet_40
+  - first:
+      213: 7543827594353588876
+    second: BlueMage_Attack_Sheet_41
+  - first:
+      213: 3754594715701694785
+    second: BlueMage_Attack_Sheet_42
+  - first:
+      213: -5335390718354395027
+    second: BlueMage_Attack_Sheet_43
+  - first:
+      213: -6092932999160921185
+    second: BlueMage_Attack_Sheet_44
+  - first:
+      213: 3821419988665941721
+    second: BlueMage_Attack_Sheet_45
+  - first:
+      213: -9179309053651320014
+    second: BlueMage_Attack_Sheet_46
+  - first:
+      213: -6147208306856162064
+    second: BlueMage_Attack_Sheet_47
+  - first:
+      213: 7318356075195861950
+    second: BlueMage_Attack_Sheet_48
+  - first:
+      213: -8860931425923217848
+    second: BlueMage_Attack_Sheet_49
+  - first:
+      213: 3212211923948349105
+    second: BlueMage_Attack_Sheet_50
+  - first:
+      213: -4263169601217313744
+    second: BlueMage_Attack_Sheet_51
+  - first:
+      213: 6443753225186004712
+    second: BlueMage_Attack_Sheet_52
+  - first:
+      213: -4272187951937931464
+    second: BlueMage_Attack_Sheet_53
+  - first:
+      213: -2460223493444907257
+    second: BlueMage_Attack_Sheet_54
+  - first:
+      213: -92290761138540906
+    second: BlueMage_Attack_Sheet_55
+  - first:
+      213: -7912615804276313962
+    second: BlueMage_Attack_Sheet_56
+  - first:
+      213: 3962090710404530328
+    second: BlueMage_Attack_Sheet_57
+  - first:
+      213: -8141850750648207918
+    second: BlueMage_Attack_Sheet_58
+  - first:
+      213: 2246864240576115522
+    second: BlueMage_Attack_Sheet_59
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 140
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BlueMage_Attack_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 755748ab20d508a4bae42f057c0552d9
+      internalID: 118348321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_01
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 175303cc7b60c704da447da464d2ea42
+      internalID: 1727586853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_02
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f13e14676afba7c4192e1ee539ddc2df
+      internalID: 1292400179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_03
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b1ac0c2252e44e418001068b0ed6002
+      internalID: -1817727745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_04
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9afa449146ecbfc418b88329e764aa3a
+      internalID: 637540082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_05
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 284c4aac2837b8345bf1726fdf0451d0
+      internalID: -105132460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_06
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 820f5f254fab70549bdedbdd9436d5e5
+      internalID: -1485450440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_07
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db0c7dca1b503334ba0dce58888aedad
+      internalID: -1663307057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_08
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf977184eb138b545b8314a00df47dec
+      internalID: 1462106403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_09
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abe20cae1313598429d279db9caa96ba
+      internalID: 1806283448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c47dab51f0ed5b44b84569f19d674d3
+      internalID: -1971418715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_11
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a1171c160b863841a6b8b2abf09b5a3
+      internalID: 1902335666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_12
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbe8caf10fe10e1448249ff35dab9336
+      internalID: -1192640003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_13
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62c359812e2c44740aa48e40954a5c0c
+      internalID: -471671467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlueMage_Attack_14
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 289f0c9e922644c409cc3598b69ebb71
+      internalID: 1962707632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c65efef6a45c0874286b27adbd22cf77
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BlueMage_Attack_00: 118348321
+      BlueMage_Attack_01: 1727586853
+      BlueMage_Attack_02: 1292400179
+      BlueMage_Attack_03: -1817727745
+      BlueMage_Attack_04: 637540082
+      BlueMage_Attack_05: -105132460
+      BlueMage_Attack_06: -1485450440
+      BlueMage_Attack_07: -1663307057
+      BlueMage_Attack_08: 1462106403
+      BlueMage_Attack_09: 1806283448
+      BlueMage_Attack_10: -1971418715
+      BlueMage_Attack_11: 1902335666
+      BlueMage_Attack_12: -1192640003
+      BlueMage_Attack_13: -471671467
+      BlueMage_Attack_14: 1962707632
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
