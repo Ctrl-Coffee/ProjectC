@@ -20,26 +20,17 @@ public class HeroEquipmentState : IStatData
     public HeroEquipmentState(EquipmentDto equipmentDto)
     {
         HeroEquipmentId = equipmentDto.equipmentId;
-        Level = equipmentDto.level; 
-        
-        EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(HeroEquipmentId);
+        Level = equipmentDto.level;
 
-        if (null == equipmentData)
-        {
-            Logger.LogError($"{HeroEquipmentId} 장비 데이터 찾을 수 없음");
-            return;
-        }
-
-        _grade = equipmentData.Grade;
-
-        GetBaseStat(equipmentData);
-        Recalculate();
+        InitializeStats();
     }
 
     public HeroEquipmentState(string id, int level)
     {
         HeroEquipmentId = id;
         Level = level;
+
+        InitializeStats();
     }
 
     public void LevelUp()
@@ -69,6 +60,9 @@ public class HeroEquipmentState : IStatData
         Attack = _baseStat.Attack * equipmentLevelData.StatMultiplier;
         Hp = _baseStat.Hp * equipmentLevelData.StatMultiplier;
         Defense = _baseStat.Defense * equipmentLevelData.StatMultiplier;
+        CriticalChance = _baseStat.CriticalChance * equipmentLevelData.StatMultiplier;
+        BasicAttackHaste = _baseStat.BasicAttackHaste * equipmentLevelData.StatMultiplier;
+        SignatureSkillHaste = _baseStat.SignatureSkillHaste * equipmentLevelData.StatMultiplier;
 
         SetCombatPower();
     }
@@ -76,5 +70,21 @@ public class HeroEquipmentState : IStatData
     private void SetCombatPower()
     {
         CombatPower = CombatPowerCalculator.Calculate(this);
+    }
+
+    private void InitializeStats()
+    {
+        EquipmentData equipmentData = GameManager.DataTable.GetEquipmentData(HeroEquipmentId);
+
+        if (null == equipmentData)
+        {
+            Logger.LogError($"{HeroEquipmentId} 장비 데이터 찾을 수 없음");
+            return;
+        }
+
+        _grade = equipmentData.Grade;
+
+        GetBaseStat(equipmentData);
+        Recalculate();
     }
 }

@@ -49,4 +49,9 @@
         public const string LEVEL_UP = "Audio/SFX/LevelUp";
         public const string NOVEL_WRITING = "Audio/SFX/NovelWriting";
     }
+
+    public static class Sprite
+    {
+        public const string EquipmentAtlas = "Atlas/Equipment";
+    }
 }
