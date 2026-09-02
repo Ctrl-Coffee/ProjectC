@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class EquipmentDetailUI : UIBase
@@ -39,7 +40,7 @@ public class EquipmentDetailUI : UIBase
 
         Refresh();
 
-        _iconImage.sprite = GameManager.Resource.GetLoadedAsset<Sprite>(data.IconSpriteAddressableKey);
+        _iconImage.sprite = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(AddressablePath.Sprite.EquipmentAtlas).GetSprite(_equipmentId);
 
         ColorUtility.TryParseHtmlString(Const.GradeColor(data.EquipmentGrade), out Color newColor);
         _gradeImage.color = newColor;
@@ -76,11 +77,14 @@ public class EquipmentDetailUI : UIBase
         EquipmentLevelData levelData =
             GameManager.DataTable.GetEquipmentLevelData(Utils.GetEquipmentLevelDataId(_equipmentData.Grade, equipmentState.Level));
 
-        _combatPowerText.SetText("{0}", equipmentState.CombatPower);
+        _combatPowerText.SetText("{0:0}", equipmentState.CombatPower);
         _attackText.SetText("{0}", equipmentState.Attack);
         _hpText.SetText("{0}", equipmentState.Hp);
         _defenseText.SetText("{0}", equipmentState.Defense);
-        _criticalChanceText.SetText("{0}", equipmentState.CriticalChance);
+
+        float criticalPercent = Mathf.Floor(equipmentState.CriticalChance * 10000f) / 100f;
+        _criticalChanceText.SetText("{0:0.00}%", criticalPercent);
+
         _attackHasteText.SetText("{0}", equipmentState.BasicAttackHaste);
         _activeSkillHasteText.SetText("{0}", equipmentState.SignatureSkillHaste);
 

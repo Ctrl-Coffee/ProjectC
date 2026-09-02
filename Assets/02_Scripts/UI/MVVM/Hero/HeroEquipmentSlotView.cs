@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class HeroEquipmentSlotView : ViewBase
@@ -91,8 +92,8 @@ public class HeroEquipmentSlotView : ViewBase
 
     private void LoadIcon()
     {
-        _icon.sprite = GameManager.Resource.GetLoadedAsset<Sprite>
-            (GameManager.DataTable.GetEquipmentData(_heroEquipmentId).IconSpriteAddressableKey);
+        _icon.sprite = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(AddressablePath.Sprite.EquipmentAtlas)
+            .GetSprite(_heroEquipmentId);
         _icon.gameObject.SetActive(true);
 
         ColorUtility.TryParseHtmlString(Const.GradeColor(_viewModel.GetGrade(_heroEquipmentId)), out var newColor);
