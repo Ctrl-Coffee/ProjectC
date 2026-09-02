@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "Id": "enemy_ch1_001",
     "Name": "초원 슬라임",
@@ -53,7 +53,7 @@
   },
   {
     "Id": "enemy_ch2_001",
-    "Name": "깊은숲 늑대",
+    "Name": "해골 병사",
     "BaseHp": 1000,
     "BaseAttack": 90,
     "BaseDefense": 45,
@@ -66,7 +66,7 @@
   },
   {
     "Id": "enemy_ch2_002",
-    "Name": "깊은숲 박쥐",
+    "Name": "깊은숲 늑대",
     "BaseHp": 700,
     "BaseAttack": 120,
     "BaseDefense": 30,
