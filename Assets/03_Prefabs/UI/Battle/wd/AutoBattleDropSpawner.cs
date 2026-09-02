@@ -15,6 +15,10 @@ public class AutoBattleDropSpawner : MonoBehaviour
 
     [SerializeField] private bool _playArriveSound = true;
 
+    [Header("정산")]
+    [SerializeField] private AutoBattleRewardBox _rewardBox;
+    [SerializeField] private long _rewardPerIcon = 1;
+
     private readonly HashSet<string> _warnedMessages = new HashSet<string>();
 
     public void Spawn(Vector3 worldPosition, AutoBattleUnit target, int sortingOrder)
@@ -39,8 +43,6 @@ public class AutoBattleDropSpawner : MonoBehaviour
                 continue;
             }
 
-            // TODO : 보상 지급을 붙일 때 picked 의 재화 종류와 획득량을 여기서 넘긴다.
-
             AutoBattleDrop drop = Instantiate(_dropPrefab, transform);
 
             drop.Play(picked.Icon, picked.CurrencyType, spawnPosition, target.GetCenterPosition(), sortingOrder, i * _dropDelayStep, OnDropArrived);
@@ -53,6 +55,14 @@ public class AutoBattleDropSpawner : MonoBehaviour
         {
             GameManager.Sound.PlaySFX(AddressablePath.Audio.CURRENCY_GAIN);
         }
+
+        if (null == _rewardBox)
+        {
+            WarnOnce("정산 상자가 지정되지 않아 자동전투 재화가 쌓이지 않습니다.");
+            return;
+        }
+
+        _rewardBox.AddReward(currencyType, _rewardPerIcon);
     }
 
     private void WarnOnce(string message)

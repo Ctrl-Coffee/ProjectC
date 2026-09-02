@@ -111,18 +111,7 @@ public static class AwayRewardPayout
 
         CurrencyModel currency = GameManager.Session.Currency;
 
-        switch (currencyType)
-        {
-            case CurrencyType.Energy:
-                currency.AddEnergy(amount);
-                break;
-            case CurrencyType.Money:
-                currency.AddMoney(amount);
-                break;
-            case CurrencyType.DreamPoint:
-                currency.AddDreamPoint(amount);
-                break;
-        }
+        currency.Add(currencyType, amount);
     }
 
     private class Reward
