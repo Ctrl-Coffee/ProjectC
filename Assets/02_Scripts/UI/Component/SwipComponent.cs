@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class SwipComponent : MonoBehaviour
 {
-    [SerializeField] private BackgroundInputHandler _inputHandler;
+    [SerializeField] private BackgroundInputHandler _inputHandler; 
+    [SerializeField] private Transform _worldContent;
 
     [Header("Swipe Settings")]
     [SerializeField] private SwipeDirect _swipeDirect = SwipeDirect.Horizontal;
@@ -64,7 +65,7 @@ public class SwipComponent : MonoBehaviour
         }
 
         _pagePositions = new Vector3[pageCount];
-        _pagePositions[0] = transform.position;
+        _pagePositions[0] = _worldContent.position;
 
         Transform firstPage = transform.GetChild(0);
         SpriteRenderer firstRenderer = firstPage.GetComponent<SpriteRenderer>();
@@ -109,7 +110,7 @@ public class SwipComponent : MonoBehaviour
     {
         _startTouchPosition = touchPosition;
         _startTouchWorldPosition = _inputHandler.GetWorldPosition(touchPosition);
-        _dragStartPosition = transform.position;
+        _dragStartPosition = _worldContent.position;
         _isDragging = true;
     }
 
@@ -125,7 +126,7 @@ public class SwipComponent : MonoBehaviour
             Mathf.Min(firstPagePosition, lastPagePosition),
             Mathf.Max(firstPagePosition, lastPagePosition));
 
-        transform.position = _dragStartPosition + GetAxisVector(targetPosition - GetAxisValue(_dragStartPosition));
+        _worldContent.position = _dragStartPosition + GetAxisVector(targetPosition - GetAxisValue(_dragStartPosition));
     }
 
     private void EndDrag(Vector2 touchPosition)
@@ -173,12 +174,12 @@ public class SwipComponent : MonoBehaviour
 
         if (immediately == true)
         {
-            transform.position = _pagePositions[index];
+            _worldContent.position = _pagePositions[index];
             return;
         }
 
         _inputHandler.SetInteractionBlocked(true);
-        _swipeTween = transform.DOMove(_pagePositions[index], _swipeTime)
+        _swipeTween = _worldContent.DOMove(_pagePositions[index], _swipeTime)
             .OnComplete(() => _inputHandler.SetInteractionBlocked(false));
     }
 

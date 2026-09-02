@@ -16,7 +16,7 @@ public class PlayerMove : MonoBehaviour
         _anim = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
-        transform.position = _destination[0].position;
+        transform.localPosition = transform.parent.InverseTransformPoint(_destination[0].position);
 
         GameManager.Time.RequestStartCooldown("PlayerStay", GetSatyTime(), () =>
         {
@@ -46,10 +46,13 @@ public class PlayerMove : MonoBehaviour
             _spriteRenderer.flipX = false;
         }
         _currentDestinationIndex = destPosIndex;
+
         Transform destination = _destination[_currentDestinationIndex];
+        Vector3 destinationLocalPosition = transform.parent.InverseTransformPoint(destination.position);
+
         _anim.SetTrigger("isMove");
 
-        transform.DOMove(destination.position, _moveSpeed)
+        transform.DOLocalMove(destinationLocalPosition, _moveSpeed)
             .SetSpeedBased()
             .SetEase(Ease.Linear)
             .OnComplete(Stay);
