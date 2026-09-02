@@ -220,6 +220,39 @@ public class CurrencyModel : ModelBase
         Inspiration += amount;
         SaveUtil.RequestSaveCurrency();
     }
+
+    public void Add(CurrencyType currencyType, long amount)
+    {
+        if (amount <= 0)
+        {
+            return;
+        }
+
+        switch (currencyType)
+        {
+            case CurrencyType.Money:
+                AddMoney(amount);
+                break;
+            case CurrencyType.DreamPoint:
+                AddDreamPoint(amount);
+                break;
+            case CurrencyType.Energy:
+                AddEnergy(amount);
+                break;
+            case CurrencyType.DreamFragment:
+                AddDreamFragment(amount);
+                break;
+            case CurrencyType.DreamScroll:
+                AddDreamScroll(amount);
+                break;
+            case CurrencyType.Inspiration:
+                AddInspiration(amount);
+                break;
+            default:
+                Logger.LogError($"지급할 수 없는 재화 종류입니다. {currencyType}");
+                break;
+        }
+    }
     public bool CanSpendMoney(long amount)
     {
         return CanSpend(Money, amount);

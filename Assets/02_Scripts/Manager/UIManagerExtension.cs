@@ -132,6 +132,17 @@ public static class UIManagerExtension
         ui.SetReport(report);
     }
 
+    public static bool OpenAutoBattleRewardUI(this UIManager uiManager, AutoBattlePendingReward reward, System.Action onPayout)
+    {
+        AutoBattleRewardUI ui = uiManager.OpenPopupUI<AutoBattleRewardUI>();
+
+        if (null == ui) return false;
+
+        ui.SetReward(reward, onPayout);
+
+        return true;
+    }
+
     public static void OpenBattlePreparationUI(this UIManager uiManager)
     {
         uiManager.OpenContentUI<BattlePreparationUI>();
