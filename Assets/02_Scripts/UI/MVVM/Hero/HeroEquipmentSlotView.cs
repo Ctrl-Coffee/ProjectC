@@ -106,10 +106,10 @@ public class HeroEquipmentSlotView : ViewBase
     {
         _viewModel.UnEquip(_type);
 
-        _level.gameObject.SetActive(false);
+        //_level.gameObject.SetActive(false);
 
-        _icon.sprite = null;
-        _icon.gameObject.SetActive(false);
+        //_icon.sprite = null;
+        //_icon.gameObject.SetActive(false);
     }
 }
 

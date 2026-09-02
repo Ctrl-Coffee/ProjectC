@@ -77,12 +77,12 @@ public class EquipmentDetailUI : UIBase
             GameManager.DataTable.GetEquipmentLevelData(Utils.GetEquipmentLevelDataId(_equipmentData.Grade, equipmentState.Level));
 
         _combatPowerText.SetText("{0}", equipmentState.CombatPower);
-        _attackText.SetText("{0}", _equipmentData.BaseAttack);
-        _hpText.SetText("{0}", _equipmentData.BaseHp);
-        _defenseText.SetText("{0}", _equipmentData.BaseDefense);
-        _criticalChanceText.SetText("{0}", _equipmentData.BaseCriticalChance);
-        _attackHasteText.SetText("{0}", _equipmentData.SignatureSkillHaste);
-        _activeSkillHasteText.SetText("{0}", _equipmentData.SignatureSkillHaste);
+        _attackText.SetText("{0}", equipmentState.Attack);
+        _hpText.SetText("{0}", equipmentState.Hp);
+        _defenseText.SetText("{0}", equipmentState.Defense);
+        _criticalChanceText.SetText("{0}", equipmentState.CriticalChance);
+        _attackHasteText.SetText("{0}", equipmentState.BasicAttackHaste);
+        _activeSkillHasteText.SetText("{0}", equipmentState.SignatureSkillHaste);
 
         bool isMaxLevel = levelData.UpgradeCost == 0;
 
