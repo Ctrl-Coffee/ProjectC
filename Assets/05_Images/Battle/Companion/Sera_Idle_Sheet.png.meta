@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: a374c92294ae3d6468a86724a5b155a8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6066153767598024533
+    second: Sera_Idle_Sheet_0
+  - first:
+      213: -5316380012791482259
+    second: Sera_Idle_Sheet_1
+  - first:
+      213: -4923068044882876422
+    second: Sera_Idle_Sheet_2
+  - first:
+      213: 4101592480102348212
+    second: Sera_Idle_Sheet_3
+  - first:
+      213: -5702844662635138032
+    second: Sera_Idle_Sheet_4
+  - first:
+      213: 5873592314804296426
+    second: Sera_Idle_Sheet_5
+  - first:
+      213: 7191144365359874209
+    second: Sera_Idle_Sheet_6
+  - first:
+      213: -9047708722426858289
+    second: Sera_Idle_Sheet_7
+  - first:
+      213: 2826386946107491817
+    second: Sera_Idle_Sheet_8
+  - first:
+      213: 4374997053017827654
+    second: Sera_Idle_Sheet_9
+  - first:
+      213: -196166208642501221
+    second: Sera_Idle_Sheet_10
+  - first:
+      213: -76038074066315111
+    second: Sera_Idle_Sheet_11
+  - first:
+      213: 249406301112023658
+    second: Sera_Idle_Sheet_12
+  - first:
+      213: -4694371958319790171
+    second: Sera_Idle_Sheet_13
+  - first:
+      213: 4394042988869260914
+    second: Sera_Idle_Sheet_14
+  - first:
+      213: -6539797605285530727
+    second: Sera_Idle_Sheet_15
+  - first:
+      213: 6663521644575730711
+    second: Sera_Idle_Sheet_16
+  - first:
+      213: -3244899361065358616
+    second: Sera_Idle_Sheet_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 180
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sera_Idle_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8f474cf2a36649479c0493e23fab2f6
+      internalID: -1671016204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_01
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e9035f1218a82443aeb957018bc7d2f
+      internalID: -1464553563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_02
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 952341686f7125f42a9ddb0114bbf160
+      internalID: 1127053360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_03
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f7c8019c6100cb4b80f4ab15a706e66
+      internalID: -1286899450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_04
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46c8190aa3449a74eb8dfc1ab4c6c148
+      internalID: 1795627395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_05
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30f8dee7c05b0a041ab813c57505b356
+      internalID: -528219039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5875e339624daa46aa02ee360ff55e8
+      internalID: 2017960248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_07
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37d81279792009a4aba09a145d9b9534
+      internalID: 876816615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_08
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ecd2b13ba293944d8a7ab299fa3bac0
+      internalID: -674768477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_09
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db50b8a4c4f0eb74e92aa3003667311b
+      internalID: 1336072928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 277d1ebaa58065c499b1919228228bbf
+      internalID: -937000393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efef03629156baa499ad4a5ea8d8d718
+      internalID: 217208936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3154922fa37ea4942b673944ecd0eed6
+      internalID: -1942407087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c104903395661540aba7aac096b8357
+      internalID: 1079382913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d51cd8eff0c30b48b168baecc049a73
+      internalID: -1628888554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b3277abcf952ad4f801cc6c6a6f9687
+      internalID: -1226972207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_16
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 379e393c7bcfc194d87302d06740438d
+      internalID: -483083009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Idle_17
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50d8b51c9d1d380448d76f78faabfa4d
+      internalID: 490109987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 70304f55abd4efe458de6ae296804821
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sera_Idle_00: -1671016204
+      Sera_Idle_01: -1464553563
+      Sera_Idle_02: 1127053360
+      Sera_Idle_03: -1286899450
+      Sera_Idle_04: 1795627395
+      Sera_Idle_05: -528219039
+      Sera_Idle_06: 2017960248
+      Sera_Idle_07: 876816615
+      Sera_Idle_08: -674768477
+      Sera_Idle_09: 1336072928
+      Sera_Idle_10: -937000393
+      Sera_Idle_11: 217208936
+      Sera_Idle_12: -1942407087
+      Sera_Idle_13: 1079382913
+      Sera_Idle_14: -1628888554
+      Sera_Idle_15: -1226972207
+      Sera_Idle_16: -483083009
+      Sera_Idle_17: 490109987
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -93,7 +93,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         Transform poolRoot = Utils.CreateEmptyGameObject("PoolRoot",transform).transform;
         await _poolManager.InitAsync(poolRoot);
 
-        _battleManager.Initialize();
+        await _battleManager.Initialize();
 
         AwayReportFlow.OnRelaunch();
 

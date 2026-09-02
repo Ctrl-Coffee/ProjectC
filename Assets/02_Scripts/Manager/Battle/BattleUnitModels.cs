@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class BattleUnitModels
 {
@@ -23,6 +22,14 @@ public class BattleUnitModels
         get
         {
             return _enemyBattleUnitModels;
+        }
+    }
+
+    public string[] CompanionFormationIds
+    {
+        get
+        {
+            return _cachedCompanionIds;
         }
     }
 
@@ -112,8 +119,7 @@ public class BattleUnitModels
         HeroInfoModel heroInfo = GameManager.Session.HeroInfo;
         HeroEquipedModel heroEquiped = GameManager.Session.HeroEquiped;
 
-       // string equipedWeaponId = heroEquiped.EquipedWeaponId;
-        string equipedWeaponId = "equipment_weapon_001";
+        string equipedWeaponId = heroEquiped.EquipedWeaponId;
 
         EquipmentData armorData = GameManager.DataTable.GetEquipmentData(equipedWeaponId);
 
@@ -258,6 +264,11 @@ public class BattleUnitModels
     {
         BattleUnitModelBase targetModel = FindTargetModel(_playerBattleUnitModels, battlePosition);
         return targetModel;
+    }
+
+    public void SaveCompanionFormationData()
+    {
+        SaveUtil.RequestSaveCompanionPartyData();
     }
 
     private void ClearCompanion(int battlePosition)

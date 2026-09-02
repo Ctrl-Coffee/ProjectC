@@ -1,0 +1,684 @@
+fileFormatVersion: 2
+guid: 7123c7b854f1e9a4094920247e5059e6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2212355695537497079
+    second: WanderingPainter_SignatureSkill_Sheet_0
+  - first:
+      213: -4921777427792440920
+    second: WanderingPainter_SignatureSkill_Sheet_1
+  - first:
+      213: 1026457801076630687
+    second: WanderingPainter_SignatureSkill_Sheet_2
+  - first:
+      213: -342179808148426800
+    second: WanderingPainter_SignatureSkill_Sheet_3
+  - first:
+      213: -3917842227627046588
+    second: WanderingPainter_SignatureSkill_Sheet_4
+  - first:
+      213: 1185557485704757075
+    second: WanderingPainter_SignatureSkill_Sheet_5
+  - first:
+      213: 8903226636059910531
+    second: WanderingPainter_SignatureSkill_Sheet_6
+  - first:
+      213: 4629082792227038772
+    second: WanderingPainter_SignatureSkill_Sheet_7
+  - first:
+      213: 2024458215577285348
+    second: WanderingPainter_SignatureSkill_Sheet_8
+  - first:
+      213: -588478466585153061
+    second: WanderingPainter_SignatureSkill_Sheet_9
+  - first:
+      213: 6672902598137162059
+    second: WanderingPainter_SignatureSkill_Sheet_10
+  - first:
+      213: -5965655182892736943
+    second: WanderingPainter_SignatureSkill_Sheet_11
+  - first:
+      213: -1623115358844086735
+    second: WanderingPainter_SignatureSkill_Sheet_12
+  - first:
+      213: -8677751339713490040
+    second: WanderingPainter_SignatureSkill_Sheet_13
+  - first:
+      213: 1149060096407428769
+    second: WanderingPainter_SignatureSkill_Sheet_14
+  - first:
+      213: 4536040360544989367
+    second: WanderingPainter_SignatureSkill_Sheet_15
+  - first:
+      213: 7911983159154733284
+    second: WanderingPainter_SignatureSkill_Sheet_16
+  - first:
+      213: -2529554532641768444
+    second: WanderingPainter_SignatureSkill_Sheet_17
+  - first:
+      213: -5586798426104885733
+    second: WanderingPainter_SignatureSkill_Sheet_18
+  - first:
+      213: 7759259784715812930
+    second: WanderingPainter_SignatureSkill_Sheet_19
+  - first:
+      213: -7420007698942609767
+    second: WanderingPainter_SignatureSkill_Sheet_20
+  - first:
+      213: 5466058340928563384
+    second: WanderingPainter_SignatureSkill_Sheet_21
+  - first:
+      213: -4155340650955860847
+    second: WanderingPainter_SignatureSkill_Sheet_22
+  - first:
+      213: -6025539392842363711
+    second: WanderingPainter_SignatureSkill_Sheet_23
+  - first:
+      213: 6885296656530745200
+    second: WanderingPainter_SignatureSkill_Sheet_24
+  - first:
+      213: -1486678788606221029
+    second: WanderingPainter_SignatureSkill_Sheet_25
+  - first:
+      213: -144230323564741283
+    second: WanderingPainter_SignatureSkill_Sheet_26
+  - first:
+      213: -3170925161801885855
+    second: WanderingPainter_SignatureSkill_Sheet_27
+  - first:
+      213: -7120583612004880499
+    second: WanderingPainter_SignatureSkill_Sheet_28
+  - first:
+      213: 3933288531549638674
+    second: WanderingPainter_SignatureSkill_Sheet_29
+  - first:
+      213: 6387745393546096638
+    second: WanderingPainter_SignatureSkill_Sheet_30
+  - first:
+      213: 5782197746858403170
+    second: WanderingPainter_SignatureSkill_Sheet_31
+  - first:
+      213: -301702023967712220
+    second: WanderingPainter_SignatureSkill_Sheet_32
+  - first:
+      213: 8712403115815704840
+    second: WanderingPainter_SignatureSkill_Sheet_33
+  - first:
+      213: 937867309890899897
+    second: WanderingPainter_SignatureSkill_Sheet_34
+  - first:
+      213: 145659367101137023
+    second: WanderingPainter_SignatureSkill_Sheet_35
+  - first:
+      213: -4052062293254702181
+    second: WanderingPainter_SignatureSkill_Sheet_36
+  - first:
+      213: 330308693624752783
+    second: WanderingPainter_SignatureSkill_Sheet_37
+  - first:
+      213: 3198097386488617071
+    second: WanderingPainter_SignatureSkill_Sheet_38
+  - first:
+      213: 3173008421156748414
+    second: WanderingPainter_SignatureSkill_Sheet_39
+  - first:
+      213: 8607129224939104721
+    second: WanderingPainter_SignatureSkill_Sheet_40
+  - first:
+      213: 6307751016435490021
+    second: WanderingPainter_SignatureSkill_Sheet_41
+  - first:
+      213: -5453087209180516018
+    second: WanderingPainter_SignatureSkill_Sheet_42
+  - first:
+      213: -5821779608867280396
+    second: WanderingPainter_SignatureSkill_Sheet_43
+  - first:
+      213: 5103179426340619468
+    second: WanderingPainter_SignatureSkill_Sheet_44
+  - first:
+      213: 3739222835235386147
+    second: WanderingPainter_SignatureSkill_Sheet_45
+  - first:
+      213: 8467135173983971032
+    second: WanderingPainter_SignatureSkill_Sheet_46
+  - first:
+      213: 3183866513154811098
+    second: WanderingPainter_SignatureSkill_Sheet_47
+  - first:
+      213: 3600039123951101950
+    second: WanderingPainter_SignatureSkill_Sheet_48
+  - first:
+      213: -2353255096842514461
+    second: WanderingPainter_SignatureSkill_Sheet_49
+  - first:
+      213: 1378183400354655573
+    second: WanderingPainter_SignatureSkill_Sheet_50
+  - first:
+      213: 794660714391079105
+    second: WanderingPainter_SignatureSkill_Sheet_51
+  - first:
+      213: 1479471627063571742
+    second: WanderingPainter_SignatureSkill_Sheet_52
+  - first:
+      213: 1871648079764713032
+    second: WanderingPainter_SignatureSkill_Sheet_53
+  - first:
+      213: -5101143288019613093
+    second: WanderingPainter_SignatureSkill_Sheet_54
+  - first:
+      213: -4113056496973801854
+    second: WanderingPainter_SignatureSkill_Sheet_55
+  - first:
+      213: 6395352248387022078
+    second: WanderingPainter_SignatureSkill_Sheet_56
+  - first:
+      213: -2687961361042396971
+    second: WanderingPainter_SignatureSkill_Sheet_57
+  - first:
+      213: 2743115084191824512
+    second: WanderingPainter_SignatureSkill_Sheet_58
+  - first:
+      213: -5936840100354928065
+    second: WanderingPainter_SignatureSkill_Sheet_59
+  - first:
+      213: 1900640878858337153
+    second: WanderingPainter_SignatureSkill_Sheet_60
+  - first:
+      213: -3190817510248017318
+    second: WanderingPainter_SignatureSkill_Sheet_61
+  - first:
+      213: 4644706306987061229
+    second: WanderingPainter_SignatureSkill_Sheet_62
+  - first:
+      213: 2670937796608812578
+    second: WanderingPainter_SignatureSkill_Sheet_63
+  - first:
+      213: 5058436944585216879
+    second: WanderingPainter_SignatureSkill_Sheet_64
+  - first:
+      213: 8270024530356251833
+    second: WanderingPainter_SignatureSkill_Sheet_65
+  - first:
+      213: 514289199910036594
+    second: WanderingPainter_SignatureSkill_Sheet_66
+  - first:
+      213: -401907511683675028
+    second: WanderingPainter_SignatureSkill_Sheet_67
+  - first:
+      213: 1157400445334032404
+    second: WanderingPainter_SignatureSkill_Sheet_68
+  - first:
+      213: 4949294253090891458
+    second: WanderingPainter_SignatureSkill_Sheet_69
+  - first:
+      213: 7125785367658530366
+    second: WanderingPainter_SignatureSkill_Sheet_70
+  - first:
+      213: 361974521620727219
+    second: WanderingPainter_SignatureSkill_Sheet_71
+  - first:
+      213: -7597528396207811384
+    second: WanderingPainter_SignatureSkill_Sheet_72
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 130
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ffdfe8c18d2c6b4a843f69917fda054
+      internalID: 209522162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_01
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d90266832934aef448bfdd8457967e97
+      internalID: -1239208422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_02
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f91f53bad14ae3542808f8de0614b61b
+      internalID: -1261259964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_03
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4be4905b1082455438e164d1bd692335
+      internalID: 159810721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_04
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21caf4deeaa771345a2158056a6be902
+      internalID: 8835771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_05
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddbd2393657d0a0419e6400712d8d730
+      internalID: -849139029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_06
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 032ab7ef5980ea74f8ccf04dcda3145c
+      internalID: 1802673674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_07
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bc2461675edcbb49940b8ce96305aad
+      internalID: 63036563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_08
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f29319d2181a9b9498ee51e4615d4acb
+      internalID: -1913799103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_09
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22304b65da8e30642ac42383296a6f13
+      internalID: -1679446681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 845f5a4825f0889459332b5fa76fb675
+      internalID: 715700993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_11
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a69f78719dbe7d498f5f74e36d6b445
+      internalID: 599324173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_12
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e51b9dd20ba9f74da933362919d1adf
+      internalID: -1807868315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WanderingPainter_SignatureSkill_13
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e5590a32d7f93e47acf72f42cdb55ca
+      internalID: 2145233166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 371ca00a47da05541bcded4d34cabbcb
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      WanderingPainter_SignatureSkill_00: 209522162
+      WanderingPainter_SignatureSkill_01: -1239208422
+      WanderingPainter_SignatureSkill_02: -1261259964
+      WanderingPainter_SignatureSkill_03: 159810721
+      WanderingPainter_SignatureSkill_04: 8835771
+      WanderingPainter_SignatureSkill_05: -849139029
+      WanderingPainter_SignatureSkill_06: 1802673674
+      WanderingPainter_SignatureSkill_07: 63036563
+      WanderingPainter_SignatureSkill_08: -1913799103
+      WanderingPainter_SignatureSkill_09: -1679446681
+      WanderingPainter_SignatureSkill_10: 715700993
+      WanderingPainter_SignatureSkill_11: 599324173
+      WanderingPainter_SignatureSkill_12: -1807868315
+      WanderingPainter_SignatureSkill_13: 2145233166
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
