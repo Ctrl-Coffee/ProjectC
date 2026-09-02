@@ -45,9 +45,18 @@ public class BattleUnitStatusView: MonoBehaviour
 
     public void UpdatePortraitSprite(string id)
     {
-        //Sprite sprite = GameManager.Resource.GetLoadedAsset<Sprite>(id);
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            return;
+        }
 
-        //_portraitImage.sprite = sprite;
+        BattlePortraitData battlePortraitData = GameManager.DataTable.GetBattlePortraitData(id);
+
+        string portraitKey = battlePortraitData.SpriteAddressableKey;
+
+        Sprite sprite = GameManager.Resource.GetLoadedAsset<Sprite>(portraitKey);
+
+        _portraitImage.sprite = sprite;
     }
 
     public void UpdateHpBar(float currentHp, float maxHp)

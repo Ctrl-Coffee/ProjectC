@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "Id": "companion_001",
     "Name": "방패 용사 레온",
@@ -15,7 +15,6 @@
     "BasicAttackSkillId": "skill_companion_001_basic",
     "SignatureSkillId": "skill_companion_001_active",
     "SlotSpriteAddressableKey": "Sprite/companion_001_slot",
-    "PortraitSpriteAddressableKey": "Sprite/companion_001_portrait",
     "AnimationSetKey": "Anim/companion_001"
   },
   {
@@ -34,7 +33,6 @@
     "BasicAttackSkillId": "skill_companion_002_basic",
     "SignatureSkillId": "skill_companion_002_active",
     "SlotSpriteAddressableKey": "Sprite/companion_002_slot",
-    "PortraitSpriteAddressableKey": "Sprite/companion_002_portrait",
     "AnimationSetKey": "Anim/companion_002"
   },
   {
@@ -53,7 +51,6 @@
     "BasicAttackSkillId": "skill_companion_003_basic",
     "SignatureSkillId": "skill_companion_003_active",
     "SlotSpriteAddressableKey": "Sprite/companion_003_slot",
-    "PortraitSpriteAddressableKey": "Sprite/companion_003_portrait",
     "AnimationSetKey": "Anim/companion_003"
   },
   {
@@ -72,7 +69,6 @@
     "BasicAttackSkillId": "skill_companion_004_basic",
     "SignatureSkillId": "skill_companion_004_active",
     "SlotSpriteAddressableKey": "Sprite/companion_004_slot",
-    "PortraitSpriteAddressableKey": "Sprite/companion_004_portrait",
     "AnimationSetKey": "Anim/companion_004"
   }
 ]

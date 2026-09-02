@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -137,6 +136,9 @@ public class StageInfoView : ViewBase
     {
         switch (propertyName)
         {
+            case nameof(_stageInfoViewModel.InfoSpriteAddressableKey):
+                UpdateStageImage(_stageInfoViewModel.InfoSpriteAddressableKey);
+                break;
             case nameof(_stageInfoViewModel.StageDisplayText):
                 UpdateStageGradeText(_stageInfoViewModel.StageDisplayText);
                 break;
