@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 628c1c13040d7504aa82be27adde0d81
+guid: d6eef3c39853e13428c36f517c195b48
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -862659620070987507
-    second: c2_0
-  - first:
-      213: -3552614339088533565
-    second: c2_1
-  - first:
-      213: -4633631059761907475
-    second: c2_2
-  - first:
-      213: 4321421417179187344
-    second: c2_3
-  - first:
-      213: 1292970404612483967
-    second: c2_4
+      213: -7257537040599282575
+    second: Gacha_Equipment_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -58,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -87,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: c2_0
+      name: Gacha_Equipment_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1001
-        height: 1513
+        width: 1536
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d09689765a73704f0800000000000000
-      internalID: -862659620070987507
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: c2_1
-      rect:
-        serializedVersion: 2
-        x: 992
-        y: 694
-        width: 11
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3c73ba6c41492bec0800000000000000
-      internalID: -3552614339088533565
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: c2_2
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 687
-        width: 19
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: de8bca6e91902bfb0800000000000000
-      internalID: -4633631059761907475
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: c2_3
-      rect:
-        serializedVersion: 2
-        x: 944
-        y: 521
-        width: 7
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0980bbf02e5c8fb30800000000000000
-      internalID: 4321421417179187344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: c2_4
-      rect:
-        serializedVersion: 2
-        x: 942
-        y: 99
-        width: 9
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f7b25088bbd81f110800000000000000
-      internalID: 1292970404612483967
+      spriteID: 17c07de738c084b90800000000000000
+      internalID: -7257537040599282575
       vertices: []
       indices: 
       edges: []
@@ -238,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -248,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      c2_0: -862659620070987507
-      c2_1: -3552614339088533565
-      c2_2: -4633631059761907475
-      c2_3: 4321421417179187344
-      c2_4: 1292970404612483967
+      Gacha_Equipment_0: -7257537040599282575
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -100,7 +100,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 484862943858069044}
-  - component: {fileID: 6071314402228974609}
   - component: {fileID: 3641366830813582660}
   - component: {fileID: 25591036405893548}
   m_Layer: 0
@@ -123,27 +122,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1621210641350274591}
-  - {fileID: 6607172922404069682}
+  - {fileID: 6787448368130200888}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6071314402228974609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 388306016501081556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d903f07432468644a633bb9d037c984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwipComponent
-  _inputHandler: {fileID: 3641366830813582660}
-  _swipeDirect: 0
-  _swipeDistanceRate: 0.2
-  _swipeTime: 0.2
-  _startPage: 0
 --- !u!114 &3641366830813582660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +241,58 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1180315690585856017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2189936729287336476}
+  - component: {fileID: 3862734218480587660}
+  m_Layer: 0
+  m_Name: PageRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2189936729287336476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180315690585856017}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1621210641350274591}
+  - {fileID: 6607172922404069682}
+  m_Father: {fileID: 6787448368130200888}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3862734218480587660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180315690585856017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d903f07432468644a633bb9d037c984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwipComponent
+  _inputHandler: {fileID: 3641366830813582660}
+  _worldContent: {fileID: 6787448368130200888}
+  _swipeDirect: 0
+  _swipeDistanceRate: 0.2
+  _swipeTime: 0.2
+  _startPage: 0
 --- !u!1 &2025634395388749327
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +328,7 @@ Transform:
   - {fileID: 6710314453677690944}
   - {fileID: 8394759781917757599}
   - {fileID: 7179541912005510291}
-  m_Father: {fileID: 484862943858069044}
+  m_Father: {fileID: 2189936729287336476}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4532016103921674415
 SpriteRenderer:
@@ -447,6 +480,38 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &2170319032871225950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6787448368130200888}
+  m_Layer: 0
+  m_Name: WorldContent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6787448368130200888
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2170319032871225950}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2189936729287336476}
+  m_Father: {fileID: 484862943858069044}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2340798608922449110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,7 +1247,7 @@ Transform:
   - {fileID: 8047298782513244154}
   - {fileID: 7995374970475156675}
   - {fileID: 3991990762109220079}
-  m_Father: {fileID: 484862943858069044}
+  m_Father: {fileID: 2189936729287336476}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1264853768148577056
 SpriteRenderer:

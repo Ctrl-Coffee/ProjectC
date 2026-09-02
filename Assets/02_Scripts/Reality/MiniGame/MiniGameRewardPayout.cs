@@ -1,43 +1,26 @@
 ﻿using System.Collections.Generic;
 
-public static class AwayRewardPayout
+public static class MiniGameRewardPayout
 {
     private static Dictionary<CurrencyType, Reward> _rewards = CreateRewards();
 
-    private static bool _isHolding;
+    private static bool _isClaimed;
 
-    // [주의] true 인 동안 AutoWorkQueue / EnergyRecovery 의 정산 루프가 통째로 멈춘다.
-    // 자동업무 보상이나 에너지 회복이 안 들어온다는 제보가 오면 여기부터 볼 것.
-    // BeginHold 는 AwayReportFlow.OnReturn 에서만 부르고, 리포트를 닫아야 풀린다.
-    public static bool IsHolding
+    public static void Begin(long money, long dp)
     {
-        get
-        {
-            return _isHolding;
-        }
+        PayAll();   // 이전 판 잔액이 남아 있으면 먼저 털어낸다 (FlushPending 미러)
+
+        SetTotal(CurrencyType.Money, money);
+        SetTotal(CurrencyType.DreamPoint, dp);
+
+        _isClaimed = true;
     }
 
-    public static void BeginHold()
+    public static bool ConsumeClaim()
     {
-        _isHolding = true;
-    }
-
-    public static void ReleaseHold()
-    {
-        _isHolding = false;
-    }
-
-    public static void Consume()
-    {
-        ReleaseHold();
-
-        FlushPending();
-
-        AutoWorkQueue.Reward reward = AutoWorkQueue.ConsumeCompleted();
-
-        SetTotal(CurrencyType.Energy, EnergyRecovery.ConsumeRecover());
-        SetTotal(CurrencyType.Money, reward.Money);
-        SetTotal(CurrencyType.DreamPoint, reward.DreamPoint);
+        bool claimed = _isClaimed;
+        _isClaimed = false;
+        return claimed;
     }
 
     public static void PayProgress(CurrencyType currencyType, float progress)
@@ -62,17 +45,10 @@ public static class AwayRewardPayout
     {
         Dictionary<CurrencyType, Reward> rewards = new();
 
-        rewards.Add(CurrencyType.Energy, new Reward(CurrencyType.Energy));
         rewards.Add(CurrencyType.Money, new Reward(CurrencyType.Money));
         rewards.Add(CurrencyType.DreamPoint, new Reward(CurrencyType.DreamPoint));
 
         return rewards;
-    }
-
-    // 이전 정산이 다 지급되지 않고 남아 있으면 먼저 털어낸다.
-    private static void FlushPending()
-    {
-        PayAll();
     }
 
     private static void SetTotal(CurrencyType currencyType, long total)
@@ -111,7 +87,15 @@ public static class AwayRewardPayout
 
         CurrencyModel currency = GameManager.Session.Currency;
 
-        currency.Add(currencyType, amount);
+        switch (currencyType)
+        {
+            case CurrencyType.Money:
+                currency.AddMoney(amount);
+                break;
+            case CurrencyType.DreamPoint:
+                currency.AddDreamPoint(amount);
+                break;
+        }
     }
 
     private class Reward

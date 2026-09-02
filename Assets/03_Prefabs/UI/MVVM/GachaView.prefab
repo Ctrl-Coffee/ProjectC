@@ -975,8 +975,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.35}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 39.3042}
+  m_SizeDelta: {x: 0, y: 78.6084}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6558687982747476943
 CanvasRenderer:
@@ -1006,9 +1006,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 92efb2224aa9f5d439d010e61fd4afe7, type: 3}
+  m_Sprite: {fileID: -4052212055757766494, guid: 5995a024f13d27349b9959884a5d6811, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1204,7 +1204,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 40, y: 35}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 100, y: 70}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &7638998077291481763
 CanvasRenderer:
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bff776d1498334ea8985a997924e528d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03d9c16ef729c4216a06625dcbc84304, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1767,7 +1767,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 83}
   m_SizeDelta: {x: 0, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3540882151165029440
@@ -1842,8 +1842,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -160}
+  m_AnchoredPosition: {x: 0, y: -30}
+  m_SizeDelta: {x: 0, y: -220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7997608822474437117
 CanvasRenderer:
@@ -2235,8 +2235,8 @@ MonoBehaviour:
   _multiDrawLabelText: {fileID: 5534915480914595790}
   _closeButton: {fileID: 2220899721248436670}
   _bannerImage: {fileID: 288732887563060176}
-  _companionBannerSprite: {fileID: 21300000, guid: 92efb2224aa9f5d439d010e61fd4afe7, type: 3}
-  _equipmentBannerSprite: {fileID: 21300000, guid: 9b9ad8b8b4b12194a8a79f766a52fb92, type: 3}
+  _companionBannerSprite: {fileID: -4052212055757766494, guid: 5995a024f13d27349b9959884a5d6811, type: 3}
+  _equipmentBannerSprite: {fileID: -7257537040599282575, guid: d6eef3c39853e13428c36f517c195b48, type: 3}
   _scrollRect: {fileID: 1872195024565604711}
   _flashImage: {fileID: 8060818855187729228}
   _spinCount: 3
