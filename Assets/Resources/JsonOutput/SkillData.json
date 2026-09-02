@@ -1,42 +1,6 @@
-﻿[
+[
   {
-    "Id": "skill_enemy_ch1_001_basic",
-    "Name": "초원 슬라임 기본 공격",
-    "SkillType": "BasicAttack",
-    "TargetType": "SingleOpponent",
-    "DamageMultiplier": 1,
-    "BaseCooldown": 1.5,
-    "Description": "대상 1명에게 {0}의 피해를 입힌다."
-  },
-  {
-    "Id": "skill_enemy_ch1_002_basic",
-    "Name": "고블린 사수 기본 공격",
-    "SkillType": "BasicAttack",
-    "TargetType": "SingleOpponent",
-    "DamageMultiplier": 1,
-    "BaseCooldown": 1.8,
-    "Description": "대상 1명에게 {0}의 피해를 입힌다."
-  },
-  {
-    "Id": "skill_enemy_ch1_003_basic",
-    "Name": "고블린 두목 기본 공격",
-    "SkillType": "BasicAttack",
-    "TargetType": "SingleOpponent",
-    "DamageMultiplier": 1,
-    "BaseCooldown": 2,
-    "Description": "대상 1명에게 {0}의 피해를 입힌다."
-  },
-  {
-    "Id": "skill_boss_ch1_001_basic",
-    "Name": "킹 슬라임 기본 공격",
-    "SkillType": "BasicAttack",
-    "TargetType": "SingleOpponent",
-    "DamageMultiplier": 1,
-    "BaseCooldown": 1.6,
-    "Description": "대상 1명에게 {0}의 피해를 입힌다."
-  },
-  {
-    "Id": "skill_boss_ch1_001_active",
+    "Id": "enemy_skill_ch1_boss_active",
     "Name": "거대 도약",
     "SkillType": "Active",
     "TargetType": "AllOpponents",
@@ -45,8 +9,17 @@
     "Description": "상대 전체에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "skill_enemy_ch2_001_basic",
-    "Name": "깊은숲 늑대 기본 공격",
+    "Id": "enemy_skill_ch1_boss_basic",
+    "Name": "킹 슬라임 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.6,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "enemy_skill_ch1_melee_basic",
+    "Name": "초원 슬라임 기본 공격",
     "SkillType": "BasicAttack",
     "TargetType": "SingleOpponent",
     "DamageMultiplier": 1,
@@ -54,8 +27,8 @@
     "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "skill_enemy_ch2_002_basic",
-    "Name": "깊은숲 박쥐 기본 공격",
+    "Id": "enemy_skill_ch1_ranged_basic",
+    "Name": "고블린 사수 기본 공격",
     "SkillType": "BasicAttack",
     "TargetType": "SingleOpponent",
     "DamageMultiplier": 1,
@@ -63,8 +36,8 @@
     "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "skill_enemy_ch2_003_basic",
-    "Name": "이끼 골렘 기본 공격",
+    "Id": "enemy_skill_ch1_tank_basic",
+    "Name": "고블린 두목 기본 공격",
     "SkillType": "BasicAttack",
     "TargetType": "SingleOpponent",
     "DamageMultiplier": 1,
@@ -72,16 +45,7 @@
     "Description": "대상 1명에게 {0}의 피해를 입힌다."
   },
   {
-    "Id": "skill_boss_ch2_001_basic",
-    "Name": "깊은 숲의 고룡 기본 공격",
-    "SkillType": "BasicAttack",
-    "TargetType": "SingleOpponent",
-    "DamageMultiplier": 1,
-    "BaseCooldown": 1.5,
-    "Description": "대상 1명에게 {0}의 피해를 입힌다."
-  },
-  {
-    "Id": "skill_boss_ch2_001_active",
+    "Id": "enemy_skill_ch2_boss_active",
     "Name": "고룡의 숨결",
     "SkillType": "Active",
     "TargetType": "AllOpponents",
@@ -90,12 +54,156 @@
     "Description": "상대 전체에게 {0}의 피해를 입힌다."
   },
   {
+    "Id": "enemy_skill_ch2_boss_basic",
+    "Name": "깊은 숲의 고룡 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.5,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "enemy_skill_ch2_melee_basic",
+    "Name": "깊은숲 늑대 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.5,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "enemy_skill_ch2_ranged_basic",
+    "Name": "깊은숲 박쥐 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.8,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "enemy_skill_ch2_tank_basic",
+    "Name": "이끼 골렘 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 2,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_companion_001_active",
+    "Name": "방패 돌격",
+    "SkillType": "Active",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 4,
+    "BaseCooldown": 9,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_companion_001_basic",
+    "Name": "레온 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 2,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_companion_002_active",
+    "Name": "강화 사격",
+    "SkillType": "Active",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 3,
+    "BaseCooldown": 7,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_companion_002_basic",
+    "Name": "리아 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.5,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_companion_003_active",
+    "Name": "화염 폭풍",
+    "SkillType": "Active",
+    "TargetType": "AllOpponents",
+    "DamageMultiplier": 2,
+    "BaseCooldown": 9,
+    "Description": "상대 전체에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_companion_003_basic",
+    "Name": "세라 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.8,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_companion_004_active",
+    "Name": "쌍검난무",
+    "SkillType": "Active",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 3.5,
+    "BaseCooldown": 6,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_companion_004_basic",
+    "Name": "카인 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.2,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
     "Id": "skill_player_001_basic",
-    "Name": null,
-    "SkillType": null,
-    "TargetType": null,
-    "DamageMultiplier": null,
-    "BaseCooldown": null,
-    "Description": null
+    "Name": "용사 기본 공격",
+    "SkillType": "BasicAttack",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 1,
+    "BaseCooldown": 1.5,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_weapon_001",
+    "Name": "검 휘두르기",
+    "SkillType": "Active",
+    "TargetType": "SingleOpponents",
+    "DamageMultiplier": 2,
+    "BaseCooldown": 7,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_weapon_002",
+    "Name": "색채의 향연",
+    "SkillType": "Active",
+    "TargetType": "AllOpponents",
+    "DamageMultiplier": 2,
+    "BaseCooldown": 6,
+    "Description": "상대 전체에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_weapon_003",
+    "Name": "마력 해방",
+    "SkillType": "Active",
+    "TargetType": "AllOpponents",
+    "DamageMultiplier": 1.5,
+    "BaseCooldown": 8,
+    "Description": "상대 전체에게 {0}의 피해를 입힌다."
+  },
+  {
+    "Id": "skill_weapon_004",
+    "Name": "거합 베기",
+    "SkillType": "Active",
+    "TargetType": "SingleOpponent",
+    "DamageMultiplier": 6,
+    "BaseCooldown": 10,
+    "Description": "대상 1명에게 {0}의 피해를 입힌다."
   }
 ]
