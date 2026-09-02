@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 92efb2224aa9f5d439d010e61fd4afe7, type: 3}
+  m_Sprite: {fileID: -4052212055757766494, guid: 5995a024f13d27349b9959884a5d6811, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2235,8 +2235,8 @@ MonoBehaviour:
   _multiDrawLabelText: {fileID: 5534915480914595790}
   _closeButton: {fileID: 2220899721248436670}
   _bannerImage: {fileID: 288732887563060176}
-  _companionBannerSprite: {fileID: 21300000, guid: 92efb2224aa9f5d439d010e61fd4afe7, type: 3}
-  _equipmentBannerSprite: {fileID: 21300000, guid: 9b9ad8b8b4b12194a8a79f766a52fb92, type: 3}
+  _companionBannerSprite: {fileID: -4052212055757766494, guid: 5995a024f13d27349b9959884a5d6811, type: 3}
+  _equipmentBannerSprite: {fileID: -7257537040599282575, guid: d6eef3c39853e13428c36f517c195b48, type: 3}
   _scrollRect: {fileID: 1872195024565604711}
   _flashImage: {fileID: 8060818855187729228}
   _spinCount: 3
