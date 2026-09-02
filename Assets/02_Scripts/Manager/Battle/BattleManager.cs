@@ -28,6 +28,14 @@ public class BattleManager
         get { return _battleUnitModels.EnemyBattleUnitModels; }
     }
 
+    public string[] CompanionFormationIds
+    {
+        get
+        {
+            return _battleUnitModels.CompanionFormationIds;
+        }
+    }
+
     public async UniTask Initialize()
     {
         LoadCompanionPartyResponse loadCompanionPartyResponse = await GameManager.Network.LoadCompanionPartyAsync();
@@ -56,6 +64,8 @@ public class BattleManager
             EndBattle();
         }
 
+        _battleUnitModels.SaveCompanionFormationData();
+
         GameManager.Instance.EnterDream();
         _battleRoot.gameObject.SetActive(false);
     }
@@ -69,6 +79,8 @@ public class BattleManager
             Logger.LogError("꿈 포인트 소비에 실패했습니다.");
             return;
         }
+
+        _battleUnitModels.SaveCompanionFormationData();
 
         SubscribeUnitModelDeadStateChangedEvent();
 
