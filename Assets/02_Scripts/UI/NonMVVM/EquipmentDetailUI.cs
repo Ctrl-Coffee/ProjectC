@@ -40,7 +40,7 @@ public class EquipmentDetailUI : UIBase
 
         Refresh();
 
-        _iconImage.sprite = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(AddressablePath.Sprite.EquipmentAtlas).GetSprite(_equipmentId);
+        _iconImage.sprite = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(AddressablePath.Atlas.EquipmentAtlas).GetSprite(_equipmentId);
 
         ColorUtility.TryParseHtmlString(Const.GradeColor(data.EquipmentGrade), out Color newColor);
         _gradeImage.color = newColor;
@@ -102,7 +102,7 @@ public class EquipmentDetailUI : UIBase
         }
 
         _levelText.SetText("Lv:{0}", equipmentState.Level);
-        _currencyText.SetText("{0}/{1}", levelData.UpgradeCost, GameManager.Session.Currency.DreamFragment);
+        _currencyText.SetText("{0}/{1}", GameManager.Session.Currency.DreamFragment, levelData.UpgradeCost);
     }
 
 }

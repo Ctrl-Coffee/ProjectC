@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 32c7187adadc8b14abe3ff02b0825564
+guid: b348b2e8ebcf8e543a9dc458e0e2edaa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8804767802834342387
-    second: Lia_Portrait_0
+      213: -1613917722138635797
+    second: player_painter_Portrait_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lia_Portrait_0
+      name: player_painter_Portrait_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 5
-        width: 106
-        height: 118
+        x: 7
+        y: 0
+        width: 113
+        height: 125
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d0e234e355e2fc580800000000000000
-      internalID: -8804767802834342387
+      spriteID: be11833f1663a99e0800000000000000
+      internalID: -1613917722138635797
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lia_Portrait_0: -8804767802834342387
+      player_painter_Portrait_0: -1613917722138635797
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

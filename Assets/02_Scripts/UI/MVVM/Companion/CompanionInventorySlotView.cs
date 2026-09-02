@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class CompanionInventorySlotView : ViewBase
@@ -24,7 +25,8 @@ public class CompanionInventorySlotView : ViewBase
         Subscribe(); 
         Refresh();
 
-        _icon.sprite = GameManager.Resource.GetLoadedAsset<Sprite>(GameManager.DataTable.GetCompanionData(_companionId).SlotSpriteAddressableKey);
+        _icon.sprite = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(AddressablePath.Atlas.CompanionPortrait)
+            .GetSprite(_companionId);
     }
 
     private void OnDestroy()

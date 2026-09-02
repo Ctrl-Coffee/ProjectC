@@ -50,8 +50,10 @@
         public const string NOVEL_WRITING = "Audio/SFX/NovelWriting";
     }
 
-    public static class Sprite
+    public static class Atlas
     {
         public const string EquipmentAtlas = "Atlas/Equipment";
+        public const string CompanionPortrait = "Atlas/CompanionPortrait";
+        public const string CompanionFullBody = "Atlas/CompanionFullBody";
     }
 }
