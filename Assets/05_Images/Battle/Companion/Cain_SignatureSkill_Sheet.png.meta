@@ -1,0 +1,636 @@
+fileFormatVersion: 2
+guid: 54b6c32c749c0e84192e2ea8200ccc7b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1718017925938173089
+    second: Cain_Skill_Sheet_0
+  - first:
+      213: 647234644461657708
+    second: Cain_Skill_Sheet_1
+  - first:
+      213: -63923197028614091
+    second: Cain_Skill_Sheet_2
+  - first:
+      213: 5356553340358318718
+    second: Cain_Skill_Sheet_3
+  - first:
+      213: -7966596847884043427
+    second: Cain_Skill_Sheet_4
+  - first:
+      213: 2926089809517759855
+    second: Cain_Skill_Sheet_5
+  - first:
+      213: -7571246994812701896
+    second: Cain_Skill_Sheet_6
+  - first:
+      213: 2435453930316898980
+    second: Cain_Skill_Sheet_7
+  - first:
+      213: 3291640209515911429
+    second: Cain_Skill_Sheet_8
+  - first:
+      213: 3819316399928824969
+    second: Cain_Skill_Sheet_9
+  - first:
+      213: 4637495777815790099
+    second: Cain_Skill_Sheet_10
+  - first:
+      213: 8241699579857933084
+    second: Cain_Skill_Sheet_11
+  - first:
+      213: -8663021826360704711
+    second: Cain_Skill_Sheet_12
+  - first:
+      213: -2688483658039932940
+    second: Cain_Skill_Sheet_13
+  - first:
+      213: 8576322607339726036
+    second: Cain_Skill_Sheet_14
+  - first:
+      213: 4356358633149176354
+    second: Cain_Skill_Sheet_15
+  - first:
+      213: 822751551367599114
+    second: Cain_Skill_Sheet_16
+  - first:
+      213: -2689146857422119254
+    second: Cain_Skill_Sheet_17
+  - first:
+      213: 6983003263697741741
+    second: Cain_Skill_Sheet_18
+  - first:
+      213: 471294227892575815
+    second: Cain_Skill_Sheet_19
+  - first:
+      213: -5431361944387271706
+    second: Cain_Skill_Sheet_20
+  - first:
+      213: -2062516356956773479
+    second: Cain_Skill_Sheet_21
+  - first:
+      213: 7794757173371988705
+    second: Cain_Skill_Sheet_22
+  - first:
+      213: 6288891965181915061
+    second: Cain_Skill_Sheet_23
+  - first:
+      213: 2016674732272673065
+    second: Cain_Skill_Sheet_24
+  - first:
+      213: 2806482720982429061
+    second: Cain_Skill_Sheet_25
+  - first:
+      213: -88135279031947553
+    second: Cain_Skill_Sheet_26
+  - first:
+      213: 1910609934745813562
+    second: Cain_Skill_Sheet_27
+  - first:
+      213: 4001795499489746617
+    second: Cain_Skill_Sheet_28
+  - first:
+      213: 1167768561503407925
+    second: Cain_Skill_Sheet_29
+  - first:
+      213: 5782217893258072338
+    second: Cain_Skill_Sheet_30
+  - first:
+      213: 1065203589047543003
+    second: Cain_Skill_Sheet_31
+  - first:
+      213: -6266976209341885375
+    second: Cain_Skill_Sheet_32
+  - first:
+      213: 8605382511920448675
+    second: Cain_Skill_Sheet_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 180
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cain_Skill_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65ff2c0f3c65d8d4d842f2c7c99df8e8
+      internalID: -1004938504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_01
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5549a5d7ff768654a91869b7c544279e
+      internalID: -1163137536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_02
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d0fac8c086726844bf25b1fccc25086
+      internalID: -1010664515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_03
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5e66e39f9c353e4783bc95f9aca6a4d
+      internalID: -1504956423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_04
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c78bc04458b9ebf42a7e09c8252556eb
+      internalID: 420109049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_05
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 864
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 388f62f0e784c0f45a700c36ccf35712
+      internalID: 1352016364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f73427c98f9bfbe4fb9556050d079868
+      internalID: 1092631072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_07
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cef6d355157a1af45a689db002f218ba
+      internalID: 829203932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_08
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b707605d72fc54249b914cc8aae5d148
+      internalID: 1304055847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_09
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56377c070dcde274f9298816e8d9f5a6
+      internalID: -131635532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_10
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cac521e97de575245ab45ed82f09138b
+      internalID: -697569232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_11
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 432
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 974a029929e37c044a9295041b863a90
+      internalID: -493201134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3b764c4e7f3c3349a60f81cf55f3f77
+      internalID: -1057741515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_13
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d63c7ec71938471479e2c3410f9ee1c7
+      internalID: -209433325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_14
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6ed0f26ed71dd541bb23442faa522b9
+      internalID: -641756483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_15
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2e1fa02b64b630429477ed960ef1496
+      internalID: -718591858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cain_Skill_16
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 576
+        height: 432
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef705cdf6e835c341b64357d7467c0e5
+      internalID: -1241480646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 442d3cd0b5a2b5a49b84e5e807dd74f9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Cain_Skill_00: -1004938504
+      Cain_Skill_01: -1163137536
+      Cain_Skill_02: -1010664515
+      Cain_Skill_03: -1504956423
+      Cain_Skill_04: 420109049
+      Cain_Skill_05: 1352016364
+      Cain_Skill_06: 1092631072
+      Cain_Skill_07: 829203932
+      Cain_Skill_08: 1304055847
+      Cain_Skill_09: -131635532
+      Cain_Skill_10: -697569232
+      Cain_Skill_11: -493201134
+      Cain_Skill_12: -1057741515
+      Cain_Skill_13: -209433325
+      Cain_Skill_14: -641756483
+      Cain_Skill_15: -718591858
+      Cain_Skill_16: -1241480646
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

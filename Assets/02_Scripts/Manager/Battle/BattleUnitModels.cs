@@ -112,8 +112,7 @@ public class BattleUnitModels
         HeroInfoModel heroInfo = GameManager.Session.HeroInfo;
         HeroEquipedModel heroEquiped = GameManager.Session.HeroEquiped;
 
-       // string equipedWeaponId = heroEquiped.EquipedWeaponId;
-        string equipedWeaponId = "equipment_weapon_001";
+        string equipedWeaponId = heroEquiped.EquipedWeaponId;
 
         EquipmentData armorData = GameManager.DataTable.GetEquipmentData(equipedWeaponId);
 
