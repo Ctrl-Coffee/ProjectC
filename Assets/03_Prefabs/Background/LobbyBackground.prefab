@@ -121,8 +121,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.8, z: 0}
-  m_LocalScale: {x: 0.45200878, y: 0.47425947, z: 0.603}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.62, y: 0.65052027, z: 0.8271078}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4815308682917925372}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -737,7 +737,7 @@ Transform:
   m_GameObject: {fileID: 6225407340157090672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.29, y: -3.59, z: 0}
+  m_LocalPosition: {x: 0.54, y: -5.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -768,7 +768,7 @@ Transform:
   m_GameObject: {fileID: 6512962249187888147}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.27, y: -5.48, z: 0}
+  m_LocalPosition: {x: -2.15, y: -8.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -925,7 +925,7 @@ Transform:
   m_GameObject: {fileID: 8209542808693762323}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.45, y: -2.54, z: 0}
+  m_LocalPosition: {x: 3.16, y: -4.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -959,8 +959,8 @@ Transform:
   m_GameObject: {fileID: 9188870774085046207}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 9.12, y: -8.35, z: 0}
+  m_LocalScale: {x: 2.8, y: 2.8, z: 2.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 708371712514638007}
@@ -1014,7 +1014,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4957440126358153855, guid: 485870676fa98eb498c5536ab8b66e54, type: 3}
+  m_Sprite: {fileID: 1998681689, guid: 90efbc39209b9af478f9c27e22163fd9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -1,0 +1,650 @@
+fileFormatVersion: 2
+guid: 90efbc39209b9af478f9c27e22163fd9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3310142780920471025
+    second: CasualHero_Idle_Sheet_0
+  - first:
+      213: -7642264038383389388
+    second: CasualHero_Idle_Sheet_1
+  - first:
+      213: 6847158141896099103
+    second: CasualHero_Idle_Sheet_2
+  - first:
+      213: -5940983028593197683
+    second: CasualHero_Idle_Sheet_3
+  - first:
+      213: 7213830502649022641
+    second: CasualHero_Idle_Sheet_4
+  - first:
+      213: -1133179545195207881
+    second: CasualHero_Idle_Sheet_5
+  - first:
+      213: -1423663989847020479
+    second: CasualHero_Idle_Sheet_6
+  - first:
+      213: 6715323697640909606
+    second: CasualHero_Idle_Sheet_7
+  - first:
+      213: -1222194831192686219
+    second: CasualHero_Idle_Sheet_8
+  - first:
+      213: 8434288945154981172
+    second: CasualHero_Idle_Sheet_9
+  - first:
+      213: 8878714990608010966
+    second: CasualHero_Idle_Sheet_10
+  - first:
+      213: 6611342027547708908
+    second: CasualHero_Idle_Sheet_11
+  - first:
+      213: 5939891103963080580
+    second: CasualHero_Idle_Sheet_12
+  - first:
+      213: 2220207151470060794
+    second: CasualHero_Idle_Sheet_13
+  - first:
+      213: 4881671724924712268
+    second: CasualHero_Idle_Sheet_14
+  - first:
+      213: -967665241793258565
+    second: CasualHero_Idle_Sheet_15
+  - first:
+      213: 2237458424340473271
+    second: CasualHero_Idle_Sheet_16
+  - first:
+      213: -2499688772897004767
+    second: CasualHero_Idle_Sheet_17
+  - first:
+      213: 7135788529185837886
+    second: CasualHero_Idle_Sheet_18
+  - first:
+      213: 237293303127946282
+    second: CasualHero_Idle_Sheet_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f147ba7f67e88e74cbd9cef60a5724f6
+      internalID: 1998681689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_01
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 388f6d75925bdd645a2e5662f42b3fb8
+      internalID: 1869203512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_02
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e54a7cbe6646744f8051d62f09c596c
+      internalID: 818740962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_03
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc5fe0eb05375924eb4424962e92ec43
+      internalID: -316331241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_04
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 521323e594a515d4aaa8750f5b63faae
+      internalID: 649289103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_05
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1152
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cae3a2344ff1e54d8059b9b43c68c4b
+      internalID: -750169007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_06
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4c84c79e0c70024da8db63a53dfff90
+      internalID: 1356206549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_07
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a914e176b762d0b4da330069129285dc
+      internalID: 1038667897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_08
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3859210405943f044aec92916c64c73b
+      internalID: -1718655707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_09
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af140de61820cad4db24e567b8ecbad5
+      internalID: -1267447767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 873b86df574819843b77be2105a922a1
+      internalID: -882158814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 768
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e52a92badfaf8479657e526b0cd762
+      internalID: -958328439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1824f413521dd6447bee10fdcf7af580
+      internalID: 25739471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbe0dfb14ef8dd64094b7ceec88c8179
+      internalID: 1911210767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46a1a6a09862142489ef07505cf30d2f
+      internalID: 2084591400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73f5f92c008e46740ba0dc7046712922
+      internalID: 2001348119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_16
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d21837635fa80e4d88d509ac32d3ac4
+      internalID: -439933565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_17
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 384
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbfb6fdaac46ccc4b93fcd7f87d552e4
+      internalID: -168593468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b056cf882e1339f4d802304b8835c9d0
+      internalID: 2048792508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RealWorldPlayer_Idle_19
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 384
+      alignment: 9
+      pivot: {x: 0.5, y: 0.078125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38c3fe6fc30b47542bbe719decdb66fa
+      internalID: -570601017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a054521b250594c4391309fc6e07afac
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      RealWorldPlayer_Idle_00: 1998681689
+      RealWorldPlayer_Idle_01: 1869203512
+      RealWorldPlayer_Idle_02: 818740962
+      RealWorldPlayer_Idle_03: -316331241
+      RealWorldPlayer_Idle_04: 649289103
+      RealWorldPlayer_Idle_05: -750169007
+      RealWorldPlayer_Idle_06: 1356206549
+      RealWorldPlayer_Idle_07: 1038667897
+      RealWorldPlayer_Idle_08: -1718655707
+      RealWorldPlayer_Idle_09: -1267447767
+      RealWorldPlayer_Idle_10: -882158814
+      RealWorldPlayer_Idle_11: -958328439
+      RealWorldPlayer_Idle_12: 25739471
+      RealWorldPlayer_Idle_13: 1911210767
+      RealWorldPlayer_Idle_14: 2084591400
+      RealWorldPlayer_Idle_15: 2001348119
+      RealWorldPlayer_Idle_16: -439933565
+      RealWorldPlayer_Idle_17: -168593468
+      RealWorldPlayer_Idle_18: 2048792508
+      RealWorldPlayer_Idle_19: -570601017
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
