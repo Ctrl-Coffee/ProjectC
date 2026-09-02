@@ -1,4 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening.Plugins;
+using System.Diagnostics;
 
 public static class SaveUtil
 {
@@ -99,7 +101,7 @@ public static class SaveUtil
 
     private static async UniTask SaveCompanionPartyAsync()
     {
-        await GameManager.Network.SaveCompanionPartyAsync();
+        await GameManager.Network.SaveCompanionPartyAsync(GameManager.Battle.CompanionFormationIds);
     }
 
     private static async UniTask SaveStageAsync()

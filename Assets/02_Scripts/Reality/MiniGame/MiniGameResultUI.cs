@@ -43,6 +43,8 @@ public class MiniGameResultUI : UIBase
     [SerializeField] private float _sparkDistance = 250f;
     [SerializeField] private float _sparkDuration = 0.6f;
 
+    private long _pendingRewardMoney;
+    private long _pendingRewardDP;
     private bool _isStampSuccess;
     private UniTaskCompletionSource _closeRequestedSource;
     private List<Image> _sparks = new();
@@ -73,7 +75,9 @@ public class MiniGameResultUI : UIBase
 
     public void SetResult(MiniGameResult result)
     {
-        
+        _pendingRewardMoney = result.RewardMoney;
+        _pendingRewardDP = result.RewardDP;
+
         SetRow(_rowRewardMoney, result.RewardMoney, false);
         SetRow(_rowRewardDP, result.RewardDP, false);
         SetRow(_rowSpentEnergy, result.SpentEnergy, true);
@@ -201,7 +205,8 @@ public class MiniGameResultUI : UIBase
 
         if (sources.Count == 0) return;
 
-        CurrencyFlyEffect.GetOrCreate().Play(sources, null, null);
+        MiniGameRewardPayout.Begin(_pendingRewardMoney, _pendingRewardDP);
+        CurrencyFlyEffect.GetOrCreate().Play(sources, MiniGameRewardPayout.PayProgress, MiniGameRewardPayout.PayAll);
     }
 
     private void SetTextActive(TextMeshProUGUI text, bool isActive)
