@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "Id": "stage_1_1",
     "Chapter": 1,
@@ -12,7 +12,7 @@
     "DPCost": 10,
     "NextStageId": "stage_1_2",
     "SpriteAddressableKey": "Sprite/Stage_1_Normal",
-    "BgmAddressableKey": null,
+    "BgmAddressableKey": "Audio/BGM/NormalStageBattle",
     "InfoSpriteAddressableKey": "Sprite/StageInfo_1"
   },
   {
@@ -28,7 +28,7 @@
     "DPCost": 10,
     "NextStageId": "stage_1_3",
     "SpriteAddressableKey": "Sprite/Stage_1_Normal",
-    "BgmAddressableKey": null,
+    "BgmAddressableKey": "Audio/BGM/NormalStageBattle",
     "InfoSpriteAddressableKey": "Sprite/StageInfo_1"
   },
   {
@@ -44,7 +44,7 @@
     "DPCost": 10,
     "NextStageId": "stage_1_4",
     "SpriteAddressableKey": "Sprite/Stage_1_Normal",
-    "BgmAddressableKey": null,
+    "BgmAddressableKey": "Audio/BGM/NormalStageBattle",
     "InfoSpriteAddressableKey": "Sprite/StageInfo_1"
   },
   {
@@ -60,7 +60,7 @@
     "DPCost": 10,
     "NextStageId": "stage_1_5",
     "SpriteAddressableKey": "Sprite/Stage_1_Normal",
-    "BgmAddressableKey": null,
+    "BgmAddressableKey": "Audio/BGM/NormalStageBattle",
     "InfoSpriteAddressableKey": "Sprite/StageInfo_1"
   },
   {
@@ -76,7 +76,7 @@
     "DPCost": 15,
     "NextStageId": "stage_2_1",
     "SpriteAddressableKey": "Sprite/Stage_1_Boss",
-    "BgmAddressableKey": null,
+    "BgmAddressableKey": "Audio/BGM/BossStage_1",
     "InfoSpriteAddressableKey": "Sprite/StageInfo_1"
   },
   {
@@ -92,7 +92,7 @@
     "DPCost": 10,
     "NextStageId": "stage_2_2",
     "SpriteAddressableKey": "Sprite/Stage_2_Normal",
-    "BgmAddressableKey": null,
+    "BgmAddressableKey": "Audio/BGM/NormalStageBattle",
     "InfoSpriteAddressableKey": "Sprite/StageInfo_2"
   },
   {
@@ -108,7 +108,7 @@
     "DPCost": 10,
     "NextStageId": "stage_2_3",
     "SpriteAddressableKey": "Sprite/Stage_2_Normal",
-    "BgmAddressableKey": null,
+    "BgmAddressableKey": "Audio/BGM/NormalStageBattle",
     "InfoSpriteAddressableKey": "Sprite/StageInfo_2"
   },
   {
@@ -124,7 +124,7 @@
     "DPCost": 10,
     "NextStageId": "stage_2_4",
     "SpriteAddressableKey": "Sprite/Stage_2_Normal",
-    "BgmAddressableKey": null,
+    "BgmAddressableKey": "Audio/BGM/NormalStageBattle",
     "InfoSpriteAddressableKey": "Sprite/StageInfo_2"
   },
   {
@@ -140,7 +140,7 @@
     "DPCost": 10,
     "NextStageId": "stage_2_5",
     "SpriteAddressableKey": "Sprite/Stage_2_Normal",
-    "BgmAddressableKey": null,
+    "BgmAddressableKey": "Audio/BGM/NormalStageBattle",
     "InfoSpriteAddressableKey": "Sprite/StageInfo_2"
   },
   {
@@ -156,7 +156,7 @@
     "DPCost": 15,
     "NextStageId": null,
     "SpriteAddressableKey": "Sprite/Stage_2_Boss",
-    "BgmAddressableKey": null,
+    "BgmAddressableKey": "Audio/BGM/BossStage_2",
     "InfoSpriteAddressableKey": "Sprite/StageInfo_2"
   }
 ]
