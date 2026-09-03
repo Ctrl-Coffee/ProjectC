@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using DG.Tweening.Plugins;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -258,10 +257,14 @@ public class NetworkManager
 
     public UniTask<SaveCompanionPartyResponse> SaveCompanionPartyAsync(string[] companionIds)
     {
-        CompanionPartyDto companionPartyDto = new();
-
-        companionPartyDto.companionIds[0] = companionIds[0];
-        companionPartyDto.companionIds[1] = companionIds[2];
+        CompanionPartyDto companionPartyDto = new()
+        {
+            companionIds = new string[2]
+            {
+                companionIds[0],
+                companionIds[1]
+            }
+        };
 
         CompanionPartyRequest request = new()
         {

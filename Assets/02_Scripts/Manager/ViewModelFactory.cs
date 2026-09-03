@@ -45,8 +45,7 @@
 
     public HeroInventoryViewModel CreateHeroInventoryViewModel()
     {
-        HeroEquipmentModel model = _session.HeroEquipment;
-        HeroInventoryViewModel viewModel = new HeroInventoryViewModel(model);
+        HeroInventoryViewModel viewModel = new HeroInventoryViewModel(_session.HeroEquipment, _session.HeroEquiped);
         return viewModel;
     }
 
@@ -69,5 +68,10 @@
         CoffeePotModel model = _session.CoffeePot;
         CoffeePotViewModel viewModel = new CoffeePotViewModel(model);
         return viewModel;
+    }
+
+    public DreamHudViewModel CreateDreamHudViewModel()
+    {
+        return new DreamHudViewModel();
     }
 }
