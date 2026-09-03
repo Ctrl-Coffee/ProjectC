@@ -49,7 +49,6 @@ public class TimeManager
 #endif
         }
     }
-
 #if UNITY_EDITOR
     public TimeSpan DebugTimeOffset
     {
@@ -57,12 +56,6 @@ public class TimeManager
         {
             return _debugTimeOffset;
         }
-    }
-
-    public void OnUpdate()
-    {
-        _elapsedGameTime += GameDeltaTime;
-        _cooldownService.UpdateCooldowns(_elapsedGameTime);
     }
 
     public void AddDebugTime(TimeSpan amount)
@@ -74,7 +67,14 @@ public class TimeManager
     {
         _debugTimeOffset = TimeSpan.Zero;
     }
+
 #endif
+
+    public void OnUpdate()
+    {
+        _elapsedGameTime += GameDeltaTime;
+        _cooldownService.UpdateCooldowns(_elapsedGameTime);
+    }
 
     public void Init()
     {
