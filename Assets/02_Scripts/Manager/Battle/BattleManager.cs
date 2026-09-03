@@ -455,14 +455,10 @@ public class BattleManager
     private async UniTask ProcessStageClearAsync()
     {
         string clearedStageId = GameManager.Stage.CurrentStageId;
-        string lastClearedStageId = GameManager.Stage.LastClearedStageId;
 
-        bool isHigherStage = GameManager.Stage.IsHigherStage(clearedStageId, lastClearedStageId);
-
-        if (isHigherStage)
+        if (GameManager.Stage.TryUpdateHighestClearedStage(clearedStageId))
         {
-            GameManager.Stage.SetLastClearedStageId(clearedStageId);
-            SaveStageRecordResponse response = await SaveUtil.RequestSaveStageData(clearedStageId);
+            await SaveUtil.RequestSaveStageData(clearedStageId);
         }
 
         GameManager.UI.OpenBattleVictoryPopup();

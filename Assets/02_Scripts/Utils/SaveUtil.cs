@@ -106,7 +106,7 @@ public static class SaveUtil
 
     private static async UniTask SaveStageAsync()
     {
-        string stageId = GameManager.Stage.LastClearedStageId;
+        string stageId = GameManager.Stage.HighestClearedStageId;
 
         if (string.IsNullOrEmpty(stageId))
         {

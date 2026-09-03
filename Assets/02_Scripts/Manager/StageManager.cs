@@ -11,7 +11,7 @@ public class StageManager
     private readonly List<string> _stageIdsInOrder = new();
     private readonly Dictionary<string, int> _stageOrderById = new();
 
-    private string _lastClearedStageId;
+    private string _highestClearedStageId;
 
     private StageModel _stageModel = new StageModel();
 
@@ -60,10 +60,39 @@ public class StageManager
         get { return _stageModel.DpCost; }
     }
 
-    public string LastClearedStageId
+    // 최고 클리어 기록
+    public string HighestClearedStageId
     {
-        get { return _lastClearedStageId; }
+        get { return _highestClearedStageId; }
     }
+
+    // 현재 입장 가능한 가장 높은 스테이지
+    public string HighestUnlockedStageId
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_highestClearedStageId))
+            {
+                return _stageIdsInOrder[0];
+            }
+
+            int highestClearedOrder = _stageOrderById[_highestClearedStageId];
+
+            int highestUnlockedOrder = Math.Min(highestClearedOrder + 1, _stageIdsInOrder.Count - 1);
+
+            return _stageIdsInOrder[highestUnlockedOrder];
+        }
+    }
+
+    // 현재 입장 가능한 가장 높은 챕터
+    public int HighestUnlockedChapter
+    {
+        get
+        {
+            return GameManager.DataTable.GetStageData(HighestUnlockedStageId).Chapter;
+        }
+    }
+
 
     public string CurrentStageId
     {
@@ -84,37 +113,6 @@ public class StageManager
         }
 
         _stageModel.SetStage(_stageModel.NextStageId);
-    }
-
-    public bool IsHigherStage(string candidateStageId, string savedStageId)
-    {
-        StageData candidateStageData = GameManager.DataTable.GetStageData(candidateStageId);
-
-        if (candidateStageData == null)
-        {
-            Logger.LogError($"스테이지 데이터를 찾을 수 없습니다. Id: {candidateStageId}");
-            return false;
-        }
-
-        if (string.IsNullOrEmpty(savedStageId))
-        {
-            return true;
-        }
-
-        StageData savedStageData = GameManager.DataTable.GetStageData(savedStageId);
-
-        if (savedStageData == null)
-        {
-            Logger.LogError($"저장된 스테이지 데이터를 찾을 수 없습니다. Id: {savedStageId}");
-            return false;
-        }
-
-        if (candidateStageData.Chapter != savedStageData.Chapter)
-        {
-            return candidateStageData.Chapter > savedStageData.Chapter;
-        }
-
-        return candidateStageData.StageNumber > savedStageData.StageNumber;
     }
 
     public void Initialize()
@@ -150,14 +148,14 @@ public class StageManager
             return StageState.Locked;
         }
 
-        if (string.IsNullOrEmpty(_lastClearedStageId))
+        if (string.IsNullOrEmpty(_highestClearedStageId))
         {
             return targetOrder == 0 ? StageState.Unlocked : StageState.Locked;
         }
 
-        if (!_stageOrderById.TryGetValue(_lastClearedStageId, out int lastClearedOrder))
+        if (!_stageOrderById.TryGetValue(_highestClearedStageId, out int lastClearedOrder))
         {
-            Logger.LogError($"클리어된 스테이지 순서를 찾을 수 없습니다. Id: {_lastClearedStageId}");
+            Logger.LogError($"클리어된 스테이지 순서를 찾을 수 없습니다. Id: {_highestClearedStageId}");
             return StageState.Locked;
         }
 
@@ -192,19 +190,48 @@ public class StageManager
 
         string loadedStageId = response.data.lastClearedStage;
 
-        _lastClearedStageId = loadedStageId == "0" ? null : loadedStageId;
-    }
-
-    public void SetLastClearedStageId(string stageId)
-    {
-        if (_lastClearedStageId == stageId)
+        if (string.IsNullOrEmpty(loadedStageId) || loadedStageId == "0")
         {
+            _highestClearedStageId = null;
             return;
         }
 
-        _lastClearedStageId = stageId;
-        OnStageProgressChanged?.Invoke();
+        if (!_stageOrderById.ContainsKey(loadedStageId))
+        {
+            Logger.LogError($"서버에서 받은 최고 클리어 스테이지가 존재하지 않습니다. Id: {loadedStageId}");
+
+            _highestClearedStageId = null;
+            return;
+        }
+
+        _highestClearedStageId = loadedStageId;
     }
+
+    public bool TryUpdateHighestClearedStage(string clearedStageId)
+    {
+        if (!_stageOrderById.TryGetValue(clearedStageId, out int clearedStageOrder))
+        {
+            Logger.LogError($"스테이지 순서를 찾을 수 없습니다. Id: {clearedStageId}");
+            return false;
+        }
+
+        if (!string.IsNullOrEmpty(_highestClearedStageId))
+        {
+            int highestClearedStageOrder = _stageOrderById[_highestClearedStageId];
+
+            if (clearedStageOrder <= highestClearedStageOrder)
+            {
+                return false;
+            }
+        }
+
+        _highestClearedStageId = clearedStageId;
+        OnStageProgressChanged?.Invoke();
+
+        return true;
+    }
+
+
     private string GetStageName()
     {
         string stageName = $"{_stageModel.Chapter}-{_stageModel.StageNumber}";

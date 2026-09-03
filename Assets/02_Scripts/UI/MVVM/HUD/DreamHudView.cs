@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DreamHudView : ViewBase
@@ -25,11 +26,15 @@ public class DreamHudView : ViewBase
     private DreamHudViewModel _dreamViewModel;
     private CurrencyViewModel _currencyViewModel;
 
+    private SwipComponent _swipComponent;
+
     private void Awake()
     {
         GameObject prefab = 
             GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.DREAM_LOBBY_BACKGROUND);
         _backgroundInstance = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity);
+
+        _swipComponent = _backgroundInstance.GetComponentInChildren<SwipComponent>();
 
         GameObject heroInventoryPrefab = 
             GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.HERO_INVENTORY_BACKGROUND);
@@ -100,6 +105,12 @@ public class DreamHudView : ViewBase
         }
     }
 
+    public void SetChapter(int chapter)
+    {
+        int pageIndex = chapter - 1;
+        _swipComponent.SetPage(pageIndex, true);
+    }
+
     protected override void BindViewModel()
     {
         _currencyViewModel = GameManager.ViewModel.CreateCurrencyViewModel();
@@ -127,13 +138,16 @@ public class DreamHudView : ViewBase
 
     protected override void Subscribe()
     {
-        _currencyViewModel.OnPropertyChanged_ViewModel += OnPropertyChanged;
+        _currencyViewModel.OnPropertyChanged_ViewModel += OnPropertyChanged; 
+        _swipComponent.OnPageChanged += OnPageChanged;
+
         RefreshAll();
     }
 
     protected override void UnSubscribe()
     {
-        _currencyViewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged;
+        _currencyViewModel.OnPropertyChanged_ViewModel -= OnPropertyChanged; 
+        _swipComponent.OnPageChanged -= OnPageChanged;
     }
 
     private void OnChangeSceenToReal()
@@ -232,5 +246,13 @@ public class DreamHudView : ViewBase
             return;
 
         _heroInventoryBGInstance.SetActive(isActive);
+    }
+
+    private void OnPageChanged(int pageIndex)
+    {
+        int chapter = pageIndex + 1;
+        string audioPath = AddressablePath.GetChapterAudioPath(chapter);
+
+        GameManager.Sound.PlayBGM(audioPath);
     }
 }
