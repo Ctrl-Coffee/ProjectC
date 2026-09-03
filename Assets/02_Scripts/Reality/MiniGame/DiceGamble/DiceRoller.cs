@@ -6,8 +6,11 @@ public class DiceRoller
 {
     public const int DICE_SIDES = 20;
     private const int TARGET_MIN = 1;
+    private const int HIGH_BAND_MIN = 11;
     private const int TARGET_MAX = 19;
-    
+
+    private const int LOW_BAND_WEIGHT = 30;
+    private const int HIGH_BAND_WEIGHT = 70;
 
     public MiniGameResult Roll(int targetValue, DiceModifier modifier)
     {
@@ -52,8 +55,10 @@ public class DiceRoller
 
     public int CreateTarget()
     {
-        return Random.Range(TARGET_MIN, TARGET_MAX + 1);
-    }
+        int totalWeight = LOW_BAND_WEIGHT + HIGH_BAND_WEIGHT;
 
-    
+        bool isLowBand = Random.Range(0, totalWeight) < LOW_BAND_WEIGHT;
+
+        return isLowBand ? Random.Range(TARGET_MIN, HIGH_BAND_MIN) : Random.Range(HIGH_BAND_MIN, TARGET_MAX + 1);
+    }
 }
