@@ -8,6 +8,7 @@ public class GameSession
     public HeroEquipedModel HeroEquiped { get; private set; }
     public GachaModel Gacha { get; private set; }
     public HeroInfoModel HeroInfo { get; private set; }
+    public CoffeePotModel CoffeePot { get; private set; }
 
 
 
@@ -25,6 +26,9 @@ public class GameSession
     {
         var currencyResponse = await _networkManager.LoadCurrencyAsync();
         Currency = new(currencyResponse.data);
+
+        CoffeePot = new(Currency);
+        CoffeePot.Restore(currencyResponse.data.coffeeUsedAt);
 
         var companionResponse = await _networkManager.LoadCompanionAsync();
         CompanionWrapperDto companionWwrapperDto =  companionResponse.data;
@@ -44,7 +48,19 @@ public class GameSession
         }
 
         var heroLevelResponse = await _networkManager.LoadHeroLevelAsync();
-        HeroLevelDto heroLevelDto = heroLevelResponse.data;
-        HeroInfo = new(new OwnedPlayerData(), HeroEquiped, HeroEquipment, heroLevelDto.userLevel);
+        var profileResponse = await _networkManager.LoadProfileAsync();
+
+        int userLevel = Const.FIRST_LEVEL;
+
+        if ((int)ServerErrorCode.Success == heroLevelResponse.result)
+        {
+            userLevel = heroLevelResponse.data.userLevel;
+        }
+        else
+        {
+            Logger.LogWarning($"주인공 레벨을 받지 못해 최소 레벨로 시작합니다. result : {heroLevelResponse.result}, message : {heroLevelResponse.message}");
+        }
+
+        HeroInfo = new(HeroEquiped, HeroEquipment, userLevel, profileResponse.nickname);
     }
 }

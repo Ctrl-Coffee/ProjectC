@@ -4,6 +4,7 @@
     public const float CRITICAL_DAMAGE_MULTIPLIER = 1.5f;
     public const float PERCENT_TO_RATE = 0.01f;
     public const float RATE_TO_PERCENT = 100f;
+    public const int FIRST_LEVEL = 1;
     public const int FIRST_BONUS_LEVEL = 2;
 
     // 계산기 상수

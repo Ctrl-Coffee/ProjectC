@@ -63,6 +63,13 @@
         return viewModel;
     }
 
+    public CoffeePotViewModel CreateCoffeePotViewModel()
+    {
+        CoffeePotModel model = _session.CoffeePot;
+        CoffeePotViewModel viewModel = new CoffeePotViewModel(model);
+        return viewModel;
+    }
+
     public DreamHudViewModel CreateDreamHudViewModel()
     {
         return new DreamHudViewModel();

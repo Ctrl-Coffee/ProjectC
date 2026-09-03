@@ -42,9 +42,7 @@ public class HeroInfoViewModel : ViewModelBase<HeroInfoModel>
 
     private void RefreshStats()
     {
-        PlayerData playerData = GameManager.DataTable.GetPlayerData(CharacterId.PLAYER_DATA);
-
-        Name = null == playerData ? string.Empty : playerData.Name;
+        Name = BuildName();
         Level = _model.Level;
 
         Attack = _model.Attack;
@@ -62,6 +60,18 @@ public class HeroInfoViewModel : ViewModelBase<HeroInfoModel>
         CombatPower = _model.CombatPower;
 
         RefreshLevelUpState();
+    }
+
+    private string BuildName()
+    {
+        if (!string.IsNullOrEmpty(_model.Nickname))
+        {
+            return _model.Nickname;
+        }
+
+        PlayerData playerData = GameManager.DataTable.GetPlayerData(CharacterId.PLAYER_DATA);
+
+        return null == playerData ? string.Empty : playerData.Name;
     }
 
     public void RefreshLevelUpState()
