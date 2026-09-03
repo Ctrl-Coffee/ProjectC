@@ -13,9 +13,10 @@ public static class UIManagerExtension
         uiManager.OpenHUDUI<RealHudView>();
     }
 
-    public static void OpenDreamHud(this UIManager uiManager)
+    public static void OpenDreamHud(this UIManager uiManager, int chapter)
     {
-        uiManager.OpenHUDUI<DreamHudView>();
+        var dreamHudView = uiManager.OpenHUDUI<DreamHudView>();
+        dreamHudView.SetChapter(chapter);
     }
 
     public static void CloseRealHud(this UIManager uiManager)

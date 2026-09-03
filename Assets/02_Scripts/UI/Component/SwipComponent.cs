@@ -1,8 +1,11 @@
 ﻿using DG.Tweening;
+using System;
 using UnityEngine;
 
 public class SwipComponent : MonoBehaviour
 {
+    public event Action<int> OnPageChanged;
+
     [SerializeField] private BackgroundInputHandler _inputHandler; 
     [SerializeField] private Transform _worldContent;
 
@@ -30,7 +33,7 @@ public class SwipComponent : MonoBehaviour
     private void Awake()
     {
         SetPagePositions();
-        Swipe(Mathf.Clamp(_startPage, 0, _maxPage), true);
+        SetPage(_startPage, true);
     }
 
     private void OnEnable()
@@ -51,6 +54,12 @@ public class SwipComponent : MonoBehaviour
         _swipeTween?.Kill();
         _inputHandler.SetInteractionBlocked(false);
         _isDragging = false;
+    }
+
+    public void SetPage(int index, bool immediately = false)
+    {
+        int pageIndex = Mathf.Clamp(index, 0, _maxPage);
+        Swipe(pageIndex, immediately);
     }
 
     private void SetPagePositions()
@@ -143,6 +152,8 @@ public class SwipComponent : MonoBehaviour
             return;
         }
 
+        int previousPage = _currentPage;
+
         float nextPageDirection = _maxPage == 0 ? 0f : Mathf.Sign(GetAxisValue(_pagePositions[_maxPage] - _pagePositions[0]));
 
         if (Mathf.Sign(swipeDistance) == nextPageDirection)
@@ -155,6 +166,11 @@ public class SwipComponent : MonoBehaviour
         }
 
         Swipe(_currentPage);
+
+        if (_currentPage != previousPage)
+        {
+            OnPageChanged?.Invoke(_currentPage);
+        }
     }
 
     private void CancelDrag()

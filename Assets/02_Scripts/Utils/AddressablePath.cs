@@ -50,6 +50,11 @@
         public const string NOVEL_WRITING = "Audio/SFX/NovelWriting";
     }
 
+    public static string GetChapterAudioPath(int chapter)
+    {
+        return $"Audio/BGM/Chapter{chapter}";
+    }
+
     public static class Atlas
     {
         public const string EquipmentAtlas = "Atlas/Equipment";

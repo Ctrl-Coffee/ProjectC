@@ -119,7 +119,10 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void EnterDream()
     {
-        UI.OpenDreamHud();
+        int chapter = Stage.HighestUnlockedChapter;
+
+        UI.OpenDreamHud(chapter);
+        Sound.PlayBGM(AddressablePath.GetChapterAudioPath(chapter));
     }
 
     public void ExitDream()
