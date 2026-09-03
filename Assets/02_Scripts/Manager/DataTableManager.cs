@@ -24,12 +24,14 @@ public class DataTableManager
     public Dictionary<string, WorkStatData> WorkStatDataTable { get; private set; } = new();
     public Dictionary<string, EnemyData> EnemyDataTable { get; private set; } = new();
     public Dictionary<string, StageData> StageDataTable { get; private set; } = new();
+    public Dictionary<string, BattlePortraitData> BattlePortraitDataTable { get; private set; } = new();
 
     private Dictionary<int, List<CompanionData>> _companionsByGrade = new();
 
     private Dictionary<GachaType, List<GachaProbabilityData>> _probabilitiesByGachaType = new();
     
     private Dictionary<int, List<EquipmentData>> _equipmentsByGrade = new();
+
 
     #endregion
 
@@ -54,6 +56,7 @@ public class DataTableManager
         WorkStatDataTable = LoadData<WorkStatData>(nameof(WorkStatData));
         EnemyDataTable = LoadData<EnemyData>(nameof(EnemyData));
         StageDataTable = LoadData<StageData>(nameof(StageData));
+        BattlePortraitDataTable = LoadData<BattlePortraitData>(nameof(BattlePortraitData));
 
         BuildCompanionGradeIndex();
         BuildGachaProbabilityIndex();
@@ -189,6 +192,12 @@ public class DataTableManager
     {
         if (null == StageDataTable || string.IsNullOrEmpty(id)) return null;
         return StageDataTable.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public BattlePortraitData GetBattlePortraitData(string id)
+    {
+        if (null == BattlePortraitDataTable || string.IsNullOrEmpty(id)) return null;
+        return BattlePortraitDataTable.TryGetValue(id, out var data) ? data : null;
     }
     #endregion
 

@@ -7,6 +7,14 @@ public class StageInfoViewModel
 
     public event Action<string> OnPropertyChanged_ViewModel;
 
+    public string InfoSpriteAddressableKey
+    {
+        get
+        {
+            return _stageModel.InfoSpriteAddressableKey;
+        }
+    }
+
     public string StageDisplayText
     {
         get
@@ -128,6 +136,9 @@ public class StageInfoViewModel
                 break;
             case nameof(_stageModel.DpCost):
                 OnPropertyChanged_ViewModel?.Invoke(nameof(DpCostText));
+                break;
+            case nameof(_stageModel.InfoSpriteAddressableKey):
+                OnPropertyChanged_ViewModel?.Invoke(nameof(InfoSpriteAddressableKey));
                 break;
         }
     }

@@ -23,26 +23,15 @@ public class CompanionState : IStatData
         CompanionId = companionDto.companionId;
         Level = companionDto.level;
 
-        CompanionData companionData = GameManager.DataTable.GetCompanionData(CompanionId);
-
-        if (null == companionData)
-        {
-            Logger.LogError($"{CompanionId} 동료 데이터 찾을 수 없음");
-            return;
-        }
-
-        _hpGrowthPerLevel = companionData.HpGrowthPerLevel;
-        _attackGrowthPerLevel = companionData.AttackGrowthPerLevel;
-        _defenseGrowthPerLevel = companionData.DefenseGrowthPerLevel;
-
-        GetBaseStat(companionData); 
-        Recalculate();
+        InitializeStats();
     }
 
     public CompanionState(string companionId, int level)
     {
         CompanionId = companionId;
         Level = level;
+
+        InitializeStats();
     }
 
     public void LevelUp()
@@ -72,11 +61,30 @@ public class CompanionState : IStatData
         Hp = _baseStat.Hp + _hpGrowthPerLevel * (Level - 1);
         Defense = _baseStat.Defense + _defenseGrowthPerLevel * (Level - 1);
 
+
         SetCombatPower();
     }
 
     private void SetCombatPower()
     {
         CombatPower = CombatPowerCalculator.Calculate(this);
+    }
+
+    private void InitializeStats()
+    {
+        CompanionData companionData = GameManager.DataTable.GetCompanionData(CompanionId);
+
+        if (null == companionData)
+        {
+            Logger.LogError($"{CompanionId} 동료 데이터 찾을 수 없음");
+            return;
+        }
+
+        _hpGrowthPerLevel = companionData.HpGrowthPerLevel;
+        _attackGrowthPerLevel = companionData.AttackGrowthPerLevel;
+        _defenseGrowthPerLevel = companionData.DefenseGrowthPerLevel;
+
+        GetBaseStat(companionData);
+        Recalculate();
     }
 }

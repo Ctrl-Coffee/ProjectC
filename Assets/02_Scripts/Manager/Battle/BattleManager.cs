@@ -50,6 +50,8 @@ public class BattleManager
     public void EnterBattle()
     {
         EndBattle();
+        
+        PlayBattleBGM();
 
         ResetBattleRoot();
         InitializeStage();
@@ -100,6 +102,13 @@ public class BattleManager
         InitializeStage();
 
         StartBattle();
+    }
+
+    public void RestartDefeatBattle()
+    {
+        PlayBattleBGM();
+
+        RestartBattle();
     }
 
     public int GetPlayerTotalCombatPower()
@@ -203,16 +212,40 @@ public class BattleManager
 
     public void RequestPlayerSkillExecution(int battlePosition, string skillId, AttackerStats skillExecutionData)
     {
-        BattleUnitModelBase targetModel = _battleUnitModels.FindEnemyTarget(battlePosition);
+        SkillData skillData = GameManager.DataTable.GetSkillData(skillId);
 
-        ExcuteSkill(targetModel, skillId, skillExecutionData);
+        SkillTargetCount skillTargetCount = ParseTargetCount(skillData.TargetType);
+
+        switch (skillTargetCount)
+        {
+            case SkillTargetCount.Single:
+                BattleUnitModelBase targetModel = _battleUnitModels.FindEnemyTarget(battlePosition);
+                ExcuteSkill(targetModel, skillId, skillExecutionData);
+                break;
+            case SkillTargetCount.All:
+                List<BattleUnitModelBase> targetModels = _battleUnitModels.FindEnemyAllTarget(battlePosition);
+                ExcuteSkill(targetModels, skillId, skillExecutionData);
+                break;
+        }
     }
 
     public void RequestEnemySkillExecution(int battlePosition, string skillId, AttackerStats skillExecutionData)
     {
-        BattleUnitModelBase targetModel = _battleUnitModels.FindPlayerTarget(battlePosition);
+        SkillData skillData = GameManager.DataTable.GetSkillData(skillId);
 
-        ExcuteSkill(targetModel, skillId, skillExecutionData);
+        SkillTargetCount skillTargetCount = ParseTargetCount(skillData.TargetType);
+
+        switch (skillTargetCount)
+        {
+            case SkillTargetCount.Single:
+                BattleUnitModelBase targetModel = _battleUnitModels.FindPlayerTarget(battlePosition);
+                ExcuteSkill(targetModel, skillId, skillExecutionData);
+                break;
+            case SkillTargetCount.All:
+                List<BattleUnitModelBase> targetModels = _battleUnitModels.FindPlayerAllTarget(battlePosition);
+                ExcuteSkill(targetModels, skillId, skillExecutionData);
+                break;
+        }
     }
 
     public void RequestUpdatePlayerUnitActive(int battlePosition, bool isActive)
@@ -359,6 +392,27 @@ public class BattleManager
         return true;
     }
 
+    private bool ExcuteSkill(List<BattleUnitModelBase> targetModels, string skillId, AttackerStats attackerStats)
+    {
+        if (targetModels == null)
+        {
+            return false;
+        }
+
+        SkillData skillData = GameManager.DataTable.GetSkillData(skillId);
+
+        float damage = attackerStats.Attack * skillData.DamageMultiplier;
+
+        AttackStats attackerStatss = new AttackStats(damage, attackerStats.CriticalChance);
+
+        foreach (BattleUnitModelBase targetModel in targetModels)
+        {
+            _battleService.ApplyAttack(targetModel, attackerStatss);
+        }
+
+        return true;
+    }
+
     private void HandlePlayerUnitDeadStateChanged(bool isDead)
     {
         if (isDead)
@@ -391,6 +445,13 @@ public class BattleManager
         }
     }
 
+    private void PlayBattleBGM()
+    {
+        string _bgmAddressableKey = GameManager.Stage.BgmAddressableKey;
+        Debug.Log(_bgmAddressableKey);
+        GameManager.Sound.PlayBGM(_bgmAddressableKey);
+    }
+
     private async UniTask ProcessStageClearAsync()
     {
         string clearedStageId = GameManager.Stage.CurrentStageId;
@@ -415,5 +476,18 @@ public class BattleManager
 
         GameManager.Session.Currency.AddDreamFragment(dreamFragmentReward);
         GameManager.Session.Currency.AddInspiration(inspirationReward);
+    }
+
+    private SkillTargetCount ParseTargetCount(string targetType)
+    {
+        switch (targetType)
+        {
+            case "SingleOpponent":
+                return SkillTargetCount.Single;
+            case "AllOpponents":
+                return SkillTargetCount.All;
+        }
+
+        return SkillTargetCount.None;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class CompanionDetailUI : UIBase
@@ -36,7 +37,8 @@ public class CompanionDetailUI : UIBase
 
         var companionData = GameManager.DataTable.GetCompanionData(companionState.CompanionId);
 
-        _iconImage.sprite = GameManager.Resource.GetLoadedAsset<Sprite>(companionData.SlotSpriteAddressableKey);
+        _iconImage.sprite = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(AddressablePath.Atlas.CompanionFullBody)
+            .GetSprite(companionState.CompanionId);
         _nameText.text = companionData.Name;
 
         _levelUpButton.BindButtonEvent(OnClickLevelUp);
@@ -87,6 +89,6 @@ public class CompanionDetailUI : UIBase
         }
 
         _levelText.SetText("Lv:{0}", _companionState.Level);
-        _currencyText.SetText("{0}/{1}", levelData.UpgradeCost, GameManager.Session.Currency.DreamFragment);
+        _currencyText.SetText("{0}/{1}", GameManager.Session.Currency.DreamFragment, levelData.UpgradeCost);
     }
 }

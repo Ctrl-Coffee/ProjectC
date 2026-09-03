@@ -266,6 +266,18 @@ public class BattleUnitModels
         return targetModel;
     }
 
+    public List<BattleUnitModelBase> FindEnemyAllTarget(int battlePosition)
+    {
+        List<BattleUnitModelBase> targetModels = FindAllTargetModel(_enemyBattleUnitModels, battlePosition);
+        return targetModels;
+    }
+
+    public List<BattleUnitModelBase> FindPlayerAllTarget(int battlePosition)
+    {
+        List<BattleUnitModelBase> targetModels = FindAllTargetModel(_playerBattleUnitModels, battlePosition);
+        return targetModels;
+    }
+
     public void SaveCompanionFormationData()
     {
         SaveUtil.RequestSaveCompanionPartyData();
@@ -312,5 +324,31 @@ public class BattleUnitModels
         }
 
         return null;
+    }
+
+    private List<BattleUnitModelBase> FindAllTargetModel(BattleUnitModelBase[] battleUnitModels, int battlePosition)
+    {
+        List<BattleUnitModelBase> battleUnitModelBases = null;
+
+        for (int index = 0; index < battleUnitModels.Length; index++)
+        {
+            int targetIndex = (battlePosition + index) % battleUnitModels.Length;
+
+            BattleUnitModelBase battleUnitModel = battleUnitModels[targetIndex];
+
+            if (battleUnitModel.IsDead)
+            {
+                continue;
+            }
+
+            if (battleUnitModelBases == null)
+            {
+                battleUnitModelBases = new List<BattleUnitModelBase>();
+            }
+
+            battleUnitModelBases.Add(battleUnitModel);
+        }
+
+        return battleUnitModelBases;
     }
 }

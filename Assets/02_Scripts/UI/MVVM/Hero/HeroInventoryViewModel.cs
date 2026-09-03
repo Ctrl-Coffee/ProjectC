@@ -81,9 +81,7 @@ public class HeroInventoryViewModel : ViewModelBase<HeroEquipmentModel>
                     return levelCompare;
                 }
 
-                return string.CompareOrdinal(
-                    x.HeroEquipmentId,
-                    y.HeroEquipmentId);
+                return string.CompareOrdinal(x.HeroEquipmentId, y.HeroEquipmentId);
             });
         else if (_currentSort == InventorySort.CombatPower)
             _items.Sort((x, y) =>
@@ -95,9 +93,7 @@ public class HeroInventoryViewModel : ViewModelBase<HeroEquipmentModel>
                     return combatPowerCompare;
                 }
 
-                return string.CompareOrdinal(
-                    x.HeroEquipmentId,
-                    y.HeroEquipmentId);
+                return string.CompareOrdinal(x.HeroEquipmentId, y.HeroEquipmentId);
             });
     }
 

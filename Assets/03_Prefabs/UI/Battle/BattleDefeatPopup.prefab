@@ -261,7 +261,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8048513154784661654, guid: 65bb9064ce7ad454fa3a50417cef4d97, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -326,6 +326,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageFailUI
   _isPlayAnimation: 0
   _panel: {fileID: 0}
+  _backgroundSprites:
+  - {fileID: 21300000, guid: 786f9c1b9c9ab664d9691fc7bb6dd5d7, type: 3}
+  - {fileID: 21300000, guid: c97794ee7bb46ef45b20448bdce4f434, type: 3}
+  _backgroundImage: {fileID: 2695073424765757945}
   _returnButton: {fileID: 8425499026778873769}
   _restartStageButton: {fileID: 4267648252717250902}
 --- !u!1 &6794192328041113542

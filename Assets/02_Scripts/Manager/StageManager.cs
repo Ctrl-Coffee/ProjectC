@@ -15,7 +15,6 @@ public class StageManager
 
     private StageModel _stageModel = new StageModel();
 
-
     public string StageName
     {
         get { return GetStageName(); }
@@ -41,6 +40,11 @@ public class StageManager
         get { return _stageModel.SpriteAddressableKey; }
     }
 
+    public string BgmAddressableKey
+    {
+        get { return _stageModel.BgmAddressableKey; }
+    }
+
     public int DreamShardReward
     {
         get { return _stageModel.DreamShardReward; }
@@ -64,6 +68,11 @@ public class StageManager
     public string CurrentStageId
     {
         get { return _stageModel.StageId; }
+    }
+
+    public int Chapter
+    {
+        get { return _stageModel.Chapter; }
     }
 
     public void SetNextStage()
