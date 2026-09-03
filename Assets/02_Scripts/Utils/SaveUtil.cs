@@ -66,7 +66,7 @@ public static class SaveUtil
 
     private static async UniTask SaveCurrencyAsync()
     {
-        await GameManager.Network.SaveCurrencyAsync(GameManager.Session.Currency);
+        await GameManager.Network.SaveCurrencyAsync(GameManager.Session.Currency, GameManager.Session.CoffeePot);
     }
 
     private static async UniTask SaveEquipmentAsync()

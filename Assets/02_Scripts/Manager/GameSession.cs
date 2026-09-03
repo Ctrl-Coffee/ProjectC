@@ -28,6 +28,7 @@ public class GameSession
         Currency = new(currencyResponse.data);
 
         CoffeePot = new(Currency);
+        CoffeePot.Restore(currencyResponse.data.coffeeUsedAt);
 
         var companionResponse = await _networkManager.LoadCompanionAsync();
         CompanionWrapperDto companionWwrapperDto =  companionResponse.data;

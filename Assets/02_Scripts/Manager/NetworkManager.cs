@@ -51,7 +51,7 @@ public class NetworkManager
         return response;
     }
 
-    public UniTask<SaveCurrencyResponse> SaveCurrencyAsync(CurrencyModel currencyModel)
+    public UniTask<SaveCurrencyResponse> SaveCurrencyAsync(CurrencyModel currencyModel, CoffeePotModel coffeePotModel)
     {
         CurrencyDto currencyDto = new CurrencyDto()
         {
@@ -61,7 +61,8 @@ public class NetworkManager
             dreamFragment = currencyModel.DreamFragment,
             dreamScroll = currencyModel.DreamScroll,
             inspiration = currencyModel.Inspiration,
-            energyRecoveredAt = currencyModel.EnergyRecoveredAt
+            energyRecoveredAt = currencyModel.EnergyRecoveredAt,
+            coffeeUsedAt = coffeePotModel.UsedAtTicks
         };
 
         SaveCurrencyRequest request = new()

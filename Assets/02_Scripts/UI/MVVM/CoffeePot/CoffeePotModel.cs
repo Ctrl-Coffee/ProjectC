@@ -15,6 +15,11 @@ public class CoffeePotModel : ModelBase
         _currency = currency;
     }
 
+    public void Restore(long usedAtTicks)
+    {
+        UsedAtTicks = usedAtTicks;
+    }
+
     public long UsedAtTicks
     {
         get
@@ -93,6 +98,8 @@ public class CoffeePotModel : ModelBase
         _currency.AddEnergy(amount);
 
         Logger.Log($"커피포트 에너지 회복 {amount} - 현재 {_currency.Energy} / {_currency.MaxEnergy}");
+
+        SaveUtil.RequestSaveCurrency();
 
         return amount;
     }

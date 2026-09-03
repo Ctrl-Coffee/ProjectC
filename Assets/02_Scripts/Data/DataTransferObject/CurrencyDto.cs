@@ -10,4 +10,5 @@ public class CurrencyDto
     public long dreamScroll;
     public long inspiration;
     public long energyRecoveredAt;
+    public long coffeeUsedAt;
 }
