@@ -63,4 +63,11 @@
         CurrencyViewModel viewModel = new CurrencyViewModel(model);
         return viewModel;
     }
+
+    public CoffeePotViewModel CreateCoffeePotViewModel()
+    {
+        CoffeePotModel model = _session.CoffeePot;
+        CoffeePotViewModel viewModel = new CoffeePotViewModel(model);
+        return viewModel;
+    }
 }

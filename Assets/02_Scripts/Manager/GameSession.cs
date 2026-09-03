@@ -8,6 +8,7 @@ public class GameSession
     public HeroEquipedModel HeroEquiped { get; private set; }
     public GachaModel Gacha { get; private set; }
     public HeroInfoModel HeroInfo { get; private set; }
+    public CoffeePotModel CoffeePot { get; private set; }
 
 
 
@@ -25,6 +26,8 @@ public class GameSession
     {
         var currencyResponse = await _networkManager.LoadCurrencyAsync();
         Currency = new(currencyResponse.data);
+
+        CoffeePot = new(Currency);
 
         var companionResponse = await _networkManager.LoadCompanionAsync();
         CompanionWrapperDto companionWwrapperDto =  companionResponse.data;

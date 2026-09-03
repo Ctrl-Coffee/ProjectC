@@ -12,9 +12,10 @@ public class RealHudView : ViewBase
     [SerializeField] private UIButtonComponent _goDreamBtn;
     [SerializeField] private UIButtonComponent _goDowntownBtn;
 
-    [SerializeField] private UIButtonComponent _coffeeBtn;
     [SerializeField] private UIButtonComponent _computerBtn;
     [SerializeField] private UIButtonComponent _perkBtn;
+
+    [SerializeField] private CoffeePotView _coffeePotView;
 
     private GameObject _backgroundInstance;
 
@@ -23,7 +24,7 @@ public class RealHudView : ViewBase
     private void Awake()
     {
         GameObject prefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.REAL_LOBBY_BACKGROUND);
-        _backgroundInstance = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        _backgroundInstance = Instantiate(prefab, Vector3.zero, Quaternion.identity);
     }
 
     private void OnEnable()
@@ -52,7 +53,6 @@ public class RealHudView : ViewBase
         _settingBtn.UnBindButtonAllEvent();
         _goDreamBtn.UnBindButtonAllEvent();
 
-        _coffeeBtn.UnBindButtonAllEvent();
         _computerBtn.UnBindButtonAllEvent();
         _perkBtn.UnBindButtonAllEvent();
 
@@ -82,9 +82,15 @@ public class RealHudView : ViewBase
         GameManager.UI.OpenWorkInfoUI();
     }
 
+    // 커피포트 오브젝트를 눌렀을 때 InteractObjectHandler 가 부른다.
     public void OnCoffeePot()
     {
+        if (null == _coffeePotView)
+        {
+            return;
+        }
 
+        _coffeePotView.OnClickCoffeePot();
     }
 
     protected override void BindViewModel()
