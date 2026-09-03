@@ -22,8 +22,7 @@ public class DreamHudView : ViewBase
     private GameObject _heroInventoryBGInstance;
     private GameObject _autoBattleInstance;
 
-    private UIBase _currentContent;
-
+    private DreamHudViewModel _dreamViewModel;
     private CurrencyViewModel _currencyViewModel;
 
     private void Awake()
@@ -37,8 +36,7 @@ public class DreamHudView : ViewBase
         _heroInventoryBGInstance = Instantiate(heroInventoryPrefab, Vector3.zero, Quaternion.identity);
         _heroInventoryBGInstance.SetActive(false);
 
-        GameObject autoBattlePrefab =
-            GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.AUTO_BATTLE);
+        GameObject autoBattlePrefab = GameManager.Resource.GetLoadedAsset<GameObject>(AddressablePath.Prefab.AUTO_BATTLE);
 
         if (autoBattlePrefab == null)
         {
@@ -52,7 +50,7 @@ public class DreamHudView : ViewBase
 
     private void OnEnable()
     {
-        if (_currencyViewModel == null)
+        if (_currencyViewModel == null || _dreamViewModel == null)
         {
             BindViewModel();
         }
@@ -105,6 +103,7 @@ public class DreamHudView : ViewBase
     protected override void BindViewModel()
     {
         _currencyViewModel = GameManager.ViewModel.CreateCurrencyViewModel();
+        _dreamViewModel = GameManager.ViewModel.CreateDreamHudViewModel();
     }
 
     protected override void OnPropertyChanged(string propertyName)
@@ -139,55 +138,49 @@ public class DreamHudView : ViewBase
 
     private void OnChangeSceenToReal()
     {
-        GameManager.Instance.ExitDream();
-        GameManager.Instance.EnterReal();
+        _dreamViewModel.OnChangeSceenToReal();
     }
 
     private void OnStage()
     {
-        if (_currentContent == null)
+        if (_dreamViewModel.ExistCurrentContent == false)
             return;
 
-        if(_heroInventoryBGInstance.activeSelf == true)
-            _heroInventoryBGInstance.SetActive(false);
-
-        if(_backgroundInstance.activeSelf == false)
-            _backgroundInstance.SetActive(true);
+        if(_dreamViewModel.IsOpenInventory)
+        {
+            HeroInventoryBGOnOff(false);
+        }
+        
+        LobbyBGOnOff(true);
+        ShowLobbyButton();
 
         SetAutoBattleActive(true);
-
-        ShowLobbyButton();
-        _currentContent.CloseUI();
-        _currentContent = null;
+        
+        _dreamViewModel.ClearCurrentContent();
     }
 
     private void OnOpenCompanion()
     {
-        CompanionInventoryView content = GameManager.UI.OpenCompanionInventory();
         HideLobbyButton();
-        CloseCurrentContent(content);
+        _dreamViewModel.OnOpenCompanion();
     }
 
 
     private void OnOpenHeroInventory()
     {
-        HeroInventoryView content = GameManager.UI.OpenHeroInventory();
-
         HideLobbyButton();
-        CloseCurrentContent(content);
+        _dreamViewModel.OnOpenHeroInventory();
 
-        _heroInventoryBGInstance.SetActive(true);
-        _backgroundInstance.SetActive(false);
+        HeroInventoryBGOnOff(true); 
+        LobbyBGOnOff(false);
 
         SetAutoBattleActive(false);
     }
 
     private void OnOpenGacha()
     {
-        GachaView content = GameManager.UI.OpenGachaView();
-
+        _dreamViewModel.OnOpenGacha();
         ShowLobbyButton();
-        CloseCurrentContent(content);
     }
 
     private void OnOpenSettingUI()
@@ -197,22 +190,7 @@ public class DreamHudView : ViewBase
 
     private void OnOpenHeroInfo()
     {
-        HeroInfoView content = GameManager.UI.OpenHeroInfo();
-
-        CloseCurrentContent(content);
-    }
-
-    private void CloseCurrentContent(UIBase content)
-    {
-        if (content == null)
-            return;
-
-        if (_currentContent != null && _currentContent != content)
-        {
-            _currentContent.CloseUI();
-        }
-
-        _currentContent = content;
+        _dreamViewModel.OnOpenHeroInfo();
     }
 
     private void RefreshAll()
@@ -239,5 +217,20 @@ public class DreamHudView : ViewBase
     private void ShowLobbyButton()
     {
         _lobbyBtn.gameObject.SetActive(true);
+    }
+
+    private void LobbyBGOnOff(bool isActive)
+    {
+        if (_backgroundInstance == null)
+            return;
+
+        _backgroundInstance.SetActive(isActive);
+    }
+    private void HeroInventoryBGOnOff(bool isActive)
+    {
+        if (_heroInventoryBGInstance == null)
+            return;
+
+        _heroInventoryBGInstance.SetActive(isActive);
     }
 }

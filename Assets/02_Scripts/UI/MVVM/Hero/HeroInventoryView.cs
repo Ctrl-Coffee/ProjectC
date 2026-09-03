@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
+using UnityEngine.UI;
 
 public class HeroInventoryView : ViewBase
 {
+    [SerializeField] private Image _heroImage;
+
     [SerializeField] private Transform _slotRoot;
     [SerializeField] private Transform _equippedSlotRoot;
 
@@ -29,7 +33,9 @@ public class HeroInventoryView : ViewBase
 
         Subscribe();
         _sortDropdown.onValueChanged.AddListener(OnClickSort);
+
         CombatPowerRefash();
+        RefreshHeroImage();
     }
 
     private void OnDisable()
@@ -81,6 +87,10 @@ public class HeroInventoryView : ViewBase
         {
             case nameof(HeroEquipmentModel.Equipments):
                 ResetSlotAndCreateAll();
+                break;
+
+            case nameof(HeroEquipedModel.EquipedWeaponId):
+                RefreshHeroImage();
                 break;
         }
     }
@@ -235,5 +245,11 @@ public class HeroInventoryView : ViewBase
     private void CombatPowerRefash()
     {
         _combatPowerText.text = Mathf.RoundToInt(_heroInfoViewModel.CombatPower).ToString("N0");
+    }
+
+    private void RefreshHeroImage()
+    {
+        _heroImage.sprite = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(AddressablePath.Atlas.HeroFullBody)
+            .GetSprite(_viewModel.GetEquipedId(EquipmentType.Weapon));
     }
 }

@@ -10,15 +10,19 @@ public class HeroInventoryViewModel : ViewModelBase<HeroEquipmentModel>
     private InventorySort _currentSort = InventorySort.Level;
     private readonly List<HeroEquipmentState> _items = new();
 
+    private HeroEquipedModel _heroEquipedModel;
 
-    public HeroInventoryViewModel(HeroEquipmentModel model) : base(model)
+    public HeroInventoryViewModel(HeroEquipmentModel model, HeroEquipedModel heroEquipedModel) : base(model)
     {
+        _heroEquipedModel = heroEquipedModel;
         model.ContainerPropertyChanged += OnContainerChanged;
+        _heroEquipedModel.PropertyChanged += OnPropertyChanged;
         RefreshItems(); 
     }
 
     public override void UnBind()
     {
+        _heroEquipedModel.PropertyChanged -= OnPropertyChanged;
         _model.ContainerPropertyChanged -= OnContainerChanged;
         base.UnBind();
     }
@@ -57,6 +61,17 @@ public class HeroInventoryViewModel : ViewModelBase<HeroEquipmentModel>
     public HeroEquipmentState GetHeroEquipmentState(string id)
     {
         return _model.GetHeroEquipment(id);
+    }
+
+    public string GetEquipedId(EquipmentType type)
+    {
+        return type switch
+        {
+            EquipmentType.Weapon => _heroEquipedModel.EquipedWeaponId,
+            EquipmentType.Armor => _heroEquipedModel.EquipedArmorId,
+            EquipmentType.Accessory => _heroEquipedModel.EquipedAccessoryId,
+            _ => null,
+        };
     }
 
     public LevelUpResult TryLevelUp(string heroEquipmentId)
