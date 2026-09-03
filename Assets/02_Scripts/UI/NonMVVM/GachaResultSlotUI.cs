@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class GachaResultSlotUI : UIBase
@@ -58,8 +59,7 @@ public class GachaResultSlotUI : UIBase
         _nameText.text = companionData.Name;
         _gradeText.text = $" {companionData.Grade}";
 
-        // TODO 희준 : CompanionData에 IconPath 열이 추가되면 주석 해제
-        // SetIcon(companionData.IconPath, companionId);
+        SetIconFromAtlas(AddressablePath.Atlas.CompanionPortrait, companionId);
 
         return true;
     }
@@ -77,26 +77,30 @@ public class GachaResultSlotUI : UIBase
         _nameText.text = equipmentData.Name;
         _gradeText.text = equipmentData.EquipmentGrade.ToString();
 
-        // TODO 희준 : 아이콘 에셋과 어드레서블 등록이 끝나면 주석 해제
-        // SetIcon(equipmentData.IconPath, equipmentId);
+        SetIconFromAtlas(AddressablePath.Atlas.EquipmentAtlas, equipmentId);
 
         return true;
     }
-    private void SetIcon(string iconPath, string id)
+    
+    private void SetIconFromAtlas(string atlasAddress, string spriteName)
     {
-        if (string.IsNullOrEmpty(iconPath))
-        {
-            Logger.LogWarning($"아이콘 경로가 비어 있습니다. Id : {id}");
+        SpriteAtlas atlas = GameManager.Resource.GetLoadedAsset<SpriteAtlas>(atlasAddress);
 
+        if (atlas == null)
+        {
+            Logger.LogWarning($"아틀라스를 찾을수 없습니다. {atlasAddress}");
             _iconImage.enabled = false;
             return;
         }
 
-        Sprite icon = GameManager.Resource.GetLoadedAsset<Sprite>(iconPath);
+        ApplyIcon(atlas.GetSprite(spriteName), spriteName);
+    }
 
+    private void ApplyIcon(Sprite icon, string id)
+    {
         if (icon == null)
         {
-            Logger.LogWarning($"아이콘을 찾을 수 없습니다. Id : {id}, 경로 : {iconPath}");
+            Logger.LogWarning($"아이콘을 찾을수 없습니다. Id : {id}");
 
             _iconImage.enabled = false;
             return;
