@@ -28,6 +28,9 @@ public class SoundManager
         _bgmPlayer = Utils.GetOrAddComponentInChild<AudioSource>(gameManager, "BGMSourcePlayer");
         _sfxPlayer = Utils.GetOrAddComponentInChild<AudioSource>(gameManager, "SFXSourcePlayer");
 
+        _bgmPlayer.volume = 0.5f;
+        _sfxPlayer.volume = 0.5f;
+
         _bgmPlayer.outputAudioMixerGroup = _mixer.FindMatchingGroups("BGM")[0];
         _sfxPlayer.outputAudioMixerGroup = _mixer.FindMatchingGroups("SFX")[0];
 
