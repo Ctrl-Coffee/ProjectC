@@ -33,7 +33,7 @@
     "ReqEnergy": 10,
     "ReqGold": 200,
     "DurationSeconds": 0,
-    "RewardMoney": 2000,
+    "RewardMoney": 400,
     "RewardDP": 0,
     "IconKey": "Sprites/Icon_Work[Icon_Work_2]",
     "Description": "주사위 굴리기!!"
