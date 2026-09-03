@@ -7,7 +7,7 @@ public class CompanionFormation
     public void InitializePositions(CompanionPartyDto companionPartyDto)
     {
         string firstCompanionId = companionPartyDto.companionIds[0];
-        string SecondCompanionId = companionPartyDto.companionIds[0];
+        string SecondCompanionId = companionPartyDto.companionIds[1];
 
         _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[0], firstCompanionId);
         _companionIdByBattlePosition.Add(Const.COMPANION_BATTLE_POSITIONS[1], SecondCompanionId);

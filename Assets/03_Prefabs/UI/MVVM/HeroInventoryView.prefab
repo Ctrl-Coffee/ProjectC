@@ -1812,6 +1812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HeroInventoryView
   _isPlayAnimation: 0
   _panel: {fileID: 2320635962228170309}
+  _heroImage: {fileID: 1696930554463165201}
   _slotRoot: {fileID: 2147629481532852276}
   _equippedSlotRoot: {fileID: 8994278293814969643}
   _sortDropdown: {fileID: 8184653130816280827}

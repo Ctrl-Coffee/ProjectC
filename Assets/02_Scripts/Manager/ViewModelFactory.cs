@@ -45,8 +45,7 @@
 
     public HeroInventoryViewModel CreateHeroInventoryViewModel()
     {
-        HeroEquipmentModel model = _session.HeroEquipment;
-        HeroInventoryViewModel viewModel = new HeroInventoryViewModel(model);
+        HeroInventoryViewModel viewModel = new HeroInventoryViewModel(_session.HeroEquipment, _session.HeroEquiped);
         return viewModel;
     }
 
@@ -62,5 +61,10 @@
         CurrencyModel model = _session.Currency;
         CurrencyViewModel viewModel = new CurrencyViewModel(model);
         return viewModel;
+    }
+
+    public DreamHudViewModel CreateDreamHudViewModel()
+    {
+        return new DreamHudViewModel();
     }
 }

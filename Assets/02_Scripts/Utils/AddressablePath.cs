@@ -55,5 +55,6 @@
         public const string EquipmentAtlas = "Atlas/Equipment";
         public const string CompanionPortrait = "Atlas/CompanionPortrait";
         public const string CompanionFullBody = "Atlas/CompanionFullBody";
+        public const string HeroFullBody = "Atlas/HeroFullBody";
     }
 }
