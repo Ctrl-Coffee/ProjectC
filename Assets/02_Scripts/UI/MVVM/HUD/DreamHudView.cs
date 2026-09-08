@@ -193,8 +193,8 @@ public class DreamHudView : ViewBase
 
     private void OnOpenGacha()
     {
+        OnStage();
         _dreamViewModel.OnOpenGacha();
-        ShowLobbyButton();
     }
 
     private void OnOpenSettingUI()
