@@ -70,7 +70,6 @@ public class TimeManager
     }
 #endif
 
-
     public void OnUpdate()
     {
         _elapsedGameTime += GameDeltaTime;
