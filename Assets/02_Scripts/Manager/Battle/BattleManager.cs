@@ -43,12 +43,15 @@ public class BattleManager
 
         _companionFormation.InitializePositions(companionPartyDto);
         _battleUnitModels.Initialize(companionPartyDto);
-
-        CreateBattleRoot();
     }
 
     public void EnterBattle()
     {
+        if (_battleRoot == null)
+        {
+            CreateBattleRoot();
+        }
+
         EndBattle();
         
         PlayBattleBGM();
@@ -70,6 +73,19 @@ public class BattleManager
 
         GameManager.Instance.EnterDream();
         _battleRoot.gameObject.SetActive(false);
+    }
+
+    public void ReleaseBattleRoot()
+    {
+        if (_battleRoot == null)
+        {
+            return;
+        }
+
+        EndBattle();
+        _battleRoot.gameObject.SetActive(false);
+        UnityEngine.Object.Destroy(_battleRoot.gameObject);
+        _battleRoot = null;
     }
 
     public void StartBattle()

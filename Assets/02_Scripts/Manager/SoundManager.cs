@@ -51,6 +51,7 @@ public class SoundManager
     public void StopBGM()
     {
         _bgmPlayer.Stop();
+        _bgmPlayer.clip = null;
     }
 
     public void StopSFX()

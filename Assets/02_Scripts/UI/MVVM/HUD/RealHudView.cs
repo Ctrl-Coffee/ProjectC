@@ -69,11 +69,12 @@ public class RealHudView : ViewBase
             _currencyViewModel.UnBind();
             _currencyViewModel = null;
         }
+
+        Destroy(_backgroundInstance);
     }
 
     public void OnChangeSceenToDream()
     {
-        GameManager.Instance.ExitReal();
         GameManager.Instance.EnterDream();
     }
 

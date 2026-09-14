@@ -53,6 +53,7 @@ public abstract class BattleUnitViewBase : MonoBehaviour
     private void OnDestroy()
     {
         _battleUnitViewModel.Dispose();
+        _battleUnitAnimator.Dispose();
     }
 
     public void Initialize(BattleUnitModelBase baseBattleUnitModel)
@@ -181,6 +182,11 @@ public abstract class BattleUnitViewBase : MonoBehaviour
         if (isDead)
         {
             await PlayDeathSequence();
+        }
+
+        if (this == null)
+        {
+            return;
         }
 
         _battleUnitViewModel.RequestSetActive(!isDead);

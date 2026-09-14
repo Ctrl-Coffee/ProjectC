@@ -11,8 +11,13 @@ public class AutoBattleRewardBox : MonoBehaviour
     [Header("이펙트")]
     [SerializeField] private GameObject _readyMark;
 
-    private readonly AutoBattlePendingReward _pending = new AutoBattlePendingReward();
+    private AutoBattlePendingReward _pending;
     private readonly AutoBattlePendingReward _settling = new AutoBattlePendingReward();
+
+    private void Awake()
+    {
+        _pending = GameManager.Session.AutoBattleReward;
+    }
 
     private void OnEnable()
     {
@@ -35,6 +40,11 @@ public class AutoBattleRewardBox : MonoBehaviour
         }
 
         _inputHandler.OnTapped -= OnTapped;
+    }
+
+    private void OnDestroy()
+    {
+        _settling.MoveTo(_pending);
     }
 
     public void AddReward(CurrencyType currencyType, long amount)

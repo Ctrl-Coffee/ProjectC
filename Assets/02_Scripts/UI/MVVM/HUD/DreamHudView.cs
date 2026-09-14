@@ -91,6 +91,7 @@ public class DreamHudView : ViewBase
         if(_backgroundInstance != null)
             _backgroundInstance.SetActive(false);
 
+        HeroInventoryBGOnOff(false);
         SetAutoBattleActive(false);
     }
 
@@ -103,6 +104,11 @@ public class DreamHudView : ViewBase
             _currencyViewModel.UnBind();
             _currencyViewModel = null;
         }
+
+        _dreamViewModel?.UnBind();
+        Destroy(_backgroundInstance);
+        Destroy(_heroInventoryBGInstance);
+        Destroy(_autoBattleInstance);
     }
 
     public void SetChapter(int chapter)

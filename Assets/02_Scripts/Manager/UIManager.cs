@@ -111,7 +111,7 @@ public class UIManager
 
         if (isCloseAll == true)
         {
-            ui.transform.DOKill();
+            ui.StopAnimation();
             CompleteClose(ui);
             return;
         }
@@ -153,6 +153,47 @@ public class UIManager
         }
 
         return _createdUI[_popupStack.Peek()];
+    }
+
+    public void ReleaseContentUI(string label)
+    {
+        List<Type> contentTypes = new();
+        foreach (Type uiType in _createdUI.Keys)
+        {
+            if (GameManager.Resource.IsContentAsset(label, AddressablePath.GetUIPath(uiType)))
+            {
+                contentTypes.Add(uiType);
+            }
+        }
+
+        foreach (Type uiType in contentTypes)
+        {
+            UIBase ui = _createdUI[uiType];
+            ui.StopAnimation();
+
+            UIState state = _uiStates[uiType];
+            if (_uiRootTypes[uiType] != UIRootType.Hud
+                && (state == UIState.Opened || state == UIState.Closing))
+            {
+                _openedUICount--;
+            }
+
+            _createdUI.Remove(uiType);
+            _uiStates.Remove(uiType);
+            _uiRootTypes.Remove(uiType);
+            ui.gameObject.SetActive(false);
+            GameObject.Destroy(ui.gameObject);
+        }
+
+        Type[] popupTypes = _popupStack.ToArray();
+        _popupStack.Clear();
+        for (int i = popupTypes.Length - 1; i >= 0; i--)
+        {
+            if (_createdUI.ContainsKey(popupTypes[i]))
+            {
+                _popupStack.Push(popupTypes[i]);
+            }
+        }
     }
 
     public T OpenContentUI<T>() where T : UIBase

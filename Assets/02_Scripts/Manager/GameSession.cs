@@ -9,6 +9,7 @@ public class GameSession
     public GachaModel Gacha { get; private set; }
     public HeroInfoModel HeroInfo { get; private set; }
     public CoffeePotModel CoffeePot { get; private set; }
+    public AutoBattlePendingReward AutoBattleReward { get; } = new();
 
 
 

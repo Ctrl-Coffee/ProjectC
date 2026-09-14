@@ -12,8 +12,17 @@ public class ResourceManager
     private Dictionary<string, UnityEngine.Object> _loadedAssets = new();
     private Dictionary<string, List<AsyncOperationHandle>> _assetHandles = new();
     private Dictionary<string, HashSet<string>> _contentAddresses = new();
+    private HashSet<string> _loadedLabels = new();
 
     private const int _maxLoadCount = 4;
+
+    public bool IsContentLoaded(string label) => _loadedLabels.Contains(label);
+
+    public bool IsContentAsset(string label, string address)
+    {
+        return _contentAddresses.TryGetValue(label, out HashSet<string> addresses)
+            && addresses.Contains(address);
+    }
 
     public T GetLoadedAsset<T>(string address) where T : UnityEngine.Object
     {
@@ -36,9 +45,22 @@ public class ResourceManager
     {
         if (Utils.IsNullOrWhiteSpace(label))
         {
-            Logger.LogError($"콘텐츠 라벨({nameof(label)})이 비어 있습니다.");
+            throw new ArgumentException("콘텐츠 라벨이 비어 있습니다.", nameof(label));
+        }
+
+        if (IsContentLoaded(label))
+        {
+            onProgress?.Invoke(1f);
             return;
         }
+
+        if (_assetHandles.ContainsKey(label))
+        {
+            throw new InvalidOperationException($"{label} 콘텐츠를 이미 로드 중입니다.");
+        }
+
+        _assetHandles.Add(label, new List<AsyncOperationHandle>());
+        _contentAddresses.Add(label, new HashSet<string>());
 
         AsyncOperationHandle<IList<IResourceLocation>> locationsHandle = default;
         AsyncOperationHandle<IList<IResourceLocation>> spriteLocationHandle = default;
@@ -55,8 +77,7 @@ public class ResourceManager
 
             if (locations.Count == 0 && spriteLocations.Count == 0)
             {
-                Logger.LogWarning($"{label} 라벨에 등록된 에셋이 없습니다.");
-                return;
+                throw new InvalidOperationException($"{label} 라벨에 등록된 에셋이 없습니다.");
             }
 
             Dictionary<string, IResourceLocation> assetLocations = new();
@@ -89,10 +110,7 @@ public class ResourceManager
 
             int totalCount = assetLocations.Count + spriteAssetLocations.Count;
 
-            _assetHandles.Add(label, new List<AsyncOperationHandle>());
-            _contentAddresses[label] = new HashSet<string>();
-
-            List<UniTask> loadTasks = new(totalCount);
+            List<UniTask<bool>> loadTasks = new(totalCount);
             int loadedCount = 0;
 
             using SemaphoreSlim semaphore = new(_maxLoadCount);
@@ -113,9 +131,23 @@ public class ResourceManager
                 loadTasks.Add(LoadContentAssetAsync(label, pair.Value, semaphore, onCompleted));
             }
 
-            await UniTask.WhenAll(loadTasks);
+            // 모든 작업이 끝난 뒤 실패한 콘텐츠의 핸들을 정리한다.
+            bool[] results = await UniTask.WhenAll(loadTasks);
+            foreach (bool succeeded in results)
+            {
+                if (!succeeded)
+                {
+                    throw new InvalidOperationException($"{label} 콘텐츠 로드에 실패했습니다.");
+                }
+            }
 
+            _loadedLabels.Add(label);
             onProgress?.Invoke(1f);
+        }
+        catch
+        {
+            ReleaseContent(label);
+            throw;
         }
         finally
         {
@@ -133,6 +165,7 @@ public class ResourceManager
 
     public void ReleaseContent(string label)
     {
+        _loadedLabels.Remove(label);
         _contentAddresses.Remove(label, out HashSet<string> addresses);
         _assetHandles.Remove(label, out List<AsyncOperationHandle> handles);
 
@@ -172,6 +205,7 @@ public class ResourceManager
         _loadedAssets.Clear();
         _assetHandles.Clear();
         _contentAddresses.Clear();
+        _loadedLabels.Clear();
     }
 
     public async UniTask LoadAllLabelAssetAsync(Action<float> onProgress)
@@ -197,7 +231,7 @@ public class ResourceManager
         }
     }
 
-    private async UniTask LoadContentAssetAsync(string label, IResourceLocation location, SemaphoreSlim semaphore, Action onCompleted)
+    private async UniTask<bool> LoadContentAssetAsync(string label, IResourceLocation location, SemaphoreSlim semaphore, Action onCompleted)
     {
         await semaphore.WaitAsync();
 
@@ -208,10 +242,12 @@ public class ResourceManager
 
             _loadedAssets[address] = asset;
             _contentAddresses[label].Add(address);
+            return true;
         }
         catch (Exception exception)
         {
             Logger.LogWarning($"콘텐츠 에셋 로드 실패 - Label: {label}, Address: {location.PrimaryKey}, Exception: {exception.Message}");
+            return false;
         }
         finally
         {
@@ -231,7 +267,7 @@ public class ResourceManager
 
             if (asset == null)
             {
-                Logger.LogError($"{location.PrimaryKey}가 null입니다.");
+                throw new InvalidOperationException($"{location.PrimaryKey}가 null입니다.");
             }
 
             _assetHandles[label].Add(handle);
@@ -248,7 +284,7 @@ public class ResourceManager
         }
     }
 
-    private async UniTask LoadSpriteContentAsync(string label, IResourceLocation location, SemaphoreSlim semaphore, Action onCompleted)
+    private async UniTask<bool> LoadSpriteContentAsync(string label, IResourceLocation location, SemaphoreSlim semaphore, Action onCompleted)
     {
         await semaphore.WaitAsync();
 
@@ -272,10 +308,13 @@ public class ResourceManager
                 _contentAddresses[label].Add(address);
 
             }
+
+            return true;
         }
         catch (Exception exception)
         {
             Logger.LogWarning($"Sprite 콘텐츠 로드 실패 - Label: {label}, Address: {address}, Exception: {exception.Message}");
+            return false;
         }
         finally
         {
@@ -295,7 +334,7 @@ public class ResourceManager
 
             if (sprites == null || sprites.Count == 0)
             {
-                Logger.LogError($"{address}에 등록된 Sprite가 없습니다.");
+                throw new InvalidOperationException($"{address}에 등록된 Sprite가 없습니다.");
             }
 
             _assetHandles[label].Add(handle);
