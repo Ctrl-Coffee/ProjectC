@@ -9,6 +9,8 @@ public class UIManager
     private Dictionary<Type, UIState> _uiStates = new();
     private Dictionary<Type, UIRootType> _uiRootTypes = new();
     private Stack<Type> _popupStack = new();
+    private readonly List<Type> _releaseTypes = new();
+    private readonly Stack<Type> _popupBuffer = new();
 
     private List<Transform> _canvasLayer;
 
@@ -157,42 +159,58 @@ public class UIManager
 
     public void ReleaseContentUI(string label)
     {
-        List<Type> contentTypes = new();
+        _releaseTypes.Clear();
         foreach (Type uiType in _createdUI.Keys)
         {
             if (GameManager.Resource.IsContentAsset(label, AddressablePath.GetUIPath(uiType)))
             {
-                contentTypes.Add(uiType);
+                _releaseTypes.Add(uiType);
             }
         }
 
-        foreach (Type uiType in contentTypes)
+        if (_releaseTypes.Count == 0)
+        {
+            return;
+        }
+
+        bool hasPopup = false;
+        foreach (Type uiType in _releaseTypes)
         {
             UIBase ui = _createdUI[uiType];
             ui.StopAnimation();
 
-            UIState state = _uiStates[uiType];
-            if (_uiRootTypes[uiType] != UIRootType.Hud
-                && (state == UIState.Opened || state == UIState.Closing))
+            _uiStates.Remove(uiType, out UIState state);
+            _uiRootTypes.Remove(uiType, out UIRootType rootType);
+            if (rootType != UIRootType.Hud && (state == UIState.Opened || state == UIState.Closing))
             {
                 _openedUICount--;
             }
 
+            hasPopup |= rootType == UIRootType.Popup;
             _createdUI.Remove(uiType);
-            _uiStates.Remove(uiType);
-            _uiRootTypes.Remove(uiType);
             ui.gameObject.SetActive(false);
             GameObject.Destroy(ui.gameObject);
         }
 
-        Type[] popupTypes = _popupStack.ToArray();
-        _popupStack.Clear();
-        for (int i = popupTypes.Length - 1; i >= 0; i--)
+        _releaseTypes.Clear();
+        if (!hasPopup)
         {
-            if (_createdUI.ContainsKey(popupTypes[i]))
+            return;
+        }
+
+        // 살아 있는 팝업을 두 번 옮겨 기존 순서를 유지한다.
+        while (_popupStack.Count > 0)
+        {
+            Type uiType = _popupStack.Pop();
+            if (_createdUI.ContainsKey(uiType))
             {
-                _popupStack.Push(popupTypes[i]);
+                _popupBuffer.Push(uiType);
             }
+        }
+
+        while (_popupBuffer.Count > 0)
+        {
+            _popupStack.Push(_popupBuffer.Pop());
         }
     }
 

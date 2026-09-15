@@ -45,7 +45,7 @@ public class ResourceManager
     {
         if (Utils.IsNullOrWhiteSpace(label))
         {
-            throw new ArgumentException("콘텐츠 라벨이 비어 있습니다.", nameof(label));
+            Logger.LogError($"콘텐츠 라벨({nameof(label)})이 비어 있습니다.");
         }
 
         if (IsContentLoaded(label))
@@ -56,7 +56,7 @@ public class ResourceManager
 
         if (_assetHandles.ContainsKey(label))
         {
-            throw new InvalidOperationException($"{label} 콘텐츠를 이미 로드 중입니다.");
+            Logger.LogError($"{label} 콘텐츠를 이미 로드 중입니다.");
         }
 
         _assetHandles.Add(label, new List<AsyncOperationHandle>());
@@ -77,7 +77,8 @@ public class ResourceManager
 
             if (locations.Count == 0 && spriteLocations.Count == 0)
             {
-                throw new InvalidOperationException($"{label} 라벨에 등록된 에셋이 없습니다.");
+                Logger.LogWarning($"{label} 라벨에 등록된 에셋이 없습니다.");
+                return;
             }
 
             Dictionary<string, IResourceLocation> assetLocations = new();
@@ -137,7 +138,7 @@ public class ResourceManager
             {
                 if (!succeeded)
                 {
-                    throw new InvalidOperationException($"{label} 콘텐츠 로드에 실패했습니다.");
+                    Logger.LogWarning($"{label} 콘텐츠 로드에 실패했습니다.");
                 }
             }
 
@@ -267,7 +268,7 @@ public class ResourceManager
 
             if (asset == null)
             {
-                throw new InvalidOperationException($"{location.PrimaryKey}가 null입니다.");
+                Logger.LogError($"{location.PrimaryKey}가 null입니다.");
             }
 
             _assetHandles[label].Add(handle);
@@ -334,7 +335,7 @@ public class ResourceManager
 
             if (sprites == null || sprites.Count == 0)
             {
-                throw new InvalidOperationException($"{address}에 등록된 Sprite가 없습니다.");
+                Logger.LogError($"{address}에 등록된 Sprite가 없습니다.");
             }
 
             _assetHandles[label].Add(handle);
