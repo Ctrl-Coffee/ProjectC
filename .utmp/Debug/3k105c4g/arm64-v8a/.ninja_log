@@ -1,0 +1,12 @@
+# ninja log v5
+85	380	8111435711749147	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	951767715b7f7a5e
+382	605	8111435713781186	D:/The Life of a Dream Hero Who Gets Stronger While Sleeping/ProjectC/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/3k105c4g/obj/arm64-v8a/libswappywrapper.so	4f5ea9a534755d4a
+28	1521	8111435723090077	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	87ff6a2d2b03b024
+37	1531	8111435723141886	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	21ce75a8cea73bba
+10	1532	8111435723141886	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	41faf1a81d212bb4
+59	1546	8111435723375932	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	adbbfedfdcd32823
+19	1563	8111435723536761	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	ba1f0001733a1a5e
+48	1654	8111435724436572	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	63d91606a46155ab
+1	1699	8111435724876001	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	dd34b9852da17ec0
+72	1765	8111435725542065	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	7ade1f978bce5820
+1766	1895	8111435726826369	D:/The Life of a Dream Hero Who Gets Stronger While Sleeping/ProjectC/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/3k105c4g/obj/arm64-v8a/libgame.so	b2b61abfd89279f2
