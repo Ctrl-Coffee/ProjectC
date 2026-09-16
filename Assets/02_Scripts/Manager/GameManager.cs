@@ -33,8 +33,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private GameSession _gameSession;
     private ViewModelFactory _viewModelFactory;
-
-
+    private string _currentLobbyLabel;
+    private bool _isChangingLobby;
     #endregion
 
     private void Update()
@@ -70,11 +70,10 @@ public class GameManager : SingletonBehaviour<GameManager>
 
         onProgress?.Invoke(0.15f);
 
-        await _resourceManager.LoadAllLabelAssetAsync(
-            progress => 
-            { 
-                onProgress?.Invoke(0.15f + progress * 0.65f); 
-            });
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.COMMON,
+            progress => onProgress?.Invoke(0.15f + progress * 0.325f));
+        await _resourceManager.LoadContentAsync(AddressablePath.Label.REALITY,
+            progress => onProgress?.Invoke(0.475f + progress * 0.325f));
 
         GameSession gameSession = new(_networkManager);
         await gameSession.LoadAllData();
@@ -100,34 +99,124 @@ public class GameManager : SingletonBehaviour<GameManager>
         AutoWorkQueue.RunCollectLoopAsync(destroyCancellationToken).Forget();
         EnergyRecovery.RunRecoverLoopAsync(destroyCancellationToken).Forget();
 
+        _currentLobbyLabel = AddressablePath.Label.REALITY;
+        OpenLobby(_currentLobbyLabel);
         onProgress?.Invoke(1f);
-
-        EnterReal();
     }                                                                     
     #endregion                                                            
 
     public void EnterReal()
     {
-        UI.OpenRealHud();
-        Sound.PlayBGM(AddressablePath.Audio.BGM_LOBBY);
+        ChangeLobbyAsync(AddressablePath.Label.REALITY).Forget();
     }
 
-    public void ExitReal()
+    public UniTask ExitReal()
     {
-        UI.CloseRealHud();
+        return ReleaseLobbyAsync(AddressablePath.Label.REALITY);
     }
 
     public void EnterDream()
     {
-        int chapter = Stage.HighestUnlockedChapter;
-
-        UI.OpenDreamHud(chapter);
-        Sound.PlayBGM(AddressablePath.GetChapterAudioPath(chapter));
+        ChangeLobbyAsync(AddressablePath.Label.DREAM).Forget();
     }
 
-    public void ExitDream()
+    public UniTask ExitDream()
     {
-        UI.CloseDreamHud();
+        Battle.ReleaseBattleRoot();
+        return ReleaseLobbyAsync(AddressablePath.Label.DREAM);
+    }
+
+    private async UniTask ChangeLobbyAsync(string label)
+    {
+        if (_isChangingLobby)
+        {
+            return;
+        }
+
+        // 전투에서 꿈 로비로 복귀할 때는 이미 로드한 Dream을 유지한다.
+        if (_currentLobbyLabel == label)
+        {
+            OpenLobby(label);
+            return;
+        }
+
+        _isChangingLobby = true;
+        string previousLabel = _currentLobbyLabel;
+        LoadingUI loadingUI = null;
+
+        try
+        {
+            loadingUI = UI.OpenLoading();
+
+            if (previousLabel == AddressablePath.Label.REALITY)
+            {
+                await ExitReal();
+            }
+            else if (previousLabel == AddressablePath.Label.DREAM)
+            {
+                await ExitDream();
+            }
+
+            await Resource.LoadContentAsync(label, progress => loadingUI.SetProgress(progress * 0.9f));
+            OpenLobby(label);
+            _currentLobbyLabel = label;
+        }
+        catch (Exception exception)
+        {
+            Logger.LogError($"로비 전환 실패 ({previousLabel} -> {label})\n{exception}");
+
+            // 부분적으로 열린 대상 화면도 정리한 뒤 이전 로비를 복원한다.
+            if (label == AddressablePath.Label.DREAM)
+            {
+                await ExitDream();
+            }
+            else
+            {
+                await ExitReal();
+            }
+
+            if (previousLabel != null)
+            {
+                await Resource.LoadContentAsync(previousLabel);
+                OpenLobby(previousLabel);
+                _currentLobbyLabel = previousLabel;
+            }
+        }
+        finally
+        {
+            if (loadingUI != null)
+            {
+                loadingUI.CloseUI(true);
+            }
+
+            _isChangingLobby = false;
+        }
+    }
+
+    private async UniTask ReleaseLobbyAsync(string label)
+    {
+        Sound.StopBGM();
+        Sound.StopSFX();
+        UI.ReleaseContentUI(label);
+
+        // Destroy와 View.OnDestroy의 배경 정리가 끝난 후 핸들을 해제한다.
+        await UniTask.NextFrame();
+        Resource.ReleaseContent(label);
+        _currentLobbyLabel = null;
+    }
+
+    private void OpenLobby(string label)
+    {
+        if (label == AddressablePath.Label.REALITY)
+        {
+            UI.OpenRealHud();
+            Sound.PlayBGM(AddressablePath.Audio.BGM_LOBBY);
+            return;
+        }
+
+        int chapter = Stage.HighestUnlockedChapter;
+        UI.OpenDreamHud(chapter);
+        Sound.PlayBGM(AddressablePath.GetChapterAudioPath(chapter));
     }
 
     public void RequestQuit()

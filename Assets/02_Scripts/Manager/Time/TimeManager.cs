@@ -59,12 +59,6 @@ public class TimeManager
         }
     }
 
-    public void OnUpdate()
-    {
-        _elapsedGameTime += GameDeltaTime;
-        _cooldownService.UpdateCooldowns(_elapsedGameTime);
-    }
-
     public void AddDebugTime(TimeSpan amount)
     {
         _debugTimeOffset += amount;
@@ -75,6 +69,12 @@ public class TimeManager
         _debugTimeOffset = TimeSpan.Zero;
     }
 #endif
+
+    public void OnUpdate()
+    {
+        _elapsedGameTime += GameDeltaTime;
+        _cooldownService.UpdateCooldowns(_elapsedGameTime);
+    }
 
     public void Init()
     {

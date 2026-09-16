@@ -36,6 +36,14 @@ public class UIBase : MonoBehaviour
             .SetUpdate(true);
     }
 
+    public void StopAnimation()
+    {
+        if (_panel != null)
+        {
+            _panel.DOKill();
+        }
+    }
+
     public virtual void OnClickCloseButton()
     {
         CloseUI();

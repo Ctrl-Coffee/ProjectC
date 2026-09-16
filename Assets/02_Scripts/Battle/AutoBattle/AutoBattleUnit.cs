@@ -321,5 +321,6 @@ public class AutoBattleUnit : MonoBehaviour
     private void OnDestroy()
     {
         KillTweens();
+        Destroy(_overrideController);
     }
 }

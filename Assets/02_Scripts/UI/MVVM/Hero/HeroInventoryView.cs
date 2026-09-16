@@ -53,6 +53,9 @@ public class HeroInventoryView : ViewBase
             _viewModel.UnBind();
             _viewModel = null;
         }
+
+        _heroInfoViewModel?.UnBind();
+        _heroInfoViewModel = null;
     }
 
     protected override void BindViewModel()

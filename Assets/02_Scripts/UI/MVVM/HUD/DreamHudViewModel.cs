@@ -9,7 +9,6 @@ public class DreamHudViewModel : ViewModelBase
 
     public void OnChangeSceenToReal()
     {
-        GameManager.Instance.ExitDream();
         GameManager.Instance.EnterReal();
     }
 
@@ -58,5 +57,8 @@ public class DreamHudViewModel : ViewModelBase
 
 
     public override void InitializeModel() { }
-    public override void UnBind() { }
+    public override void UnBind()
+    {
+        _currentContent = null;
+    }
 }

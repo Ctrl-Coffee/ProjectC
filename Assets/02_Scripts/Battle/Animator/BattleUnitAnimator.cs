@@ -62,6 +62,11 @@ public class BattleUnitAnimator
         ApplyAnimationClip(Const.DEATH, unitAnimationSet.DeathClip);
     }
 
+    public void Dispose()
+    {
+        UnityEngine.Object.Destroy(_animatorOverrideController);
+    }
+
     public void Play(BattleUnitAnimationType animType)
     {
         if (!_animationHashes.TryGetValue(animType, out int animHash))

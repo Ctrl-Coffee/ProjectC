@@ -9,7 +9,8 @@ public class PlayerMove : MonoBehaviour
     private int _currentDestinationIndex;
 
     private Animator _anim;
-    private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _spriteRenderer; 
+    private Tween _moveTween;
 
     private void Awake()
     {
@@ -17,11 +18,19 @@ public class PlayerMove : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
         transform.localPosition = transform.parent.InverseTransformPoint(_destination[0].position);
+    }
 
-        GameManager.Time.RequestStartCooldown("PlayerStay", GetSatyTime(), () =>
-        {
-            OnMove();
-        });
+    private void OnEnable()
+    {
+        Stay();
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Time.RequestCancelCooldown("PlayerStay");
+
+        _moveTween?.Kill();
+        _moveTween = null;
     }
 
     private int GetSatyTime()
@@ -36,6 +45,7 @@ public class PlayerMove : MonoBehaviour
         if(destPosIndex == _currentDestinationIndex)
         {
             Stay();
+            return;
         }
         else if(destPosIndex < _currentDestinationIndex)
         {
@@ -52,7 +62,7 @@ public class PlayerMove : MonoBehaviour
 
         _anim.SetTrigger("isMove");
 
-        transform.DOLocalMove(destinationLocalPosition, _moveSpeed)
+        _moveTween = transform.DOLocalMove(destinationLocalPosition, _moveSpeed)
             .SetSpeedBased()
             .SetEase(Ease.Linear)
             .OnComplete(Stay);

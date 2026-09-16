@@ -123,7 +123,7 @@ public class StageInfoView : ViewBase
     private void OpenBattleRoot()
     {
         GameManager.Battle.EnterBattle();
-        GameManager.Instance.ExitDream();
+        GameManager.UI.CloseDreamHud();
         GameManager.UI.CloseStagePopup();
     }
 

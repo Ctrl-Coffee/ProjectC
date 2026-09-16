@@ -17,8 +17,12 @@ public class LoadingUI : UIBase
 
     private void Awake()
     {
-        ResetProgress();
         SetVersionText();
+    }
+
+    private void OnEnable()
+    {
+        ResetProgress();
     }
 
     private void Update()

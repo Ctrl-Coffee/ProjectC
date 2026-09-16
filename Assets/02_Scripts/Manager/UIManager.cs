@@ -9,6 +9,8 @@ public class UIManager
     private Dictionary<Type, UIState> _uiStates = new();
     private Dictionary<Type, UIRootType> _uiRootTypes = new();
     private Stack<Type> _popupStack = new();
+    private readonly List<Type> _releaseTypes = new();
+    private readonly Stack<Type> _popupBuffer = new();
 
     private List<Transform> _canvasLayer;
 
@@ -111,7 +113,7 @@ public class UIManager
 
         if (isCloseAll == true)
         {
-            ui.transform.DOKill();
+            ui.StopAnimation();
             CompleteClose(ui);
             return;
         }
@@ -153,6 +155,63 @@ public class UIManager
         }
 
         return _createdUI[_popupStack.Peek()];
+    }
+
+    public void ReleaseContentUI(string label)
+    {
+        _releaseTypes.Clear();
+        foreach (Type uiType in _createdUI.Keys)
+        {
+            if (GameManager.Resource.IsContentAsset(label, AddressablePath.GetUIPath(uiType)))
+            {
+                _releaseTypes.Add(uiType);
+            }
+        }
+
+        if (_releaseTypes.Count == 0)
+        {
+            return;
+        }
+
+        bool hasPopup = false;
+        foreach (Type uiType in _releaseTypes)
+        {
+            UIBase ui = _createdUI[uiType];
+            ui.StopAnimation();
+
+            _uiStates.Remove(uiType, out UIState state);
+            _uiRootTypes.Remove(uiType, out UIRootType rootType);
+            if (rootType != UIRootType.Hud && (state == UIState.Opened || state == UIState.Closing))
+            {
+                _openedUICount--;
+            }
+
+            hasPopup |= rootType == UIRootType.Popup;
+            _createdUI.Remove(uiType);
+            ui.gameObject.SetActive(false);
+            GameObject.Destroy(ui.gameObject);
+        }
+
+        _releaseTypes.Clear();
+        if (!hasPopup)
+        {
+            return;
+        }
+
+        // 살아 있는 팝업을 두 번 옮겨 기존 순서를 유지한다.
+        while (_popupStack.Count > 0)
+        {
+            Type uiType = _popupStack.Pop();
+            if (_createdUI.ContainsKey(uiType))
+            {
+                _popupBuffer.Push(uiType);
+            }
+        }
+
+        while (_popupBuffer.Count > 0)
+        {
+            _popupStack.Push(_popupBuffer.Pop());
+        }
     }
 
     public T OpenContentUI<T>() where T : UIBase
