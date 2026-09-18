@@ -60,6 +60,7 @@ public class PlayerMove : MonoBehaviour
         Transform destination = _destination[_currentDestinationIndex];
         Vector3 destinationLocalPosition = transform.parent.InverseTransformPoint(destination.position);
 
+        _anim.ResetTrigger("isIdle");
         _anim.SetTrigger("isMove");
 
         _moveTween = transform.DOLocalMove(destinationLocalPosition, _moveSpeed)
@@ -70,6 +71,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Stay()
     {
+        _anim.ResetTrigger("isMove");
         _anim.SetTrigger("isIdle");
 
         GameManager.Time.RequestStartCooldown("PlayerStay", GetSatyTime(), () =>

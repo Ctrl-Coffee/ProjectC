@@ -60,16 +60,8 @@ public class LoginUI : UIBase
             string mail;
             string password;
 
-            if (string.IsNullOrEmpty(_mailInputField.text) || string.IsNullOrEmpty(_passwordInputField.text))
-            {
-                mail = TestAccount.EMAIL;
-                password = TestAccount.PASSWORD;
-            }
-            else
-            {
-                mail = _mailInputField.text;
-                password = _passwordInputField.text;
-            }
+            mail = _mailInputField.text;
+            password = _passwordInputField.text;
 
             LoginResponse response = await GameManager.Network.LoginAsync(mail, password);
 
